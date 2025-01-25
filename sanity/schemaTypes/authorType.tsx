@@ -1,5 +1,9 @@
 import { UserIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
+import Image from "next/image";
+
+const iconSize = 30;
+const socialMediaIcons = ["github", "gitlab", "linkedin"];
 
 export const authorType = defineType({
   name: "author",
@@ -9,6 +13,10 @@ export const authorType = defineType({
   fields: [
     defineField({
       name: "name",
+      type: "string",
+    }),
+    defineField({
+      name: "description",
       type: "string",
     }),
     defineField({
@@ -29,6 +37,7 @@ export const authorType = defineType({
       name: "socialMedia",
       type: "array",
       title: "Social Media",
+
       of: [
         defineArrayMember({
           type: "object",
@@ -46,13 +55,42 @@ export const authorType = defineType({
             }),
             defineField({
               name: "icon",
-              type: "image",
+              type: "string",
               title: "Icon",
               options: {
-                hotspot: true,
+                list: socialMediaIcons.map((icon) => ({
+                  title: icon,
+                  value: icon,
+                })),
               },
             }),
           ],
+          preview: {
+            select: {
+              title: "title",
+              icon: "icon",
+              media: "icon",
+            },
+            prepare: ({ title, icon }) => {
+              const iconUrl = icon ? `/icons/${icon}.svg` : null;
+
+              return {
+                title: title || "No title provided",
+                media: iconUrl
+                  ? () => (
+                      <Image
+                        key={icon}
+                        aria-hidden
+                        src={`/icons/${icon}.svg`}
+                        alt={title}
+                        width={iconSize}
+                        height={iconSize}
+                      />
+                    )
+                  : UserIcon,
+              };
+            },
+          },
         }),
       ],
     }),

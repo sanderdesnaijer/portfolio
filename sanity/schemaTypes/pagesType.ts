@@ -1,0 +1,62 @@
+import { DocumentIcon } from "@sanity/icons";
+import { defineField, defineType } from "sanity";
+
+export const pagesType = defineType({
+  name: "pages",
+  title: "Pages",
+  type: "document",
+  icon: DocumentIcon,
+  fields: [
+    defineField({
+      name: "name",
+      type: "string",
+    }),
+    defineField({
+      name: "title",
+      type: "string",
+    }),
+    defineField({
+      name: "description",
+      type: "string",
+    }),
+    defineField({
+      name: "slug",
+      type: "slug",
+      options: {
+        source: "title",
+      },
+    }),
+    defineField({
+      name: "mainImage",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
+        }),
+      ],
+    }),
+    defineField({
+      name: "publishedAt",
+      type: "datetime",
+    }),
+    defineField({
+      name: "body",
+      type: "blockContent",
+    }),
+  ],
+  preview: {
+    select: {
+      title: "name",
+      media: "mainImage",
+    },
+    // prepare(selection) {
+    //   const { author } = selection;
+    //   return { ...selection, subtitle: author && `by ${author}` };
+    // },
+  },
+});
