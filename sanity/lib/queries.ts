@@ -14,7 +14,7 @@ _id,
 title,
 description,
 slug,
-content, // Replace with your specific fields for pages
+body,
 "imageURL": mainImage.asset->url // Optional: Adjust this if your pages have an image
 }`;
 

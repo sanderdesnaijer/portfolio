@@ -1,7 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { pageQuery, postsQuery } from "@/sanity/lib/queries";
+import { pageQuery } from "@/sanity/lib/queries";
 import { SanityDocument } from "next-sanity";
-import { Posts } from "./components/Posts";
 import Image from "next/image";
 
 const icons = ["linkedin", "github", "gitlab"];
@@ -13,11 +12,6 @@ export default async function Home({ params }: { params: { slug: string } }) {
   const page = await sanityFetch<SanityDocument>({
     query: pageQuery,
     params: { slug: null },
-  });
-
-  // Fetch posts data
-  const posts = await sanityFetch<SanityDocument[]>({
-    query: postsQuery,
   });
 
   if (!page) {
@@ -43,7 +37,6 @@ export default async function Home({ params }: { params: { slug: string } }) {
             height={iconSize}
           />
         ))}
-        <Posts posts={posts} />
       </main>
     </div>
   );
