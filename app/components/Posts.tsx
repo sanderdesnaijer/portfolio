@@ -1,13 +1,13 @@
-import type { SanityDocument } from "@sanity/client";
-import Image from "next/image";
-import Link from "next/link";
+import type { SanityDocument } from '@sanity/client';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export const Posts = ({ posts = [] }: { posts: SanityDocument[] }) => {
   const convertDate = (date: string) => {
-    return new Date(date).toLocaleDateString("en-GB", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
+    return new Date(date).toLocaleDateString('en-GB', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
     });
   };
 

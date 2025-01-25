@@ -1,7 +1,7 @@
-import Posts from "@/app/components/Posts";
-import { sanityFetch } from "@/sanity/lib/fetch";
-import { postsQuery } from "@/sanity/lib/queries";
-import { SanityDocument } from "next-sanity";
+import Posts from '@/app/components/Posts';
+import { sanityFetch } from '@/sanity/lib/fetch';
+import { postsQuery } from '@/sanity/lib/queries';
+import { SanityDocument } from 'next-sanity';
 export default async function Page() {
   const posts = await sanityFetch<SanityDocument[]>({ query: postsQuery });
 

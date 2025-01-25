@@ -1,8 +1,8 @@
-import "server-only";
+import 'server-only';
 
-import type { QueryParams } from "@sanity/client";
-import { draftMode } from "next/headers";
-import { client } from "@/sanity/lib/client";
+import type { QueryParams } from '@sanity/client';
+import { draftMode } from 'next/headers';
+import { client } from '@/sanity/lib/client';
 
 const DEFAULT_PARAMS = {} as QueryParams;
 const DEFAULT_TAGS = [] as string[];
@@ -23,20 +23,20 @@ export async function sanityFetch<QueryResponse>({
 
   if (isDraftMode && !token) {
     throw new Error(
-      "The `SANITY_API_READ_TOKEN` environment variable is required."
+      'The `SANITY_API_READ_TOKEN` environment variable is required.'
     );
   }
-  const isDevelopment = process.env.NODE_ENV === "development";
+  const isDevelopment = process.env.NODE_ENV === 'development';
 
   const queryParams = await params;
 
   return client
     .withConfig({ useCdn: true })
     .fetch<QueryResponse>(query, queryParams, {
-      cache: isDevelopment || isDraftMode ? undefined : "force-cache",
+      cache: isDevelopment || isDraftMode ? undefined : 'force-cache',
       ...(isDraftMode && {
         token: token,
-        perspective: "previewDrafts",
+        perspective: 'previewDrafts',
       }),
       next: {
         ...(isDraftMode && { revalidate: 30 }),
