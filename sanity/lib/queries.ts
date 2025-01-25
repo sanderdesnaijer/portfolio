@@ -6,7 +6,7 @@ title,
 description,
 slug,
 content, // Replace with your specific fields for pages
-"imageURL": mainImage.asset->url // Optional: Adjust this if your pages have an image
+"imageURL": mainImage.asset->url, 
 }`;
 
 export const pageQuery = groq`*[_type == "pages" && slug.current == $slug][0]{
@@ -15,7 +15,15 @@ title,
 description,
 slug,
 body,
-"imageURL": mainImage.asset->url // Optional: Adjust this if your pages have an image
+"imageAlt": mainImage.alt, 
+"imageURL": mainImage.asset->url, 
+}`;
+
+export const authorQuery = `*[_type == "author" && name == $name][0] {
+_id,
+name,
+bio,
+socialMedia,
 }`;
 
 // Get all posts

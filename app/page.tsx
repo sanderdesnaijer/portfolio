@@ -1,17 +1,22 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { pageQuery } from "@/sanity/lib/queries";
-import { SanityDocument } from "next-sanity";
+import { authorQuery, pageQuery } from "@/sanity/lib/queries";
+import { AuthorSanity, PageSanity } from "@/sanity/lib/types";
 import Image from "next/image";
+import Link from "next/link";
 
-const icons = ["linkedin", "github", "gitlab"];
 const iconSize = 30;
 
 export default async function Home({ params }: { params: { slug: string } }) {
   const slug = params.slug || null;
 
-  const page = await sanityFetch<SanityDocument>({
+  const page = await sanityFetch<PageSanity>({
     query: pageQuery,
     params: { slug: null },
+  });
+
+  const author = await sanityFetch<AuthorSanity>({
+    query: authorQuery,
+    params: { name: "Sander de Snaijer" },
   });
 
   if (!page) {
@@ -27,16 +32,22 @@ export default async function Home({ params }: { params: { slug: string } }) {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <h1 className="text-5xl">{page.title || "Home page"}</h1>
         <p>{page.description}</p>
-        {icons.map((icon) => (
-          <Image
-            key={icon}
-            aria-hidden
-            src={`/icons/${icon}.svg`}
-            alt={`${icon} icon`}
-            width={iconSize}
-            height={iconSize}
-          />
-        ))}
+        {author.socialMedia.map((media) => {
+          const { icon, link } = media;
+          const iconUrl = `/icons/${icon}.svg`;
+
+          return (
+            <Link key={icon} href={link} target="_blank">
+              <Image
+                aria-hidden
+                src={iconUrl}
+                alt={`${icon} icon`}
+                width={iconSize}
+                height={iconSize}
+              />
+            </Link>
+          );
+        })}
       </main>
     </div>
   );

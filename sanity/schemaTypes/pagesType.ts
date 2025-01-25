@@ -54,9 +54,5 @@ export const pagesType = defineType({
       title: "name",
       media: "mainImage",
     },
-    // prepare(selection) {
-    //   const { author } = selection;
-    //   return { ...selection, subtitle: author && `by ${author}` };
-    // },
   },
 });
