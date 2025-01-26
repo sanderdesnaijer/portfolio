@@ -3,14 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ICON_SIZE } from "../utils/constants";
 import { ProjectTypeSanity } from "@/sanity/types";
-
-const convertDate = (date: string) => {
-  return new Date(date).toLocaleDateString("en-GB", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-  });
-};
+import { convertDate } from "../utils/utils";
 
 const truncateText = (text: string, length: number) => {
   if (text.length <= length) return text;
@@ -22,6 +15,7 @@ export const Projects = ({
 }: {
   projects: ProjectTypeSanity[];
 }) => {
+  console.log(projects);
   return (
     <div className="py-10 mx-auto grid grid-cols-1">
       <div className="grid gap-10">

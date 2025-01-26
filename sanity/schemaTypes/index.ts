@@ -6,6 +6,7 @@ import { categoryType } from "./categoryType";
 import { projectType } from "./projectType";
 import { pageType } from "./pageType";
 import { settingType } from "./settingType";
+import { jobType } from "./jobType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -15,5 +16,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     categoryType,
     projectType,
     settingType,
+    jobType,
   ],
 };
