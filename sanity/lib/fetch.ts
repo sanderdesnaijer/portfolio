@@ -20,6 +20,7 @@ export async function sanityFetch<QueryResponse>({
 }): Promise<QueryResponse> {
   const currentDraftMode = await draftMode();
   const isDraftMode = currentDraftMode.isEnabled;
+  const queryParams = await params;
 
   if (isDraftMode && !token) {
     throw new Error(
@@ -30,7 +31,7 @@ export async function sanityFetch<QueryResponse>({
 
   return client
     .withConfig({ useCdn: true })
-    .fetch<QueryResponse>(query, params, {
+    .fetch<QueryResponse>(query, queryParams, {
       cache: isDevelopment || isDraftMode ? undefined : "force-cache",
       ...(isDraftMode && {
         token: token,

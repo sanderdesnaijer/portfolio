@@ -37,6 +37,7 @@ export const postsQuery = groq`*[_type == "post"] {
   title,
   slug,
   mainImage,
+  links,
   "imageURL": mainImage.asset->url,
 }`;
 

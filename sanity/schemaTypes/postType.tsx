@@ -1,28 +1,59 @@
-import { ControlsIcon, UserIcon } from "@sanity/icons";
+import { DocumentTextIcon, UserIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
+
 import Image from "next/image";
 
 const iconSize = 30;
-const socialMediaIcons = ["github", "gitlab", "linkedin"];
+const icons = ["article", "download", "demo", "github"];
 
-export const settingType = defineType({
-  name: "setting",
-  title: "Setting",
+export const postType = defineType({
+  name: "post",
+  title: "Post",
   type: "document",
-  icon: ControlsIcon,
+  icon: DocumentTextIcon,
   fields: [
     defineField({
       name: "title",
       type: "string",
     }),
     defineField({
-      name: "description",
-      type: "string",
+      name: "slug",
+      type: "slug",
+      options: {
+        source: "title",
+      },
     }),
     defineField({
-      name: "socialMedia",
+      name: "mainImage",
+      type: "image",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        defineField({
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
+        }),
+      ],
+    }),
+    // defineField({
+    //   name: "categories",
+    //   type: "array",
+    //   of: [defineArrayMember({ type: "reference", to: { type: "category" } })],
+    // }),
+    defineField({
+      name: "publishedAt",
+      type: "datetime",
+    }),
+    defineField({
+      name: "body",
+      type: "blockContent",
+    }),
+    defineField({
+      name: "links",
       type: "array",
-      title: "Social Media",
+      title: "Links",
       of: [
         defineArrayMember({
           type: "object",
@@ -43,7 +74,7 @@ export const settingType = defineType({
               type: "string",
               title: "Icon",
               options: {
-                list: socialMediaIcons.map((icon) => ({
+                list: icons.map((icon) => ({
                   title: icon,
                   value: icon,
                 })),
@@ -83,6 +114,7 @@ export const settingType = defineType({
   preview: {
     select: {
       title: "title",
+      media: "mainImage",
     },
   },
 });
