@@ -16,7 +16,7 @@ interface IconLink {
   icon: string;
 }
 
-export interface PostTypeSanity extends SanityDocument {
+export interface ProjectTypeSanity extends SanityDocument {
   title: string;
   slug: {
     _type: "slug";

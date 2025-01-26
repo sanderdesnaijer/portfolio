@@ -30,8 +30,8 @@ socialMedia[] {
 }
 }`;
 
-// Get all posts
-export const postsQuery = groq`*[_type == "post"] {
+// Get all projects
+export const projectsQuery = groq`*[_type == "post"] {
   _createdAt,
   _id,
   title,
@@ -42,8 +42,8 @@ export const postsQuery = groq`*[_type == "post"] {
   "imageURL": mainImage.asset->url,
 }`;
 
-// Get a single post by its slug
-export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{ 
+// Get a single project by its slug
+export const projectQuery = groq`*[_type == "post" && slug.current == $slug][0]{ 
     title, 
     description, 
     mainImage, 
@@ -52,6 +52,6 @@ export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{
   }`;
 
 // Get all post slugs
-export const postPathsQuery = groq`*[_type == "post" && defined(slug.current)][]{
+export const projectPathsQuery = groq`*[_type == "post" && defined(slug.current)][]{
     "params": { "slug": slug.current }
   }`;

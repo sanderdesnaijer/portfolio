@@ -1,4 +1,4 @@
-import { PostTypeSanity } from "@/sanity/lib/types";
+import { ProjectTypeSanity } from "@/sanity/lib/types";
 import { toPlainText } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,38 +17,42 @@ const truncateText = (text: string, length: number) => {
   return text.slice(0, length) + "...";
 };
 
-export const Posts = ({ posts = [] }: { posts: PostTypeSanity[] }) => {
+export const Projects = ({
+  projects = [],
+}: {
+  projects: ProjectTypeSanity[];
+}) => {
   return (
     <div className="py-10 mx-auto grid grid-cols-1">
       <div className="grid gap-10">
-        {posts.map((post) => (
+        {projects.map((project) => (
           <Link
             className="items-center justify-between hover:opacity-90"
-            key={post._id}
-            href={post.slug.current}
+            key={project._id}
+            href={project.slug.current}
           >
-            <h2 className="font-medium text-xl">{post.title}</h2>
+            <h2 className="font-medium text-xl">{project.title}</h2>
             <p className="py-2 text-gray-400 text-xs font-light uppercase">
-              {convertDate(post._createdAt)}
+              {convertDate(project._createdAt)}
             </p>
-            {post?.mainImage && (
+            {project?.mainImage && (
               <Image
                 className="w-32 object-fill rounded-lg"
-                src={post.imageURL}
-                alt={post.mainImage.alt}
+                src={project.imageURL}
+                alt={project.mainImage.alt}
                 width={350}
                 height={350}
                 priority
               />
             )}
-            {post.body ? (
+            {project.body ? (
               <p className="text-gray-600 text-sm">
-                {truncateText(toPlainText(post.body), 200)}
+                {truncateText(toPlainText(project.body), 200)}
               </p>
             ) : null}
-            {post.links && post.links.length && (
+            {project.links && project.links.length && (
               <ul>
-                {post.links.map((link) => (
+                {project.links.map((link) => (
                   <li key={link.title}>
                     <Image
                       aria-hidden
@@ -69,4 +73,4 @@ export const Posts = ({ posts = [] }: { posts: PostTypeSanity[] }) => {
   );
 };
 
-export default Posts;
+export default Projects;

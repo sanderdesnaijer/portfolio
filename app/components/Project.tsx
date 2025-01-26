@@ -5,33 +5,33 @@ import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { ICON_SIZE } from "../utils/constants";
-import { PostTypeSanity } from "@/sanity/lib/types";
+import { ProjectTypeSanity } from "@/sanity/lib/types";
 
 const builder = imageUrlBuilder(client);
 const imageSize = 300;
 
-export const Post = ({ post }: { post: PostTypeSanity }) => {
+export const Project = ({ project }: { project: ProjectTypeSanity }) => {
   return (
     <main className="container mx-auto prose prose-xl px-4 py-16">
-      <h1>{post.title}</h1>
-      <p>{post.description}</p>
-      {post?.mainImage && post.mainImage.alt ? (
+      <h1>{project.title}</h1>
+      <p>{project.description}</p>
+      {project?.mainImage && project.mainImage.alt ? (
         <Image
           src={builder
-            .image(post.mainImage)
+            .image(project.mainImage)
             .width(imageSize)
             .height(imageSize)
             .url()}
-          alt={post.mainImage.alt}
+          alt={project.mainImage.alt}
           width={imageSize}
           height={imageSize}
           priority
         />
       ) : null}
-      {post?.body ? <PortableText value={post.body} /> : null}
-      {post.links && post.links.length && (
+      {project?.body ? <PortableText value={project.body} /> : null}
+      {project.links && project.links.length && (
         <ul>
-          {post.links.map((link) => (
+          {project.links.map((link) => (
             <li key={link.title}>
               <Image
                 aria-hidden
@@ -49,4 +49,4 @@ export const Post = ({ post }: { post: PostTypeSanity }) => {
   );
 };
 
-export default Post;
+export default Project;
