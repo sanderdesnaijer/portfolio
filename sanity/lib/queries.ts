@@ -38,12 +38,17 @@ export const postsQuery = groq`*[_type == "post"] {
   slug,
   mainImage,
   links,
+  body,
   "imageURL": mainImage.asset->url,
 }`;
 
 // Get a single post by its slug
 export const postQuery = groq`*[_type == "post" && slug.current == $slug][0]{ 
-    title, description, mainImage, body
+    title, 
+    description, 
+    mainImage, 
+    body, 
+    links
   }`;
 
 // Get all post slugs

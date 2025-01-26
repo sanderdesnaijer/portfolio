@@ -1,8 +1,4 @@
-export interface SocialMediaSanity {
-  title: string;
-  link: string;
-  icon: string;
-}
+import { SanityDocument } from "@sanity/client";
 
 interface Block {
   _type: "block";
@@ -14,7 +10,32 @@ interface Block {
   style: string;
 }
 
-export interface PageSanity {
+interface IconLink {
+  title: string;
+  link: string;
+  icon: string;
+}
+
+export interface PostTypeSanity extends SanityDocument {
+  title: string;
+  slug: {
+    _type: "slug";
+    current: string;
+  };
+  mainImage?: {
+    _type: "image";
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+    alt: string;
+  };
+  publishedAt: string;
+  body: Array<Block>;
+  links?: Array<IconLink>;
+}
+
+export interface PageSanity extends SanityDocument {
   name: string;
   title: string;
   description: string;
@@ -36,8 +57,8 @@ export interface PageSanity {
   imageURL: string;
 }
 
-export interface SettingSanity {
+export interface SettingSanity extends SanityDocument {
   title: string;
   description: string;
-  socialMedia: SocialMediaSanity[];
+  socialMedia: IconLink[];
 }
