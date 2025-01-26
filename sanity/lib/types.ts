@@ -1,6 +1,6 @@
 import { SanityDocument } from "@sanity/client";
 
-interface Block {
+export interface Block {
   _type: "block";
   children: Array<{
     _type: "span";
@@ -10,7 +10,7 @@ interface Block {
   style: string;
 }
 
-interface IconLink {
+export interface IconLink {
   title: string;
   link: string;
   icon: string;
