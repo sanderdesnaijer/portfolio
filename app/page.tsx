@@ -13,7 +13,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
   if (!setting) {
     return (
       <div>
-        <p>Page not found for slug: {slug}</p>
+        <p>[Page not found for slug: {slug}]</p>
       </div>
     );
   }
