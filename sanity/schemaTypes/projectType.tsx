@@ -6,9 +6,9 @@ import Image from "next/image";
 const iconSize = 30;
 const icons = ["article", "download", "demo", "github"];
 
-export const postType = defineType({
-  name: "post",
-  title: "Post",
+export const projectType = defineType({
+  name: "project",
+  title: "Project",
   type: "document",
   icon: DocumentTextIcon,
   fields: [
