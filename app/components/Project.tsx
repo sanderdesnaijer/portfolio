@@ -5,7 +5,7 @@ import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { ICON_SIZE } from "../utils/constants";
-import { ProjectTypeSanity } from "@/sanity/lib/types";
+import { ProjectTypeSanity } from "@/sanity/types";
 
 const builder = imageUrlBuilder(client);
 const imageSize = 300;

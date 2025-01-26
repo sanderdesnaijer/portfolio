@@ -1,7 +1,7 @@
 import Projects from "@/app/components/Projects";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { projectsQuery } from "@/sanity/lib/queries";
-import { ProjectTypeSanity } from "@/sanity/lib/types";
+import { ProjectTypeSanity } from "@/sanity/types";
 
 export default async function Page() {
   const projects = await sanityFetch<ProjectTypeSanity[]>({

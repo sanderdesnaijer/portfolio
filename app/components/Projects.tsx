@@ -1,8 +1,8 @@
-import { ProjectTypeSanity } from "@/sanity/lib/types";
 import { toPlainText } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
 import { ICON_SIZE } from "../utils/constants";
+import { ProjectTypeSanity } from "@/sanity/types";
 
 const convertDate = (date: string) => {
   return new Date(date).toLocaleDateString("en-GB", {

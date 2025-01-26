@@ -3,7 +3,7 @@ import { projectPathsQuery, projectQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
 import { Project } from "../../components/Project";
-import { ProjectTypeSanity } from "@/sanity/lib/types";
+import { ProjectTypeSanity } from "@/sanity/types";
 
 export const revalidate = 60;
 

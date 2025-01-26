@@ -1,9 +1,9 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { settingsQuery } from "@/sanity/lib/queries";
-import { SettingSanity } from "@/sanity/lib/types";
 import Image from "next/image";
 import Link from "next/link";
 import { ICON_SIZE } from "./utils/constants";
+import { SettingSanity } from "@/sanity/types";
 
 export default async function Home({ params }: { params: { slug: string } }) {
   const slug = params.slug || null;

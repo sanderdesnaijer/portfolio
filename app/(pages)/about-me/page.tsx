@@ -4,7 +4,7 @@ import { PortableText } from "next-sanity";
 import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
-import { PageSanity } from "@/sanity/lib/types";
+import { PageSanity } from "@/sanity/types";
 
 const slug = "about-me";
 
