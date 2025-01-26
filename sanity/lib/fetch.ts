@@ -20,6 +20,7 @@ export async function sanityFetch<QueryResponse>({
 }): Promise<QueryResponse> {
   const currentDraftMode = await draftMode();
   const isDraftMode = currentDraftMode.isEnabled;
+  const queryParams = await params;
 
   if (isDraftMode && !token) {
     throw new Error(
@@ -27,8 +28,6 @@ export async function sanityFetch<QueryResponse>({
     );
   }
   const isDevelopment = process.env.NODE_ENV === "development";
-
-  const queryParams = await params;
 
   return client
     .withConfig({ useCdn: true })
