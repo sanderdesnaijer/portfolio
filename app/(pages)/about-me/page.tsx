@@ -10,6 +10,8 @@ const slug = "about-me";
 
 const builder = imageUrlBuilder(client);
 
+const imageSize = 300;
+
 export default async function Page() {
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
@@ -29,9 +31,13 @@ export default async function Page() {
       <h1>{page.title}</h1>
       <Image
         alt={page.imageAlt}
-        src={builder.image(page.imageURL).width(300).height(300).url()}
-        width={300}
-        height={300}
+        src={builder
+          .image(page.imageURL)
+          .width(imageSize)
+          .height(imageSize)
+          .url()}
+        width={imageSize}
+        height={imageSize}
         priority
       />
       {page?.body ? <PortableText value={page.body} /> : null}

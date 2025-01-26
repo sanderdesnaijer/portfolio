@@ -3,8 +3,7 @@ import { settingsQuery } from "@/sanity/lib/queries";
 import { SettingSanity } from "@/sanity/lib/types";
 import Image from "next/image";
 import Link from "next/link";
-
-const iconSize = 30;
+import { ICON_SIZE } from "./utils/constants";
 
 export default async function Home({ params }: { params: { slug: string } }) {
   const slug = params.slug || null;
@@ -36,8 +35,8 @@ export default async function Home({ params }: { params: { slug: string } }) {
                     aria-hidden
                     src={iconUrl}
                     alt={`${icon} icon`}
-                    width={iconSize}
-                    height={iconSize}
+                    width={ICON_SIZE}
+                    height={ICON_SIZE}
                   />
                 </Link>
               </li>

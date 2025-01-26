@@ -7,6 +7,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 
 const builder = imageUrlBuilder(client);
+const imageSize = 300;
 
 export const Post = ({ post }: { post: SanityDocument }) => {
   return (
@@ -15,10 +16,14 @@ export const Post = ({ post }: { post: SanityDocument }) => {
       <p>{post.description}</p>
       {post?.mainImage ? (
         <Image
-          src={builder.image(post.mainImage).width(300).height(300).url()}
+          src={builder
+            .image(post.mainImage)
+            .width(imageSize)
+            .height(imageSize)
+            .url()}
           alt={post?.mainImage?.alt}
-          width={300}
-          height={300}
+          width={imageSize}
+          height={imageSize}
           priority
         />
       ) : null}
