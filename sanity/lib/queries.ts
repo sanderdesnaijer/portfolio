@@ -19,11 +19,15 @@ body,
 "imageURL": mainImage.asset->url, 
 }`;
 
-export const authorQuery = `*[_type == "author" && name == $name][0] {
+export const settingsQuery = `*[_type == "setting"][0] {
 _id,
-name,
-bio,
-socialMedia,
+title,
+description,
+socialMedia[] {
+  title,
+  link,
+  icon
+}
 }`;
 
 // Get all posts
@@ -34,7 +38,6 @@ export const postsQuery = groq`*[_type == "post"] {
   slug,
   mainImage,
   "imageURL": mainImage.asset->url,
-  "authorName": author->name,
 }`;
 
 // Get a single post by its slug

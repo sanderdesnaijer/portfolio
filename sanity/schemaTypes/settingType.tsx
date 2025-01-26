@@ -1,18 +1,18 @@
-import { UserIcon } from "@sanity/icons";
+import { ControlsIcon } from "@sanity/icons";
 import { defineArrayMember, defineField, defineType } from "sanity";
 import Image from "next/image";
 
 const iconSize = 30;
 const socialMediaIcons = ["github", "gitlab", "linkedin"];
 
-export const authorType = defineType({
-  name: "author",
-  title: "Author",
+export const settingType = defineType({
+  name: "setting",
+  title: "Setting",
   type: "document",
-  icon: UserIcon,
+  icon: ControlsIcon,
   fields: [
     defineField({
-      name: "name",
+      name: "title",
       type: "string",
     }),
     defineField({
@@ -20,24 +20,9 @@ export const authorType = defineType({
       type: "string",
     }),
     defineField({
-      name: "slug",
-      type: "slug",
-      options: {
-        source: "name",
-      },
-    }),
-    defineField({
-      name: "image",
-      type: "image",
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
       name: "socialMedia",
       type: "array",
       title: "Social Media",
-
       of: [
         defineArrayMember({
           type: "object",
@@ -94,22 +79,10 @@ export const authorType = defineType({
         }),
       ],
     }),
-    defineField({
-      name: "bio",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "block",
-          styles: [{ title: "Normal", value: "normal" }],
-          lists: [],
-        }),
-      ],
-    }),
   ],
   preview: {
     select: {
-      title: "name",
-      media: "image",
+      title: "title",
     },
   },
 });

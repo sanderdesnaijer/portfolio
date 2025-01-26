@@ -1,5 +1,3 @@
-import { SanityDocument } from "sanity";
-
 export interface SocialMediaSanity {
   title: string;
   link: string;
@@ -38,11 +36,8 @@ export interface PageSanity {
   imageURL: string;
 }
 
-export interface AuthorSanity extends SanityDocument {
-  name: string;
+export interface SettingSanity {
+  title: string;
   description: string;
-  slug: { _type: string; current: string };
-  image: { _type: string; asset: { _ref: string; _type: string } };
   socialMedia: SocialMediaSanity[];
-  bio: Block[];
 }

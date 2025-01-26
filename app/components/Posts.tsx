@@ -24,7 +24,7 @@ export const Posts = ({ posts = [] }: { posts: SanityDocument[] }) => {
             <div>
               <h2 className="font-medium text-xl">{post.title}</h2>
               <p className="py-2 text-gray-400 text-xs font-light uppercase">
-                {convertDate(post._createdAt)} • {post.authorName}
+                {convertDate(post._createdAt)} • {"[Sander de Snaijer]"}
               </p>
             </div>
             {post?.mainImage && (
