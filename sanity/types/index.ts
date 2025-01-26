@@ -1,3 +1,3 @@
-export * from "./block";
-export * from "./page";
-export * from "./setting";
+export * from "./blockType";
+export * from "./pageType";
+export * from "./settingType";
