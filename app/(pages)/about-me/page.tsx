@@ -50,6 +50,7 @@ export default async function Page() {
       />
       {page?.body ? <PortableText value={page.body} /> : null}
 
+      <h3>[Experience]</h3>
       <ol>
         {jobs.map((job) => {
           return (
