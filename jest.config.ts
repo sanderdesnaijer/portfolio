@@ -156,6 +156,12 @@ const config: Config = {
 
   // The test environment that will be used for testing
   testEnvironment: "jsdom",
+  // testEnvironment: 'jest-environment-jsdom',
+  setupFilesAfterEnv: ["<rootDir>/setupTests.ts"],
+
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/$1", // Map @/ to the root directory
+  },
 
   // Options that will be passed to the testEnvironment
   // testEnvironmentOptions: {},
