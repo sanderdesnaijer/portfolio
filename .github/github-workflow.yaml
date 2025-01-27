@@ -1,0 +1,64 @@
+name: CI Workflow
+
+on:
+  push:
+    branches:
+      - main  # Trigger on push to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests to the main branch
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Use the Node.js version that matches your project
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run linting
+        run: npm run lint  # Runs Next.js lint
+
+  typecheck:
+    runs-on: ubuntu-latest
+    needs: lint  # Ensure linting runs before typecheck
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run TypeScript check
+        run: npm run typecheck  # Runs TypeScript type checking (noEmit)
+
+  test:
+    runs-on: ubuntu-latest
+    needs: typecheck  # Ensure TypeScript check is done before running tests
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test  # Runs Jest tests
+
