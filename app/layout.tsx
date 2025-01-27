@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description:
     "Passionate software developer turning creative ideas to functional products.",
 };
-
+console.log("test");
 export default function RootLayout({
   children,
 }: Readonly<{
