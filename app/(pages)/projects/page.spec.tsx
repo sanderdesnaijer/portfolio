@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
+import { mockProjects } from "@/app/__mocks__/mockProjects";
 
 // Mock external modules and functions
 jest.mock("@/sanity/lib/fetch", () => ({
@@ -36,44 +37,6 @@ jest.mock("next/link", () => ({
 }));
 
 describe("Page Component", () => {
-  const mockProjects = [
-    {
-      _id: "project-1",
-      title: "Project One",
-      _createdAt: "2023-01-01",
-      slug: { current: "project-one" },
-      mainImage: { alt: "Project One Image" },
-      imageURL: "mock-image-url",
-      body: [{ type: "text", children: [{ text: "Mock body content" }] }],
-      links: [
-        {
-          title: "GitHub",
-          icon: "github",
-        },
-      ],
-    },
-    {
-      _id: "project-2",
-      title: "Project Two",
-      _createdAt: "2023-02-01",
-      slug: { current: "project-two" },
-      mainImage: { alt: "Project Two Image" },
-      imageURL: "mock-image-url-2",
-      body: [
-        {
-          type: "text",
-          children: [{ text: "Mock body content for second project" }],
-        },
-      ],
-      links: [
-        {
-          title: "LinkedIn",
-          icon: "linkedin",
-        },
-      ],
-    },
-  ];
-
   beforeEach(() => {
     jest.clearAllMocks();
   });

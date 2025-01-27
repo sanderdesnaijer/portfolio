@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Project } from "./Project";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { Block } from "@/sanity/types/types";
+import { mockProject } from "../__mocks__/mockProjects";
 
 // Mock `PortableText` and `imageUrlBuilder`
 jest.mock("@portabletext/react", () => ({
@@ -24,30 +24,6 @@ jest.mock("@sanity/image-url", () => ({
 }));
 
 describe("Project Component", () => {
-  const mockProject: ProjectTypeSanity = {
-    _id: "1",
-    title: "Project Title",
-    _createdAt: "2025-01-01",
-    description: "This is a project description.",
-    mainImage: {
-      alt: "Project Image Alt",
-      asset: { _ref: "image-ref", _type: "reference" },
-      _type: "image",
-    },
-    body: [
-      { children: [{ text: "This is a project body", _type: "span" }] },
-    ] as Block[],
-    links: [
-      { title: "GitHub", icon: "github", link: "http://test" },
-      { title: "Live Demo", icon: "external-link", link: "http://test" },
-    ],
-    publishedAt: "",
-    _updatedAt: "",
-    _rev: "",
-    _type: "",
-    slug: { _type: "slug", current: "/project-1" },
-  };
-
   const mockProjectWithoutImage: ProjectTypeSanity = {
     ...mockProject,
     mainImage: null!,

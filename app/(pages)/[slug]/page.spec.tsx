@@ -3,6 +3,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
 import { generateStaticParams } from "./page";
 import ProjectPage from "./page";
+import { mockProject, mockProjects } from "@/app/__mocks__/mockProjects";
 
 jest.mock("@/sanity/lib/fetch", () => ({
   sanityFetch: jest.fn(),
@@ -25,11 +26,6 @@ describe("ProductPage", () => {
 
   describe("generateStaticParams", () => {
     it("fetches project paths correctly", async () => {
-      const mockProjects = [
-        { slug: { current: "project-1" } },
-        { slug: { current: "project-2" } },
-      ];
-
       (client.fetch as jest.Mock).mockResolvedValueOnce(mockProjects);
 
       const result = await generateStaticParams();
@@ -41,18 +37,6 @@ describe("ProductPage", () => {
 
   describe("ProductPage Component", () => {
     it("renders the Project component with fetched project data", async () => {
-      const mockProject = {
-        title: "Test Project",
-        slug: { current: "test-project" },
-        mainImage: {
-          asset: { _ref: "image-123", _type: "reference" },
-          alt: "Test Image",
-        },
-        publishedAt: "2023-01-01",
-        body: [],
-        links: [],
-      };
-
       (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProject);
 
       const params = { slug: "test-project" };
