@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Page Component renders the page with correct data 1`] = `
+<div>
+  <main
+    class="container mx-auto prose prose-xl px-4 py-16"
+  >
+    <h1>
+      About Me
+    </h1>
+    <img
+      alt="Profile Picture"
+      data-nimg="1"
+      decoding="async"
+      height="300"
+      src="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=640&q=75"
+      srcset="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=384&q=75 1x, /_next/image?url=http%3A%2F%2Fmocked-image-url&w=640&q=75 2x"
+      style="color: transparent;"
+      width="300"
+    />
+    <div
+      data-testid="portable-text"
+    >
+      [{"type":"text","children":[{"text":"Mock body content"}]}]
+    </div>
+    <h3>
+      [Experience]
+    </h3>
+    <ol>
+      <li>
+        <img
+          alt="mock-job-image-url"
+          data-nimg="1"
+          decoding="async"
+          height="50"
+          loading="lazy"
+          src="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=128&q=75"
+          srcset="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=64&q=75 1x, /_next/image?url=http%3A%2F%2Fmocked-image-url&w=128&q=75 2x"
+          style="color: transparent;"
+          width="50"
+        />
+        <h3>
+          Company A
+        </h3>
+        <p>
+          Developer
+        </p>
+        <p
+          class=""
+        >
+          Jan 2022
+           -
+           
+          [present]
+        </p>
+        <div
+          data-testid="portable-text"
+        >
+          [{"type":"text","children":[{"text":"Job description"}]}]
+        </div>
+        <ul>
+          <li>
+            <img
+              alt="github icon"
+              aria-hidden="true"
+              data-nimg="1"
+              decoding="async"
+              height="30"
+              loading="lazy"
+              src="/icons/github.svg"
+              style="color: transparent;"
+              width="30"
+            />
+            <h3>
+              GitHub
+            </h3>
+          </li>
+        </ul>
+        <p>
+          React, TypeScript
+        </p>
+      </li>
+    </ol>
+  </main>
+</div>
+`;

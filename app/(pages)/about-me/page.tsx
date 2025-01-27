@@ -52,7 +52,7 @@ export default async function Page() {
 
       <h3>[Experience]</h3>
       <ol>
-        {jobs.map((job) => {
+        {jobs?.map((job) => {
           return (
             <li key={job._id}>
               <Image

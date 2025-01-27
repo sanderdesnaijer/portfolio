@@ -160,7 +160,8 @@ const config: Config = {
   setupFilesAfterEnv: ["<rootDir>/setupTests.ts"],
 
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/$1", // Map @/ to the root directory
+    "^@/components/(.*)$": "<rootDir>/app/components/$1",
+    "^@/sanity/(.*)$": "<rootDir>/sanity/$1",
   },
 
   // Options that will be passed to the testEnvironment
