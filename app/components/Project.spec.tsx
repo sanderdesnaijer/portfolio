@@ -116,7 +116,7 @@ describe("Project Component", () => {
   });
 
   it("renders correctly with an empty project object", () => {
-    const emptyProject = {};
+    const emptyProject = {} as ProjectTypeSanity;
     render(<Project project={emptyProject} />);
 
     // Ensure no content is rendered

@@ -1,5 +1,4 @@
 import { ProjectTypeSanity } from "@/sanity/types";
-import { Block } from "@/sanity/types/types";
 
 export const mockProject: ProjectTypeSanity = {
   _id: "1",
@@ -14,7 +13,8 @@ export const mockProject: ProjectTypeSanity = {
   },
   body: [
     {
-      type: "text",
+      _type: "block",
+      style: "style",
       children: [{ text: "Mock body content", _type: "span", marks: [] }],
     },
   ],
