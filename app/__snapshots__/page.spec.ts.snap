@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app/page renders 'Page not found' when sanityFetch returns null 1`] = `
+<div>
+  <div>
+    <p>
+      [Page not found]
+    </p>
+  </div>
+</div>
+`;
+
+exports[`app/page renders the Home page with settings data 1`] = `
+<div>
+  <div
+    class="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]"
+  >
+    <main
+      class="flex flex-col gap-8 row-start-2 items-center sm:items-start"
+    >
+      <h1
+        class="text-5xl"
+      >
+        Test Title
+      </h1>
+      <p>
+        Test Description
+      </p>
+      <ul>
+        <li>
+          <a
+            href="https://facebook.com"
+            target="_blank"
+          >
+            <img
+              alt="facebook icon"
+              aria-hidden="true"
+              data-nimg="1"
+              decoding="async"
+              height="30"
+              loading="lazy"
+              src="/icons/facebook.svg"
+              style="color: transparent;"
+              width="30"
+            />
+          </a>
+        </li>
+        <li>
+          <a
+            href="https://twitter.com"
+            target="_blank"
+          >
+            <img
+              alt="twitter icon"
+              aria-hidden="true"
+              data-nimg="1"
+              decoding="async"
+              height="30"
+              loading="lazy"
+              src="/icons/twitter.svg"
+              style="color: transparent;"
+              width="30"
+            />
+          </a>
+        </li>
+      </ul>
+    </main>
+  </div>
+</div>
+`;

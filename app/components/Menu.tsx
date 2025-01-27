@@ -26,7 +26,7 @@ const Menu = () => {
   const path = usePathname();
 
   return (
-    <div className="py-4 border-b flex flex-row items-center justify-center gap-4">
+    <nav className="py-4 border-b flex flex-row items-center justify-center gap-4">
       {menuItems.map((item, i) => (
         <Link
           className={`${path === item.pathname && "text-orange-600 underline underline-offset-8 decoration-2"}`}
@@ -36,7 +36,7 @@ const Menu = () => {
           {item.name}
         </Link>
       ))}
-    </div>
+    </nav>
   );
 };
 

@@ -5,15 +5,13 @@ import Link from "next/link";
 import { ICON_SIZE } from "./utils/constants";
 import { SettingSanity } from "@/sanity/types";
 
-export default async function Home({ params }: { params: { slug: string } }) {
-  const slug = params.slug || null;
-
+export default async function Home() {
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
   if (!setting) {
     return (
       <div>
-        <p>[Page not found for slug: {slug}]</p>
+        <p>[Page not found]</p>
       </div>
     );
   }
@@ -24,7 +22,7 @@ export default async function Home({ params }: { params: { slug: string } }) {
         <h1 className="text-5xl">{setting.title}</h1>
         <p>{setting.description}</p>
         <ul>
-          {setting.socialMedia.map((media) => {
+          {setting.socialMedia?.map((media) => {
             const { icon, link } = media;
             const iconUrl = `/icons/${icon}.svg`;
 
