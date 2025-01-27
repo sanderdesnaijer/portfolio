@@ -48,14 +48,14 @@ describe("Project Component", () => {
 
     // Check title and description
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Project Title"
+      "Project 1"
     );
     expect(
-      screen.getByText("This is a project description.")
+      screen.getByText((content) => content.includes("Mock body content"))
     ).toBeInTheDocument();
 
     // Check image rendering
-    const image = screen.getByAltText("Project Image Alt");
+    const image = screen.getByAltText("Project 1 Image Alt");
     expect(image).toBeInTheDocument();
 
     // Assert that the `src` contains the mocked image URL
@@ -79,10 +79,10 @@ describe("Project Component", () => {
 
     // Check title and description
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Project Title"
+      "Project 1"
     );
     expect(
-      screen.getByText("This is a project description.")
+      screen.getByText((content) => content.includes("Mock body content"))
     ).toBeInTheDocument();
 
     // Ensure no image is rendered
@@ -94,11 +94,9 @@ describe("Project Component", () => {
 
     // Check title and description
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Project Title"
+      "Project 1"
     );
-    expect(
-      screen.getByText("This is a project description.")
-    ).toBeInTheDocument();
+    expect(screen.queryByText("Mock body content")).not.toBeInTheDocument();
 
     // Ensure no PortableText is rendered
     expect(screen.queryByTestId("portable-text")).not.toBeInTheDocument();
@@ -109,11 +107,8 @@ describe("Project Component", () => {
 
     // Check title and description
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Project Title"
+      "Project 1"
     );
-    expect(
-      screen.getByText("This is a project description.")
-    ).toBeInTheDocument();
 
     // Ensure no links are rendered
     expect(screen.queryByText("GitHub")).not.toBeInTheDocument();

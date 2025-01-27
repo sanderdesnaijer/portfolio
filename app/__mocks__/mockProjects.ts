@@ -13,8 +13,11 @@ export const mockProject: ProjectTypeSanity = {
     asset: { _ref: "string", _type: "ref" },
   },
   body: [
-    { children: [{ text: "This is a project body", _type: "span" }] },
-  ] as Block[],
+    {
+      type: "text",
+      children: [{ text: "Mock body content", _type: "span", marks: [] }],
+    },
+  ],
   links: [
     { title: "GitHub", icon: "github", link: "http://test" },
     { title: "Live Demo", icon: "external-link", link: "http://test" },
@@ -26,29 +29,7 @@ export const mockProject: ProjectTypeSanity = {
 };
 
 export const mockProjects: ProjectTypeSanity[] = [
-  {
-    _id: "1",
-    title: "Project 1",
-    _createdAt: "2025-01-01",
-    slug: { _type: "slug", current: "/project-1" },
-    imageURL: "http://mocked-image-url.com/image1.jpg",
-    mainImage: {
-      _type: "image",
-      alt: "Project 1 Image Alt",
-      asset: { _ref: "string", _type: "ref" },
-    },
-    body: [
-      { children: [{ text: "This is a project body", _type: "span" }] },
-    ] as Block[],
-    links: [
-      { title: "GitHub", icon: "github", link: "http://test" },
-      { title: "Live Demo", icon: "external-link", link: "http://test" },
-    ],
-    publishedAt: "",
-    _updatedAt: "",
-    _rev: "",
-    _type: "",
-  },
+  mockProject,
   {
     _id: "2",
     title: "Project 2",

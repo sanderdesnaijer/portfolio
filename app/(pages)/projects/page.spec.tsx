@@ -52,16 +52,16 @@ describe("Page Component", () => {
     );
 
     // Check if the project titles are rendered
-    expect(screen.getByText("Project One")).toBeInTheDocument();
-    expect(screen.getByText("Project Two")).toBeInTheDocument();
+    expect(screen.getByText("Project 1")).toBeInTheDocument();
+    expect(screen.getByText("Project 2")).toBeInTheDocument();
 
     // Check if the image for the first project is rendered
-    expect(screen.getByAltText("Project One Image")).toBeInTheDocument();
-    expect(screen.getByAltText("Project Two Image")).toBeInTheDocument();
+    expect(screen.getByAltText("Project 1 Image Alt")).toBeInTheDocument();
+    expect(screen.getByAltText("Project 2 Image Alt")).toBeInTheDocument();
 
     // Check if the links are rendered correctly
     expect(screen.getByText("GitHub")).toBeInTheDocument();
-    expect(screen.getByText("LinkedIn")).toBeInTheDocument();
+    expect(screen.getByText("Live Demo")).toBeInTheDocument();
   });
 
   it("renders correctly when projects are missing", async () => {
@@ -70,8 +70,8 @@ describe("Page Component", () => {
     render(await Page());
 
     // Check if there are no projects rendered
-    expect(screen.queryByText("Project One")).not.toBeInTheDocument();
-    expect(screen.queryByText("Project Two")).not.toBeInTheDocument();
+    expect(screen.queryByText("Project 1")).not.toBeInTheDocument();
+    expect(screen.queryByText("Project 2")).not.toBeInTheDocument();
   });
 
   it("renders correctly when a project has no body", async () => {
@@ -87,7 +87,7 @@ describe("Page Component", () => {
     render(await Page());
 
     // Check if the project is rendered without the body content
-    expect(screen.getByText("Project One")).toBeInTheDocument();
+    expect(screen.getByText("Project 1")).toBeInTheDocument();
     expect(screen.queryByText("Mock body content")).not.toBeInTheDocument();
   });
 
