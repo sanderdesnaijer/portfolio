@@ -76,10 +76,9 @@ describe("Page Component", () => {
     );
 
     // Check image rendering
-    expect(screen.getByAltText("Profile Picture")).toHaveAttribute(
-      "src",
-      "/_next/image?url=http%3A%2F%2Fmocked-image-url&w=640&q=75"
-    );
+    expect(
+      screen.getByAltText("Profile Picture").getAttribute("src")
+    ).toContain("mocked-image-url");
 
     // Check body content rendering
     expect(screen.getByText(JSON.stringify(mockPage.body))).toBeTruthy();

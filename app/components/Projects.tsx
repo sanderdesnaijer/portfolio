@@ -15,7 +15,6 @@ export const Projects = ({
 }: {
   projects: ProjectTypeSanity[];
 }) => {
-  // console.log("render", projects);
   return (
     <div className="py-10 mx-auto grid grid-cols-1">
       <div className="grid gap-10">
