@@ -137,6 +137,13 @@ describe("components/Projects", () => {
 
     // Ensure truncated text is displayed
     expect(screen.getByText("Mock body content")).toBeInTheDocument();
+    const images = screen.queryAllByRole("img");
+    images.forEach((img, index) => {
+      expect(img.getAttribute("src")).toEqual(mockProjects[index].imageURL);
+      expect(img.getAttribute("alt")).toEqual(
+        mockProjects[index].mainImage!.alt
+      );
+    });
   });
 
   it("renders links correctly for a project", () => {
@@ -156,5 +163,33 @@ describe("components/Projects", () => {
         project.slug.current
       );
     });
+  });
+
+  it("does not render body text when project body is null or empty", () => {
+    const mockProjectsWithEmptyBody: ProjectTypeSanity[] = [
+      {
+        _id: "2",
+        title: "Project 2",
+        _createdAt: "2025-01-02",
+        slug: { current: "/project-2", _type: "slug" },
+        imageURL: "http://mocked-image-url.com/image2.jpg",
+        mainImage: {
+          _type: "image",
+          alt: "Project 2 Image Alt",
+          asset: { _ref: "string", _type: "ref" },
+        },
+        body: [], // Empty array
+        links: [],
+        publishedAt: "",
+        _updatedAt: "",
+        _rev: "",
+        _type: "",
+      },
+    ];
+
+    render(<Projects projects={mockProjectsWithEmptyBody} />);
+
+    // Ensure that no body text is rendered (even if body is an empty array)
+    expect(screen.queryByText("Mock body content")).not.toBeInTheDocument();
   });
 });

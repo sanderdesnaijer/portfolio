@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
 
@@ -24,6 +24,7 @@ jest.mock("next/image", () => ({
     alt: string;
     width: number;
     height: number;
+    // eslint-disable-next-line @next/next/no-img-element
   }) => <img src={src} alt={alt} width={width} height={height} />,
 }));
 

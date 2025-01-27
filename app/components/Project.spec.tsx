@@ -1,5 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Project } from "./Project";
+import { ProjectTypeSanity } from "@/sanity/types";
+import { Block } from "@/sanity/types/types";
 
 // Mock `PortableText` and `imageUrlBuilder`
 jest.mock("@portabletext/react", () => ({
@@ -22,39 +24,43 @@ jest.mock("@sanity/image-url", () => ({
 }));
 
 describe("Project Component", () => {
-  const mockProject = {
+  const mockProject: ProjectTypeSanity = {
+    _id: "1",
     title: "Project Title",
+    _createdAt: "2025-01-01",
     description: "This is a project description.",
     mainImage: {
       alt: "Project Image Alt",
       asset: { _ref: "image-ref", _type: "reference" },
+      _type: "image",
     },
-    body: [{ type: "text", children: [{ text: "Mock body content" }] }],
+    body: [
+      { children: [{ text: "This is a project body", _type: "span" }] },
+    ] as Block[],
     links: [
-      {
-        title: "GitHub",
-        icon: "github",
-      },
-      {
-        title: "Website",
-        icon: "globe",
-      },
+      { title: "GitHub", icon: "github", link: "http://test" },
+      { title: "Live Demo", icon: "external-link", link: "http://test" },
     ],
+    publishedAt: "",
+    _updatedAt: "",
+    _rev: "",
+    _type: "",
+    slug: { _type: "slug", current: "/project-1" },
   };
 
-  const mockProjectWithoutImage = {
+  const mockProjectWithoutImage: ProjectTypeSanity = {
     ...mockProject,
-    mainImage: null,
+    mainImage: null!,
   };
 
-  const mockProjectWithoutBody = {
+  const mockProjectWithoutBody: ProjectTypeSanity = {
     ...mockProject,
-    body: null,
+    body: null!,
   };
 
-  const mockProjectWithoutLinks = {
+  const mockProjectWithoutLinks: ProjectTypeSanity = {
     ...mockProject,
-    links: null,
+    links: null!,
   };
 
   beforeEach(() => {
@@ -89,7 +95,7 @@ describe("Project Component", () => {
 
     // Check links rendering
     expect(screen.getByText("GitHub")).toBeInTheDocument();
-    expect(screen.getByText("Website")).toBeInTheDocument();
+    expect(screen.getByText("Live Demo")).toBeInTheDocument();
   });
 
   it("renders without the image when mainImage is missing", () => {
