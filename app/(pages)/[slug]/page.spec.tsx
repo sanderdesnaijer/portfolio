@@ -3,7 +3,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
 import { generateStaticParams } from "./page";
 import ProjectPage from "./page";
-import { mockProject, mockProjects } from "@/app/__mocks__/mockProjects";
+import { mockProject, mockProjects } from "@/app/test-utils/mockProjects";
 
 jest.mock("@/sanity/lib/fetch", () => ({
   sanityFetch: jest.fn(),

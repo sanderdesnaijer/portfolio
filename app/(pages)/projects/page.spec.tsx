@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
-import { mockProjects } from "@/app/__mocks__/mockProjects";
+import { mockProjects } from "@/app/test-utils/mockProjects";
 
 // Mock external modules and functions
 jest.mock("@/sanity/lib/fetch", () => ({

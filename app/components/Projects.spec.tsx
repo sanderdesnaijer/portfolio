@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import Projects, { truncateText } from "./Projects";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { mockProjects } from "../__mocks__/mockProjects";
+import { mockProjects } from "../test-utils/mockProjects";
 
 jest.mock("next-sanity", () => ({
   toPlainText: jest.fn(() => "Mock body content"),

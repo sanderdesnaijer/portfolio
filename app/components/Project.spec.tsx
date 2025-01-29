@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Project } from "./Project";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { mockProject } from "../__mocks__/mockProjects";
+import { mockProject } from "../test-utils/mockProjects";
 
 // Mock `PortableText` and `imageUrlBuilder`
 jest.mock("@portabletext/react", () => ({
