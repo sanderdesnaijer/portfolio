@@ -2,11 +2,6 @@ import { render, screen } from "@testing-library/react";
 import { usePathname } from "next/navigation";
 import Menu from "./Menu";
 
-// Mock `usePathname` from `next/navigation`
-jest.mock("next/navigation", () => ({
-  usePathname: jest.fn(),
-}));
-
 describe("Menu Component", () => {
   const mockedUsePathname = usePathname as jest.Mock;
 

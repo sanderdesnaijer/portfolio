@@ -1,31 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
-// Mock external modules and functions
-jest.mock("@/sanity/lib/fetch", () => ({
-  sanityFetch: jest.fn(),
-}));
-
-jest.mock("@sanity/image-url", () => ({
-  __esModule: true,
-  default: jest.fn(() => ({
-    image: jest.fn(() => ({
-      width: jest.fn(() => ({
-        height: jest.fn(() => ({
-          url: jest.fn(() => "http://mocked-image-url"),
-        })),
-      })),
-    })),
-  })),
-}));
-
-jest.mock("@/sanity/lib/client", () => ({
-  client: {},
-}));
 
 jest.mock("next-sanity", () => ({
   ...jest.requireActual("next-sanity"),
-  groq: (query: string) => query, // Simply return the query as a string
+  groq: (query: string) => query,
 
   PortableText: ({ value }: { value: unknown }) => (
     <div data-testid="portable-text">{JSON.stringify(value)}</div>

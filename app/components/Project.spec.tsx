@@ -1,26 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { Project } from "./Project";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { mockProject } from "../__mocks__/mockProjects";
+import { mockProject } from "../test-utils/mockProjects";
 
-// Mock `PortableText` and `imageUrlBuilder`
 jest.mock("@portabletext/react", () => ({
   PortableText: ({ value }: { value: unknown }) => (
     <div data-testid="portable-text">{JSON.stringify(value)}</div>
   ),
-}));
-jest.mock("@/sanity/lib/client", () => ({}));
-jest.mock("@sanity/image-url", () => ({
-  __esModule: true,
-  default: jest.fn(() => ({
-    image: jest.fn(() => ({
-      width: jest.fn(() => ({
-        height: jest.fn(() => ({
-          url: jest.fn(() => "http://mocked-image-url"),
-        })),
-      })),
-    })),
-  })),
 }));
 
 describe("Project Component", () => {

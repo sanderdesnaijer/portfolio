@@ -3,9 +3,6 @@ import { settingsQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 
 import Home from "./page";
-jest.mock("@/sanity/lib/fetch", () => ({
-  sanityFetch: jest.fn(),
-}));
 
 const mockSanityFetch = sanityFetch as jest.Mock;
 

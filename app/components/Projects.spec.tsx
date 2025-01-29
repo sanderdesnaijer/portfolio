@@ -1,26 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import Projects, { truncateText } from "./Projects";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { mockProjects } from "../__mocks__/mockProjects";
+import { mockProjects } from "../test-utils/mockProjects";
 
-jest.mock("next-sanity", () => ({
-  toPlainText: jest.fn(() => "Mock body content"),
-}));
-
-jest.mock("next/image", () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const MockedImage = (props: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { priority, ...rest } = props;
-    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-    return <img {...rest} />;
-  };
-
-  // Add display name here for better debugging
-  MockedImage.displayName = "MockedImage";
-
-  return MockedImage;
-});
 jest.mock("../utils/utils", () => ({
   ...jest.requireActual("../utils/utils"),
   convertDate: jest.fn(() => "Mocked Date"),
@@ -36,6 +18,12 @@ describe("components/Projects", () => {
     it('should truncate the text and append "..." if it exceeds the specified length', () => {
       expect(truncateText("Hello World", 5)).toBe("Hello...");
       expect(truncateText("Hello World", 8)).toBe("Hello Wo...");
+    });
+
+    it("should truncate text longer than the specified length", () => {
+      const longText = "This is a very long text that needs to be truncated.";
+      const truncatedText = truncateText(longText, 20);
+      expect(truncatedText).toBe("This is a very long ...");
     });
 
     it("should handle an empty string", () => {
@@ -95,7 +83,9 @@ describe("components/Projects", () => {
     expect(screen.getByText("Mock body content")).toBeInTheDocument();
     const images = screen.queryAllByRole("img");
     images.forEach((img, index) => {
-      expect(img.getAttribute("src")).toEqual(mockProjects[index].imageURL);
+      expect(img.getAttribute("src")).toContain(
+        encodeURIComponent(mockProjects[index].imageURL)
+      );
       expect(img.getAttribute("alt")).toEqual(
         mockProjects[index].mainImage!.alt
       );
