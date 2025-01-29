@@ -7,6 +7,7 @@ import { client } from "@/sanity/lib/client";
 import { JobSanity, PageSanity } from "@/sanity/types";
 import { convertDate } from "@/app/utils/utils";
 import { ICON_SIZE } from "@/app/utils/constants";
+import { PageNotFound } from "@/app/components/PageNotFound";
 
 const slug = "about-me";
 
@@ -26,11 +27,7 @@ export default async function Page() {
   });
 
   if (!page) {
-    return (
-      <div>
-        <p>[Page not found]</p>
-      </div>
-    );
+    return <PageNotFound />;
   }
 
   return (
