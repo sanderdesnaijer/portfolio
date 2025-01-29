@@ -4,14 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { ICON_SIZE } from "./utils/constants";
 import { SettingSanity } from "@/sanity/types";
+import { getTranslations } from "./utils/translations";
 
 export default async function Home() {
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
+  const translations = await getTranslations();
 
   if (!setting) {
     return (
       <div>
-        <p>[Page not found]</p>
+        <p>{translations["page-not-found"]}</p>
       </div>
     );
   }

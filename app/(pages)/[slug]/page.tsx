@@ -4,6 +4,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
 import { Project } from "../../components/Project";
 import { ProjectTypeSanity } from "@/sanity/types";
+import { PageNotFound } from "@/app/components/PageNotFound";
 
 export const revalidate = 60;
 
@@ -17,6 +18,11 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
     query: projectQuery,
     params,
   });
+
+  if (!project) {
+    return <PageNotFound />;
+  }
+
   return <Project project={project} />;
 };
 
