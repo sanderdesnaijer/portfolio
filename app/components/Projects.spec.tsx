@@ -20,6 +20,12 @@ describe("components/Projects", () => {
       expect(truncateText("Hello World", 8)).toBe("Hello Wo...");
     });
 
+    it("should truncate text longer than the specified length", () => {
+      const longText = "This is a very long text that needs to be truncated.";
+      const truncatedText = truncateText(longText, 20);
+      expect(truncatedText).toBe("This is a very long ...");
+    });
+
     it("should handle an empty string", () => {
       expect(truncateText("", 5)).toBe("");
     });
