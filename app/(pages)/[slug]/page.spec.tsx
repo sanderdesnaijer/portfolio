@@ -5,16 +5,6 @@ import { generateStaticParams } from "./page";
 import ProjectPage from "./page";
 import { mockProject, mockProjects } from "@/app/test-utils/mockProjects";
 
-jest.mock("@/sanity/lib/fetch", () => ({
-  sanityFetch: jest.fn(),
-}));
-
-jest.mock("@/sanity/lib/client", () => ({
-  client: {
-    fetch: jest.fn(),
-  },
-}));
-
 jest.mock("@/components/Project", () => ({
   Project: jest.fn(() => <div>Mocked Project Component</div>),
 }));

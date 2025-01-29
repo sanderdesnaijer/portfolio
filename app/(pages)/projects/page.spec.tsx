@@ -3,39 +3,6 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
 import { mockProjects } from "@/app/test-utils/mockProjects";
 
-// Mock external modules and functions
-jest.mock("@/sanity/lib/fetch", () => ({
-  sanityFetch: jest.fn(),
-}));
-
-jest.mock("next-sanity", () => ({
-  ...jest.requireActual("next-sanity"),
-  toPlainText: jest.fn(() => "Mocked plain text"),
-}));
-
-jest.mock("next/image", () => ({
-  __esModule: true,
-  default: ({
-    src,
-    alt,
-    width,
-    height,
-  }: {
-    src: string;
-    alt: string;
-    width: number;
-    height: number;
-    // eslint-disable-next-line @next/next/no-img-element
-  }) => <img src={src} alt={alt} width={width} height={height} />,
-}));
-
-jest.mock("next/link", () => ({
-  __esModule: true,
-  default: ({ children }: { children: React.ReactNode }) => (
-    <div>{children}</div>
-  ),
-}));
-
 describe("Page Component", () => {
   beforeEach(() => {
     jest.clearAllMocks();
