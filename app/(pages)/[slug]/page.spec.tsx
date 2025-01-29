@@ -30,7 +30,7 @@ describe("ProductPage", () => {
 
       const result = await generateStaticParams();
 
-      expect(client.fetch).toHaveBeenCalledWith(expect.any(String)); // Validate query is passed
+      expect(client.fetch).toHaveBeenCalledWith(expect.any(String));
       expect(result).toEqual(mockProjects);
     });
   });
@@ -43,12 +43,25 @@ describe("ProductPage", () => {
 
       render(await ProjectPage({ params }));
 
-      // Ensure the Project component is rendered with the correct props
       expect(sanityFetch).toHaveBeenCalledWith({
-        query: expect.any(String), // Validate query is passed
+        query: expect.any(String),
         params,
       });
       expect(screen.getByText("Mocked Project Component")).toBeInTheDocument();
+    });
+
+    it("renders PageNotFound when project data is not found", async () => {
+      (sanityFetch as jest.Mock).mockResolvedValueOnce(null);
+
+      const params = { slug: "nonexistent-project" };
+
+      render(await ProjectPage({ params }));
+
+      expect(sanityFetch).toHaveBeenCalledWith({
+        query: expect.any(String),
+        params,
+      });
+      expect(screen.getByText("[Page not found]")).toBeInTheDocument();
     });
   });
 });
