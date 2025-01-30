@@ -18,6 +18,7 @@
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.71.2",
     "next": "15.1.6",
+    "next-intl": "^3.26.3",
     "next-sanity": "^9.8.42",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

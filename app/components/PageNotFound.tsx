@@ -1,5 +1,11 @@
-export const PageNotFound = () => (
-  <div>
-    <p>[Page not found]</p>
-  </div>
-);
+import { useTranslations } from "next-intl";
+
+export const PageNotFound = () => {
+  const t = useTranslations();
+
+  return (
+    <div>
+      <p>{t("page-not-found")}</p>
+    </div>
+  );
+};
