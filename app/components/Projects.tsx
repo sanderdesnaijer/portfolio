@@ -46,7 +46,7 @@ export const Projects = ({
               {body ? <p className="text-gray-600 text-sm">{body}</p> : null}
               {project.links && project.links.length && (
                 <ul>
-                  {project.links.map(async (link) => {
+                  {project.links.map((link) => {
                     const IconComponent = getIcon(link.icon);
 
                     return (

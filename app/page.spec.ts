@@ -36,8 +36,8 @@ describe("app/page", () => {
 
     expect(screen.getByText("Test Title")).toBeInTheDocument();
     expect(screen.getByText("Test Description")).toBeInTheDocument();
-    expect(screen.getByAltText("facebook icon")).toBeInTheDocument();
-    expect(screen.getByAltText("twitter icon")).toBeInTheDocument();
+    expect(screen.getByLabelText("facebook icon")).toBeInTheDocument();
+    expect(screen.getByLabelText("twitter icon")).toBeInTheDocument();
     expect(container).toMatchSnapshot();
   });
 

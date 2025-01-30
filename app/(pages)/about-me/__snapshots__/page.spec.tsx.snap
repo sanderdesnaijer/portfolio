@@ -59,18 +59,11 @@ exports[`Page Component renders the page with correct data 1`] = `
           [{"type":"text","children":[{"text":"Job description"}]}]
         </div>
         <ul>
-          <li>
-            <img
-              alt="github icon"
-              aria-hidden="true"
-              data-nimg="1"
-              decoding="async"
-              height="30"
-              loading="lazy"
-              src="/icons/github.svg"
-              style="color: transparent;"
-              width="30"
-            />
+          <li
+            aria-label="github icon"
+            title="github"
+          >
+            svgrurl
             <h3>
               GitHub
             </h3>

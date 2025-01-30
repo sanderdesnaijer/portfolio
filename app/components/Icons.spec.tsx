@@ -5,10 +5,10 @@ import Download from "../../public/icons/download.svg";
 import Demo from "../../public/icons/demo.svg";
 import Gitlab from "../../public/icons/gitlab.svg";
 import Linkedin from "../../public/icons/linkedin.svg";
+import Missing from "../../public/icons/missing.svg";
 
 describe("Icons component", () => {
   it("should return the correct icon component", () => {
-    console.log(getIcon("github"));
     expect(getIcon("github")).toBe(Github);
     expect(getIcon("article")).toBe(Article);
     expect(getIcon("download")).toBe(Download);
@@ -18,7 +18,7 @@ describe("Icons component", () => {
   });
 
   it("should return null for an unknown icon", () => {
-    expect(getIcon("unknown")).toBeNull();
+    expect(getIcon("unknown")).toBe(Missing);
   });
 
   it("should have the correct icon size", () => {

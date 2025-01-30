@@ -2,10 +2,12 @@ import { render, screen } from "@testing-library/react";
 import RootLayout, { metadata } from "./layout";
 
 describe("RootLayout", () => {
+  // eslint-disable-next-line no-console
   const originalConsoleError = console.error;
 
   beforeAll(() => {
     // Suppress hydration warning about <html> being a child of <div>
+    // eslint-disable-next-line no-console
     console.error = (...args) => {
       if (
         typeof args[0] === "string" &&
@@ -19,6 +21,7 @@ describe("RootLayout", () => {
 
   afterAll(() => {
     // Restore original console.error
+    // eslint-disable-next-line no-console
     console.error = originalConsoleError;
   });
   it("should render children inside the layout", () => {

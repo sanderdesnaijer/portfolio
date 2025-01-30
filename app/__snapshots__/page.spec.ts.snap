@@ -29,38 +29,22 @@ exports[`app/page renders the Home page with settings data 1`] = `
       <ul>
         <li>
           <a
+            aria-label="facebook icon"
             href="https://facebook.com"
             target="_blank"
+            title="facebook"
           >
-            <img
-              alt="facebook icon"
-              aria-hidden="true"
-              data-nimg="1"
-              decoding="async"
-              height="30"
-              loading="lazy"
-              src="/icons/facebook.svg"
-              style="color: transparent;"
-              width="30"
-            />
+            svgrurl
           </a>
         </li>
         <li>
           <a
+            aria-label="twitter icon"
             href="https://twitter.com"
             target="_blank"
+            title="twitter"
           >
-            <img
-              alt="twitter icon"
-              aria-hidden="true"
-              data-nimg="1"
-              decoding="async"
-              height="30"
-              loading="lazy"
-              src="/icons/twitter.svg"
-              style="color: transparent;"
-              width="30"
-            />
+            svgrurl
           </a>
         </li>
       </ul>

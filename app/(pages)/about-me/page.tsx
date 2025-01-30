@@ -72,17 +72,15 @@ export default async function Page() {
               <PortableText value={job.description} />
               {job.links && job.links.length && (
                 <ul>
-                  {job.links.map(async (link) => {
+                  {job.links.map((link) => {
                     const IconComponent = getIcon(link.icon);
-                    console.log("icon component", IconComponent);
-
                     return (
                       <li
                         key={link.title}
                         aria-label={`${link.icon} icon`}
                         title={link.icon}
                       >
-                        <IconComponent />
+                        {IconComponent && <IconComponent />}
                         <h3>{link.title}</h3>
                       </li>
                     );

@@ -31,7 +31,7 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
       {project?.body ? <PortableText value={project.body} /> : null}
       {project.links && project.links.length && (
         <ul>
-          {project.links.map(async (link) => {
+          {project.links.map((link) => {
             const IconComponent = getIcon(link.icon);
             return (
               <li

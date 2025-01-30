@@ -18,7 +18,7 @@ export default async function Home() {
         <h1 className="text-5xl">{setting.title}</h1>
         <p>{setting.description}</p>
         <ul>
-          {setting.socialMedia?.map(async (media) => {
+          {setting.socialMedia?.map((media) => {
             const { icon, link } = media;
             const IconComponent = getIcon(icon);
 
