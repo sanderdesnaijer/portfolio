@@ -1,12 +1,8 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { settingsQuery } from "@/sanity/lib/queries";
-import Image from "next/image";
 import Link from "next/link";
-import { ICON_SIZE } from "./utils/constants";
 import { SettingSanity } from "@/sanity/types";
 import { PageNotFound } from "./components/PageNotFound";
-
-import Star from "../public/icons/github.svg";
 
 export default async function Home() {
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
@@ -20,22 +16,21 @@ export default async function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <h1 className="text-5xl">{setting.title}</h1>
         <p>{setting.description}</p>
-        <Star />
         <ul>
-          {setting.socialMedia?.map((media) => {
+          {setting.socialMedia?.map(async (media) => {
             const { icon, link } = media;
-            const iconUrl = `/icons/${icon}.svg`;
+            const IconComponent = (await import(`../public/icons/${icon}.svg`))
+              .default;
 
             return (
               <li key={icon}>
-                <Link href={link} target="_blank">
-                  <Image
-                    aria-hidden
-                    src={iconUrl}
-                    alt={`${icon} icon`}
-                    width={ICON_SIZE}
-                    height={ICON_SIZE}
-                  />
+                <Link
+                  href={link}
+                  target="_blank"
+                  aria-label={`${icon} icon`}
+                  title={icon}
+                >
+                  <IconComponent />
                 </Link>
               </li>
             );

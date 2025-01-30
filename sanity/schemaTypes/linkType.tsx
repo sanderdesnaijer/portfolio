@@ -1,8 +1,33 @@
 import { defineType, defineField, defineArrayMember } from "sanity";
-import Image from "next/image";
+
+import Github from "../../public/icons/github.svg";
+import Article from "../../public/icons/article.svg";
+import Download from "../../public/icons/download.svg";
+import Demo from "../../public/icons/demo.svg";
+import Gitlab from "../../public/icons/gitlab.svg";
+import Linkedin from "../../public/icons/linkedin.svg";
 
 const iconSize = 24;
 const icons = ["article", "download", "demo", "github", "gitlab", "linkedin"];
+
+const getIcon = (icon: string) => {
+  switch (icon) {
+    case "article":
+      return Article;
+    case "download":
+      return Download;
+    case "demo":
+      return Demo;
+    case "github":
+      return Github;
+    case "gitlab":
+      return Gitlab;
+    case "linkedin":
+      return Linkedin;
+    default:
+      return null;
+  }
+};
 
 export const linkType = defineType({
   name: "link",
@@ -46,16 +71,20 @@ export const linkType = defineType({
           return {
             title: title || "No title provided",
             media: iconUrl
-              ? () => (
-                  <Image
-                    key={icon}
-                    aria-hidden
-                    src={`/icons/${icon}.svg`}
-                    alt={title}
-                    width={iconSize}
-                    height={iconSize}
-                  />
-                )
+              ? () => {
+                  const IconComponent = getIcon(icon);
+                  return (
+                    <span
+                      style={{
+                        width: iconSize,
+                        height: iconSize,
+                      }}
+                      aria-label={icon}
+                    >
+                      <IconComponent data-sanity-icon />
+                    </span>
+                  );
+                }
               : null,
           };
         },

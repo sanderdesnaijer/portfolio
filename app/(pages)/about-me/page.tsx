@@ -6,7 +6,6 @@ import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
 import { JobSanity, PageSanity } from "@/sanity/types";
 import { convertDate } from "@/app/utils/utils";
-import { ICON_SIZE } from "@/app/utils/constants";
 import { PageNotFound } from "@/app/components/PageNotFound";
 
 const slug = "about-me";
@@ -72,18 +71,22 @@ export default async function Page() {
               <PortableText value={job.description} />
               {job.links && job.links.length && (
                 <ul>
-                  {job.links.map((link) => (
-                    <li key={link.title}>
-                      <Image
-                        aria-hidden
-                        src={`/icons/${link.icon}.svg`}
-                        alt={`${link.icon} icon`}
-                        width={ICON_SIZE}
-                        height={ICON_SIZE}
-                      />
-                      <h3>{link.title}</h3>
-                    </li>
-                  ))}
+                  {job.links.map(async (link) => {
+                    const IconComponent = (
+                      await import(`../../../public/icons/${link.icon}.svg`)
+                    ).default;
+
+                    return (
+                      <li
+                        key={link.title}
+                        aria-label={`${link.icon} icon`}
+                        title={link.icon}
+                      >
+                        <IconComponent />
+                        <h3>{link.title}</h3>
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
               <p>{job.tags}</p>
