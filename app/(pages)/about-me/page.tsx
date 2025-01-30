@@ -31,7 +31,7 @@ export default async function Page() {
   }
 
   return (
-    <main className="container mx-auto prose prose-xl px-4 py-16">
+    <main className="container mx-auto prose prose-xl px-4 py-16 dark:prose-invert">
       <h1>{page.title}</h1>
 
       <Image

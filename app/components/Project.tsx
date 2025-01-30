@@ -12,7 +12,7 @@ const imageSize = 300;
 
 export const Project = ({ project }: { project: ProjectTypeSanity }) => {
   return (
-    <main className="container mx-auto prose prose-xl px-4 py-16">
+    <main className="container mx-auto prose prose-xl px-4 py-16 dark:prose-invert">
       {project.title && <h1>{project.title}</h1>}
       <p>{project.description}</p>
       {project?.mainImage && project.mainImage.alt ? (

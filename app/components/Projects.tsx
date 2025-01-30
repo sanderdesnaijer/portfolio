@@ -43,7 +43,9 @@ export const Projects = ({
                   priority
                 />
               )}
-              {body ? <p className="text-gray-600 text-sm">{body}</p> : null}
+              {body ? (
+                <p className="text-gray-600 dark:text-white text-sm">{body}</p>
+              ) : null}
               {project.links && project.links.length && (
                 <ul>
                   {project.links.map((link) => {
