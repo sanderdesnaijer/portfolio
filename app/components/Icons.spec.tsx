@@ -17,7 +17,7 @@ describe("Icons component", () => {
     expect(getIcon("linkedin")).toBe(Linkedin);
   });
 
-  it("should return null for an unknown icon", () => {
+  it("should return the Missing icon component for an unknown icon", () => {
     expect(getIcon("unknown")).toBe(Missing);
   });
 

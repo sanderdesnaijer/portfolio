@@ -17,8 +17,7 @@ const iconMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   linkedin: Linkedin,
 };
 
-export const icons = Object.keys(iconMap);
-
 export const getIcon = (icon: string) => {
   return iconMap[icon] || Missing;
 };
+export const icons = Object.keys(iconMap);
