@@ -32,4 +32,7 @@ jobs:
     - name: Typecheck code
       run: npm run typecheck
     - run: npm test  
+    - name: Set up environment variables
+      run: echo "NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}" >> $GITHUB_ENV
+    - run: echo "NEXT_PUBLIC_SANITY_DATASET=${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}" >> $GITHUB_ENV
     - run: npm run build --if-present
