@@ -3,7 +3,7 @@
 exports[`Page Component renders the page with correct data 1`] = `
 <div>
   <main
-    class="container mx-auto prose prose-xl px-4 py-16"
+    class="container mx-auto prose prose-xl px-4 py-16 dark:prose-invert"
   >
     <h1>
       About Me
