@@ -17,6 +17,16 @@ const builder = imageUrlBuilder(client);
 const imageSize = 300;
 const companyIconSize = 50;
 
+const getExperienceTitle = (
+  startDate: string,
+  endDate: string | undefined,
+  presentTitle: string
+): string => {
+  const start = convertDate(startDate, false);
+  const end = endDate ? convertDate(endDate, false) : presentTitle;
+  return `${start} - ${end}`;
+};
+
 export default async function Page() {
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
@@ -68,10 +78,11 @@ export default async function Page() {
               <h3>{job.companyName}</h3>
               <p>{job.jobTitle}</p>
               <p className="">
-                {convertDate(job.startDate, false)} -{" "}
-                {job.endDate
-                  ? convertDate(job.endDate, false)
-                  : t("date-present")}
+                {getExperienceTitle(
+                  job.startDate,
+                  job.endDate,
+                  t("date-present")
+                )}
               </p>
 
               <PortableText value={job.description} />

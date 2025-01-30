@@ -14,10 +14,17 @@ const eslintConfig = [
   {
     rules: {
       "no-console": "error",
+      "react/jsx-no-literals": "error",
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_" },
       ],
+    },
+  },
+  {
+    files: ["**/*.spec.ts", "**/*.spec.tsx"],
+    rules: {
+      "react/jsx-no-literals": "off",
     },
   },
 ];
