@@ -6,6 +6,8 @@ import { ICON_SIZE } from "./utils/constants";
 import { SettingSanity } from "@/sanity/types";
 import { PageNotFound } from "./components/PageNotFound";
 
+import Star from "../public/icons/github.svg";
+
 export default async function Home() {
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
@@ -18,6 +20,7 @@ export default async function Home() {
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <h1 className="text-5xl">{setting.title}</h1>
         <p>{setting.description}</p>
+        <Star />
         <ul>
           {setting.socialMedia?.map((media) => {
             const { icon, link } = media;
