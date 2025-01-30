@@ -29,4 +29,10 @@ describe("app/utils/utils/convertDate", () => {
     const result = convertDate(date, true);
     expect(result).toBe("25 Dec 2025");
   });
+
+  it("should format the date correctly when no shouldShowDay parameter is provided", () => {
+    const date = "2025-01-27";
+    const result = convertDate(date);
+    expect(result).toBe("27 Jan 2025");
+  });
 });
