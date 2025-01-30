@@ -29,7 +29,22 @@ const config: Config = {
   moduleNameMapper: {
     "^@/components/(.*)$": "<rootDir>/app/components/$1",
     "^@/sanity/(.*)$": "<rootDir>/sanity/$1",
+    "\\.svg": "<rootDir>/app/__mocks__/svg.ts",
   },
 };
 
-export default createJestConfig(config);
+const jestConfigWithOverrides = async () => {
+  const configFn = createJestConfig(config);
+  const res = await configFn();
+
+  res.moduleNameMapper = {
+    // We cannot depend on the exact key used by Next.js
+    // so we inject an SVG key higher up on the mapping tree
+    "\\.svg": "<rootDir>/src/__mocks__/svg.ts",
+    ...res.moduleNameMapper,
+  };
+
+  return res;
+};
+
+export default jestConfigWithOverrides;

@@ -61,8 +61,8 @@ describe("components/Projects", () => {
     });
 
     // Ensure links are rendered correctly
-    const githubLinks = screen.getAllByAltText("github icon");
-    const liveDemoLinks = screen.getAllByAltText("external-link icon");
+    const githubLinks = screen.getAllByLabelText("github icon");
+    const liveDemoLinks = screen.getAllByLabelText("external-link icon");
 
     expect(githubLinks.length).toBe(1); // Only one GitHub link
     expect(liveDemoLinks.length).toBe(1); // Only one Live Demo link

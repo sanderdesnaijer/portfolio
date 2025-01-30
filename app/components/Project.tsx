@@ -4,15 +4,15 @@ import { PortableText } from "@portabletext/react";
 import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
-import { ICON_SIZE } from "../utils/constants";
 import { ProjectTypeSanity } from "@/sanity/types";
+import { getIcon } from "./Icons";
 
 const builder = imageUrlBuilder(client);
 const imageSize = 300;
 
 export const Project = ({ project }: { project: ProjectTypeSanity }) => {
   return (
-    <main className="container mx-auto prose prose-xl px-4 py-16">
+    <main className="container mx-auto prose prose-xl px-4 py-16 dark:prose-invert">
       {project.title && <h1>{project.title}</h1>}
       <p>{project.description}</p>
       {project?.mainImage && project.mainImage.alt ? (
@@ -31,18 +31,19 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
       {project?.body ? <PortableText value={project.body} /> : null}
       {project.links && project.links.length && (
         <ul>
-          {project.links.map((link) => (
-            <li key={link.title}>
-              <Image
-                aria-hidden
-                src={`/icons/${link.icon}.svg`}
-                alt={`${link.icon} icon`}
-                width={ICON_SIZE}
-                height={ICON_SIZE}
-              />
-              <p>{link.title}</p>
-            </li>
-          ))}
+          {project.links.map((link) => {
+            const IconComponent = getIcon(link.icon);
+            return (
+              <li
+                key={link.title}
+                aria-label={`${link.icon} icon`}
+                title={link.icon}
+              >
+                <IconComponent />
+                <h3>{link.title}</h3>
+              </li>
+            );
+          })}
         </ul>
       )}
     </main>

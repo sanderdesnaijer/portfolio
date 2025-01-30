@@ -1,10 +1,9 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { settingsQuery } from "@/sanity/lib/queries";
-import Image from "next/image";
 import Link from "next/link";
-import { ICON_SIZE } from "./utils/constants";
 import { SettingSanity } from "@/sanity/types";
 import { PageNotFound } from "./components/PageNotFound";
+import { getIcon } from "./components/Icons";
 
 export default async function Home() {
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
@@ -21,18 +20,17 @@ export default async function Home() {
         <ul>
           {setting.socialMedia?.map((media) => {
             const { icon, link } = media;
-            const iconUrl = `/icons/${icon}.svg`;
+            const IconComponent = getIcon(icon);
 
             return (
               <li key={icon}>
-                <Link href={link} target="_blank">
-                  <Image
-                    aria-hidden
-                    src={iconUrl}
-                    alt={`${icon} icon`}
-                    width={ICON_SIZE}
-                    height={ICON_SIZE}
-                  />
+                <Link
+                  href={link}
+                  target="_blank"
+                  aria-label={`${icon} icon`}
+                  title={icon}
+                >
+                  <IconComponent />
                 </Link>
               </li>
             );

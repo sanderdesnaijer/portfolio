@@ -1,9 +1,9 @@
 import { toPlainText } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
-import { ICON_SIZE } from "../utils/constants";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { convertDate } from "../utils/utils";
+import { getIcon } from "./Icons";
 
 export const truncateText = (text: string, length: number) => {
   if (text.length <= length) return text;
@@ -43,21 +43,25 @@ export const Projects = ({
                   priority
                 />
               )}
-              {body ? <p className="text-gray-600 text-sm">{body}</p> : null}
+              {body ? (
+                <p className="text-gray-600 dark:text-white text-sm">{body}</p>
+              ) : null}
               {project.links && project.links.length && (
                 <ul>
-                  {project.links.map((link) => (
-                    <li key={link.title}>
-                      <Image
-                        aria-hidden
-                        src={`/icons/${link.icon}.svg`}
-                        alt={`${link.icon} icon`}
-                        width={ICON_SIZE}
-                        height={ICON_SIZE}
-                      />
-                      <h3>{link.title}</h3>
-                    </li>
-                  ))}
+                  {project.links.map((link) => {
+                    const IconComponent = getIcon(link.icon);
+
+                    return (
+                      <li
+                        key={link.title}
+                        aria-label={`${link.icon} icon`}
+                        title={link.icon}
+                      >
+                        <IconComponent />
+                        <h3>{link.title}</h3>
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </Link>

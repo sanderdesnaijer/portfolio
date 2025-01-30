@@ -1,8 +1,5 @@
+import { getIcon, icons, iconSize } from "@/app/components/Icons";
 import { defineType, defineField, defineArrayMember } from "sanity";
-import Image from "next/image";
-
-const iconSize = 24;
-const icons = ["article", "download", "demo", "github", "gitlab", "linkedin"];
 
 export const linkType = defineType({
   name: "link",
@@ -46,16 +43,20 @@ export const linkType = defineType({
           return {
             title: title || "No title provided",
             media: iconUrl
-              ? () => (
-                  <Image
-                    key={icon}
-                    aria-hidden
-                    src={`/icons/${icon}.svg`}
-                    alt={title}
-                    width={iconSize}
-                    height={iconSize}
-                  />
-                )
+              ? () => {
+                  const IconComponent = getIcon(icon);
+                  return (
+                    <span
+                      style={{
+                        width: iconSize,
+                        height: iconSize,
+                      }}
+                      aria-label={icon}
+                    >
+                      <IconComponent data-sanity-icon />
+                    </span>
+                  );
+                }
               : null,
           };
         },
