@@ -3,6 +3,7 @@ import { settingsQuery } from "@/sanity/lib/queries";
 import Link from "next/link";
 import { SettingSanity } from "@/sanity/types";
 import { PageNotFound } from "./components/PageNotFound";
+import { getIcon } from "./components/Icons";
 
 export default async function Home() {
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
@@ -19,8 +20,7 @@ export default async function Home() {
         <ul>
           {setting.socialMedia?.map(async (media) => {
             const { icon, link } = media;
-            const IconComponent = (await import(`../public/icons/${icon}.svg`))
-              .default;
+            const IconComponent = getIcon(icon);
 
             return (
               <li key={icon}>

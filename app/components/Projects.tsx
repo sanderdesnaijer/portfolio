@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { convertDate } from "../utils/utils";
+import { getIcon } from "./Icons";
 
 export const truncateText = (text: string, length: number) => {
   if (text.length <= length) return text;
@@ -46,9 +47,7 @@ export const Projects = ({
               {project.links && project.links.length && (
                 <ul>
                   {project.links.map(async (link) => {
-                    const IconComponent = (
-                      await import(`../../public/icons/${link.icon}.svg`)
-                    ).default;
+                    const IconComponent = getIcon(link.icon);
 
                     return (
                       <li

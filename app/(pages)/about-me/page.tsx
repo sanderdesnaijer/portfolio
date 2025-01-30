@@ -7,6 +7,7 @@ import { client } from "@/sanity/lib/client";
 import { JobSanity, PageSanity } from "@/sanity/types";
 import { convertDate } from "@/app/utils/utils";
 import { PageNotFound } from "@/app/components/PageNotFound";
+import { getIcon } from "@/app/components/Icons";
 
 const slug = "about-me";
 
@@ -72,9 +73,8 @@ export default async function Page() {
               {job.links && job.links.length && (
                 <ul>
                   {job.links.map(async (link) => {
-                    const IconComponent = (
-                      await import(`../../../public/icons/${link.icon}.svg`)
-                    ).default;
+                    const IconComponent = getIcon(link.icon);
+                    console.log("icon component", IconComponent);
 
                     return (
                       <li

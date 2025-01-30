@@ -5,6 +5,7 @@ import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { ProjectTypeSanity } from "@/sanity/types";
+import { getIcon } from "./Icons";
 
 const builder = imageUrlBuilder(client);
 const imageSize = 300;
@@ -31,10 +32,7 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
       {project.links && project.links.length && (
         <ul>
           {project.links.map(async (link) => {
-            const IconComponent = (
-              await import(`../../public/icons/${link.icon}.svg`)
-            ).default;
-
+            const IconComponent = getIcon(link.icon);
             return (
               <li
                 key={link.title}
