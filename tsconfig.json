@@ -18,7 +18,7 @@
     "strictFunctionTypes": true,
     "alwaysStrict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,    
+    "noUnusedParameters": true,
     "plugins": [
       {
         "name": "next"
