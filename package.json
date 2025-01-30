@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
+    "format:check": "prettier -c .",
     "typecheck": "tsc --noEmit",
     "test": "jest",
     "test:coverage": "jest --coverage"
