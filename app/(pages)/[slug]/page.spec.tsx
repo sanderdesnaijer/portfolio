@@ -10,7 +10,7 @@ jest.mock("@/components/Project", () => ({
   Project: jest.fn(() => <div>Mocked Project Component</div>),
 }));
 
-describe("ProductPage", () => {
+describe("app/(pages)/[slug]/page", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });

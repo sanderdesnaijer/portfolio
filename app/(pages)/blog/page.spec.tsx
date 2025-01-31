@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 import Page from "./page";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
+import { mockPage } from "@/app/test-utils/mockPage";
 
-const mockPage: PageSanity = {
-  _id: "1",
-  _type: "page",
+const mockBlogPage: PageSanity = {
+  ...mockPage,
   name: "Blog",
   title: "Blog",
   description: "Blog description",
@@ -22,21 +22,19 @@ const mockPage: PageSanity = {
     alt: "Main image",
   },
   publishedAt: "2023-01-01",
-  body: [],
   imageAlt: "Image alt text",
   imageURL: "https://example.com/image.jpg",
-  _rev: "1",
   _createdAt: "2023-01-01T00:00:00Z",
   _updatedAt: "2023-01-01T00:00:00Z",
 };
 
-describe("pages/blog/page", () => {
+describe("app/(pages)/blog/page", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
   it("renders the Page component with the correct structure", async () => {
-    (sanityFetch as jest.Mock).mockResolvedValue(mockPage);
+    (sanityFetch as jest.Mock).mockResolvedValue(mockBlogPage);
 
     // Render the asynchronous Page component
     const { container } = render(await Page());

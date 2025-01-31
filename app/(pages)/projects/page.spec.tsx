@@ -2,20 +2,22 @@ import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
 import { mockProjects } from "@/app/test-utils/mockProjects";
+import { mockPage } from "@/app/test-utils/mockPage";
 
-describe("Page Component", () => {
+describe("app/(pages)/projects/page", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it("renders the Page with correct project data", async () => {
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjects);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
 
     render(await Page());
 
     // Check if the title "Projects" is rendered
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Projects"
+      mockPage.title
     );
 
     // Check if the project titles are rendered
@@ -33,6 +35,7 @@ describe("Page Component", () => {
 
   it("renders correctly when projects are missing", async () => {
     (sanityFetch as jest.Mock).mockResolvedValueOnce([]);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
 
     render(await Page());
 
@@ -50,6 +53,7 @@ describe("Page Component", () => {
     ];
 
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjectsWithoutBody);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
 
     render(await Page());
 
@@ -67,6 +71,7 @@ describe("Page Component", () => {
     ];
 
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjectsWithoutLinks);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
 
     render(await Page());
 

@@ -2,6 +2,8 @@ import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
 import { getTranslationKey } from "@/app/test-utils/i18n";
+import { JobSanity, PageSanity } from "@/sanity/types";
+import { mockPage } from "@/app/test-utils/mockPage";
 
 jest.mock("next-sanity", () => ({
   ...jest.requireActual("next-sanity"),
@@ -12,30 +14,45 @@ jest.mock("next-sanity", () => ({
   ),
 }));
 
-describe("Page Component", () => {
-  const mockPage = {
+describe("app/(pages)/about-me", () => {
+  const mockAboutMePage: PageSanity = {
+    ...mockPage,
     title: "About Me",
-    imageAlt: "Profile Picture",
-    imageURL: "mock-image-url",
-    body: [{ type: "text", children: [{ text: "Mock body content" }] }],
   };
 
-  const mockJobs = [
+  const mockJobs: JobSanity[] = [
     {
       _id: "job-1",
       imageURL: "mock-job-image-url",
       companyName: "Company A",
       jobTitle: "Developer",
       startDate: "2022-01-01",
-      endDate: null,
-      description: [{ type: "text", children: [{ text: "Job description" }] }],
+      endDate: undefined,
+      description: [
+        {
+          _type: "block",
+          children: [
+            {
+              text: "Job description",
+              _type: "span",
+              marks: [],
+            },
+          ],
+          style: "",
+        },
+      ],
       links: [
         {
           title: "GitHub",
           icon: "github",
+          link: "",
         },
       ],
       tags: "React, TypeScript",
+      _rev: "",
+      _type: "",
+      _createdAt: "",
+      _updatedAt: "",
     },
   ];
 
@@ -45,7 +62,7 @@ describe("Page Component", () => {
 
   it("renders the page with correct data", async () => {
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockPage) // First call for page data
+      .mockResolvedValueOnce(mockAboutMePage) // First call for page data
       .mockResolvedValueOnce(mockJobs); // Second call for jobs data
 
     const { container } = render(await Page());
@@ -61,7 +78,7 @@ describe("Page Component", () => {
     ).toContain("mocked-image-url");
 
     // Check body content rendering
-    expect(screen.getByText(JSON.stringify(mockPage.body))).toBeTruthy();
+    expect(screen.getByText(JSON.stringify(mockAboutMePage.body))).toBeTruthy();
 
     // Check job experience section
     expect(screen.getByText("Company A")).toBeInTheDocument();
@@ -98,7 +115,7 @@ describe("Page Component", () => {
     ];
 
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockPage) // First call for page data
+      .mockResolvedValueOnce(mockAboutMePage) // First call for page data
       .mockResolvedValueOnce(mockJobsWithoutLinks); // Second call for jobs data
 
     render(await Page());
@@ -109,7 +126,7 @@ describe("Page Component", () => {
 
   it("handles empty jobs list gracefully", async () => {
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockPage) // First call for page data
+      .mockResolvedValueOnce(mockAboutMePage) // First call for page data
       .mockResolvedValueOnce([]); // Second call for jobs data
 
     render(await Page());
@@ -120,7 +137,7 @@ describe("Page Component", () => {
 
   it("renders correctly when page body is missing", async () => {
     const mockPageWithoutBody = {
-      ...mockPage,
+      ...mockAboutMePage,
       body: null, // Body is missing
     };
 
@@ -146,7 +163,7 @@ describe("Page Component", () => {
     ];
 
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockPage) // First call for page data
+      .mockResolvedValueOnce(mockAboutMePage) // First call for page data
       .mockResolvedValueOnce(mockJobsWithEndDate); // Second call for jobs data
 
     render(await Page());
@@ -164,7 +181,7 @@ describe("Page Component", () => {
     ];
 
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockPage) // First call for page data
+      .mockResolvedValueOnce(mockAboutMePage) // First call for page data
       .mockResolvedValueOnce(mockJobsWithoutEndDate); // Second call for jobs data
 
     render(await Page());
