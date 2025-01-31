@@ -1,5 +1,5 @@
 import React from "react";
-import { getTranslationKey, MockTranslations } from "../test-utils/i18n";
+import { getTranslationKey, MockTranslations } from "../../test-utils/i18n";
 
 export const useTranslations = jest.fn().mockImplementation(() => {
   return (key: keyof MockTranslations) => {
