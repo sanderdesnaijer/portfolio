@@ -4,6 +4,7 @@ import { client } from "@/sanity/lib/client";
 import { generateStaticParams } from "./page";
 import ProjectPage from "./page";
 import { mockProject, mockProjects } from "@/app/test-utils/mockProjects";
+import { getTranslationKey } from "@/app/test-utils/i18n";
 
 jest.mock("@/components/Project", () => ({
   Project: jest.fn(() => <div>Mocked Project Component</div>),
@@ -51,7 +52,9 @@ describe("ProductPage", () => {
         query: expect.any(String),
         params,
       });
-      expect(screen.getByText("[Page not found]")).toBeInTheDocument();
+      expect(
+        screen.getByText(getTranslationKey("page-not-found"))
+      ).toBeInTheDocument();
     });
   });
 });

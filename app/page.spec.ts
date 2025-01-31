@@ -3,6 +3,7 @@ import { settingsQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 
 import Home from "./page";
+import { getTranslationKey } from "./test-utils/i18n";
 
 const mockSanityFetch = sanityFetch as jest.Mock;
 
@@ -16,7 +17,9 @@ describe("app/page", () => {
 
     const { container } = render(await Home());
 
-    expect(screen.getByText("[Page not found]")).toBeInTheDocument();
+    expect(
+      screen.getByText(getTranslationKey("page-not-found"))
+    ).toBeInTheDocument();
     expect(container).toMatchSnapshot();
   });
 

@@ -77,14 +77,16 @@ describe("Page Component", () => {
     expect(container).toMatchSnapshot();
   });
 
-  it("renders [Page not found] when page data is missing", async () => {
+  it("renders Page not found when page data is missing", async () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(null) // First call for page data
       .mockResolvedValueOnce(mockJobs); // Second call for jobs data
 
     render(await Page());
 
-    expect(screen.getByText("[Page not found]")).toBeInTheDocument();
+    expect(
+      screen.getByText(getTranslationKey("page-not-found"))
+    ).toBeInTheDocument();
   });
 
   it("handles missing job links gracefully", async () => {
@@ -153,7 +155,7 @@ describe("Page Component", () => {
     expect(screen.getByText("Jan 2022 - Dec 2023")).toBeInTheDocument();
   });
 
-  it("renders [present] when job endDate is not given", async () => {
+  it("renders present when job endDate is not given", async () => {
     const mockJobsWithoutEndDate = [
       {
         ...mockJobs[0],
@@ -167,7 +169,6 @@ describe("Page Component", () => {
 
     render(await Page());
 
-    // Check that "[present]" is displayed for the job
     expect(
       screen.getByText(`Jan 2022 - ${getTranslationKey("date-present")}`)
     ).toBeInTheDocument();
