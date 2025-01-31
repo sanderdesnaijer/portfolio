@@ -3,6 +3,7 @@ import Projects from "@/app/components/Projects";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery, projectsQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
+
 const slug = "projects";
 
 export default async function Page() {

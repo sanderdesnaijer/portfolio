@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
+import { getTranslationKey } from "@/app/test-utils/i18n";
 
 jest.mock("next-sanity", () => ({
   ...jest.requireActual("next-sanity"),
@@ -65,7 +66,9 @@ describe("Page Component", () => {
     // Check job experience section
     expect(screen.getByText("Company A")).toBeInTheDocument();
     expect(screen.getByText("Developer")).toBeInTheDocument();
-    expect(screen.getByText("Jan 2022 - [present]")).toBeInTheDocument();
+    expect(
+      screen.getByText(`Jan 2022 - ${getTranslationKey("date-present")}`)
+    ).toBeInTheDocument();
 
     // Check links in job
     expect(screen.getByText("GitHub")).toBeInTheDocument();
@@ -165,6 +168,8 @@ describe("Page Component", () => {
     render(await Page());
 
     // Check that "[present]" is displayed for the job
-    expect(screen.getByText("Jan 2022 - [present]")).toBeInTheDocument();
+    expect(
+      screen.getByText(`Jan 2022 - ${getTranslationKey("date-present")}`)
+    ).toBeInTheDocument();
   });
 });

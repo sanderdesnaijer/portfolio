@@ -24,7 +24,7 @@ exports[`Page Component renders the page with correct data 1`] = `
       [{"type":"text","children":[{"text":"Mock body content"}]}]
     </div>
     <h3>
-      [Experience]
+      Experience
     </h3>
     <ol>
       <li>
@@ -48,10 +48,7 @@ exports[`Page Component renders the page with correct data 1`] = `
         <p
           class=""
         >
-          Jan 2022
-           -
-           
-          [present]
+          Jan 2022 - present
         </p>
         <div
           data-testid="portable-text"
