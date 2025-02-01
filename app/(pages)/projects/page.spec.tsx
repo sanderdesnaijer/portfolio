@@ -3,6 +3,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
 import { mockProjects } from "@/app/test-utils/mockProjects";
 import { mockPage } from "@/app/test-utils/mockPage";
+import { getTranslationKey } from "@/app/test-utils/i18n";
 
 describe("app/(pages)/projects/page", () => {
   beforeEach(() => {
@@ -60,6 +61,15 @@ describe("app/(pages)/projects/page", () => {
     // Check if the project is rendered without the body content
     expect(screen.getByText("Project 1")).toBeInTheDocument();
     expect(screen.queryByText("Mock body content")).not.toBeInTheDocument();
+  });
+
+  it("should show not found if page is not found", async () => {
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(null);
+
+    render(await Page());
+
+    const message = screen.getByText(getTranslationKey("page-not-found"));
+    expect(message).toBeInTheDocument();
   });
 
   it("displays 'No content' if no links are provided", async () => {
