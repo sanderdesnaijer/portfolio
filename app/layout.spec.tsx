@@ -1,7 +1,14 @@
 import { render, screen } from "@testing-library/react";
 import RootLayout, { metadata } from "./layout";
 
-describe("RootLayout", () => {
+// Mock IntlProvider to avoid async/await issues in client components
+jest.mock("./components/IntlProvider", () => ({
+  __esModule: true,
+  default: ({ children }: { children: (locale: string) => React.ReactNode }) =>
+    children("en"),
+}));
+
+describe("app/layout", () => {
   // eslint-disable-next-line no-console
   const originalConsoleError = console.error;
 
@@ -10,8 +17,10 @@ describe("RootLayout", () => {
     // eslint-disable-next-line no-console
     console.error = (...args) => {
       if (
-        typeof args[0] === "string" &&
-        args[0].includes("In HTML, %s cannot be a child of <%s>.%s")
+        (typeof args[0] === "string" &&
+          args[0].includes("In HTML, %s cannot be a child of <%s>.%s")) ||
+        (typeof args[0] === "string" &&
+          args[0].includes("async/await it not yet supported"))
       ) {
         return; // Ignore this specific warning
       }
@@ -24,6 +33,7 @@ describe("RootLayout", () => {
     // eslint-disable-next-line no-console
     console.error = originalConsoleError;
   });
+
   it("should render children inside the layout", () => {
     render(
       <RootLayout>

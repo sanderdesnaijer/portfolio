@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Menu from "./components/Menu";
-import { getLocale, getMessages } from "next-intl/server";
-import { NextIntlClientProvider } from "next-intl";
+import IntlProvider from "./components/IntlProvider"; // Updated import
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,25 +20,23 @@ export const metadata: Metadata = {
     "Passionate software developer turning creative ideas to functional products.",
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-  const messages = await getMessages();
-
   return (
-    <html lang={locale}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <NextIntlClientProvider messages={messages}>
-          <Menu />
-
-          {children}
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <IntlProvider>
+      {(locale) => (
+        <html lang={locale}>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <Menu />
+            {children}
+          </body>
+        </html>
+      )}
+    </IntlProvider>
   );
 }

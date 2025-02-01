@@ -6,9 +6,15 @@ const getTranslations = jest
     return getTranslationKey(key);
   });
 
+const getLocale = jest.fn().mockResolvedValue(() => {
+  return "en";
+});
+
 const actualNextIntlServer = jest.requireActual("next-intl/server");
 
 module.exports = {
   ...actualNextIntlServer,
   getTranslations,
+  getLocale,
+  getMessages: getTranslations,
 };
