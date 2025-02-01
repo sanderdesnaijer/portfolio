@@ -8,6 +8,7 @@ import { JobSanity, PageSanity } from "@/sanity/types";
 import { convertDate } from "@/app/utils/utils";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import { getIcon } from "@/app/components/Icons";
+import { getTranslations } from "next-intl/server";
 
 const slug = "about-me";
 
@@ -15,6 +16,16 @@ const builder = imageUrlBuilder(client);
 
 const imageSize = 300;
 const companyIconSize = 50;
+
+const getExperienceTitle = (
+  startDate: string,
+  endDate: string | undefined,
+  presentTitle: string
+): string => {
+  const start = convertDate(startDate, false);
+  const end = endDate ? convertDate(endDate, false) : presentTitle;
+  return `${start} - ${end}`;
+};
 
 export default async function Page() {
   const page = await sanityFetch<PageSanity>({
@@ -25,6 +36,8 @@ export default async function Page() {
   const jobs = await sanityFetch<JobSanity[]>({
     query: jobsQuery,
   });
+
+  const t = await getTranslations();
 
   if (!page) {
     return <PageNotFound />;
@@ -47,7 +60,7 @@ export default async function Page() {
       />
       {page?.body ? <PortableText value={page.body} /> : null}
 
-      <h3>[Experience]</h3>
+      <h3>{t("job-experience")}</h3>
       <ol>
         {jobs?.map((job) => {
           return (
@@ -65,8 +78,11 @@ export default async function Page() {
               <h3>{job.companyName}</h3>
               <p>{job.jobTitle}</p>
               <p className="">
-                {convertDate(job.startDate, false)} -{" "}
-                {job.endDate ? convertDate(job.endDate, false) : "[present]"}
+                {getExperienceTitle(
+                  job.startDate,
+                  job.endDate,
+                  t("date-present")
+                )}
               </p>
 
               <PortableText value={job.description} />

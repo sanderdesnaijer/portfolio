@@ -4,7 +4,7 @@ exports[`app/page renders 'Page not found' when sanityFetch returns null 1`] = `
 <div>
   <div>
     <p>
-      [Page not found]
+      Page not found
     </p>
   </div>
 </div>

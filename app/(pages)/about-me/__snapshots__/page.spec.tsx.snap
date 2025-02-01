@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Page Component renders the page with correct data 1`] = `
+exports[`app/(pages)/about-me renders the page with correct data 1`] = `
 <div>
   <main
     class="container mx-auto prose prose-xl px-4 py-16 dark:prose-invert"
@@ -21,10 +21,10 @@ exports[`Page Component renders the page with correct data 1`] = `
     <div
       data-testid="portable-text"
     >
-      [{"type":"text","children":[{"text":"Mock body content"}]}]
+      [{"_type":"block","children":[{"text":"Mock body content","_type":"span","marks":[]}],"style":""}]
     </div>
     <h3>
-      [Experience]
+      Experience
     </h3>
     <ol>
       <li>
@@ -48,15 +48,12 @@ exports[`Page Component renders the page with correct data 1`] = `
         <p
           class=""
         >
-          Jan 2022
-           -
-           
-          [present]
+          Jan 2022 - present
         </p>
         <div
           data-testid="portable-text"
         >
-          [{"type":"text","children":[{"text":"Job description"}]}]
+          [{"_type":"block","children":[{"text":"Job description","_type":"span","marks":[]}],"style":""}]
         </div>
         <ul>
           <li

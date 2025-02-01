@@ -2,20 +2,23 @@ import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
 import { mockProjects } from "@/app/test-utils/mockProjects";
+import { mockPage } from "@/app/test-utils/mockPage";
+import { getTranslationKey } from "@/app/test-utils/i18n";
 
-describe("Page Component", () => {
+describe("app/(pages)/projects/page", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
   it("renders the Page with correct project data", async () => {
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjects);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
 
     render(await Page());
 
     // Check if the title "Projects" is rendered
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Projects"
+      mockPage.title
     );
 
     // Check if the project titles are rendered
@@ -33,6 +36,7 @@ describe("Page Component", () => {
 
   it("renders correctly when projects are missing", async () => {
     (sanityFetch as jest.Mock).mockResolvedValueOnce([]);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
 
     render(await Page());
 
@@ -50,12 +54,22 @@ describe("Page Component", () => {
     ];
 
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjectsWithoutBody);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
 
     render(await Page());
 
     // Check if the project is rendered without the body content
     expect(screen.getByText("Project 1")).toBeInTheDocument();
     expect(screen.queryByText("Mock body content")).not.toBeInTheDocument();
+  });
+
+  it("should show not found if page is not found", async () => {
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(null);
+
+    render(await Page());
+
+    const message = screen.getByText(getTranslationKey("page-not-found"));
+    expect(message).toBeInTheDocument();
   });
 
   it("displays 'No content' if no links are provided", async () => {
@@ -67,6 +81,7 @@ describe("Page Component", () => {
     ];
 
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjectsWithoutLinks);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
 
     render(await Page());
 

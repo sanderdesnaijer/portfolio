@@ -17,6 +17,7 @@ const config: Config = {
     "app/**/*.{js,jsx,ts,tsx}",
     "!app/**/*.d.ts",
     "!app/**/index.{js,ts}",
+    "!app/test-utils/**/*.{js,ts}",
   ],
   coveragePathIgnorePatterns: [
     "/node_modules/",
