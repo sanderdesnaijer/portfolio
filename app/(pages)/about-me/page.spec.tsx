@@ -62,42 +62,36 @@ describe("app/(pages)/about-me", () => {
 
   it("renders the page with correct data", async () => {
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockAboutMePage) // First call for page data
-      .mockResolvedValueOnce(mockJobs); // Second call for jobs data
+      .mockResolvedValueOnce(mockAboutMePage)
+      .mockResolvedValueOnce(mockJobs);
 
     const { container } = render(await Page());
 
-    // Check page title
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "About Me"
     );
 
-    // Check image rendering
     expect(
       screen.getByAltText("Profile Picture").getAttribute("src")
     ).toContain("mocked-image-url");
 
-    // Check body content rendering
     expect(screen.getByText(JSON.stringify(mockAboutMePage.body))).toBeTruthy();
 
-    // Check job experience section
     expect(screen.getByText("Company A")).toBeInTheDocument();
     expect(screen.getByText("Developer")).toBeInTheDocument();
     expect(
       screen.getByText(`Jan 2022 - ${getTranslationKey("date-present")}`)
     ).toBeInTheDocument();
 
-    // Check links in job
     expect(screen.getByText("GitHub")).toBeInTheDocument();
 
-    // Check snapshot
     expect(container).toMatchSnapshot();
   });
 
   it("renders Page not found when page data is missing", async () => {
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(null) // First call for page data
-      .mockResolvedValueOnce(mockJobs); // Second call for jobs data
+      .mockResolvedValueOnce(null)
+      .mockResolvedValueOnce(mockJobs);
 
     render(await Page());
 
@@ -110,45 +104,41 @@ describe("app/(pages)/about-me", () => {
     const mockJobsWithoutLinks = [
       {
         ...mockJobs[0],
-        links: null, // Remove links
+        links: null,
       },
     ];
 
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockAboutMePage) // First call for page data
-      .mockResolvedValueOnce(mockJobsWithoutLinks); // Second call for jobs data
+      .mockResolvedValueOnce(mockAboutMePage)
+      .mockResolvedValueOnce(mockJobsWithoutLinks);
 
     render(await Page());
 
-    // Ensure it doesn't throw an error and renders correctly
     expect(screen.queryByText("GitHub")).not.toBeInTheDocument();
   });
 
   it("handles empty jobs list gracefully", async () => {
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockAboutMePage) // First call for page data
-      .mockResolvedValueOnce([]); // Second call for jobs data
+      .mockResolvedValueOnce(mockAboutMePage)
+      .mockResolvedValueOnce([]);
 
     render(await Page());
 
-    // Ensure no jobs are rendered
     expect(screen.queryByRole("listitem")).not.toBeInTheDocument();
   });
 
   it("renders correctly when page body is missing", async () => {
     const mockPageWithoutBody = {
       ...mockAboutMePage,
-      body: null, // Body is missing
+      body: null,
     };
 
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPageWithoutBody); // First call for page data
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPageWithoutBody);
 
     render(await Page());
 
-    // Ensure the PortableText is not rendered
     expect(screen.queryByTestId("portable-text")).not.toBeInTheDocument();
 
-    // Verify the page title still renders
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "About Me"
     );
@@ -158,17 +148,16 @@ describe("app/(pages)/about-me", () => {
     const mockJobsWithEndDate = [
       {
         ...mockJobs[0],
-        endDate: "2023-12-31", // Provide an endDate
+        endDate: "2023-12-31",
       },
     ];
 
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockAboutMePage) // First call for page data
-      .mockResolvedValueOnce(mockJobsWithEndDate); // Second call for jobs data
+      .mockResolvedValueOnce(mockAboutMePage)
+      .mockResolvedValueOnce(mockJobsWithEndDate);
 
     render(await Page());
 
-    // Check that the job's start and end date is rendered correctly
     expect(screen.getByText("Jan 2022 - Dec 2023")).toBeInTheDocument();
   });
 
@@ -176,13 +165,13 @@ describe("app/(pages)/about-me", () => {
     const mockJobsWithoutEndDate = [
       {
         ...mockJobs[0],
-        endDate: null, // No end date
+        endDate: null,
       },
     ];
 
     (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockAboutMePage) // First call for page data
-      .mockResolvedValueOnce(mockJobsWithoutEndDate); // Second call for jobs data
+      .mockResolvedValueOnce(mockAboutMePage)
+      .mockResolvedValueOnce(mockJobsWithoutEndDate);
 
     render(await Page());
 
