@@ -9,7 +9,7 @@ const menuItems = [
     name: "Home",
   },
   {
-    pathname: "/about-me",
+    pathname: "/about",
     name: "About me",
   },
   {

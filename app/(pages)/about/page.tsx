@@ -10,7 +10,7 @@ import { PageNotFound } from "@/app/components/PageNotFound";
 import { getIcon } from "@/app/components/Icons";
 import { getTranslations } from "next-intl/server";
 
-const slug = "about-me";
+const slug = "about";
 
 const builder = imageUrlBuilder(client);
 
@@ -44,8 +44,8 @@ export default async function Page() {
   }
 
   return (
-    <main className="container mx-auto prose prose-xl px-4 py-16 dark:prose-invert">
-      <h1>{page.title}</h1>
+    <main className="prose prose-xl dark:prose-invert container mx-auto pt-24">
+      <h1 className="font-bold text-8xl">{page.title}</h1>
 
       <Image
         alt={page.imageAlt}
