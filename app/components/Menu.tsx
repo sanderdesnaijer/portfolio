@@ -26,10 +26,10 @@ const Menu = () => {
   const path = usePathname();
 
   return (
-    <nav className="py-4 border-b flex flex-row items-center justify-center gap-4">
+    <nav className="py-4 flex flex-col text-4xl font-extralight absolute bottom-0">
       {menuItems.map((item, i) => (
         <Link
-          className={`${path === item.pathname && "text-orange-600 underline underline-offset-8 decoration-2"}`}
+          className={`${path === item.pathname && "font-bold"}`}
           key={i}
           href={item.pathname}
         >

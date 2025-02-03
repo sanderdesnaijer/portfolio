@@ -27,7 +27,7 @@ export default function RootLayout({
       {(locale) => (
         <html lang={locale}>
           <body className={`${montserrat.variable} antialiased`}>
-            <Menu />
+            {/* <Menu /> */}
             {children}
           </body>
         </html>

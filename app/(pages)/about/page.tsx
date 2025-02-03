@@ -9,6 +9,7 @@ import { convertDate } from "@/app/utils/utils";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import Menu from "@/app/components/Menu";
 
 const slug = "about";
 const builder = imageUrlBuilder(client);
@@ -34,7 +35,7 @@ const components: Partial<PortableTextReactComponents> = {
 const jobComponents: Partial<PortableTextReactComponents> = {
   block: {
     normal: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="leading-8 text-sm">{children}</h2>
+      <p className="leading-8 text-sm mb-3">{children}</p>
     ),
   },
 };
@@ -66,74 +67,79 @@ export default async function Page() {
   }
 
   return (
-    <main className="container mx-auto pt-20 px-4 prose prose-xl dark:prose-invert">
-      <h1 className="font-bold text-8xl mb-10">{page.title}</h1>
+    <div className="grid grid-cols-9 container mx-auto">
+      <div className="col-span-2 sticky top-0 h-screen flex justify-end p-4">
+        <Menu />
+      </div>
+      <main className="prose prose-xl dark:prose-invert col-span-5 max-w-fit py-24 relative">
+        <h1 className="font-bold text-8xl mb-10">{page.title}</h1>
 
-      <Image
-        alt={page.imageAlt}
-        src={builder
-          .image(page.imageURL)
-          .width(mainImageSize)
-          .height(mainImageSize)
-          .url()}
-        width={mainImageSize}
-        height={mainImageSize}
-        priority
-        className="absolute right-0 top-0"
-      />
-      {page?.body ? (
-        <PortableText value={page.body} components={components} />
-      ) : null}
+        <Image
+          alt={page.imageAlt}
+          src={builder
+            .image(page.imageURL)
+            .width(mainImageSize)
+            .height(mainImageSize)
+            .url()}
+          width={mainImageSize}
+          height={mainImageSize}
+          priority
+          className="absolute -right-10 -top-10"
+        />
+        {page?.body ? (
+          <PortableText value={page.body} components={components} />
+        ) : null}
 
-      <h2>{t("job-experience")}</h2>
-      <ol className="list-none p-0 flex flex-col gap-10 not-prose">
-        {jobs?.map((job) => {
-          return (
-            <li key={job._id} className="flex">
-              <div className="w-1/5">
-                <p className="text-base text-right mt-0 mb-2">
-                  {getExperienceTitle(
-                    job.startDate,
-                    job.endDate,
-                    t("date-present")
-                  )}
-                </p>
-              </div>
-              <div className="w-4/5 pl-4">
-                <div className="flex mb-2">
-                  <Image
-                    alt={job.imageURL}
-                    src={builder
-                      .image(job.imageURL)
-                      .width(companyIconSize)
-                      .height(companyIconSize)
-                      .url()}
-                    width={companyIconSize}
-                    height={companyIconSize}
-                    className="mt-0 h-fit"
-                  />
-                  <div className="pl-2">
-                    <Link
-                      href={job.link}
-                      aria-label={`[Link to] ${job.companyName}`}
-                      target="_blank"
-                    >
-                      <h3 className="text-lg font-bold">{job.companyName}</h3>
-                      <p className="text-base">{job.jobTitle}</p>
-                    </Link>
-                  </div>
+        <h2>{t("job-experience")}</h2>
+        <ol className="list-none p-0 flex flex-col gap-10 not-prose">
+          {jobs?.map((job) => {
+            return (
+              <li key={job._id} className="flex">
+                <div className="w-1/5">
+                  <p className="text-base text-right mt-0 mb-2">
+                    {getExperienceTitle(
+                      job.startDate,
+                      job.endDate,
+                      t("date-present")
+                    )}
+                  </p>
                 </div>
-                <PortableText
-                  value={job.description}
-                  components={jobComponents}
-                />
+                <div className="w-4/5 pl-4">
+                  <div className="flex mb-2">
+                    <Image
+                      alt={job.imageURL}
+                      src={builder
+                        .image(job.imageURL)
+                        .width(companyIconSize)
+                        .height(companyIconSize)
+                        .url()}
+                      width={companyIconSize}
+                      height={companyIconSize}
+                      className="mt-0 h-fit"
+                    />
+                    <div className="pl-2">
+                      <Link
+                        href={job.link}
+                        aria-label={`[Link to] ${job.companyName}`}
+                        target="_blank"
+                      >
+                        <h3 className="text-lg font-bold">{job.companyName}</h3>
+                        <p className="text-base">{job.jobTitle}</p>
+                      </Link>
+                    </div>
+                  </div>
+                  <PortableText
+                    value={job.description}
+                    components={jobComponents}
+                  />
 
-                <p className="text-sm">{job.tags}</p>
-              </div>
-            </li>
-          );
-        })}
-      </ol>
-    </main>
+                  <p className="text-sm">{job.tags}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ol>
+      </main>
+    </div>
   );
 }
