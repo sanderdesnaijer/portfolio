@@ -43,7 +43,7 @@ export const jobsQuery = groq`
     jobTitle,
     startDate,
     endDate,
-    links,
+    link,
     description,
     tags,
     "imageURL": logo.asset->url

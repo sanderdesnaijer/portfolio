@@ -39,8 +39,10 @@ export const jobType = defineType({
       type: "string",
     }),
     defineField({
-      name: "links",
-      type: "link",
+      name: "link",
+      type: "url",
+      title: "Link",
+      validation: (Rule) => Rule.uri({ allowRelative: false }),
     }),
   ],
   preview: {

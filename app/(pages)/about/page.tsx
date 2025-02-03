@@ -1,31 +1,25 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { jobsQuery, pageQuery } from "@/sanity/lib/queries";
-import { PortableText } from "next-sanity";
+import { PortableText, PortableTextReactComponents } from "next-sanity";
 import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
 import { JobSanity, PageSanity } from "@/sanity/types";
 import { convertDate } from "@/app/utils/utils";
 import { PageNotFound } from "@/app/components/PageNotFound";
-import { getIcon } from "@/app/components/Icons";
 import { getTranslations } from "next-intl/server";
+import Link from "next/link";
 
 const slug = "about";
-
 const builder = imageUrlBuilder(client);
+const mainImageSize = 300;
+const companyIconSize = 56;
 
-const imageSize = 300;
-const companyIconSize = 48;
-
-const DefaultParagraphComponent = ({
-  children,
-}: {
-  children?: React.ReactNode;
-}) => <p className="text-lg leading-8">{children}</p>;
-
-const components = {
+const components: Partial<PortableTextReactComponents> = {
   block: {
-    normal: DefaultParagraphComponent,
+    normal: ({ children }: { children?: React.ReactNode }) => (
+      <p className="text-lg leading-8">{children}</p>
+    ),
     h2: ({ children }: { children?: React.ReactNode }) => (
       <h2 className="font-extralight text-4xl w-2/3 mb-10">{children}</h2>
     ),
@@ -37,9 +31,11 @@ const components = {
   },
 };
 
-const jobComponents = {
+const jobComponents: Partial<PortableTextReactComponents> = {
   block: {
-    normal: DefaultParagraphComponent,
+    normal: ({ children }: { children?: React.ReactNode }) => (
+      <h2 className="leading-8 text-sm">{children}</h2>
+    ),
   },
 };
 
@@ -77,11 +73,11 @@ export default async function Page() {
         alt={page.imageAlt}
         src={builder
           .image(page.imageURL)
-          .width(imageSize)
-          .height(imageSize)
+          .width(mainImageSize)
+          .height(mainImageSize)
           .url()}
-        width={imageSize}
-        height={imageSize}
+        width={mainImageSize}
+        height={mainImageSize}
         priority
         className="absolute right-0 top-0"
       />
@@ -117,33 +113,22 @@ export default async function Page() {
                     className="mt-0 h-fit"
                   />
                   <div className="pl-2">
-                    <h3 className="text-lg font-bold">{job.companyName}</h3>
-                    <p className="text-base">{job.jobTitle}</p>
+                    <Link
+                      href={job.link}
+                      aria-label={`[Link to] ${job.companyName}`}
+                      target="_blank"
+                    >
+                      <h3 className="text-lg font-bold">{job.companyName}</h3>
+                      <p className="text-base">{job.jobTitle}</p>
+                    </Link>
                   </div>
                 </div>
                 <PortableText
                   value={job.description}
                   components={jobComponents}
                 />
-                {job.links && job.links.length && (
-                  <ol>
-                    {job.links.map((link) => {
-                      const IconComponent = getIcon(link.icon);
-                      return (
-                        <li
-                          key={link.title}
-                          aria-label={`${link.icon} icon`}
-                          title={link.icon}
-                          className="flex"
-                        >
-                          {IconComponent && <IconComponent />}
-                          <div>{link.title}</div>
-                        </li>
-                      );
-                    })}
-                  </ol>
-                )}
-                <p>{job.tags}</p>
+
+                <p className="text-sm">{job.tags}</p>
               </div>
             </li>
           );
