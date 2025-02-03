@@ -55,26 +55,32 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
               class="mt-0 h-fit"
               data-nimg="1"
               decoding="async"
-              height="48"
+              height="56"
               loading="lazy"
-              src="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=96&q=75"
-              srcset="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=48&q=75 1x, /_next/image?url=http%3A%2F%2Fmocked-image-url&w=96&q=75 2x"
+              src="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=128&q=75"
+              srcset="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=64&q=75 1x, /_next/image?url=http%3A%2F%2Fmocked-image-url&w=128&q=75 2x"
               style="color: transparent;"
-              width="48"
+              width="56"
             />
             <div
               class="pl-2"
             >
-              <h3
-                class="text-lg font-bold"
+              <a
+                aria-label="[Link to] Company A"
+                href="https://test.com"
+                target="_blank"
               >
-                Company A
-              </h3>
-              <p
-                class="text-base"
-              >
-                Developer
-              </p>
+                <h3
+                  class="text-lg font-bold"
+                >
+                  Company A
+                </h3>
+                <p
+                  class="text-base"
+                >
+                  Developer
+                </p>
+              </a>
             </div>
           </div>
           <div
@@ -82,19 +88,9 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
           >
             [{"_type":"block","children":[{"text":"Job description","_type":"span","marks":[]}],"style":""}]
           </div>
-          <ol>
-            <li
-              aria-label="github icon"
-              class="flex"
-              title="github"
-            >
-              svgrurl
-              <div>
-                GitHub
-              </div>
-            </li>
-          </ol>
-          <p>
+          <p
+            class="text-sm"
+          >
             React, TypeScript
           </p>
         </div>

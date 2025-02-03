@@ -42,7 +42,7 @@ export const jobType = defineType({
       name: "link",
       type: "url",
       title: "Link",
-      validation: (Rule) => Rule.uri({ allowRelative: false }),
+      validation: (Rule) => Rule.uri({ allowRelative: false }).required(),
     }),
   ],
   preview: {

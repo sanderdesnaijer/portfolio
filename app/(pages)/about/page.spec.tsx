@@ -41,13 +41,7 @@ describe("app/(pages)/about-me", () => {
           style: "",
         },
       ],
-      links: [
-        {
-          title: "GitHub",
-          icon: "github",
-          link: "",
-        },
-      ],
+      link: "https://test.com",
       tags: "React, TypeScript",
       _rev: "",
       _type: "",
@@ -82,8 +76,6 @@ describe("app/(pages)/about-me", () => {
     expect(
       screen.getByText(`Jan 2022 - ${getTranslationKey("date-present")}`)
     ).toBeInTheDocument();
-
-    expect(screen.getByText("GitHub")).toBeInTheDocument();
 
     expect(container).toMatchSnapshot();
   });
