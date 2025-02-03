@@ -10,7 +10,7 @@ const menuItems = [
   },
   {
     pathname: "/about",
-    name: "About me",
+    name: "About",
   },
   {
     pathname: "/projects",

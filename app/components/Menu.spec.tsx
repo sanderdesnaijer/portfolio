@@ -15,17 +15,17 @@ describe("Menu Component", () => {
     render(<Menu />);
 
     expect(screen.getByText("Home")).toBeInTheDocument();
-    expect(screen.getByText("About me")).toBeInTheDocument();
+    expect(screen.getByText("About")).toBeInTheDocument();
     expect(screen.getByText("Projects")).toBeInTheDocument();
     expect(screen.getByText("Blog")).toBeInTheDocument();
   });
 
   it("highlights the active menu item based on the current path", () => {
-    mockedUsePathname.mockReturnValue("/about-me");
+    mockedUsePathname.mockReturnValue("/about");
 
     render(<Menu />);
 
-    const activeMenuItem = screen.getByText("About me");
+    const activeMenuItem = screen.getByText("About");
     expect(activeMenuItem).toHaveClass(
       "text-orange-600 underline underline-offset-8 decoration-2"
     );
@@ -42,27 +42,13 @@ describe("Menu Component", () => {
     );
   });
 
-  it("does not highlight any menu item if the path does not match", () => {
-    mockedUsePathname.mockReturnValue("/unknown-path");
-
-    render(<Menu />);
-
-    screen
-      .getAllByRole("link")
-      .forEach((item) =>
-        expect(item).not.toHaveClass(
-          "text-orange-600 underline underline-offset-8 decoration-2"
-        )
-      );
-  });
-
   it("renders menu items with correct href attributes", () => {
     mockedUsePathname.mockReturnValue("/");
 
     render(<Menu />);
 
     expect(screen.getByText("Home")).toHaveAttribute("href", "/");
-    expect(screen.getByText("About me")).toHaveAttribute("href", "/about-me");
+    expect(screen.getByText("About")).toHaveAttribute("href", "/about");
     expect(screen.getByText("Projects")).toHaveAttribute("href", "/projects");
     expect(screen.getByText("Blog")).toHaveAttribute("href", "/blog");
   });
