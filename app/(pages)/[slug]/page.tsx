@@ -5,6 +5,7 @@ import { client } from "@/sanity/lib/client";
 import { Project } from "../../components/Project";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { PageNotFound } from "@/app/components/PageNotFound";
+import { Layout } from "@/app/components/Layout";
 
 export const revalidate = 60;
 
@@ -23,7 +24,11 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
     return <PageNotFound />;
   }
 
-  return <Project project={project} />;
+  return (
+    <Layout title={project.title}>
+      <Project project={project} />
+    </Layout>
+  );
 };
 
 export default ProductPage;

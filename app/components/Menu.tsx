@@ -26,7 +26,7 @@ const Menu = () => {
   const path = usePathname();
 
   return (
-    <nav className="py-4 flex flex-col text-4xl font-extralight absolute bottom-0">
+    <nav className="py-4 flex flex-col text-4xl font-extralight absolute bottom-0 text-right">
       {menuItems.map((item, i) => (
         <Link
           className={`${path === item.pathname && "font-bold"}`}
