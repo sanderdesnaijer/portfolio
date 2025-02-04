@@ -5,10 +5,11 @@ import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { getIcon } from "./Icons";
+import { LinkList } from "./LinkList";
 
 const builder = imageUrlBuilder(client);
-const imageSize = 300;
+const imageWidth = 800;
+const imageHeight = 400;
 
 export const Project = ({ project }: { project: ProjectTypeSanity }) => {
   return (
@@ -18,32 +19,18 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
         <Image
           src={builder
             .image(project.mainImage)
-            .width(imageSize)
-            .height(imageSize)
+            .width(imageWidth)
+            .height(imageHeight)
             .url()}
           alt={project.mainImage.alt}
-          width={imageSize}
-          height={imageSize}
+          width={imageWidth}
+          height={imageHeight}
           priority
         />
       ) : null}
       {project?.body ? <PortableText value={project.body} /> : null}
       {project.links && project.links.length && (
-        <ul>
-          {project.links.map((link) => {
-            const IconComponent = getIcon(link.icon);
-            return (
-              <li
-                key={link.title}
-                aria-label={`${link.icon} icon`}
-                title={link.icon}
-              >
-                <IconComponent />
-                <h3>{link.title}</h3>
-              </li>
-            );
-          })}
-        </ul>
+        <LinkList links={project.links} />
       )}
     </>
   );

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { convertDate } from "../utils/utils";
 import { getIcon } from "./Icons";
+import { LinkList } from "./LinkList";
 
 export const truncateText = (text: string, length: number) => {
   if (text.length <= length) return text;
@@ -25,45 +26,39 @@ export const Projects = ({
               : null;
           return (
             <Link
-              className="items-center justify-between hover:opacity-90"
+              className="justify-between hover:opacity-90  no-underline grid grid-cols-5 "
               key={project._id}
               href={project.slug.current}
             >
-              <h2 className="font-medium text-xl">{project.title}</h2>
-              <p className="py-2 text-gray-400 text-xs font-light uppercase">
-                {convertDate(project._createdAt)}
-              </p>
-              {project?.mainImage && (
-                <Image
-                  className="w-32 object-fill rounded-lg"
-                  src={project.imageURL}
-                  alt={project.mainImage.alt}
-                  width={350}
-                  height={350}
-                  priority
-                />
-              )}
-              {body ? (
-                <p className="text-gray-600 dark:text-white text-sm">{body}</p>
-              ) : null}
-              {project.links && project.links.length && (
-                <ul>
-                  {project.links.map((link) => {
-                    const IconComponent = getIcon(link.icon);
+              <div className="col-span-2">
+                {project?.mainImage && (
+                  <Image
+                    className="object-fill mt-0"
+                    src={project.imageURL}
+                    alt={project.mainImage.alt}
+                    width={350}
+                    height={350}
+                    priority
+                  />
+                )}
+              </div>
+              <div className="col-span-3 px-4">
+                <h2 className="font-normal text-xl text-[2.5rem] mt-0 mb-4">
+                  {project.title}
+                </h2>
+                <p className="py-2 text-gray-900 text-xs font-light uppercase">
+                  {convertDate(project._createdAt)}
+                </p>
 
-                    return (
-                      <li
-                        key={link.title}
-                        aria-label={`${link.icon} icon`}
-                        title={link.icon}
-                      >
-                        <IconComponent />
-                        <h3>{link.title}</h3>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
+                {body ? (
+                  <p className="text-gray-600 dark:text-white text-base">
+                    {body}
+                  </p>
+                ) : null}
+                {project.links && project.links.length && (
+                  <LinkList links={project.links} />
+                )}
+              </div>
             </Link>
           );
         })}
