@@ -1,8 +1,8 @@
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { pageQuery } from "@/sanity/lib/queries";
-import { PageSanity } from "@/sanity/types";
+import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
+import { PageSanity, SettingSanity } from "@/sanity/types";
 
 const slug = "blog";
 
@@ -11,10 +11,11 @@ export default async function Page() {
     query: pageQuery,
     params: { slug: slug },
   });
+  const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
   if (!page) {
     return <PageNotFound />;
   }
 
-  return <Layout title={page.title} />;
+  return <Layout title={page.title} socialMedia={setting.socialMedia} />;
 }

@@ -1,31 +1,26 @@
 import { QueryParams } from "@sanity/client";
-import { projectPathsQuery, projectQuery } from "@/sanity/lib/queries";
+import { projectQuery, settingsQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { client } from "@/sanity/lib/client";
-import { ProjectTypeSanity } from "@/sanity/types";
+import { ProjectTypeSanity, SettingSanity } from "@/sanity/types";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import { Layout } from "@/app/components/Layout";
 import Project from "@/app/components/Project";
 
 export const revalidate = 60;
 
-export async function generateStaticParams() {
-  const projects = await client.fetch(projectPathsQuery);
-  return projects;
-}
-
 const ProductPage = async ({ params }: { params: QueryParams }) => {
   const project = await sanityFetch<ProjectTypeSanity>({
     query: projectQuery,
     params,
   });
+  const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
   if (!project) {
     return <PageNotFound />;
   }
 
   return (
-    <Layout title={project.title}>
+    <Layout title={project.title} socialMedia={setting.socialMedia}>
       <Project project={project} />
     </Layout>
   );
