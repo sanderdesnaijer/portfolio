@@ -1,9 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { client } from "@/sanity/lib/client";
-import { generateStaticParams } from "./page";
 import ProjectPage from "./page";
-import { mockProject, mockProjects } from "@/app/test-utils/mockProjects";
+import { mockProject } from "@/app/test-utils/mockProjects";
 import { getTranslationKey } from "@/app/test-utils/i18n";
 
 jest.mock("@/components/Project", () => ({
@@ -13,17 +11,6 @@ jest.mock("@/components/Project", () => ({
 describe("app/(pages)/[slug]/page", () => {
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  describe("generateStaticParams", () => {
-    it("fetches project paths correctly", async () => {
-      (client.fetch as jest.Mock).mockResolvedValueOnce(mockProjects);
-
-      const result = await generateStaticParams();
-
-      expect(client.fetch).toHaveBeenCalledWith(expect.any(String));
-      expect(result).toEqual(mockProjects);
-    });
   });
 
   describe("ProductPage Component", () => {

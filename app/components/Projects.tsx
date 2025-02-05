@@ -47,7 +47,7 @@ export const Projects = ({
                 <h2 className="font-normal text-xl text-[2.5rem] mt-0 mb-4">
                   {project.title}
                 </h2>
-                <p className="py-2 text-gray-900 text-xs font-light uppercase">
+                <p className="py-2 text-gray-700 text-xs font-light uppercase dark:dark:text-gray-100">
                   {convertDate(project._createdAt)}
                 </p>
 

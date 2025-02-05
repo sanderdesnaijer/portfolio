@@ -17,5 +17,11 @@ export default async function Page() {
     return <PageNotFound />;
   }
 
-  return <Layout title={page.title} socialMedia={setting.socialMedia} />;
+  return (
+    <Layout
+      pageTitle={page.title}
+      socialMedia={setting.socialMedia}
+      authorName={setting.title}
+    />
+  );
 }

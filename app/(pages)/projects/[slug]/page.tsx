@@ -20,7 +20,11 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
   }
 
   return (
-    <Layout title={project.title} socialMedia={setting.socialMedia}>
+    <Layout
+      pageTitle={project.title}
+      socialMedia={setting.socialMedia}
+      authorName={setting.title}
+    >
       <Project project={project} />
     </Layout>
   );

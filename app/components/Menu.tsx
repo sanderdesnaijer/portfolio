@@ -23,7 +23,7 @@ const menuItems = [
 ];
 
 const Menu = ({
-  className = "py-4 flex flex-col text-4xl font-extralight absolute bottom-0 text-right",
+  className = "flex flex-col text-4xl font-extralight text-right justify-end min-w-[156px]",
 }: {
   className?: string;
 }) => {

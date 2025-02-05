@@ -68,7 +68,11 @@ export default async function Page() {
   }
 
   return (
-    <Layout title={page.title} socialMedia={setting.socialMedia}>
+    <Layout
+      pageTitle={page.title}
+      socialMedia={setting.socialMedia}
+      authorName={setting.title}
+    >
       <Image
         alt={page.imageAlt}
         src={builder
