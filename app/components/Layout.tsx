@@ -42,9 +42,34 @@ export const Layout: React.FC<{
         </div>
         <Menu />
       </div>
-      <main className="prose prose-xl dark:prose-invert col-span-5 max-w-fit py-24 relative">
+      <main className="prose prose-xl dark:prose-invert col-span-5 max-w-fit pt-24 relative">
         <h1 className="font-bold text-8xl mb-10">{pageTitle}</h1>
-        {children}
+
+        <div className="relative py-24 pt-12">
+          <div
+            style={{
+              position: "absolute",
+              background: "#FFF",
+              right: 0,
+              left: -180,
+              width: "calc(100vw)",
+              height: 1,
+            }}
+            className="top-0"
+          ></div>
+          <div
+            style={{
+              position: "absolute",
+              background: "#FFF",
+              right: 0,
+              bottom: 0,
+              top: 0,
+              left: -180,
+              width: 1,
+            }}
+          ></div>
+          {children}
+        </div>
       </main>
     </div>
   );
