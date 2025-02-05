@@ -13,41 +13,85 @@ exports[`app/page renders 'Page not found' when sanityFetch returns null 1`] = `
 exports[`app/page renders the Home page with settings data 1`] = `
 <div>
   <div
-    class="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]"
+    class="container mx-auto h-screen"
   >
     <main
-      class="flex flex-col gap-8 row-start-2 items-center sm:items-start"
+      class="grid grid-cols-5 h-full gap-4"
     >
-      <h1
-        class="text-5xl"
+      <div
+        class="col-span-2 content-center"
       >
-        Test Title
-      </h1>
-      <p>
-        Test Description
-      </p>
-      <ul>
-        <li>
-          <a
-            aria-label="facebook icon"
-            href="https://facebook.com"
-            target="_blank"
-            title="facebook"
+        <h1
+          class="text-5xl font-bold mb-4"
+        >
+          Test Title
+        </h1>
+        <p
+          class="text-xl mb-4"
+        >
+          Test Description
+        </p>
+        <ul
+          class="flex gap-2"
+        >
+          <li
+            class=""
           >
-            svgrurl
-          </a>
-        </li>
-        <li>
-          <a
-            aria-label="twitter icon"
-            href="https://twitter.com"
-            target="_blank"
-            title="twitter"
+            <a
+              aria-label="facebook icon"
+              href="https://facebook.com"
+              target="_blank"
+              title="facebook"
+            >
+              svgrurl
+            </a>
+          </li>
+          <li
+            class=""
           >
-            svgrurl
+            <a
+              aria-label="twitter icon"
+              href="https://twitter.com"
+              target="_blank"
+              title="twitter"
+            >
+              svgrurl
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div
+        class="col-span-3 content-center"
+      >
+        <nav
+          class="flex flex-col text-9xl font-extralight"
+        >
+          <a
+            class="false"
+            href="/"
+          >
+            Home
           </a>
-        </li>
-      </ul>
+          <a
+            class="false"
+            href="/about"
+          >
+            About
+          </a>
+          <a
+            class="false"
+            href="/projects"
+          >
+            Projects
+          </a>
+          <a
+            class="false"
+            href="/blog"
+          >
+            Blog
+          </a>
+        </nav>
+      </div>
     </main>
   </div>
 </div>

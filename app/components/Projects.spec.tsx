@@ -41,7 +41,7 @@ describe("components/Projects", () => {
   });
 
   it("renders a list of projects", () => {
-    render(<Projects projects={mockProjects} />);
+    render(<Projects pageSlug="projects" projects={mockProjects} />);
 
     // Ensure each project title is rendered
     mockProjects.forEach((project) => {
@@ -69,7 +69,7 @@ describe("components/Projects", () => {
   });
 
   it("renders correctly with no projects", () => {
-    render(<Projects projects={[]} />);
+    render(<Projects pageSlug="projects" projects={[]} />);
 
     // Ensure no project titles or images are rendered
     expect(screen.queryByRole("heading")).not.toBeInTheDocument();
@@ -77,7 +77,7 @@ describe("components/Projects", () => {
   });
 
   it("renders truncated text for the project body", () => {
-    render(<Projects projects={mockProjects} />);
+    render(<Projects pageSlug="projects" projects={mockProjects} />);
 
     // Ensure truncated text is displayed
     expect(screen.getByText("Mock body content")).toBeInTheDocument();
@@ -93,7 +93,7 @@ describe("components/Projects", () => {
   });
 
   it("renders links correctly for a project", () => {
-    render(<Projects projects={mockProjects} />);
+    render(<Projects pageSlug="projects" projects={mockProjects} />);
 
     // Ensure GitHub and Live Demo links are rendered
     expect(screen.getByText("GitHub")).toBeInTheDocument();
@@ -101,12 +101,16 @@ describe("components/Projects", () => {
   });
 
   it("renders projects with correct href", () => {
-    render(<Projects projects={mockProjects} />);
+    const props = {
+      pageSlug: "projects",
+      projects: mockProjects,
+    };
+    render(<Projects {...props} />);
 
     mockProjects.forEach((project) => {
       expect(screen.getByText(project.title).closest("a")).toHaveAttribute(
         "href",
-        project.slug.current
+        `/${props.pageSlug}/${project.slug.current}`
       );
     });
   });
@@ -133,7 +137,9 @@ describe("components/Projects", () => {
       },
     ];
 
-    render(<Projects projects={mockProjectsWithEmptyBody} />);
+    render(
+      <Projects pageSlug="projects" projects={mockProjectsWithEmptyBody} />
+    );
 
     // Ensure that no body text is rendered (even if body is an empty array)
     expect(screen.queryByText("Mock body content")).not.toBeInTheDocument();

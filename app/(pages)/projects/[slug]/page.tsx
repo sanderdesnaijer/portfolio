@@ -2,10 +2,10 @@ import { QueryParams } from "@sanity/client";
 import { projectPathsQuery, projectQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
-import { Project } from "../../components/Project";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import { Layout } from "@/app/components/Layout";
+import Project from "@/app/components/Project";
 
 export const revalidate = 60;
 

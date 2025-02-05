@@ -23,7 +23,7 @@ export default async function Page() {
 
   return (
     <Layout title={page.title}>
-      <Projects projects={projects} />
+      <Projects projects={projects} pageSlug={page.slug.current} />
     </Layout>
   );
 }

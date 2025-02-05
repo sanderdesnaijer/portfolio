@@ -22,11 +22,15 @@ const menuItems = [
   },
 ];
 
-const Menu = () => {
+const Menu = ({
+  className = "py-4 flex flex-col text-4xl font-extralight absolute bottom-0 text-right",
+}: {
+  className?: string;
+}) => {
   const path = usePathname();
 
   return (
-    <nav className="py-4 flex flex-col text-4xl font-extralight absolute bottom-0 text-right">
+    <nav className={className}>
       {menuItems.map((item, i) => (
         <Link
           className={`${path === item.pathname && "font-bold"}`}

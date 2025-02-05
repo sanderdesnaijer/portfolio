@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { convertDate } from "../utils/utils";
-import { getIcon } from "./Icons";
 import { LinkList } from "./LinkList";
 
 export const truncateText = (text: string, length: number) => {
@@ -13,8 +12,10 @@ export const truncateText = (text: string, length: number) => {
 
 export const Projects = ({
   projects = [],
+  pageSlug,
 }: {
   projects: ProjectTypeSanity[];
+  pageSlug: string;
 }) => {
   return (
     <div className="py-10 mx-auto grid grid-cols-1">
@@ -28,7 +29,7 @@ export const Projects = ({
             <Link
               className="justify-between hover:opacity-90  no-underline grid grid-cols-5 "
               key={project._id}
-              href={project.slug.current}
+              href={`/${pageSlug}/${project.slug.current}`}
             >
               <div className="col-span-2">
                 {project?.mainImage && (
