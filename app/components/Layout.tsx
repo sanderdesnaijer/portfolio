@@ -49,18 +49,17 @@ export const Layout: React.FC<{
           <div
             style={{
               position: "absolute",
-              background: "#FFF",
               right: 0,
               left: -180,
               width: "calc(100vw)",
               height: 1,
             }}
-            className="top-0"
+            className="top-0 bg-black dark:bg-white"
           ></div>
           <div
+            className="bg-black dark:bg-white"
             style={{
               position: "absolute",
-              background: "#FFF",
               right: 0,
               bottom: 0,
               top: 0,
