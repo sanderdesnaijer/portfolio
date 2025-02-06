@@ -15,7 +15,7 @@ export default async function Home() {
 
   return (
     <div className="container mx-auto h-screen">
-      <main className="grid grid-cols-5 h-full gap-4">
+      <main className="grid grid-cols-6 h-full gap-4">
         <div className="col-span-2 content-center">
           <h1 className="text-5xl font-bold mb-4">{setting.title}</h1>
           <p className="text-xl mb-4">{setting.description}</p>

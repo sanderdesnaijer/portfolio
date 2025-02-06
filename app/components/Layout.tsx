@@ -50,7 +50,7 @@ export const Layout: React.FC<{
             style={{
               position: "absolute",
               right: 0,
-              left: -180,
+              left: -196,
               width: "calc(100vw)",
               height: 1,
             }}
@@ -63,7 +63,7 @@ export const Layout: React.FC<{
               right: 0,
               bottom: 0,
               top: 0,
-              left: -180,
+              left: -196,
               width: 1,
             }}
           ></div>
