@@ -106,17 +106,6 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
           class="bg-black dark:bg-white"
           style="position: absolute; right: 0px; bottom: 0px; top: 0px; left: -196px; width: 1px;"
         />
-        <img
-          alt="Profile Picture"
-          class="absolute -right-10 -top-10"
-          data-nimg="1"
-          decoding="async"
-          height="300"
-          src="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=640&q=75"
-          srcset="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=384&q=75 1x, /_next/image?url=http%3A%2F%2Fmocked-image-url&w=640&q=75 2x"
-          style="color: transparent;"
-          width="300"
-        />
         <div
           data-testid="portable-text"
         >
@@ -194,6 +183,24 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
         </ol>
       </div>
     </main>
+    <div
+      class="col-span-2 pt-24"
+    >
+      <div
+        class="-mt-8 -ml-8 p-2 bg-white dark:bg-black border-b-black border-b-1 border-black dark:border-white absolute z-10  after:content-[''] after:absolute after:top-[168px] after:bottom-0 after:left-0 after:border-l after:border-black dark:after:border-white before:content-[''] before:absolute before:top-[168px] before:bottom-0 before:right-0 before:border-r before:border-black dark:before:border-white"
+      >
+        <img
+          alt="Profile Picture"
+          data-nimg="1"
+          decoding="async"
+          height="341"
+          src="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=640&q=75"
+          srcset="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=256&q=75 1x, /_next/image?url=http%3A%2F%2Fmocked-image-url&w=640&q=75 2x"
+          style="color: transparent;"
+          width="256"
+        />
+      </div>
+    </div>
   </div>
 </div>
 `;
