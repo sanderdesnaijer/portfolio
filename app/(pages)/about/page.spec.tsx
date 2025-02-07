@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
 import { getTranslationKey } from "@/app/test-utils/i18n";
-import { JobSanity, PageSanity, SettingSanity } from "@/sanity/types";
+import { JobSanity, PageSanity } from "@/sanity/types";
 import { mockPage } from "@/app/test-utils/mockPage";
 import { mockSetting } from "@/app/test-utils/mockSetting";
 
