@@ -13,7 +13,8 @@ import { Layout } from "@/app/components/Layout";
 
 const slug = "about";
 const builder = imageUrlBuilder(client);
-const mainImageSize = 300;
+const mainImageSizeHeigth = 341;
+const mainImageSizeWidtht = 256;
 const companyIconSize = 56;
 
 const components: Partial<PortableTextReactComponents> = {
@@ -72,19 +73,22 @@ export default async function Page() {
       pageTitle={page.title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
+      rightColSlot={
+        <div className="-mt-8 -ml-8 p-2 bg-white dark:bg-black border-b-black border-b-1 border-black dark:border-white absolute z-10  after:content-[''] after:absolute after:top-[168px] after:bottom-0 after:left-0 after:border-l after:border-black dark:after:border-white before:content-[''] before:absolute before:top-[168px] before:bottom-0 before:right-0 before:border-r before:border-black dark:before:border-white">
+          <Image
+            alt={page.imageAlt}
+            src={builder
+              .image(page.imageURL)
+              .width(mainImageSizeWidtht)
+              .height(mainImageSizeHeigth)
+              .url()}
+            width={mainImageSizeWidtht}
+            height={mainImageSizeHeigth}
+            priority
+          />
+        </div>
+      }
     >
-      <Image
-        alt={page.imageAlt}
-        src={builder
-          .image(page.imageURL)
-          .width(mainImageSize)
-          .height(mainImageSize)
-          .url()}
-        width={mainImageSize}
-        height={mainImageSize}
-        priority
-        className="absolute -right-10 -top-10"
-      />
       {page?.body ? (
         <PortableText value={page.body} components={components} />
       ) : null}

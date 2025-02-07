@@ -8,7 +8,8 @@ export const Layout: React.FC<{
   pageTitle: string;
   socialMedia: Array<IconLink>;
   authorName: string;
-}> = ({ children, pageTitle, socialMedia, authorName }) => {
+  rightColSlot?: React.ReactNode;
+}> = ({ children, pageTitle, socialMedia, authorName, rightColSlot }) => {
   return (
     <div className="grid grid-cols-9 container mx-auto">
       <div className="col-span-2 sticky top-0 h-screen flex justify-end p-6 gap-4">
@@ -44,7 +45,6 @@ export const Layout: React.FC<{
       </div>
       <main className="prose prose-xl dark:prose-invert col-span-5 max-w-fit pt-24 relative">
         <h1 className="font-bold text-8xl mb-10">{pageTitle}</h1>
-
         <div className="relative py-24 pt-12">
           <div
             style={{
@@ -70,6 +70,7 @@ export const Layout: React.FC<{
           {children}
         </div>
       </main>
+      {rightColSlot && <div className="col-span-2 pt-24">{rightColSlot}</div>}
     </div>
   );
 };
