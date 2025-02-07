@@ -26,7 +26,7 @@ export default function RootLayout({
       {(locale) => (
         <html lang={locale}>
           <body
-            className={`${montserrat.variable} antialiased overflow-x-hidden`}
+            className={`${montserrat.variable} overflow-x-hidden antialiased`}
           >
             {children}
           </body>

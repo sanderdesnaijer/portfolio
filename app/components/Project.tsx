@@ -29,7 +29,7 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
           priority
         />
       ) : null}
-      <p className="py-2 text-gray-700 text-xs font-light uppercase dark:dark:text-gray-100">
+      <p className="py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
         {convertDate(project._createdAt)}
       </p>
       {project?.body ? <PortableText value={project.body} /> : null}

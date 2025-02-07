@@ -18,7 +18,7 @@ export const Projects = ({
   pageSlug: string;
 }) => {
   return (
-    <div className="py-10 mx-auto grid grid-cols-1">
+    <div className="mx-auto grid grid-cols-1 py-10">
       <div className="grid gap-10">
         {projects.map((project) => {
           const body =
@@ -27,14 +27,14 @@ export const Projects = ({
               : null;
           return (
             <Link
-              className="justify-between hover:opacity-90  no-underline grid grid-cols-5 "
+              className="grid grid-cols-5 justify-between no-underline hover:opacity-90"
               key={project._id}
               href={`/${pageSlug}/${project.slug.current}`}
             >
               <div className="col-span-2">
                 {project?.mainImage && (
                   <Image
-                    className="object-fill mt-0"
+                    className="mt-0 object-fill"
                     src={project.imageURL}
                     alt={project.mainImage.alt}
                     width={350}
@@ -44,15 +44,15 @@ export const Projects = ({
                 )}
               </div>
               <div className="col-span-3 px-4">
-                <h2 className="font-normal text-xl text-[2.5rem] mt-0 mb-2">
+                <h2 className="mt-0 mb-2 text-xl text-[2.5rem] font-normal">
                   {project.title}
                 </h2>
-                <p className="py-2 text-gray-700 text-xs font-light uppercase dark:dark:text-gray-100 mb-2">
+                <p className="mb-2 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
                   {convertDate(project._createdAt)}
                 </p>
 
                 {body ? (
-                  <p className="text-gray-600 dark:text-white text-base mt-0">
+                  <p className="mt-0 text-base text-gray-600 dark:text-white">
                     {body}
                   </p>
                 ) : null}
