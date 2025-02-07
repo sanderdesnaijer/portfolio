@@ -44,15 +44,15 @@ export const Projects = ({
                 )}
               </div>
               <div className="col-span-3 px-4">
-                <h2 className="font-normal text-xl text-[2.5rem] mt-0 mb-4">
+                <h2 className="font-normal text-xl text-[2.5rem] mt-0 mb-2">
                   {project.title}
                 </h2>
-                <p className="py-2 text-gray-700 text-xs font-light uppercase dark:dark:text-gray-100">
+                <p className="py-2 text-gray-700 text-xs font-light uppercase dark:dark:text-gray-100 mb-2">
                   {convertDate(project._createdAt)}
                 </p>
 
                 {body ? (
-                  <p className="text-gray-600 dark:text-white text-base">
+                  <p className="text-gray-600 dark:text-white text-base mt-0">
                     {body}
                   </p>
                 ) : null}

@@ -25,7 +25,9 @@ export default function RootLayout({
     <IntlProvider>
       {(locale) => (
         <html lang={locale}>
-          <body className={`${montserrat.variable} antialiased`}>
+          <body
+            className={`${montserrat.variable} antialiased overflow-x-hidden`}
+          >
             {children}
           </body>
         </html>
