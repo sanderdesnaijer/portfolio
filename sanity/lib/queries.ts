@@ -43,7 +43,7 @@ export const jobsQuery = groq`
     jobTitle,
     startDate,
     endDate,
-    links,
+    link,
     description,
     tags,
     "imageURL": logo.asset->url
@@ -65,6 +65,7 @@ export const projectsQuery = groq`
 
 export const projectQuery = groq`
   *[_type == "project" && slug.current == $slug][0]{
+    _createdAt,
     title,
     description,
     mainImage,

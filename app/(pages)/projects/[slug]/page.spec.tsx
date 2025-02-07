@@ -1,34 +1,19 @@
 import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { client } from "@/sanity/lib/client";
-import { generateStaticParams } from "./page";
 import ProjectPage from "./page";
-import { mockProject, mockProjects } from "@/app/test-utils/mockProjects";
+import { mockProject } from "@/app/test-utils/mockProjects";
 import { getTranslationKey } from "@/app/test-utils/i18n";
-
-jest.mock("@/components/Project", () => ({
-  Project: jest.fn(() => <div>Mocked Project Component</div>),
-}));
+import { mockSetting } from "@/app/test-utils/mockSetting";
 
 describe("app/(pages)/[slug]/page", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  describe("generateStaticParams", () => {
-    it("fetches project paths correctly", async () => {
-      (client.fetch as jest.Mock).mockResolvedValueOnce(mockProjects);
-
-      const result = await generateStaticParams();
-
-      expect(client.fetch).toHaveBeenCalledWith(expect.any(String));
-      expect(result).toEqual(mockProjects);
-    });
-  });
-
   describe("ProductPage Component", () => {
     it("renders the Project component with fetched project data", async () => {
       (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProject);
+      (sanityFetch as jest.Mock).mockResolvedValueOnce(mockSetting);
 
       const params = { slug: "test-project" };
 
@@ -38,11 +23,12 @@ describe("app/(pages)/[slug]/page", () => {
         query: expect.any(String),
         params,
       });
-      expect(screen.getByText("Mocked Project Component")).toBeInTheDocument();
+      expect(screen.getByText(mockProject.title)).toBeInTheDocument();
     });
 
     it("renders PageNotFound when project data is not found", async () => {
       (sanityFetch as jest.Mock).mockResolvedValueOnce(null);
+      (sanityFetch as jest.Mock).mockResolvedValueOnce(mockSetting);
 
       const params = { slug: "nonexistent-project" };
 

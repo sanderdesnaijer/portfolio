@@ -9,8 +9,8 @@ const menuItems = [
     name: "Home",
   },
   {
-    pathname: "/about-me",
-    name: "About me",
+    pathname: "/about",
+    name: "About",
   },
   {
     pathname: "/projects",
@@ -22,14 +22,18 @@ const menuItems = [
   },
 ];
 
-const Menu = () => {
+const Menu = ({
+  className = "flex flex-col text-4xl font-extralight justify-end min-w-[172px] pl-4",
+}: {
+  className?: string;
+}) => {
   const path = usePathname();
 
   return (
-    <nav className="py-4 border-b flex flex-row items-center justify-center gap-4">
+    <nav className={className}>
       {menuItems.map((item, i) => (
         <Link
-          className={`${path === item.pathname && "text-orange-600 underline underline-offset-8 decoration-2"}`}
+          className={`${path === item.pathname && "font-bold"}`}
           key={i}
           href={item.pathname}
         >

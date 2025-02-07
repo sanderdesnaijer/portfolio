@@ -5,48 +5,38 @@ import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { getIcon } from "./Icons";
+import { LinkList } from "./LinkList";
+import { convertDate } from "../utils/utils";
 
 const builder = imageUrlBuilder(client);
-const imageSize = 300;
+const imageWidth = 800;
+const imageHeight = 400;
 
 export const Project = ({ project }: { project: ProjectTypeSanity }) => {
   return (
-    <main className="container mx-auto prose prose-xl px-4 py-16 dark:prose-invert">
-      {project.title && <h1>{project.title}</h1>}
+    <>
       <p>{project.description}</p>
       {project?.mainImage && project.mainImage.alt ? (
         <Image
           src={builder
             .image(project.mainImage)
-            .width(imageSize)
-            .height(imageSize)
+            .width(imageWidth)
+            .height(imageHeight)
             .url()}
           alt={project.mainImage.alt}
-          width={imageSize}
-          height={imageSize}
+          width={imageWidth}
+          height={imageHeight}
           priority
         />
       ) : null}
+      <p className="py-2 text-gray-700 text-xs font-light uppercase dark:dark:text-gray-100">
+        {convertDate(project._createdAt)}
+      </p>
       {project?.body ? <PortableText value={project.body} /> : null}
       {project.links && project.links.length && (
-        <ul>
-          {project.links.map((link) => {
-            const IconComponent = getIcon(link.icon);
-            return (
-              <li
-                key={link.title}
-                aria-label={`${link.icon} icon`}
-                title={link.icon}
-              >
-                <IconComponent />
-                <h3>{link.title}</h3>
-              </li>
-            );
-          })}
-        </ul>
+        <LinkList links={project.links} />
       )}
-    </main>
+    </>
   );
 };
 

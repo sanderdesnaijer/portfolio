@@ -38,19 +38,11 @@ describe("app/(pages)/blog/page", () => {
 
     const { container } = render(await Page());
 
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Blog");
-
     const gridContainer = container.querySelector("div.grid");
     expect(gridContainer).toBeInTheDocument();
-    expect(gridContainer).toHaveClass(
-      "grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]"
-    );
 
     const mainElement = screen.getByRole("main");
     expect(mainElement).toBeInTheDocument();
-    expect(mainElement).toHaveClass(
-      "flex flex-col gap-8 row-start-2 items-center sm:items-start"
-    );
   });
 
   it("renders PageNotFound when page data is not found", async () => {

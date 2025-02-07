@@ -25,6 +25,7 @@ export const pageType = defineType({
       options: {
         source: "title",
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "mainImage",

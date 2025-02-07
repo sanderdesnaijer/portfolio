@@ -1,5 +1,5 @@
 import { SanityDocument } from "@sanity/client";
-import { Block, IconLink } from "./types";
+import { Block } from "./types";
 
 export interface JobSanity extends SanityDocument {
   companyName: string;
@@ -15,6 +15,6 @@ export interface JobSanity extends SanityDocument {
   startDate: string;
   endDate?: string;
   tags?: string;
-  links?: Array<IconLink>;
+  link: string;
   imageURL: string;
 }
