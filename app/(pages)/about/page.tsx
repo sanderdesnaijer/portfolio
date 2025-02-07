@@ -23,10 +23,10 @@ const components: Partial<PortableTextReactComponents> = {
       <p className="text-lg leading-8">{children}</p>
     ),
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="font-extralight text-4xl w-2/3 mb-10">{children}</h2>
+      <h2 className="mb-10 w-2/3 text-4xl font-extralight">{children}</h2>
     ),
     span: ({ children }: { children?: React.ReactNode }) => (
-      <span className="font-extralight text-4xl w-2/3 mb-10 block">
+      <span className="mb-10 block w-2/3 text-4xl font-extralight">
         {children}
       </span>
     ),
@@ -36,7 +36,7 @@ const components: Partial<PortableTextReactComponents> = {
 const jobComponents: Partial<PortableTextReactComponents> = {
   block: {
     normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="leading-8 text-sm mb-3">{children}</p>
+      <p className="mb-3 text-sm leading-8">{children}</p>
     ),
   },
 };
@@ -74,7 +74,7 @@ export default async function Page() {
       socialMedia={setting.socialMedia}
       authorName={setting.title}
       rightColSlot={
-        <div className="-mt-8 -ml-8 p-2 bg-white dark:bg-black border-b-black border-b-1 border-black dark:border-white absolute z-10  after:content-[''] after:absolute after:top-[168px] after:bottom-0 after:left-0 after:border-l after:border-black dark:after:border-white before:content-[''] before:absolute before:top-[168px] before:bottom-0 before:right-0 before:border-r before:border-black dark:before:border-white">
+        <div className="absolute z-10 -mt-8 -ml-8 border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[168px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[168px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
           <Image
             alt={page.imageAlt}
             src={builder
@@ -94,12 +94,12 @@ export default async function Page() {
       ) : null}
 
       <h2>{t("job-experience")}</h2>
-      <ol className="list-none p-0 flex flex-col gap-10 not-prose">
+      <ol className="not-prose flex list-none flex-col gap-10 p-0">
         {jobs?.map((job) => {
           return (
             <li key={job._id} className="flex">
               <div className="w-1/5">
-                <p className="text-base text-right mt-0 mb-2">
+                <p className="mt-0 mb-2 text-right text-base">
                   {getExperienceTitle(
                     job.startDate,
                     job.endDate,
@@ -108,7 +108,7 @@ export default async function Page() {
                 </p>
               </div>
               <div className="w-4/5 pl-4">
-                <div className="flex mb-2">
+                <div className="mb-2 flex">
                   <Image
                     alt={job.imageURL}
                     src={builder
