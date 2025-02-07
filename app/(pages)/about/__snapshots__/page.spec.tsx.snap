@@ -3,22 +3,22 @@
 exports[`app/(pages)/about-me renders the page with correct data 1`] = `
 <div>
   <div
-    class="grid grid-cols-9 container mx-auto"
+    class="container mx-auto grid grid-cols-9"
   >
     <div
-      class="col-span-2 sticky top-0 h-screen flex justify-end p-6 gap-4"
+      class="sticky top-0 col-span-2 flex h-screen justify-end gap-4 p-6"
     >
       <div
         class="flex flex-col justify-end"
       >
         <span
-          class="text-lg font-bold mb-2"
+          class="mb-2 text-lg font-bold"
           style="writing-mode: vertical-rl;"
         >
           Sander de Snaijer
         </span>
         <ul
-          class="flex flex-col gap-2 left-0"
+          class="left-0 flex flex-col gap-2"
         >
           <li
             class=""
@@ -88,10 +88,10 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
       </nav>
     </div>
     <main
-      class="prose prose-xl dark:prose-invert col-span-5 max-w-fit pt-24 relative"
+      class="prose prose-xl dark:prose-invert relative col-span-5 max-w-fit pt-24"
     >
       <h1
-        class="font-bold text-8xl mb-10"
+        class="mb-10 text-8xl font-bold"
       >
         About Me
       </h1>
@@ -115,7 +115,7 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
           Experience
         </h2>
         <ol
-          class="list-none p-0 flex flex-col gap-10 not-prose"
+          class="not-prose flex list-none flex-col gap-10 p-0"
         >
           <li
             class="flex"
@@ -124,7 +124,7 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
               class="w-1/5"
             >
               <p
-                class="text-base text-right mt-0 mb-2"
+                class="mt-0 mb-2 text-right text-base"
               >
                 Jan 2022 - present
               </p>
@@ -133,7 +133,7 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
               class="w-4/5 pl-4"
             >
               <div
-                class="flex mb-2"
+                class="mb-2 flex"
               >
                 <img
                   alt="mock-job-image-url"
@@ -187,7 +187,7 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
       class="col-span-2 pt-24"
     >
       <div
-        class="-mt-8 -ml-8 p-2 bg-white dark:bg-black border-b-black border-b-1 border-black dark:border-white absolute z-10  after:content-[''] after:absolute after:top-[168px] after:bottom-0 after:left-0 after:border-l after:border-black dark:after:border-white before:content-[''] before:absolute before:top-[168px] before:bottom-0 before:right-0 before:border-r before:border-black dark:before:border-white"
+        class="absolute z-10 -mt-8 -ml-8 border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[168px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[168px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white"
       >
         <img
           alt="Profile Picture"
