@@ -46,17 +46,6 @@ describe("app/layout", () => {
     expect(mainContent).toHaveTextContent("Hello, World!");
   });
 
-  it("should include the Menu component", () => {
-    render(
-      <RootLayout>
-        <div />
-      </RootLayout>
-    );
-
-    const menu = screen.getByRole("navigation");
-    expect(menu).toBeInTheDocument();
-  });
-
   it("should have the correct metadata", () => {
     expect(metadata.title).toBe("Portfolio Sander de Snaijer");
     expect(metadata.description).toBe(

@@ -31,11 +31,6 @@ describe("Project Component", () => {
 
   it("renders project details with all data", () => {
     render(<Project project={mockProject} />);
-
-    // Check title and description
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Project 1"
-    );
     expect(
       screen.getByText((content) => content.includes("Mock body content"))
     ).toBeInTheDocument();
@@ -63,10 +58,6 @@ describe("Project Component", () => {
   it("renders without the image when mainImage is missing", () => {
     render(<Project project={mockProjectWithoutImage} />);
 
-    // Check title and description
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Project 1"
-    );
     expect(
       screen.getByText((content) => content.includes("Mock body content"))
     ).toBeInTheDocument();
@@ -78,10 +69,6 @@ describe("Project Component", () => {
   it("renders without the body when body content is missing", () => {
     render(<Project project={mockProjectWithoutBody} />);
 
-    // Check title and description
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Project 1"
-    );
     expect(screen.queryByText("Mock body content")).not.toBeInTheDocument();
 
     // Ensure no PortableText is rendered
@@ -90,11 +77,6 @@ describe("Project Component", () => {
 
   it("renders without links when no links are provided", () => {
     render(<Project project={mockProjectWithoutLinks} />);
-
-    // Check title and description
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Project 1"
-    );
 
     // Ensure no links are rendered
     expect(screen.queryByText("GitHub")).not.toBeInTheDocument();

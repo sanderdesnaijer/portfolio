@@ -4,6 +4,7 @@ import Page from "./page";
 import { mockProjects } from "@/app/test-utils/mockProjects";
 import { mockPage } from "@/app/test-utils/mockPage";
 import { getTranslationKey } from "@/app/test-utils/i18n";
+import { mockSetting } from "@/app/test-utils/mockSetting";
 
 describe("app/(pages)/projects/page", () => {
   beforeEach(() => {
@@ -13,6 +14,7 @@ describe("app/(pages)/projects/page", () => {
   it("renders the Page with correct project data", async () => {
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjects);
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockSetting);
 
     render(await Page());
 
@@ -37,6 +39,7 @@ describe("app/(pages)/projects/page", () => {
   it("renders correctly when projects are missing", async () => {
     (sanityFetch as jest.Mock).mockResolvedValueOnce([]);
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockSetting);
 
     render(await Page());
 
@@ -55,6 +58,7 @@ describe("app/(pages)/projects/page", () => {
 
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjectsWithoutBody);
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockSetting);
 
     render(await Page());
 
@@ -82,6 +86,7 @@ describe("app/(pages)/projects/page", () => {
 
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjectsWithoutLinks);
     (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
+    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockSetting);
 
     render(await Page());
 

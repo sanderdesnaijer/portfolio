@@ -16,7 +16,7 @@ exports[`app/page renders the Home page with settings data 1`] = `
     class="container mx-auto h-screen"
   >
     <main
-      class="grid grid-cols-5 h-full gap-4"
+      class="grid grid-cols-6 h-full gap-4"
     >
       <div
         class="col-span-2 content-center"

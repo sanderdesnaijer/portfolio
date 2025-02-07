@@ -26,9 +26,7 @@ describe("Menu Component", () => {
     render(<Menu />);
 
     const activeMenuItem = screen.getByText("About");
-    expect(activeMenuItem).toHaveClass(
-      "text-orange-600 underline underline-offset-8 decoration-2"
-    );
+    expect(activeMenuItem).toHaveClass("font-bold");
 
     const nonActiveMenuItems = [
       screen.getByText("Home"),
@@ -36,9 +34,7 @@ describe("Menu Component", () => {
       screen.getByText("Blog"),
     ];
     nonActiveMenuItems.forEach((item) =>
-      expect(item).not.toHaveClass(
-        "text-orange-600 underline underline-offset-8 decoration-2"
-      )
+      expect(item).not.toHaveClass("font-bold")
     );
   });
 

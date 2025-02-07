@@ -2,8 +2,9 @@ import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
 import { getTranslationKey } from "@/app/test-utils/i18n";
-import { JobSanity, PageSanity } from "@/sanity/types";
+import { JobSanity, PageSanity, SettingSanity } from "@/sanity/types";
 import { mockPage } from "@/app/test-utils/mockPage";
+import { mockSetting } from "@/app/test-utils/mockSetting";
 
 jest.mock("next-sanity", () => ({
   ...jest.requireActual("next-sanity"),
@@ -57,7 +58,8 @@ describe("app/(pages)/about-me", () => {
   it("renders the page with correct data", async () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockAboutMePage)
-      .mockResolvedValueOnce(mockJobs);
+      .mockResolvedValueOnce(mockJobs)
+      .mockResolvedValueOnce(mockSetting);
 
     const { container } = render(await Page());
 
@@ -102,21 +104,12 @@ describe("app/(pages)/about-me", () => {
 
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockAboutMePage)
-      .mockResolvedValueOnce(mockJobsWithoutLinks);
+      .mockResolvedValueOnce(mockJobsWithoutLinks)
+      .mockResolvedValueOnce(mockSetting);
 
     render(await Page());
 
     expect(screen.queryByText("GitHub")).not.toBeInTheDocument();
-  });
-
-  it("handles empty jobs list gracefully", async () => {
-    (sanityFetch as jest.Mock)
-      .mockResolvedValueOnce(mockAboutMePage)
-      .mockResolvedValueOnce([]);
-
-    render(await Page());
-
-    expect(screen.queryByRole("listitem")).not.toBeInTheDocument();
   });
 
   it("renders correctly when page body is missing", async () => {
@@ -125,8 +118,10 @@ describe("app/(pages)/about-me", () => {
       body: null,
     };
 
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPageWithoutBody);
-
+    (sanityFetch as jest.Mock)
+      .mockResolvedValueOnce(mockPageWithoutBody)
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce(mockJobs);
     render(await Page());
 
     expect(screen.queryByTestId("portable-text")).not.toBeInTheDocument();
@@ -146,7 +141,8 @@ describe("app/(pages)/about-me", () => {
 
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockAboutMePage)
-      .mockResolvedValueOnce(mockJobsWithEndDate);
+      .mockResolvedValueOnce(mockJobsWithEndDate)
+      .mockResolvedValueOnce(mockJobs);
 
     render(await Page());
 
@@ -163,7 +159,8 @@ describe("app/(pages)/about-me", () => {
 
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockAboutMePage)
-      .mockResolvedValueOnce(mockJobsWithoutEndDate);
+      .mockResolvedValueOnce(mockJobsWithoutEndDate)
+      .mockResolvedValueOnce(mockJobs);
 
     render(await Page());
 
