@@ -34,15 +34,16 @@ export const jobType = defineType({
     defineField({
       name: "contractName",
       title: "Contract Name",
-      type: "string",
+      type: "reference",
+      to: [{ type: "job" }],
       hidden: ({ parent }) => parent?.employmentType !== "contract",
+      options: {
+        disableNew: true,
+      },
     }),
     defineField({
       name: "logo",
       type: "image",
-      options: {
-        hotspot: true,
-      },
     }),
     defineField({
       name: "startDate",
@@ -73,4 +74,16 @@ export const jobType = defineType({
       media: "logo",
     },
   },
+  orderings: [
+    {
+      title: "Start Date (Newest First)",
+      name: "startDateDesc",
+      by: [{ field: "startDate", direction: "desc" }],
+    },
+    {
+      title: "Start Date (Oldest First)",
+      name: "startDateAsc",
+      by: [{ field: "startDate", direction: "asc" }],
+    },
+  ],
 });
