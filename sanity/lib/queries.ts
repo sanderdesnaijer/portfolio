@@ -46,8 +46,7 @@ export const jobsQuery = groq`
     link,
     description,
     tags,
-    "imageAlt": logo.asset.alt,
-    "imageURL": logo.asset->alt,
+    "imageURL": logo.asset->url,
     employmentType,    
     "contractName": contractName->companyName
   }

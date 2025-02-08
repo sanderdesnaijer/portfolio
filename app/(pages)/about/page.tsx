@@ -48,8 +48,8 @@ const getExperienceTitle = (
   endDate: string | undefined,
   presentTitle: string
 ): string => {
-  const start = convertDate(startDate, false);
-  const end = endDate ? convertDate(endDate, false) : presentTitle;
+  const start = convertDate(startDate);
+  const end = endDate ? convertDate(endDate) : presentTitle;
   return `${start} - ${end}`;
 };
 

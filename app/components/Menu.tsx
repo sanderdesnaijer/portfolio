@@ -35,6 +35,9 @@ const Menu = ({
   const path = usePathname();
   const isActive = (item: MenuItem) => {
     const { pathname } = item;
+    if (path === undefined || pathname === undefined) {
+      return false;
+    }
     return pathname === path || (pathname !== "/" && path.startsWith(pathname));
   };
 

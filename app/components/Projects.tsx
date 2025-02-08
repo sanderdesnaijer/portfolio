@@ -52,7 +52,7 @@ export const Projects = ({
                   </h2>
                 </Link>
                 <p className="mb-2 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
-                  {convertDate(project.publishedAt, false)}
+                  {convertDate(project.publishedAt)}
                 </p>
 
                 {body ? (
