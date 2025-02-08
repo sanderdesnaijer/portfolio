@@ -15,7 +15,9 @@ const imageHeight = 400;
 export const Project = ({ project }: { project: ProjectTypeSanity }) => {
   return (
     <>
-      <p>{project.description}</p>
+      <p className="-mt-8 mb-0 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
+        {convertDate(project._createdAt)}
+      </p>
       {project?.mainImage && project.mainImage.alt ? (
         <Image
           src={builder
@@ -27,11 +29,10 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
           width={imageWidth}
           height={imageHeight}
           priority
+          className="mt-2"
         />
       ) : null}
-      <p className="py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
-        {convertDate(project._createdAt)}
-      </p>
+
       {project?.body ? <PortableText value={project.body} /> : null}
       {project.links && project.links.length && (
         <LinkList links={project.links} />

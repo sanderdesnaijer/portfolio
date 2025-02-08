@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const menuItems = [
+type MenuItem = {
+  pathname: string;
+  name: string;
+};
+
+const menuItems: MenuItem[] = [
   {
     pathname: "/",
     name: "Home",
@@ -28,12 +33,16 @@ const Menu = ({
   className?: string;
 }) => {
   const path = usePathname();
+  const isActive = (item: MenuItem) => {
+    const { pathname } = item;
+    return pathname === path || (pathname !== "/" && path.startsWith(pathname));
+  };
 
   return (
     <nav className={className}>
       {menuItems.map((item, i) => (
         <Link
-          className={`${path === item.pathname && "font-bold"}`}
+          className={isActive(item) ? "font-bold" : ""}
           key={i}
           href={item.pathname}
         >

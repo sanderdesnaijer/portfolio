@@ -14,6 +14,7 @@ export const projectType = defineType({
     defineField({
       name: "slug",
       type: "slug",
+      validation: (Rule) => Rule.required(),
       options: {
         source: "title",
       },
