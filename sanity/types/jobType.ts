@@ -17,4 +17,6 @@ export interface JobSanity extends SanityDocument {
   tags?: string;
   link: string;
   imageURL: string;
+  employmentType: "full-time" | "intern" | "contract";
+  contractName?: string;
 }

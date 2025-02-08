@@ -6,7 +6,7 @@ import IntlProvider from "./components/IntlProvider";
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
-  style: ["normal"],
+  style: ["normal", "italic"],
   weight: ["200", "400", "700"],
 });
 

@@ -11,6 +11,8 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
 
+export const revalidate = 1;
+
 const slug = "about";
 const builder = imageUrlBuilder(client);
 const mainImageSizeHeigth = 341;
@@ -126,8 +128,14 @@ export default async function Page() {
                       aria-label={`[Link to] ${job.companyName}`}
                       target="_blank"
                     >
-                      <h3 className="text-lg font-bold">{job.companyName}</h3>
+                      <h3 className="text-lg leading-[18px] font-bold">
+                        {job.companyName}
+                      </h3>
                       <p className="text-base">{job.jobTitle}</p>
+                      <p className="text-xs italic">
+                        {job.employmentType}{" "}
+                        {job.contractName && `(via ${job.contractName})`}
+                      </p>
                     </Link>
                   </div>
                 </div>

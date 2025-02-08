@@ -10,10 +10,32 @@ export const jobType = defineType({
     defineField({
       name: "companyName",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "jobTitle",
       type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "employmentType",
+      title: "Employment Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Full-Time", value: "full-time" },
+          { title: "Intern", value: "intern" },
+          { title: "Contract", value: "contract" },
+        ],
+        layout: "dropdown",
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "contractName",
+      title: "Contract Name",
+      type: "string",
+      hidden: ({ parent }) => parent?.employmentType !== "contract",
     }),
     defineField({
       name: "logo",
@@ -23,16 +45,16 @@ export const jobType = defineType({
       },
     }),
     defineField({
-      name: "description",
-      type: "blockContent",
-    }),
-    defineField({
       name: "startDate",
       type: "datetime",
     }),
     defineField({
       name: "endDate",
       type: "datetime",
+    }),
+    defineField({
+      name: "description",
+      type: "blockContent",
     }),
     defineField({
       name: "tags",

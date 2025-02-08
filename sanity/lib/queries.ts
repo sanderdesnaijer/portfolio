@@ -37,7 +37,7 @@ export const settingsQuery = groq`
 `;
 
 export const jobsQuery = groq`
-  *[_type == "job"]{    
+  *[_type == "job"] | order(startDate desc){
     _id,
     companyName,
     jobTitle,
@@ -46,7 +46,9 @@ export const jobsQuery = groq`
     link,
     description,
     tags,
-    "imageURL": logo.asset->url
+    "imageURL": logo.asset->url,
+    employmentType,
+    contractName
   }
 `;
 
