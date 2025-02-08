@@ -47,13 +47,12 @@ export const Projects = ({
                   href={`/${pageSlug}/${project.slug.current}`}
                   className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
                 >
-                  {/* <span className="absolute right-0 left-0 h-full opacity-0"></span> */}
                   <h2 className="-mt-3 mb-2 text-xl text-[2.5rem] font-normal">
                     {project.title}
                   </h2>
                 </Link>
                 <p className="mb-2 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
-                  {convertDate(project._createdAt)}
+                  {convertDate(project.publishedAt, false)}
                 </p>
 
                 {body ? (

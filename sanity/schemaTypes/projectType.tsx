@@ -45,6 +45,15 @@ export const projectType = defineType({
       name: "links",
       type: "link",
     }),
+    defineField({
+      name: "job",
+      title: "Job name",
+      type: "reference",
+      to: [{ type: "job" }],
+      options: {
+        disableNew: true,
+      },
+    }),
   ],
   preview: {
     select: {
