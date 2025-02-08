@@ -168,6 +168,7 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
                     <p
                       class="text-xs italic"
                     >
+                      full-time
                        
                     </p>
                   </a>
