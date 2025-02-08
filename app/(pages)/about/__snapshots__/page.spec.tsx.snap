@@ -148,7 +148,7 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
                   width="56"
                 />
                 <div
-                  class="pl-2"
+                  class="pl-3"
                 >
                   <a
                     aria-label="[Link to] Company A"
@@ -156,7 +156,7 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
                     target="_blank"
                   >
                     <h3
-                      class="text-lg font-bold"
+                      class="text-lg leading-[18px] font-bold"
                     >
                       Company A
                     </h3>
@@ -164,6 +164,11 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
                       class="text-base"
                     >
                       Developer
+                    </p>
+                    <p
+                      class="text-xs italic"
+                    >
+                       
                     </p>
                   </a>
                 </div>

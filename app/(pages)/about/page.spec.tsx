@@ -48,6 +48,7 @@ describe("app/(pages)/about-me", () => {
       _type: "",
       _createdAt: "",
       _updatedAt: "",
+      employmentType: "full-time",
     },
   ];
 

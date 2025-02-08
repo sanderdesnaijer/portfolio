@@ -122,7 +122,7 @@ export default async function Page() {
                     height={companyIconSize}
                     className="mt-0 h-fit"
                   />
-                  <div className="pl-2">
+                  <div className="pl-3">
                     <Link
                       href={job.link}
                       aria-label={`[Link to] ${job.companyName}`}
@@ -134,7 +134,8 @@ export default async function Page() {
                       <p className="text-base">{job.jobTitle}</p>
                       <p className="text-xs italic">
                         {job.employmentType}{" "}
-                        {job.contractName && `(via ${job.contractName})`}
+                        {job.contractName &&
+                          `(${t("job-contract")} ${job.contractName})`}
                       </p>
                     </Link>
                   </div>
