@@ -26,10 +26,9 @@ export const Projects = ({
               ? truncateText(toPlainText(project.body), 200)
               : null;
           return (
-            <Link
-              className="grid grid-cols-5 justify-between no-underline hover:opacity-90"
+            <div
+              className="relative grid grid-cols-5 justify-between no-underline hover:opacity-90"
               key={project._id}
-              href={`/${pageSlug}/${project.slug.current}`}
             >
               <div className="col-span-2">
                 {project?.mainImage && (
@@ -44,11 +43,16 @@ export const Projects = ({
                 )}
               </div>
               <div className="col-span-3 px-4">
-                <h2 className="mt-0 mb-2 text-xl text-[2.5rem] font-normal">
-                  {project.title}
-                </h2>
+                <Link
+                  href={`/${pageSlug}/${project.slug.current}`}
+                  className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
+                >
+                  <h2 className="-mt-3 mb-2 text-xl text-[2.5rem] font-normal">
+                    {project.title}
+                  </h2>
+                </Link>
                 <p className="mb-2 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
-                  {convertDate(project._createdAt)}
+                  {convertDate(project.publishedAt)}
                 </p>
 
                 {body ? (
@@ -60,7 +64,7 @@ export const Projects = ({
                   <LinkList links={project.links} />
                 )}
               </div>
-            </Link>
+            </div>
           );
         })}
       </div>

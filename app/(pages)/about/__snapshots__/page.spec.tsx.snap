@@ -62,25 +62,25 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
         class="flex flex-col text-4xl font-extralight justify-end min-w-[172px] pl-4"
       >
         <a
-          class="false"
+          class=""
           href="/"
         >
           Home
         </a>
         <a
-          class="false"
+          class=""
           href="/about"
         >
           About
         </a>
         <a
-          class="false"
+          class=""
           href="/projects"
         >
           Projects
         </a>
         <a
-          class="false"
+          class=""
           href="/blog"
         >
           Blog

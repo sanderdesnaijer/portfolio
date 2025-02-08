@@ -54,7 +54,7 @@ export const jobsQuery = groq`
 
 export const projectsQuery = groq`
   *[_type == "project"]{
-    _createdAt,
+    publishedAt,
     _id,
     title,
     slug,
@@ -68,11 +68,14 @@ export const projectsQuery = groq`
 export const projectQuery = groq`
   *[_type == "project" && slug.current == $slug][0]{
     _createdAt,
+    publishedAt,
     title,
     description,
     mainImage,
     body,
-    links
+    links,
+    "companyName": job->companyName,
+    "companyLogo": job->logo.asset->url,
   }
 `;
 

@@ -7,6 +7,8 @@ import { PageSanity, ProjectTypeSanity, SettingSanity } from "@/sanity/types";
 
 const slug = "projects";
 
+export const revalidate = 1;
+
 export default async function Page() {
   const projects = await sanityFetch<ProjectTypeSanity[]>({
     query: projectsQuery,

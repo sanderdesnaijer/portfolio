@@ -1,8 +1,5 @@
-export const convertDate = (date: string, shouldShowDay = true) => {
+export const convertDate = (date: string) => {
   const format: Intl.DateTimeFormatOptions = {
-    ...(shouldShowDay && {
-      day: "numeric",
-    }),
     month: "short",
     year: "numeric",
   };

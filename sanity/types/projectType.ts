@@ -18,4 +18,6 @@ export interface ProjectTypeSanity extends SanityDocument {
   publishedAt: string;
   body: Array<Block>;
   links?: Array<IconLink>;
+  companyName?: string;
+  companyLogo?: string;
 }

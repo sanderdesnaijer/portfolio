@@ -67,25 +67,25 @@ exports[`app/page renders the Home page with settings data 1`] = `
           class="flex flex-col text-9xl font-extralight"
         >
           <a
-            class="false"
+            class=""
             href="/"
           >
             Home
           </a>
           <a
-            class="false"
+            class=""
             href="/about"
           >
             About
           </a>
           <a
-            class="false"
+            class=""
             href="/projects"
           >
             Projects
           </a>
           <a
-            class="false"
+            class=""
             href="/blog"
           >
             Blog

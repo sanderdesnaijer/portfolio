@@ -14,6 +14,7 @@ export const projectType = defineType({
     defineField({
       name: "slug",
       type: "slug",
+      validation: (Rule) => Rule.required(),
       options: {
         source: "title",
       },
@@ -43,6 +44,15 @@ export const projectType = defineType({
     defineField({
       name: "links",
       type: "link",
+    }),
+    defineField({
+      name: "job",
+      title: "Job name",
+      type: "reference",
+      to: [{ type: "job" }],
+      options: {
+        disableNew: true,
+      },
     }),
   ],
   preview: {
