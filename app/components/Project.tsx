@@ -7,6 +7,7 @@ import Image from "next/image";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { LinkList } from "./LinkList";
 import { convertDate } from "../utils/utils";
+import { useTranslations } from "next-intl";
 
 const builder = imageUrlBuilder(client);
 const imageWidth = 800;
@@ -14,6 +15,10 @@ const imageHeight = 400;
 const companyIconSize = 24;
 
 export const Project = ({ project }: { project: ProjectTypeSanity }) => {
+  const t = useTranslations();
+  const getCreatedAtTitle = (): string =>
+    `${t("project-created-at")} ${project.companyName}`;
+
   return (
     <>
       <p className="-mt-8 mb-0 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
@@ -21,14 +26,14 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
       </p>
       {project?.companyName ? (
         <p className="mt-0 mb-3 flex items-center text-xs italic">
-          {`[created at] ${project.companyName}`}{" "}
+          {getCreatedAtTitle()}
           <Image
             src={builder
               .image(project.companyLogo!)
               .width(companyIconSize)
               .height(companyIconSize)
               .url()}
-            alt={`[created at] ${project.companyName}`}
+            alt={getCreatedAtTitle()}
             width={companyIconSize}
             height={companyIconSize}
             priority
