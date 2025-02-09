@@ -1,7 +1,7 @@
 const MEDIUM_URL = process.env.NEXT_PUBLIC_MEDIUM_URL;
 const RSS_API_URL = process.env.NEXT_PUBLIC_RSS_API_URL;
 
-export interface Article {
+export interface MediumArticle {
   author: string;
   categories: string[];
   content: string;
@@ -14,13 +14,14 @@ export interface Article {
   title: string;
 }
 
-export async function fetchMediumArticles(): Promise<Article[]> {
+export async function fetchMediumArticles(): Promise<MediumArticle[]> {
   try {
-    const res = await global.fetch(`${RSS_API_URL}?rss_url=${MEDIUM_URL}`);
+    const res = await fetch(`${RSS_API_URL}?rss_url=${MEDIUM_URL}`);
     if (!res.ok) throw new Error("Failed to fetch Medium articles");
 
     const data = await res.json();
-    return data.items as Article[];
+
+    return data.items as MediumArticle[];
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error("Error fetching Medium articles:", error);
