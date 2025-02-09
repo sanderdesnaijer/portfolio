@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
+      {
+        protocol: "https",
+        hostname: "cdn-images-1.medium.com",
+      },
     ],
   },
   webpack: (config) => {
