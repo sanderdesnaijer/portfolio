@@ -18,12 +18,15 @@ export default async function Page() {
   });
 
   const articles = await fetchMediumArticles();
-
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
   if (!page || !articles) {
     return <PageNotFound />;
   }
+
+  const getImageURL = (articleDescription: string): string | undefined => {
+    return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
+  };
 
   return (
     <Layout
@@ -34,22 +37,23 @@ export default async function Page() {
       <div className="mx-auto grid grid-cols-1 py-10">
         <div className="grid gap-10">
           {articles.map((article, index) => {
+            const imageURL = getImageURL(article.description);
             return (
               <div
                 className="relative grid grid-cols-5 justify-between no-underline hover:opacity-90"
                 key={index}
               >
                 <div className="col-span-2">
-                  <Image
-                    className="mt-0 object-fill"
-                    src={
-                      article.description.match(/<img[^>]+src="([^">]+)"/)?.[1]
-                    }
-                    alt={article.title}
-                    width={350}
-                    height={350}
-                    priority
-                  />
+                  {imageURL && (
+                    <Image
+                      className="mt-0 object-fill"
+                      src={imageURL}
+                      alt={article.title}
+                      width={350}
+                      height={350}
+                      priority
+                    />
+                  )}
                 </div>
                 <div className="not-prose col-span-3 px-4">
                   <Link

@@ -16,12 +16,15 @@ export interface Article {
 
 export async function fetchMediumArticles(): Promise<Article[]> {
   try {
-    const res = await fetch(`${RSS_API_URL}?rss_url=${MEDIUM_URL}`);
+    console.log("Fetch is available:", typeof globalThis.fetch !== "undefined");
+
+    const res = await global.fetch(`${RSS_API_URL}?rss_url=${MEDIUM_URL}`);
     if (!res.ok) throw new Error("Failed to fetch Medium articles");
 
     const data = await res.json();
     return data.items as Article[];
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Error fetching Medium articles:", error);
     return [];
   }
