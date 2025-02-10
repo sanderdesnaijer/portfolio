@@ -90,103 +90,99 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
     <main
       class="prose prose-xl dark:prose-invert relative col-span-5 max-w-fit pt-24"
     >
-      <h1
-        class="mb-10 text-8xl font-bold"
-      >
-        About Me
-      </h1>
       <div
-        class="relative py-24 pt-12"
+        class="flex h-full flex-col"
       >
-        <div
-          class="top-0 bg-black dark:bg-white"
-          style="position: absolute; right: 0px; left: -196px; width: calc(100vw); height: 1px;"
-        />
-        <div
-          class="bg-black dark:bg-white"
-          style="position: absolute; right: 0px; bottom: 0px; top: 0px; left: -196px; width: 1px;"
-        />
-        <div
-          data-testid="portable-text"
+        <h1
+          class="relative mb-10 text-8xl font-bold after:absolute after:right-0 after:-bottom-10 after:left-[-196px] after:h-px after:w-[100vw] after:bg-current dark:bg-white"
         >
-          [{"_type":"block","children":[{"text":"Mock body content","_type":"span","marks":[]}],"style":""}]
-        </div>
-        <h2>
-          Experience
-        </h2>
-        <ol
-          class="not-prose flex list-none flex-col gap-10 p-0"
+          About Me
+        </h1>
+        <div
+          class="relative flex-1 pt-12 pb-12 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black dark:after:bg-white"
         >
-          <li
-            class="flex"
+          <div
+            data-testid="portable-text"
           >
-            <div
-              class="w-1/5"
-            >
-              <p
-                class="mt-0 mb-2 text-right text-base"
-              >
-                Jan 2022 - present
-              </p>
-            </div>
-            <div
-              class="w-4/5 pl-4"
+            [{"_type":"block","children":[{"text":"Mock body content","_type":"span","marks":[]}],"style":""}]
+          </div>
+          <h2>
+            Experience
+          </h2>
+          <ol
+            class="not-prose flex list-none flex-col gap-10 p-0"
+          >
+            <li
+              class="flex"
             >
               <div
-                class="mb-2 flex"
+                class="w-1/5"
               >
-                <img
-                  alt="mock-job-image-url"
-                  class="mt-0 h-fit"
-                  data-nimg="1"
-                  decoding="async"
-                  height="56"
-                  loading="lazy"
-                  src="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=128&q=75"
-                  srcset="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=64&q=75 1x, /_next/image?url=http%3A%2F%2Fmocked-image-url&w=128&q=75 2x"
-                  style="color: transparent;"
-                  width="56"
-                />
-                <div
-                  class="pl-3"
+                <p
+                  class="mt-0 mb-2 text-right text-base"
                 >
-                  <a
-                    aria-label="[Link to] Company A"
-                    href="https://test.com"
-                    target="_blank"
-                  >
-                    <h3
-                      class="text-lg leading-[18px] font-bold"
-                    >
-                      Company A
-                    </h3>
-                    <p
-                      class="text-base"
-                    >
-                      Developer
-                    </p>
-                    <p
-                      class="text-xs italic"
-                    >
-                      full-time
-                       
-                    </p>
-                  </a>
-                </div>
+                  Jan 2022 - present
+                </p>
               </div>
               <div
-                data-testid="portable-text"
+                class="w-4/5 pl-4"
               >
-                [{"_type":"block","children":[{"text":"Job description","_type":"span","marks":[]}],"style":""}]
+                <div
+                  class="mb-2 flex"
+                >
+                  <img
+                    alt="mock-job-image-url"
+                    class="mt-0 h-fit"
+                    data-nimg="1"
+                    decoding="async"
+                    height="56"
+                    loading="lazy"
+                    src="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=128&q=75"
+                    srcset="/_next/image?url=http%3A%2F%2Fmocked-image-url&w=64&q=75 1x, /_next/image?url=http%3A%2F%2Fmocked-image-url&w=128&q=75 2x"
+                    style="color: transparent;"
+                    width="56"
+                  />
+                  <div
+                    class="pl-3"
+                  >
+                    <a
+                      aria-label="[Link to] Company A"
+                      href="https://test.com"
+                      target="_blank"
+                    >
+                      <h3
+                        class="text-lg leading-[18px] font-bold"
+                      >
+                        Company A
+                      </h3>
+                      <p
+                        class="text-base"
+                      >
+                        Developer
+                      </p>
+                      <p
+                        class="text-xs italic"
+                      >
+                        full-time
+                         
+                      </p>
+                    </a>
+                  </div>
+                </div>
+                <div
+                  data-testid="portable-text"
+                >
+                  [{"_type":"block","children":[{"text":"Job description","_type":"span","marks":[]}],"style":""}]
+                </div>
+                <p
+                  class="text-sm"
+                >
+                  React, TypeScript
+                </p>
               </div>
-              <p
-                class="text-sm"
-              >
-                React, TypeScript
-              </p>
-            </div>
-          </li>
-        </ol>
+            </li>
+          </ol>
+        </div>
       </div>
     </main>
     <div
