@@ -44,30 +44,13 @@ export const Layout: React.FC<{
         <Menu />
       </div>
       <main className="prose prose-xl dark:prose-invert relative col-span-5 max-w-fit pt-24">
-        <h1 className="mb-10 text-8xl font-bold">{pageTitle}</h1>
-        <div className="relative py-24 pt-12">
-          <div
-            style={{
-              position: "absolute",
-              right: 0,
-              left: -196,
-              width: "calc(100vw)",
-              height: 1,
-            }}
-            className="top-0 bg-black dark:bg-white"
-          ></div>
-          <div
-            className="bg-black dark:bg-white"
-            style={{
-              position: "absolute",
-              right: 0,
-              bottom: 0,
-              top: 0,
-              left: -196,
-              width: 1,
-            }}
-          ></div>
-          {children}
+        <div className="flex h-full flex-col">
+          <h1 className="relative mb-10 text-8xl font-bold after:absolute after:right-0 after:-bottom-10 after:left-[-196px] after:h-px after:w-[100vw] after:bg-current dark:bg-white">
+            {pageTitle}
+          </h1>
+          <div className="relative flex-1 pt-12 pb-12 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black dark:after:bg-white">
+            {children}
+          </div>
         </div>
       </main>
       {rightColSlot && <div className="col-span-2 pt-24">{rightColSlot}</div>}
