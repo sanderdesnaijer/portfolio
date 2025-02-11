@@ -5,8 +5,8 @@ import { SettingSanity } from "@/sanity/types";
 import { Layout } from "@/app/components/Layout";
 import { fetchMediumArticles } from "@/app/utils/fetchMedium";
 import { PageNotFound } from "@/app/components/PageNotFound";
-import { LinkList } from "@/app/components/LinkList";
 import { convertDate } from "@/app/utils/utils";
+import { ProjectLayout } from "@/app/components/ProjectLayout";
 
 export const revalidate = 1;
 
@@ -28,15 +28,8 @@ const BlogPage = async ({ params }: { params: QueryParams }) => {
       socialMedia={setting.socialMedia}
       authorName={setting.title}
     >
-      <p className="-mt-8 mb-2 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
-        {convertDate(article.pubDate, true)}
-      </p>
-
-      <div
-        className="prose prose-xl dark:prose-invert"
-        dangerouslySetInnerHTML={{ __html: article.description }}
-      ></div>
-      <LinkList
+      <ProjectLayout
+        date={convertDate(article.pubDate, true)}
         links={[
           {
             title: "originally published on Medium",
@@ -44,7 +37,12 @@ const BlogPage = async ({ params }: { params: QueryParams }) => {
             icon: "article",
           },
         ]}
-      ></LinkList>
+      >
+        <div
+          className="prose prose-xl dark:prose-invert"
+          dangerouslySetInnerHTML={{ __html: article.description }}
+        ></div>
+      </ProjectLayout>
     </Layout>
   );
 };
