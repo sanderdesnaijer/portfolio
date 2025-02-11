@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { convertDate } from "../utils/utils";
-import { LinkList } from "./LinkList";
 
 export const truncateText = (text: string, length: number) => {
   if (text.length <= length) return text;
@@ -25,6 +24,7 @@ export const Projects = ({
             project?.body && project?.body.length
               ? truncateText(toPlainText(project.body), 200)
               : null;
+
           return (
             <div
               className="relative grid grid-cols-5 justify-between no-underline hover:opacity-90"
@@ -60,9 +60,15 @@ export const Projects = ({
                     {body}
                   </p>
                 ) : null}
-                {project.links && project.links.length && (
-                  <LinkList links={project.links} />
-                )}
+                {project.tags ? (
+                  <ul className="mt-0 mb-0 flex list-none flex-wrap pl-0 text-xs">
+                    {project.tags.map((tag) => (
+                      <li className="mt-0 pr-2 pl-0" key={tag._id}>
+                        {tag.label}
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
               </div>
             </div>
           );

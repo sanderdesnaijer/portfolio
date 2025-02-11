@@ -20,6 +20,12 @@ export const projectType = defineType({
       },
     }),
     defineField({
+      name: "tags",
+      title: "Tags",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "tag" }] }],
+    }),
+    defineField({
       name: "mainImage",
       type: "image",
       options: {

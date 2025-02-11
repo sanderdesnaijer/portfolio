@@ -59,9 +59,12 @@ export const projectsQuery = groq`
     title,
     slug,
     mainImage,
-    links,
     body,
-    "imageURL": mainImage.asset->url
+    "imageURL": mainImage.asset->url,
+    "tags": tags[]->{
+      _id,
+      label
+    }
   }
 `;
 
@@ -75,7 +78,7 @@ export const projectQuery = groq`
     body,
     links,
     "companyName": job->companyName,
-    "companyLogo": job->logo.asset->url,
+    "companyLogo": job->logo.asset->url
   }
 `;
 

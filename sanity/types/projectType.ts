@@ -1,5 +1,6 @@
 import { SanityDocument } from "@sanity/client";
 import { Block, IconLink } from "./types";
+import { TagSanity } from "./tagType";
 
 export interface ProjectTypeSanity extends SanityDocument {
   title: string;
@@ -20,4 +21,5 @@ export interface ProjectTypeSanity extends SanityDocument {
   links?: Array<IconLink>;
   companyName?: string;
   companyLogo?: string;
+  tags?: TagSanity[];
 }
