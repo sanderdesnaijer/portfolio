@@ -11,6 +11,15 @@ import { fetchMediumArticles } from "@/app/utils/fetchMedium";
 
 const slug = "blog";
 
+const getSlug = (url: string): string => {
+  const match = url.match(/\/([^\/]+)-[a-f0-9]{12}\?/);
+  return match ? match[1] : "not-found";
+};
+
+const getImageURL = (articleDescription: string): string | undefined => {
+  return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
+};
+
 export default async function Page() {
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
@@ -23,10 +32,6 @@ export default async function Page() {
   if (!page || !articles) {
     return <PageNotFound />;
   }
-
-  const getImageURL = (articleDescription: string): string | undefined => {
-    return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
-  };
 
   return (
     <Layout
@@ -57,8 +62,7 @@ export default async function Page() {
                 </div>
                 <div className="not-prose col-span-3 px-4">
                   <Link
-                    href={article.link}
-                    target="_blank"
+                    href={`${page.slug.current}/${getSlug(article.link)}`}
                     className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
                   >
                     <h2 className="-mt-3 mb-2 text-xl text-[2.5rem] font-normal">

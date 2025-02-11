@@ -45,7 +45,7 @@ export const Layout: React.FC<{
       </div>
       <main className="prose prose-xl dark:prose-invert relative col-span-5 max-w-fit pt-24">
         <div className="flex h-full flex-col">
-          <h1 className="relative mb-10 text-8xl font-bold after:absolute after:right-0 after:-bottom-10 after:left-[-196px] after:h-px after:w-[100vw] after:bg-current dark:bg-white">
+          <h1 className="relative mb-10 text-8xl font-bold after:absolute after:right-0 after:-bottom-10 after:left-[-196px] after:h-px after:w-[100vw] after:bg-current after:dark:bg-white">
             {pageTitle}
           </h1>
           <div className="relative flex-1 pt-12 pb-12 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black dark:after:bg-white">

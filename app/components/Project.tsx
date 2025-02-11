@@ -5,9 +5,9 @@ import { client } from "@/sanity/lib/client";
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { LinkList } from "./LinkList";
 import { convertDate } from "../utils/utils";
 import { useTranslations } from "next-intl";
+import { ProjectLayout } from "./ProjectLayout";
 
 const builder = imageUrlBuilder(client);
 const imageWidth = 800;
@@ -20,10 +20,10 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
     `${t("project-created-at")} ${project.companyName}`;
 
   return (
-    <>
-      <p className="-mt-8 mb-0 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
-        {convertDate(project.publishedAt)}
-      </p>
+    <ProjectLayout
+      date={convertDate(project.publishedAt)}
+      links={project.links && project.links.length ? project.links : []}
+    >
       {project?.companyName ? (
         <p className="mt-0 mb-3 flex items-center text-xs italic">
           {getCreatedAtTitle()}
@@ -52,15 +52,12 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
           width={imageWidth}
           height={imageHeight}
           priority
-          className="mt-2 mb-0"
+          className="mt-0 mb-0"
         />
       ) : null}
 
       {project?.body ? <PortableText value={project.body} /> : null}
-      {project.links && project.links.length && (
-        <LinkList links={project.links} />
-      )}
-    </>
+    </ProjectLayout>
   );
 };
 
