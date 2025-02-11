@@ -21,7 +21,7 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
 
   return (
     <>
-      <p className="-mt-8 mb-0 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
+      <p className="-mt-8 mb-2 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
         {convertDate(project.publishedAt)}
       </p>
       {project?.companyName ? (
@@ -52,7 +52,7 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
           width={imageWidth}
           height={imageHeight}
           priority
-          className="mt-2 mb-0"
+          className="mt-0 mb-0"
         />
       ) : null}
 

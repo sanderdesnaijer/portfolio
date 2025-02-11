@@ -28,12 +28,12 @@ const BlogPage = async ({ params }: { params: QueryParams }) => {
       socialMedia={setting.socialMedia}
       authorName={setting.title}
     >
-      <p className="-mt-8 mb-0 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
+      <p className="-mt-8 mb-2 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
         {convertDate(article.pubDate, true)}
       </p>
 
       <div
-        className=""
+        className="prose prose-xl dark:prose-invert"
         dangerouslySetInnerHTML={{ __html: article.description }}
       ></div>
       <LinkList
