@@ -53,7 +53,7 @@ export const jobsQuery = groq`
 `;
 
 export const projectsQuery = groq`
-  *[_type == "project"]{
+  *[_type == "project"] | order(publishedAt desc){
     publishedAt,
     _id,
     title,
