@@ -78,7 +78,11 @@ export const projectQuery = groq`
     body,
     links,
     "companyName": job->companyName,
-    "companyLogo": job->logo.asset->url
+    "companyLogo": job->logo.asset->url,
+    "tags": tags[]->{
+      _id,
+      label
+    }
   }
 `;
 

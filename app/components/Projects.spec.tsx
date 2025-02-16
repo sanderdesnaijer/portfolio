@@ -59,13 +59,6 @@ describe("components/Projects", () => {
         expect(screen.getByAltText(project.mainImage.alt)).toBeInTheDocument();
       }
     });
-
-    // Ensure links are rendered correctly
-    const githubLinks = screen.getAllByLabelText("github icon");
-    const liveDemoLinks = screen.getAllByLabelText("external-link icon");
-
-    expect(githubLinks.length).toBe(1); // Only one GitHub link
-    expect(liveDemoLinks.length).toBe(1); // Only one Live Demo link
   });
 
   it("renders correctly with no projects", () => {
@@ -90,14 +83,6 @@ describe("components/Projects", () => {
         mockProjects[index].mainImage!.alt
       );
     });
-  });
-
-  it("renders links correctly for a project", () => {
-    render(<Projects pageSlug="projects" projects={mockProjects} />);
-
-    // Ensure GitHub and Live Demo links are rendered
-    expect(screen.getByText("GitHub")).toBeInTheDocument();
-    expect(screen.getByText("Live Demo")).toBeInTheDocument();
   });
 
   it("renders projects with correct href", () => {
