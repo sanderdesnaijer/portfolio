@@ -59,7 +59,9 @@ export const jobType = defineType({
     }),
     defineField({
       name: "tags",
-      type: "string",
+      title: "Tags",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "tag" }] }],
     }),
     defineField({
       name: "link",

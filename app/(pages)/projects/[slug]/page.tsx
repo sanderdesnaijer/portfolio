@@ -5,6 +5,7 @@ import { ProjectTypeSanity, SettingSanity } from "@/sanity/types";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import { Layout } from "@/app/components/Layout";
 import Project from "@/app/components/Project";
+import { Tags } from "@/app/components/Tags";
 
 export const revalidate = 1;
 
@@ -26,6 +27,7 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
       authorName={setting.title}
     >
       <Project project={project} />
+      {project.tags && <Tags tags={project.tags} />}
     </Layout>
   );
 };

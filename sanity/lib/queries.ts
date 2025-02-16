@@ -45,7 +45,10 @@ export const jobsQuery = groq`
     endDate,
     link,
     description,
-    tags,
+    "tags": tags[]->{
+      _id,
+      label
+    },
     "imageURL": logo.asset->url,
     employmentType,    
     "contractName": contractName->companyName
@@ -59,9 +62,12 @@ export const projectsQuery = groq`
     title,
     slug,
     mainImage,
-    links,
     body,
-    "imageURL": mainImage.asset->url
+    "imageURL": mainImage.asset->url,
+    "tags": tags[]->{
+      _id,
+      label
+    }
   }
 `;
 
@@ -76,6 +82,10 @@ export const projectQuery = groq`
     links,
     "companyName": job->companyName,
     "companyLogo": job->logo.asset->url,
+    "tags": tags[]->{
+      _id,
+      label
+    }
   }
 `;
 

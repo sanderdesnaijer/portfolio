@@ -10,6 +10,7 @@ import { PageNotFound } from "@/app/components/PageNotFound";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
+import { Tags } from "@/app/components/Tags";
 
 export const revalidate = 1;
 
@@ -145,7 +146,7 @@ export default async function Page() {
                   components={jobComponents}
                 />
 
-                <p className="text-sm">{job.tags}</p>
+                {job.tags && <Tags tags={job.tags} />}
               </div>
             </li>
           );

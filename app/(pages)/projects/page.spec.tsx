@@ -32,8 +32,8 @@ describe("app/(pages)/projects/page", () => {
     expect(screen.getByAltText("Project 2 Image Alt")).toBeInTheDocument();
 
     // Check if the links are rendered correctly
-    expect(screen.getByText("GitHub")).toBeInTheDocument();
-    expect(screen.getByText("Live Demo")).toBeInTheDocument();
+    expect(screen.getByLabelText("github icon")).toBeInTheDocument();
+    expect(screen.getByLabelText("linkedin icon")).toBeInTheDocument();
   });
 
   it("renders correctly when projects are missing", async () => {

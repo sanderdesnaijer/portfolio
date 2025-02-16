@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { convertDate } from "../utils/utils";
-import { LinkList } from "./LinkList";
+import { Tags } from "./Tags";
 
 export const truncateText = (text: string, length: number) => {
   if (text.length <= length) return text;
@@ -25,6 +25,7 @@ export const Projects = ({
             project?.body && project?.body.length
               ? truncateText(toPlainText(project.body), 200)
               : null;
+
           return (
             <div
               className="relative grid grid-cols-5 justify-between no-underline hover:opacity-90"
@@ -47,11 +48,11 @@ export const Projects = ({
                   href={`/${pageSlug}/${project.slug.current}`}
                   className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
                 >
-                  <h2 className="-mt-3 mb-2 text-xl text-[2.5rem] font-normal">
+                  <h2 className="-mt-2 mb-0 text-xl text-[2.5rem] leading-12 font-normal">
                     {project.title}
                   </h2>
                 </Link>
-                <p className="mb-2 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
+                <p className="mt-1 mb-1 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
                   {convertDate(project.publishedAt)}
                 </p>
 
@@ -60,9 +61,8 @@ export const Projects = ({
                     {body}
                   </p>
                 ) : null}
-                {project.links && project.links.length && (
-                  <LinkList links={project.links} />
-                )}
+
+                {project.tags && <Tags tags={project.tags} />}
               </div>
             </div>
           );
