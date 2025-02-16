@@ -67,4 +67,16 @@ export const projectType = defineType({
       media: "mainImage",
     },
   },
+  orderings: [
+    {
+      title: "Publish Date (Newest First)",
+      name: "publishedAtDesc",
+      by: [{ field: "publishedAt", direction: "desc" }],
+    },
+    {
+      title: "Publish Date (Oldest First)",
+      name: "publishedAtAsc",
+      by: [{ field: "publishedAt", direction: "asc" }],
+    },
+  ],
 });

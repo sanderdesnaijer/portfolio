@@ -1,5 +1,6 @@
 import { SanityDocument } from "@sanity/client";
 import { Block } from "./types";
+import { TagSanity } from "./tagType";
 
 export interface JobSanity extends SanityDocument {
   companyName: string;
@@ -14,7 +15,7 @@ export interface JobSanity extends SanityDocument {
   description: Block[];
   startDate: string;
   endDate?: string;
-  tags?: string;
+  tags?: TagSanity[];
   link: string;
   imageURL: string;
   employmentType: "full-time" | "intern" | "contract";
