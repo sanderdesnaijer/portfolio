@@ -76,22 +76,20 @@ export default async function Page() {
       pageTitle={page.title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
-      rightColSlot={
-        <div className="absolute z-10 -mt-8 -ml-8 border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[168px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[168px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
-          <Image
-            alt={page.imageAlt}
-            src={builder
-              .image(page.imageURL)
-              .width(mainImageSizeWidtht)
-              .height(mainImageSizeHeigth)
-              .url()}
-            width={mainImageSizeWidtht}
-            height={mainImageSizeHeigth}
-            priority
-          />
-        </div>
-      }
     >
+      <div className="not-prose absolute -top-[169px] -right-[100px] z-10 border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[168px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[168px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
+        <Image
+          alt={page.imageAlt}
+          src={builder
+            .image(page.imageURL)
+            .width(mainImageSizeWidtht)
+            .height(mainImageSizeHeigth)
+            .url()}
+          width={mainImageSizeWidtht}
+          height={mainImageSizeHeigth}
+          priority
+        />
+      </div>
       {page?.body ? (
         <PortableText value={page.body} components={components} />
       ) : null}

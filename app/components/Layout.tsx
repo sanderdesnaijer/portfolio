@@ -8,8 +8,7 @@ export const Layout: React.FC<{
   pageTitle: string;
   socialMedia: Array<IconLink>;
   authorName: string;
-  rightColSlot?: React.ReactNode;
-}> = ({ children, pageTitle, socialMedia, authorName, rightColSlot }) => {
+}> = ({ children, pageTitle, socialMedia, authorName }) => {
   return (
     <div className="container mx-auto grid grid-cols-9">
       <div className="sticky top-0 col-span-2 flex h-screen justify-end gap-4 p-6">
@@ -53,7 +52,6 @@ export const Layout: React.FC<{
           </div>
         </div>
       </main>
-      {rightColSlot && <div className="col-span-2 pt-24">{rightColSlot}</div>}
     </div>
   );
 };
