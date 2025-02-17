@@ -47,7 +47,7 @@ export const Layout: React.FC<{
           <h1 className="relative mb-10 text-5xl font-bold after:absolute after:right-0 after:-bottom-10 after:-left-10 after:h-px after:w-[100vw] after:bg-current sm:text-8xl sm:after:left-[-196px] after:dark:bg-white">
             {pageTitle}
           </h1>
-          <div className="relative flex-1 pt-12 pb-12 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black dark:after:bg-white">
+          <div className="relative flex-1 pt-6 pb-12 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black sm:pt-12 dark:after:bg-white">
             {children}
           </div>
         </div>
