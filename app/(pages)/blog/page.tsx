@@ -4,10 +4,9 @@ import { convertDate } from "@/app/utils/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
 import { PageSanity, SettingSanity } from "@/sanity/types";
-import Link from "next/link";
-import Image from "next/image";
-import { LinkList } from "@/app/components/LinkList";
 import { fetchMediumArticles } from "@/app/utils/fetchMedium";
+import { ProjectListItem } from "@/app/components/ProjectListItem";
+import { TagSanity } from "@/sanity/types/tagType";
 
 const slug = "blog";
 
@@ -19,6 +18,16 @@ const getSlug = (url: string): string => {
 const getImageURL = (articleDescription: string): string | undefined => {
   return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
 };
+
+function extractTextFromHTML(html: string) {
+  const withoutFigcaptions = html.replace(
+    /<figcaption>[^]*?<\/figcaption>/g,
+    ""
+  );
+  const text = withoutFigcaptions.replace(/<[^>]*>/g, " ");
+  const cleanText = text.replace(/\s+/g, " ").trim();
+  return cleanText.substring(0, 200) + "...";
+}
 
 export default async function Page() {
   const page = await sanityFetch<PageSanity>({
@@ -43,54 +52,28 @@ export default async function Page() {
         <div className="grid gap-10">
           {articles.map((article, index) => {
             const imageURL = getImageURL(article.description);
+            const tags = article.categories.map<TagSanity>((cat, index) => ({
+              label: cat,
+              _id: `${cat}-${index}`,
+              _rev: "",
+              _type: "tag",
+              _createdAt: new Date().toISOString(),
+              _updatedAt: new Date().toISOString(),
+            }));
+
+            const body = extractTextFromHTML(article.description);
+
             return (
-              <div
-                className="relative grid grid-cols-5 justify-between no-underline hover:opacity-90"
+              <ProjectListItem
                 key={index}
-              >
-                <div className="col-span-2">
-                  {imageURL && (
-                    <Image
-                      className="mt-0 object-fill"
-                      src={imageURL}
-                      alt={article.title}
-                      width={350}
-                      height={350}
-                      priority
-                    />
-                  )}
-                </div>
-                <div className="not-prose col-span-3 px-4">
-                  <Link
-                    href={`${page.slug.current}/${getSlug(article.link)}`}
-                    className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
-                  >
-                    <h2 className="-mt-3 mb-2 text-xl text-[2.5rem] font-normal">
-                      {article.title}
-                    </h2>
-                  </Link>
-                  <p className="mb-0 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
-                    {convertDate(article.pubDate)}
-                  </p>
-                  <p className="mt-0 mb-0">
-                    {article.categories.map((cat, index) => (
-                      <span key={index}>
-                        {cat}
-                        {index < article.categories.length - 1 && ", "}
-                      </span>
-                    ))}
-                  </p>
-                  <LinkList
-                    links={[
-                      {
-                        icon: "article",
-                        link: article.link,
-                        title: "Read blog",
-                      },
-                    ]}
-                  />
-                </div>
-              </div>
+                href={`${page.slug.current}/${getSlug(article.link)}`}
+                imageURL={imageURL}
+                imageALT={article.title}
+                date={convertDate(article.pubDate)}
+                title={article.title}
+                body={body}
+                tags={tags}
+              />
             );
           })}
         </div>
