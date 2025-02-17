@@ -29,7 +29,7 @@ const components: Partial<PortableTextReactComponents> = {
       <h2 className="mb-10 w-2/3 text-4xl font-extralight">{children}</h2>
     ),
     span: ({ children }: { children?: React.ReactNode }) => (
-      <span className="mb-10 block w-2/3 text-lg font-extralight sm:text-4xl">
+      <span className="mb-10 block w-2/3 text-lg font-extralight md:text-4xl">
         {children}
       </span>
     ),
@@ -77,7 +77,7 @@ export default async function Page() {
       socialMedia={setting.socialMedia}
       authorName={setting.title}
     >
-      <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[109px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[109px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] sm:mt-auto sm:mr-auto sm:w-auto sm:before:top-[168px] sm:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
+      <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[109px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[109px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] md:mt-auto md:mr-auto md:w-auto md:before:top-[168px] md:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
         <Image
           alt={page.imageAlt}
           src={builder

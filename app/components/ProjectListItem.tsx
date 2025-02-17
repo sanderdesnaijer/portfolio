@@ -24,7 +24,7 @@ export const ProjectListItem = ({
   tags,
 }: ProjectListItemProps) => (
   <div className="relative grid grid-cols-5 justify-between no-underline hover:opacity-90">
-    <div className="col-span-1 sm:col-span-2">
+    <div className="col-span-1 md:col-span-2">
       {imageURL && imageALT && (
         <Image
           className="mt-0 object-fill"
@@ -36,12 +36,12 @@ export const ProjectListItem = ({
         />
       )}
     </div>
-    <div className="col-span-4 px-4 sm:col-span-3">
+    <div className="col-span-4 px-4 md:col-span-3">
       <Link
         href={href}
         className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
       >
-        <h2 className="-mt-2 mb-0 text-3xl leading-10 font-normal sm:text-[2.5rem] sm:leading-12">
+        <h2 className="-mt-2 mb-0 text-3xl leading-10 font-normal md:text-[2.5rem] md:leading-12">
           {title}
         </h2>
       </Link>
