@@ -15,7 +15,7 @@ export const Projects = ({
   pageSlug: string;
 }) => {
   return (
-    <div className="mx-auto grid grid-cols-1 py-10">
+    <div className="mx-auto grid grid-cols-1 md:py-10">
       <div className="grid gap-10">
         {projects.map((project) => {
           const body =
