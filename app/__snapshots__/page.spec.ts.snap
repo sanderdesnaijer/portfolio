@@ -13,16 +13,16 @@ exports[`app/page renders 'Page not found' when sanityFetch returns null 1`] = `
 exports[`app/page renders the Home page with settings data 1`] = `
 <div>
   <div
-    class="container mx-auto h-screen"
+    class="container mx-auto h-screen p-4"
   >
     <main
-      class="grid h-full grid-cols-6 gap-4"
+      class="grid grid-cols-6 gap-4 md:h-full"
     >
       <div
-        class="col-span-2 content-center"
+        class="col-span-6 md:col-span-2 md:content-center"
       >
         <h1
-          class="mb-4 text-5xl font-bold"
+          class="mb-4 text-3xl font-bold md:text-5xl"
         >
           Test Title
         </h1>
@@ -64,28 +64,28 @@ exports[`app/page renders the Home page with settings data 1`] = `
         class="col-span-3 content-center"
       >
         <nav
-          class="flex flex-col text-9xl font-extralight"
+          class="flex flex-col text-7xl font-extralight md:text-9xl"
         >
           <a
-            class=""
+            class=" mr-2 md:mr-auto"
             href="/"
           >
             Home
           </a>
           <a
-            class=""
+            class=" mr-2 md:mr-auto"
             href="/about"
           >
             About
           </a>
           <a
-            class=""
+            class=" mr-2 md:mr-auto"
             href="/projects"
           >
             Projects
           </a>
           <a
-            class=""
+            class=" mr-2 md:mr-auto"
             href="/blog"
           >
             Blog

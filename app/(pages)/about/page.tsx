@@ -39,7 +39,7 @@ const components: Partial<PortableTextReactComponents> = {
 const jobComponents: Partial<PortableTextReactComponents> = {
   block: {
     normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="mb-3 text-sm leading-8">{children}</p>
+      <p className="mb-3 text-sm leading-6">{children}</p>
     ),
   },
 };
@@ -94,13 +94,13 @@ export default async function Page() {
         <PortableText value={page.body} components={components} />
       ) : null}
 
-      <h2>{t("job-experience")}</h2>
+      <h2 className="font-normal">{t("job-experience")}</h2>
       <ol className="not-prose flex list-none flex-col gap-10 p-0">
         {jobs?.map((job) => {
           return (
-            <li key={job._id} className="flex">
-              <div className="w-1/5">
-                <p className="mt-0 mb-2 text-right text-base">
+            <li key={job._id} className="md:flex">
+              <div className="md:w-2/7">
+                <p className="mt-0 mb-2 text-sm text-gray-400 italic md:text-right">
                   {getExperienceTitle(
                     job.startDate,
                     job.endDate,
@@ -108,7 +108,7 @@ export default async function Page() {
                   )}
                 </p>
               </div>
-              <div className="w-4/5 pl-4">
+              <div className="md:w-5/7 md:pl-4">
                 <div className="mb-2 flex">
                   <Image
                     alt={job.imageURL}
@@ -131,7 +131,7 @@ export default async function Page() {
                         {job.companyName}
                       </h3>
                       <p className="text-base">{job.jobTitle}</p>
-                      <p className="text-xs italic">
+                      <p className="text-xs text-gray-400 italic">
                         {job.employmentType}{" "}
                         {job.contractName &&
                           `(${t("job-contract")} ${job.contractName})`}
