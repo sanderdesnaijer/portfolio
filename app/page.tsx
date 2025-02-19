@@ -14,10 +14,12 @@ export default async function Home() {
   }
 
   return (
-    <div className="container mx-auto h-screen">
-      <main className="grid h-full grid-cols-6 gap-4">
-        <div className="col-span-2 content-center">
-          <h1 className="mb-4 text-5xl font-bold">{setting.title}</h1>
+    <div className="container mx-auto h-screen p-4">
+      <main className="grid grid-cols-6 gap-4 md:h-full">
+        <div className="col-span-6 md:col-span-2 md:content-center">
+          <h1 className="mb-4 text-3xl font-bold md:text-5xl">
+            {setting.title}
+          </h1>
           <p className="mb-4 text-xl">{setting.description}</p>
           <ul className="flex gap-2">
             {setting.socialMedia?.map((media) => {
@@ -40,7 +42,7 @@ export default async function Home() {
           </ul>
         </div>
         <div className="col-span-3 content-center">
-          <Menu className="flex flex-col text-9xl font-extralight" />
+          <Menu className="flex flex-col text-7xl font-extralight md:text-9xl" />
         </div>
       </main>
     </div>

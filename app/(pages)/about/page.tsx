@@ -29,7 +29,7 @@ const components: Partial<PortableTextReactComponents> = {
       <h2 className="mb-10 w-2/3 text-4xl font-extralight">{children}</h2>
     ),
     span: ({ children }: { children?: React.ReactNode }) => (
-      <span className="mb-10 block w-2/3 text-4xl font-extralight">
+      <span className="mb-10 block w-2/3 text-lg font-extralight md:text-4xl">
         {children}
       </span>
     ),
@@ -39,7 +39,7 @@ const components: Partial<PortableTextReactComponents> = {
 const jobComponents: Partial<PortableTextReactComponents> = {
   block: {
     normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="mb-3 text-sm leading-8">{children}</p>
+      <p className="mb-3 text-sm leading-6">{children}</p>
     ),
   },
 };
@@ -76,33 +76,31 @@ export default async function Page() {
       pageTitle={page.title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
-      rightColSlot={
-        <div className="absolute z-10 -mt-8 -ml-8 border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[168px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[168px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
-          <Image
-            alt={page.imageAlt}
-            src={builder
-              .image(page.imageURL)
-              .width(mainImageSizeWidtht)
-              .height(mainImageSizeHeigth)
-              .url()}
-            width={mainImageSizeWidtht}
-            height={mainImageSizeHeigth}
-            priority
-          />
-        </div>
-      }
     >
+      <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[88px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[88px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] md:mt-auto md:mr-auto md:w-auto md:before:top-[168px] md:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
+        <Image
+          alt={page.imageAlt}
+          src={builder
+            .image(page.imageURL)
+            .width(mainImageSizeWidtht)
+            .height(mainImageSizeHeigth)
+            .url()}
+          width={mainImageSizeWidtht}
+          height={mainImageSizeHeigth}
+          priority
+        />
+      </div>
       {page?.body ? (
         <PortableText value={page.body} components={components} />
       ) : null}
 
-      <h2>{t("job-experience")}</h2>
+      <h2 className="font-normal">{t("job-experience")}</h2>
       <ol className="not-prose flex list-none flex-col gap-10 p-0">
         {jobs?.map((job) => {
           return (
-            <li key={job._id} className="flex">
-              <div className="w-1/5">
-                <p className="mt-0 mb-2 text-right text-base">
+            <li key={job._id} className="md:flex">
+              <div className="md:w-2/7">
+                <p className="mt-0 mb-2 text-sm text-gray-400 italic md:text-right">
                   {getExperienceTitle(
                     job.startDate,
                     job.endDate,
@@ -110,7 +108,7 @@ export default async function Page() {
                   )}
                 </p>
               </div>
-              <div className="w-4/5 pl-4">
+              <div className="md:w-5/7 md:pl-4">
                 <div className="mb-2 flex">
                   <Image
                     alt={job.imageURL}
@@ -133,7 +131,7 @@ export default async function Page() {
                         {job.companyName}
                       </h3>
                       <p className="text-base">{job.jobTitle}</p>
-                      <p className="text-xs italic">
+                      <p className="text-xs text-gray-400 italic">
                         {job.employmentType}{" "}
                         {job.contractName &&
                           `(${t("job-contract")} ${job.contractName})`}

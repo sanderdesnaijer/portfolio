@@ -28,7 +28,7 @@ const menuItems: MenuItem[] = [
 ];
 
 const Menu = ({
-  className = "flex flex-col text-4xl font-extralight justify-end min-w-[172px] pl-4",
+  className = "flex md:flex-col md:text-4xl font-extralight md:justify-end min-w-[172px] md:pl-4",
 }: {
   className?: string;
 }) => {
@@ -45,7 +45,7 @@ const Menu = ({
     <nav className={className}>
       {menuItems.map((item, i) => (
         <Link
-          className={isActive(item) ? "font-bold" : ""}
+          className={`${isActive(item) ? "font-bold" : ""} mr-2 md:mr-auto`}
           key={i}
           href={item.pathname}
         >
