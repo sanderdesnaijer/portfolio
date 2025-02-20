@@ -4,9 +4,9 @@ import { convertDate } from "@/app/utils/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
 import { PageSanity, SettingSanity } from "@/sanity/types";
-import { fetchMediumArticles } from "@/app/utils/fetchMedium";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
 import { TagSanity } from "@/sanity/types/tagType";
+import { MediumArticle } from "@/app/api/medium/types";
 
 const slug = "blog";
 
@@ -35,7 +35,11 @@ export default async function Page() {
     params: { slug: slug },
   });
 
-  const articles = await fetchMediumArticles();
+  const articles = (await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/medium`,
+    { next: { revalidate: 600 } }
+  ).then((data) => data.json())) as MediumArticle[];
+
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
   if (!page || !articles) {
