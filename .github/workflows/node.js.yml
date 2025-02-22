@@ -38,5 +38,7 @@ jobs:
           echo "NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}" >> $GITHUB_ENV
           echo "NEXT_PUBLIC_SANITY_DATASET=${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}" >> $GITHUB_ENV
           echo "NEXT_PUBLIC_BASE_URL=${{ secrets.NEXT_PUBLIC_BASE_URL }}" >> $GITHUB_ENV
+      - name: Debug env
+        run: echo "BASE URL is $NEXT_PUBLIC_BASE_URL"    
       - name: Build code
         run: npm run build --if-present
