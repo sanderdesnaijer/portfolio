@@ -35,32 +35,21 @@ global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
     json: () =>
-      Promise.resolve({
-        status: "ok",
-        feed: {
-          url: "https://medium.com/feed/@john_doe",
-          title: "Stories by John Doe on Medium",
-          link: "https://medium.com/@john_doe?source=rss-asdadasd------2",
-          author: "",
-          description: "Stories by John Doe on Medium",
-          image: "https://nonexistent-image-url.com/image.jpeg",
-        },
-        items: [
-          {
-            title: "Building a Smart Home with Raspberry Pi",
-            pubDate: "2025-02-09 11:18:24",
-            link: "https://medium.com/@john_doe/building-a-smart-home-with-raspberry-pi-asdsadasd?source=rss-adasdsd------2",
-            guid: "https://medium.com/p/asdads",
-            author: "John Doe",
-            thumbnail: "",
-            description:
-              "<p>In this post, I show you how to build a smart home using a Raspberry Pi. It’s an easy project for beginners and helps you learn about IoT and automation.</p><img src='https://nonexistent-image-url.com/raspberry-pi.jpeg' alt='Raspberry Pi Setup'>",
-            content:
-              "This project walks you through setting up a Raspberry Pi to control various smart devices in your home. I use MQTT for communication between devices and explore different sensors and controllers.",
-            categories: ["tag1", "tag2"],
-          } as MediumArticle,
-        ],
-      }),
+      Promise.resolve([
+        {
+          title: "Building a Smart Home with Raspberry Pi",
+          pubDate: "2025-02-09 11:18:24",
+          link: "https://medium.com/@john_doe/building-a-smart-home-with-raspberry-pi-asdsadasd?source=rss-adasdsd------2",
+          guid: "https://medium.com/p/asdads",
+          author: "John Doe",
+          thumbnail: "",
+          description:
+            "<p>In this post, I show you how to build a smart home using a Raspberry Pi. It’s an easy project for beginners and helps you learn about IoT and automation.</p><img src='https://nonexistent-image-url.com/raspberry-pi.jpeg' alt='Raspberry Pi Setup'>",
+          content:
+            "This project walks you through setting up a Raspberry Pi to control various smart devices in your home. I use MQTT for communication between devices and explore different sensors and controllers.",
+          categories: ["tag1", "tag2"],
+        } as MediumArticle,
+      ]),
   })
 );
 

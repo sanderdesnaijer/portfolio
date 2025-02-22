@@ -12,6 +12,7 @@ export async function fetchMediumArticles(): Promise<MediumArticle[]> {
     const data = await res.json();
     return data.items as MediumArticle[];
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error("Error fetching Medium articles:", error);
     return [];
   }
