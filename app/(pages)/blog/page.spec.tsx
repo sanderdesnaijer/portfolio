@@ -4,6 +4,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
 import { mockPage } from "@/app/test-utils/mockPage";
 import { MediumArticle } from "@/app/api/medium/types";
+import { mockArticles } from "@/app/test-utils/mockArticle";
 
 const mockBlogPage: PageSanity = {
   ...mockPage,
@@ -34,22 +35,7 @@ const mockBlogPage: PageSanity = {
 global.fetch = jest.fn(() =>
   Promise.resolve({
     ok: true,
-    json: () =>
-      Promise.resolve([
-        {
-          title: "Building a Smart Home with Raspberry Pi",
-          pubDate: "2025-02-09 11:18:24",
-          link: "https://medium.com/@john_doe/building-a-smart-home-with-raspberry-pi-asdsadasd?source=rss-adasdsd------2",
-          guid: "https://medium.com/p/asdads",
-          author: "John Doe",
-          thumbnail: "",
-          description:
-            "<p>In this post, I show you how to build a smart home using a Raspberry Pi. It’s an easy project for beginners and helps you learn about IoT and automation.</p><img src='https://nonexistent-image-url.com/raspberry-pi.jpeg' alt='Raspberry Pi Setup'>",
-          content:
-            "This project walks you through setting up a Raspberry Pi to control various smart devices in your home. I use MQTT for communication between devices and explore different sensors and controllers.",
-          categories: ["tag1", "tag2"],
-        } as MediumArticle,
-      ]),
+    json: () => Promise.resolve(mockArticles),
   })
 );
 
