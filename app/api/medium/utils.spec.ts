@@ -5,6 +5,8 @@ describe("fetchMediumArticles", () => {
   beforeEach(() => {
     // Mock the global fetch function
     global.fetch = jest.fn();
+    // disable console.error coming from fetchMediumArticles
+    jest.spyOn(console, "error").mockImplementation(() => {});
   });
 
   afterEach(() => {
