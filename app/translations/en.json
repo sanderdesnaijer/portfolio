@@ -3,5 +3,11 @@
   "date-present": "present",
   "job-experience": "Experience",
   "job-contract": "via",
-  "project-created-at": "created at"
+  "project-created-at": "created at",
+  "api": {
+    "info": "Api is running",
+    "medium": {
+      "not-found": "Article not found"
+    }
+  }
 }

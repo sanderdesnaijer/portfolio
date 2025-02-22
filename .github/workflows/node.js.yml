@@ -12,6 +12,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+      NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+      NEXT_PUBLIC_RSS_API_URL: ${{ secrets.NEXT_PUBLIC_RSS_API_URL }}
+      NEXT_PUBLIC_MEDIUM_URL: ${{ secrets.NEXT_PUBLIC_MEDIUM_URL }}
 
     strategy:
       matrix:
@@ -33,9 +39,5 @@ jobs:
         run: npm run typecheck
       - name: Test code
         run: npm test
-      - name: Set environment variables
-        run: |
-          echo "NEXT_PUBLIC_SANITY_PROJECT_ID=${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}" >> $GITHUB_ENV
-          echo "NEXT_PUBLIC_SANITY_DATASET=${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}" >> $GITHUB_ENV
       - name: Build code
         run: npm run build --if-present

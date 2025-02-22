@@ -3,20 +3,22 @@ import { settingsQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { SettingSanity } from "@/sanity/types";
 import { Layout } from "@/app/components/Layout";
-import { fetchMediumArticles } from "@/app/utils/fetchMedium";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import { convertDate } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
+import { MediumArticle } from "@/app/api/medium/types";
 
 export const revalidate = 1;
 
 const BlogPage = async ({ params }: { params: QueryParams }) => {
   const queryParams = await params;
-  const articles = await fetchMediumArticles();
+
+  const article = (await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/medium/${queryParams.slug}`,
+    { next: { revalidate: 600 } }
+  ).then((data) => data.json())) as MediumArticle;
+
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
-  const article = articles.find((article) =>
-    article.link.includes(queryParams.slug)
-  );
 
   if (!article) {
     return <PageNotFound />;
