@@ -38,7 +38,11 @@ export default async function Page() {
   const articles = (await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/medium`,
     { next: { revalidate: 600 } }
-  ).then((data) => data.json())) as MediumArticle[];
+  )
+    .then((data) => data.json())
+    .catch(() => {
+      return [];
+    })) as MediumArticle[];
 
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
