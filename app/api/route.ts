@@ -1,6 +1,9 @@
+import { getTranslations } from "next-intl/server";
 import { NextResponse } from "next/server";
 
 // To handle a GET request to /api
 export async function GET() {
-  return NextResponse.json({ message: "Hello World" }, { status: 200 });
+  const t = await getTranslations();
+
+  return NextResponse.json({ message: t("api.info") }, { status: 200 });
 }
