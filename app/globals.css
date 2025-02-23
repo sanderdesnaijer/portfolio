@@ -4,7 +4,6 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-
 @plugin '@tailwindcss/typography';
 
 @theme {
@@ -30,7 +29,8 @@
   }
 }
 
-:root,:root.light {
+:root,
+:root.light {
   --background: #ffffff;
   --foreground: #171717;
 }

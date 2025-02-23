@@ -1,12 +1,12 @@
 @import "https://unpkg.com/open-props/easings.min.css";
 
 :root {
-  --icon-fill-hover: rgba(0,0,0,0.7);
+  --icon-fill-hover: rgba(0, 0, 0, 0.7);
   --icon-fill: currentColor;
 }
 
 :root.dark {
-  --icon-fill-hover: rgba(255,255,255,0.8);
+  --icon-fill-hover: rgba(255, 255, 255, 0.8);
   --icon-fill: currentColor;
 }
 
