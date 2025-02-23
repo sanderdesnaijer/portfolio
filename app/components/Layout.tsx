@@ -2,6 +2,7 @@ import Menu from "@/app/components/Menu";
 import { IconLink } from "@/sanity/types/types";
 import { getIcon } from "./Icons";
 import Link from "next/link";
+import { ThemeToggle } from "./ThemeToggle/ThemeToggle";
 
 export const Layout: React.FC<{
   children?: React.ReactNode;
@@ -12,33 +13,31 @@ export const Layout: React.FC<{
   return (
     <div className="container mx-auto grid grid-cols-9">
       <div className="bg top-0 z-20 col-span-9 justify-end gap-4 p-6 pb-0 md:sticky md:col-span-2 md:flex md:h-screen md:pb-6">
-        <div className="hidden flex-col justify-end md:flex">
-          <span
-            className="mb-2 text-lg font-bold"
-            style={{
-              writingMode: "vertical-rl",
-            }}
-          >
-            {authorName}
-          </span>
-          <ul className="left-0 flex flex-col gap-2">
-            {socialMedia?.map((media) => {
-              const { icon, link } = media;
-              const IconComponent = getIcon(icon);
-              return (
-                <li key={icon} className="">
-                  <Link
-                    href={link}
-                    target="_blank"
-                    aria-label={`${icon} icon`}
-                    title={icon}
-                  >
-                    <IconComponent />
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+        <div className="flex-col justify-between md:flex">
+          <ThemeToggle />
+          <div className="flex justify-between md:block">
+            <span className="mb-2 text-lg font-bold md:[writing-mode:vertical-lr]">
+              {authorName}
+            </span>
+            <ul className="left-0 flex gap-2 md:flex-col">
+              {socialMedia?.map((media) => {
+                const { icon, link } = media;
+                const IconComponent = getIcon(icon);
+                return (
+                  <li key={icon} className="">
+                    <Link
+                      href={link}
+                      target="_blank"
+                      aria-label={`${icon} icon`}
+                      title={icon}
+                    >
+                      <IconComponent />
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
         <Menu />
       </div>
