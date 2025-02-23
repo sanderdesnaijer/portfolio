@@ -37,16 +37,16 @@ export const ThemeToggle = () => {
   };
 
   return (
-    <div>
+    <>
       <button
-        className="theme-toggle"
+        className="theme-toggle absolute top-15 right-6 cursor-pointer md:relative md:top-auto md:right-auto"
         id="theme-toggle"
         title="Toggles light & dark"
         aria-label={theme}
         aria-live="polite"
         onClick={toggleTheme}
       >
-        {/** converted from https://web.dev/patterns/theming/theme-switch */}
+        {/** used from https://web.dev/patterns/theming/theme-switch */}
         <svg
           className="sun-and-moon"
           aria-hidden="true"
@@ -79,10 +79,6 @@ export const ThemeToggle = () => {
           </g>
         </svg>
       </button>
-      {/* The current theme is: {theme}
-      <br></br>
-      <button onClick={() => setTheme("light")}>{`Light   `}</button>
-      <button onClick={() => setTheme("dark")}>Dark </button> */}
-    </div>
+    </>
   );
 };
