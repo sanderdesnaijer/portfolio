@@ -2,6 +2,7 @@ import Menu from "@/app/components/Menu";
 import { IconLink } from "@/sanity/types/types";
 import { ThemeToggle } from "./ThemeToggle/ThemeToggle";
 import { SocialIcons } from "./SocialIcons";
+import Link from "next/link";
 
 export const Layout: React.FC<{
   children?: React.ReactNode;
@@ -15,9 +16,12 @@ export const Layout: React.FC<{
         <div className="flex-col justify-between md:flex">
           <ThemeToggle />
           <div className="flex justify-between md:block">
-            <span className="mb-2 text-lg font-bold md:[writing-mode:vertical-lr]">
+            <Link
+              href={"/"}
+              className="mb-2 origin-bottom-right scale-100 text-lg font-bold transition-transform duration-100 hover:scale-105 md:[writing-mode:vertical-lr]"
+            >
               {authorName}
-            </span>
+            </Link>
             <SocialIcons socialMedia={socialMedia} />
           </div>
         </div>

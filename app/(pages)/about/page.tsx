@@ -136,7 +136,7 @@ export default async function Page() {
                     >
                       <h3 className="text-lg leading-[18px] font-bold xl:-ml-[1px]">
                         {job.companyName.trim()}
-                        <span className="relative top-0.5 inline-block h-[20px] w-[20px] -translate-x-5 opacity-0 transition-all ease-in-out group-hover/item:translate-x-0 group-hover/item:opacity-100">
+                        <span className="relative top-[4px] inline-block h-[20px] w-[20px] -translate-x-0 transition-all ease-in-out group-hover/item:translate-x-1">
                           <ChevronIcon />
                         </span>
                       </h3>
