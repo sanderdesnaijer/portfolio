@@ -1,8 +1,7 @@
 import Menu from "@/app/components/Menu";
 import { IconLink } from "@/sanity/types/types";
-import { getIcon } from "./Icons";
-import Link from "next/link";
 import { ThemeToggle } from "./ThemeToggle/ThemeToggle";
+import { SocialIcons } from "./SocialIcons";
 
 export const Layout: React.FC<{
   children?: React.ReactNode;
@@ -19,24 +18,7 @@ export const Layout: React.FC<{
             <span className="mb-2 text-lg font-bold md:[writing-mode:vertical-lr]">
               {authorName}
             </span>
-            <ul className="left-0 flex gap-2 md:flex-col">
-              {socialMedia?.map((media) => {
-                const { icon, link } = media;
-                const IconComponent = getIcon(icon);
-                return (
-                  <li key={icon} className="">
-                    <Link
-                      href={link}
-                      target="_blank"
-                      aria-label={`${icon} icon`}
-                      title={icon}
-                    >
-                      <IconComponent />
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
+            <SocialIcons socialMedia={socialMedia} />
           </div>
         </div>
         <Menu />

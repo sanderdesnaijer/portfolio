@@ -11,6 +11,7 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
+import { getIcon } from "@/app/components/Icons";
 
 export const revalidate = 1;
 
@@ -71,6 +72,8 @@ export default async function Page() {
     return <PageNotFound />;
   }
 
+  const ChevronIcon = getIcon("chevronRight");
+
   return (
     <Layout
       pageTitle={page.title}
@@ -95,10 +98,13 @@ export default async function Page() {
       ) : null}
 
       <h2 className="font-normal">{t("job-experience")}</h2>
-      <ol className="not-prose flex list-none flex-col gap-10 p-0">
+      <ol className="not-prose group/list flex list-none flex-col gap-10 p-0">
         {jobs?.map((job) => {
           return (
-            <li key={job._id} className="md:flex">
+            <li
+              key={job._id}
+              className="group/item relative transition-colors delay-200 group-hover/list:opacity-70 hover:opacity-100 md:flex"
+            >
               <div className="md:w-2/7">
                 <p className="mt-0 mb-2 text-sm text-gray-400 italic md:text-right">
                   {getExperienceTitle(
@@ -126,9 +132,13 @@ export default async function Page() {
                       href={job.link}
                       aria-label={`[Link to] ${job.companyName}`}
                       target="_blank"
+                      className="before:absolute before:inset-0 before:block before:h-full before:w-full"
                     >
-                      <h3 className="text-lg leading-[18px] font-bold">
-                        {job.companyName}
+                      <h3 className="text-lg leading-[18px] font-bold xl:-ml-[1px]">
+                        {job.companyName.trim()}
+                        <span className="relative top-0.5 inline-block h-[20px] w-[20px] -translate-x-5 opacity-0 transition-all ease-in-out group-hover/item:translate-x-0 group-hover/item:opacity-100">
+                          <ChevronIcon />
+                        </span>
                       </h3>
                       <p className="text-base">{job.jobTitle}</p>
                       <p className="text-xs text-gray-400 italic">

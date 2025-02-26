@@ -45,7 +45,7 @@ const Menu = ({
     <nav className={className}>
       {menuItems.map((item, i) => (
         <Link
-          className={`${isActive(item) ? "font-bold" : ""} mr-2 md:mr-auto`}
+          className={`${isActive(item) ? "font-bold" : ""} mr-2 hover:font-bold hover:italic md:mr-auto`}
           key={i}
           href={item.pathname}
         >

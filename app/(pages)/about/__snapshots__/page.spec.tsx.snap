@@ -115,10 +115,10 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
             Sander de Snaijer
           </span>
           <ul
-            class="left-0 flex gap-2 md:flex-col"
+            class="group left-0 flex gap-2 md:flex-col"
           >
             <li
-              class=""
+              class="scale-100 transition-transform duration-100 hover:scale-110"
             >
               <a
                 aria-label="github icon"
@@ -130,7 +130,7 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
               </a>
             </li>
             <li
-              class=""
+              class="scale-100 transition-transform duration-100 hover:scale-110"
             >
               <a
                 aria-label="linkedin icon"
@@ -142,7 +142,7 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
               </a>
             </li>
             <li
-              class=""
+              class="scale-100 transition-transform duration-100 hover:scale-110"
             >
               <a
                 aria-label="gitlab icon"
@@ -160,25 +160,25 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
         class="flex md:flex-col md:text-4xl font-extralight md:justify-end min-w-[172px] md:pl-4"
       >
         <a
-          class=" mr-2 md:mr-auto"
+          class=" mr-2 hover:font-bold hover:italic md:mr-auto"
           href="/"
         >
           Home
         </a>
         <a
-          class=" mr-2 md:mr-auto"
+          class=" mr-2 hover:font-bold hover:italic md:mr-auto"
           href="/about"
         >
           About
         </a>
         <a
-          class=" mr-2 md:mr-auto"
+          class=" mr-2 hover:font-bold hover:italic md:mr-auto"
           href="/projects"
         >
           Projects
         </a>
         <a
-          class=" mr-2 md:mr-auto"
+          class=" mr-2 hover:font-bold hover:italic md:mr-auto"
           href="/blog"
         >
           Blog
@@ -224,10 +224,10 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
             Experience
           </h2>
           <ol
-            class="not-prose flex list-none flex-col gap-10 p-0"
+            class="not-prose group/list flex list-none flex-col gap-10 p-0"
           >
             <li
-              class="md:flex"
+              class="group/item relative transition-colors delay-200 group-hover/list:opacity-70 hover:opacity-100 md:flex"
             >
               <div
                 class="md:w-2/7"
@@ -261,13 +261,19 @@ exports[`app/(pages)/about-me renders the page with correct data 1`] = `
                   >
                     <a
                       aria-label="[Link to] Company A"
+                      class="before:absolute before:inset-0 before:block before:h-full before:w-full"
                       href="https://test.com"
                       target="_blank"
                     >
                       <h3
-                        class="text-lg leading-[18px] font-bold"
+                        class="text-lg leading-[18px] font-bold xl:-ml-[1px]"
                       >
                         Company A
+                        <span
+                          class="relative top-0.5 inline-block h-[20px] w-[20px] -translate-x-5 opacity-0 transition-all ease-in-out group-hover/item:translate-x-0 group-hover/item:opacity-100"
+                        >
+                          svgrurl
+                        </span>
                       </h3>
                       <p
                         class="text-base"
