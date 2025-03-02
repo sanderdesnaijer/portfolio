@@ -43,7 +43,7 @@ export const ProjectListItem = ({
         className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
       >
         <h2
-          className={`-mt-2 mb-0 text-3xl leading-10 md:text-[2.5rem] md:leading-11 ${getChevronClasses()}`}
+          className={`-mt-2 mb-0 text-3xl leading-10 md:text-[2.5rem] md:leading-11 ${getChevronClasses()} after:mt-0.5 after:h-11 after:w-11`}
         >
           {title}
         </h2>
