@@ -133,7 +133,7 @@ export default async function Page() {
                       className="before:absolute before:inset-0 before:block before:h-full before:w-full"
                     >
                       <h3
-                        className={`text-lg leading-[18px] font-bold xl:-ml-[1px] ${getChevronClasses("5", "0")}`}
+                        className={`text-lg leading-[18px] font-bold xl:-ml-[1px] ${getChevronClasses(5, 0)}`}
                       >
                         {job.companyName.trim()}
                       </h3>
