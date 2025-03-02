@@ -11,7 +11,7 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
-import { getIcon } from "@/app/components/Icons";
+import { getChevronClasses } from "@/app/utils/tailwind";
 
 export const revalidate = 1;
 
@@ -72,8 +72,6 @@ export default async function Page() {
     return <PageNotFound />;
   }
 
-  const ChevronIcon = getIcon("chevronRight");
-
   return (
     <Layout
       pageTitle={page.title}
@@ -103,7 +101,7 @@ export default async function Page() {
           return (
             <li
               key={job._id}
-              className="group/item relative transition-colors delay-200 group-hover/list:opacity-70 hover:opacity-100 md:flex"
+              className="group/item relative transition-colors duration-100 md:flex"
             >
               <div className="md:w-2/7">
                 <p className="mt-0 mb-2 text-sm text-gray-400 italic md:text-right">
@@ -134,11 +132,10 @@ export default async function Page() {
                       target="_blank"
                       className="before:absolute before:inset-0 before:block before:h-full before:w-full"
                     >
-                      <h3 className="text-lg leading-[18px] font-bold xl:-ml-[1px]">
+                      <h3
+                        className={`text-lg leading-[18px] font-bold xl:-ml-[1px] ${getChevronClasses("5", "0")}`}
+                      >
                         {job.companyName.trim()}
-                        <span className="relative top-[4px] inline-block h-[20px] w-[20px] -translate-x-0 transition-all ease-in-out group-hover/item:translate-x-1">
-                          <ChevronIcon />
-                        </span>
                       </h3>
                       <p className="text-base">{job.jobTitle}</p>
                       <p className="text-xs text-gray-400 italic">
