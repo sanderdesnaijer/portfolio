@@ -27,7 +27,7 @@ export default function RootLayout({
       {(locale) => (
         <html lang={locale} suppressHydrationWarning>
           <body
-            className={`${montserrat.variable} overflow-x-hidden antialiased`}
+            className={`${montserrat.variable} overflow-x-hidden antialiased transition-colors duration-200`}
           >
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
               {children}

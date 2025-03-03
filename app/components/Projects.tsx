@@ -16,7 +16,7 @@ export const Projects = ({
 }) => {
   return (
     <div className="mx-auto grid grid-cols-1 md:py-10">
-      <div className="grid gap-10">
+      <ol className="group mt-0 grid gap-10 pl-0">
         {projects.map((project) => {
           const body =
             project?.body && project?.body.length
@@ -36,7 +36,7 @@ export const Projects = ({
             />
           );
         })}
-      </div>
+      </ol>
     </div>
   );
 };

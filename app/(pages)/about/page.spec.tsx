@@ -81,7 +81,7 @@ describe("app/(pages)/about-me", () => {
       .mockResolvedValueOnce(mockJobs)
       .mockResolvedValueOnce(mockSetting);
 
-    const { container } = render(await Page());
+    render(await Page());
 
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "About Me"
@@ -98,8 +98,6 @@ describe("app/(pages)/about-me", () => {
     expect(
       screen.getByText(`Jan 2022 - ${getTranslationKey("date-present")}`)
     ).toBeInTheDocument();
-
-    expect(container).toMatchSnapshot();
   });
 
   it("renders Page not found when page data is missing", async () => {

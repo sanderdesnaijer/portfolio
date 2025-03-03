@@ -4,6 +4,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
 import { mockPage } from "@/app/test-utils/mockPage";
 import { mockArticles } from "@/app/test-utils/mockArticle";
+import { mockSetting } from "@/app/test-utils/mockSetting";
 
 const mockBlogPage: PageSanity = {
   ...mockPage,
@@ -44,7 +45,9 @@ describe("app/(pages)/blog/page", () => {
   });
 
   it("renders the Page component with the correct structure", async () => {
-    (sanityFetch as jest.Mock).mockResolvedValue(mockBlogPage);
+    (sanityFetch as jest.Mock)
+      .mockResolvedValueOnce(mockBlogPage)
+      .mockResolvedValueOnce(mockSetting);
 
     const { container } = render(await Page());
 

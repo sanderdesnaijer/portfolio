@@ -5,6 +5,7 @@ import Demo from "../../public/icons/demo.svg";
 import Gitlab from "../../public/icons/gitlab.svg";
 import Linkedin from "../../public/icons/linkedin.svg";
 import Missing from "../../public/icons/missing.svg";
+import ChevronRight from "../../public/icons/chevron-rigt.svg";
 
 export const iconSize = 24;
 
@@ -15,6 +16,7 @@ const iconMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   github: Github,
   gitlab: Gitlab,
   linkedin: Linkedin,
+  chevronRight: ChevronRight,
 };
 
 export const getIcon = (icon: string) => {

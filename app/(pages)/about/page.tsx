@@ -11,6 +11,7 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
+import { getChevronClasses } from "@/app/utils/tailwind";
 
 export const revalidate = 1;
 
@@ -95,10 +96,13 @@ export default async function Page() {
       ) : null}
 
       <h2 className="font-normal">{t("job-experience")}</h2>
-      <ol className="not-prose flex list-none flex-col gap-10 p-0">
+      <ol className="not-prose group/list flex list-none flex-col gap-10 p-0">
         {jobs?.map((job) => {
           return (
-            <li key={job._id} className="md:flex">
+            <li
+              key={job._id}
+              className="group/item relative transition-colors duration-100 md:flex"
+            >
               <div className="md:w-2/7">
                 <p className="mt-0 mb-2 text-sm text-gray-400 italic md:text-right">
                   {getExperienceTitle(
@@ -126,9 +130,12 @@ export default async function Page() {
                       href={job.link}
                       aria-label={`[Link to] ${job.companyName}`}
                       target="_blank"
+                      className="before:absolute before:inset-0 before:block before:h-full before:w-full"
                     >
-                      <h3 className="text-lg leading-[18px] font-bold">
-                        {job.companyName}
+                      <h3
+                        className={`text-lg leading-[18px] font-bold after:h-5 after:w-5 xl:-ml-[1px] ${getChevronClasses()}`}
+                      >
+                        {job.companyName.trim()}
                       </h3>
                       <p className="text-base">{job.jobTitle}</p>
                       <p className="text-xs text-gray-400 italic">

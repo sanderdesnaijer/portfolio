@@ -130,7 +130,7 @@ exports[`app/page renders the Home page with settings data 1`] = `
           class="flex gap-2"
         >
           <li
-            class=""
+            class="scale-100 transition-transform duration-100 hover:scale-110"
           >
             <a
               aria-label="facebook icon"
@@ -142,7 +142,7 @@ exports[`app/page renders the Home page with settings data 1`] = `
             </a>
           </li>
           <li
-            class=""
+            class="scale-100 transition-transform duration-100 hover:scale-110"
           >
             <a
               aria-label="twitter icon"
@@ -162,25 +162,25 @@ exports[`app/page renders the Home page with settings data 1`] = `
           class="flex flex-col text-7xl font-extralight md:text-9xl"
         >
           <a
-            class=" mr-2 md:mr-auto"
+            class=" mr-2 hover:font-bold hover:italic md:mr-auto"
             href="/"
           >
             Home
           </a>
           <a
-            class=" mr-2 md:mr-auto"
+            class=" mr-2 hover:font-bold hover:italic md:mr-auto"
             href="/about"
           >
             About
           </a>
           <a
-            class=" mr-2 md:mr-auto"
+            class=" mr-2 hover:font-bold hover:italic md:mr-auto"
             href="/projects"
           >
             Projects
           </a>
           <a
-            class=" mr-2 md:mr-auto"
+            class=" mr-2 hover:font-bold hover:italic md:mr-auto"
             href="/blog"
           >
             Blog

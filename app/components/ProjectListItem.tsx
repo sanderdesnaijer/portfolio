@@ -3,6 +3,7 @@ import Link from "next/link";
 import { convertDate } from "../utils/utils";
 import { Tags } from "./Tags";
 import { TagSanity } from "@/sanity/types/tagType";
+import { getChevronClasses } from "../utils/tailwind";
 
 interface ProjectListItemProps {
   imageURL?: string;
@@ -23,7 +24,7 @@ export const ProjectListItem = ({
   body,
   tags,
 }: ProjectListItemProps) => (
-  <div className="relative grid grid-cols-5 justify-between no-underline hover:opacity-90">
+  <li className="group/item transition-del relative mt-0 mb-0 grid grid-cols-5 justify-between pl-0 no-underline transition-opacity duration-200">
     <div className="col-span-1 md:col-span-2">
       {imageURL && imageALT && (
         <Image
@@ -39,9 +40,11 @@ export const ProjectListItem = ({
     <div className="col-span-4 px-4 md:col-span-3">
       <Link
         href={href}
-        className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
+        className="no-underline group-hover/item:italic before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
       >
-        <h2 className="-mt-2 mb-0 text-3xl leading-10 font-normal md:text-[2.5rem] md:leading-12">
+        <h2
+          className={`-mt-2 mb-0 text-3xl leading-10 md:text-[2.5rem] md:leading-11 ${getChevronClasses()} after:mt-0.5 after:h-11 after:w-11`}
+        >
           {title}
         </h2>
       </Link>
@@ -55,5 +58,5 @@ export const ProjectListItem = ({
 
       {tags && <Tags tags={tags} />}
     </div>
-  </div>
+  </li>
 );

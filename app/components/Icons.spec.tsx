@@ -15,6 +15,7 @@ describe("Icons component", () => {
     expect(getIcon("demo")).toBe(Demo);
     expect(getIcon("gitlab")).toBe(Gitlab);
     expect(getIcon("linkedin")).toBe(Linkedin);
+    expect(getIcon("chevronRight")).toBe(Linkedin);
   });
 
   it("should return the Missing icon component for an unknown icon", () => {
@@ -33,6 +34,7 @@ describe("Icons component", () => {
       "github",
       "gitlab",
       "linkedin",
+      "chevronRight",
     ]);
   });
 });

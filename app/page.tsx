@@ -1,11 +1,10 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { settingsQuery } from "@/sanity/lib/queries";
-import Link from "next/link";
 import { SettingSanity } from "@/sanity/types";
 import { PageNotFound } from "./components/PageNotFound";
-import { getIcon } from "./components/Icons";
 import Menu from "./components/Menu";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
+import { SocialIcons } from "./components/SocialIcons";
 
 export default async function Home() {
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
@@ -23,25 +22,10 @@ export default async function Home() {
             {setting.title}
           </h1>
           <p className="mb-4 text-xl">{setting.description}</p>
-          <ul className="flex gap-2">
-            {setting.socialMedia?.map((media) => {
-              const { icon, link } = media;
-              const IconComponent = getIcon(icon);
-
-              return (
-                <li key={icon} className="">
-                  <Link
-                    href={link}
-                    target="_blank"
-                    aria-label={`${icon} icon`}
-                    title={icon}
-                  >
-                    <IconComponent />
-                  </Link>
-                </li>
-              );
-            })}
-          </ul>
+          <SocialIcons
+            className="flex gap-2"
+            socialMedia={setting.socialMedia}
+          />
         </div>
         <div className="col-span-3 content-center">
           <Menu className="flex flex-col text-7xl font-extralight md:text-9xl" />

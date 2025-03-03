@@ -57,7 +57,7 @@ export default async function Page() {
       authorName={setting.title}
     >
       <div className="mx-auto grid grid-cols-1 py-10">
-        <div className="grid gap-10">
+        <ol className="group mt-0 grid gap-10 pl-0">
           {articles.map((article, index) => {
             const imageURL = getImageURL(article.description);
             const tags = article.categories.map<TagSanity>((cat, index) => ({
@@ -84,7 +84,7 @@ export default async function Page() {
               />
             );
           })}
-        </div>
+        </ol>
       </div>
     </Layout>
   );
