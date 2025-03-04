@@ -15,7 +15,10 @@ export const Layout: React.FC<{
       <div className="bg top-0 z-20 col-span-9 justify-end gap-4 p-6 pb-0 md:sticky md:col-span-2 md:flex md:h-screen md:pb-6">
         <div className="flex-col justify-between md:flex">
           <ThemeToggle />
-          <div className="flex justify-between md:block">
+          <nav
+            aria-label="author-navigation"
+            className="flex justify-between md:block"
+          >
             <Link
               href={"/"}
               className="mb-2 origin-bottom-right scale-100 text-lg font-bold transition-transform duration-100 hover:scale-105 md:[writing-mode:vertical-lr]"
@@ -23,7 +26,7 @@ export const Layout: React.FC<{
               {authorName}
             </Link>
             <SocialIcons socialMedia={socialMedia} />
-          </div>
+          </nav>
         </div>
         <Menu />
       </div>

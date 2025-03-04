@@ -42,7 +42,7 @@ const Menu = ({
   };
 
   return (
-    <nav className={className}>
+    <nav aria-label="page-navigation" className={className}>
       {menuItems.map((item, i) => (
         <Link
           className={`${isActive(item) ? "font-bold" : ""} mr-2 hover:font-bold hover:italic md:mr-auto`}
