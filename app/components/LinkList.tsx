@@ -21,11 +21,11 @@ export const LinkList: React.FC<{ links: Array<IconLink> }> = ({ links }) => {
               target="_blank"
             >
               <IconComponent className="mr-3 transition-transform group-hover/item:scale-110" />
-              <h3
+              <span
                 className={`mt-0 mb-0 text-base font-normal ${getChevronClasses()} after:mt-0.5 after:h-5 after:w-5`}
               >
                 {link.title}
-              </h3>
+              </span>
             </Link>
           </li>
         );

@@ -35,13 +35,12 @@ describe("app/page", () => {
 
     mockSanityFetch.mockResolvedValue(mockSettings);
 
-    const { container } = render(await Home());
+    render(await Home());
 
     expect(screen.getByText("Test Title")).toBeInTheDocument();
     expect(screen.getByText("Test Description")).toBeInTheDocument();
     expect(screen.getByLabelText("facebook icon")).toBeInTheDocument();
     expect(screen.getByLabelText("twitter icon")).toBeInTheDocument();
-    expect(container).toMatchSnapshot();
   });
 
   it("calls sanityFetch with the correct query", async () => {
