@@ -12,12 +12,11 @@ export const Layout: React.FC<{
 }> = ({ children, pageTitle, socialMedia, authorName }) => {
   return (
     <div className="container mx-auto grid grid-cols-9">
-      <div className="bg top-0 z-20 col-span-9 justify-end gap-4 p-6 pb-0 md:sticky md:col-span-2 md:flex md:h-screen md:pb-6">
-        <div className="flex-col justify-between md:flex">
-          <ThemeToggle />
+      <div className="bg top-0 z-20 col-span-9 flex flex-col justify-end gap-4 p-6 pb-0 md:sticky md:col-span-2 md:h-screen md:flex-row md:pb-6">
+        <div className="flex flex-col justify-between">
           <nav
             aria-label="author-navigation"
-            className="flex justify-between md:block"
+            className="order-2 flex justify-between md:block"
           >
             <Link
               href={"/"}
@@ -27,6 +26,9 @@ export const Layout: React.FC<{
             </Link>
             <SocialIcons socialMedia={socialMedia} />
           </nav>
+          <div className="order-1 flex">
+            <ThemeToggle />
+          </div>
         </div>
         <Menu />
       </div>

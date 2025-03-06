@@ -28,7 +28,7 @@ const menuItems: MenuItem[] = [
 ];
 
 const Menu = ({
-  className = "flex md:flex-col md:text-4xl font-extralight md:justify-end min-w-[172px] md:pl-4",
+  className = "flex md:flex-col md:text-4xl font-extralight md:justify-end min-w-[172px] md:pl-4 order-2",
 }: {
   className?: string;
 }) => {
