@@ -13,7 +13,7 @@ import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
 import { getChevronClasses } from "@/app/utils/tailwind";
 
-export const revalidate = 1;
+export const revalidate = 600;
 
 const slug = "about";
 const builder = imageUrlBuilder(client);

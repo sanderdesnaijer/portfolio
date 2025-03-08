@@ -7,7 +7,7 @@ import { Layout } from "@/app/components/Layout";
 import Project from "@/app/components/Project";
 import { Tags } from "@/app/components/Tags";
 
-export const revalidate = 1;
+export const revalidate = 600;
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {
   const project = await sanityFetch<ProjectTypeSanity>({
