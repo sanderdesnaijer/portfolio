@@ -9,6 +9,7 @@ import { TagSanity } from "@/sanity/types/tagType";
 import { MediumArticle } from "@/app/api/medium/types";
 
 const slug = "blog";
+
 export const revalidate = 600;
 
 const getSlug = (url: string): string => {
@@ -38,7 +39,7 @@ export default async function Page() {
 
   const articles = (await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/medium`,
-    { next: { revalidate: REVALIDATION_INTERVAL } }
+    { next: { revalidate: revalidate } }
   )
     .then((data) => data.json())
     .catch(() => {
