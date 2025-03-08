@@ -1,13 +1,14 @@
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import Projects from "@/app/components/Projects";
+import { REVALIDATION_INTERVAL } from "@/app/utils/constants";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery, projectsQuery, settingsQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity, SettingSanity } from "@/sanity/types";
 
 const slug = "projects";
 
-export const revalidate = 1;
+export const revalidate = REVALIDATION_INTERVAL;
 
 export default async function Page() {
   const projects = await sanityFetch<ProjectTypeSanity[]>({

@@ -12,8 +12,9 @@ import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
 import { getChevronClasses } from "@/app/utils/tailwind";
+import { REVALIDATION_INTERVAL } from "@/app/utils/constants";
 
-export const revalidate = 1;
+export const revalidate = REVALIDATION_INTERVAL;
 
 const slug = "about";
 const builder = imageUrlBuilder(client);

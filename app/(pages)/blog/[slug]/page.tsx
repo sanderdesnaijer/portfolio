@@ -7,15 +7,16 @@ import { PageNotFound } from "@/app/components/PageNotFound";
 import { convertDate } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { MediumArticle } from "@/app/api/medium/types";
+import { REVALIDATION_INTERVAL } from "@/app/utils/constants";
 
-export const revalidate = 1;
+export const revalidate = REVALIDATION_INTERVAL;
 
 const BlogPage = async ({ params }: { params: QueryParams }) => {
   const queryParams = await params;
 
   const article = (await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/medium/${queryParams.slug}`,
-    { next: { revalidate: 600 } }
+    { next: { revalidate: revalidate } }
   ).then((data) => data.json())) as MediumArticle;
 
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
