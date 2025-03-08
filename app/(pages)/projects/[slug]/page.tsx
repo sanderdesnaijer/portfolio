@@ -6,8 +6,9 @@ import { PageNotFound } from "@/app/components/PageNotFound";
 import { Layout } from "@/app/components/Layout";
 import Project from "@/app/components/Project";
 import { Tags } from "@/app/components/Tags";
+import { REVALIDATION_INTERVAL } from "@/app/utils/constants";
 
-export const revalidate = 600;
+export const revalidate = REVALIDATION_INTERVAL;
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {
   const project = await sanityFetch<ProjectTypeSanity>({
