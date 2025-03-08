@@ -35,6 +35,24 @@ const components: Partial<PortableTextReactComponents> = {
       </span>
     ),
   },
+  marks: {
+    link: ({
+      children,
+      value,
+    }: {
+      children?: React.ReactNode;
+      value?: { href: string };
+    }) => (
+      <Link
+        href={value?.href || "#"}
+        className="underline underline-offset-2 transition-all duration-100 hover:underline-offset-4"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </Link>
+    ),
+  },
 };
 
 const jobComponents: Partial<PortableTextReactComponents> = {
@@ -123,7 +141,7 @@ export default async function Page() {
                       .url()}
                     width={companyIconSize}
                     height={companyIconSize}
-                    className="mt-0 h-fit"
+                    className="mt-0 h-fit transition group-hover/item:scale-105"
                   />
                   <div className="pl-3">
                     <Link
@@ -133,12 +151,14 @@ export default async function Page() {
                       className="before:absolute before:inset-0 before:block before:h-full before:w-full"
                     >
                       <h3
-                        className={`text-lg leading-[18px] font-bold after:h-5 after:w-5 xl:-ml-[1px] ${getChevronClasses()}`}
+                        className={`text-lg leading-[18px] font-bold transition group-hover/item:translate-x-1 group-hover/item:italic after:h-5 after:w-5 xl:-ml-[1px] ${getChevronClasses()}`}
                       >
                         {job.companyName.trim()}
                       </h3>
-                      <p className="text-base">{job.jobTitle}</p>
-                      <p className="text-xs text-gray-400 italic">
+                      <p className="text-base transition group-hover/item:translate-x-1">
+                        {job.jobTitle}
+                      </p>
+                      <p className="text-xs text-gray-400 italic transition group-hover/item:translate-x-1">
                         {job.employmentType}{" "}
                         {job.contractName &&
                           `(${t("job-contract")} ${job.contractName})`}
