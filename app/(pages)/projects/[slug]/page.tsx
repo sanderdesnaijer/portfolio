@@ -6,8 +6,21 @@ import { PageNotFound } from "@/app/components/PageNotFound";
 import { Layout } from "@/app/components/Layout";
 import Project from "@/app/components/Project";
 import { Tags } from "@/app/components/Tags";
+import { generatePageMetadata } from "@/app/utils/metadata";
 
 export const revalidate = 600;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const project = await sanityFetch<ProjectTypeSanity>({
+    query: projectQuery,
+    params,
+  });
+  return generatePageMetadata({ pageSlug: "projects", project });
+}
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {
   const project = await sanityFetch<ProjectTypeSanity>({

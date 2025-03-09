@@ -1,14 +1,41 @@
 import { QueryParams } from "@sanity/client";
-import { settingsQuery } from "@/sanity/lib/queries";
+import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { SettingSanity } from "@/sanity/types";
+import { PageSanity, SettingSanity } from "@/sanity/types";
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
-import { convertDate } from "@/app/utils/utils";
+import { convertDate, extractTextFromHTML } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { getMediumArticle } from "@/app/utils/api";
 
-export const revalidate = 1;
+export const revalidate = 600;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const article = await getMediumArticle(params).catch(() => {
+    return undefined;
+  });
+  if (!article) {
+    return;
+  }
+
+  const page = await sanityFetch<PageSanity>({
+    query: pageQuery,
+    params: { slug: "blog" },
+  });
+  const baseTitle = `Sander de Snaijer | ${page.title}`;
+
+  const title = `${baseTitle} | ${article.title}`;
+  const description = extractTextFromHTML(article?.description);
+
+  return {
+    title,
+    description,
+  };
+}
 
 const BlogPage = async ({ params }: { params: QueryParams }) => {
   const queryParams = await params;

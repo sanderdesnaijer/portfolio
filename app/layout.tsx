@@ -12,7 +12,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio Sander de Snaijer",
+  title: "Sander de Snaijer",
   description:
     "Passionate software developer turning creative ideas to functional products.",
 };

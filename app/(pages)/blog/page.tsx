@@ -1,12 +1,13 @@
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
-import { convertDate } from "@/app/utils/utils";
+import { convertDate, extractTextFromHTML } from "@/app/utils/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
 import { PageSanity, SettingSanity } from "@/sanity/types";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
 import { TagSanity } from "@/sanity/types/tagType";
 import { getMediumArticles } from "@/app/utils/api";
+import { generatePageMetadata } from "@/app/utils/metadata";
 
 const slug = "blog";
 
@@ -21,14 +22,8 @@ const getImageURL = (articleDescription: string): string | undefined => {
   return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
 };
 
-function extractTextFromHTML(html: string) {
-  const withoutFigcaptions = html.replace(
-    /<figcaption>[^]*?<\/figcaption>/g,
-    ""
-  );
-  const text = withoutFigcaptions.replace(/<[^>]*>/g, " ");
-  const cleanText = text.replace(/\s+/g, " ").trim();
-  return cleanText.substring(0, 200) + "...";
+export async function generateMetadata() {
+  return generatePageMetadata({ pageSlug: slug });
 }
 
 export default async function Page() {

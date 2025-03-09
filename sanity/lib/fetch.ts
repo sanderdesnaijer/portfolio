@@ -30,9 +30,12 @@ export async function sanityFetch<QueryResponse>({
   const isDevelopment = process.env.NODE_ENV === "development";
 
   return client
-    .withConfig({ useCdn: true })
+    .withConfig({
+      useCdn: isDevelopment,
+    })
     .fetch<QueryResponse>(query, queryParams, {
       cache: isDevelopment || isDraftMode ? undefined : "force-cache",
+      // cache: isDevelopment || isDraftMode ? undefined : "no-store",
       ...(isDraftMode && {
         token,
         perspective: "previewDrafts",

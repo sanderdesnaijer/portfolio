@@ -1,14 +1,17 @@
+"use server";
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import Projects from "@/app/components/Projects";
+import { generatePageMetadata } from "@/app/utils/metadata";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery, projectsQuery, settingsQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity, SettingSanity } from "@/sanity/types";
 
 const slug = "projects";
 
-export const revalidate = 600;
-
+export async function generateMetadata() {
+  return generatePageMetadata({ pageSlug: slug });
+}
 export default async function Page() {
   const projects = await sanityFetch<ProjectTypeSanity[]>({
     query: projectsQuery,
@@ -17,6 +20,7 @@ export default async function Page() {
     query: pageQuery,
     params: { slug },
   });
+
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
   if (!page) {
