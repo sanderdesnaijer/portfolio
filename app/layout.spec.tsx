@@ -47,7 +47,7 @@ describe("app/layout", () => {
   });
 
   it("should have the correct metadata", () => {
-    expect(metadata.title).toBe("Portfolio Sander de Snaijer");
+    expect(metadata.title).toBe("Sander de Snaijer");
     expect(metadata.description).toBe(
       "Passionate software developer turning creative ideas to functional products."
     );

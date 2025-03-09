@@ -2,11 +2,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { toPlainText } from "next-sanity";
-
-const truncateText = (text: string, length: number) => {
-  if (text.length <= length) return text;
-  return text.slice(0, length) + "...";
-};
+import { truncateText } from "./utils";
 
 export async function generatePageMetadata({
   pageSlug,

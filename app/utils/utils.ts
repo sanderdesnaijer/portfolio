@@ -31,3 +31,15 @@ export const extractTextFromHTML = (html: string) => {
   const cleanText = text.replace(/\s+/g, " ").trim();
   return cleanText.substring(0, 200) + "...";
 };
+
+/**
+ * Truncates a given text to a specified length and appends an ellipsis ("...") if the text exceeds that length.
+ *
+ * @param text - The text to be truncated.
+ * @param length - The maximum length of the truncated text.
+ * @returns The truncated text with an ellipsis if it exceeds the specified length, otherwise the original text.
+ */
+export const truncateText = (text: string, length: number) => {
+  if (text.length <= length) return text;
+  return text.slice(0, length) + "...";
+};

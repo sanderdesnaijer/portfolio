@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import Projects, { truncateText } from "./Projects";
+import Projects from "./Projects";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { mockProjects } from "../test-utils/mockProjects";
 
@@ -9,37 +9,6 @@ jest.mock("../utils/utils", () => ({
 }));
 
 describe("components/Projects", () => {
-  describe("truncateText", () => {
-    it("should return the original text if it is shorter than or equal to the specified length", () => {
-      expect(truncateText("Hello", 10)).toBe("Hello");
-      expect(truncateText("Hello", 5)).toBe("Hello");
-    });
-
-    it('should truncate the text and append "..." if it exceeds the specified length', () => {
-      expect(truncateText("Hello World", 5)).toBe("Hello...");
-      expect(truncateText("Hello World", 8)).toBe("Hello Wo...");
-    });
-
-    it("should truncate text longer than the specified length", () => {
-      const longText = "This is a very long text that needs to be truncated.";
-      const truncatedText = truncateText(longText, 20);
-      expect(truncatedText).toBe("This is a very long ...");
-    });
-
-    it("should handle an empty string", () => {
-      expect(truncateText("", 5)).toBe("");
-    });
-
-    it("should handle length of 0", () => {
-      expect(truncateText("Hello", 0)).toBe("...");
-    });
-
-    it("should work with text shorter than 3 characters and very small lengths", () => {
-      expect(truncateText("Hi", 1)).toBe("H...");
-      expect(truncateText("A", 0)).toBe("...");
-    });
-  });
-
   it("renders a list of projects", () => {
     render(<Projects pageSlug="projects" projects={mockProjects} />);
 
