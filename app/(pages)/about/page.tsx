@@ -76,7 +76,7 @@ const getExperienceTitle = (
 export default async function Page() {
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
-    params: { slug: slug },
+    params: { slug },
   });
 
   const jobs = await sanityFetch<JobSanity[]>({

@@ -15,7 +15,7 @@ export default async function Page() {
   });
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
-    params: { slug: slug },
+    params: { slug },
   });
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 

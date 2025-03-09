@@ -6,7 +6,7 @@ import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
 import { PageSanity, SettingSanity } from "@/sanity/types";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
 import { TagSanity } from "@/sanity/types/tagType";
-import { MediumArticle } from "@/app/api/medium/types";
+import { getMediumArticles } from "@/app/utils/api";
 
 const slug = "blog";
 
@@ -34,17 +34,12 @@ function extractTextFromHTML(html: string) {
 export default async function Page() {
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
-    params: { slug: slug },
+    params: { slug },
   });
 
-  const articles = (await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/medium`,
-    { next: { revalidate: revalidate } }
-  )
-    .then((data) => data.json())
-    .catch(() => {
-      return [];
-    })) as MediumArticle[];
+  const articles = await getMediumArticles().catch(() => {
+    return [];
+  });
 
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 

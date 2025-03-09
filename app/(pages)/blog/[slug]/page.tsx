@@ -6,17 +6,16 @@ import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import { convertDate } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
-import { MediumArticle } from "@/app/api/medium/types";
+import { getMediumArticle } from "@/app/utils/api";
 
 export const revalidate = 1;
 
 const BlogPage = async ({ params }: { params: QueryParams }) => {
   const queryParams = await params;
 
-  const article = (await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/medium/${queryParams.slug}`,
-    { next: { revalidate: 600 } }
-  ).then((data) => data.json())) as MediumArticle;
+  const article = await getMediumArticle(queryParams).catch(() => {
+    return undefined;
+  });
 
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 

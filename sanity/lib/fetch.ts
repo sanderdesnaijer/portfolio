@@ -34,7 +34,7 @@ export async function sanityFetch<QueryResponse>({
     .fetch<QueryResponse>(query, queryParams, {
       cache: isDevelopment || isDraftMode ? undefined : "force-cache",
       ...(isDraftMode && {
-        token: token,
+        token,
         perspective: "previewDrafts",
       }),
       next: {

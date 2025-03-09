@@ -4,8 +4,8 @@ export const PageNotFound = () => {
   const t = useTranslations();
 
   return (
-    <div>
-      <p>{t("page-not-found")}</p>
+    <div className="flex h-screen items-center">
+      <p className="w-full text-center">{t("page-not-found")}</p>
     </div>
   );
 };
