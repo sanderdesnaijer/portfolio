@@ -43,6 +43,7 @@ export async function generateMetadata({
     modifiedTime: page._updatedAt,
     imageUrl: getImageURL(article.description) || page.imageURL,
     keywords: article.categories,
+    canonical: article.link,
   });
 }
 

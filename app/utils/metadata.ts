@@ -14,6 +14,7 @@ export const generateMetaData = ({
   imageUrl,
   imageAlt,
   keywords,
+  canonical,
 }: {
   title: string;
   description: string;
@@ -24,6 +25,7 @@ export const generateMetaData = ({
   imageUrl: string;
   imageAlt?: string;
   keywords?: string[];
+  canonical?: string;
 }) => ({
   title,
   description,
@@ -70,7 +72,7 @@ export const generateMetaData = ({
     ],
   },
   alternates: {
-    canonical: url,
+    canonical: canonical || url,
   },
 });
 
