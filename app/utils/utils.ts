@@ -53,3 +53,8 @@ export const truncateText = (text: string, length: number) => {
 export const getImageURL = (articleDescription: string): string | undefined => {
   return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
 };
+
+export const getSlug = (url: string): string => {
+  const match = url.match(/\/([^\/]+)-[a-f0-9]{12}\?/);
+  return match ? match[1] : "not-found";
+};

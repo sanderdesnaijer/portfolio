@@ -4,6 +4,7 @@ import {
   convertDate,
   extractTextFromHTML,
   getImageURL,
+  getSlug,
 } from "@/app/utils/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
@@ -16,11 +17,6 @@ import { generatePageMetadata } from "@/app/utils/metadata";
 const slug = "blog";
 
 export const revalidate = 600;
-
-const getSlug = (url: string): string => {
-  const match = url.match(/\/([^\/]+)-[a-f0-9]{12}\?/);
-  return match ? match[1] : "not-found";
-};
 
 export async function generateMetadata() {
   return generatePageMetadata({ pageSlug: slug });

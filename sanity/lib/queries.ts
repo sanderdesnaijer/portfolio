@@ -5,8 +5,10 @@ export const allPagesQuery = groq`
     _id,
     title,
     description,
+    _updatedAt,
     slug,
     content,
+    name,
     "imageURL": mainImage.asset->url
   }
 `;
@@ -60,6 +62,7 @@ export const jobsQuery = groq`
 export const projectsQuery = groq`
   *[_type == "project"] | order(publishedAt desc){
     publishedAt,
+    _updatedAt,
     _id,
     title,
     slug,
