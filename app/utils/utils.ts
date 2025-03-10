@@ -43,3 +43,13 @@ export const truncateText = (text: string, length: number) => {
   if (text.length <= length) return text;
   return text.slice(0, length) + "...";
 };
+
+/**
+ * Extracts the URL of the first image found in the given article description.
+ *
+ * @param articleDescription - The HTML content of the article description.
+ * @returns The URL of the first image if found, otherwise undefined.
+ */
+export const getImageURL = (articleDescription: string): string | undefined => {
+  return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
+};

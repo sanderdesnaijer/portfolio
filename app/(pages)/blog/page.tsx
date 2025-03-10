@@ -1,6 +1,10 @@
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
-import { convertDate, extractTextFromHTML } from "@/app/utils/utils";
+import {
+  convertDate,
+  extractTextFromHTML,
+  getImageURL,
+} from "@/app/utils/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
 import { PageSanity, SettingSanity } from "@/sanity/types";
@@ -16,10 +20,6 @@ export const revalidate = 600;
 const getSlug = (url: string): string => {
   const match = url.match(/\/([^\/]+)-[a-f0-9]{12}\?/);
   return match ? match[1] : "not-found";
-};
-
-const getImageURL = (articleDescription: string): string | undefined => {
-  return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
 };
 
 export async function generateMetadata() {

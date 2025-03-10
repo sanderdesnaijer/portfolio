@@ -4,9 +4,14 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity, SettingSanity } from "@/sanity/types";
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
-import { convertDate, extractTextFromHTML } from "@/app/utils/utils";
+import {
+  convertDate,
+  extractTextFromHTML,
+  getImageURL,
+} from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { getMediumArticle } from "@/app/utils/api";
+import { generateMetaData } from "@/app/utils/metadata";
 
 export const revalidate = 600;
 
@@ -16,9 +21,7 @@ export async function generateMetadata({
   params: { slug: string };
 }) {
   const queryParams = await params;
-  const article = await getMediumArticle(queryParams).catch(() => {
-    return undefined;
-  });
+  const article = await getMediumArticle(queryParams).catch(() => undefined);
   if (!article) {
     return;
   }
@@ -32,19 +35,21 @@ export async function generateMetadata({
   const title = `${baseTitle} | ${article.title}`;
   const description = extractTextFromHTML(article?.description);
 
-  return {
+  return generateMetaData({
     title,
     description,
-  };
+    url: process.env.NEXT_PUBLIC_BASE_URL!,
+    publishedTime: page._createdAt,
+    modifiedTime: page._updatedAt,
+    imageUrl: getImageURL(article.description) || page.imageURL,
+    keywords: article.categories,
+  });
 }
 
 const BlogPage = async ({ params }: { params: QueryParams }) => {
   const queryParams = await params;
 
-  const article = await getMediumArticle(queryParams).catch(() => {
-    return undefined;
-  });
-
+  const article = await getMediumArticle(queryParams).catch(() => undefined);
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
   if (!article) {

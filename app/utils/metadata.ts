@@ -7,7 +7,7 @@ import { truncateText } from "./utils";
 export const generateMetaData = ({
   title,
   description,
-  author,
+  author = "Sander de Snaijer",
   url,
   publishedTime,
   modifiedTime,
@@ -17,12 +17,12 @@ export const generateMetaData = ({
 }: {
   title: string;
   description: string;
-  author: string;
+  author?: string;
   url: string;
   publishedTime: string;
   modifiedTime: string;
   imageUrl: string;
-  imageAlt: string;
+  imageAlt?: string;
   keywords?: string[];
 }) => ({
   title,
