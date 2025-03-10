@@ -34,6 +34,7 @@ export async function generateMetadata({
 
   const title = `${baseTitle} | ${article.title}`;
   const description = extractTextFromHTML(article?.description);
+  const imageUrl = getImageURL(article?.description) || page.imageURL;
 
   return generateMetaData({
     title,
@@ -41,7 +42,7 @@ export async function generateMetadata({
     url: process.env.NEXT_PUBLIC_BASE_URL!,
     publishedTime: page._createdAt,
     modifiedTime: page._updatedAt,
-    imageUrl: getImageURL(article.description) || page.imageURL,
+    imageUrl,
     keywords: article.categories,
     canonical: article.link,
   });

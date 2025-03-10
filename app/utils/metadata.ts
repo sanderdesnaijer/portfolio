@@ -58,7 +58,7 @@ export const generateMetaData = ({
   },
   twitter: {
     card: "summary_large_image",
-    site: "Sander de Snaijer",
+    site: author,
     creator: "@sanderdesnaijer",
     title,
     description,
