@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import IntlProvider from "./components/IntlProvider";
@@ -10,12 +9,6 @@ const montserrat = Montserrat({
   style: ["normal", "italic"],
   weight: ["200", "400", "700"],
 });
-
-export const metadata: Metadata = {
-  title: "Sander de Snaijer",
-  description:
-    "Passionate software developer turning creative ideas to functional products.",
-};
 
 export default function RootLayout({
   children,

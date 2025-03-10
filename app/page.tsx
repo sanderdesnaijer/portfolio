@@ -1,10 +1,28 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { settingsQuery } from "@/sanity/lib/queries";
-import { SettingSanity } from "@/sanity/types";
+import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
+import { PageSanity, SettingSanity } from "@/sanity/types";
 import { PageNotFound } from "./components/PageNotFound";
 import Menu from "./components/Menu";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
 import { SocialIcons } from "./components/SocialIcons";
+import { generateMetaData } from "./utils/metadata";
+import { AUTHOR_NAME } from "./utils/constants";
+
+export async function generateMetadata() {
+  const page = await sanityFetch<PageSanity>({
+    query: pageQuery,
+    params: { slug: "" },
+  });
+
+  return generateMetaData({
+    title: AUTHOR_NAME,
+    description: page.description,
+    publishedTime: page._createdAt,
+    modifiedTime: page._updatedAt,
+    imageUrl: page.imageURL,
+    url: process.env.NEXT_PUBLIC_BASE_URL!,
+  });
+}
 
 export default async function Home() {
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });

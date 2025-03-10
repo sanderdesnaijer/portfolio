@@ -3,11 +3,12 @@ import { pageQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { toPlainText } from "next-sanity";
 import { truncateText } from "./utils";
+import { AUTHOR_NAME } from "./constants";
 
 export const generateMetaData = ({
   title,
   description,
-  author = "Sander de Snaijer",
+  author = AUTHOR_NAME,
   url,
   publishedTime,
   modifiedTime,
@@ -87,8 +88,7 @@ export async function generatePageMetadata({
     query: pageQuery,
     params: { slug: pageSlug },
   });
-  const author = "Sander de Snaijer";
-  const baseTitle = `${author} | ${page.title}`;
+  const baseTitle = `${AUTHOR_NAME} | ${page.title}`;
   const title = project ? `${baseTitle} | ${project.title}` : baseTitle;
 
   const description = project?.body
@@ -108,7 +108,6 @@ export async function generatePageMetadata({
   return generateMetaData({
     title,
     description,
-    author,
     publishedTime: page._createdAt,
     modifiedTime: page._updatedAt,
     imageAlt,

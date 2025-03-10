@@ -12,7 +12,7 @@ export const allPagesQuery = groq`
 `;
 
 export const pageQuery = groq`
-  *[_type == "pages" && slug.current == $slug][0]{
+  *[_type == "pages" && (slug.current == $slug || $slug == "")][0]{
     _id,
     _createdAt,
     _updatedAt,
