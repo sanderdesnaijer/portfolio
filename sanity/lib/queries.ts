@@ -14,6 +14,8 @@ export const allPagesQuery = groq`
 export const pageQuery = groq`
   *[_type == "pages" && slug.current == $slug][0]{
     _id,
+    _createdAt,
+    _updatedAt,
     title,
     description,
     slug,
@@ -80,8 +82,11 @@ export const projectQuery = groq`
     mainImage,
     body,
     links,
+    slug,
     "companyName": job->companyName,
     "companyLogo": job->logo.asset->url,
+    "imageURL": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     "tags": tags[]->{
       _id,
       label

@@ -4,6 +4,76 @@ import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { toPlainText } from "next-sanity";
 import { truncateText } from "./utils";
 
+export const generateMetaData = ({
+  title,
+  description,
+  author,
+  url,
+  publishedTime,
+  modifiedTime,
+  imageUrl,
+  imageAlt,
+  keywords,
+}: {
+  title: string;
+  description: string;
+  author: string;
+  url: string;
+  publishedTime: string;
+  modifiedTime: string;
+  imageUrl: string;
+  imageAlt: string;
+  keywords?: string[];
+}) => ({
+  title,
+  description,
+  authors: [
+    {
+      name: author,
+    },
+  ],
+  ...(keywords &&
+    keywords.length && {
+      keywords,
+    }),
+  openGraph: {
+    title,
+    description,
+    type: "article",
+    url,
+    publishedTime,
+    modifiedTime,
+    images: [
+      {
+        url: imageUrl,
+        width: 1200,
+        height: 630,
+        alt: imageAlt || title,
+        type: "image/png",
+      },
+    ],
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "Sander de Snaijer",
+    creator: "@sanderdesnaijer",
+    title,
+    description,
+    images: [
+      {
+        url: imageUrl,
+        width: 1200,
+        height: 675,
+        alt: imageAlt || title,
+      },
+    ],
+  },
+  alternates: {
+    canonical: url,
+  },
+});
+
 export async function generatePageMetadata({
   pageSlug,
   project,
@@ -15,15 +85,33 @@ export async function generatePageMetadata({
     query: pageQuery,
     params: { slug: pageSlug },
   });
-  const baseTitle = `Sander de Snaijer | ${page.title}`;
+  const author = "Sander de Snaijer";
+  const baseTitle = `${author} | ${page.title}`;
   const title = project ? `${baseTitle} | ${project.title}` : baseTitle;
 
   const description = project?.body
     ? truncateText(toPlainText(project?.body), 160)
     : page.description;
 
-  return {
+  const getUrl = (): string => {
+    return `${process.env.NEXT_PUBLIC_BASE_URL}/${page.slug.current}${project?.slug.current ? `/${project?.slug.current}` : ""}`;
+  };
+
+  const url = getUrl();
+  const imageUrl = project?.imageURL || page.imageURL;
+  const imageAlt = project?.imageAlt || page.imageAlt;
+
+  const keywords = project?.tags?.map((tag) => tag.label);
+
+  return generateMetaData({
     title,
     description,
-  };
+    author,
+    publishedTime: page._createdAt,
+    modifiedTime: page._updatedAt,
+    imageAlt,
+    imageUrl,
+    url,
+    keywords,
+  });
 }

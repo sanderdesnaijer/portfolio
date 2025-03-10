@@ -46,7 +46,7 @@ describe("components/Projects", () => {
     const images = screen.queryAllByRole("img");
     images.forEach((img, index) => {
       expect(img.getAttribute("src")).toContain(
-        encodeURIComponent(mockProjects[index].imageURL)
+        encodeURIComponent(mockProjects[index].imageURL!)
       );
       expect(img.getAttribute("alt")).toEqual(
         mockProjects[index].mainImage!.alt

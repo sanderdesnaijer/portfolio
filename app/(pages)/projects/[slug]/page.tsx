@@ -19,6 +19,7 @@ export async function generateMetadata({
     query: projectQuery,
     params,
   });
+
   return generatePageMetadata({ pageSlug: "projects", project });
 }
 

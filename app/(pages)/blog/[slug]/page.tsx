@@ -15,7 +15,8 @@ export async function generateMetadata({
 }: {
   params: { slug: string };
 }) {
-  const article = await getMediumArticle(params).catch(() => {
+  const queryParams = await params;
+  const article = await getMediumArticle(queryParams).catch(() => {
     return undefined;
   });
   if (!article) {
