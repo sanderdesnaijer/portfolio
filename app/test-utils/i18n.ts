@@ -1,5 +1,5 @@
 import { AbstractIntlMessages } from "next-intl";
-import translations from "../translations/en.json";
+import translations from "../../messages/en.json";
 
 export type MockTranslations = typeof translations;
 
