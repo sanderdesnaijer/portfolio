@@ -88,6 +88,7 @@ export async function generatePageMetadata({
     query: pageQuery,
     params: { slug: pageSlug },
   });
+
   const baseTitle = `${AUTHOR_NAME} | ${page.title}`;
   const title = project ? `${baseTitle} | ${project.title}` : baseTitle;
 

@@ -54,6 +54,16 @@ export const getImageURL = (articleDescription: string): string | undefined => {
   return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
 };
 
+/**
+ * Extracts the slug from a given URL.
+ *
+ * This function looks for a pattern where the slug is followed by a hyphen
+ * and a 12-character alphanumeric ID, before a query parameter (`?`).
+ * If no match is found, it returns `"not-found"`.
+ *
+ * @param {string} url - The URL to extract the slug from.
+ * @returns {string} The extracted slug or `"not-found"` if no match is found.
+ */
 export const getSlug = (url: string): string => {
   const match = url.match(/\/([^\/]+)-[a-f0-9]{12}\?/);
   return match ? match[1] : "not-found";
