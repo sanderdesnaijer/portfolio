@@ -22,4 +22,6 @@ export interface ProjectTypeSanity extends SanityDocument {
   companyName?: string;
   companyLogo?: string;
   tags?: TagSanity[];
+  imageURL?: string;
+  imageAlt?: string;
 }

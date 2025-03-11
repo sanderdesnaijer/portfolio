@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import RootLayout, { metadata } from "./layout";
+import RootLayout from "./layout";
 
 // Mock IntlProvider to avoid async/await issues in client components
 jest.mock("./components/IntlProvider", () => ({
@@ -44,12 +44,5 @@ describe("app/layout", () => {
     const mainContent = screen.getByTestId("main-content");
     expect(mainContent).toBeInTheDocument();
     expect(mainContent).toHaveTextContent("Hello, World!");
-  });
-
-  it("should have the correct metadata", () => {
-    expect(metadata.title).toBe("Portfolio Sander de Snaijer");
-    expect(metadata.description).toBe(
-      "Passionate software developer turning creative ideas to functional products."
-    );
   });
 });

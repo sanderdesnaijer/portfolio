@@ -1,23 +1,57 @@
 import { QueryParams } from "@sanity/client";
-import { settingsQuery } from "@/sanity/lib/queries";
+import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { SettingSanity } from "@/sanity/types";
+import { PageSanity, SettingSanity } from "@/sanity/types";
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
-import { convertDate } from "@/app/utils/utils";
+import {
+  convertDate,
+  extractTextFromHTML,
+  getImageURL,
+} from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
-import { MediumArticle } from "@/app/api/medium/types";
+import { getMediumArticle } from "@/app/utils/api";
+import { generateMetaData } from "@/app/utils/metadata";
 
-export const revalidate = 1;
+export const revalidate = 600;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const queryParams = await params;
+  const article = await getMediumArticle(queryParams).catch(() => undefined);
+  if (!article) {
+    return;
+  }
+
+  const page = await sanityFetch<PageSanity>({
+    query: pageQuery,
+    params: { slug: "blog" },
+  });
+  const baseTitle = `Sander de Snaijer | ${page.title}`;
+
+  const title = `${baseTitle} | ${article.title}`;
+  const description = extractTextFromHTML(article?.description);
+  const imageUrl = getImageURL(article?.description) || page.imageURL;
+
+  return generateMetaData({
+    title,
+    description,
+    url: process.env.NEXT_PUBLIC_BASE_URL!,
+    publishedTime: page._createdAt,
+    modifiedTime: page._updatedAt,
+    imageUrl,
+    keywords: article.categories,
+    canonical: article.link,
+  });
+}
 
 const BlogPage = async ({ params }: { params: QueryParams }) => {
   const queryParams = await params;
 
-  const article = (await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/medium/${queryParams.slug}`,
-    { next: { revalidate: 600 } }
-  ).then((data) => data.json())) as MediumArticle;
-
+  const article = await getMediumArticle(queryParams).catch(() => undefined);
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
   if (!article) {

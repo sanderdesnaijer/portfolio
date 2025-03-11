@@ -1,11 +1,7 @@
 import { toPlainText } from "next-sanity";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { ProjectListItem } from "./ProjectListItem";
-
-export const truncateText = (text: string, length: number) => {
-  if (text.length <= length) return text;
-  return text.slice(0, length) + "...";
-};
+import { truncateText } from "../utils/utils";
 
 export const Projects = ({
   projects = [],

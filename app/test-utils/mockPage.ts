@@ -21,7 +21,7 @@ export const mockPage: PageSanity = {
   description: "",
   slug: {
     _type: "slug",
-    current: "",
+    current: "page-slug",
   },
   mainImage: {
     _type: "image",

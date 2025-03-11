@@ -1,50 +1,36 @@
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
-import { convertDate } from "@/app/utils/utils";
+import {
+  convertDate,
+  extractTextFromHTML,
+  getImageURL,
+  getSlug,
+} from "@/app/utils/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
 import { PageSanity, SettingSanity } from "@/sanity/types";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
 import { TagSanity } from "@/sanity/types/tagType";
-import { MediumArticle } from "@/app/api/medium/types";
+import { getMediumArticles } from "@/app/utils/api";
+import { generatePageMetadata } from "@/app/utils/metadata";
 
 const slug = "blog";
 
 export const revalidate = 600;
 
-const getSlug = (url: string): string => {
-  const match = url.match(/\/([^\/]+)-[a-f0-9]{12}\?/);
-  return match ? match[1] : "not-found";
-};
-
-const getImageURL = (articleDescription: string): string | undefined => {
-  return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
-};
-
-function extractTextFromHTML(html: string) {
-  const withoutFigcaptions = html.replace(
-    /<figcaption>[^]*?<\/figcaption>/g,
-    ""
-  );
-  const text = withoutFigcaptions.replace(/<[^>]*>/g, " ");
-  const cleanText = text.replace(/\s+/g, " ").trim();
-  return cleanText.substring(0, 200) + "...";
+export async function generateMetadata() {
+  return generatePageMetadata({ pageSlug: slug });
 }
 
 export default async function Page() {
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
-    params: { slug: slug },
+    params: { slug },
   });
 
-  const articles = (await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/medium`,
-    { next: { revalidate: revalidate } }
-  )
-    .then((data) => data.json())
-    .catch(() => {
-      return [];
-    })) as MediumArticle[];
+  const articles = await getMediumArticles().catch(() => {
+    return [];
+  });
 
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 

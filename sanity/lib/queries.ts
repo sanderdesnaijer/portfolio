@@ -5,15 +5,19 @@ export const allPagesQuery = groq`
     _id,
     title,
     description,
+    _updatedAt,
     slug,
     content,
+    name,
     "imageURL": mainImage.asset->url
   }
 `;
 
 export const pageQuery = groq`
-  *[_type == "pages" && slug.current == $slug][0]{
+  *[_type == "pages" && (slug.current == $slug || $slug == "")][0]{
     _id,
+    _createdAt,
+    _updatedAt,
     title,
     description,
     slug,
@@ -58,6 +62,7 @@ export const jobsQuery = groq`
 export const projectsQuery = groq`
   *[_type == "project"] | order(publishedAt desc){
     publishedAt,
+    _updatedAt,
     _id,
     title,
     slug,
@@ -80,8 +85,11 @@ export const projectQuery = groq`
     mainImage,
     body,
     links,
+    slug,
     "companyName": job->companyName,
     "companyLogo": job->logo.asset->url,
+    "imageURL": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     "tags": tags[]->{
       _id,
       label

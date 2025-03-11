@@ -19,6 +19,7 @@ const eslintConfig = [
         "error",
         { argsIgnorePattern: "^_" },
       ],
+      "object-shorthand": ["error", "always"],
     },
   },
   {

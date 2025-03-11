@@ -2,8 +2,12 @@
 
 exports[`app/page renders 'Page not found' when sanityFetch returns null 1`] = `
 <div>
-  <div>
-    <p>
+  <div
+    class="flex h-screen items-center"
+  >
+    <p
+      class="w-full text-center"
+    >
       Page not found
     </p>
   </div>

@@ -12,6 +12,7 @@ import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
 import { getChevronClasses } from "@/app/utils/tailwind";
+import { generatePageMetadata } from "@/app/utils/metadata";
 
 export const revalidate = 600;
 
@@ -73,10 +74,14 @@ const getExperienceTitle = (
   return `${start} - ${end}`;
 };
 
+export async function generateMetadata() {
+  return generatePageMetadata({ pageSlug: slug });
+}
+
 export default async function Page() {
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
-    params: { slug: slug },
+    params: { slug },
   });
 
   const jobs = await sanityFetch<JobSanity[]>({
