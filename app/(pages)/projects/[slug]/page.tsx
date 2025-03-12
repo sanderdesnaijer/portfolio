@@ -1,3 +1,4 @@
+"use server";
 import { QueryParams } from "@sanity/client";
 import { projectQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -8,8 +9,7 @@ import Project from "@/app/components/Project";
 import { Tags } from "@/app/components/Tags";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
-
-export const revalidate = 3600;
+import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 
 export async function generateMetadata({
   params,
@@ -21,7 +21,10 @@ export async function generateMetadata({
     params,
   });
 
-  return generatePageMetadata({ pageSlug: "projects", project });
+  return {
+    ...generatePageMetadata({ pageSlug: "projects", project }),
+    revalidate: REVALIDATE_INTERVAL,
+  };
 }
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {

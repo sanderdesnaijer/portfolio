@@ -1,3 +1,4 @@
+"use server";
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import {
@@ -14,13 +15,15 @@ import { TagSanity } from "@/sanity/types/tagType";
 import { getMediumArticles } from "@/app/utils/api";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
+import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 
 const slug = "blog";
 
-export const revalidate = 3600;
-
 export async function generateMetadata() {
-  return generatePageMetadata({ pageSlug: slug });
+  return {
+    ...generatePageMetadata({ pageSlug: slug }),
+    revalidate: REVALIDATE_INTERVAL,
+  };
 }
 
 export default async function Page() {

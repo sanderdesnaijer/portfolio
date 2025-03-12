@@ -1,3 +1,4 @@
+"use server";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery } from "@/sanity/lib/queries";
 import { PageSanity } from "@/sanity/types";
@@ -6,10 +7,8 @@ import Menu from "./components/Menu";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
 import { SocialIcons } from "./components/SocialIcons";
 import { generateMetaData } from "./utils/metadata";
-import { AUTHOR_NAME } from "./utils/constants";
+import { AUTHOR_NAME, REVALIDATE_INTERVAL } from "./utils/constants";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
-
-export const revalidate = 3600 * 24;
 
 export async function generateMetadata() {
   const page = await sanityFetch<PageSanity>({
@@ -17,14 +16,17 @@ export async function generateMetadata() {
     params: { slug: "" },
   });
 
-  return generateMetaData({
-    title: AUTHOR_NAME,
-    description: page.description,
-    publishedTime: page._createdAt,
-    modifiedTime: page._updatedAt,
-    imageUrl: page.imageURL,
-    url: process.env.NEXT_PUBLIC_BASE_URL!,
-  });
+  return {
+    ...generateMetaData({
+      title: AUTHOR_NAME,
+      description: page.description,
+      publishedTime: page._createdAt,
+      modifiedTime: page._updatedAt,
+      imageUrl: page.imageURL,
+      url: process.env.NEXT_PUBLIC_BASE_URL!,
+    }),
+    revalidate: REVALIDATE_INTERVAL,
+  };
 }
 
 export default async function Home() {

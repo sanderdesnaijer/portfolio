@@ -1,3 +1,4 @@
+"use server";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { jobsQuery, pageQuery } from "@/sanity/lib/queries";
 import { PortableText, PortableTextReactComponents } from "next-sanity";
@@ -14,8 +15,7 @@ import { Tags } from "@/app/components/Tags";
 import { getChevronClasses } from "@/app/utils/tailwind";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
-
-export const revalidate = 3600;
+import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 
 const slug = "about";
 const builder = imageUrlBuilder(client);
@@ -76,7 +76,10 @@ const getExperienceTitle = (
 };
 
 export async function generateMetadata() {
-  return generatePageMetadata({ pageSlug: slug });
+  return {
+    ...generatePageMetadata({ pageSlug: slug }),
+    revalidate: REVALIDATE_INTERVAL,
+  };
 }
 
 export default async function Page() {

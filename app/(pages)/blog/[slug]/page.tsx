@@ -1,3 +1,4 @@
+"use server";
 import { QueryParams } from "@sanity/client";
 import { pageQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -13,8 +14,7 @@ import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { getMediumArticle } from "@/app/utils/api";
 import { generateMetaData } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
-
-export const revalidate = 3600;
+import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 
 export async function generateMetadata({
   params,
@@ -37,16 +37,19 @@ export async function generateMetadata({
   const description = extractTextFromHTML(article?.description);
   const imageUrl = getImageURL(article?.description) || page.imageURL;
 
-  return generateMetaData({
-    title,
-    description,
-    url: process.env.NEXT_PUBLIC_BASE_URL!,
-    publishedTime: page._createdAt,
-    modifiedTime: page._updatedAt,
-    imageUrl,
-    keywords: article.categories,
-    canonical: article.link,
-  });
+  return {
+    ...generateMetaData({
+      title,
+      description,
+      url: process.env.NEXT_PUBLIC_BASE_URL!,
+      publishedTime: page._createdAt,
+      modifiedTime: page._updatedAt,
+      imageUrl,
+      keywords: article.categories,
+      canonical: article.link,
+    }),
+    revalidate: REVALIDATE_INTERVAL,
+  };
 }
 
 const BlogPage = async ({ params }: { params: QueryParams }) => {
