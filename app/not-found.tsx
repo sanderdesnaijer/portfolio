@@ -26,7 +26,7 @@ export default async function Page() {
       <LinkList
         links={[
           {
-            title: t("back-to-home"),
+            title: t("error.404.action"),
             link: process.env.NEXT_PUBLIC_BASE_URL || "/",
             icon: "demo",
           },

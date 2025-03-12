@@ -4,7 +4,6 @@
   "job-experience": "Experience",
   "job-contract": "via",
   "project-created-at": "created at",
-  "back-to-home": "Go back to home",
   "medium-article-link": "originally published on Medium",
   "api": {
     "info": "Api is running",
@@ -15,7 +14,8 @@
   "error": {
     "404": {
       "title": "Page not found",
-      "description": "Sorry, the page you are looking for does not exist."
+      "description": "Sorry, the page you are looking for does not exist.",
+      "action": "Go back to home"
     }
   }
 }
