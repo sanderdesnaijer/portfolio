@@ -27,7 +27,7 @@ export async function generateMetadata({
   };
 }
 
-const ProductPage = async ({ params }: { params: Promise<QueryParams> }) => {
+const ProductPage = async ({ params }: { params: QueryParams }) => {
   const project = await sanityFetch<ProjectTypeSanity>({
     query: projectQuery,
     params,

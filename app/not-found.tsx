@@ -9,6 +9,10 @@ export async function generateMetadata() {
   return {
     title: `${AUTHOR_NAME} | ${t("error.404.title")}`,
     description: t("error.404.description"),
+    robots: {
+      index: false,
+      follow: true,
+    },
   };
 }
 
