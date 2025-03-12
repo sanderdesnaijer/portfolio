@@ -1,7 +1,8 @@
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import IntlProvider from "./components/IntlProvider";
 import { ThemeProvider } from "next-themes";
+import { getLocale, getMessages } from "next-intl/server";
+import { NextIntlClientProvider } from "next-intl";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -10,24 +11,25 @@ const montserrat = Montserrat({
   weight: ["200", "400", "700"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
+
   return (
-    <IntlProvider>
-      {(locale) => (
-        <html lang={locale} suppressHydrationWarning>
-          <body
-            className={`${montserrat.variable} overflow-x-hidden antialiased transition-colors duration-200`}
-          >
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-              {children}
-            </ThemeProvider>
-          </body>
-        </html>
-      )}
-    </IntlProvider>
+    <html lang={locale} suppressHydrationWarning>
+      <body
+        className={`${montserrat.variable} overflow-x-hidden antialiased transition-colors duration-200`}
+      >
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+          </ThemeProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
   );
 }
