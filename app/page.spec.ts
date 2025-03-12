@@ -4,6 +4,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 
 import Home from "./page";
 import { getTranslationKey } from "./test-utils/i18n";
+import { mockPages } from "./test-utils/mockPage";
 
 const mockSanityFetch = sanityFetch as jest.Mock;
 
@@ -13,7 +14,7 @@ describe("app/page", () => {
   });
 
   it("renders 'Page not found' when sanityFetch returns null", async () => {
-    mockSanityFetch.mockResolvedValue(null);
+    mockSanityFetch.mockResolvedValue(null).mockResolvedValueOnce(null);
 
     const { container } = render(await Home());
 
@@ -33,7 +34,9 @@ describe("app/page", () => {
       ],
     };
 
-    mockSanityFetch.mockResolvedValue(mockSettings);
+    mockSanityFetch
+      .mockResolvedValueOnce(mockSettings)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Home());
 
@@ -46,7 +49,9 @@ describe("app/page", () => {
   it("calls sanityFetch with the correct query", async () => {
     const mockSettings = { title: "Test Title" };
 
-    mockSanityFetch.mockResolvedValue(mockSettings);
+    mockSanityFetch
+      .mockResolvedValueOnce(mockSettings)
+      .mockResolvedValueOnce(mockPages);
 
     await Home();
 

@@ -1,10 +1,11 @@
+"use server";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { jobsQuery, pageQuery, settingsQuery } from "@/sanity/lib/queries";
+import { jobsQuery, pageQuery } from "@/sanity/lib/queries";
 import { PortableText, PortableTextReactComponents } from "next-sanity";
 import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
-import { JobSanity, PageSanity, SettingSanity } from "@/sanity/types";
+import { JobSanity, PageSanity } from "@/sanity/types";
 import { convertDate } from "@/app/utils/utils";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import { getTranslations } from "next-intl/server";
@@ -13,8 +14,8 @@ import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
 import { getChevronClasses } from "@/app/utils/tailwind";
 import { generatePageMetadata } from "@/app/utils/metadata";
-
-export const revalidate = 600;
+import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
+import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 
 const slug = "about";
 const builder = imageUrlBuilder(client);
@@ -75,7 +76,10 @@ const getExperienceTitle = (
 };
 
 export async function generateMetadata() {
-  return generatePageMetadata({ pageSlug: slug });
+  return {
+    ...generatePageMetadata({ pageSlug: slug }),
+    revalidate: REVALIDATE_INTERVAL,
+  };
 }
 
 export default async function Page() {
@@ -87,7 +91,7 @@ export default async function Page() {
   const jobs = await sanityFetch<JobSanity[]>({
     query: jobsQuery,
   });
-  const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
+  const { setting, menuItems } = await fetchCommonData();
 
   const t = await getTranslations();
 
@@ -100,6 +104,7 @@ export default async function Page() {
       pageTitle={page.title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
+      menuItems={menuItems}
     >
       <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[88px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[88px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] md:mt-auto md:mr-auto md:w-auto md:before:top-[168px] md:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
         <Image

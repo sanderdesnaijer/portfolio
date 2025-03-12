@@ -1,7 +1,8 @@
+"use server";
 import { QueryParams } from "@sanity/client";
-import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
+import { pageQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { PageSanity, SettingSanity } from "@/sanity/types";
+import { PageSanity } from "@/sanity/types";
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import {
@@ -12,8 +13,8 @@ import {
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { getMediumArticle } from "@/app/utils/api";
 import { generateMetaData } from "@/app/utils/metadata";
-
-export const revalidate = 600;
+import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
+import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 
 export async function generateMetadata({
   params,
@@ -36,23 +37,26 @@ export async function generateMetadata({
   const description = extractTextFromHTML(article?.description);
   const imageUrl = getImageURL(article?.description) || page.imageURL;
 
-  return generateMetaData({
-    title,
-    description,
-    url: process.env.NEXT_PUBLIC_BASE_URL!,
-    publishedTime: page._createdAt,
-    modifiedTime: page._updatedAt,
-    imageUrl,
-    keywords: article.categories,
-    canonical: article.link,
-  });
+  return {
+    ...generateMetaData({
+      title,
+      description,
+      url: process.env.NEXT_PUBLIC_BASE_URL!,
+      publishedTime: page._createdAt,
+      modifiedTime: page._updatedAt,
+      imageUrl,
+      keywords: article.categories,
+      canonical: article.link,
+    }),
+    revalidate: REVALIDATE_INTERVAL,
+  };
 }
 
 const BlogPage = async ({ params }: { params: QueryParams }) => {
   const queryParams = await params;
 
   const article = await getMediumArticle(queryParams).catch(() => undefined);
-  const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
+  const { setting, menuItems } = await fetchCommonData();
 
   if (!article) {
     return <PageNotFound />;
@@ -63,6 +67,7 @@ const BlogPage = async ({ params }: { params: QueryParams }) => {
       pageTitle={article.title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
+      menuItems={menuItems}
     >
       <ProjectLayout
         date={convertDate(article.pubDate, true)}

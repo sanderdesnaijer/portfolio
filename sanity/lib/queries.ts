@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 
 export const allPagesQuery = groq`
-  *[_type == "pages"]{
+  *[_type == "pages"] | order(order asc) {
     _id,
     title,
     description,
@@ -9,6 +9,7 @@ export const allPagesQuery = groq`
     slug,
     content,
     name,
+    order,
     "imageURL": mainImage.asset->url
   }
 `;

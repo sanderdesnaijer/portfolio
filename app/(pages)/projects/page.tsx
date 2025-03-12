@@ -2,16 +2,22 @@
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import Projects from "@/app/components/Projects";
+import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { pageQuery, projectsQuery, settingsQuery } from "@/sanity/lib/queries";
-import { PageSanity, ProjectTypeSanity, SettingSanity } from "@/sanity/types";
+import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
+import { pageQuery, projectsQuery } from "@/sanity/lib/queries";
+import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 
 const slug = "projects";
 
 export async function generateMetadata() {
-  return generatePageMetadata({ pageSlug: slug });
+  return {
+    ...generatePageMetadata({ pageSlug: slug }),
+    revalidate: REVALIDATE_INTERVAL,
+  };
 }
+
 export default async function Page() {
   const projects = await sanityFetch<ProjectTypeSanity[]>({
     query: projectsQuery,
@@ -21,7 +27,7 @@ export default async function Page() {
     params: { slug },
   });
 
-  const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
+  const { setting, menuItems } = await fetchCommonData();
 
   if (!page) {
     return <PageNotFound />;
@@ -32,6 +38,7 @@ export default async function Page() {
       pageTitle={page.title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
+      menuItems={menuItems}
     >
       <Projects projects={projects} pageSlug={page.slug.current} />
     </Layout>

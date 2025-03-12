@@ -1,9 +1,27 @@
 import { render, screen } from "@testing-library/react";
 import { usePathname } from "next/navigation";
-import Menu from "./Menu";
+import Menu, { MenuItem } from "./Menu";
 
 describe("Menu Component", () => {
   const mockedUsePathname = usePathname as jest.Mock;
+  const mockMenuItems: MenuItem[] = [
+    {
+      pathname: "/",
+      title: "Home",
+    },
+    {
+      pathname: "/about",
+      title: "About",
+    },
+    {
+      pathname: "/projects",
+      title: "Projects",
+    },
+    {
+      pathname: "/blog",
+      title: "Blog",
+    },
+  ];
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -12,7 +30,7 @@ describe("Menu Component", () => {
   it("renders all menu items", () => {
     mockedUsePathname.mockReturnValue("/");
 
-    render(<Menu />);
+    render(<Menu menuItems={mockMenuItems} />);
 
     expect(screen.getByText("Home")).toBeInTheDocument();
     expect(screen.getByText("About")).toBeInTheDocument();
@@ -23,7 +41,7 @@ describe("Menu Component", () => {
   it("highlights the active menu item based on the current path", () => {
     mockedUsePathname.mockReturnValue("/about");
 
-    render(<Menu />);
+    render(<Menu menuItems={mockMenuItems} />);
 
     const activeMenuItem = screen.getByText("About");
     expect(activeMenuItem).toHaveClass("font-bold");
@@ -41,7 +59,7 @@ describe("Menu Component", () => {
   it("renders menu items with correct href attributes", () => {
     mockedUsePathname.mockReturnValue("/");
 
-    render(<Menu />);
+    render(<Menu menuItems={mockMenuItems} />);
 
     expect(screen.getByText("Home")).toHaveAttribute("href", "/");
     expect(screen.getByText("About")).toHaveAttribute("href", "/about");

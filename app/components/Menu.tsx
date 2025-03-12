@@ -3,34 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-type MenuItem = {
+export type MenuItem = {
   pathname: string;
-  name: string;
+  title: string;
 };
-
-const menuItems: MenuItem[] = [
-  {
-    pathname: "/",
-    name: "Home",
-  },
-  {
-    pathname: "/about",
-    name: "About",
-  },
-  {
-    pathname: "/projects",
-    name: "Projects",
-  },
-  {
-    pathname: "/blog",
-    name: "Blog",
-  },
-];
 
 const Menu = ({
   className = "flex md:flex-col md:text-4xl font-extralight md:justify-end min-w-[172px] md:pl-4 order-2",
+  menuItems,
 }: {
   className?: string;
+  menuItems: MenuItem[];
 }) => {
   const path = usePathname();
   const isActive = (item: MenuItem) => {
@@ -49,7 +32,7 @@ const Menu = ({
           key={i}
           href={item.pathname}
         >
-          {item.name}
+          {item.title}
         </Link>
       ))}
     </nav>

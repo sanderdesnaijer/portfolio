@@ -1,14 +1,15 @@
+"use server";
 import { QueryParams } from "@sanity/client";
-import { projectQuery, settingsQuery } from "@/sanity/lib/queries";
+import { projectQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { ProjectTypeSanity, SettingSanity } from "@/sanity/types";
+import { ProjectTypeSanity } from "@/sanity/types";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import { Layout } from "@/app/components/Layout";
 import Project from "@/app/components/Project";
 import { Tags } from "@/app/components/Tags";
 import { generatePageMetadata } from "@/app/utils/metadata";
-
-export const revalidate = 600;
+import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
+import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 
 export async function generateMetadata({
   params,
@@ -20,7 +21,10 @@ export async function generateMetadata({
     params,
   });
 
-  return generatePageMetadata({ pageSlug: "projects", project });
+  return {
+    ...generatePageMetadata({ pageSlug: "projects", project }),
+    revalidate: REVALIDATE_INTERVAL,
+  };
 }
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {
@@ -28,7 +32,7 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
     query: projectQuery,
     params,
   });
-  const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
+  const { setting, menuItems } = await fetchCommonData();
 
   if (!project) {
     return <PageNotFound />;
@@ -39,6 +43,7 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
       pageTitle={project.title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
+      menuItems={menuItems}
     >
       <Project project={project} />
       {project.tags && <Tags tags={project.tags} />}
