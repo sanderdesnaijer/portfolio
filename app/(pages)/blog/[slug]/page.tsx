@@ -15,6 +15,7 @@ import { getMediumArticle } from "@/app/utils/api";
 import { generateMetaData } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
+import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata({
   params,
@@ -54,6 +55,7 @@ export async function generateMetadata({
 
 const BlogPage = async ({ params }: { params: QueryParams }) => {
   const queryParams = await params;
+  const t = await getTranslations();
 
   const article = await getMediumArticle(queryParams).catch(() => undefined);
   const { setting, menuItems } = await fetchCommonData();
@@ -73,7 +75,7 @@ const BlogPage = async ({ params }: { params: QueryParams }) => {
         date={convertDate(article.pubDate, true)}
         links={[
           {
-            title: "originally published on Medium",
+            title: t("medium-article-link"),
             link: article.link,
             icon: "article",
           },

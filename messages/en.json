@@ -4,6 +4,8 @@
   "job-experience": "Experience",
   "job-contract": "via",
   "project-created-at": "created at",
+  "back-to-home": "Go back to home",
+  "medium-article-link": "originally published on Medium",
   "api": {
     "info": "Api is running",
     "medium": {
