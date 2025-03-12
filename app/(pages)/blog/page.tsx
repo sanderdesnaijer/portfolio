@@ -7,16 +7,17 @@ import {
   getSlug,
 } from "@/app/utils/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
-import { PageSanity, SettingSanity } from "@/sanity/types";
+import { pageQuery } from "@/sanity/lib/queries";
+import { PageSanity } from "@/sanity/types";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
 import { TagSanity } from "@/sanity/types/tagType";
 import { getMediumArticles } from "@/app/utils/api";
 import { generatePageMetadata } from "@/app/utils/metadata";
+import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 
 const slug = "blog";
 
-export const revalidate = 600;
+export const revalidate = 3600;
 
 export async function generateMetadata() {
   return generatePageMetadata({ pageSlug: slug });
@@ -31,8 +32,7 @@ export default async function Page() {
   const articles = await getMediumArticles().catch(() => {
     return [];
   });
-
-  const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
+  const { setting, menuItems } = await fetchCommonData();
 
   if (!page || !articles) {
     return <PageNotFound />;
@@ -43,6 +43,7 @@ export default async function Page() {
       pageTitle={page.title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
+      menuItems={menuItems}
     >
       <div className="mx-auto grid grid-cols-1 py-10">
         <ol className="group mt-0 grid gap-10 pl-0">

@@ -46,6 +46,12 @@ export const pageType = defineType({
       type: "datetime",
     }),
     defineField({
+      name: "order",
+      title: "Order",
+      type: "number",
+      description: "Set a custom order for sorting pages",
+    }),
+    defineField({
       name: "body",
       type: "blockContent",
     }),
@@ -56,4 +62,11 @@ export const pageType = defineType({
       media: "mainImage",
     },
   },
+  orderings: [
+    {
+      title: "Manual order (bottom)",
+      name: "manualOrder",
+      by: [{ field: "order", direction: "asc" }],
+    },
+  ],
 });

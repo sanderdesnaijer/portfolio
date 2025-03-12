@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import Page from "./page";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
-import { mockPage } from "@/app/test-utils/mockPage";
+import { mockPage, mockPages } from "@/app/test-utils/mockPage";
 import { mockArticles } from "@/app/test-utils/mockArticle";
 import { mockSetting } from "@/app/test-utils/mockSetting";
 
@@ -47,7 +47,8 @@ describe("app/(pages)/blog/page", () => {
   it("renders the Page component with the correct structure", async () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockBlogPage)
-      .mockResolvedValueOnce(mockSetting);
+      .mockResolvedValueOnce(mockSetting)
+      .mockResolvedValueOnce(mockPages);
 
     const { container } = render(await Page());
 
@@ -59,7 +60,10 @@ describe("app/(pages)/blog/page", () => {
   });
 
   it("renders PageNotFound when page data is not found", async () => {
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(null);
+    (sanityFetch as jest.Mock)
+      .mockResolvedValueOnce(null)
+      .mockResolvedValueOnce(mockSetting)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 

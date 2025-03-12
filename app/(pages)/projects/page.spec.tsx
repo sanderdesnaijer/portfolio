@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
 import { mockProjects } from "@/app/test-utils/mockProjects";
-import { mockPage } from "@/app/test-utils/mockPage";
+import { mockPage, mockPages } from "@/app/test-utils/mockPage";
 import { getTranslationKey } from "@/app/test-utils/i18n";
 import { mockSetting } from "@/app/test-utils/mockSetting";
 
@@ -12,9 +12,11 @@ describe("app/(pages)/projects/page", () => {
   });
 
   it("renders the Page with correct project data", async () => {
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjects);
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockSetting);
+    (sanityFetch as jest.Mock)
+      .mockResolvedValueOnce(mockProjects)
+      .mockResolvedValueOnce(mockPage)
+      .mockResolvedValueOnce(mockSetting)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 
@@ -37,9 +39,11 @@ describe("app/(pages)/projects/page", () => {
   });
 
   it("renders correctly when projects are missing", async () => {
-    (sanityFetch as jest.Mock).mockResolvedValueOnce([]);
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockSetting);
+    (sanityFetch as jest.Mock)
+      .mockResolvedValueOnce([])
+      .mockResolvedValueOnce(mockPage)
+      .mockResolvedValueOnce(mockSetting)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 
@@ -56,9 +60,11 @@ describe("app/(pages)/projects/page", () => {
       },
     ];
 
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjectsWithoutBody);
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockSetting);
+    (sanityFetch as jest.Mock)
+      .mockResolvedValueOnce(mockProjectsWithoutBody)
+      .mockResolvedValueOnce(mockPage)
+      .mockResolvedValueOnce(mockSetting)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 
@@ -68,7 +74,11 @@ describe("app/(pages)/projects/page", () => {
   });
 
   it("should show not found if page is not found", async () => {
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(null);
+    (sanityFetch as jest.Mock)
+      .mockResolvedValueOnce(null)
+      .mockResolvedValueOnce(null)
+      .mockResolvedValueOnce(mockSetting)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 
@@ -84,9 +94,11 @@ describe("app/(pages)/projects/page", () => {
       },
     ];
 
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockProjectsWithoutLinks);
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
-    (sanityFetch as jest.Mock).mockResolvedValueOnce(mockSetting);
+    (sanityFetch as jest.Mock)
+      .mockResolvedValueOnce(mockProjectsWithoutLinks)
+      .mockResolvedValueOnce(mockPage)
+      .mockResolvedValueOnce(mockSetting)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 

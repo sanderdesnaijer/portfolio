@@ -1,12 +1,15 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
-import { PageSanity, SettingSanity } from "@/sanity/types";
+import { pageQuery } from "@/sanity/lib/queries";
+import { PageSanity } from "@/sanity/types";
 import { PageNotFound } from "./components/PageNotFound";
 import Menu from "./components/Menu";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
 import { SocialIcons } from "./components/SocialIcons";
 import { generateMetaData } from "./utils/metadata";
 import { AUTHOR_NAME } from "./utils/constants";
+import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
+
+export const revalidate = 3600 * 24;
 
 export async function generateMetadata() {
   const page = await sanityFetch<PageSanity>({
@@ -25,7 +28,7 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
-  const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
+  const { setting, menuItems } = await fetchCommonData();
 
   if (!setting) {
     return <PageNotFound />;
@@ -46,7 +49,10 @@ export default async function Home() {
           />
         </div>
         <div className="col-span-3 content-center">
-          <Menu className="flex flex-col text-7xl font-extralight md:text-9xl" />
+          <Menu
+            menuItems={menuItems}
+            className="flex flex-col text-7xl font-extralight md:text-9xl"
+          />
         </div>
       </main>
     </div>

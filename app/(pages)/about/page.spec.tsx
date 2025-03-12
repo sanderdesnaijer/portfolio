@@ -3,7 +3,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import Page from "./page";
 import { getTranslationKey } from "@/app/test-utils/i18n";
 import { JobSanity, PageSanity } from "@/sanity/types";
-import { mockPage } from "@/app/test-utils/mockPage";
+import { mockPage, mockPages } from "@/app/test-utils/mockPage";
 import { mockSetting } from "@/app/test-utils/mockSetting";
 
 jest.mock("next-sanity", () => ({
@@ -79,7 +79,8 @@ describe("app/(pages)/about-me", () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockAboutMePage)
       .mockResolvedValueOnce(mockJobs)
-      .mockResolvedValueOnce(mockSetting);
+      .mockResolvedValueOnce(mockSetting)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 
@@ -103,7 +104,9 @@ describe("app/(pages)/about-me", () => {
   it("renders Page not found when page data is missing", async () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(null)
-      .mockResolvedValueOnce(mockJobs);
+      .mockResolvedValueOnce(mockJobs)
+      .mockResolvedValueOnce(mockSetting)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 
@@ -123,7 +126,8 @@ describe("app/(pages)/about-me", () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockAboutMePage)
       .mockResolvedValueOnce(mockJobsWithoutLinks)
-      .mockResolvedValueOnce(mockSetting);
+      .mockResolvedValueOnce(mockSetting)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 
@@ -139,7 +143,8 @@ describe("app/(pages)/about-me", () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockPageWithoutBody)
       .mockResolvedValueOnce([])
-      .mockResolvedValueOnce(mockJobs);
+      .mockResolvedValueOnce(mockJobs)
+      .mockResolvedValueOnce(mockPages);
     render(await Page());
 
     expect(screen.queryByTestId("portable-text")).not.toBeInTheDocument();
@@ -160,7 +165,8 @@ describe("app/(pages)/about-me", () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockAboutMePage)
       .mockResolvedValueOnce(mockJobsWithEndDate)
-      .mockResolvedValueOnce(mockJobs);
+      .mockResolvedValueOnce(mockJobs)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 
@@ -178,7 +184,8 @@ describe("app/(pages)/about-me", () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockAboutMePage)
       .mockResolvedValueOnce(mockJobsWithoutEndDate)
-      .mockResolvedValueOnce(mockJobs);
+      .mockResolvedValueOnce(mockJobs)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Page());
 

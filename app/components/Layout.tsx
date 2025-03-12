@@ -1,4 +1,4 @@
-import Menu from "@/app/components/Menu";
+import Menu, { MenuItem } from "@/app/components/Menu";
 import { IconLink } from "@/sanity/types/types";
 import { ThemeToggle } from "./ThemeToggle/ThemeToggle";
 import { SocialIcons } from "./SocialIcons";
@@ -9,7 +9,8 @@ export const Layout: React.FC<{
   pageTitle: string;
   socialMedia: Array<IconLink>;
   authorName: string;
-}> = ({ children, pageTitle, socialMedia, authorName }) => {
+  menuItems: MenuItem[];
+}> = ({ children, pageTitle, socialMedia, authorName, menuItems }) => {
   return (
     <div className="container mx-auto grid grid-cols-9">
       <div className="bg top-0 z-20 col-span-9 flex flex-col justify-end gap-4 p-6 pb-0 md:sticky md:col-span-2 md:h-screen md:flex-row md:pb-6">
@@ -30,7 +31,7 @@ export const Layout: React.FC<{
             <ThemeToggle />
           </div>
         </div>
-        <Menu />
+        <Menu menuItems={menuItems} />
       </div>
       <main className="prose prose-xl dark:prose-invert relative col-span-9 max-w-fit px-6 pt-6 md:col-span-5 md:px-0 md:pt-24">
         <div className="flex h-full flex-col">
