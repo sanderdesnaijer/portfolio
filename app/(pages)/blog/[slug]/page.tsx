@@ -53,7 +53,7 @@ export async function generateMetadata({
   };
 }
 
-const BlogPage = async ({ params }: { params: QueryParams }) => {
+const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   const queryParams = await params;
   const t = await getTranslations();
 

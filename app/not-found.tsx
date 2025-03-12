@@ -1,8 +1,20 @@
-import { useTranslations } from "next-intl";
+"use server";
 import { LinkList } from "./components/LinkList";
+import { getTranslations } from "next-intl/server";
+import { AUTHOR_NAME } from "./utils/constants";
 
-export default function Page() {
-  const t = useTranslations();
+export async function generateMetadata() {
+  const t = await getTranslations();
+
+  return {
+    title: `${AUTHOR_NAME} | ${t("error.404.title")}`,
+    description: t("error.404.description"),
+  };
+}
+
+export default async function Page() {
+  const t = await getTranslations();
+
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       <h1 className="w-full text-center text-2xl">{t("page-not-found")}</h1>
