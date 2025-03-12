@@ -5,7 +5,7 @@ import Demo from "../../public/icons/demo.svg";
 import Gitlab from "../../public/icons/gitlab.svg";
 import Linkedin from "../../public/icons/linkedin.svg";
 import Missing from "../../public/icons/missing.svg";
-import ChevronRight from "../../public/icons/chevron-rigt.svg";
+import ChevronRight from "../../public/icons/chevron-right.svg";
 
 export const iconSize = 24;
 
