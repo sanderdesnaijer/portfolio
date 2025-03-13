@@ -52,12 +52,14 @@ export const ProjectListItem = ({
           {title}
         </DynamicElement>
       </Link>
-      <p className="mt-1 mb-1 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
+      <p className="mt-1 mb-1 py-2 text-xs text-gray-800 uppercase group-hover/item:text-gray-900 dark:text-gray-300 dark:group-hover/item:text-gray-100">
         {convertDate(date)}
       </p>
 
       {body ? (
-        <p className="mt-0 text-base text-gray-600 dark:text-white">{body}</p>
+        <p className="mt-0 text-base text-gray-800 group-hover/item:text-gray-900 dark:text-gray-100 dark:group-hover/item:text-gray-50">
+          {body}
+        </p>
       ) : null}
 
       {tags && <Tags tags={tags} />}

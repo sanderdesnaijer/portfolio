@@ -60,7 +60,9 @@ const components: Partial<PortableTextReactComponents> = {
 const jobComponents: Partial<PortableTextReactComponents> = {
   block: {
     normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="mb-3 text-sm leading-6">{children}</p>
+      <p className="mb-3 text-sm leading-6 text-gray-800 group-hover/item:text-gray-900 dark:text-gray-100 dark:group-hover/item:text-gray-50">
+        {children}
+      </p>
     ),
   },
 };
@@ -129,7 +131,7 @@ export default async function Page() {
                   className="group/item relative transition-colors duration-100 md:flex"
                 >
                   <div className="md:w-2/7">
-                    <p className="mt-0 mb-2 text-sm text-gray-400 italic md:text-right">
+                    <p className="mt-0 mb-2 text-sm text-gray-800 italic md:text-right dark:text-gray-100">
                       {getExperienceTitle(
                         job.startDate,
                         job.endDate,
@@ -167,7 +169,7 @@ export default async function Page() {
                           <p className="text-base transition group-hover/item:translate-x-1">
                             {job.jobTitle}
                           </p>
-                          <p className="text-xs text-gray-400 italic transition group-hover/item:translate-x-1">
+                          <p className="text-xs text-gray-800 italic transition group-hover/item:translate-x-1 dark:text-gray-100">
                             {job.employmentType}{" "}
                             {job.contractName &&
                               `(${t("pages.about.jobContract")} ${job.contractName})`}
