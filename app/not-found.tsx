@@ -1,7 +1,7 @@
 "use server";
-import { CustomLink } from "./components/LinkList";
 import { getTranslations } from "next-intl/server";
 import { AUTHOR_NAME } from "./utils/constants";
+import { CustomLink } from "./components/CustomLink";
 
 export async function generateMetadata() {
   const t = await getTranslations();

@@ -12,9 +12,9 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
-import { getChevronClasses } from "@/app/utils/tailwind";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
+import { DynamicElement } from "@/app/components/DynamicElement";
 
 const slug = "about";
 const builder = imageUrlBuilder(client);
@@ -157,11 +157,12 @@ export default async function Page() {
                       rel="noopener noreferrer"
                       className="before:absolute before:inset-0 before:block before:h-full before:w-full"
                     >
-                      <h3
-                        className={`text-lg leading-[18px] font-bold transition group-hover/item:translate-x-1 group-hover/item:italic after:h-5 after:w-5 xl:-ml-[1px] ${getChevronClasses()}`}
+                      <DynamicElement
+                        as="h3"
+                        className="text-lg leading-[18px] font-bold group-hover/item:translate-x-1 group-hover/item:italic"
                       >
                         {job.companyName.trim()}
-                      </h3>
+                      </DynamicElement>
                       <p className="text-base transition group-hover/item:translate-x-1">
                         {job.jobTitle}
                       </p>

@@ -1,4 +1,4 @@
-import { CustomLink } from "./LinkList";
+import { CustomLink } from "./CustomLink";
 
 export const NotFound: React.FC<{
   title: string;

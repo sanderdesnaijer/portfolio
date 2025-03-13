@@ -1,32 +1,6 @@
 import { IconLink } from "@/sanity/types/types";
 import { getIcon } from "./Icons";
-import Link from "next/link";
-import { getChevronClasses } from "../utils/tailwind";
-
-export const CustomLink: React.FC<{
-  href: string;
-  title: string;
-  target?: string;
-  icon?: React.ReactNode;
-  className?: string;
-}> = ({ href, title, target = "_blank", icon, className }) => (
-  <Link
-    className={`flex w-full no-underline underline-offset-4 group-hover/item:underline hover:underline ${className}`}
-    href={href}
-    target={target}
-    aria-label={title}
-    {...(target === "_blank" && {
-      rel: "noopener noreferrer",
-    })}
-  >
-    {icon}
-    <span
-      className={`mt-0 mb-0 text-base font-normal ${getChevronClasses()} after:mt-0.5 after:h-5 after:w-5`}
-    >
-      {title}
-    </span>
-  </Link>
-);
+import { CustomLink } from "./CustomLink";
 
 export const LinkList: React.FC<{ links: Array<IconLink> }> = ({ links }) => {
   return (
