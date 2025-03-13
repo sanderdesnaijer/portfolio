@@ -3,7 +3,7 @@ import Link from "next/link";
 import { convertDate } from "../utils/utils";
 import { Tags } from "./Tags";
 import { TagSanity } from "@/sanity/types/tagType";
-import { getChevronClasses } from "../utils/tailwind";
+import { DynamicElement } from "./DynamicElement";
 
 interface ProjectListItemProps {
   imageURL?: string;
@@ -44,11 +44,13 @@ export const ProjectListItem = ({
         href={href}
         className="no-underline group-hover/item:italic before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
       >
-        <h2
-          className={`-mt-2 mb-0 translate-x-0 text-3xl leading-10 transition-transform group-hover/item:translate-x-2 md:text-[2.5rem] md:leading-11 ${getChevronClasses()} after:mt-0.5 after:h-11 after:w-11`}
+        <DynamicElement
+          as="h2"
+          className={`-mt-2 mb-0 translate-x-0 text-3xl leading-10 group-hover/item:translate-x-2 md:text-[2.5rem] md:leading-11`}
+          size="11"
         >
           {title}
-        </h2>
+        </DynamicElement>
       </Link>
       <p className="mt-1 mb-1 py-2 text-xs font-light text-gray-700 uppercase dark:dark:text-gray-100">
         {convertDate(date)}

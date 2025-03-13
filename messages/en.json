@@ -1,13 +1,38 @@
 {
-  "page-not-found": "Page not found",
-  "date-present": "present",
-  "job-experience": "Experience",
-  "job-contract": "via",
-  "project-created-at": "created at",
   "api": {
     "info": "Api is running",
     "medium": {
-      "not-found": "Article not found"
+      "notFound": "Article not found"
+    }
+  },
+  "pages": {
+    "about": {
+      "datePresent": "present",
+      "jobExperience": "Experience",
+      "jobContract": "via",
+      "projectCreatedAt": "created at"
+    },
+    "blog": {
+      "articleLinkMedium": "originally published on Medium"
+    }
+  },
+  "error": {
+    "404": {
+      "generic": {
+        "title": "Page not found",
+        "description": "Sorry, the page you are looking for does not exist.",
+        "action": "Go back to home"
+      },
+      "project": {
+        "title": "Project not found",
+        "description": "Sorry, we couldn't find the project you're looking for.",
+        "action": "Go back to the project overview"
+      },
+      "blog": {
+        "title": "Blog not found",
+        "description": "Sorry, we couldn't find the blog you're looking for.",
+        "action": "Go back to the blog overview"
+      }
     }
   }
 }

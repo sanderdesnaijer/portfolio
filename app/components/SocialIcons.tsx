@@ -24,6 +24,7 @@ export const SocialIcons: React.FC<{
               target="_blank"
               aria-label={`${icon} icon`}
               title={icon}
+              rel="noopener noreferrer"
             >
               <IconComponent />
             </Link>

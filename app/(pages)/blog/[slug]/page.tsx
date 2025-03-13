@@ -4,7 +4,6 @@ import { pageQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
 import { Layout } from "@/app/components/Layout";
-import { PageNotFound } from "@/app/components/PageNotFound";
 import {
   convertDate,
   extractTextFromHTML,
@@ -14,22 +13,33 @@ import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { getMediumArticle } from "@/app/utils/api";
 import { generateMetaData } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
-import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
+import { getTranslations } from "next-intl/server";
+import { NotFound } from "@/app/components/NotFound";
+
+const slug = "blog";
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const queryParams = await params;
   const article = await getMediumArticle(queryParams).catch(() => undefined);
   if (!article) {
-    return;
+    const t = await getTranslations();
+    return {
+      title: t("error.404.blog.title"),
+      description: t("error.404.blog.description"),
+      robots: {
+        index: false,
+        follow: true,
+      },
+    };
   }
 
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
-    params: { slug: "blog" },
+    params: { slug },
   });
   const baseTitle = `Sander de Snaijer | ${page.title}`;
 
@@ -37,53 +47,56 @@ export async function generateMetadata({
   const description = extractTextFromHTML(article?.description);
   const imageUrl = getImageURL(article?.description) || page.imageURL;
 
-  return {
-    ...generateMetaData({
-      title,
-      description,
-      url: process.env.NEXT_PUBLIC_BASE_URL!,
-      publishedTime: page._createdAt,
-      modifiedTime: page._updatedAt,
-      imageUrl,
-      keywords: article.categories,
-      canonical: article.link,
-    }),
-    revalidate: REVALIDATE_INTERVAL,
-  };
+  return generateMetaData({
+    title,
+    description,
+    url: process.env.NEXT_PUBLIC_BASE_URL!,
+    publishedTime: page._createdAt,
+    modifiedTime: page._updatedAt,
+    imageUrl,
+    keywords: article.categories,
+    canonical: article.link,
+  });
 }
 
-const BlogPage = async ({ params }: { params: QueryParams }) => {
+const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   const queryParams = await params;
-
   const article = await getMediumArticle(queryParams).catch(() => undefined);
   const { setting, menuItems } = await fetchCommonData();
+  const t = await getTranslations();
 
-  if (!article) {
-    return <PageNotFound />;
-  }
+  const title = article ? article.title : t("error.404.blog.title");
 
   return (
     <Layout
-      pageTitle={article.title}
+      pageTitle={title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
       menuItems={menuItems}
     >
-      <ProjectLayout
-        date={convertDate(article.pubDate, true)}
-        links={[
-          {
-            title: "originally published on Medium",
-            link: article.link,
-            icon: "article",
-          },
-        ]}
-      >
-        <div
-          className="prose prose-xl dark:prose-invert [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3"
-          dangerouslySetInnerHTML={{ __html: article.description }}
-        ></div>
-      </ProjectLayout>
+      {article ? (
+        <ProjectLayout
+          date={convertDate(article.pubDate, true)}
+          links={[
+            {
+              title: t("pages.blog.articleLinkMedium"),
+              link: article.link,
+              icon: "article",
+            },
+          ]}
+        >
+          <div
+            className="prose prose-xl dark:prose-invert [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3"
+            dangerouslySetInnerHTML={{ __html: article.description }}
+          ></div>
+        </ProjectLayout>
+      ) : (
+        <NotFound
+          title={t("error.404.blog.action")}
+          description={t("error.404.blog.description")}
+          href={`${process.env.NEXT_PUBLIC_BASE_URL}/${slug}` || `/${slug}`}
+        />
+      )}
     </Layout>
   );
 };

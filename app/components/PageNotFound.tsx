@@ -5,7 +5,7 @@ export const PageNotFound = () => {
 
   return (
     <div className="flex h-screen items-center">
-      <p className="w-full text-center">{t("page-not-found")}</p>
+      <p className="w-full text-center">{t("error.404.generic.title")}</p>
     </div>
   );
 };

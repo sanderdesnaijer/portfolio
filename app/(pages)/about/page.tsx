@@ -12,10 +12,9 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
-import { getChevronClasses } from "@/app/utils/tailwind";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
-import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
+import { DynamicElement } from "@/app/components/DynamicElement";
 
 const slug = "about";
 const builder = imageUrlBuilder(client);
@@ -76,10 +75,7 @@ const getExperienceTitle = (
 };
 
 export async function generateMetadata() {
-  return {
-    ...generatePageMetadata({ pageSlug: slug }),
-    revalidate: REVALIDATE_INTERVAL,
-  };
+  return generatePageMetadata({ pageSlug: slug });
 }
 
 export default async function Page() {
@@ -123,7 +119,7 @@ export default async function Page() {
         <PortableText value={page.body} components={components} />
       ) : null}
 
-      <h2 className="font-normal">{t("job-experience")}</h2>
+      <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
       <ol className="not-prose group/list flex list-none flex-col gap-10 p-0">
         {jobs?.map((job) => {
           return (
@@ -136,7 +132,7 @@ export default async function Page() {
                   {getExperienceTitle(
                     job.startDate,
                     job.endDate,
-                    t("date-present")
+                    t("pages.about.datePresent")
                   )}
                 </p>
               </div>
@@ -158,20 +154,22 @@ export default async function Page() {
                       href={job.link}
                       aria-label={`[Link to] ${job.companyName}`}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="before:absolute before:inset-0 before:block before:h-full before:w-full"
                     >
-                      <h3
-                        className={`text-lg leading-[18px] font-bold transition group-hover/item:translate-x-1 group-hover/item:italic after:h-5 after:w-5 xl:-ml-[1px] ${getChevronClasses()}`}
+                      <DynamicElement
+                        as="h3"
+                        className="text-lg leading-[18px] font-bold group-hover/item:translate-x-1 group-hover/item:italic"
                       >
                         {job.companyName.trim()}
-                      </h3>
+                      </DynamicElement>
                       <p className="text-base transition group-hover/item:translate-x-1">
                         {job.jobTitle}
                       </p>
                       <p className="text-xs text-gray-400 italic transition group-hover/item:translate-x-1">
                         {job.employmentType}{" "}
                         {job.contractName &&
-                          `(${t("job-contract")} ${job.contractName})`}
+                          `(${t("pages.about.jobContract")} ${job.contractName})`}
                       </p>
                     </Link>
                   </div>

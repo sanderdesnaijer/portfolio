@@ -15,6 +15,7 @@ const eslintConfig = [
     rules: {
       "no-console": "error",
       "react/jsx-no-literals": "error",
+      "react/jsx-no-useless-fragment": ["error", { allowExpressions: true }],
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_" },

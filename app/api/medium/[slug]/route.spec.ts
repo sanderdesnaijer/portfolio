@@ -36,7 +36,7 @@ describe("GET /api/medium", () => {
 
     expect(response.status).toBe(404);
     expect(json).toEqual({
-      message: getTranslationKey("api.medium.not-found"),
+      message: getTranslationKey("api.medium.notFound"),
     });
     expect(response.headers.get("Cache-Control")).toBe(null);
   });
