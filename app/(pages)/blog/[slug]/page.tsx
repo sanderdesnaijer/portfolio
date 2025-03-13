@@ -28,8 +28,8 @@ export async function generateMetadata({
   if (!article) {
     const t = await getTranslations();
     return {
-      title: t("pages.blog.404.title"),
-      description: t("pages.blog.404.description"),
+      title: t("error.404.blog.title"),
+      description: t("error.404.blog.description"),
       robots: {
         index: false,
         follow: true,
@@ -65,7 +65,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   const { setting, menuItems } = await fetchCommonData();
   const t = await getTranslations();
 
-  const title = article ? article.title : t("pages.blog.404.title");
+  const title = article ? article.title : t("error.404.blog.title");
 
   return (
     <Layout
@@ -79,7 +79,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
           date={convertDate(article.pubDate, true)}
           links={[
             {
-              title: t("medium-article-link"),
+              title: t("pages.blog.articleLinkMedium"),
               link: article.link,
               icon: "article",
             },
@@ -92,8 +92,8 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
         </ProjectLayout>
       ) : (
         <NotFound
-          title={t("pages.blog.404.action")}
-          description={t("pages.blog.404.description")}
+          title={t("error.404.blog.action")}
+          description={t("error.404.blog.description")}
           href={`${process.env.NEXT_PUBLIC_BASE_URL}/${slug}` || `/${slug}`}
         />
       )}

@@ -82,7 +82,9 @@ describe("app/(pages)/projects/page", () => {
 
     render(await Page());
 
-    const message = screen.getByText(getTranslationKey("page-not-found"));
+    const message = screen.getByText(
+      getTranslationKey("error.404.generic.title")
+    );
     expect(message).toBeInTheDocument();
   });
 

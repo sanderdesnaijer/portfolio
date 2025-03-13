@@ -7,8 +7,8 @@ export async function generateMetadata() {
   const t = await getTranslations();
 
   return {
-    title: `${AUTHOR_NAME} | ${t("error.404.title")}`,
-    description: t("error.404.description"),
+    title: `${AUTHOR_NAME} | ${t("error.404.generic.title")}`,
+    description: t("error.404.generic.description"),
     robots: {
       index: false,
       follow: true,
@@ -22,10 +22,10 @@ export default async function Page() {
   return (
     <div className="flex h-screen flex-col items-center justify-center">
       <h1 className="mb-2 w-full text-center text-2xl font-bold">
-        {t("page-not-found")}
+        {t("error.404.generic.title")}
       </h1>
       <CustomLink
-        title={t("error.404.action")}
+        title={t("error.404.generic.action")}
         href={process.env.NEXT_PUBLIC_BASE_URL || "/"}
         target="_self"
         className={"inline-block text-center"}

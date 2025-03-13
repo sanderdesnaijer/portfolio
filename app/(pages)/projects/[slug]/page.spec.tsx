@@ -44,7 +44,7 @@ describe("app/(pages)/[slug]/page", () => {
         params,
       });
       expect(
-        screen.getByText(getTranslationKey("pages.project.404.description"))
+        screen.getByText(getTranslationKey("error.404.project.description"))
       ).toBeInTheDocument();
     });
   });

@@ -14,7 +14,7 @@ export async function GET(
 
   if (!article) {
     return NextResponse.json(
-      { message: t("api.medium.not-found") },
+      { message: t("api.medium.notFound") },
       { status: 404 }
     );
   }

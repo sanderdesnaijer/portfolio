@@ -119,7 +119,7 @@ export default async function Page() {
         <PortableText value={page.body} components={components} />
       ) : null}
 
-      <h2 className="font-normal">{t("job-experience")}</h2>
+      <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
       <ol className="not-prose group/list flex list-none flex-col gap-10 p-0">
         {jobs?.map((job) => {
           return (
@@ -132,7 +132,7 @@ export default async function Page() {
                   {getExperienceTitle(
                     job.startDate,
                     job.endDate,
-                    t("date-present")
+                    t("pages.about.datePresent")
                   )}
                 </p>
               </div>
@@ -167,7 +167,7 @@ export default async function Page() {
                       <p className="text-xs text-gray-400 italic transition group-hover/item:translate-x-1">
                         {job.employmentType}{" "}
                         {job.contractName &&
-                          `(${t("job-contract")} ${job.contractName})`}
+                          `(${t("pages.about.jobContract")} ${job.contractName})`}
                       </p>
                     </Link>
                   </div>

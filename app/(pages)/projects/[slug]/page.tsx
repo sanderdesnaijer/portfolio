@@ -26,8 +26,8 @@ export async function generateMetadata({
 
   if (!project) {
     return {
-      title: t("pages.project.404.title"),
-      description: t("pages.project.404.description"),
+      title: t("error.404.project.title"),
+      description: t("error.404.project.description"),
       robots: {
         index: false,
         follow: true,
@@ -46,7 +46,7 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
   const { setting, menuItems } = await fetchCommonData();
   const t = await getTranslations();
 
-  const title = project ? project.title : t("pages.project.404.title");
+  const title = project ? project.title : t("error.404.project.title");
 
   return (
     <Layout
@@ -59,8 +59,8 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
         <Project project={project} />
       ) : (
         <NotFound
-          title={t("pages.project.404.action")}
-          description={t("pages.project.404.description")}
+          title={t("error.404.project.action")}
+          description={t("error.404.project.description")}
           href={`${process.env.NEXT_PUBLIC_BASE_URL}/${slug}` || `/${slug}`}
         />
       )}

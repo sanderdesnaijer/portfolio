@@ -97,7 +97,9 @@ describe("app/(pages)/about-me", () => {
     expect(screen.getByText("Company A")).toBeInTheDocument();
     expect(screen.getByText("Developer")).toBeInTheDocument();
     expect(
-      screen.getByText(`Jan 2022 - ${getTranslationKey("date-present")}`)
+      screen.getByText(
+        `Jan 2022 - ${getTranslationKey("pages.about.datePresent")}`
+      )
     ).toBeInTheDocument();
   });
 
@@ -111,7 +113,7 @@ describe("app/(pages)/about-me", () => {
     render(await Page());
 
     expect(
-      screen.getByText(getTranslationKey("page-not-found"))
+      screen.getByText(getTranslationKey("error.404.generic.title"))
     ).toBeInTheDocument();
   });
 
@@ -190,7 +192,9 @@ describe("app/(pages)/about-me", () => {
     render(await Page());
 
     expect(
-      screen.getByText(`Jan 2022 - ${getTranslationKey("date-present")}`)
+      screen.getByText(
+        `Jan 2022 - ${getTranslationKey("pages.about.datePresent")}`
+      )
     ).toBeInTheDocument();
   });
 });

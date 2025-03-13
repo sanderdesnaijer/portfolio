@@ -17,9 +17,8 @@ describe("app/page", () => {
     mockSanityFetch.mockResolvedValue(null).mockResolvedValueOnce(null);
 
     const { container } = render(await Home());
-
     expect(
-      screen.getByText(getTranslationKey("page-not-found"))
+      screen.getByText(getTranslationKey("error.404.generic.title"))
     ).toBeInTheDocument();
     expect(container).toMatchSnapshot();
   });

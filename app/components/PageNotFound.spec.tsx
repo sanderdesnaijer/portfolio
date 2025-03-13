@@ -6,7 +6,9 @@ describe("PageNotFound component", () => {
   it("renders the correct content", () => {
     render(<PageNotFound />);
 
-    const message = screen.getByText(getTranslationKey("page-not-found"));
+    const message = screen.getByText(
+      getTranslationKey("error.404.generic.title")
+    );
     expect(message).toBeInTheDocument();
   });
 });
