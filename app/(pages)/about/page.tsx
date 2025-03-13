@@ -15,12 +15,13 @@ import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { DynamicElement } from "@/app/components/DynamicElement";
 import { NotFound } from "@/app/components/NotFound";
+import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
 
-const slug = "about";
 const builder = imageUrlBuilder(client);
 const mainImageSizeHeigth = 341;
 const mainImageSizeWidtht = 256;
 const companyIconSize = 56;
+const { about: slug } = pageSlugs;
 
 const components: Partial<PortableTextReactComponents> = {
   block: {
@@ -190,7 +191,7 @@ export default async function Page() {
         <NotFound
           title={t("error.404.generic.action")}
           description={t("error.404.generic.description")}
-          href={`${process.env.NEXT_PUBLIC_BASE_URL}` || `/`}
+          href={getBaseUrl()}
         />
       )}
     </Layout>

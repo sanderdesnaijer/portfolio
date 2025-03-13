@@ -2,6 +2,7 @@
 import { getTranslations } from "next-intl/server";
 import { AUTHOR_NAME } from "./utils/constants";
 import { CustomLink } from "./components/CustomLink";
+import { getBaseUrl } from "./utils/routes";
 
 export async function generateMetadata() {
   const t = await getTranslations();
@@ -26,7 +27,7 @@ export default async function Page() {
       </h1>
       <CustomLink
         title={t("error.404.generic.action")}
-        href={process.env.NEXT_PUBLIC_BASE_URL || "/"}
+        href={getBaseUrl()}
         target="_self"
         className={"inline-block text-center"}
       />

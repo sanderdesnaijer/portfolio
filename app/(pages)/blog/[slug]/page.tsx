@@ -15,8 +15,9 @@ import { generateMetaData } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
+import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
 
-const slug = "blog";
+const { blog: slug } = pageSlugs;
 
 export async function generateMetadata({
   params,
@@ -50,7 +51,7 @@ export async function generateMetadata({
   return generateMetaData({
     title,
     description,
-    url: process.env.NEXT_PUBLIC_BASE_URL!,
+    url: getBaseUrl(),
     publishedTime: page._createdAt,
     modifiedTime: page._updatedAt,
     imageUrl,
@@ -94,7 +95,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
         <NotFound
           title={t("error.404.blog.action")}
           description={t("error.404.blog.description")}
-          href={`${process.env.NEXT_PUBLIC_BASE_URL}/${slug}` || `/${slug}`}
+          href={`${getBaseUrl()}/${slug}`}
         />
       )}
     </Layout>

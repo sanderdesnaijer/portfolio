@@ -3,13 +3,14 @@ import { Layout } from "@/app/components/Layout";
 import { NotFound } from "@/app/components/NotFound";
 import Projects from "@/app/components/Projects";
 import { generatePageMetadata } from "@/app/utils/metadata";
+import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { pageQuery, projectsQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { getTranslations } from "next-intl/server";
 
-const slug = "projects";
+const { projects: slug } = pageSlugs;
 
 export async function generateMetadata() {
   return generatePageMetadata({ pageSlug: slug });
@@ -41,7 +42,7 @@ export default async function Page() {
         <NotFound
           title={t("error.404.generic.action")}
           description={t("error.404.generic.description")}
-          href={`${process.env.NEXT_PUBLIC_BASE_URL}` || `/`}
+          href={getBaseUrl()}
         />
       )}
     </Layout>

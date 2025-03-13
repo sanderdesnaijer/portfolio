@@ -10,6 +10,7 @@ import { AUTHOR_NAME } from "./utils/constants";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "./components/NotFound";
+import { getBaseUrl } from "./utils/routes";
 
 export async function generateMetadata() {
   const page = await sanityFetch<PageSanity>({
@@ -23,7 +24,7 @@ export async function generateMetadata() {
     publishedTime: page._createdAt,
     modifiedTime: page._updatedAt,
     imageUrl: page.imageURL,
-    url: process.env.NEXT_PUBLIC_BASE_URL!,
+    url: getBaseUrl(),
   });
 }
 
