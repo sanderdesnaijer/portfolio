@@ -15,7 +15,6 @@ export const CustomLink: React.FC<{
     href={href}
     target={target}
     aria-label={title}
-    // TODO: make ticket or fix this everywhere
     {...(target === "_blank" && {
       rel: "noopener noreferrer",
     })}

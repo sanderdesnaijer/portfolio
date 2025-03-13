@@ -154,6 +154,7 @@ export default async function Page() {
                       href={job.link}
                       aria-label={`[Link to] ${job.companyName}`}
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="before:absolute before:inset-0 before:block before:h-full before:w-full"
                     >
                       <h3
