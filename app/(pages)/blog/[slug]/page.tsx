@@ -21,12 +21,20 @@ const slug = "blog";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
   const queryParams = await params;
   const article = await getMediumArticle(queryParams).catch(() => undefined);
   if (!article) {
-    return;
+    const t = await getTranslations();
+    return {
+      title: t("pages.blog.404.title"),
+      description: t("pages.blog.404.description"),
+      robots: {
+        index: false,
+        follow: true,
+      },
+    };
   }
 
   const page = await sanityFetch<PageSanity>({
