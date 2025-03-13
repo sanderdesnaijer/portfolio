@@ -3,6 +3,7 @@ import "server-only";
 import type { QueryParams } from "@sanity/client";
 import { draftMode } from "next/headers";
 import { client } from "@/sanity/lib/client";
+import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 
 const DEFAULT_PARAMS = {} as QueryParams;
 const DEFAULT_TAGS = [] as string[];
@@ -41,7 +42,8 @@ export async function sanityFetch<QueryResponse>({
         perspective: "previewDrafts",
       }),
       next: {
-        ...(isDraftMode && { revalidate: 30 }),
+        revalidate:
+          isDevelopment || isDraftMode ? undefined : REVALIDATE_INTERVAL,
         tags,
       },
     });

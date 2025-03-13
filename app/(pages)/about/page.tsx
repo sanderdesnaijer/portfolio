@@ -15,7 +15,6 @@ import { Tags } from "@/app/components/Tags";
 import { getChevronClasses } from "@/app/utils/tailwind";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
-import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 
 const slug = "about";
 const builder = imageUrlBuilder(client);
@@ -76,10 +75,7 @@ const getExperienceTitle = (
 };
 
 export async function generateMetadata() {
-  return {
-    ...generatePageMetadata({ pageSlug: slug }),
-    revalidate: REVALIDATE_INTERVAL,
-  };
+  return generatePageMetadata({ pageSlug: slug });
 }
 
 export default async function Page() {

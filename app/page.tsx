@@ -7,7 +7,7 @@ import Menu from "./components/Menu";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
 import { SocialIcons } from "./components/SocialIcons";
 import { generateMetaData } from "./utils/metadata";
-import { AUTHOR_NAME, REVALIDATE_INTERVAL } from "./utils/constants";
+import { AUTHOR_NAME } from "./utils/constants";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 
 export async function generateMetadata() {
@@ -16,17 +16,14 @@ export async function generateMetadata() {
     params: { slug: "" },
   });
 
-  return {
-    ...generateMetaData({
-      title: AUTHOR_NAME,
-      description: page.description,
-      publishedTime: page._createdAt,
-      modifiedTime: page._updatedAt,
-      imageUrl: page.imageURL,
-      url: process.env.NEXT_PUBLIC_BASE_URL!,
-    }),
-    revalidate: REVALIDATE_INTERVAL,
-  };
+  return generateMetaData({
+    title: AUTHOR_NAME,
+    description: page.description,
+    publishedTime: page._createdAt,
+    modifiedTime: page._updatedAt,
+    imageUrl: page.imageURL,
+    url: process.env.NEXT_PUBLIC_BASE_URL!,
+  });
 }
 
 export default async function Home() {

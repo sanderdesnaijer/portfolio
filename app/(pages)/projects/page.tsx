@@ -2,7 +2,6 @@
 import { Layout } from "@/app/components/Layout";
 import { PageNotFound } from "@/app/components/PageNotFound";
 import Projects from "@/app/components/Projects";
-import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
@@ -12,10 +11,7 @@ import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 const slug = "projects";
 
 export async function generateMetadata() {
-  return {
-    ...generatePageMetadata({ pageSlug: slug }),
-    revalidate: REVALIDATE_INTERVAL,
-  };
+  return generatePageMetadata({ pageSlug: slug });
 }
 
 export default async function Page() {

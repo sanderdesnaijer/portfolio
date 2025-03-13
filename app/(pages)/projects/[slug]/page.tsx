@@ -3,13 +3,15 @@ import { QueryParams } from "@sanity/client";
 import { projectQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { PageNotFound } from "@/app/components/PageNotFound";
 import { Layout } from "@/app/components/Layout";
 import Project from "@/app/components/Project";
 import { Tags } from "@/app/components/Tags";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
-import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
+import { getTranslations } from "next-intl/server";
+import { NotFound } from "@/app/components/NotFound";
+
+const slug = "projects";
 
 export async function generateMetadata({
   params,
@@ -20,11 +22,20 @@ export async function generateMetadata({
     query: projectQuery,
     params,
   });
+  const t = await getTranslations();
 
-  return {
-    ...generatePageMetadata({ pageSlug: "projects", project }),
-    revalidate: REVALIDATE_INTERVAL,
-  };
+  if (!project) {
+    return {
+      title: t("pages.project.404.title"),
+      description: t("pages.project.404.description"),
+      robots: {
+        index: false,
+        follow: true,
+      },
+    };
+  }
+
+  return generatePageMetadata({ pageSlug: slug, project });
 }
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {
@@ -33,20 +44,27 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
     params,
   });
   const { setting, menuItems } = await fetchCommonData();
+  const t = await getTranslations();
 
-  if (!project) {
-    return <PageNotFound />;
-  }
+  const title = project ? project.title : t("pages.project.404.title");
 
   return (
     <Layout
-      pageTitle={project.title}
+      pageTitle={title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
       menuItems={menuItems}
     >
-      <Project project={project} />
-      {project.tags && <Tags tags={project.tags} />}
+      {project ? (
+        <Project project={project} />
+      ) : (
+        <NotFound
+          title={t("pages.project.404.action")}
+          description={t("pages.project.404.description")}
+          href={`${process.env.NEXT_PUBLIC_BASE_URL}/${slug}` || `/${slug}`}
+        />
+      )}
+      {project && project.tags && <Tags tags={project.tags} />}
     </Layout>
   );
 };

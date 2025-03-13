@@ -1,5 +1,5 @@
 "use server";
-import { LinkList } from "./components/LinkList";
+import { CustomLink } from "./components/LinkList";
 import { getTranslations } from "next-intl/server";
 import { AUTHOR_NAME } from "./utils/constants";
 
@@ -21,17 +21,15 @@ export default async function Page() {
 
   return (
     <div className="flex h-screen flex-col items-center justify-center">
-      <h1 className="w-full text-center text-2xl">{t("page-not-found")}</h1>
-      {/** TODO: dont send into new tab with _blank  */}
-      <LinkList
-        links={[
-          {
-            title: t("error.404.action"),
-            link: process.env.NEXT_PUBLIC_BASE_URL || "/",
-            icon: "demo",
-          },
-        ]}
-      ></LinkList>
+      <h1 className="mb-2 w-full text-center text-2xl font-bold">
+        {t("page-not-found")}
+      </h1>
+      <CustomLink
+        title={t("error.404.action")}
+        href={process.env.NEXT_PUBLIC_BASE_URL || "/"}
+        target="_self"
+        className={"inline-block text-center"}
+      />
     </div>
   );
 }

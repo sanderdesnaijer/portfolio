@@ -12,8 +12,13 @@ export async function getMediumArticles(): Promise<MediumArticle[]> {
 
 export async function getMediumArticle(
   params: QueryParams
-): Promise<MediumArticle> {
-  return await fetch(`${baseUrl}/api/medium/${params.slug}`, {
+): Promise<MediumArticle | null> {
+  const response = await fetch(`${baseUrl}/api/medium/${params.slug}`, {
     next: { revalidate: REVALIDATE_INTERVAL },
-  }).then((data) => data.json());
+  });
+  if (!response.ok) {
+    return null;
+  }
+  const data = await response.json();
+  return data;
 }

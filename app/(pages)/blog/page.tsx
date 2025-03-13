@@ -15,15 +15,11 @@ import { TagSanity } from "@/sanity/types/tagType";
 import { getMediumArticles } from "@/app/utils/api";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
-import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 
 const slug = "blog";
 
 export async function generateMetadata() {
-  return {
-    ...generatePageMetadata({ pageSlug: slug }),
-    revalidate: REVALIDATE_INTERVAL,
-  };
+  return generatePageMetadata({ pageSlug: slug });
 }
 
 export default async function Page() {
