@@ -43,6 +43,7 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
     query: projectQuery,
     params,
   });
+
   const { setting, menuItems } = await fetchCommonData();
   const t = await getTranslations();
 

@@ -18,7 +18,7 @@ describe("app/page", () => {
 
     const { container } = render(await Home());
     expect(
-      screen.getByText(getTranslationKey("error.404.generic.title"))
+      screen.getByText(getTranslationKey("error.404.generic.description"))
     ).toBeInTheDocument();
     expect(container).toMatchSnapshot();
   });

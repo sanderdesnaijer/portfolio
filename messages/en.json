@@ -17,6 +17,9 @@
     }
   },
   "error": {
+    "generic": {
+      "title": "An error occurred"
+    },
     "404": {
       "generic": {
         "title": "Page not found",

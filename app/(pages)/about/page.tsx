@@ -7,7 +7,6 @@ import imageUrlBuilder from "@sanity/image-url";
 import { client } from "@/sanity/lib/client";
 import { JobSanity, PageSanity } from "@/sanity/types";
 import { convertDate } from "@/app/utils/utils";
-import { PageNotFound } from "@/app/components/PageNotFound";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
@@ -15,6 +14,7 @@ import { Tags } from "@/app/components/Tags";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { DynamicElement } from "@/app/components/DynamicElement";
+import { NotFound } from "@/app/components/NotFound";
 
 const slug = "about";
 const builder = imageUrlBuilder(client);
@@ -91,100 +91,108 @@ export default async function Page() {
 
   const t = await getTranslations();
 
-  if (!page) {
-    return <PageNotFound />;
-  }
+  const title = page ? page.title : t("error.404.generic.title");
 
   return (
     <Layout
-      pageTitle={page.title}
+      pageTitle={title}
       socialMedia={setting.socialMedia}
       authorName={setting.title}
       menuItems={menuItems}
     >
-      <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[88px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[88px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] md:mt-auto md:mr-auto md:w-auto md:before:top-[168px] md:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
-        <Image
-          alt={page.imageAlt}
-          src={builder
-            .image(page.imageURL)
-            .width(mainImageSizeWidtht)
-            .height(mainImageSizeHeigth)
-            .url()}
-          width={mainImageSizeWidtht}
-          height={mainImageSizeHeigth}
-          priority
-        />
-      </div>
-      {page?.body ? (
-        <PortableText value={page.body} components={components} />
-      ) : null}
+      {page ? (
+        <>
+          <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[88px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[88px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] md:mt-auto md:mr-auto md:w-auto md:before:top-[168px] md:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
+            <Image
+              alt={page.imageAlt}
+              src={builder
+                .image(page.imageURL)
+                .width(mainImageSizeWidtht)
+                .height(mainImageSizeHeigth)
+                .url()}
+              width={mainImageSizeWidtht}
+              height={mainImageSizeHeigth}
+              priority
+            />
+          </div>
+          {page?.body ? (
+            <PortableText value={page.body} components={components} />
+          ) : null}
 
-      <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
-      <ol className="not-prose group/list flex list-none flex-col gap-10 p-0">
-        {jobs?.map((job) => {
-          return (
-            <li
-              key={job._id}
-              className="group/item relative transition-colors duration-100 md:flex"
-            >
-              <div className="md:w-2/7">
-                <p className="mt-0 mb-2 text-sm text-gray-400 italic md:text-right">
-                  {getExperienceTitle(
-                    job.startDate,
-                    job.endDate,
-                    t("pages.about.datePresent")
-                  )}
-                </p>
-              </div>
-              <div className="md:w-5/7 md:pl-4">
-                <div className="mb-2 flex">
-                  <Image
-                    alt={job.imageURL}
-                    src={builder
-                      .image(job.imageURL)
-                      .width(companyIconSize)
-                      .height(companyIconSize)
-                      .url()}
-                    width={companyIconSize}
-                    height={companyIconSize}
-                    className="mt-0 h-fit transition group-hover/item:scale-105"
-                  />
-                  <div className="pl-3">
-                    <Link
-                      href={job.link}
-                      aria-label={`[Link to] ${job.companyName}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="before:absolute before:inset-0 before:block before:h-full before:w-full"
-                    >
-                      <DynamicElement
-                        as="h3"
-                        className="text-lg leading-[18px] font-bold group-hover/item:translate-x-1 group-hover/item:italic"
-                      >
-                        {job.companyName.trim()}
-                      </DynamicElement>
-                      <p className="text-base transition group-hover/item:translate-x-1">
-                        {job.jobTitle}
-                      </p>
-                      <p className="text-xs text-gray-400 italic transition group-hover/item:translate-x-1">
-                        {job.employmentType}{" "}
-                        {job.contractName &&
-                          `(${t("pages.about.jobContract")} ${job.contractName})`}
-                      </p>
-                    </Link>
+          <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
+          <ol className="not-prose group/list flex list-none flex-col gap-10 p-0">
+            {jobs?.map((job) => {
+              return (
+                <li
+                  key={job._id}
+                  className="group/item relative transition-colors duration-100 md:flex"
+                >
+                  <div className="md:w-2/7">
+                    <p className="mt-0 mb-2 text-sm text-gray-400 italic md:text-right">
+                      {getExperienceTitle(
+                        job.startDate,
+                        job.endDate,
+                        t("pages.about.datePresent")
+                      )}
+                    </p>
                   </div>
-                </div>
-                <PortableText
-                  value={job.description}
-                  components={jobComponents}
-                />
+                  <div className="md:w-5/7 md:pl-4">
+                    <div className="mb-2 flex">
+                      <Image
+                        alt={job.imageURL}
+                        src={builder
+                          .image(job.imageURL)
+                          .width(companyIconSize)
+                          .height(companyIconSize)
+                          .url()}
+                        width={companyIconSize}
+                        height={companyIconSize}
+                        className="mt-0 h-fit transition group-hover/item:scale-105"
+                      />
+                      <div className="pl-3">
+                        <Link
+                          href={job.link}
+                          aria-label={`[Link to] ${job.companyName}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="before:absolute before:inset-0 before:block before:h-full before:w-full"
+                        >
+                          <DynamicElement
+                            as="h3"
+                            className="text-lg leading-[18px] font-bold group-hover/item:translate-x-1 group-hover/item:italic"
+                          >
+                            {job.companyName.trim()}
+                          </DynamicElement>
+                          <p className="text-base transition group-hover/item:translate-x-1">
+                            {job.jobTitle}
+                          </p>
+                          <p className="text-xs text-gray-400 italic transition group-hover/item:translate-x-1">
+                            {job.employmentType}{" "}
+                            {job.contractName &&
+                              `(${t("pages.about.jobContract")} ${job.contractName})`}
+                          </p>
+                        </Link>
+                      </div>
+                    </div>
+                    <PortableText
+                      value={job.description}
+                      components={jobComponents}
+                    />
 
-                {job.tags && <Tags tags={job.tags} />}
-              </div>
-            </li>
-          );
-        })}
-      </ol>
+                    {job.tags && <Tags tags={job.tags} />}
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </>
+      ) : (
+        <NotFound
+          title={t("error.404.generic.action")}
+          description={t("error.404.generic.description")}
+          href={`${process.env.NEXT_PUBLIC_BASE_URL}` || `/`}
+        />
+      )}
     </Layout>
   );
 }

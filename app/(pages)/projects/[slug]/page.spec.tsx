@@ -29,7 +29,7 @@ describe("app/(pages)/[slug]/page", () => {
       expect(screen.getByText(mockProject.title)).toBeInTheDocument();
     });
 
-    it("renders PageNotFound when project data is not found", async () => {
+    it("renders not found when project data is not found", async () => {
       (sanityFetch as jest.Mock)
         .mockResolvedValueOnce(null)
         .mockResolvedValueOnce(mockSetting)
