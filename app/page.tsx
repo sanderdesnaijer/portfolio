@@ -2,13 +2,15 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery } from "@/sanity/lib/queries";
 import { PageSanity } from "@/sanity/types";
-import { PageNotFound } from "./components/PageNotFound";
 import Menu from "./components/Menu";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
 import { SocialIcons } from "./components/SocialIcons";
 import { generateMetaData } from "./utils/metadata";
 import { AUTHOR_NAME } from "./utils/constants";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
+import { getTranslations } from "next-intl/server";
+import { NotFound } from "./components/NotFound";
+import { getBaseUrl } from "./utils/routes";
 
 export async function generateMetadata() {
   const page = await sanityFetch<PageSanity>({
@@ -22,15 +24,22 @@ export async function generateMetadata() {
     publishedTime: page._createdAt,
     modifiedTime: page._updatedAt,
     imageUrl: page.imageURL,
-    url: process.env.NEXT_PUBLIC_BASE_URL!,
+    url: getBaseUrl(),
   });
 }
 
 export default async function Home() {
   const { setting, menuItems } = await fetchCommonData();
 
-  if (!setting) {
-    return <PageNotFound />;
+  if (!setting || !menuItems) {
+    const t = await getTranslations();
+
+    return (
+      <NotFound
+        title={t("error.404.generic.action")}
+        description={t("error.404.generic.description")}
+      />
+    );
   }
 
   return (

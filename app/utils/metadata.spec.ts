@@ -3,6 +3,7 @@ import { mockProject } from "../test-utils/mockProjects";
 import { AUTHOR_NAME } from "./constants";
 import { generateMetaData, generatePageMetadata } from "./metadata";
 import { sanityFetch } from "@/sanity/lib/fetch";
+import { getBaseUrl } from "./routes";
 
 describe("app/utils/metadata", () => {
   afterEach(() => {
@@ -156,9 +157,7 @@ describe("app/utils/metadata", () => {
 
       const result = await generatePageMetadata({ pageSlug });
 
-      expect(result.openGraph.url).toBe(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/page-slug`
-      );
+      expect(result.openGraph.url).toBe(`${getBaseUrl()}/page-slug`);
     });
 
     it("should generate correct metadata with project provided", async () => {

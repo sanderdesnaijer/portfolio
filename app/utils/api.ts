@@ -1,8 +1,9 @@
 import { QueryParams } from "next-sanity";
 import { MediumArticle } from "../api/medium/types";
 import { REVALIDATE_INTERVAL } from "./constants";
+import { getBaseUrl } from "./routes";
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+const baseUrl = getBaseUrl();
 
 export async function getMediumArticles(): Promise<MediumArticle[]> {
   return await fetch(`${baseUrl}/api/medium`, {

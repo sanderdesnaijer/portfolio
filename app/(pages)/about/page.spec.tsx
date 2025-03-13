@@ -113,7 +113,7 @@ describe("app/(pages)/about-me", () => {
     render(await Page());
 
     expect(
-      screen.getByText(getTranslationKey("error.404.generic.title"))
+      screen.getByText(getTranslationKey("error.404.generic.description"))
     ).toBeInTheDocument();
   });
 

@@ -10,8 +10,9 @@ import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
+import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
 
-const slug = "projects";
+const { projects: slug } = pageSlugs;
 
 export async function generateMetadata({
   params,
@@ -43,6 +44,7 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
     query: projectQuery,
     params,
   });
+
   const { setting, menuItems } = await fetchCommonData();
   const t = await getTranslations();
 
@@ -61,7 +63,7 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
         <NotFound
           title={t("error.404.project.action")}
           description={t("error.404.project.description")}
-          href={`${process.env.NEXT_PUBLIC_BASE_URL}/${slug}` || `/${slug}`}
+          href={`${getBaseUrl()}/${slug}` || `/${slug}`}
         />
       )}
       {project && project.tags && <Tags tags={project.tags} />}

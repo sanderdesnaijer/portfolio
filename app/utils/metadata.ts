@@ -4,6 +4,7 @@ import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { toPlainText } from "next-sanity";
 import { truncateText } from "./utils";
 import { AUTHOR_NAME } from "./constants";
+import { getBaseUrl } from "./routes";
 
 export const generateMetaData = ({
   title,
@@ -97,7 +98,7 @@ export async function generatePageMetadata({
     : page.description;
 
   const getUrl = (): string => {
-    return `${process.env.NEXT_PUBLIC_BASE_URL}/${page.slug.current}${project?.slug.current ? `/${project?.slug.current}` : ""}`;
+    return `${getBaseUrl()}/${page.slug.current}${project?.slug.current ? `/${project?.slug.current}` : ""}`;
   };
 
   const url = getUrl();

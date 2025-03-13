@@ -21,6 +21,13 @@ const eslintConfig = [
         { argsIgnorePattern: "^_" },
       ],
       "object-shorthand": ["error", "always"],
+      "prefer-destructuring": [
+        "error",
+        {
+          object: true,
+          array: false,
+        },
+      ],
     },
   },
   {
