@@ -25,7 +25,7 @@ const Menu = React.forwardRef<
 >(
   (
     {
-      className = "order-2 border-none group-[.sticky]:bg-white dark:group-[.sticky]:bg-black  group-[.sticky]:text-2xl group-[.sticky]:place-content-evenly group-[.sticky]:py-8 group-[.sticky]:bottom-0 group-[.sticky]:left-0 group-[.sticky]:right-0 group-[.sticky]:fixed flex min-w-[172px] font-extralight before:absolute before:right-[-100px] before:left-[-100px] before:h-[24px] md:flex-col md:justify-end md:pl-4 md:text-4xl",
+      className = "order-2 dark:group-[.sticky]:shadow-[0px_-3px_15px_rgba(0,0,0,0.8)] group-[.sticky]:shadow-[0px_-1px_10px_rgba(0,0,0,0.15)] border-none group-[.sticky]:bg-white dark:group-[.sticky]:bg-black  group-[.sticky]:text-2xl group-[.sticky]:place-content-evenly group-[.sticky]:py-8 group-[.sticky]:bottom-0 group-[.sticky]:left-0 group-[.sticky]:right-0 group-[.sticky]:fixed flex min-w-[172px] font-extralight  md:flex-col md:justify-end md:pl-4 md:text-4xl",
       menuItems,
     },
     ref
@@ -46,7 +46,7 @@ const Menu = React.forwardRef<
       <nav ref={ref} aria-label="page-navigation" className={className}>
         {menuItems.map((item, i) => (
           <Link
-            className={`${isActive(item) ? "font-bold" : ""} translate-x-0 transition hover:font-bold hover:italic md:mr-2 md:mr-auto md:hover:translate-x-2`}
+            className={`${isActive(item) ? "font-bold" : ""} mr-2 translate-x-0 transition hover:font-bold hover:italic md:mr-auto md:hover:translate-x-2`}
             key={i}
             href={item.pathname}
           >

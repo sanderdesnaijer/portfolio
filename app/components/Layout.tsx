@@ -29,7 +29,12 @@ export default function useScrollPosition(
           const isSticky = navTop - currentY <= 0;
           const direction = currentY > lastY ? "down" : "up";
 
-          console.log(isSticky);
+          console.log(
+            isSticky,
+            scrollPositionTrigger.current,
+            navTop,
+            currentY
+          );
 
           const shouldStick =
             // direction === "up" &&
@@ -73,9 +78,9 @@ export const Layout: React.FC<{
     <div className="container mx-auto grid grid-cols-9 pt-6 md:pt-0">
       <div
         ref={mainRef}
-        className="group peer top-[0px] z-20 col-span-9 flex flex-col justify-end bg-white p-6 pt-0 pb-0 md:sticky md:top-0 md:col-span-2 md:h-screen md:flex-row md:gap-4 md:bg-transparent md:pb-6 dark:bg-black dark:md:bg-transparent"
+        className="group peer relative top-[0px] z-20 col-span-9 flex flex-col justify-end bg-white p-6 pt-0 pb-0 md:sticky md:top-0 md:col-span-2 md:h-screen md:flex-row md:gap-4 md:bg-transparent md:pb-6 dark:bg-black dark:md:bg-transparent"
       >
-        <div className="flex flex-col justify-between py-2 md:items-center md:py-0">
+        <div className="flex flex-col justify-between py-2 before:absolute before:top-[0px] before:right-[-100px] before:left-[-100px] before:h-full before:bg-white group-[.sticky]:before:shadow-[0px_1px_10px_rgba(0,0,0,0.15)] md:items-center md:py-0 dark:before:bg-black dark:group-[.sticky]:before:shadow-[0px_3px_15px_rgba(0,0,0,0.8)]">
           <nav
             aria-label="author-navigation"
             className="order-2 flex justify-between md:block"
