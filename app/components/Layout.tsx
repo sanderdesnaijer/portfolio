@@ -18,8 +18,7 @@ export default function useScrollPosition(
 
   const handleMediaQueryChange = useCallback(
     (event: MediaQueryListEvent) => {
-      const shouldEnable = !event.matches;
-      setIsStickyEnabled(shouldEnable);
+      setIsStickyEnabled(!event.matches);
       scrollRef.current?.classList.remove(
         "sticky",
         "sticky-show",
@@ -38,6 +37,7 @@ export default function useScrollPosition(
         const maxScroll =
           document.documentElement.scrollHeight - window.innerHeight;
 
+        // Don't do anything when the bottom of the page is reached
         if (currentY >= maxScroll) {
           lastY.current = maxScroll;
           ticking.current = false;
@@ -50,6 +50,7 @@ export default function useScrollPosition(
 
         if (isSticky) {
           classList?.add("sticky");
+          // Add transition with a delay to not prevent flickering
           requestAnimationFrame(() => {
             classList?.add("sticky-transition");
             if (direction === "up") {
