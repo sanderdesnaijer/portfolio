@@ -11,9 +11,11 @@ export default function useScrollPosition(
   stickyRef: React.RefObject<HTMLDivElement | null>
 ) {
   const scrollPositionTrigger = React.useRef<number>(null);
+
   React.useEffect(() => {
     let lastY = window.scrollY;
     let ticking = false;
+
     if (scrollPositionTrigger.current === null && stickyRef.current !== null) {
       scrollPositionTrigger.current =
         (stickyRef.current?.offsetTop || 0) +
@@ -24,26 +26,34 @@ export default function useScrollPosition(
       if (!ticking) {
         requestAnimationFrame(() => {
           const currentY = window.scrollY;
-          const navTop = scrollPositionTrigger.current || 0;
+          const offsetTop = scrollPositionTrigger.current || 0;
+          const maxScroll =
+            document.documentElement.scrollHeight - window.innerHeight;
 
-          const isSticky = navTop - currentY <= 0;
+          if (currentY >= maxScroll) {
+            lastY = maxScroll;
+            ticking = false;
+            return;
+          }
+
+          const isSticky = offsetTop - currentY <= 0;
           const direction = currentY > lastY ? "down" : "up";
 
-          console.log(
-            isSticky,
-            scrollPositionTrigger.current,
-            navTop,
-            currentY
-          );
-
-          const shouldStick = direction === "up" && isSticky;
-
-          if (shouldStick) {
+          if (isSticky) {
             scrollRef.current?.classList.add("sticky");
-            // stickyRef.current?.classList.add("-translate-y-6");
+            // add class with delay to avoid flicker of transition
+            setTimeout(() => {
+              scrollRef.current?.classList.add("sticky-transition");
+            }, 1);
+            if (direction === "up") {
+              scrollRef.current?.classList.add("sticky-show");
+            } else {
+              scrollRef.current?.classList.remove("sticky-show");
+            }
           } else {
             scrollRef.current?.classList.remove("sticky");
-            // stickyRef.current?.classList.remove("-translate-y-6");
+            scrollRef.current?.classList.remove("sticky-show");
+            scrollRef.current?.classList.remove("sticky-transition");
           }
 
           lastY = currentY;
@@ -76,9 +86,9 @@ export const Layout: React.FC<{
     <div className="container mx-auto grid grid-cols-9 pt-6 md:pt-0">
       <div
         ref={mainRef}
-        className="group peer m:py-0 relative top-[0px] z-20 col-span-9 flex flex-col justify-end bg-white md:sticky md:top-0 md:col-span-2 md:h-screen md:flex-row md:gap-4 md:bg-transparent md:px-6 md:pb-6 dark:bg-black dark:md:bg-transparent"
+        className="group peer relative top-[0px] z-20 col-span-9 flex flex-col justify-end md:sticky md:top-0 md:col-span-2 md:h-screen md:flex-row md:gap-4 md:px-6 md:py-0 md:pb-6 xl:px-0"
       >
-        <div className="flex flex-col justify-between px-6 py-2 group-[.sticky]:shadow-md md:items-center md:px-0 md:py-0 dark:group-[.sticky]:shadow-[0px_2px_4px_-2px_rgba(0,0,0,0.8)]">
+        <div className="flex flex-col justify-between bg-white px-6 py-2 group-[.sticky]:-translate-y-full group-[.sticky-show]:translate-y-0 group-[.sticky-show]:shadow-md group-[.sticky-transition]:transition-all md:items-center md:bg-transparent md:px-0 md:py-0 dark:bg-black dark:group-[.sticky-show]:shadow-[0px_2px_4px_-2px_rgba(0,0,0,0.8)]">
           <nav
             aria-label="author-navigation"
             className="order-2 flex justify-between md:block"

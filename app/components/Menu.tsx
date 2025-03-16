@@ -9,23 +9,13 @@ export type MenuItem = {
   title: string;
 };
 
-// position: fixed;
-// bottom: 0;
-// width: 100%;
-// background: red;
-// left: 0;
-// right: 0;
-// justify-content: space-evenly;
-// padding: 20px 20px 40px;
-// font-size: 22px;
-
 const Menu = React.forwardRef<
   HTMLElement,
   { className?: string; menuItems: MenuItem[] }
 >(
   (
     {
-      className = "px-6 order-2 dark:group-[.sticky]:shadow-[0px_-2px_4px_-2px_rgba(0,0,0,0.8)] group-[.sticky]:shadow-[0_-4px_6px_-1px_var(--tw-shadow-color,rgb(0_0_0_/_0.1))] border-none group-[.sticky]:bg-white dark:group-[.sticky]:bg-black  group-[.sticky]:text-2xl group-[.sticky]:place-content-evenly group-[.sticky]:py-8 group-[.sticky]:bottom-0 group-[.sticky]:left-0 group-[.sticky]:right-0 group-[.sticky]:fixed flex min-w-[172px] font-extralight  md:flex-col md:justify-end md:pl-4 md:text-4xl",
+      className = "order-2 group-[.sticky]:translate-y-full group-[.sticky-show]:translate-y-0 group-[.sticky-transition]:transition-transform flex min-w-[172px] border-none px-6 font-extralight group-[.sticky]:fixed group-[.sticky]:right-0 group-[.sticky]:bottom-0 group-[.sticky]:left-0 group-[.sticky]:place-content-evenly group-[.sticky]:bg-white group-[.sticky]:py-8 group-[.sticky]:text-2xl group-[.sticky]:shadow-[0_-4px_6px_-1px_var(--tw-shadow-color,rgb(0_0_0_/_0.1))] md:flex-col md:justify-end md:pl-4 md:text-4xl dark:group-[.sticky]:bg-black dark:group-[.sticky]:shadow-[0px_-2px_4px_-2px_rgba(0,0,0,0.8)]",
       menuItems,
     },
     ref
@@ -57,6 +47,6 @@ const Menu = React.forwardRef<
     );
   }
 );
-Menu.displayName = "Menu"; // Required for forwardRef components
+Menu.displayName = "Menu";
 
 export default Menu;
