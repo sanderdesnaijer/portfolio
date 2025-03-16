@@ -10,7 +10,7 @@ export type MenuItem = {
 };
 
 const Menu = React.forwardRef<
-  HTMLElement,
+  HTMLDivElement,
   { className?: string; menuItems: MenuItem[] }
 >(
   (
@@ -33,16 +33,22 @@ const Menu = React.forwardRef<
     };
 
     return (
-      <nav ref={ref} aria-label="page-navigation" className={className}>
-        {menuItems.map((item, i) => (
-          <Link
-            className={`${isActive(item) ? "font-bold" : ""} mr-2 translate-x-0 transition-transform group-[.sticky]:mr-0 group-[.sticky]:w-1/4 group-[.sticky]:pt-4 group-[.sticky]:pb-6 group-[.sticky]:text-center hover:font-bold hover:italic focus:font-bold active:font-bold md:mr-auto md:hover:translate-x-2`}
-            key={i}
-            href={item.pathname}
-          >
-            {item.title}
-          </Link>
-        ))}
+      <nav aria-label="Main navigation" ref={ref} className={className}>
+        <ul className="flex w-full md:block">
+          {menuItems.map((item, i) => (
+            <li key={i} className="flex group-[.sticky]:w-1/4">
+              <Link
+                className={`${isActive(item) ? "font-bold" : ""} mr-2 block w-full translate-x-0 transition-transform group-[.sticky]:mr-0 group-[.sticky]:pt-4 group-[.sticky]:pb-6 group-[.sticky]:text-center hover:font-bold hover:italic active:font-bold md:mr-auto md:hover:translate-x-2`}
+                href={item.pathname}
+                {...(isActive(item) && {
+                  ["aria-current"]: "page",
+                })}
+              >
+                {item.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </nav>
     );
   }
