@@ -4,7 +4,9 @@ import React from "react";
 import Image from "next/image";
 import "./style.css";
 
-export const ThemeToggle = () => {
+export const ThemeToggle: React.FC<{ className?: string }> = ({
+  className = "theme-toggle absolute right-[0px] z-10 cursor-pointer group-[.sticky]:top-[52px] md:relative",
+}) => {
   const [mounted, setMounted] = React.useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -12,7 +14,7 @@ export const ThemeToggle = () => {
 
   if (!mounted) {
     return (
-      <div className="theme-toggle absolute top-[36px] right-0 z-10 cursor-pointer group-[.sticky]:top-[52px] md:relative md:top-6 md:right-auto">
+      <div className={className}>
         <Image
           src="data:image/svg+xml;base64,PHN2ZyBzdHJva2U9IiNGRkZGRkYiIGZpbGw9IiNGRkZGRkYiIHN0cm9rZS13aWR0aD0iMCIgdmlld0JveD0iMCAwIDI0IDI0IiBoZWlnaHQ9IjIwMHB4IiB3aWR0aD0iMjAwcHgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHJlY3Qgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiB4PSIyIiB5PSIyIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGg9IjIiIHJ4PSIyIj48L3JlY3Q+PC9zdmc+Cg=="
           width={24}
@@ -39,7 +41,7 @@ export const ThemeToggle = () => {
 
   return (
     <button
-      className="theme-toggle absolute top-[36px] right-0 z-10 cursor-pointer group-[.sticky]:top-[52px] md:relative md:top-6 md:right-auto"
+      className={className}
       id="theme-toggle"
       title="Toggles light & dark"
       aria-label={theme}

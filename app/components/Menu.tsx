@@ -15,7 +15,7 @@ const Menu = React.forwardRef<
 >(
   (
     {
-      className = "order-2 group-[.sticky]:translate-y-full group-[.sticky-show]:translate-y-0 group-[.sticky-transition]:transition-transform flex min-w-[172px] border-none px-6 group-[.sticky]:px-0 font-extralight group-[.sticky]:fixed group-[.sticky]:right-0 group-[.sticky]:bottom-0 group-[.sticky]:left-0 group-[.sticky]:place-content-evenly group-[.sticky]:bg-white group-[.sticky]:py-0 group-[.sticky]:text-2xl group-[.sticky]:shadow-[0_-4px_6px_-1px_var(--tw-shadow-color,rgb(0_0_0_/_0.1))] md:flex-col md:justify-end md:pl-4 md:text-4xl dark:group-[.sticky]:bg-black dark:group-[.sticky]:shadow-[0px_-2px_4px_-2px_rgba(0,0,0,0.8)]",
+      className = "order-2 group-[.sticky]:translate-y-full group-[.sticky-show]:translate-y-0 group-[.sticky-transition]:transition-transform flex min-w-[172px] border-none px-6 md:py-6 group-[.sticky]:px-0 font-extralight group-[.sticky]:fixed group-[.sticky]:right-0 group-[.sticky]:bottom-0 group-[.sticky]:left-0 group-[.sticky]:place-content-evenly group-[.sticky]:bg-white group-[.sticky]:py-0 group-[.sticky]:text-2xl group-[.sticky]:shadow-[0_-4px_6px_-1px_var(--tw-shadow-color,rgb(0_0_0_/_0.1))] md:flex-col md:justify-end md:pl-4 md:text-4xl dark:group-[.sticky]:bg-black dark:group-[.sticky]:shadow-[0px_-2px_4px_-2px_rgba(0,0,0,0.8)]",
       menuItems,
     },
     ref
@@ -34,7 +34,7 @@ const Menu = React.forwardRef<
 
     return (
       <nav aria-label="Main navigation" ref={ref} className={className}>
-        <ul className="flex w-full md:block">
+        <ul className="flex w-full md:absolute md:block">
           {menuItems.map((item, i) => (
             <li key={i} className="flex group-[.sticky]:w-1/4">
               <Link

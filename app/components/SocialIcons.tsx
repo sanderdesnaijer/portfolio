@@ -7,7 +7,7 @@ export const SocialIcons: React.FC<{
   className?: string;
 }> = ({
   socialMedia = [],
-  className = "group left-0 flex gap-2 md:flex-col group-[.sticky]:hidden",
+  className = "group left-0 md:flex gap-2 md:flex-col hidden",
 }) => {
   return (
     <ul className={className}>
