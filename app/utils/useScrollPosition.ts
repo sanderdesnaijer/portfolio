@@ -65,11 +65,7 @@ export default function useScrollPosition(
           // Add transition with a delay to not prevent flickering
           requestAnimationFrame(() => {
             classList?.add("sticky-transition");
-            if (direction === "up") {
-              classList?.add("sticky-show");
-            } else {
-              classList?.remove("sticky-show");
-            }
+            classList?.toggle("sticky-show", direction === "up");
           });
         } else {
           classList?.remove("sticky", "sticky-show", "sticky-transition");
@@ -96,7 +92,7 @@ export default function useScrollPosition(
 
     // Event listeners
     mdQuery.addEventListener("change", handleMediaQueryChange);
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // Cleanup
     return () => {
