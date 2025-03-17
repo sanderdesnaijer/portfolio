@@ -26,9 +26,8 @@ export const Layout: React.FC<{
         className="group peer relative top-[0px] z-20 col-span-9 flex flex-col justify-end md:sticky md:top-0 md:col-span-2 md:h-screen md:flex-row md:gap-4 md:px-6 md:py-0"
       >
         <Menu ref={navRef} menuItems={menuItems} />
-
-        <header className="flex flex-col justify-between px-6 py-2 group-[.sticky]:-translate-y-full group-[.sticky]:bg-white group-[.sticky-show]:translate-y-0 group-[.sticky-show]:shadow-md group-[.sticky-transition]:transition-transform md:items-center md:bg-transparent md:px-0 md:py-6 dark:group-[.sticky]:bg-black dark:group-[.sticky-show]:shadow-[0px_2px_4px_-2px_rgba(0,0,0,0.8)]">
-          <div className="order-2 flex justify-between md:block">
+        <header className="flex flex-col justify-between px-6 py-2 group-[.sticky]:-translate-y-full group-[.sticky-show]:translate-y-0 group-[.sticky-transition]:transition-transform group-[.sticky]:after:absolute group-[.sticky]:after:top-0 group-[.sticky]:after:-right-full group-[.sticky]:after:-left-full group-[.sticky]:after:h-full group-[.sticky]:after:bg-white group-[.sticky]:after:content-[''] group-[.sticky-show]:after:shadow-md md:items-center md:bg-transparent md:px-0 md:py-6 dark:group-[.sticky]:after:bg-black dark:group-[.sticky-show]:after:shadow-[0px_2px_4px_-2px_rgba(0,0,0,0.8)]">
+          <div className="z-1 order-2 flex justify-between md:block">
             <Link
               href={"/"}
               className="origin-bottom-right scale-100 text-lg font-bold transition-transform duration-100 hover:scale-105 md:mb-2 md:[writing-mode:vertical-lr]"
@@ -37,7 +36,7 @@ export const Layout: React.FC<{
             </Link>
             <SocialIcons socialMedia={socialMedia} />
           </div>
-          <div className="relative order-1 flex group-[.sticky]:translate-y-[-50px]">
+          <div className="relative z-2 order-1 flex group-[.sticky]:translate-y-[-50px]">
             <ThemeToggle />
           </div>
         </header>
