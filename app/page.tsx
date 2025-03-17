@@ -44,7 +44,7 @@ export default async function Home() {
 
   return (
     <div className="container mx-auto h-screen p-4">
-      <ThemeToggle />
+      <ThemeToggle className="theme-toggle absolute right-6 cursor-pointer" />
       <main className="grid grid-cols-6 gap-4 md:h-full">
         <div className="col-span-6 md:col-span-2 md:content-center">
           <h1 className="mb-4 text-3xl font-bold md:text-5xl">
@@ -59,7 +59,7 @@ export default async function Home() {
         <div className="col-span-3 content-center">
           <Menu
             menuItems={menuItems}
-            className="flex flex-col text-7xl font-extralight md:text-9xl"
+            className="flex flex-col text-7xl font-extralight md:text-9xl [&>ul]:relative [&>ul]:block"
           />
         </div>
       </main>

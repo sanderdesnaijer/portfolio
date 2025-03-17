@@ -24,12 +24,12 @@ export const ProjectListItem = ({
   body,
   tags,
 }: ProjectListItemProps) => (
-  <li className="group/item transition-del relative mt-0 mb-0 grid grid-cols-5 justify-between pl-0 no-underline transition-opacity duration-200">
+  <li className="group/item relative mt-0 mb-0 grid grid-cols-5 justify-between pl-0 no-underline transition-opacity duration-200">
     <div className="col-span-1 md:col-span-2">
       {imageURL && imageALT && (
         <div className="inline-block overflow-hidden">
           <Image
-            className="mt-0 mb-0 scale-100 object-fill transition group-hover:blur-[2px] group-hover/item:scale-105 group-hover/item:blur-none"
+            className="mt-0 mb-0 scale-100 transform-gpu object-fill transition group-hover:blur-[2px] group-hover/item:scale-105 group-hover/item:blur-none"
             src={imageURL}
             alt={imageALT}
             width={350}

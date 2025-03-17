@@ -17,7 +17,7 @@ const companyIconSize = 24;
 export const Project = ({ project }: { project: ProjectTypeSanity }) => {
   const t = useTranslations();
   const getCreatedAtTitle = (): string =>
-    `${t("projectCreatedAt")} ${project.companyName}`;
+    `${t("pages.about.projectCreatedAt")} ${project.companyName}`;
 
   return (
     <ProjectLayout

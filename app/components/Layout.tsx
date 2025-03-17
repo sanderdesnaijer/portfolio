@@ -1,8 +1,11 @@
+"use client";
 import Menu, { MenuItem } from "@/app/components/Menu";
 import { IconLink } from "@/sanity/types/types";
 import { ThemeToggle } from "./ThemeToggle/ThemeToggle";
 import { SocialIcons } from "./SocialIcons";
 import Link from "next/link";
+import React from "react";
+import useScrollPosition from "../utils/useScrollPosition";
 
 export const Layout: React.FC<{
   children?: React.ReactNode;
@@ -11,34 +14,39 @@ export const Layout: React.FC<{
   authorName: string;
   menuItems: MenuItem[];
 }> = ({ children, pageTitle, socialMedia, authorName, menuItems }) => {
+  const navRef = React.useRef<HTMLDivElement>(null);
+  const mainRef = React.useRef<HTMLDivElement>(null);
+
+  useScrollPosition(mainRef, navRef);
+
   return (
-    <div className="container mx-auto grid grid-cols-9">
-      <div className="bg top-0 z-20 col-span-9 flex flex-col justify-end gap-4 p-6 pb-0 md:sticky md:col-span-2 md:h-screen md:flex-row md:pb-6">
-        <div className="flex flex-col justify-between">
-          <nav
-            aria-label="author-navigation"
-            className="order-2 flex justify-between md:block"
-          >
+    <div className="container mx-auto grid grid-cols-9 pt-6 md:pt-0">
+      <div
+        ref={mainRef}
+        className="group peer relative top-[0px] z-20 col-span-9 flex flex-col justify-end md:sticky md:top-0 md:col-span-2 md:h-screen md:flex-row md:gap-4 md:px-6 md:py-0"
+      >
+        <Menu ref={navRef} menuItems={menuItems} />
+        <header className="flex flex-col justify-between px-6 py-2 group-[.sticky]:-translate-y-full group-[.sticky-show]:translate-y-0 group-[.sticky-transition]:transition-transform group-[.sticky]:after:absolute group-[.sticky]:after:top-0 group-[.sticky]:after:-right-full group-[.sticky]:after:-left-full group-[.sticky]:after:h-full group-[.sticky]:after:bg-white group-[.sticky]:after:content-[''] group-[.sticky-show]:after:shadow-md md:items-center md:bg-transparent md:px-0 md:py-6 dark:group-[.sticky]:after:bg-black dark:group-[.sticky-show]:after:shadow-[0px_2px_4px_-2px_rgba(0,0,0,0.8)]">
+          <div className="z-1 order-2 flex justify-between md:block">
             <Link
               href={"/"}
-              className="mb-2 origin-bottom-right scale-100 text-lg font-bold transition-transform duration-100 hover:scale-105 md:[writing-mode:vertical-lr]"
+              className="origin-bottom-right scale-100 text-lg font-bold transition-transform duration-100 hover:scale-105 md:mb-2 md:[writing-mode:vertical-lr]"
             >
               {authorName}
             </Link>
             <SocialIcons socialMedia={socialMedia} />
-          </nav>
-          <div className="order-1 flex">
+          </div>
+          <div className="relative z-2 order-1 flex group-[.sticky]:translate-y-[-50px]">
             <ThemeToggle />
           </div>
-        </div>
-        <Menu menuItems={menuItems} />
+        </header>
       </div>
-      <main className="prose prose-xl dark:prose-invert relative col-span-9 max-w-fit px-6 pt-6 md:col-span-5 md:px-0 md:pt-24">
+      <main className="prose prose-xl dark:prose-invert relative col-span-9 max-w-fit px-6 pt-6 peer-[.sticky]:top-[24px] md:col-span-5 md:px-0 md:pt-24">
         <div className="flex h-full flex-col">
-          <h1 className="relative mb-10 text-5xl font-bold after:absolute after:right-0 after:-bottom-5 after:-left-10 after:h-px after:w-[100vw] after:bg-current md:text-8xl md:after:-bottom-10 md:after:left-[-196px] after:dark:bg-white">
+          <h1 className="relative text-5xl font-bold after:absolute after:right-0 after:-bottom-5 after:-left-10 after:h-px after:w-[100vw] after:bg-current md:mb-10 md:text-8xl md:after:-bottom-10 md:after:left-[-196px] after:dark:bg-white">
             {pageTitle}
           </h1>
-          <div className="relative flex-1 pt-6 pb-12 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black md:pt-12 dark:after:bg-white">
+          <div className="relative flex-1 pt-6 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black md:pt-12 dark:after:bg-white">
             {children}
           </div>
         </div>

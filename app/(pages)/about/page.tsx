@@ -32,7 +32,7 @@ const components: Partial<PortableTextReactComponents> = {
       <h2 className="mb-10 w-2/3 text-4xl font-extralight">{children}</h2>
     ),
     span: ({ children }: { children?: React.ReactNode }) => (
-      <span className="mb-10 block w-2/3 text-lg font-extralight md:text-4xl">
+      <span className="mb-10 block w-2/3 text-2xl font-extralight md:text-4xl">
         {children}
       </span>
     ),
