@@ -1,4 +1,4 @@
-/* @import "https://unpkg.com/open-props/easings.min.css"; */
+@import "https://unpkg.com/open-props/easings.min.css";
 
 :root {
   --icon-fill-hover: rgba(0, 0, 0, 0.7);
