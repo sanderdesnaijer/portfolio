@@ -20,6 +20,21 @@ export default function useScrollPosition(
   const ticking = useRef(false);
   const lastY = useRef(0);
 
+  const addStickyClasses = useCallback(
+    (direction: "up" | "down") => {
+      const classList = ref.current?.classList;
+      if (classList) {
+        classList.add("sticky", "sticky-transition");
+        classList.toggle("sticky-show", direction === "up");
+      }
+    },
+    [ref]
+  );
+
+  const removeStickyClasses = useCallback(() => {
+    ref.current?.classList.remove("sticky", "sticky-show", "sticky-transition");
+  }, [ref]);
+
   const registerScrollPositionTrigger = useCallback(() => {
     if (scrollPositionTrigger.current === null && ref.current) {
       // Find element with '[data-sticky]'
@@ -28,7 +43,7 @@ export default function useScrollPosition(
       ) as HTMLElement;
       if (stickyElement) {
         const { top, height } = stickyElement.getBoundingClientRect();
-        scrollPositionTrigger.current = top + height;
+        scrollPositionTrigger.current = top + height + window.scrollY;
       } else {
         // eslint-disable-next-line no-console
         console.warn(
@@ -47,13 +62,9 @@ export default function useScrollPosition(
         registerScrollPositionTrigger();
       }
 
-      ref.current?.classList.remove(
-        "sticky",
-        "sticky-show",
-        "sticky-transition"
-      );
+      removeStickyClasses();
     },
-    [registerScrollPositionTrigger, ref]
+    [removeStickyClasses, registerScrollPositionTrigger]
   );
 
   const handleScroll = useCallback(() => {
@@ -73,23 +84,18 @@ export default function useScrollPosition(
 
         const isSticky = offsetTop - currentY <= 0;
         const direction = currentY > lastY.current ? "down" : "up";
-        const classList = ref.current?.classList;
 
         if (isSticky) {
-          classList?.add("sticky");
-          requestAnimationFrame(() => {
-            classList?.add("sticky-transition");
-            classList?.toggle("sticky-show", direction === "up");
-          });
+          addStickyClasses(direction);
         } else {
-          classList?.remove("sticky", "sticky-show", "sticky-transition");
+          removeStickyClasses();
         }
 
         lastY.current = currentY;
         ticking.current = false;
       });
     }
-  }, [isStickyEnabled, ref]);
+  }, [addStickyClasses, isStickyEnabled, removeStickyClasses]);
 
   useEffect(() => {
     const mdQuery = window.matchMedia("(min-width: 48rem)");
