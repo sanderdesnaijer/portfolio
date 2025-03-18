@@ -33,7 +33,12 @@ const Menu = React.forwardRef<
     };
 
     return (
-      <nav aria-label="Main navigation" ref={ref} className={className}>
+      <nav
+        data-sticky
+        aria-label="Main navigation"
+        ref={ref}
+        className={className}
+      >
         <ul className="flex w-full md:absolute md:block">
           {menuItems.map((item, i) => (
             <li key={i} className="flex group-[.sticky]:w-1/4">

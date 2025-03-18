@@ -1,26 +1,60 @@
-import { useState, useRef, useCallback, useLayoutEffect } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 /**
- * Custom hook to manage sticky positioning based on scroll behavior
- * @param scrollRef - Reference to the scrollable container
- * @param stickyRef - Reference to the element that should become sticky
- * @returns Object containing sticky state information
+ * Custom hook to manage sticky positioning based on scroll behavior.
+ * @param mainRef - Reference to the main container that should contain an element with [data-sticky].
+ *                  Example:
+ *                  ```tsx
+ *                  <div ref={mainRef}>
+ *                    <div data-sticky>Sticky Element</div>
+ *                  </div>
+ *                  ```
+ * @returns Object containing sticky state information.
+ * @warning The provided `mainRef` must contain an element with `[data-sticky]`, otherwise the hook will not function properly.
  */
 export default function useScrollPosition(
-  scrollRef: React.RefObject<HTMLDivElement | null>,
-  stickyRef: React.RefObject<HTMLDivElement | null>
+  ref: React.RefObject<HTMLDivElement | null>
 ) {
   const scrollPositionTrigger = useRef<number | null>(null);
   const [isStickyEnabled, setIsStickyEnabled] = useState(false);
   const ticking = useRef(false);
   const lastY = useRef(0);
 
+  const addStickyClasses = useCallback(
+    (direction: "up" | "down") => {
+      const classList = ref.current?.classList;
+      if (classList) {
+        classList?.add("sticky");
+        requestAnimationFrame(() => {
+          classList?.add("sticky-transition");
+          classList?.toggle("sticky-show", direction === "up");
+        });
+      }
+    },
+    [ref]
+  );
+
+  const removeStickyClasses = useCallback(() => {
+    ref.current?.classList.remove("sticky", "sticky-show", "sticky-transition");
+  }, [ref]);
+
   const registerScrollPositionTrigger = useCallback(() => {
-    if (scrollPositionTrigger.current === null && stickyRef.current) {
-      scrollPositionTrigger.current =
-        stickyRef.current.offsetTop + stickyRef.current.offsetHeight;
+    if (scrollPositionTrigger.current === null && ref.current) {
+      // Find element 'data-sticky' (or another selector)
+      const stickyElement = ref.current.querySelector(
+        "[data-sticky]"
+      ) as HTMLElement;
+      if (stickyElement) {
+        const { top, height } = stickyElement.getBoundingClientRect();
+        scrollPositionTrigger.current = top + height + window.scrollY;
+      } else {
+        // eslint-disable-next-line no-console
+        console.warn(
+          "useScrollPosition: No element with [data-sticky] found inside the provided ref."
+        );
+      }
     }
-  }, [stickyRef]);
+  }, [ref]);
 
   const handleMediaQueryChange = useCallback(
     (event: MediaQueryListEvent) => {
@@ -31,13 +65,9 @@ export default function useScrollPosition(
         registerScrollPositionTrigger();
       }
 
-      scrollRef.current?.classList.remove(
-        "sticky",
-        "sticky-show",
-        "sticky-transition"
-      );
+      removeStickyClasses();
     },
-    [registerScrollPositionTrigger, scrollRef]
+    [removeStickyClasses, registerScrollPositionTrigger]
   );
 
   const handleScroll = useCallback(() => {
@@ -49,7 +79,6 @@ export default function useScrollPosition(
         const maxScroll =
           document.documentElement.scrollHeight - window.innerHeight;
 
-        // Don't do anything when the bottom of the page is reached
         if (currentY >= maxScroll) {
           lastY.current = maxScroll;
           ticking.current = false;
@@ -58,31 +87,24 @@ export default function useScrollPosition(
 
         const isSticky = offsetTop - currentY <= 0;
         const direction = currentY > lastY.current ? "down" : "up";
-        const classList = scrollRef.current?.classList;
 
         if (isSticky) {
-          classList?.add("sticky");
-          // Add transition with a delay to not prevent flickering
-          requestAnimationFrame(() => {
-            classList?.add("sticky-transition");
-            classList?.toggle("sticky-show", direction === "up");
-          });
+          addStickyClasses(direction);
         } else {
-          classList?.remove("sticky", "sticky-show", "sticky-transition");
+          removeStickyClasses();
         }
 
         lastY.current = currentY;
         ticking.current = false;
       });
     }
-  }, [isStickyEnabled, scrollRef]);
+  }, [addStickyClasses, isStickyEnabled, removeStickyClasses]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const mdQuery = window.matchMedia("(min-width: 48rem)");
     const shouldEnableSticky = !mdQuery.matches;
     setIsStickyEnabled(shouldEnableSticky);
 
-    // Initialize scroll position trigger
     if (shouldEnableSticky) {
       registerScrollPositionTrigger();
       handleScroll();
@@ -90,11 +112,9 @@ export default function useScrollPosition(
 
     lastY.current = window.scrollY;
 
-    // Event listeners
     mdQuery.addEventListener("change", handleMediaQueryChange);
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Cleanup
     return () => {
       mdQuery.removeEventListener("change", handleMediaQueryChange);
       window.removeEventListener("scroll", handleScroll);

@@ -20,16 +20,13 @@ describe("useScrollPosition", () => {
 
   it("should initialize with sticky disabled", () => {
     const scrollRef = createRef<HTMLDivElement>();
-    const stickyRef = createRef<HTMLDivElement>();
 
-    const { result } = renderHook(() =>
-      useScrollPosition(scrollRef, stickyRef)
-    );
+    const { result } = renderHook(() => useScrollPosition(scrollRef));
 
     expect(result.current.isStickyEnabled).toBe(false);
   });
 
-  it("should enable sticky when media query matches", () => {
+  it("should enable sticky when media query matches (mobile view)", () => {
     mockMatchMedia.mockReturnValue({
       matches: false, // Simulate mobile view
       addEventListener: jest.fn(),
@@ -37,16 +34,13 @@ describe("useScrollPosition", () => {
     });
 
     const scrollRef = createRef<HTMLDivElement>();
-    const stickyRef = createRef<HTMLDivElement>();
 
-    const { result } = renderHook(() =>
-      useScrollPosition(scrollRef, stickyRef)
-    );
+    const { result } = renderHook(() => useScrollPosition(scrollRef));
 
     expect(result.current.isStickyEnabled).toBe(true);
   });
 
-  it("should disable sticky on wider screens", () => {
+  it("should disable sticky on wider screens (desktop view)", () => {
     mockMatchMedia.mockReturnValue({
       matches: true, // Simulate desktop view
       addEventListener: jest.fn(),
@@ -54,26 +48,26 @@ describe("useScrollPosition", () => {
     });
 
     const scrollRef = createRef<HTMLDivElement>();
-    const stickyRef = createRef<HTMLDivElement>();
 
-    const { result } = renderHook(() =>
-      useScrollPosition(scrollRef, stickyRef)
-    );
+    const { result } = renderHook(() => useScrollPosition(scrollRef));
 
     expect(result.current.isStickyEnabled).toBe(false);
   });
 
   it("should respond to scroll events", () => {
     const scrollRef = createRef<HTMLDivElement>();
-    const stickyRef = createRef<HTMLDivElement>();
 
-    const { result } = renderHook(() =>
-      useScrollPosition(scrollRef, stickyRef)
-    );
+    const { result } = renderHook(() => useScrollPosition(scrollRef));
 
-    // Mock stickyRef position
-    Object.defineProperty(stickyRef, "current", {
-      value: { offsetTop: 50, offsetHeight: 20 },
+    // Mock scrollRef structure with a sticky element inside
+    Object.defineProperty(scrollRef, "current", {
+      value: {
+        querySelector: jest.fn().mockReturnValue({
+          offsetTop: 50,
+          offsetHeight: 20,
+        }),
+        classList: { add: jest.fn(), remove: jest.fn(), toggle: jest.fn() },
+      },
       writable: true,
     });
 
@@ -89,7 +83,6 @@ describe("useScrollPosition", () => {
 
   it("should clean up event listeners on unmount", () => {
     const scrollRef = createRef<HTMLDivElement>();
-    const stickyRef = createRef<HTMLDivElement>();
 
     const mockMdQuery = {
       matches: false,
@@ -103,9 +96,7 @@ describe("useScrollPosition", () => {
     const addEventListenerSpy = jest.spyOn(window, "addEventListener");
     const removeEventListenerSpy = jest.spyOn(window, "removeEventListener");
 
-    const { unmount } = renderHook(() =>
-      useScrollPosition(scrollRef, stickyRef)
-    );
+    const { unmount } = renderHook(() => useScrollPosition(scrollRef));
 
     // Verify mdQuery listener is added before window events
     expect(mockMdQuery.addEventListener).toHaveBeenCalledWith(
