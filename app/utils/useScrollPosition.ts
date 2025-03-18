@@ -24,8 +24,11 @@ export default function useScrollPosition(
     (direction: "up" | "down") => {
       const classList = ref.current?.classList;
       if (classList) {
-        classList.add("sticky", "sticky-transition");
-        classList.toggle("sticky-show", direction === "up");
+        classList?.add("sticky");
+        requestAnimationFrame(() => {
+          classList?.add("sticky-transition");
+          classList?.toggle("sticky-show", direction === "up");
+        });
       }
     },
     [ref]
@@ -36,21 +39,20 @@ export default function useScrollPosition(
   }, [ref]);
 
   const registerScrollPositionTrigger = useCallback(() => {
-    if (!ref.current || scrollPositionTrigger.current !== null) {
-      return;
-    }
-    // Find element with '[data-sticky]'
-    const stickyElement =
-      (ref.current.querySelector("[data-sticky]") as HTMLElement) || null;
-
-    if (stickyElement) {
-      const { top, height } = stickyElement.getBoundingClientRect();
-      scrollPositionTrigger.current = top + height + window.scrollY;
-    } else {
-      // eslint-disable-next-line no-console
-      console.warn(
-        "useScrollPosition: No element with [data-sticky] found inside the provided ref."
-      );
+    if (scrollPositionTrigger.current === null && ref.current) {
+      // Find element 'data-sticky' (or another selector)
+      const stickyElement = ref.current.querySelector(
+        "[data-sticky]"
+      ) as HTMLElement;
+      if (stickyElement) {
+        const { top, height } = stickyElement.getBoundingClientRect();
+        scrollPositionTrigger.current = top + height + window.scrollY;
+      } else {
+        // eslint-disable-next-line no-console
+        console.warn(
+          "useScrollPosition: No element with [data-sticky] found inside the provided ref."
+        );
+      }
     }
   }, [ref]);
 
