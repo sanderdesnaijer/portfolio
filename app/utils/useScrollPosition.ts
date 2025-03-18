@@ -1,14 +1,19 @@
-import { useState, useRef, useCallback, useLayoutEffect } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 /**
- * Custom hook to manage sticky positioning based on scroll behavior
- * @param scrollRef - Reference to the scrollable container
- * @param stickyRef - Reference to the element that should become sticky
- * @returns Object containing sticky state information
+ * Custom hook to manage sticky positioning based on scroll behavior.
+ * @param mainRef - Reference to the main container that should contain an element with [data-sticky].
+ *                  Example:
+ *                  ```tsx
+ *                  <div ref={mainRef}>
+ *                    <div data-sticky>Sticky Element</div>
+ *                  </div>
+ *                  ```
+ * @returns Object containing sticky state information.
+ * @warning The provided `mainRef` must contain an element with `[data-sticky]`, otherwise the hook will not function properly.
  */
 export default function useScrollPosition(
-  scrollRef: React.RefObject<HTMLDivElement | null>,
-  stickyRef: React.RefObject<HTMLDivElement | null>
+  ref: React.RefObject<HTMLDivElement | null>
 ) {
   const scrollPositionTrigger = useRef<number | null>(null);
   const [isStickyEnabled, setIsStickyEnabled] = useState(false);
@@ -16,11 +21,22 @@ export default function useScrollPosition(
   const lastY = useRef(0);
 
   const registerScrollPositionTrigger = useCallback(() => {
-    if (scrollPositionTrigger.current === null && stickyRef.current) {
-      scrollPositionTrigger.current =
-        stickyRef.current.offsetTop + stickyRef.current.offsetHeight;
+    if (scrollPositionTrigger.current === null && ref.current) {
+      // Find element with '[data-sticky]'
+      const stickyElement = ref.current.querySelector(
+        "[data-sticky]"
+      ) as HTMLElement;
+      if (stickyElement) {
+        const { top, height } = stickyElement.getBoundingClientRect();
+        scrollPositionTrigger.current = top + height;
+      } else {
+        // eslint-disable-next-line no-console
+        console.warn(
+          "useScrollPosition: No element with [data-sticky] found inside the provided ref."
+        );
+      }
     }
-  }, [stickyRef]);
+  }, [ref]);
 
   const handleMediaQueryChange = useCallback(
     (event: MediaQueryListEvent) => {
@@ -31,13 +47,13 @@ export default function useScrollPosition(
         registerScrollPositionTrigger();
       }
 
-      scrollRef.current?.classList.remove(
+      ref.current?.classList.remove(
         "sticky",
         "sticky-show",
         "sticky-transition"
       );
     },
-    [registerScrollPositionTrigger, scrollRef]
+    [registerScrollPositionTrigger, ref]
   );
 
   const handleScroll = useCallback(() => {
@@ -49,7 +65,6 @@ export default function useScrollPosition(
         const maxScroll =
           document.documentElement.scrollHeight - window.innerHeight;
 
-        // Don't do anything when the bottom of the page is reached
         if (currentY >= maxScroll) {
           lastY.current = maxScroll;
           ticking.current = false;
@@ -58,11 +73,10 @@ export default function useScrollPosition(
 
         const isSticky = offsetTop - currentY <= 0;
         const direction = currentY > lastY.current ? "down" : "up";
-        const classList = scrollRef.current?.classList;
+        const classList = ref.current?.classList;
 
         if (isSticky) {
           classList?.add("sticky");
-          // Add transition with a delay to not prevent flickering
           requestAnimationFrame(() => {
             classList?.add("sticky-transition");
             classList?.toggle("sticky-show", direction === "up");
@@ -75,14 +89,13 @@ export default function useScrollPosition(
         ticking.current = false;
       });
     }
-  }, [isStickyEnabled, scrollRef]);
+  }, [isStickyEnabled, ref]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const mdQuery = window.matchMedia("(min-width: 48rem)");
     const shouldEnableSticky = !mdQuery.matches;
     setIsStickyEnabled(shouldEnableSticky);
 
-    // Initialize scroll position trigger
     if (shouldEnableSticky) {
       registerScrollPositionTrigger();
       handleScroll();
@@ -90,11 +103,9 @@ export default function useScrollPosition(
 
     lastY.current = window.scrollY;
 
-    // Event listeners
     mdQuery.addEventListener("change", handleMediaQueryChange);
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Cleanup
     return () => {
       mdQuery.removeEventListener("change", handleMediaQueryChange);
       window.removeEventListener("scroll", handleScroll);
