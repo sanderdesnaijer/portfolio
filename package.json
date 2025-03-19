@@ -11,7 +11,9 @@
     "format:check": "prettier -c .",
     "typecheck": "tsc --noEmit",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:e2e": "npx playwright test",
+    "test:e2e:ui": "npx playwright test --ui"
   },
   "dependencies": {
     "@sanity/icons": "^3.7.0",
@@ -28,6 +30,7 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",
+    "@playwright/test": "^1.51.1",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4.0.13",
     "@tailwindcss/typography": "^0.5.16",
