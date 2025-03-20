@@ -1,15 +1,13 @@
 "use client";
 
 import { PortableText } from "@portabletext/react";
-import { client } from "@/sanity/lib/client";
-import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { convertDate } from "../utils/utils";
 import { useTranslations } from "next-intl";
 import { ProjectLayout } from "./ProjectLayout";
+import { urlFor } from "@/sanity/lib/image";
 
-const builder = imageUrlBuilder(client);
 const imageWidth = 800;
 const imageHeight = 400;
 const companyIconSize = 24;
@@ -28,8 +26,7 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
         <p className="mt-0 mb-3 flex items-center text-xs italic">
           {getCreatedAtTitle()}
           <Image
-            src={builder
-              .image(project.companyLogo!)
+            src={urlFor(project.companyLogo!)
               .width(companyIconSize)
               .height(companyIconSize)
               .url()}
@@ -43,8 +40,7 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
       ) : null}
       {project?.mainImage && project.mainImage.alt ? (
         <Image
-          src={builder
-            .image(project.mainImage)
+          src={urlFor(project.mainImage)
             .width(imageWidth)
             .height(imageHeight)
             .url()}

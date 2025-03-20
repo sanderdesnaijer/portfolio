@@ -3,8 +3,6 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { jobsQuery, pageQuery } from "@/sanity/lib/queries";
 import { PortableText, PortableTextReactComponents } from "next-sanity";
 import Image from "next/image";
-import imageUrlBuilder from "@sanity/image-url";
-import { client } from "@/sanity/lib/client";
 import { JobSanity, PageSanity } from "@/sanity/types";
 import { convertDate } from "@/app/utils/utils";
 import { getTranslations } from "next-intl/server";
@@ -16,8 +14,8 @@ import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { DynamicElement } from "@/app/components/DynamicElement";
 import { NotFound } from "@/app/components/NotFound";
 import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
+import { urlFor } from "@/sanity/lib/image";
 
-const builder = imageUrlBuilder(client);
 const mainImageSizeHeigth = 341;
 const mainImageSizeWidtht = 256;
 const companyIconSize = 56;
@@ -108,8 +106,7 @@ export default async function Page() {
           <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[88px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[88px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] md:mt-auto md:mr-auto md:w-auto md:before:top-[168px] md:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
             <Image
               alt={page.imageAlt}
-              src={builder
-                .image(page.imageURL)
+              src={urlFor(page.imageURL)
                 .width(mainImageSizeWidtht)
                 .height(mainImageSizeHeigth)
                 .url()}
@@ -143,8 +140,7 @@ export default async function Page() {
                     <div className="mb-2 flex">
                       <Image
                         alt={job.imageURL}
-                        src={builder
-                          .image(job.imageURL)
+                        src={urlFor(job.imageURL)
                           .width(companyIconSize)
                           .height(companyIconSize)
                           .url()}

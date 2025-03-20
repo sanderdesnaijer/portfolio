@@ -29,6 +29,7 @@
     "styled-components": "^6.1.15"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
     "@eslint/eslintrc": "^3.3.0",
     "@playwright/test": "^1.51.1",
     "@svgr/webpack": "^8.1.0",
