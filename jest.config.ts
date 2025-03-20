@@ -32,6 +32,7 @@ const config: Config = {
     "^@/sanity/(.*)$": "<rootDir>/sanity/$1",
     "\\.svg": "<rootDir>/app/__mocks__/svg.ts",
   },
+  testPathIgnorePatterns: ["<rootDir>/e2e/"],
 };
 
 const jestConfigWithOverrides = async () => {
