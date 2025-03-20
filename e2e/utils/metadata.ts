@@ -95,7 +95,7 @@ export async function testPageMetadata(
   );
   await expect(page.locator('meta[name="twitter:site"]')).toHaveAttribute(
     "content",
-    expectedMeta.author
+    AUTHOR_NAME
   );
   await expect(page.locator('meta[name="twitter:creator"]')).toHaveAttribute(
     "content",
