@@ -18,6 +18,9 @@ async function checkAboutPageElements(page: Page) {
 
   // // Check if the job experience section is present
   expect(page.getByRole("heading", { name: /Experience/i })).toBeVisible();
+  expect(
+    page.getByRole("list", { name: /Professional Experience/i })
+  ).toBeVisible();
 
   // // Verify at least one job entry exists
   expect(await page.locator("li").count()).toBeGreaterThan(0);

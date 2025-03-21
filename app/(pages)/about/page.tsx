@@ -120,7 +120,10 @@ export default async function Page() {
           ) : null}
 
           <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
-          <ol className="not-prose group/list flex list-none flex-col gap-10 p-0">
+          <ol
+            aria-label="Professional Experience"
+            className="not-prose group/list flex list-none flex-col gap-10 p-0"
+          >
             {jobs?.map((job) => {
               return (
                 <li
