@@ -1,3 +1,6 @@
+import { ProjectTypeSanity } from "@/sanity/types";
+import { AUTHOR_NAME } from "./constants";
+
 /**
  * Converts a date string into a formatted date string.
  *
@@ -68,3 +71,25 @@ export const getSlug = (url: string): string => {
   const match = url.match(/\/([^\/]+)-[a-f0-9]{12}\?/);
   return match ? match[1] : "not-found";
 };
+
+/**
+ * Generates a title string for the page, including author name and project title if available.
+ *
+ * @param {string} pageTitle - The title of the page.
+ * @param {ProjectTypeSanity} [project] - The project object that contains a title (optional).
+ * @returns {string} - The generated title, including the author name and project title if provided.
+ *
+ * @example
+ * generateTitle("My Portfolio", { title: "Project One" });
+ * // Returns: "AUTHOR_NAME | My Portfolio | Project One"
+ *
+ * generateTitle("My Portfolio");
+ * // Returns: "AUTHOR_NAME | My Portfolio"
+ */
+export function generateTitle(
+  pageTitle: string,
+  project?: ProjectTypeSanity
+): string {
+  const baseTitle = `${AUTHOR_NAME} | ${pageTitle}`;
+  return project ? `${baseTitle} | ${project.title}` : baseTitle;
+}

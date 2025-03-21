@@ -2,7 +2,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { toPlainText } from "next-sanity";
-import { truncateText } from "./utils";
+import { generateTitle, truncateText } from "./utils";
 import { AUTHOR_NAME } from "./constants";
 import { getBaseUrl } from "./routes";
 
@@ -90,8 +90,7 @@ export async function generatePageMetadata({
     params: { slug: pageSlug },
   });
 
-  const baseTitle = `${AUTHOR_NAME} | ${page.title}`;
-  const title = project ? `${baseTitle} | ${project.title}` : baseTitle;
+  const title = generateTitle(page.title, project);
 
   const description = project?.body
     ? truncateText(toPlainText(project?.body), 160)

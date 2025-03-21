@@ -4,62 +4,63 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
-import { AUTHOR_NAME } from "@/app/utils/constants";
 import { getBaseUrl } from "@/app/utils/routes";
+import { generateTitle } from "@/app/utils/utils";
 
-async function checkHomePageElements(page: Page) {
+async function checkAboutPageElements(page: Page) {
   await expect(
-    page.getByRole("heading", { name: /Sander de Snaijer/i })
+    page.getByRole("heading", { level: 1, name: /About/i })
   ).toBeVisible();
-  const socialButtons = ["github", "linkedin", "gitlab"];
-  for (const button of socialButtons) {
-    await expect(
-      page.getByRole("link", { name: `${button} icon` })
-    ).toBeVisible();
-  }
-  await expect(page.getByRole("link", { name: "Home" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "About" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Projects" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Blog" })).toBeVisible();
+
+  expect(
+    page.getByRole("img", { name: "Profile picture Sander de Snaijer" })
+  ).toBeVisible();
+
+  // // Check if the job experience section is present
+  expect(page.getByRole("heading", { name: /Experience/i })).toBeVisible();
+
+  // // Verify at least one job entry exists
+  expect(await page.locator("li").count()).toBeGreaterThan(0);
 }
 
-test.describe("home", () => {
+test.describe("about", () => {
   test("should display correct elements across breakpoints", async ({
     page,
   }) => {
-    await page.goto("/");
-    await testResponsive(page, "/", checkHomePageElements);
+    await page.goto("/about");
+    await testResponsive(page, "/about", checkAboutPageElements);
   });
 
   test("should meet accessibility standards", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/about");
     await runAccessibilityTest(page);
   });
 
-  test("should navigate between home and subpages", async ({ page }) => {
+  test("should navigate back to home and other subpages", async ({ page }) => {
     const navLinks = [
-      { name: "About", url: "/about", heading: "About" },
+      { name: "Home", url: "/", heading: "Home" },
       { name: "Projects", url: "/projects", heading: "Projects" },
       { name: "Blog", url: "/blog", heading: "Blog" },
     ];
 
-    await testNavigation(page, "/", navLinks, "Sander de Snaijer");
+    await testNavigation(page, "/about", navLinks, "about");
   });
 
   test("should render dynamic content from Sanity", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/about");
     await expect(
-      page.getByText(/Passionate software developer/i)
+      page.getByRole("link", { name: "[Link to] Royal Netherlands" })
     ).toBeVisible();
+    await expect(page.getByText("Passionate software developer")).toBeVisible();
   });
 
   test("should include accurate metadata", async ({ page }) => {
-    await page.goto("/");
-    const data = await fetchPageData();
+    await page.goto("/about");
+    const data = await fetchPageData("about");
     await testPageMetadata(page, {
-      title: AUTHOR_NAME,
+      title: generateTitle("About"),
       description: data!.description,
-      url: getBaseUrl(),
+      url: `${getBaseUrl()}/about`,
       imageUrl: data!.imageURL,
       imageAlt: data!.imageAlt,
       publishedTime: data!._createdAt,

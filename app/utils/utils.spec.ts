@@ -1,6 +1,9 @@
+import { mockProject } from "../test-utils/mockProjects";
+import { AUTHOR_NAME } from "./constants";
 import {
   convertDate,
   extractTextFromHTML,
+  generateTitle,
   getImageURL,
   getSlug,
   truncateText,
@@ -131,6 +134,24 @@ describe("app/utils/utils", () => {
       const url = "https://example.com/some-slug-123abc456def";
       const result = getSlug(url);
       expect(result).toBe("not-found");
+    });
+  });
+
+  describe("generateTitle", () => {
+    it("should generate a title without project", () => {
+      const result = generateTitle("My Portfolio");
+      expect(result).toBe(`${AUTHOR_NAME} | My Portfolio`);
+    });
+
+    it("should generate a title with project", () => {
+      const project = { ...mockProject, title: "Project One" };
+      const result = generateTitle("My Portfolio", project);
+      expect(result).toBe(`${AUTHOR_NAME} | My Portfolio | Project One`);
+    });
+
+    it("should handle undefined project", () => {
+      const result = generateTitle("My Portfolio", undefined);
+      expect(result).toBe(`${AUTHOR_NAME} | My Portfolio`);
     });
   });
 });
