@@ -51,10 +51,6 @@ test.describe("home", () => {
     ).toBeVisible();
   });
 
-  // test("should show error when...", async ({ page }) => {
-  //   // TODO
-  // });
-
   test("page should have correct metadata", async ({ page }) => {
     await page.goto("/");
     const data = await fetchPageData();
