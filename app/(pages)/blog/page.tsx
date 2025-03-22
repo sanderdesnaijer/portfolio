@@ -48,7 +48,10 @@ export default async function Page() {
     >
       {page ? (
         <div className="mx-auto grid grid-cols-1 py-10">
-          <ol className="group mt-0 grid gap-10 pl-0">
+          <ol
+            aria-label="Blog articles"
+            className="group mt-0 grid gap-10 pl-0"
+          >
             {articles.map((article, index) => {
               const imageURL = getImageURL(article.description);
               const tags = article.categories.map<TagSanity>((cat, index) => ({
