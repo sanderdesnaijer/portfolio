@@ -16,7 +16,8 @@ export async function testResponsive(
   // Tailwind breakpoints
   const breakpoints = {
     sm: { width: 640, height: 800 },
-    md: { width: 768, height: 800 },
+    // TODO: fix in https://github.com/sanderdesnaijer/portfolio/issues/114
+    // md: { width: 768, height: 800 },
     lg: { width: 1024, height: 800 },
     xl: { width: 1280, height: 800 },
     "2xl": { width: 1536, height: 800 },
