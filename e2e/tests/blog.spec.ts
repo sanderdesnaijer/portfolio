@@ -5,7 +5,7 @@ import { testNavigation } from "../utils/navigation";
 import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
 import { getBaseUrl } from "@/app/utils/routes";
-import { generateTitle } from "@/app/utils/utils";
+import { buildPageUrl, generateTitle } from "@/app/utils/utils";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -69,7 +69,7 @@ test.describe("blog", () => {
     await testPageMetadata(page, {
       title: generateTitle("Blog"),
       description: data!.description,
-      url: `${getBaseUrl()}/blog`,
+      url: buildPageUrl("blog"),
       imageUrl: data!.imageURL,
       imageAlt: data!.imageAlt,
       publishedTime: data!._createdAt,

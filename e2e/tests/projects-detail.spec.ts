@@ -4,7 +4,11 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
 import { getBaseUrl } from "@/app/utils/routes";
-import { generateTitle, getDescriptionFromSanity } from "@/app/utils/utils";
+import {
+  buildPageUrl,
+  generateTitle,
+  getDescriptionFromSanity,
+} from "@/app/utils/utils";
 import { fetchProjectData } from "@/app/api/project/utils";
 
 async function checkPageElements(page: Page) {
@@ -86,7 +90,7 @@ test.describe("projects detail", () => {
     await testPageMetadata(page, {
       title: generateTitle(data!.title, project!.title),
       description: getDescriptionFromSanity(project!.body),
-      url: `${getBaseUrl()}/projects/flutter-tabata-whip-timer`,
+      url: buildPageUrl("projects", "flutter-tabata-whip-timer"),
       imageUrl: project!.imageURL!,
       imageAlt: project!.imageAlt,
       publishedTime: project!._createdAt,

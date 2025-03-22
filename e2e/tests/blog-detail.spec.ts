@@ -5,6 +5,7 @@ import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
 import { getBaseUrl } from "@/app/utils/routes";
 import {
+  buildPageUrl,
   extractTextFromHTML,
   generateTitle,
   getImageURL,
@@ -98,7 +99,10 @@ test.describe("blog detail", () => {
     await testPageMetadata(page, {
       title: generateTitle(pageData!.title, article?.title),
       description: extractTextFromHTML(article!.description),
-      url: `${getBaseUrl()}/blog/building-my-first-flutter-app-challenges-and-lessons-learned`,
+      url: buildPageUrl(
+        "blog",
+        "building-my-first-flutter-app-challenges-and-lessons-learned"
+      ),
       imageUrl: getImageURL(article!.description)!,
       publishedTime: article!.pubDate,
       modifiedTime: article!.pubDate,

@@ -97,7 +97,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
         <NotFound
           title={t("error.404.blog.action")}
           description={t("error.404.blog.description")}
-          href={`${getBaseUrl()}/${slug}`}
+          href={buildPageUrl(slug)}
         />
       )}
     </Layout>
