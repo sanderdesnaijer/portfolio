@@ -9,7 +9,7 @@ module.exports = {
     schema: [],
     messages: {
       hardcodedAriaLabel:
-        "Avoid hardcoded strings in aria-label. Use i18n instead.",
+        "Avoid hardcoded strings in aria-label. Use next-intl instead.",
     },
   },
   create(context) {
