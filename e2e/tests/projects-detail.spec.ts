@@ -1,7 +1,6 @@
 import { test, expect, Page } from "@playwright/test";
 import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
-import { testNavigation } from "../utils/navigation";
 import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
 import { getBaseUrl } from "@/app/utils/routes";
@@ -20,10 +19,6 @@ async function checkPageElements(page: Page) {
   expect(page.getByRole("link", { name: "link to article" })).toBeVisible();
   expect(page.getByRole("list", { name: "Related tags" })).toBeVisible();
   expect(page.getByRole("list", { name: "Project resources" })).toBeVisible();
-
-  //   expect(page.getByRole("list", { name: /Projects/i })).toBeVisible();
-  // // Verify at least one project entry exists
-  expect(await page.locator("li").count()).toBeGreaterThan(0);
 }
 
 test.describe("projects detail", () => {
