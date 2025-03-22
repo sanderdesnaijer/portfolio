@@ -15,7 +15,9 @@ describe("GET /api/medium", () => {
     (fetchMediumArticles as jest.Mock).mockResolvedValue(mockArticles);
 
     const response = await GET(new Request("http://localhost"), {
-      params: { slug: "exploring-the-cosmos-with-a-telescope" },
+      params: {
+        slug: "building-my-first-flutter-app-challenges-and-lessons-learned",
+      },
     });
     const json = await response.json();
 
