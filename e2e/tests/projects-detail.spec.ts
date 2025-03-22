@@ -3,7 +3,6 @@ import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
-import { getBaseUrl } from "@/app/utils/routes";
 import {
   buildPageUrl,
   generateTitle,

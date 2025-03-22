@@ -4,7 +4,6 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
-import { getBaseUrl } from "@/app/utils/routes";
 import { buildPageUrl, generateTitle } from "@/app/utils/utils";
 
 async function checkAboutPageElements(page: Page) {
