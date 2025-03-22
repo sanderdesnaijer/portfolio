@@ -37,13 +37,7 @@ test.describe("home", () => {
   });
 
   test("should navigate between home and subpages", async ({ page }) => {
-    const navLinks = [
-      { name: "About", url: "/about", heading: "About" },
-      { name: "Projects", url: "/projects", heading: "Projects" },
-      { name: "Blog", url: "/blog", heading: "Blog" },
-    ];
-
-    await testNavigation(page, "/", navLinks, "Sander de Snaijer");
+    await testNavigation(page, "/", "Sander de Snaijer");
   });
 
   test("should render dynamic content from Sanity", async ({ page }) => {

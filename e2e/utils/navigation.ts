@@ -1,18 +1,20 @@
 import { Page, expect } from "@playwright/test";
 
-interface NavLink {
-  name: string;
-  url: string;
-  heading: string | RegExp;
-}
+const mainNavLinks = [
+  { name: "Home", url: "/", heading: "" },
+  { name: "About", url: "/about", heading: "About" },
+  { name: "Projects", url: "/projects", heading: "Projects" },
+  { name: "Blog", url: "/blog", heading: "Blog" },
+];
 
 export async function testNavigation(
   page: Page,
   fromUrl: string,
-  navLinks: NavLink[],
   returnHeading: string
 ): Promise<void> {
   await page.goto(fromUrl);
+
+  const navLinks = mainNavLinks.filter((link) => link.url !== fromUrl);
 
   for (const link of navLinks) {
     await expect(page.getByRole("link", { name: link.name })).toBeVisible();

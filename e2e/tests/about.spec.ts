@@ -40,13 +40,7 @@ test.describe("about", () => {
   });
 
   test("should navigate back to home and other subpages", async ({ page }) => {
-    const navLinks = [
-      { name: "Home", url: "/", heading: "Home" },
-      { name: "Projects", url: "/projects", heading: "Projects" },
-      { name: "Blog", url: "/blog", heading: "Blog" },
-    ];
-
-    await testNavigation(page, "/about", navLinks, "about");
+    await testNavigation(page, "/about", "about");
   });
 
   test("should render dynamic content from Sanity", async ({ page }) => {
