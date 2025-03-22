@@ -35,8 +35,8 @@ export const mockPage: PageSanity = {
   _id: "page-1",
   _rev: "",
   _type: "",
-  _createdAt: "",
-  _updatedAt: "",
+  _createdAt: "2025-01-01",
+  _updatedAt: "2025-01-02",
 };
 
 const mockPage2: PageSanity = {
