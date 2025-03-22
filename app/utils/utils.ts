@@ -1,4 +1,3 @@
-import { ProjectTypeSanity } from "@/sanity/types";
 import { AUTHOR_NAME } from "./constants";
 import { toPlainText } from "next-sanity";
 import { Block } from "@/sanity/types/types";
@@ -79,11 +78,11 @@ export const getSlug = (url: string): string => {
  * Generates a title string for the page, including author name and project title if available.
  *
  * @param {string} pageTitle - The title of the page.
- * @param {ProjectTypeSanity} [project] - The project object that contains a title (optional).
+ * @param {string} subPageTitle - The sub page title (optional)
  * @returns {string} - The generated title, including the author name and project title if provided.
  *
  * @example
- * generateTitle("My Portfolio", { title: "Project One" });
+ * generateTitle("My Portfolio", "Project One");
  * // Returns: "AUTHOR_NAME | My Portfolio | Project One"
  *
  * generateTitle("My Portfolio");
@@ -91,10 +90,10 @@ export const getSlug = (url: string): string => {
  */
 export function generateTitle(
   pageTitle: string,
-  project?: ProjectTypeSanity
+  subPageTitle?: string
 ): string {
   const baseTitle = `${AUTHOR_NAME} | ${pageTitle}`;
-  return project ? `${baseTitle} | ${project.title}` : baseTitle;
+  return subPageTitle ? `${baseTitle} | ${subPageTitle}` : baseTitle;
 }
 
 /**

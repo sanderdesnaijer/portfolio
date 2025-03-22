@@ -1,4 +1,3 @@
-import { mockProject } from "../test-utils/mockProjects";
 import { AUTHOR_NAME } from "./constants";
 import { getBaseUrl } from "./routes";
 import {
@@ -146,8 +145,7 @@ describe("app/utils/utils", () => {
     });
 
     it("should generate a title with project", () => {
-      const project = { ...mockProject, title: "Project One" };
-      const result = generateTitle("My Portfolio", project);
+      const result = generateTitle("My Portfolio", "Project One");
       expect(result).toBe(`${AUTHOR_NAME} | My Portfolio | Project One`);
     });
 

@@ -90,20 +90,19 @@ test.describe("blog detail", () => {
   });
 
   test("should include accurate metadata", async ({ page }) => {
-    const data = await fetchPageData("blog");
-    const project = await getMediumArticle({
+    const pageData = await fetchPageData("blog");
+    const article = await getMediumArticle({
       slug: "building-my-first-flutter-app-challenges-and-lessons-learned",
     });
 
     await testPageMetadata(page, {
-      title: generateTitle(data!.title, project!),
-      description: extractTextFromHTML(project!.description),
+      title: generateTitle(pageData!.title, article?.title),
+      description: extractTextFromHTML(article!.description),
       url: `${getBaseUrl()}/blog/building-my-first-flutter-app-challenges-and-lessons-learned`,
-      imageUrl: getImageURL(project!.description)!,
-      //   imageAlt: project!.imageAlt,
-      publishedTime: project!.pubDate,
-      modifiedTime: project!.pubDate,
-      canonical: project?.link,
+      imageUrl: getImageURL(article!.description)!,
+      publishedTime: article!.pubDate,
+      modifiedTime: article!.pubDate,
+      canonical: article?.link,
     });
   });
 });

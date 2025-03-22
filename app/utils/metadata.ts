@@ -88,7 +88,7 @@ export async function generatePageMetadata({
     params: { slug: pageSlug },
   });
 
-  const title = generateTitle(page.title, project);
+  const title = generateTitle(page.title, project?.title);
   const description = project?.body
     ? getDescriptionFromSanity(project.body)
     : page.description;

@@ -84,7 +84,7 @@ test.describe("projects detail", () => {
     const project = await fetchProjectData("flutter-tabata-whip-timer");
 
     await testPageMetadata(page, {
-      title: generateTitle(data!.title, project!),
+      title: generateTitle(data!.title, project!.title),
       description: getDescriptionFromSanity(project!.body),
       url: `${getBaseUrl()}/projects/flutter-tabata-whip-timer`,
       imageUrl: project!.imageURL!,
