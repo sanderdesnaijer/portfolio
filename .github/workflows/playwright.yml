@@ -21,7 +21,7 @@ jobs:
           node-version: lts/*
       - name: Test network connectivity
         run: |
-          curl -I ${{ secrets.NEXT_PUBLIC_RSS_API_URL }}
+          curl -I "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@sanderdesnaijer"
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
