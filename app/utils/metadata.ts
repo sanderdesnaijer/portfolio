@@ -1,9 +1,8 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
-import { generateTitle, getDescriptionFromSanity } from "./utils";
+import { buildPageUrl, generateTitle, getDescriptionFromSanity } from "./utils";
 import { AUTHOR_NAME } from "./constants";
-import { getBaseUrl } from "./routes";
 
 export const generateMetaData = ({
   title,
@@ -90,21 +89,13 @@ export async function generatePageMetadata({
   });
 
   const title = generateTitle(page.title, project);
-
   const description = project?.body
     ? getDescriptionFromSanity(project.body)
     : page.description;
-
-  const getUrl = (): string => {
-    return `${getBaseUrl()}/${page.slug.current}${project?.slug.current ? `/${project?.slug.current}` : ""}`;
-  };
-
-  const url = getUrl();
+  const url = buildPageUrl(pageSlug, project?.slug.current);
   const imageUrl = project?.imageURL || page.imageURL;
   const imageAlt = project?.imageAlt || page.imageAlt;
-
   const keywords = project?.tags?.map((tag) => tag.label);
-
   const publishedTime = project ? project._createdAt : page._createdAt;
   const modifiedTime = project ? project._updatedAt : page._updatedAt;
 

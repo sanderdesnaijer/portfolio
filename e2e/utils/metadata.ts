@@ -16,6 +16,7 @@ export async function testPageMetadata(
     imageAlt?: string;
     publishedTime: string;
     modifiedTime: string;
+    canonical?: string;
   }
 ) {
   // Title
@@ -34,11 +35,11 @@ export async function testPageMetadata(
   expect(metaAuthor).toBe(AUTHOR_NAME);
 
   // Canonical URL
-  if (expectedMeta.url) {
+  if (expectedMeta.canonical || expectedMeta.url) {
     const canonicalLink = await page
       .locator('link[rel="canonical"]')
       .getAttribute("href");
-    expect(canonicalLink).toBe(expectedMeta.url);
+    expect(canonicalLink).toBe(expectedMeta.canonical || expectedMeta.url);
   }
 
   // Open Graph metadata

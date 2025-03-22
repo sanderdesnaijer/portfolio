@@ -1,6 +1,8 @@
 import { mockProject } from "../test-utils/mockProjects";
 import { AUTHOR_NAME } from "./constants";
+import { getBaseUrl } from "./routes";
 import {
+  buildPageUrl,
   convertDate,
   extractTextFromHTML,
   generateTitle,
@@ -152,6 +154,24 @@ describe("app/utils/utils", () => {
     it("should handle undefined project", () => {
       const result = generateTitle("My Portfolio", undefined);
       expect(result).toBe(`${AUTHOR_NAME} | My Portfolio`);
+    });
+  });
+
+  describe("buildPageUrl", () => {
+    it("should return the correct URL for a page without a detail slug", () => {
+      expect(buildPageUrl("home")).toBe(`${getBaseUrl()}/home`);
+    });
+
+    it("should return the correct URL for a page with a detail slug", () => {
+      expect(buildPageUrl("products", "123")).toBe(
+        `${getBaseUrl()}/products/123`
+      );
+    });
+
+    it("should handle special characters in slugs", () => {
+      expect(buildPageUrl("category", "t-shirts")).toBe(
+        `${getBaseUrl()}/category/t-shirts`
+      );
     });
   });
 });

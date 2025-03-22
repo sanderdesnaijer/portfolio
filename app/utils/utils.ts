@@ -2,6 +2,7 @@ import { ProjectTypeSanity } from "@/sanity/types";
 import { AUTHOR_NAME } from "./constants";
 import { toPlainText } from "next-sanity";
 import { Block } from "@/sanity/types/types";
+import { getBaseUrl } from "./routes";
 
 /**
  * Converts a date string into a formatted date string.
@@ -104,3 +105,17 @@ export function generateTitle(
  */
 export const getDescriptionFromSanity = (sanityBlock: Block[]): string =>
   truncateText(toPlainText(sanityBlock), 160);
+
+/**
+ * Constructs a full URL using the base URL and provided slugs.
+ *
+ * @param {string} pageSlug - The main page slug (e.g., "products", "about").
+ * @param {string} [detailPageSlug] - Optional detail page slug (e.g., a product ID or category name).
+ * @returns {string} - The fully constructed URL.
+ */
+export const buildPageUrl = (
+  pageSlug: string,
+  detailPageSlug?: string
+): string => {
+  return `${getBaseUrl()}/${pageSlug}${detailPageSlug ? `/${detailPageSlug}` : ""}`;
+};

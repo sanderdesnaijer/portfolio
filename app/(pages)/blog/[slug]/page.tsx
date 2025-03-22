@@ -5,9 +5,11 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
 import { Layout } from "@/app/components/Layout";
 import {
+  buildPageUrl,
   convertDate,
   extractTextFromHTML,
   getImageURL,
+  getSlug,
 } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { getMediumArticle } from "@/app/utils/api";
@@ -48,12 +50,14 @@ export async function generateMetadata({
   const description = extractTextFromHTML(article?.description);
   const imageUrl = getImageURL(article?.description) || page.imageURL;
 
+  const url = buildPageUrl(page.slug.current, getSlug(article.link));
+
   return generateMetaData({
     title,
     description,
-    url: getBaseUrl(),
-    publishedTime: page._createdAt,
-    modifiedTime: page._updatedAt,
+    url,
+    publishedTime: article.pubDate,
+    modifiedTime: article.pubDate,
     imageUrl,
     keywords: article.categories,
     canonical: article.link,
@@ -67,7 +71,6 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   const t = await getTranslations();
 
   const title = article ? article.title : t("error.404.blog.title");
-
   return (
     <Layout
       pageTitle={title}
