@@ -1,8 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
-import { toPlainText } from "next-sanity";
-import { generateTitle, truncateText } from "./utils";
+import { generateTitle, getDescriptionFromSanity } from "./utils";
 import { AUTHOR_NAME } from "./constants";
 import { getBaseUrl } from "./routes";
 
@@ -93,7 +92,7 @@ export async function generatePageMetadata({
   const title = generateTitle(page.title, project);
 
   const description = project?.body
-    ? truncateText(toPlainText(project?.body), 160)
+    ? getDescriptionFromSanity(project.body)
     : page.description;
 
   const getUrl = (): string => {
@@ -106,11 +105,14 @@ export async function generatePageMetadata({
 
   const keywords = project?.tags?.map((tag) => tag.label);
 
+  const publishedTime = project ? project._createdAt : page._createdAt;
+  const modifiedTime = project ? project._updatedAt : page._updatedAt;
+
   return generateMetaData({
     title,
     description,
-    publishedTime: page._createdAt,
-    modifiedTime: page._updatedAt,
+    publishedTime,
+    modifiedTime,
     imageAlt,
     imageUrl,
     url,

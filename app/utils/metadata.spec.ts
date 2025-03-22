@@ -179,5 +179,26 @@ describe("app/utils/metadata", () => {
       expect(result.openGraph.images[0].url).toBe(mockProject.imageURL);
       expect(result.keywords).toEqual(["React", "Typescript"]);
     });
+
+    it("should correctly set publishedTime and modifiedTime without project", async () => {
+      (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
+      const pageSlug = "page-slug";
+      const result = await generatePageMetadata({ pageSlug });
+
+      expect(result.openGraph.publishedTime).toBe(mockPage._createdAt);
+      expect(result.openGraph.modifiedTime).toBe(mockPage._updatedAt);
+    });
+
+    it("should correctly set publishedTime and modifiedTime with project", async () => {
+      (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
+      const pageSlug = "page-slug";
+      const result = await generatePageMetadata({
+        pageSlug,
+        project: mockProject,
+      });
+
+      expect(result.openGraph.publishedTime).toBe(mockProject._createdAt);
+      expect(result.openGraph.modifiedTime).toBe(mockProject._updatedAt);
+    });
   });
 });

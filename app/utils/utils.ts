@@ -1,5 +1,7 @@
 import { ProjectTypeSanity } from "@/sanity/types";
 import { AUTHOR_NAME } from "./constants";
+import { toPlainText } from "next-sanity";
+import { Block } from "@/sanity/types/types";
 
 /**
  * Converts a date string into a formatted date string.
@@ -93,3 +95,12 @@ export function generateTitle(
   const baseTitle = `${AUTHOR_NAME} | ${pageTitle}`;
   return project ? `${baseTitle} | ${project.title}` : baseTitle;
 }
+
+/**
+ * Extracts a plain text description from a Sanity block array and truncates it to 160 characters.
+ *
+ * @param {Block[]} sanityBlock - The Sanity block array containing rich text content.
+ * @returns {string} - The truncated plain text description.
+ */
+export const getDescriptionFromSanity = (sanityBlock: Block[]): string =>
+  truncateText(toPlainText(sanityBlock), 160);

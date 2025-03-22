@@ -4,7 +4,10 @@ import { CustomLink } from "./CustomLink";
 
 export const LinkList: React.FC<{ links: Array<IconLink> }> = ({ links }) => {
   return (
-    <ul className="group relative z-1 m-0 list-none p-0">
+    <ul
+      aria-label="Project resources"
+      className="group relative z-1 m-0 list-none p-0"
+    >
       {links.map((link) => {
         const IconComponent = getIcon(link.icon);
         return (
