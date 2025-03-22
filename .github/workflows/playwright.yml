@@ -18,10 +18,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: lts/*
-      - name: Test network connectivity
-        run: |
-          curl -I "https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@sanderdesnaijer"
+          node-version: lts/*      
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
