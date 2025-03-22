@@ -8,6 +8,7 @@ import {
   buildPageUrl,
   convertDate,
   extractTextFromHTML,
+  generateTitle,
   getImageURL,
   getSlug,
 } from "@/app/utils/utils";
@@ -44,12 +45,10 @@ export async function generateMetadata({
     query: pageQuery,
     params: { slug },
   });
-  const baseTitle = `Sander de Snaijer | ${page.title}`;
 
-  const title = `${baseTitle} | ${article.title}`;
+  const title = generateTitle(page.title, article.title);
   const description = extractTextFromHTML(article?.description);
   const imageUrl = getImageURL(article?.description) || page.imageURL;
-
   const url = buildPageUrl(page.slug.current, getSlug(article.link));
 
   return generateMetaData({

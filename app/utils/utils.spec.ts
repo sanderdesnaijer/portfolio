@@ -153,6 +153,11 @@ describe("app/utils/utils", () => {
       const result = generateTitle("My Portfolio", undefined);
       expect(result).toBe(`${AUTHOR_NAME} | My Portfolio`);
     });
+
+    it("should return only the author name if no title is provided", () => {
+      const result = generateTitle();
+      expect(result).toBe(AUTHOR_NAME);
+    });
   });
 
   describe("buildPageUrl", () => {

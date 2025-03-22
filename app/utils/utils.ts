@@ -77,21 +77,21 @@ export const getSlug = (url: string): string => {
 /**
  * Generates a title string for the page, including author name and project title if available.
  *
- * @param {string} pageTitle - The title of the page.
+ * If `pageTitle` is not provided, it will return only the author's name.
+ *
+ * @param {string} pageTitle - The title of the page (optional)
  * @param {string} subPageTitle - The sub page title (optional)
  * @returns {string} - The generated title, including the author name and project title if provided.
- *
- * @example
- * generateTitle("My Portfolio", "Project One");
- * // Returns: "AUTHOR_NAME | My Portfolio | Project One"
- *
- * generateTitle("My Portfolio");
- * // Returns: "AUTHOR_NAME | My Portfolio"
  */
+
 export function generateTitle(
-  pageTitle: string,
+  pageTitle?: string,
   subPageTitle?: string
 ): string {
+  if (!pageTitle) {
+    return AUTHOR_NAME;
+  }
+
   const baseTitle = `${AUTHOR_NAME} | ${pageTitle}`;
   return subPageTitle ? `${baseTitle} | ${subPageTitle}` : baseTitle;
 }
