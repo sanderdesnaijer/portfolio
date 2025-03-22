@@ -14,6 +14,8 @@ export async function fetchMediumArticles(): Promise<MediumArticle[]> {
     return data.items as MediumArticle[];
   } catch (error) {
     // eslint-disable-next-line no-console
+    console.error("MEDIUM_URL", MEDIUM_URL);
+    console.error("RSS_API_URL", RSS_API_URL);
     console.error("Error fetching Medium articles:", error);
     return [];
   }
