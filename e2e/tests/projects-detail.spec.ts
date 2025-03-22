@@ -12,16 +12,16 @@ import { fetchProjectData } from "@/app/api/project/utils";
 
 async function checkPageElements(page: Page) {
   await expect(
-    page.getByRole("heading", { name: "Flutter Tabata whip timer" })
+    page.getByRole("heading", { name: /Flutter Tabata whip timer/i })
   ).toBeVisible();
 
   expect(
-    page.getByRole("img", { name: "Flutter tabata whip timer app" })
+    page.getByRole("img", { name: /Flutter tabata whip timer app/i })
   ).toBeVisible();
 
-  expect(page.getByRole("link", { name: "link to article" })).toBeVisible();
-  expect(page.getByRole("list", { name: "Related tags" })).toBeVisible();
-  expect(page.getByRole("list", { name: "Project resources" })).toBeVisible();
+  expect(page.getByRole("link", { name: /link to article/i })).toBeVisible();
+  expect(page.getByRole("list", { name: /Related tags/i })).toBeVisible();
+  expect(page.getByRole("list", { name: /Project resources/i })).toBeVisible();
 }
 
 test.describe("projects detail", () => {
@@ -43,18 +43,20 @@ test.describe("projects detail", () => {
     page,
   }) => {
     await expect(
-      page.getByRole("heading", { name: "Flutter Tabata whip timer" })
+      page.getByRole("heading", { name: /Flutter Tabata whip timer/i })
     ).toBeVisible();
 
-    const link = page.getByRole("link", { name: "Projects" });
+    const link = page.getByRole("link", { name: /Projects/i });
     await link.click();
     const href = await link.getAttribute("href");
     await expect(page).toHaveURL(href!);
 
-    await expect(page.getByRole("heading", { name: "Projects" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /Projects/i })
+    ).toBeVisible();
     await page.goBack();
     await expect(
-      page.getByRole("heading", { name: "Flutter Tabata whip timer" })
+      page.getByRole("heading", { name: /Flutter Tabata whip timer/i })
     ).toBeVisible();
   });
 
@@ -64,7 +66,7 @@ test.describe("projects detail", () => {
 
   test("open resource links in a new tab", async ({ page }) => {
     const links = await page
-      .getByRole("list", { name: "Project resources" })
+      .getByRole("list", { name: /Project resources/i })
       .getByRole("link")
       .all();
 

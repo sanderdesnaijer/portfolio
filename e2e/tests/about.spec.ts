@@ -12,7 +12,7 @@ async function checkAboutPageElements(page: Page) {
   ).toBeVisible();
 
   expect(
-    page.getByRole("img", { name: "Profile picture Sander de Snaijer" })
+    page.getByRole("img", { name: /Profile picture Sander de Snaijer/i })
   ).toBeVisible();
 
   // // Check if the job experience section is present
@@ -48,7 +48,9 @@ test.describe("about", () => {
     await expect(
       page.getByRole("link", { name: "[Link to] Royal Netherlands" })
     ).toBeVisible();
-    await expect(page.getByText("Passionate software developer")).toBeVisible();
+    await expect(
+      page.getByText(/Passionate software developer/i)
+    ).toBeVisible();
   });
 
   test("should include accurate metadata", async ({ page }) => {

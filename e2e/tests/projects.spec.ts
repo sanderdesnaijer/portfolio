@@ -12,7 +12,7 @@ async function checkPageElements(page: Page) {
   ).toBeVisible();
 
   expect(page.getByRole("list", { name: /Projects/i })).toBeVisible();
-  // // Verify at least one project entry exists
+  // Verify at least one project entry exists
   expect(await page.locator("li").count()).toBeGreaterThan(0);
 }
 
@@ -30,20 +30,22 @@ test.describe("projects", () => {
     page,
   }) => {
     const link = page.getByRole("link", {
-      name: "Arduino 3d printed dutch word",
+      name: /Arduino 3d printed dutch word/i,
     });
     await link.click();
     const href = await link.getAttribute("href");
     await expect(page).toHaveURL(href!);
 
     await expect(
-      page.getByRole("heading", { name: "Arduino 3d printed dutch word" })
+      page.getByRole("heading", { name: /Arduino 3d printed dutch word/i })
     ).toBeVisible();
     expect(
-      page.getByRole("img", { name: "Arduino 3d printed wordclock" })
+      page.getByRole("img", { name: /Arduino 3d printed wordclock/i })
     ).toBeVisible();
     await page.goBack();
-    await expect(page.getByRole("heading", { name: "Projects" })).toBeVisible();
+    await expect(
+      page.getByRole("heading", { name: /Projects/i })
+    ).toBeVisible();
   });
 
   test("should meet accessibility standards", async ({ page }) => {
@@ -56,7 +58,7 @@ test.describe("projects", () => {
 
   test("should render dynamic content from Sanity", async ({ page }) => {
     await expect(
-      page.getByRole("link", { name: "Flutter Tabata whip timer" })
+      page.getByRole("link", { name: /Flutter Tabata whip timer/i })
     ).toBeVisible();
   });
 

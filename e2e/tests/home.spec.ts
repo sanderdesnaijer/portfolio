@@ -4,8 +4,8 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
-import { AUTHOR_NAME } from "@/app/utils/constants";
 import { getBaseUrl } from "@/app/utils/routes";
+import { generateTitle } from "@/app/utils/utils";
 
 async function checkHomePageElements(page: Page) {
   await expect(
@@ -17,10 +17,10 @@ async function checkHomePageElements(page: Page) {
       page.getByRole("link", { name: `${button} icon` })
     ).toBeVisible();
   }
-  await expect(page.getByRole("link", { name: "Home" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "About" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Projects" })).toBeVisible();
-  await expect(page.getByRole("link", { name: "Blog" })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Home/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /About/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Projects/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: /Blog/i })).toBeVisible();
 }
 
 test.describe("home", () => {
@@ -50,7 +50,7 @@ test.describe("home", () => {
   test("should include accurate metadata", async ({ page }) => {
     const data = await fetchPageData();
     await testPageMetadata(page, {
-      title: AUTHOR_NAME,
+      title: generateTitle(),
       description: data!.description,
       url: getBaseUrl(),
       imageUrl: data!.imageURL,
