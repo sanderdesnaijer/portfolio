@@ -18,7 +18,7 @@ import { generateMetaData } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
-import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
+import { pageSlugs } from "@/app/utils/routes";
 
 const { blog: slug } = pageSlugs;
 
