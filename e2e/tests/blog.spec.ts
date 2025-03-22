@@ -5,7 +5,6 @@ import { testNavigation } from "../utils/navigation";
 import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl, generateTitle } from "@/app/utils/utils";
-import { mockArticles } from "@/app/test-utils/mockArticle";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -15,22 +14,12 @@ async function checkPageElements(page: Page) {
   await expect(
     page.getByRole("list", { name: /Blog articles/i })
   ).toBeVisible();
-  // // Verify at least one project entry exists
+
   expect(await page.locator("li").count()).toBeGreaterThan(0);
 }
 
 test.describe("blog", () => {
   test.beforeEach(async ({ page }) => {
-    await page.route("**/api/medium", (route) =>
-      route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        headers: {
-          "Cache-Control": "public, s-maxage=600, stale-while-revalidate=300",
-        },
-        body: JSON.stringify(mockArticles),
-      })
-    );
     await page.goto("/blog");
   });
 
