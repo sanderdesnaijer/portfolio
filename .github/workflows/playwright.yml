@@ -19,6 +19,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
+      - name: Test network connectivity
+        run: |
+          curl -I ${{ secrets.NEXT_PUBLIC_RSS_API_URL }}
       - name: Install dependencies
         run: npm ci
       - name: Install Playwright Browsers
