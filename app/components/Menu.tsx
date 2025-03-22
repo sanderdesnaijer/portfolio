@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -21,6 +22,7 @@ const Menu = React.forwardRef<
     ref
   ) => {
     const path = usePathname();
+    const t = useTranslations();
 
     const isActive = (item: MenuItem) => {
       const { pathname } = item;
@@ -35,7 +37,7 @@ const Menu = React.forwardRef<
     return (
       <nav
         data-sticky
-        aria-label="Main navigation"
+        aria-label={t("generic.mainNavigation")}
         ref={ref}
         className={className}
       >
