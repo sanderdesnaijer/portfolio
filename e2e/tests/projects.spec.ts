@@ -18,17 +18,18 @@ async function checkPageElements(page: Page) {
 }
 
 test.describe("projects", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/projects");
+  });
   test("should display correct elements across breakpoints", async ({
     page,
   }) => {
-    await page.goto("/projects");
     await testResponsive(page, "/projects", checkPageElements);
   });
 
   test("should navigate to a project detail page and back", async ({
     page,
   }) => {
-    await page.goto("/projects");
     const link = page.getByRole("link", {
       name: "Arduino 3d printed dutch word",
     });
@@ -47,7 +48,6 @@ test.describe("projects", () => {
   });
 
   test("should meet accessibility standards", async ({ page }) => {
-    await page.goto("/projects");
     await runAccessibilityTest(page);
   });
 
@@ -56,14 +56,12 @@ test.describe("projects", () => {
   });
 
   test("should render dynamic content from Sanity", async ({ page }) => {
-    await page.goto("/projects");
     await expect(
       page.getByRole("link", { name: "Flutter Tabata whip timer" })
     ).toBeVisible();
   });
 
   test("should include accurate metadata", async ({ page }) => {
-    await page.goto("/projects");
     const data = await fetchPageData("projects");
     await testPageMetadata(page, {
       title: generateTitle("Projects"),

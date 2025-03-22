@@ -24,15 +24,16 @@ async function checkHomePageElements(page: Page) {
 }
 
 test.describe("home", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/");
+  });
   test("should display correct elements across breakpoints", async ({
     page,
   }) => {
-    await page.goto("/");
     await testResponsive(page, "/", checkHomePageElements);
   });
 
   test("should meet accessibility standards", async ({ page }) => {
-    await page.goto("/");
     await runAccessibilityTest(page);
   });
 
@@ -41,14 +42,12 @@ test.describe("home", () => {
   });
 
   test("should render dynamic content from Sanity", async ({ page }) => {
-    await page.goto("/");
     await expect(
       page.getByText(/Passionate software developer/i)
     ).toBeVisible();
   });
 
   test("should include accurate metadata", async ({ page }) => {
-    await page.goto("/");
     const data = await fetchPageData();
     await testPageMetadata(page, {
       title: AUTHOR_NAME,

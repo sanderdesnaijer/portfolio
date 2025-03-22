@@ -18,10 +18,13 @@ async function checkPageElements(page: Page) {
 }
 
 test.describe("blog", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/blog");
+  });
+
   test("should display correct elements across breakpoints", async ({
     page,
   }) => {
-    await page.goto("/blog");
     await testResponsive(page, "/blog", checkPageElements);
   });
 
@@ -45,7 +48,6 @@ test.describe("blog", () => {
   });
 
   test("should meet accessibility standards", async ({ page }) => {
-    await page.goto("/blog");
     await runAccessibilityTest(page);
   });
 
@@ -54,7 +56,6 @@ test.describe("blog", () => {
   });
 
   test("should render dynamic content from Sanity", async ({ page }) => {
-    await page.goto("/blog");
     await expect(
       page.getByRole("heading", { level: 1, name: /Blog/i })
     ).toBeVisible();
@@ -64,7 +65,6 @@ test.describe("blog", () => {
   });
 
   test("should include accurate metadata", async ({ page }) => {
-    await page.goto("/blog");
     const data = await fetchPageData("blog");
     await testPageMetadata(page, {
       title: generateTitle("Blog"),

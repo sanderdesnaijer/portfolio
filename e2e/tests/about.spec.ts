@@ -27,15 +27,17 @@ async function checkAboutPageElements(page: Page) {
 }
 
 test.describe("about", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto("/about");
+  });
+
   test("should display correct elements across breakpoints", async ({
     page,
   }) => {
-    await page.goto("/about");
     await testResponsive(page, "/about", checkAboutPageElements);
   });
 
   test("should meet accessibility standards", async ({ page }) => {
-    await page.goto("/about");
     await runAccessibilityTest(page);
   });
 
@@ -44,7 +46,6 @@ test.describe("about", () => {
   });
 
   test("should render dynamic content from Sanity", async ({ page }) => {
-    await page.goto("/about");
     await expect(
       page.getByRole("link", { name: "[Link to] Royal Netherlands" })
     ).toBeVisible();
@@ -52,7 +53,6 @@ test.describe("about", () => {
   });
 
   test("should include accurate metadata", async ({ page }) => {
-    await page.goto("/about");
     const data = await fetchPageData("about");
     await testPageMetadata(page, {
       title: generateTitle("About"),
