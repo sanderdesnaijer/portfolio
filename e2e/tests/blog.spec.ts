@@ -11,7 +11,9 @@ async function checkPageElements(page: Page) {
     page.getByRole("heading", { level: 1, name: /Blog/i })
   ).toBeVisible();
 
-  expect(page.getByRole("list", { name: /Blog articles/i })).toBeVisible();
+  await expect(
+    page.getByRole("list", { name: /Blog articles/i })
+  ).toBeVisible();
   // // Verify at least one project entry exists
   expect(await page.locator("li").count()).toBeGreaterThan(0);
 }

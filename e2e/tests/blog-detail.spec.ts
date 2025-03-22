@@ -18,7 +18,7 @@ async function checkPageElements(page: Page) {
     })
   ).toBeVisible();
 
-  expect(
+  await expect(
     page
       .getByRole("figure", { name: "Tabata whip timer app store" })
       .locator("img")
