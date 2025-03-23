@@ -65,7 +65,7 @@ test.describe("blog detail", () => {
     await page.goBack();
     await expect(
       page.getByRole("heading", {
-        name: /Building My First Flutter App: Challenges and Lessons Learned/i,
+        name: /Mock Building My First Flutter App: Challenges and Lessons Learned/i,
       })
     ).toBeVisible();
   });
