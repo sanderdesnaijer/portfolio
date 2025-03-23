@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Common Setup
-        uses: sanderdesnaijer/portfolio/.github/workflows/common.yml@main
+        uses: ./.github/workflows/common.yml
         with:
           node-version: ${{ matrix.node-version }}
       - name: Check code formatting
