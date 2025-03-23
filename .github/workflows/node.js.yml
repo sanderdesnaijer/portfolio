@@ -13,6 +13,8 @@ jobs:
       matrix:
         node-version: [22.x]
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Common Setup
         uses: ./.github/workflows/common.yml
         with:
