@@ -15,13 +15,17 @@ async function checkPageElements(page: Page) {
     page.getByRole("heading", { name: /Flutter Tabata whip timer/i })
   ).toBeVisible();
 
-  expect(
+  await expect(
     page.getByRole("img", { name: /Flutter tabata whip timer app/i })
   ).toBeVisible();
 
-  expect(page.getByRole("link", { name: /link to article/i })).toBeVisible();
-  expect(page.getByRole("list", { name: /Related tags/i })).toBeVisible();
-  expect(page.getByRole("list", { name: /Project resources/i })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /link to article/i })
+  ).toBeVisible();
+  await expect(page.getByRole("list", { name: /Related tags/i })).toBeVisible();
+  await expect(
+    page.getByRole("list", { name: /Project resources/i })
+  ).toBeVisible();
 }
 
 test.describe("projects detail", () => {
