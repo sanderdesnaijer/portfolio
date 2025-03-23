@@ -52,6 +52,6 @@ jobs:
           path: .next/cache
           key: nextjs-${{ runner.os }}-${{ github.sha }}
           restore-keys: |
-            nextjs-${{ runner.os }}-  
+            nextjs-${{ runner.os }}-
       - name: Build code
         run: npm run build
