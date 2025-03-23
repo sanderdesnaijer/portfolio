@@ -1,5 +1,3 @@
-// import "cross-fetch/polyfill";
-// import "cross-fetch/polyfill";
 import "@testing-library/jest-dom";
 
 import { mswServer } from "./app/mock/mswServer";

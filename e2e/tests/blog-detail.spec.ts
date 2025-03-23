@@ -106,4 +106,23 @@ test.describe("blog detail", () => {
       canonical: article?.link,
     });
   });
+
+  test("show a message when b;pg can not be found", async ({ page }) => {
+    await page.goto("/blog/does-not-exist");
+
+    await expect(
+      page.getByRole("heading", { name: /Blog not found/i })
+    ).toBeVisible();
+
+    expect(
+      page.getByText(/Sorry, we couldn't find the blog you're looking for/i)
+    ).toBeVisible();
+
+    const pageLink = page.getByRole("link", {
+      name: /Go back to the blog overview/i,
+    });
+    const href = await pageLink.getAttribute("href");
+    await pageLink.click();
+    await expect(page).toHaveURL(href!);
+  });
 });
