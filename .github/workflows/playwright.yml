@@ -14,15 +14,44 @@ jobs:
       NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
       NEXT_PUBLIC_RSS_API_URL: ${{ secrets.NEXT_PUBLIC_RSS_API_URL }}
       NEXT_PUBLIC_MEDIUM_URL: ${{ secrets.NEXT_PUBLIC_MEDIUM_URL }}
+      NEXT_PUBLIC_MOCK_API: true
+    strategy:
+      matrix:
+        node-version: [22.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
         with:
-          node-version: lts/*
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: Cache Node.js modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ matrix.node-version }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-${{ matrix.node-version }}-
+            ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
+      - name: Cache Playwright browsers
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            playwright-${{ runner.os }}-
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+      - name: Cache Next.js build
+        uses: actions/cache@v3
+        with:
+          path: .next/cache
+          key: nextjs-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-
       - name: Build code
         run: npm run build
       - name: Run Playwright tests

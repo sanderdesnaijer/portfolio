@@ -12,6 +12,12 @@ const montserrat = Montserrat({
   weight: ["200", "400", "700"],
 });
 
+if (process.env.NEXT_PUBLIC_MOCK_API === "true") {
+  import("./mock").then(({ setupMocks }) => {
+    setupMocks();
+  });
+}
+
 export default async function RootLayout({
   children,
 }: Readonly<{

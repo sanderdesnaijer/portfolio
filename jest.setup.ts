@@ -1,5 +1,16 @@
 import "@testing-library/jest-dom";
 
+import { mswServer } from "./app/mock/mswServer";
+
+// Start the server before running tests
+beforeAll(() => mswServer.listen());
+
+// Reset any handlers that might be overridden during tests
+afterEach(() => mswServer.resetHandlers());
+
+// Close the mswServer after tests are done
+afterAll(() => mswServer.close());
+
 jest.mock("@/sanity/lib/fetch", () => ({
   sanityFetch: jest.fn(),
 }));
