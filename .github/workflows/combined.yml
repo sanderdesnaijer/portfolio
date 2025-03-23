@@ -9,12 +9,6 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    env:
-      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
-      NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
-      NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
-      NEXT_PUBLIC_RSS_API_URL: ${{ secrets.NEXT_PUBLIC_RSS_API_URL }}
-      NEXT_PUBLIC_MEDIUM_URL: ${{ secrets.NEXT_PUBLIC_MEDIUM_URL }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -26,7 +20,13 @@ jobs:
 
   node-ci:
     needs: setup
-    runs-on: ubuntu-latest    
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+      NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+      NEXT_PUBLIC_RSS_API_URL: ${{ secrets.NEXT_PUBLIC_RSS_API_URL }}
+      NEXT_PUBLIC_MEDIUM_URL: ${{ secrets.NEXT_PUBLIC_MEDIUM_URL }}
     strategy:
       matrix:
         node-version: [22.x]
@@ -49,6 +49,12 @@ jobs:
   playwright-tests:
     needs: setup
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SANITY_PROJECT_ID: ${{ secrets.NEXT_PUBLIC_SANITY_PROJECT_ID }}
+      NEXT_PUBLIC_SANITY_DATASET: ${{ secrets.NEXT_PUBLIC_SANITY_DATASET }}
+      NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+      NEXT_PUBLIC_RSS_API_URL: ${{ secrets.NEXT_PUBLIC_RSS_API_URL }}
+      NEXT_PUBLIC_MEDIUM_URL: ${{ secrets.NEXT_PUBLIC_MEDIUM_URL }}
     steps:
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
