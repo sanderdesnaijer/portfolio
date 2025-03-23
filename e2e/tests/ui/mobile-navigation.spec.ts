@@ -9,6 +9,9 @@ test.describe("mobile navigation", () => {
 
     // Navigate to the page
     await page.goto("/about");
+    await expect(
+      page.getByRole("heading", { level: 1, name: /About/i })
+    ).toBeVisible();
 
     const nav = page.locator("nav");
     const navLink = page.locator("nav a").nth(2); // Adjust if needed
@@ -18,7 +21,7 @@ test.describe("mobile navigation", () => {
     await expect(nav).toBeInViewport();
 
     // Scroll down 500px
-    await page.evaluate(() => window.scrollBy(0, 300));
+    await page.evaluate(() => window.scrollBy(0, 500));
     await page.waitForTimeout(300); // Ensure scroll event processes
 
     // Check that navigation is NOT in viewport (hidden)
