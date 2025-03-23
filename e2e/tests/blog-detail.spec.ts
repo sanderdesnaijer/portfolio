@@ -17,7 +17,6 @@ async function checkPageElements(page: Page) {
       name: /Mock Building My First Flutter App: Challenges and Lessons Learned/i,
     })
   ).toBeVisible();
-  //
 
   await expect(
     page
@@ -25,7 +24,7 @@ async function checkPageElements(page: Page) {
       .locator("img")
   ).toBeVisible();
 
-  expect(
+  await expect(
     page.getByRole("link", { name: /originally published on Medium/i })
   ).toBeVisible();
 }

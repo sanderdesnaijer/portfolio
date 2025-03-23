@@ -3,7 +3,6 @@ import Page from "./page";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
 import { mockPage, mockPages } from "@/app/test-utils/mockPage";
-import { mockArticles } from "@/app/test-utils/mockArticle";
 import { mockSetting } from "@/app/test-utils/mockSetting";
 
 const mockBlogPage: PageSanity = {
@@ -29,15 +28,6 @@ const mockBlogPage: PageSanity = {
   _createdAt: "2023-01-01T00:00:00Z",
   _updatedAt: "2023-01-01T00:00:00Z",
 };
-
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    ok: true,
-    json: () => Promise.resolve(mockArticles),
-  })
-);
 
 describe("app/(pages)/blog/page", () => {
   afterEach(() => {

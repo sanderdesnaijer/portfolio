@@ -2,18 +2,13 @@
  * @jest-environment node
  */
 import { mockArticles } from "@/app/test-utils/mockArticle";
-import { fetchMediumArticles } from "../utils";
 import { GET } from "./route";
 import { getTranslationKey } from "@/app/test-utils/i18n";
-
-jest.mock("../utils", () => ({
-  fetchMediumArticles: jest.fn(),
-}));
+import { mswServer } from "@/app/mock/mswServer";
+import { http, HttpResponse } from "msw";
 
 describe("GET /api/medium", () => {
   it("should return a 200 status with found article", async () => {
-    (fetchMediumArticles as jest.Mock).mockResolvedValue(mockArticles);
-
     const response = await GET(new Request("http://localhost"), {
       params: {
         slug: "building-my-first-flutter-app-challenges-and-lessons-learned",
@@ -29,8 +24,11 @@ describe("GET /api/medium", () => {
   });
 
   it("should return a 404 status with not found message", async () => {
-    (fetchMediumArticles as jest.Mock).mockResolvedValue(mockArticles);
-
+    mswServer.use(
+      http.all("*/api.rss2json*", async () => {
+        return new HttpResponse(null, { status: 404 });
+      })
+    );
     const response = await GET(new Request("http://localhost"), {
       params: { slug: "my-not-be-found-article" },
     });

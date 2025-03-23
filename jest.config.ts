@@ -25,7 +25,7 @@ const config: Config = {
   ],
   coverageDirectory: "coverage",
   coverageProvider: "v8",
-  testEnvironment: "jsdom",
+  testEnvironment: "jest-fixed-jsdom",
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   moduleNameMapper: {
     "^@/components/(.*)$": "<rootDir>/app/components/$1",
@@ -33,6 +33,9 @@ const config: Config = {
     "\\.svg": "<rootDir>/app/__mocks__/svg.ts",
   },
   testPathIgnorePatterns: ["<rootDir>/e2e/"],
+  testEnvironmentOptions: {
+    customExportConditions: [""],
+  },
 };
 
 const jestConfigWithOverrides = async () => {
