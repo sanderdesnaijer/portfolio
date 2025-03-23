@@ -17,8 +17,7 @@ export const handlers = [
     return HttpResponse.json({ items: mockArticles });
   }),
   // sanity
-  http.all("*", async ({ request }) => {
-    console.log(request.url);
+  http.all("*", async () => {
     // Pass the request to the real server (or continue normal behavior)
     return passthrough();
   }),
