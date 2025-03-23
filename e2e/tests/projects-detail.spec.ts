@@ -111,8 +111,8 @@ test.describe("projects detail", () => {
     ).toBeVisible();
 
     const pageLink = page.getByRole("link", { name: "Go back to the project" });
-    await pageLink.click();
     const href = await pageLink.getAttribute("href");
+    await pageLink.click();
     await expect(page).toHaveURL(href!);
   });
 });
