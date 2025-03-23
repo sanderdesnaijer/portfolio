@@ -1,6 +1,10 @@
+import { AUTHOR_NAME } from "./constants";
+import { getBaseUrl } from "./routes";
 import {
+  buildPageUrl,
   convertDate,
   extractTextFromHTML,
+  generateTitle,
   getImageURL,
   getSlug,
   truncateText,
@@ -131,6 +135,46 @@ describe("app/utils/utils", () => {
       const url = "https://example.com/some-slug-123abc456def";
       const result = getSlug(url);
       expect(result).toBe("not-found");
+    });
+  });
+
+  describe("generateTitle", () => {
+    it("should generate a title without project", () => {
+      const result = generateTitle("My Portfolio");
+      expect(result).toBe(`${AUTHOR_NAME} | My Portfolio`);
+    });
+
+    it("should generate a title with project", () => {
+      const result = generateTitle("My Portfolio", "Project One");
+      expect(result).toBe(`${AUTHOR_NAME} | My Portfolio | Project One`);
+    });
+
+    it("should handle undefined project", () => {
+      const result = generateTitle("My Portfolio", undefined);
+      expect(result).toBe(`${AUTHOR_NAME} | My Portfolio`);
+    });
+
+    it("should return only the author name if no title is provided", () => {
+      const result = generateTitle();
+      expect(result).toBe(AUTHOR_NAME);
+    });
+  });
+
+  describe("buildPageUrl", () => {
+    it("should return the correct URL for a page without a detail slug", () => {
+      expect(buildPageUrl("home")).toBe(`${getBaseUrl()}/home`);
+    });
+
+    it("should return the correct URL for a page with a detail slug", () => {
+      expect(buildPageUrl("products", "123")).toBe(
+        `${getBaseUrl()}/products/123`
+      );
+    });
+
+    it("should handle special characters in slugs", () => {
+      expect(buildPageUrl("category", "t-shirts")).toBe(
+        `${getBaseUrl()}/category/t-shirts`
+      );
     });
   });
 });

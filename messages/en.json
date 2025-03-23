@@ -10,11 +10,21 @@
       "datePresent": "present",
       "jobExperience": "Experience",
       "jobContract": "via",
-      "projectCreatedAt": "created at"
+      "projectCreatedAt": "created at",
+      "professionalExperience": "Professional Experience"
     },
     "blog": {
-      "articleLinkMedium": "originally published on Medium"
+      "articleLinkMedium": "originally published on Medium",
+      "articles": "Blog articles"
+    },
+    "project": {
+      "resources": "Project resources",
+      "projects": "Projects"
     }
+  },
+  "generic": {
+    "relatedTags": "Related tags",
+    "mainNavigation": "Main navigation"
   },
   "error": {
     "generic": {

@@ -9,9 +9,18 @@ const compat = new FlatCompat({
   baseDirectory: __dirname,
 });
 
+import noHardcodedAriaLabels from "./eslint-rules/no-hardcoded-aria-labels.js";
+
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
   {
+    plugins: {
+      "custom-rules": {
+        rules: {
+          "no-hardcoded-aria-labels": noHardcodedAriaLabels,
+        },
+      },
+    },
     rules: {
       "no-console": "error",
       "react/jsx-no-literals": "error",
@@ -28,6 +37,7 @@ const eslintConfig = [
           array: false,
         },
       ],
+      "custom-rules/no-hardcoded-aria-labels": "error",
     },
   },
   {

@@ -10,7 +10,8 @@ import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
-import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
+import { pageSlugs } from "@/app/utils/routes";
+import { buildPageUrl } from "@/app/utils/utils";
 
 const { projects: slug } = pageSlugs;
 
@@ -63,7 +64,7 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
         <NotFound
           title={t("error.404.project.action")}
           description={t("error.404.project.description")}
-          href={`${getBaseUrl()}/${slug}` || `/${slug}`}
+          href={buildPageUrl(slug)}
         />
       )}
       {project && project.tags && <Tags tags={project.tags} />}

@@ -1,10 +1,16 @@
 import { IconLink } from "@/sanity/types/types";
 import { getIcon } from "./Icons";
 import { CustomLink } from "./CustomLink";
+import { useTranslations } from "next-intl";
 
 export const LinkList: React.FC<{ links: Array<IconLink> }> = ({ links }) => {
+  const t = useTranslations();
+
   return (
-    <ul className="group relative z-1 m-0 list-none p-0">
+    <ul
+      aria-label={t("pages.project.resources")}
+      className="group relative z-1 m-0 list-none p-0"
+    >
       {links.map((link) => {
         const IconComponent = getIcon(link.icon);
         return (

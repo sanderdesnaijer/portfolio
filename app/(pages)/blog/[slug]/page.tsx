@@ -5,9 +5,12 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
 import { Layout } from "@/app/components/Layout";
 import {
+  buildPageUrl,
   convertDate,
   extractTextFromHTML,
+  generateTitle,
   getImageURL,
+  getSlug,
 } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { getMediumArticle } from "@/app/utils/api";
@@ -15,7 +18,7 @@ import { generateMetaData } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
-import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
+import { pageSlugs } from "@/app/utils/routes";
 
 const { blog: slug } = pageSlugs;
 
@@ -42,18 +45,18 @@ export async function generateMetadata({
     query: pageQuery,
     params: { slug },
   });
-  const baseTitle = `Sander de Snaijer | ${page.title}`;
 
-  const title = `${baseTitle} | ${article.title}`;
+  const title = generateTitle(page.title, article.title);
   const description = extractTextFromHTML(article?.description);
   const imageUrl = getImageURL(article?.description) || page.imageURL;
+  const url = buildPageUrl(page.slug.current, getSlug(article.link));
 
   return generateMetaData({
     title,
     description,
-    url: getBaseUrl(),
-    publishedTime: page._createdAt,
-    modifiedTime: page._updatedAt,
+    url,
+    publishedTime: article.pubDate,
+    modifiedTime: article.pubDate,
     imageUrl,
     keywords: article.categories,
     canonical: article.link,
@@ -67,7 +70,6 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   const t = await getTranslations();
 
   const title = article ? article.title : t("error.404.blog.title");
-
   return (
     <Layout
       pageTitle={title}
@@ -95,7 +97,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
         <NotFound
           title={t("error.404.blog.action")}
           description={t("error.404.blog.description")}
-          href={`${getBaseUrl()}/${slug}`}
+          href={buildPageUrl(slug)}
         />
       )}
     </Layout>

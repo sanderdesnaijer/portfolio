@@ -6,11 +6,11 @@ import Menu from "./components/Menu";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
 import { SocialIcons } from "./components/SocialIcons";
 import { generateMetaData } from "./utils/metadata";
-import { AUTHOR_NAME } from "./utils/constants";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "./components/NotFound";
 import { getBaseUrl } from "./utils/routes";
+import { generateTitle } from "./utils/utils";
 
 export async function generateMetadata() {
   const page = await sanityFetch<PageSanity>({
@@ -19,7 +19,7 @@ export async function generateMetadata() {
   });
 
   return generateMetaData({
-    title: AUTHOR_NAME,
+    title: generateTitle(),
     description: page.description,
     publishedTime: page._createdAt,
     modifiedTime: page._updatedAt,

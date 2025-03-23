@@ -1,3 +1,8 @@
+import { AUTHOR_NAME } from "./constants";
+import { toPlainText } from "next-sanity";
+import { Block } from "@/sanity/types/types";
+import { getBaseUrl } from "./routes";
+
 /**
  * Converts a date string into a formatted date string.
  *
@@ -67,4 +72,49 @@ export const getImageURL = (articleDescription: string): string | undefined => {
 export const getSlug = (url: string): string => {
   const match = url.match(/\/([^\/]+)-[a-f0-9]{12}\?/);
   return match ? match[1] : "not-found";
+};
+
+/**
+ * Generates a title string for the page, including author name and project title if available.
+ *
+ * If `pageTitle` is not provided, it will return only the author's name.
+ *
+ * @param {string} pageTitle - The title of the page (optional)
+ * @param {string} subPageTitle - The sub page title (optional)
+ * @returns {string} - The generated title, including the author name and project title if provided.
+ */
+
+export function generateTitle(
+  pageTitle?: string,
+  subPageTitle?: string
+): string {
+  if (!pageTitle) {
+    return AUTHOR_NAME;
+  }
+
+  const baseTitle = `${AUTHOR_NAME} | ${pageTitle}`;
+  return subPageTitle ? `${baseTitle} | ${subPageTitle}` : baseTitle;
+}
+
+/**
+ * Extracts a plain text description from a Sanity block array and truncates it to 160 characters.
+ *
+ * @param {Block[]} sanityBlock - The Sanity block array containing rich text content.
+ * @returns {string} - The truncated plain text description.
+ */
+export const getDescriptionFromSanity = (sanityBlock: Block[]): string =>
+  truncateText(toPlainText(sanityBlock), 160);
+
+/**
+ * Constructs a full URL using the base URL and provided slugs.
+ *
+ * @param {string} pageSlug - The main page slug (e.g., "products", "about").
+ * @param {string} [detailPageSlug] - Optional detail page slug (e.g., a product ID or category name).
+ * @returns {string} - The fully constructed URL.
+ */
+export const buildPageUrl = (
+  pageSlug: string,
+  detailPageSlug?: string
+): string => {
+  return `${getBaseUrl()}/${pageSlug}${detailPageSlug ? `/${detailPageSlug}` : ""}`;
 };

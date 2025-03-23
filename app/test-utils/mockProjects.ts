@@ -42,8 +42,8 @@ export const mockProject: ProjectTypeSanity = {
       _updatedAt: "",
     },
   ],
-  publishedAt: "",
-  _updatedAt: "",
+  publishedAt: "2025-01-02",
+  _updatedAt: "2025-01-02",
   _rev: "",
   _type: "",
 };

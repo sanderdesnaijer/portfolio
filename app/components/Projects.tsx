@@ -2,6 +2,7 @@ import { toPlainText } from "next-sanity";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { ProjectListItem } from "./ProjectListItem";
 import { truncateText } from "../utils/utils";
+import { useTranslations } from "next-intl";
 
 export const Projects = ({
   projects = [],
@@ -10,9 +11,14 @@ export const Projects = ({
   projects: ProjectTypeSanity[];
   pageSlug: string;
 }) => {
+  const t = useTranslations();
+
   return (
     <div className="mx-auto grid grid-cols-1 md:py-10">
-      <ol className="group mt-0 grid gap-10 pl-0">
+      <ol
+        aria-label={t("pages.project.projects")}
+        className="group mt-0 grid gap-10 pl-0"
+      >
         {projects.map((project) => {
           const body =
             project?.body && project?.body.length

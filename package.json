@@ -11,7 +11,9 @@
     "format:check": "prettier -c .",
     "typecheck": "tsc --noEmit",
     "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test:e2e": "npx playwright test",
+    "test:e2e-ui": "npx playwright test --ui"
   },
   "dependencies": {
     "@sanity/icons": "^3.7.0",
@@ -27,7 +29,9 @@
     "styled-components": "^6.1.15"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
     "@eslint/eslintrc": "^3.3.0",
+    "@playwright/test": "^1.51.1",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4.0.13",
     "@tailwindcss/typography": "^0.5.16",
@@ -38,6 +42,7 @@
     "@types/node": "^22.13.10",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "dotenv": "^16.4.7",
     "eslint": "^9.22.0",
     "eslint-config-next": "^15.2.2",
     "eslint-config-prettier": "^10.1.1",

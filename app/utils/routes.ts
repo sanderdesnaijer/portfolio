@@ -2,12 +2,13 @@ type RouteKey = "about" | "blog" | "projects";
 type Routes = Record<RouteKey, string>;
 
 export const getBaseUrl = (): string => {
-  if (!process.env.NEXT_PUBLIC_BASE_URL) {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  if (!baseUrl) {
     throw new Error(
       "NEXT_PUBLIC_BASE_URL is not set in the environment variables."
     );
   }
-  return process.env.NEXT_PUBLIC_BASE_URL;
+  return baseUrl;
 };
 
 export const pageSlugs: Routes = {
