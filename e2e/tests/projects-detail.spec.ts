@@ -98,4 +98,21 @@ test.describe("projects detail", () => {
       modifiedTime: project!._updatedAt,
     });
   });
+
+  test("show a message when project can not be found", async ({ page }) => {
+    await page.goto("/projects/does-not-exist");
+
+    await expect(
+      page.getByRole("heading", { name: /Project not found/i })
+    ).toBeVisible();
+
+    expect(
+      page.getByText(/Sorry, we couldn't find the project you're looking for/i)
+    ).toBeVisible();
+
+    const pageLink = page.getByRole("link", { name: "Go back to the project" });
+    await pageLink.click();
+    const href = await pageLink.getAttribute("href");
+    await expect(page).toHaveURL(href!);
+  });
 });
