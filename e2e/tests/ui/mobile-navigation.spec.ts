@@ -22,7 +22,7 @@ test.describe("mobile navigation", () => {
 
     // Scroll down 500px
     await page.evaluate(() => window.scrollBy(0, 500));
-    await page.waitForTimeout(300); // Ensure scroll event processes
+    await page.waitForTimeout(500); // Ensure scroll event processes
 
     // Check that navigation is NOT in viewport (hidden)
     await expect(nav).not.toBeInViewport();
@@ -40,6 +40,9 @@ test.describe("mobile navigation", () => {
 
     // Ensure URL changed correctly
     await expect(page).toHaveURL("/projects");
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Projects/i })
+    ).toBeVisible();
 
     // Ensure nav is visible after navigation
     await expect(nav).toBeVisible();
@@ -60,6 +63,9 @@ test.describe("mobile navigation", () => {
 
     // Navigate to the page
     await page.goto("/about");
+    await expect(
+      page.getByRole("heading", { level: 1, name: /About/i })
+    ).toBeVisible();
 
     const nav = page.locator("nav");
     const navLink = page.locator("nav a").nth(2); // Adjust if needed
@@ -70,12 +76,12 @@ test.describe("mobile navigation", () => {
 
     // Scroll down 500px
     await page.evaluate(() => window.scrollBy(0, 500));
-    await page.waitForTimeout(300); // Ensure scroll event processes
+    await page.waitForTimeout(500); // Ensure scroll event processes
     await expect(nav).not.toBeInViewport();
 
     // Scroll up 100px instead of 10px (more realistic)
     await page.evaluate(() => window.scrollBy(0, -100));
-    await page.waitForTimeout(300); // Ensure UI updates
+    await page.waitForTimeout(500); // Ensure UI updates
 
     // Ensure navigation is visible again
     await expect(nav).toBeVisible();
@@ -94,6 +100,9 @@ test.describe("mobile navigation", () => {
 
     // Ensure URL changed correctly
     await expect(page).toHaveURL("/projects");
+    await expect(
+      page.getByRole("heading", { level: 1, name: /Projects/i })
+    ).toBeVisible();
 
     // Ensure nav is visible after navigation
     await expect(nav).toBeVisible();
