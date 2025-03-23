@@ -8,7 +8,6 @@ export const handlers = [
     const article = mockArticles.find((item) =>
       item.link.includes(articleSlug)
     );
-
     return HttpResponse.json(article);
   }),
   http.all("*", async () => {
