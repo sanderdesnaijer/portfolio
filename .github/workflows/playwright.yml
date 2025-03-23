@@ -37,6 +37,13 @@ jobs:
         run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+      - name: Cache Next.js build
+        uses: actions/cache@v3
+        with:
+          path: .next/cache
+          key: nextjs-${{ runner.os }}-${{ github.sha }}
+          restore-keys: |
+            nextjs-${{ runner.os }}-  
       - name: Build code
         run: npm run build
       - name: Run Playwright tests
