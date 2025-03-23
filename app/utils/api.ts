@@ -41,10 +41,12 @@ export async function getMediumArticle(
   return fetchData<MediumArticle>(`/api/medium/${params.slug}`);
 }
 
+// currently only used in e2e test to be able to intercept and mock it
 export async function fetchPage(slug = ""): Promise<PageSanity | null> {
   return fetchData<PageSanity>("/api/page", { slug });
 }
 
+// currently only used in e2e test to be able to intercept and mock it
 export async function fetchProject(
   slug = ""
 ): Promise<ProjectTypeSanity | null> {
