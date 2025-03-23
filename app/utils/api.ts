@@ -19,9 +19,10 @@ async function fetchData<T>(
     const res = await fetch(url.toString(), {
       next: { revalidate: REVALIDATE_INTERVAL },
     });
-    if (!res.ok) {
+    if (!res.ok || !res.body) {
       throw new Error(`Failed to fetch data from ${endpoint}`);
     }
+
     return await res.json();
   } catch (error) {
     // eslint-disable-next-line no-console

@@ -108,6 +108,7 @@ test.describe("blog detail", () => {
   });
 
   test("show a message when b;pg can not be found", async ({ page }) => {
+    //
     await page.goto("/blog/does-not-exist");
 
     await expect(
