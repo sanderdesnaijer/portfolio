@@ -15,7 +15,8 @@ jobs:
       NEXT_PUBLIC_MEDIUM_URL: ${{ secrets.NEXT_PUBLIC_MEDIUM_URL }}
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Set up Node.js
         id: node_version
         uses: actions/setup-node@v4
