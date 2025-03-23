@@ -14,10 +14,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: "npm"
+      - name: Cache npm dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm ci
-        
 
   node-ci:
     needs: setup
@@ -37,6 +42,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
       - name: Check code formatting
         run: npm run format:check
       - name: Lint code
@@ -58,6 +72,19 @@ jobs:
       NEXT_PUBLIC_RSS_API_URL: ${{ secrets.NEXT_PUBLIC_RSS_API_URL }}
       NEXT_PUBLIC_MEDIUM_URL: ${{ secrets.NEXT_PUBLIC_MEDIUM_URL }}
     steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+      - name: Restore npm cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      - name: Install dependencies
+        run: npm ci
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Build code
