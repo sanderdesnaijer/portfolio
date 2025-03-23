@@ -2,6 +2,7 @@ import { http, HttpResponse, passthrough } from "msw";
 import { mockArticles } from "../test-utils/mockArticle";
 
 export const handlers = [
+  // medium
   http.get("*/api/medium", async () => {
     return HttpResponse.json(mockArticles);
   }),
@@ -15,8 +16,9 @@ export const handlers = [
   http.all("*/api.rss2json*", async () => {
     return HttpResponse.json({ items: mockArticles });
   }),
-
-  http.all("*", async () => {
+  // sanity
+  http.all("*", async ({ request }) => {
+    console.log(request.url);
     // Pass the request to the real server (or continue normal behavior)
     return passthrough();
   }),

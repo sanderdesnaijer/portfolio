@@ -1,7 +1,6 @@
 import { test, expect, Page } from "@playwright/test";
 import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
-import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
 import {
   buildPageUrl,
@@ -10,6 +9,7 @@ import {
   getImageURL,
 } from "@/app/utils/utils";
 import { mockArticles } from "@/app/test-utils/mockArticle";
+import { fetchPage } from "@/app/utils/api";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -90,7 +90,7 @@ test.describe("blog detail", () => {
   });
 
   test("should include accurate metadata", async ({ page }) => {
-    const pageData = await fetchPageData("blog");
+    const pageData = await fetchPage("blog");
     const article = mockArticles[0];
 
     await testPageMetadata(page, {

@@ -1,14 +1,13 @@
 import { test, expect, Page } from "@playwright/test";
 import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
-import { fetchPageData } from "@/app/api/pageData/utils";
 import { testPageMetadata } from "../utils/metadata";
 import {
   buildPageUrl,
   generateTitle,
   getDescriptionFromSanity,
 } from "@/app/utils/utils";
-import { fetchProjectData } from "@/app/api/project/utils";
+import { fetchPage, fetchProject } from "@/app/utils/api";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -89,8 +88,8 @@ test.describe("projects detail", () => {
   });
 
   test("should include accurate metadata", async ({ page }) => {
-    const data = await fetchPageData("projects");
-    const project = await fetchProjectData("flutter-tabata-whip-timer");
+    const data = await fetchPage("projects");
+    const project = await fetchProject("flutter-tabata-whip-timer");
 
     await testPageMetadata(page, {
       title: generateTitle(data!.title, project!.title),
