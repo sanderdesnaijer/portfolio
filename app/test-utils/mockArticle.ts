@@ -2,7 +2,7 @@ import { MediumArticle } from "../api/medium/types";
 
 export const mockArticles: MediumArticle[] = [
   {
-    title: "Building My First Flutter App: Challenges and Lessons Learned",
+    title: "Mock Building My First Flutter App: Challenges and Lessons Learned",
     pubDate: "2025-03-02 08:02:41",
     link: "https://medium.com/@sanderdesnaijer/building-my-first-flutter-app-challenges-and-lessons-learned-49ad913b4941?source=rss-aae3af6fc2dd------2",
     guid: "https://medium.com/p/49ad913b4941",
@@ -22,7 +22,7 @@ export const mockArticles: MediumArticle[] = [
     ],
   },
   {
-    title: "Creating a 3D-Printed Word Clock with Minute Accuracy",
+    title: "Mock Creating a 3D-Printed Word Clock with Minute Accuracy",
     pubDate: "2025-02-09 11:18:24",
     link: "https://medium.com/@sanderdesnaijer/creating-a-3d-printed-word-clock-with-minute-accuracy-c8e0fd85bd16?source=rss-aae3af6fc2dd------2",
     guid: "https://medium.com/p/c8e0fd85bd16",
