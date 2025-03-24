@@ -1,4 +1,4 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Page, test } from "@playwright/test";
 import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
@@ -9,7 +9,6 @@ import { getAboutScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import { getTranslationKey } from "@/app/test-utils/i18n";
 import { JobSanity } from "@/sanity/types";
-import { test } from "../setup";
 async function checkAboutPageElements(page: Page) {
   await expect(
     page.getByRole("heading", { level: 1, name: /About/i })
