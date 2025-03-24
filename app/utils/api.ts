@@ -2,7 +2,12 @@ import { QueryParams } from "next-sanity";
 import { MediumArticle } from "../api/medium/types";
 import { REVALIDATE_INTERVAL } from "./constants";
 import { getBaseUrl } from "./routes";
-import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
+import {
+  JobSanity,
+  PageSanity,
+  ProjectTypeSanity,
+  SettingSanity,
+} from "@/sanity/types";
 
 const baseUrl = getBaseUrl();
 
@@ -46,14 +51,21 @@ export async function getMediumArticle(
   return fetchData<MediumArticle>(`/api/medium/${params.slug}`);
 }
 
-// currently only used in e2e test to be able to intercept and mock it
+// following routes are currently only used in e2e test
 export async function fetchPage(slug = ""): Promise<PageSanity | null> {
   return fetchData<PageSanity>("/api/page", { slug });
 }
 
-// currently only used in e2e test to be able to intercept and mock it
 export async function fetchProject(
   slug = ""
 ): Promise<ProjectTypeSanity | null> {
   return fetchData<ProjectTypeSanity>("/api/project", { slug });
+}
+
+export async function fetchSettings(): Promise<SettingSanity | null> {
+  return fetchData<SettingSanity>("/api/settings");
+}
+
+export async function fetchJobs(): Promise<JobSanity | null> {
+  return fetchData<JobSanity>("/api/jobs");
 }

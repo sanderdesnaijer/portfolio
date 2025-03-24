@@ -19,5 +19,5 @@ export async function validateJsonLd(
   expect(jsonLdText).not.toBeNull();
 
   const parsedJsonLd = JSON.parse(jsonLdText!);
-  expect(parsedJsonLd.value).toMatchObject(expectedJsonLd);
+  expect(parsedJsonLd).toMatchObject(expectedJsonLd);
 }

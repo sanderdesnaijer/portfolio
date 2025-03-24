@@ -1,11 +1,15 @@
-import { test, expect, Page } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl, generateTitle } from "@/app/utils/utils";
-import { fetchPage } from "@/app/utils/api";
-
+import { fetchJobs, fetchPage, fetchSettings } from "@/app/utils/api";
+import { getAboutScheme } from "@/app/utils/jsonLDSchemes";
+import { validateJsonLd } from "../utils/jsonLD";
+import { getTranslationKey } from "@/app/test-utils/i18n";
+import { JobSanity } from "@/sanity/types";
+import { test } from "../setup";
 async function checkAboutPageElements(page: Page) {
   await expect(
     page.getByRole("heading", { level: 1, name: /About/i })
@@ -55,14 +59,34 @@ test.describe("about", () => {
 
   test("should include accurate metadata", async ({ page }) => {
     const data = await fetchPage("about");
+    const url = buildPageUrl("about");
     await testPageMetadata(page, {
       title: generateTitle("About"),
       description: data!.description,
-      url: buildPageUrl("about"),
+      url,
       imageUrl: data!.imageURL,
       imageAlt: data!.imageAlt,
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,
     });
+
+    const setting = await fetchSettings();
+    const socialLinks = setting!.socialMedia.map((s) => s.link);
+    const jobs = await fetchJobs();
+    const activeJobs = jobs!.reduce(
+      (list: string[], job: JobSanity) =>
+        job.endDate === null ? list.concat(job.companyName) : list,
+      []
+    );
+
+    // json-ld
+    const expectedJsonLd = getAboutScheme({
+      imageUrl: data!.imageURL,
+      url,
+      jobs: activeJobs,
+      jobTitle: getTranslationKey("pages.about.jobTitle"),
+      links: socialLinks,
+    });
+    await validateJsonLd(page, expectedJsonLd);
   });
 });

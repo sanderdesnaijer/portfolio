@@ -145,7 +145,7 @@ describe("app/(pages)/about-me", () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockPageWithoutBody)
       .mockResolvedValueOnce([])
-      .mockResolvedValueOnce(mockJobs)
+      .mockResolvedValueOnce(mockSetting)
       .mockResolvedValueOnce(mockPages);
     render(await Page());
 
@@ -167,7 +167,7 @@ describe("app/(pages)/about-me", () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockAboutMePage)
       .mockResolvedValueOnce(mockJobsWithEndDate)
-      .mockResolvedValueOnce(mockJobs)
+      .mockResolvedValueOnce(mockSetting)
       .mockResolvedValueOnce(mockPages);
 
     render(await Page());
@@ -186,7 +186,7 @@ describe("app/(pages)/about-me", () => {
     (sanityFetch as jest.Mock)
       .mockResolvedValueOnce(mockAboutMePage)
       .mockResolvedValueOnce(mockJobsWithoutEndDate)
-      .mockResolvedValueOnce(mockJobs)
+      .mockResolvedValueOnce(mockSetting)
       .mockResolvedValueOnce(mockPages);
 
     render(await Page());

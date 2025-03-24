@@ -40,3 +40,29 @@ export const getWebsiteScheme = ({
   dateModified: updatedAt,
   inLanguage: language,
 });
+
+export const getAboutScheme = ({
+  url,
+  links,
+  jobTitle,
+  jobs,
+  imageUrl,
+}: {
+  url: string;
+  links: string[];
+  jobTitle: string;
+  jobs: string[];
+  imageUrl: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: AUTHOR_NAME,
+  url,
+  sameAs: links,
+  jobTitle,
+  worksFor: jobs.map((job) => ({
+    "@type": "Organization",
+    name: job,
+  })),
+  image: imageUrl,
+});
