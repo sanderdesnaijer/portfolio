@@ -4,7 +4,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 
 import Home from "./page";
 import { getTranslationKey } from "./test-utils/i18n";
-import { mockPages } from "./test-utils/mockPage";
+import { mockPage, mockPages } from "./test-utils/mockPage";
 
 const mockSanityFetch = sanityFetch as jest.Mock;
 
@@ -35,7 +35,8 @@ describe("app/page", () => {
 
     mockSanityFetch
       .mockResolvedValueOnce(mockSettings)
-      .mockResolvedValueOnce(mockPages);
+      .mockResolvedValueOnce(mockPages)
+      .mockResolvedValueOnce(mockPage);
 
     render(await Home());
 
@@ -46,11 +47,12 @@ describe("app/page", () => {
   });
 
   it("calls sanityFetch with the correct query", async () => {
-    const mockSettings = { title: "Test Title" };
+    const mockSettings = { title: "Test Title", socialMedia: [] };
 
     mockSanityFetch
       .mockResolvedValueOnce(mockSettings)
-      .mockResolvedValueOnce(mockPages);
+      .mockResolvedValueOnce(mockPages)
+      .mockResolvedValueOnce(mockPage);
 
     await Home();
 

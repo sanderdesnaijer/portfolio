@@ -12,11 +12,19 @@ import { NotFound } from "./components/NotFound";
 import { getBaseUrl } from "./utils/routes";
 import { generateTitle } from "./utils/utils";
 
-export async function generateMetadata() {
-  const page = await sanityFetch<PageSanity>({
+import { cache } from "react";
+import { getWebsiteScheme } from "./utils/jsonLDSchemes";
+import { JsonLd } from "./components/JsonLd";
+
+const fetchPageData = cache(async function fetchPageData() {
+  return sanityFetch<PageSanity>({
     query: pageQuery,
     params: { slug: "" },
   });
+});
+
+export async function generateMetadata() {
+  const page = await fetchPageData();
 
   return generateMetaData({
     title: generateTitle(),
@@ -30,6 +38,7 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const { setting, menuItems } = await fetchCommonData();
+  const page = await fetchPageData();
 
   if (!setting || !menuItems) {
     const t = await getTranslations();
@@ -42,27 +51,40 @@ export default async function Home() {
     );
   }
 
+  const jsonLd = getWebsiteScheme({
+    authorLink: setting?.socialMedia.find((s) => s.title === "LinkedIn")?.link,
+    createdAt: page._createdAt,
+    description: page.description,
+    imageUrl: page.imageURL,
+    title: page.title,
+    updatedAt: page._updatedAt,
+    url: getBaseUrl(),
+  });
+
   return (
-    <div className="container mx-auto h-screen p-4">
-      <ThemeToggle className="theme-toggle absolute right-6 cursor-pointer" />
-      <main className="grid grid-cols-6 gap-4 md:h-full">
-        <div className="col-span-6 md:col-span-2 md:content-center">
-          <h1 className="mb-4 text-3xl font-bold md:text-5xl">
-            {setting.title}
-          </h1>
-          <p className="mb-4 text-xl">{setting.description}</p>
-          <SocialIcons
-            className="flex gap-2"
-            socialMedia={setting.socialMedia}
-          />
-        </div>
-        <div className="col-span-3 content-center">
-          <Menu
-            menuItems={menuItems}
-            className="flex flex-col text-7xl font-extralight md:text-9xl [&>ul]:relative [&>ul]:block"
-          />
-        </div>
-      </main>
-    </div>
+    <>
+      <JsonLd value={jsonLd} />
+      <div className="container mx-auto h-screen p-4">
+        <ThemeToggle className="theme-toggle absolute right-6 cursor-pointer" />
+        <main className="grid grid-cols-6 gap-4 md:h-full">
+          <div className="col-span-6 md:col-span-2 md:content-center">
+            <h1 className="mb-4 text-3xl font-bold md:text-5xl">
+              {setting.title}
+            </h1>
+            <p className="mb-4 text-xl">{setting.description}</p>
+            <SocialIcons
+              className="flex gap-2"
+              socialMedia={setting.socialMedia}
+            />
+          </div>
+          <div className="col-span-3 content-center">
+            <Menu
+              menuItems={menuItems}
+              className="flex flex-col text-7xl font-extralight md:text-9xl [&>ul]:relative [&>ul]:block"
+            />
+          </div>
+        </main>
+      </div>
+    </>
   );
 }
