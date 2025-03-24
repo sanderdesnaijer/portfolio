@@ -51,19 +51,22 @@ export default async function Home() {
     );
   }
 
-  const jsonLd = getWebsiteScheme({
-    authorLink: setting?.socialMedia.find((s) => s.title === "LinkedIn")?.link,
-    createdAt: page._createdAt,
-    description: page.description,
-    imageUrl: page.imageURL,
-    title: page.title,
-    updatedAt: page._updatedAt,
-    url: getBaseUrl(),
-  });
+  const jsonLd = page
+    ? getWebsiteScheme({
+        authorLink: setting?.socialMedia.find((s) => s.title === "LinkedIn")
+          ?.link,
+        createdAt: page._createdAt,
+        description: page.description,
+        imageUrl: page.imageURL,
+        title: page.title,
+        updatedAt: page._updatedAt,
+        url: getBaseUrl(),
+      })
+    : null;
 
   return (
     <>
-      <JsonLd value={jsonLd} />
+      {jsonLd && <JsonLd value={jsonLd} />}
       <div className="container mx-auto h-screen p-4">
         <ThemeToggle className="theme-toggle absolute right-6 cursor-pointer" />
         <main className="grid grid-cols-6 gap-4 md:h-full">
