@@ -19,6 +19,11 @@ async function fetchData<T>(
     const res = await fetch(url.toString(), {
       next: { revalidate: REVALIDATE_INTERVAL },
     });
+
+    if (res.status === 404) {
+      return null;
+    }
+
     if (!res.ok || !res.body) {
       throw new Error(`Failed to fetch data from ${endpoint}`);
     }
