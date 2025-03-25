@@ -1,6 +1,5 @@
 import { http, HttpResponse, passthrough } from "msw";
 import { mockArticles } from "../test-utils/mockArticle";
-// import { mockPages } from "../test-utils/mockPage";
 
 export const handlers = [
   http.get("*/api/medium", async () => {

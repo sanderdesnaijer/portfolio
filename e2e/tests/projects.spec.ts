@@ -4,7 +4,10 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl, generateTitle } from "@/app/utils/utils";
-import { fetchPage } from "@/app/utils/api";
+import { fetchPage, fetchProjects } from "@/app/utils/api";
+import { getProjectsScheme } from "@/app/utils/jsonLDSchemes";
+import { toPlainText } from "next-sanity";
+import { validateJsonLd } from "../utils/jsonLD";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -73,5 +76,26 @@ test.describe("projects", () => {
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,
     });
+
+    const projects = await fetchProjects();
+
+    // json-ld
+    const expectedJsonLd = getProjectsScheme({
+      title: data!.title,
+      url: buildPageUrl(data!.slug.current),
+      description: data!.description,
+      projects: projects!.map((project) => ({
+        title: project.title,
+        url: buildPageUrl(data!.slug.current, project.slug.current),
+        description: project.body && toPlainText(project.body),
+        imageUrl: project.imageURL!,
+        type: project.jsonLdType,
+        applicationCategory: project.jsonLdApplicationCategory,
+        operatingSystem: project.jsonLdOperatingSystem,
+        codeRepository: project.jsonLdCodeRepository,
+        programmingLanguage: project.jsonLdProgrammingLanguage,
+      })),
+    });
+    await validateJsonLd(page, expectedJsonLd);
   });
 });

@@ -24,4 +24,10 @@ export interface ProjectTypeSanity extends SanityDocument {
   tags?: TagSanity[];
   imageURL?: string;
   imageAlt?: string;
+  // JSON LD
+  jsonLdType: string[];
+  jsonLdApplicationCategory?: string;
+  jsonLdOperatingSystem?: string;
+  jsonLdCodeRepository?: string;
+  jsonLdProgrammingLanguage?: string;
 }

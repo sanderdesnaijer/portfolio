@@ -6,7 +6,6 @@ export const getWebsiteScheme = ({
   description,
   author = AUTHOR_NAME,
   authorLink,
-
   imageUrl,
   createdAt,
   updatedAt,
@@ -65,4 +64,59 @@ export const getAboutScheme = ({
     name: job,
   })),
   image: imageUrl,
+});
+
+export const getProjectsScheme = ({
+  title,
+  url,
+  description,
+  projects,
+}: {
+  title: string;
+  url: string;
+  description: string;
+  projects: {
+    title: string;
+    url: string;
+    imageUrl: string;
+    description: string;
+    type: string[];
+    // specific
+    applicationCategory?: string;
+    operatingSystem?: string;
+    codeRepository?: string;
+    programmingLanguage?: string;
+  }[];
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: title,
+  url,
+  description,
+  hasPart: projects.map(
+    ({
+      title: pTitle,
+      url: pUrl,
+      imageUrl,
+      description,
+      type,
+      // specific
+      applicationCategory,
+      operatingSystem,
+      codeRepository,
+      programmingLanguage,
+    }) => ({
+      "@type": type.length === 1 ? type[0] : type.map((t) => t),
+      "@id": pUrl,
+      name: pTitle,
+      url: pUrl,
+      image: imageUrl,
+      description,
+      // specific
+      ...(applicationCategory && { applicationCategory }),
+      ...(operatingSystem && { operatingSystem }),
+      ...(codeRepository && { codeRepository }),
+      ...(programmingLanguage && { programmingLanguage }),
+    })
+  ),
 });

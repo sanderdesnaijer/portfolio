@@ -10,9 +10,9 @@ import { http, HttpResponse } from "msw";
 describe("GET /api/medium", () => {
   it("should return a 200 status with found article", async () => {
     const response = await GET(new Request("http://localhost"), {
-      params: {
+      params: Promise.resolve({
         slug: "building-my-first-flutter-app-challenges-and-lessons-learned",
-      },
+      }),
     });
     const json = await response.json();
 
@@ -30,7 +30,7 @@ describe("GET /api/medium", () => {
       })
     );
     const response = await GET(new Request("http://localhost"), {
-      params: { slug: "my-not-be-found-article" },
+      params: Promise.resolve({ slug: "my-not-be-found-article" }),
     });
     const json = await response.json();
 

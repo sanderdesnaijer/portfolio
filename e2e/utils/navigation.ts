@@ -31,6 +31,8 @@ export async function testNavigation(
     }
 
     await page.goBack();
+    await expect(page).toHaveURL(fromUrl);
+
     await expect(
       page.getByRole("heading", { name: returnHeading })
     ).toBeVisible();

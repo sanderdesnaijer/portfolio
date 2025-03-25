@@ -5,7 +5,7 @@ import { getTranslations } from "next-intl/server";
 // GET handler for /api/medium/[id]
 export async function GET(
   _request: Request,
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
   const queryParams = await params;
   const articles = await fetchMediumArticles();

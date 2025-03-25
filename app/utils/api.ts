@@ -56,10 +56,14 @@ export async function fetchPage(slug = ""): Promise<PageSanity | null> {
   return fetchData<PageSanity>("/api/page", { slug });
 }
 
+export async function fetchProjects(): Promise<ProjectTypeSanity[] | null> {
+  return fetchData<ProjectTypeSanity[]>("/api/projects");
+}
+
 export async function fetchProject(
   slug = ""
 ): Promise<ProjectTypeSanity | null> {
-  return fetchData<ProjectTypeSanity>("/api/project", { slug });
+  return fetchData<ProjectTypeSanity>(`/api/projects/${slug}`);
 }
 
 export async function fetchSettings(): Promise<SettingSanity | null> {

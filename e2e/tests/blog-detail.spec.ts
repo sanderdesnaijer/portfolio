@@ -106,9 +106,12 @@ test.describe("blog detail", () => {
       canonical: article?.link,
     });
   });
+});
 
-  test("show a message when b;pg can not be found", async ({ page }) => {
-    //
+test.describe("blog detail not found", () => {
+  test("blog detail show a message when blog can not be found", async ({
+    page,
+  }) => {
     await page.goto("/blog/does-not-exist");
 
     await expect(

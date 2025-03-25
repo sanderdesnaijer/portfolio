@@ -6,6 +6,13 @@ export const projectType = defineType({
   title: "Project",
   type: "document",
   icon: DocumentTextIcon,
+  fieldsets: [
+    {
+      name: "jsonLd",
+      title: "JSON-LD Settings",
+      options: { collapsible: true, collapsed: false },
+    },
+  ],
   fields: [
     defineField({
       name: "title",
@@ -39,6 +46,82 @@ export const projectType = defineType({
         }),
       ],
     }),
+    // JSON-LD
+    defineField({
+      name: "jsonLdType",
+      title: "JSON-LD Type",
+      type: "array",
+      of: [{ type: "string" }],
+      validation: (Rule) => Rule.required().min(1),
+      options: {
+        list: [
+          { title: "Software Application", value: "SoftwareApplication" },
+          { title: "Product", value: "Product" },
+          { title: "Software Source Code", value: "SoftwareSourceCode" },
+          { title: "Web Application", value: "WebApplication" },
+          { title: "Creative Work", value: "CreativeWork" },
+        ],
+        layout: "list",
+      },
+      fieldset: "jsonLd",
+    }),
+    // SoftwareApplication
+    defineField({
+      name: "jsonLdApplicationCategory",
+      title: "JSON-LD Application Category",
+      type: "string",
+      options: {
+        list: [
+          { title: "Game", value: "Game" },
+          { title: "WeatherApp", value: "WeatherApp" },
+          { title: "WebApp", value: "WebApp" },
+          { title: "MobileApplication", value: "MobileApplication" },
+          { title: "Business", value: "Business" },
+        ],
+      },
+      hidden: ({ parent }) => {
+        const jsonLdType = parent?.jsonLdType;
+        return (
+          jsonLdType &&
+          !(
+            jsonLdType.includes("SoftwareApplication") ||
+            jsonLdType.includes("MobileApplication") ||
+            jsonLdType.includes("WebApplication")
+          )
+        );
+      },
+      fieldset: "jsonLd",
+    }),
+
+    defineField({
+      name: "jsonLdOperatingSystem",
+      title: "JSON-LD Operating System",
+      type: "string",
+      placeholder: "iOS",
+      hidden: ({ parent }) =>
+        !parent?.jsonLdType?.includes("SoftwareApplication"),
+      fieldset: "jsonLd",
+    }),
+    // SoftwareSourceCode
+    defineField({
+      name: "jsonLdCodeRepository",
+      title: "JSON-LD Code repository",
+      type: "string",
+      placeholder: "",
+      hidden: ({ parent }) =>
+        !parent?.jsonLdType?.includes("SoftwareSourceCode"),
+      fieldset: "jsonLd",
+    }),
+    defineField({
+      name: "jsonLdProgrammingLanguage",
+      title: "JSON-LD Programming language",
+      type: "string",
+      placeholder: "",
+      hidden: ({ parent }) =>
+        !parent?.jsonLdType?.includes("SoftwareSourceCode"),
+      fieldset: "jsonLd",
+    }),
+    // other meta
     defineField({
       name: "publishedAt",
       type: "datetime",
