@@ -69,6 +69,32 @@ export const getAboutScheme = ({
   image: imageUrl,
 });
 
+export const getProjectScheme = (
+  project: ProjectTypeSanity,
+  pageSlug: string
+) => ({
+  "@type":
+    project.jsonLdType.length === 1
+      ? project.jsonLdType[0]
+      : project.jsonLdType.map((t) => t),
+  "@id": buildPageUrl(pageSlug, project.slug.current),
+  name: project.title,
+  url: buildPageUrl(pageSlug, project.slug.current),
+  image: project.imageURL,
+  description: project.body && toPlainText(project.body),
+  // specific
+  ...(project.applicationCategory && {
+    applicationCategory: project.applicationCategory,
+  }),
+  ...(project.operatingSystem && {
+    operatingSystem: project.operatingSystem,
+  }),
+  ...(project.codeRepository && { codeRepository: project.codeRepository }),
+  ...(project.programmingLanguage && {
+    programmingLanguage: project.programmingLanguage,
+  }),
+});
+
 export const getProjectsScheme = ({
   page,
   projects,
@@ -81,26 +107,7 @@ export const getProjectsScheme = ({
   name: page.title,
   url: buildPageUrl(page.slug.current),
   description: page.description,
-  hasPart: projects.map((project) => ({
-    "@type":
-      project.jsonLdType.length === 1
-        ? project.jsonLdType[0]
-        : project.jsonLdType.map((t) => t),
-    "@id": buildPageUrl(page.slug.current, project.slug.current),
-    name: project.title,
-    url: buildPageUrl(page.slug.current, project.slug.current),
-    image: project.imageURL,
-    description: project.body && toPlainText(project.body),
-    // specific
-    ...(project.applicationCategory && {
-      applicationCategory: project.applicationCategory,
-    }),
-    ...(project.operatingSystem && {
-      operatingSystem: project.operatingSystem,
-    }),
-    ...(project.codeRepository && { codeRepository: project.codeRepository }),
-    ...(project.programmingLanguage && {
-      programmingLanguage: project.programmingLanguage,
-    }),
-  })),
+  hasPart: projects.map((project) =>
+    getProjectScheme(project, page.slug.current)
+  ),
 });

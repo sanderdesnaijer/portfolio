@@ -56,9 +56,10 @@ export const projectType = defineType({
       options: {
         list: [
           { title: "Software Application", value: "SoftwareApplication" },
-          { title: "CreativeWork", value: "CreativeWork" },
+          { title: "Product", value: "Product" },
           { title: "Software Source Code", value: "SoftwareSourceCode" },
           { title: "Web Application", value: "WebApplication" },
+          { title: "Creative Work", value: "CreativeWork" },
         ],
         layout: "list",
       },
