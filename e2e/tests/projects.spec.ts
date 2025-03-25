@@ -6,7 +6,7 @@ import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl, generateTitle } from "@/app/utils/utils";
 import { fetchPage, fetchProjects } from "@/app/utils/api";
 import { getProjectsScheme } from "@/app/utils/jsonLDSchemes";
-import { toPlainText } from "next-sanity";
+
 import { validateJsonLd } from "../utils/jsonLD";
 
 async function checkPageElements(page: Page) {
@@ -81,20 +81,8 @@ test.describe("projects", () => {
 
     // json-ld
     const expectedJsonLd = getProjectsScheme({
-      title: data!.title,
-      url: buildPageUrl(data!.slug.current),
-      description: data!.description,
-      projects: projects!.map((project) => ({
-        title: project.title,
-        url: buildPageUrl(data!.slug.current, project.slug.current),
-        description: project.body && toPlainText(project.body),
-        imageUrl: project.imageURL!,
-        type: project.jsonLdType,
-        applicationCategory: project.jsonLdApplicationCategory,
-        operatingSystem: project.jsonLdOperatingSystem,
-        codeRepository: project.jsonLdCodeRepository,
-        programmingLanguage: project.jsonLdProgrammingLanguage,
-      })),
+      page: data!,
+      projects: projects!,
     });
     await validateJsonLd(page, expectedJsonLd);
   });

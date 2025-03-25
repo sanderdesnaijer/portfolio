@@ -6,13 +6,12 @@ import Projects from "@/app/components/Projects";
 import { getProjectsScheme } from "@/app/utils/jsonLDSchemes";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
-import { buildPageUrl } from "@/app/utils/utils";
+
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { pageQuery, projectsQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { getTranslations } from "next-intl/server";
-import { toPlainText } from "next-sanity";
 
 const { projects: slug } = pageSlugs;
 
@@ -32,27 +31,9 @@ export default async function Page() {
   const t = await getTranslations();
 
   const jsonLd =
-    page && projects
-      ? getProjectsScheme({
-          title: page.title,
-          url: buildPageUrl(page.slug.current),
-          description: page.description,
-          projects: projects.map((project) => ({
-            title: project.title,
-            url: buildPageUrl(page.slug.current, project.slug.current),
-            description: project.body && toPlainText(project.body),
-            imageUrl: project.imageURL!,
-            type: project.jsonLdType,
-            applicationCategory: project.jsonLdApplicationCategory,
-            operatingSystem: project.jsonLdOperatingSystem,
-            codeRepository: project.jsonLdCodeRepository,
-            programmingLanguage: project.jsonLdProgrammingLanguage,
-          })),
-        })
-      : null;
+    page && projects ? getProjectsScheme({ page, projects }) : null;
 
   const title = page ? page.title : t("error.404.generic.title");
-
   return (
     <>
       {jsonLd && <JsonLd value={jsonLd} />}

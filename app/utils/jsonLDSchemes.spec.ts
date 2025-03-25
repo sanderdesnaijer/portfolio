@@ -1,3 +1,4 @@
+import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { AUTHOR_NAME } from "./constants";
 import {
   getWebsiteScheme,
@@ -124,26 +125,39 @@ describe("utils/jsonLDSchemes", () => {
   });
   describe("getProjectsScheme", () => {
     it("should return a valid schema for a collection page", () => {
-      const input = {
+      const page = {
         title: "Projects",
-        url: "http://test/projects",
+        slug: { current: "projects" },
         description: "A selection of projects I have worked on",
-        projects: [
-          {
-            title: "Flutter Tabata whip timer",
-            url: "http://test/projects/flutter-tabata-whip-timer",
-            imageUrl:
-              "https://cdn.test.io/images/c6ybobx3/production/1xs367222ba8434fdb83e7481e83391bf604795-2200x1160.png",
-            description:
-              "Building my first Flutter app has been an exciting journey, filled with challenges, discoveries, and valuable learning moments. I've documented my experience in a blog and you can download the app from the store, see the links below.",
-            type: ["SoftwareApplication", "Product"],
-            applicationCategory: "MobileApplication",
-            operatingSystem: "iOS",
-          },
-        ],
-      };
+      } as PageSanity;
 
-      const result = getProjectsScheme(input);
+      const projects = [
+        {
+          title: "Flutter Tabata whip timer",
+          slug: { current: "flutter-tabata-whip-timer" },
+          imageURL:
+            "https://cdn.test.io/images/c6ybobx3/production/1xs367222ba8434fdb83e7481e83391bf604795-2200x1160.png",
+
+          body: [
+            {
+              _type: "block",
+              children: [
+                {
+                  text: "Building my first Flutter app has been an exciting journey...",
+                  _type: "span",
+                  marks: [],
+                },
+              ],
+              style: "",
+            },
+          ],
+          jsonLdType: ["SoftwareApplication", "Product"],
+          applicationCategory: "MobileApplication",
+          operatingSystem: "iOS",
+        },
+      ] as unknown as ProjectTypeSanity[];
+
+      const result = getProjectsScheme({ page, projects });
 
       expect(result).toEqual({
         "@context": "https://schema.org",
@@ -160,7 +174,7 @@ describe("utils/jsonLDSchemes", () => {
             image:
               "https://cdn.test.io/images/c6ybobx3/production/1xs367222ba8434fdb83e7481e83391bf604795-2200x1160.png",
             description:
-              "Building my first Flutter app has been an exciting journey, filled with challenges, discoveries, and valuable learning moments. I've documented my experience in a blog and you can download the app from the store, see the links below.",
+              "Building my first Flutter app has been an exciting journey...",
             applicationCategory: "MobileApplication",
             operatingSystem: "iOS",
           },
@@ -169,25 +183,26 @@ describe("utils/jsonLDSchemes", () => {
     });
 
     it("should handle a project with multiple types correctly", () => {
-      const input = {
+      const page = {
         title: "Test Project",
-        url: "http://example.com/test",
+        slug: { current: "test" },
         description: "Testing project schema",
-        projects: [
-          {
-            title: "Multi-Type Project",
-            url: "http://example.com/project",
-            imageUrl: "http://example.com/image.jpg",
-            description: "A project with multiple types",
-            type: ["SoftwareSourceCode", "WebApplication"],
-            applicationCategory: "WebApp",
-            codeRepository: "http://github.com/example",
-            programmingLanguage: "JavaScript",
-          },
-        ],
-      };
+      } as PageSanity;
 
-      const result = getProjectsScheme(input);
+      const projects = [
+        {
+          title: "Multi-Type Project",
+          slug: { current: "multi-type-project" },
+          imageURL: "http://example.com/image.jpg",
+          body: "A project with multiple types",
+          jsonLdType: ["SoftwareSourceCode", "WebApplication"],
+          applicationCategory: "WebApp",
+          codeRepository: "http://github.com/example",
+          programmingLanguage: "JavaScript",
+        },
+      ] as unknown as ProjectTypeSanity[];
+
+      const result = getProjectsScheme({ page, projects });
 
       expect(result.hasPart[0]["@type"]).toEqual([
         "SoftwareSourceCode",
@@ -197,22 +212,23 @@ describe("utils/jsonLDSchemes", () => {
     });
 
     it("should handle missing optional fields", () => {
-      const input = {
+      const page = {
         title: "Minimal Project",
-        url: "http://example.com/minimal",
+        slug: { current: "minimal" },
         description: "Minimal schema test",
-        projects: [
-          {
-            title: "Simple Project",
-            url: "http://example.com/simple",
-            imageUrl: "http://example.com/image.jpg",
-            description: "A simple project with no optional fields",
-            type: ["WebApplication"],
-          },
-        ],
-      };
+      } as PageSanity;
 
-      const result = getProjectsScheme(input);
+      const projects = [
+        {
+          title: "Simple Project",
+          slug: { current: "simple" },
+          imageURL: "http://example.com/image.jpg",
+          body: "A simple project with no optional fields",
+          jsonLdType: ["WebApplication"],
+        },
+      ] as unknown as ProjectTypeSanity[];
+
+      const result = getProjectsScheme({ page, projects });
 
       expect(result.hasPart[0]).not.toHaveProperty("applicationCategory");
       expect(result.hasPart[0]).not.toHaveProperty("operatingSystem");
@@ -221,22 +237,23 @@ describe("utils/jsonLDSchemes", () => {
     });
 
     it("should ensure applicationCategory is omitted when type does not require it", () => {
-      const input = {
+      const page = {
         title: "Project Without App Category",
-        url: "http://example.com/no-app-category",
+        slug: { current: "no-app-category" },
         description: "Test for omitting applicationCategory",
-        projects: [
-          {
-            title: "Product Only",
-            url: "http://example.com/product-only",
-            imageUrl: "http://example.com/image.jpg",
-            description: "A project with only 'Product' type",
-            type: ["Product"],
-          },
-        ],
-      };
+      } as PageSanity;
 
-      const result = getProjectsScheme(input);
+      const projects = [
+        {
+          title: "Product Only",
+          slug: { current: "product-only" },
+          imageURL: "http://example.com/image.jpg",
+          body: "A project with only 'Product' type",
+          jsonLdType: ["Product"],
+        },
+      ] as unknown as ProjectTypeSanity[];
+
+      const result = getProjectsScheme({ page, projects });
       expect(result.hasPart[0]).not.toHaveProperty("applicationCategory");
     });
   });

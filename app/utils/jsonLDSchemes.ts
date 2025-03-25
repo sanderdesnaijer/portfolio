@@ -1,4 +1,7 @@
+import { toPlainText } from "next-sanity";
 import { AUTHOR_NAME } from "./constants";
+import { buildPageUrl } from "./utils";
+import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 
 export const getWebsiteScheme = ({
   url,
@@ -67,56 +70,37 @@ export const getAboutScheme = ({
 });
 
 export const getProjectsScheme = ({
-  title,
-  url,
-  description,
+  page,
   projects,
 }: {
-  title: string;
-  url: string;
-  description: string;
-  projects: {
-    title: string;
-    url: string;
-    imageUrl: string;
-    description: string;
-    type: string[];
-    // specific
-    applicationCategory?: string;
-    operatingSystem?: string;
-    codeRepository?: string;
-    programmingLanguage?: string;
-  }[];
+  page: PageSanity;
+  projects: ProjectTypeSanity[];
 }) => ({
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: title,
-  url,
-  description,
-  hasPart: projects.map(
-    ({
-      title: pTitle,
-      url: pUrl,
-      imageUrl,
-      description,
-      type,
-      // specific
-      applicationCategory,
-      operatingSystem,
-      codeRepository,
-      programmingLanguage,
-    }) => ({
-      "@type": type.length === 1 ? type[0] : type.map((t) => t),
-      "@id": pUrl,
-      name: pTitle,
-      url: pUrl,
-      image: imageUrl,
-      description,
-      // specific
-      ...(applicationCategory && { applicationCategory }),
-      ...(operatingSystem && { operatingSystem }),
-      ...(codeRepository && { codeRepository }),
-      ...(programmingLanguage && { programmingLanguage }),
-    })
-  ),
+  name: page.title,
+  url: buildPageUrl(page.slug.current),
+  description: page.description,
+  hasPart: projects.map((project) => ({
+    "@type":
+      project.jsonLdType.length === 1
+        ? project.jsonLdType[0]
+        : project.jsonLdType.map((t) => t),
+    "@id": buildPageUrl(page.slug.current, project.slug.current),
+    name: project.title,
+    url: buildPageUrl(page.slug.current, project.slug.current),
+    image: project.imageURL,
+    description: project.body && toPlainText(project.body),
+    // specific
+    ...(project.applicationCategory && {
+      applicationCategory: project.applicationCategory,
+    }),
+    ...(project.operatingSystem && {
+      operatingSystem: project.operatingSystem,
+    }),
+    ...(project.codeRepository && { codeRepository: project.codeRepository }),
+    ...(project.programmingLanguage && {
+      programmingLanguage: project.programmingLanguage,
+    }),
+  })),
 });
