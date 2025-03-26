@@ -80,8 +80,7 @@ test.describe("about", () => {
 
     // json-ld
     const expectedJsonLd = getAboutScheme({
-      imageUrl: data!.imageURL,
-      url,
+      page: data!,
       jobs: activeJobs,
       jobTitle: getTranslationKey("pages.about.jobTitle"),
       links: socialLinks,

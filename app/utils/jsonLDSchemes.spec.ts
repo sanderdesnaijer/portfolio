@@ -22,13 +22,31 @@ describe("utils/jsonLDSchemes", () => {
 
   describe("getWebsiteScheme", () => {
     it("should return a valid schema with required fields", () => {
-      const input = {
-        url: "https://example.com",
+      const input: PageSanity = {
         title: "Example Site",
         description: "This is an example site.",
-        imageUrl: "https://example.com/image.jpg",
-        createdAt: "2023-01-01T00:00:00Z",
-        updatedAt: "2023-01-02T00:00:00Z",
+        name: "",
+        slug: {
+          _type: "slug",
+          current: "",
+        },
+        mainImage: {
+          _type: "image",
+          asset: {
+            _ref: "",
+            _type: "",
+          },
+          alt: undefined,
+        },
+        publishedAt: "",
+        body: [],
+        imageAlt: "",
+        imageURL: "https://example.com/image.jpg",
+        _id: "",
+        _rev: "",
+        _type: "",
+        _createdAt: "2023-01-01T00:00:00Z",
+        _updatedAt: "2023-01-02T00:00:00Z",
       };
 
       const result = getWebsiteScheme(input);
@@ -36,88 +54,150 @@ describe("utils/jsonLDSchemes", () => {
       expect(result).toEqual({
         "@context": "https://schema.org",
         "@type": "WebSite",
-        url: input.url,
+        url: mockBaseURL,
         name: input.title,
         description: input.description,
         creator: {
           "@type": "Person",
           name: AUTHOR_NAME,
         },
-        image: input.imageUrl,
-        dateCreated: input.createdAt,
-        dateModified: input.updatedAt,
+        image: input.imageURL,
+        dateCreated: input._createdAt,
+        dateModified: input._updatedAt,
         inLanguage: "en-US",
       });
     });
 
     it("should include the authorLink when provided", () => {
-      const input = {
+      const input: PageSanity = {
         url: "https://example.com",
         title: "Example Site",
         description: "This is an example site.",
         author: "John Doe",
         authorLink: "https://johndoe.com",
-        imageUrl: "https://example.com/image.jpg",
-        createdAt: "2023-01-01T00:00:00Z",
-        updatedAt: "2023-01-02T00:00:00Z",
+        imageURL: "https://example.com/image.jpg",
+        _createdAt: "2023-01-01T00:00:00Z",
+        _updatedAt: "2023-01-02T00:00:00Z",
+        name: "",
+        slug: {
+          _type: "slug",
+          current: "",
+        },
+        mainImage: {
+          _type: "image",
+          asset: {
+            _ref: "",
+            _type: "",
+          },
+          alt: undefined,
+        },
+        publishedAt: "",
+        body: [],
+        imageAlt: "",
+
+        _id: "",
+        _rev: "",
+        _type: "",
       };
 
-      const result = getWebsiteScheme(input);
+      const result = getWebsiteScheme(input, "https://johndoe.com");
       expect(result.creator.url).toBe("https://johndoe.com");
-    });
-
-    it("should use the provided language instead of default", () => {
-      const input = {
-        url: "https://example.com",
-        title: "Example Site",
-        description: "This is an example site.",
-        imageUrl: "https://example.com/image.jpg",
-        createdAt: "2023-01-01T00:00:00Z",
-        updatedAt: "2023-01-02T00:00:00Z",
-        language: "fr-FR",
-      };
-
-      const result = getWebsiteScheme(input);
-      expect(result.inLanguage).toBe("fr-FR");
     });
   });
   describe("getAboutScheme", () => {
     it("should return a valid schema with required fields", () => {
-      const input = {
-        url: "https://example.com",
+      const page: PageSanity = {
         links: ["https://github.com/user", "https://linkedin.com/in/user"],
         jobTitle: "Software Engineer",
-        jobs: ["Company A", "Company B"],
-        imageUrl: "https://example.com/profile.jpg",
+        imageURL: "https://example.com/profile.jpg",
+        name: "",
+        title: "",
+        description: "",
+        slug: {
+          _type: "slug",
+          current: "",
+        },
+        mainImage: {
+          _type: "image",
+          asset: {
+            _ref: "",
+            _type: "",
+          },
+          alt: undefined,
+        },
+        publishedAt: "",
+        body: [],
+        imageAlt: "",
+        _id: "",
+        _rev: "",
+        _type: "",
+        _createdAt: "",
+        _updatedAt: "",
       };
 
-      const result = getAboutScheme(input);
+      const links = [
+        "https://github.com/sanderdesnaijer",
+        "https://www.linkedin.com/in/sanderdesnaijer",
+        "https://gitlab.com/sanderdesnaijer",
+      ];
+
+      const result = getAboutScheme({
+        page,
+        links,
+        jobTitle: "Software Engineer",
+        jobs: ["Company A", "Company B"],
+      });
 
       expect(result).toEqual({
         "@context": "https://schema.org",
         "@type": "Person",
         name: AUTHOR_NAME,
-        url: input.url,
-        sameAs: input.links,
-        jobTitle: input.jobTitle,
+        url: `${mockBaseURL}/`,
+        sameAs: links,
+        jobTitle: "Software Engineer",
         worksFor: [
           { "@type": "Organization", name: "Company A" },
           { "@type": "Organization", name: "Company B" },
         ],
-        image: input.imageUrl,
+        image: page.imageURL,
       });
     });
 
     it("should handle an empty jobs array", () => {
-      const input = {
-        url: "https://example.com",
-        links: ["https://github.com/user"],
+      const page: PageSanity = {
+        links: ["https://github.com/user", "https://linkedin.com/in/user"],
         jobTitle: "Software Engineer",
-        jobs: [],
-        imageUrl: "https://example.com/profile.jpg",
+        imageURL: "https://example.com/profile.jpg",
+        name: "",
+        title: "",
+        description: "",
+        slug: {
+          _type: "slug",
+          current: "",
+        },
+        mainImage: {
+          _type: "image",
+          asset: {
+            _ref: "",
+            _type: "",
+          },
+          alt: undefined,
+        },
+        publishedAt: "",
+        body: [],
+        imageAlt: "",
+        _id: "",
+        _rev: "",
+        _type: "",
+        _createdAt: "",
+        _updatedAt: "",
       };
-
-      const result = getAboutScheme(input);
+      const result = getAboutScheme({
+        page,
+        jobs: [],
+        jobTitle: "Software developer",
+        links: [],
+      });
       expect(result.worksFor).toEqual([]);
     });
   });

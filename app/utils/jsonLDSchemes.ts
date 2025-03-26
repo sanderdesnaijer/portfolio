@@ -3,6 +3,7 @@ import { AUTHOR_NAME } from "./constants";
 import { buildPageUrl, extractTextFromHTML } from "./utils";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { MediumArticle } from "../api/medium/types";
+import { getBaseUrl } from "./routes";
 
 const createAuthor = (url?: string) => ({
   "@type": "Person",
@@ -12,63 +13,41 @@ const createAuthor = (url?: string) => ({
   }),
 });
 
-export const getWebsiteScheme = ({
-  url,
-  title,
-  description,
-  authorLink,
-  imageUrl,
-  createdAt,
-  updatedAt,
-  language = "en-US",
-}: {
-  url: string;
-  title: string;
-  description: string;
-  author?: string;
-  authorLink?: string;
-  logo?: string;
-  imageUrl: string;
-  createdAt: string;
-  updatedAt: string;
-  language?: string;
-}) => ({
+export const getWebsiteScheme = (page: PageSanity, authorLink?: string) => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
-  url,
-  name: title,
-  description,
+  url: getBaseUrl(),
+  name: page.title,
+  description: page.description,
   creator: createAuthor(authorLink),
-  image: imageUrl,
-  dateCreated: createdAt,
-  dateModified: updatedAt,
-  inLanguage: language,
+  image: page.imageURL,
+  dateCreated: page._createdAt,
+  dateModified: page._updatedAt,
+  inLanguage: "en-US",
 });
 
 export const getAboutScheme = ({
-  url,
+  page,
   links,
   jobTitle,
   jobs,
-  imageUrl,
 }: {
-  url: string;
+  page: PageSanity;
   links: string[];
   jobTitle: string;
   jobs: string[];
-  imageUrl: string;
 }) => ({
   "@context": "https://schema.org",
   "@type": "Person",
   name: AUTHOR_NAME,
-  url,
+  url: buildPageUrl(page.slug.current),
   sameAs: links,
   jobTitle,
   worksFor: jobs.map((job) => ({
     "@type": "Organization",
     name: job,
   })),
-  image: imageUrl,
+  image: page.imageURL,
 });
 
 export const getProjectScheme = (
@@ -137,7 +116,7 @@ export const getProjectsScheme = ({
   ),
 });
 
-export function convertToISO8601(dateString: string): string {
+function convertToISO8601(dateString: string): string {
   // Parse the input date string
   const date = new Date(dateString);
 

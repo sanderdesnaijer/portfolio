@@ -51,18 +51,13 @@ export default async function Home() {
     );
   }
 
-  const jsonLd = page
-    ? getWebsiteScheme({
-        authorLink: setting?.socialMedia.find((s) => s.title === "LinkedIn")
-          ?.link,
-        createdAt: page._createdAt,
-        description: page.description,
-        imageUrl: page.imageURL,
-        title: page.title,
-        updatedAt: page._updatedAt,
-        url: getBaseUrl(),
-      })
-    : null;
+  const jsonLd =
+    page && setting
+      ? getWebsiteScheme(
+          page,
+          setting.socialMedia.find((s) => s.title === "LinkedIn")?.link
+        )
+      : null;
 
   return (
     <>

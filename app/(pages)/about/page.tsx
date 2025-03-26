@@ -4,7 +4,7 @@ import { jobsQuery, pageQuery } from "@/sanity/lib/queries";
 import { PortableText, PortableTextReactComponents } from "next-sanity";
 import Image from "next/image";
 import { JobSanity, PageSanity } from "@/sanity/types";
-import { buildPageUrl, convertDate } from "@/app/utils/utils";
+import { convertDate } from "@/app/utils/utils";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Layout } from "@/app/components/Layout";
@@ -102,11 +102,10 @@ export default async function Page() {
   const jsonLD =
     page && setting
       ? getAboutScheme({
-          url: buildPageUrl(slug),
+          page,
           jobs: activeJobs,
           jobTitle: t("pages.about.jobTitle"),
           links: setting.socialMedia.map((s) => s.link),
-          imageUrl: page.imageURL,
         })
       : null;
 

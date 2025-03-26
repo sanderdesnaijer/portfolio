@@ -62,15 +62,10 @@ test.describe("home", () => {
       modifiedTime: data!._updatedAt,
     });
     // json-ld
-    const expectedJsonLd = getWebsiteScheme({
-      authorLink: "https://www.linkedin.com/in/sanderdesnaijer",
-      createdAt: data!._createdAt,
-      description: data!.description,
-      imageUrl: data!.imageURL,
-      title: data!.title,
-      updatedAt: data!._updatedAt,
-      url: getBaseUrl(),
-    });
+    const expectedJsonLd = getWebsiteScheme(
+      data!,
+      "https://www.linkedin.com/in/sanderdesnaijer"
+    );
     await validateJsonLd(page, expectedJsonLd);
   });
 });
