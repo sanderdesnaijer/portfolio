@@ -4,7 +4,9 @@ import {
   getWebsiteScheme,
   getAboutScheme,
   getProjectsScheme,
+  getBlogsScheme,
 } from "./jsonLDSchemes";
+import { MediumArticle } from "../api/medium/types";
 
 const mockBaseURL = "https://mocked-url.com";
 describe("utils/jsonLDSchemes", () => {
@@ -340,6 +342,104 @@ describe("utils/jsonLDSchemes", () => {
       expect(result.hasPart[0].publisher).toEqual({
         "@type": "Person",
         name: AUTHOR_NAME,
+      });
+    });
+  });
+
+  describe("getBlogsScheme", () => {
+    it("should return a valid schema for a blog page with articles", () => {
+      const page = {
+        title: "My Blog",
+        slug: { current: "blog" },
+        description: "A collection of my blog posts",
+      } as PageSanity;
+
+      const articles: MediumArticle[] = [
+        {
+          title: "First Blog Post",
+          link: "https://example.com/first-blog-post",
+          pubDate: "2023-10-01T12:00:00Z",
+          author: "",
+          categories: [],
+          content: "",
+          description: "",
+          enclosure: {},
+          guid: "",
+          thumbnail: null,
+        },
+        {
+          title: "Second Blog Post",
+          link: "https://example.com/second-blog-post",
+          pubDate: "2023-10-02T12:00:00Z",
+          author: "",
+          categories: [],
+          content: "",
+          description: "",
+          enclosure: {},
+          guid: "",
+          thumbnail: null,
+        },
+      ];
+
+      const result = getBlogsScheme({ page, articles });
+
+      expect(result).toEqual({
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        name: "My Blog",
+        url: "https://mocked-url.com/blog",
+        blogPost: [
+          {
+            "@type": "BlogPosting",
+            "@id": "https://example.com/first-blog-post",
+            headline: "First Blog Post",
+            url: "https://example.com/first-blog-post",
+            datePublished: "2023-10-01T12:00:00.000Z",
+            author: {
+              "@type": "Person",
+              name: AUTHOR_NAME,
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Medium",
+              url: "https://medium.com",
+            },
+          },
+          {
+            "@type": "BlogPosting",
+            "@id": "https://example.com/second-blog-post",
+            headline: "Second Blog Post",
+            url: "https://example.com/second-blog-post",
+            datePublished: "2023-10-02T12:00:00.000Z",
+            author: {
+              "@type": "Person",
+              name: AUTHOR_NAME,
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "Medium",
+              url: "https://medium.com",
+            },
+          },
+        ],
+      });
+    });
+
+    it("should handle an empty articles array", () => {
+      const page = {
+        title: "Empty Blog",
+        slug: { current: "empty-blog" },
+        description: "A blog with no articles",
+      } as PageSanity;
+
+      const result = getBlogsScheme({ page, articles: [] });
+
+      expect(result).toEqual({
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        name: "Empty Blog",
+        url: "https://mocked-url.com/empty-blog",
+        blogPost: [],
       });
     });
   });

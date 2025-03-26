@@ -5,6 +5,9 @@ import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl, generateTitle } from "@/app/utils/utils";
 import { fetchPage } from "@/app/utils/api";
+import { getBlogsScheme } from "@/app/utils/jsonLDSchemes";
+import { validateJsonLd } from "../utils/jsonLD";
+import { mockArticles } from "@/app/test-utils/mockArticle";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -75,5 +78,11 @@ test.describe("blog", () => {
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,
     });
+
+    const articles = mockArticles;
+
+    // json-ld
+    const expectedJsonLd = getBlogsScheme({ page: data!, articles });
+    await validateJsonLd(page, expectedJsonLd);
   });
 });
