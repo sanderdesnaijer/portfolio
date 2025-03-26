@@ -30,4 +30,6 @@ export interface ProjectTypeSanity extends SanityDocument {
   jsonLdOperatingSystem?: string;
   jsonLdCodeRepository?: string;
   jsonLdProgrammingLanguage?: string;
+  jsonLdDownloadUrl?: string;
+  jsonLdIsAuthor?: boolean;
 }

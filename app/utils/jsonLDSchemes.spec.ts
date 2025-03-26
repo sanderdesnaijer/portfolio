@@ -6,7 +6,17 @@ import {
   getProjectsScheme,
 } from "./jsonLDSchemes";
 
+const mockBaseURL = "https://mocked-url.com";
 describe("utils/jsonLDSchemes", () => {
+  beforeAll(() => {
+    process.env.NEXT_PUBLIC_BASE_URL = mockBaseURL;
+  });
+
+  afterAll(() => {
+    // Clean up after the tests to avoid side effects on other tests
+    delete process.env.NEXT_PUBLIC_BASE_URL;
+  });
+
   describe("getWebsiteScheme", () => {
     it("should return a valid schema with required fields", () => {
       const input = {
@@ -35,21 +45,6 @@ describe("utils/jsonLDSchemes", () => {
         dateModified: input.updatedAt,
         inLanguage: "en-US",
       });
-    });
-
-    it("should override the default author when provided", () => {
-      const input = {
-        url: "https://example.com",
-        title: "Example Site",
-        description: "This is an example site.",
-        author: "John Doe",
-        imageUrl: "https://example.com/image.jpg",
-        createdAt: "2023-01-01T00:00:00Z",
-        updatedAt: "2023-01-02T00:00:00Z",
-      };
-
-      const result = getWebsiteScheme(input);
-      expect(result.creator.name).toBe("John Doe");
     });
 
     it("should include the authorLink when provided", () => {
@@ -171,14 +166,14 @@ describe("utils/jsonLDSchemes", () => {
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         name: "Projects",
-        url: "http://test/projects",
+        url: "https://mocked-url.com/projects",
         description: "A selection of projects I have worked on",
         hasPart: [
           {
             "@type": ["SoftwareApplication", "Product"],
-            "@id": "http://test/projects/flutter-tabata-whip-timer",
+            "@id": "https://mocked-url.com/projects/flutter-tabata-whip-timer",
             name: "Flutter Tabata whip timer",
-            url: "http://test/projects/flutter-tabata-whip-timer",
+            url: "https://mocked-url.com/projects/flutter-tabata-whip-timer",
             image:
               "https://cdn.test.io/images/c6ybobx3/production/1xs367222ba8434fdb83e7481e83391bf604795-2200x1160.png",
             operatingSystem: "iOS",
@@ -204,7 +199,7 @@ describe("utils/jsonLDSchemes", () => {
             current: "multi-type-project",
             _type: "slug",
           },
-          imageURL: "http://example.com/image.jpg",
+          imageURL: "https://example.com/image.jpg",
           body: [
             {
               _type: "block",
@@ -220,7 +215,7 @@ describe("utils/jsonLDSchemes", () => {
           ],
           jsonLdType: ["SoftwareSourceCode", "WebApplication"],
           jsonLdApplicationCategory: "WebApp",
-          jsonLdCodeRepository: "http://github.com/example",
+          jsonLdCodeRepository: "https://github.com/example",
           jsonLdProgrammingLanguage: "JavaScript",
           publishedAt: "",
           _id: "",
@@ -251,7 +246,7 @@ describe("utils/jsonLDSchemes", () => {
         {
           title: "Simple Project",
           slug: { current: "simple" },
-          imageURL: "http://example.com/image.jpg",
+          imageURL: "https://example.com/image.jpg",
           body: "A simple project with no optional fields",
           jsonLdType: ["WebApplication"],
         },
@@ -276,7 +271,7 @@ describe("utils/jsonLDSchemes", () => {
         {
           title: "Product Only",
           slug: { current: "product-only" },
-          imageURL: "http://example.com/image.jpg",
+          imageURL: "https://example.com/image.jpg",
           body: "A project with only 'Product' type",
           jsonLdType: ["Product"],
         },
@@ -284,6 +279,68 @@ describe("utils/jsonLDSchemes", () => {
 
       const result = getProjectsScheme({ page, projects });
       expect(result.hasPart[0]).not.toHaveProperty("applicationCategory");
+    });
+
+    it("should include downloadUrl and offers when jsonLdDownloadUrl is provided", () => {
+      const page = {
+        title: "Downloadable Project",
+        slug: { current: "downloadable" },
+        description: "Test for downloadable project schema",
+      } as PageSanity;
+
+      const projects = [
+        {
+          title: "Downloadable App",
+          slug: { current: "downloadable-app" },
+          imageURL: "https://example.com/image.jpg",
+          body: "A project with a download URL",
+          jsonLdType: ["SoftwareApplication"],
+          jsonLdDownloadUrl: "https://example.com/download",
+        },
+      ] as unknown as ProjectTypeSanity[];
+
+      const result = getProjectsScheme({ page, projects });
+
+      expect(result.hasPart[0].downloadUrl).toBe(
+        "https://example.com/download"
+      );
+      expect(result.hasPart[0].offers).toEqual({
+        "@type": "Offer",
+        "@id": "https://mocked-url.com/downloadable/downloadable-app#offer",
+        price: "0.00",
+        priceCurrency: "USD",
+        availability: "https://schema.org/OnlineOnly",
+      });
+    });
+
+    it("should include author and publisher when jsonLdIsAuthor is true", () => {
+      const page = {
+        title: "Author Project",
+        slug: { current: "author-project" },
+        description: "Test for author and publisher inclusion",
+      } as PageSanity;
+
+      const projects = [
+        {
+          title: "Authored Project",
+          slug: { current: "authored-project" },
+          imageURL: "https://example.com/image.jpg",
+          body: "A project authored by the creator",
+          jsonLdType: ["SoftwareApplication"],
+          jsonLdIsAuthor: true,
+        },
+      ] as unknown as ProjectTypeSanity[];
+
+      const result = getProjectsScheme({ page, projects });
+
+      expect(result.hasPart[0].author).toEqual({
+        "@type": "Person",
+        name: AUTHOR_NAME,
+      });
+      expect(result.hasPart[0].publisher).toEqual({
+        "@type": "Person",
+        name: AUTHOR_NAME,
+      });
     });
   });
 });

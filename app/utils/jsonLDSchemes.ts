@@ -3,11 +3,18 @@ import { AUTHOR_NAME } from "./constants";
 import { buildPageUrl } from "./utils";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 
+const createAuthor = (url?: string) => ({
+  "@type": "Person",
+  name: AUTHOR_NAME,
+  ...(url && {
+    url,
+  }),
+});
+
 export const getWebsiteScheme = ({
   url,
   title,
   description,
-  author = AUTHOR_NAME,
   authorLink,
   imageUrl,
   createdAt,
@@ -30,13 +37,7 @@ export const getWebsiteScheme = ({
   url,
   name: title,
   description,
-  creator: {
-    "@type": "Person",
-    name: author,
-    ...(authorLink && {
-      url: authorLink,
-    }),
-  },
+  creator: createAuthor(authorLink),
   image: imageUrl,
   dateCreated: createdAt,
   dateModified: updatedAt,
@@ -73,33 +74,50 @@ export const getProjectScheme = (
   project: ProjectTypeSanity,
   pageSlug: string,
   shouldIncludeContext = false
-) => ({
-  ...(shouldIncludeContext && {
-    "@context": "https://schema.org",
-  }),
-  "@type":
-    project.jsonLdType.length === 1
-      ? project.jsonLdType[0]
-      : project.jsonLdType.map((t) => t),
-  "@id": buildPageUrl(pageSlug, project.slug.current),
-  name: project.title,
-  url: buildPageUrl(pageSlug, project.slug.current),
-  image: project.imageURL,
-  description: project.body && toPlainText(project.body),
-  // specific
-  ...(project.jsonLdApplicationCategory && {
-    applicationCategory: project.jsonLdApplicationCategory,
-  }),
-  ...(project.jsonLdOperatingSystem && {
-    operatingSystem: project.jsonLdOperatingSystem,
-  }),
-  ...(project.jsonLdCodeRepository && {
-    codeRepository: project.jsonLdCodeRepository,
-  }),
-  ...(project.jsonLdProgrammingLanguage && {
-    programmingLanguage: project.jsonLdProgrammingLanguage,
-  }),
-});
+) => {
+  const url = buildPageUrl(pageSlug, project.slug.current);
+  return {
+    ...(shouldIncludeContext && {
+      "@context": "https://schema.org",
+    }),
+    "@type":
+      project.jsonLdType.length === 1
+        ? project.jsonLdType[0]
+        : project.jsonLdType.map((t) => t),
+    "@id": url,
+    name: project.title,
+    url,
+    image: project.imageURL,
+    description: project.body && toPlainText(project.body),
+    // specific
+    ...(project.jsonLdApplicationCategory && {
+      applicationCategory: project.jsonLdApplicationCategory,
+    }),
+    ...(project.jsonLdOperatingSystem && {
+      operatingSystem: project.jsonLdOperatingSystem,
+    }),
+    ...(project.jsonLdCodeRepository && {
+      codeRepository: project.jsonLdCodeRepository,
+    }),
+    ...(project.jsonLdProgrammingLanguage && {
+      programmingLanguage: project.jsonLdProgrammingLanguage,
+    }),
+    ...(project.jsonLdDownloadUrl && {
+      downloadUrl: project.jsonLdDownloadUrl,
+      offers: {
+        "@type": "Offer",
+        "@id": `${url}#offer`,
+        price: "0.00",
+        priceCurrency: "USD",
+        availability: "https://schema.org/OnlineOnly",
+      },
+    }),
+    ...(project.jsonLdIsAuthor && {
+      author: createAuthor(),
+      publisher: createAuthor(),
+    }),
+  };
+};
 
 export const getProjectsScheme = ({
   page,

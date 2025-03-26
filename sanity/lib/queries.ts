@@ -78,7 +78,9 @@ export const projectsQuery = groq`
     jsonLdApplicationCategory,
     jsonLdOperatingSystem,
     jsonLdCodeRepository,
-    jsonLdProgrammingLanguage
+    jsonLdProgrammingLanguage,
+    jsonLdDownloadUrl,
+    jsonLdIsAuthor
   }
 `;
 
@@ -105,7 +107,9 @@ export const projectQuery = groq`
     jsonLdApplicationCategory,
     jsonLdOperatingSystem,
     jsonLdCodeRepository,
-    jsonLdProgrammingLanguage
+    jsonLdProgrammingLanguage,
+    jsonLdDownloadUrl,
+    jsonLdIsAuthor
   }
 `;
 

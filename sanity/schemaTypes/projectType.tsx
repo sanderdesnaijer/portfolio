@@ -121,6 +121,22 @@ export const projectType = defineType({
         !parent?.jsonLdType?.includes("SoftwareSourceCode"),
       fieldset: "jsonLd",
     }),
+    defineField({
+      name: "jsonLdDownloadUrl",
+      title: "JSON-LD Download URL",
+      type: "string",
+      placeholder: "",
+      hidden: ({ parent }) =>
+        !parent?.jsonLdApplicationCategory?.includes("MobileApplication"),
+      fieldset: "jsonLd",
+    }),
+    defineField({
+      name: "jsonLdIsAuthor",
+      title: "JSON-LD Is Author",
+      type: "boolean",
+      initialValue: false,
+      fieldset: "jsonLd",
+    }),
     // other meta
     defineField({
       name: "publishedAt",
