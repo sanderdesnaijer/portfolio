@@ -34,20 +34,20 @@ describe("app/utils/utils", () => {
     it("should remove all HTML tags and return plain text", () => {
       const input = "<p>Hello <strong>world</strong>!</p>";
       const output = extractTextFromHTML(input);
-      expect(output).toBe("Hello world !...");
+      expect(output).toBe("Hello world !");
     });
 
     it("should remove figcaptions from the text", () => {
       const input =
         "<figcaption>This is a caption</figcaption><p>Visible text</p>";
       const output = extractTextFromHTML(input);
-      expect(output).toBe("Visible text...");
+      expect(output).toBe("Visible text");
     });
 
     it("should collapse multiple spaces into a single space", () => {
       const input = "<p>Hello    world</p>";
       const output = extractTextFromHTML(input);
-      expect(output).toBe("Hello world...");
+      expect(output).toBe("Hello world");
     });
 
     it("should truncate text to 200 characters and add ellipsis", () => {

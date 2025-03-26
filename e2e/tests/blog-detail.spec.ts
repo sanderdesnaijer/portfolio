@@ -10,6 +10,8 @@ import {
 } from "@/app/utils/utils";
 import { mockArticles } from "@/app/test-utils/mockArticle";
 import { fetchPage } from "@/app/utils/api";
+import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
+import { validateJsonLd } from "../utils/jsonLD";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -105,6 +107,10 @@ test.describe("blog detail", () => {
       modifiedTime: article!.pubDate,
       canonical: article?.link,
     });
+
+    // json-ld
+    const expectedJsonLd = getArticleScheme(article!, true);
+    await validateJsonLd(page, expectedJsonLd);
   });
 });
 

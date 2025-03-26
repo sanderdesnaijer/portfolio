@@ -40,7 +40,6 @@ export default async function Page() {
   const t = await getTranslations();
 
   const jsonLd = page && articles ? getBlogsScheme({ page, articles }) : null;
-
   const title = page ? page.title : t("error.404.generic.title");
 
   return (

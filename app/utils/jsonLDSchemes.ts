@@ -1,6 +1,6 @@
 import { toPlainText } from "next-sanity";
 import { AUTHOR_NAME } from "./constants";
-import { buildPageUrl } from "./utils";
+import { buildPageUrl, extractTextFromHTML } from "./utils";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { MediumArticle } from "../api/medium/types";
 
@@ -145,6 +145,27 @@ export function convertToISO8601(dateString: string): string {
   return date.toISOString();
 }
 
+export const getArticleScheme = (
+  article: MediumArticle,
+  hasDetail = false
+) => ({
+  "@type": "BlogPosting",
+  "@id": article.link,
+  headline: article.title,
+  url: article.link,
+  datePublished: convertToISO8601(article.pubDate),
+  author: createAuthor(),
+  publisher: {
+    "@type": "Organization",
+    name: "Medium",
+    url: "https://medium.com",
+  },
+  ...(hasDetail &&
+    article.description && {
+      description: extractTextFromHTML(article.description),
+    }),
+});
+
 export const getBlogsScheme = ({
   page,
   articles,
@@ -156,17 +177,5 @@ export const getBlogsScheme = ({
   "@type": "Blog",
   name: page.title,
   url: buildPageUrl(page.slug.current),
-  blogPost: articles.map((article) => ({
-    "@type": "BlogPosting",
-    "@id": article.link,
-    headline: article.title,
-    url: article.link,
-    datePublished: convertToISO8601(article.pubDate),
-    author: createAuthor(),
-    publisher: {
-      "@type": "Organization",
-      name: "Medium",
-      url: "https://medium.com",
-    },
-  })),
+  blogPost: articles.map((article) => getArticleScheme(article)),
 });

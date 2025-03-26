@@ -5,6 +5,7 @@ import {
   getAboutScheme,
   getProjectsScheme,
   getBlogsScheme,
+  getArticleScheme,
 } from "./jsonLDSchemes";
 import { MediumArticle } from "../api/medium/types";
 
@@ -441,6 +442,95 @@ describe("utils/jsonLDSchemes", () => {
         url: "https://mocked-url.com/empty-blog",
         blogPost: [],
       });
+    });
+  });
+  describe("getArticleScheme", () => {
+    it("should return a valid schema for a blog article", () => {
+      const article: MediumArticle = {
+        title: "Test Article",
+        link: "https://example.com/test-article",
+        pubDate: "2023-10-01T12:00:00Z",
+        author: "",
+        categories: [],
+        content: "",
+        description: "",
+        enclosure: {},
+        guid: "",
+        thumbnail: null,
+      };
+
+      const result = getArticleScheme(article);
+
+      expect(result).toEqual({
+        "@type": "BlogPosting",
+        "@id": "https://example.com/test-article",
+        headline: "Test Article",
+        url: "https://example.com/test-article",
+        datePublished: "2023-10-01T12:00:00.000Z",
+        author: {
+          "@type": "Person",
+          name: AUTHOR_NAME,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Medium",
+          url: "https://medium.com",
+        },
+      });
+    });
+
+    it("should include description when hasDetail is true and description is provided", () => {
+      const article: MediumArticle = {
+        title: "Detailed Article",
+        link: "https://example.com/detailed-article",
+        pubDate: "2023-10-01T12:00:00Z",
+        author: "",
+        categories: [],
+        content: "",
+        description: "<p>This is a detailed article.</p>",
+        enclosure: {},
+        guid: "",
+        thumbnail: null,
+      };
+
+      const result = getArticleScheme(article, true);
+
+      expect(result).toEqual({
+        "@type": "BlogPosting",
+        "@id": "https://example.com/detailed-article",
+        headline: "Detailed Article",
+        url: "https://example.com/detailed-article",
+        datePublished: "2023-10-01T12:00:00.000Z",
+        author: {
+          "@type": "Person",
+          name: AUTHOR_NAME,
+        },
+        publisher: {
+          "@type": "Organization",
+          name: "Medium",
+          url: "https://medium.com",
+        },
+        description: "This is a detailed article.",
+      });
+    });
+
+    it("should not include description when hasDetail is false", () => {
+      const article: MediumArticle = {
+        title: "No Detail Article",
+        link: "https://example.com/no-detail-article",
+        pubDate: "2023-10-01T12:00:00Z",
+        author: "",
+        categories: [],
+        content: "",
+        description: "<p>This description should not appear.</p>",
+        enclosure: {},
+        guid: "",
+        thumbnail: null,
+      };
+
+      const result = getArticleScheme(article, false);
+
+      expect(result).not.toHaveProperty("description");
     });
   });
 });
