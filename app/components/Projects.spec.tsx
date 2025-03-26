@@ -88,6 +88,7 @@ describe("components/Projects", () => {
         _updatedAt: "",
         _rev: "",
         _type: "",
+        jsonLdType: [],
       },
     ];
 

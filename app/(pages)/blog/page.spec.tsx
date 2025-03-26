@@ -30,6 +30,9 @@ const mockBlogPage: PageSanity = {
 };
 
 describe("app/(pages)/blog/page", () => {
+  beforeEach(() => {
+    jest.spyOn(console, "error").mockImplementation(jest.fn());
+  });
   afterEach(() => {
     jest.clearAllMocks();
   });

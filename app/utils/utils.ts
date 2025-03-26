@@ -34,7 +34,12 @@ export const extractTextFromHTML = (html: string) => {
   );
   const text = withoutFigcaptions.replace(/<[^>]*>/g, " ");
   const cleanText = text.replace(/\s+/g, " ").trim();
-  return cleanText.substring(0, 200) + "...";
+  const maxLength = 200;
+
+  return (
+    cleanText.substring(0, maxLength) +
+    (cleanText.length > maxLength ? "..." : "")
+  );
 };
 
 /**

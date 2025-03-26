@@ -46,6 +46,7 @@ export const mockProject: ProjectTypeSanity = {
   _updatedAt: "2025-01-02",
   _rev: "",
   _type: "",
+  jsonLdType: [],
 };
 
 export const mockProjects: ProjectTypeSanity[] = [
@@ -61,11 +62,12 @@ export const mockProjects: ProjectTypeSanity[] = [
       alt: "Project 2 Image Alt",
       asset: { _ref: "string", _type: "ref" },
     },
-    body: null!,
+    body: [],
     links: [],
     publishedAt: "",
     _updatedAt: "",
     _rev: "",
     _type: "",
+    jsonLdType: [],
   },
 ];

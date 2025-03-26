@@ -6,6 +6,8 @@ import { testPageMetadata } from "../utils/metadata";
 import { getBaseUrl } from "@/app/utils/routes";
 import { generateTitle } from "@/app/utils/utils";
 import { fetchPage } from "@/app/utils/api";
+import { getWebsiteScheme } from "@/app/utils/jsonLDSchemes";
+import { validateJsonLd } from "../utils/jsonLD";
 
 async function checkHomePageElements(page: Page) {
   await expect(
@@ -49,6 +51,7 @@ test.describe("home", () => {
 
   test("should include accurate metadata", async ({ page }) => {
     const data = await fetchPage();
+    // general meta data
     await testPageMetadata(page, {
       title: generateTitle(),
       description: data!.description,
@@ -58,5 +61,11 @@ test.describe("home", () => {
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,
     });
+    // json-ld
+    const expectedJsonLd = getWebsiteScheme(
+      data!,
+      "https://www.linkedin.com/in/sanderdesnaijer"
+    );
+    await validateJsonLd(page, expectedJsonLd);
   });
 });

@@ -4,6 +4,9 @@ import type { NextConfig } from "next";
 const withNextIntl = createNextIntlPlugin("./app/utils/i18n.ts");
 
 const nextConfig: NextConfig = {
+  eslint: {
+    dirs: ["app", "e2e", "sanity"],
+  },
   images: {
     remotePatterns: [
       {

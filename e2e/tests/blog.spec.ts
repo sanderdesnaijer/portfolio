@@ -5,6 +5,9 @@ import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl, generateTitle } from "@/app/utils/utils";
 import { fetchPage } from "@/app/utils/api";
+import { getBlogsScheme } from "@/app/utils/jsonLDSchemes";
+import { validateJsonLd } from "../utils/jsonLD";
+import { mockArticles } from "@/app/test-utils/mockArticle";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -74,6 +77,44 @@ test.describe("blog", () => {
       imageAlt: data!.imageAlt,
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,
+    });
+  });
+
+  test("JSON-LD Validation", async ({ page }) => {
+    const data = await fetchPage("blog");
+    const articles = mockArticles;
+
+    // json-ld
+    const expectedJsonLd = getBlogsScheme({ page: data!, articles });
+    const validatedJsonLd = await validateJsonLd(page, expectedJsonLd);
+
+    // expect(validatedJsonLd.image).toBeTruthy();
+    // expect(validatedJsonLd.image.length).toBeGreaterThan(0);
+
+    expect(validatedJsonLd.name).toBeTruthy();
+    expect(validatedJsonLd.name.length).toBeGreaterThan(0);
+
+    expect(validatedJsonLd.url).toBeTruthy();
+    expect(validatedJsonLd.url.length).toBeGreaterThan(0);
+
+    expect(validatedJsonLd["@context"]).toBeTruthy();
+    expect(validatedJsonLd["@context"].length).toBeGreaterThan(0);
+
+    expect(validatedJsonLd["@type"]).toBeTruthy();
+    expect(validatedJsonLd["@type"].length).toBeGreaterThan(0);
+
+    validatedJsonLd.blogPost.forEach((post: unknown) => {
+      expect(post).toEqual(
+        expect.objectContaining({
+          "@type": "BlogPosting",
+          "@id": expect.any(String),
+          headline: expect.any(String),
+          url: expect.any(String),
+          datePublished: expect.any(String),
+          author: expect.any(Object),
+          publisher: expect.any(Object),
+        })
+      );
     });
   });
 });

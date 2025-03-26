@@ -11,7 +11,8 @@
       "jobExperience": "Experience",
       "jobContract": "via",
       "projectCreatedAt": "created at",
-      "professionalExperience": "Professional Experience"
+      "professionalExperience": "Professional Experience",
+      "jobTitle": "Software developer"
     },
     "blog": {
       "articleLinkMedium": "originally published on Medium",

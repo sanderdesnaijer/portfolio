@@ -3,15 +3,16 @@ import { projectQuery } from "@/sanity/lib/queries";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { NextResponse } from "next/server";
 
-// Explicitly export the GET method
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const slug = searchParams.get("slug");
+export async function GET(
+  _request: Request,
+  context: { params: Promise<{ slug: string }> }
+) {
+  const queryParams = await context.params;
 
   try {
     const data = await sanityFetch<ProjectTypeSanity>({
       query: projectQuery,
-      params: { slug },
+      params: { slug: queryParams.slug },
     });
 
     return NextResponse.json(data, {
@@ -22,10 +23,10 @@ export async function GET(req: Request) {
     });
   } catch (error) {
     // eslint-disable-next-line no-console
-    console.error("Error fetching page data:", error);
+    console.error("Error fetching project data:", error);
 
     return NextResponse.json(
-      { error: "Failed to fetch page data" },
+      { error: "Failed to fetch project data" },
       { status: 500 }
     );
   }
