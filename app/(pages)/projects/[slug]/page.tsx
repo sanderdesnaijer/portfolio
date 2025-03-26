@@ -12,6 +12,8 @@ import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
 import { pageSlugs } from "@/app/utils/routes";
 import { buildPageUrl } from "@/app/utils/utils";
+import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
+import { JsonLd } from "@/app/components/JsonLd";
 
 const { projects: slug } = pageSlugs;
 
@@ -49,26 +51,31 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
   const { setting, menuItems } = await fetchCommonData();
   const t = await getTranslations();
 
+  const jsonLd = project ? getProjectScheme(project, slug, true) : null;
+
   const title = project ? project.title : t("error.404.project.title");
 
   return (
-    <Layout
-      pageTitle={title}
-      socialMedia={setting.socialMedia}
-      authorName={setting.title}
-      menuItems={menuItems}
-    >
-      {project ? (
-        <Project project={project} />
-      ) : (
-        <NotFound
-          title={t("error.404.project.action")}
-          description={t("error.404.project.description")}
-          href={buildPageUrl(slug)}
-        />
-      )}
-      {project && project.tags && <Tags tags={project.tags} />}
-    </Layout>
+    <>
+      {jsonLd && <JsonLd value={jsonLd} />}
+      <Layout
+        pageTitle={title}
+        socialMedia={setting.socialMedia}
+        authorName={setting.title}
+        menuItems={menuItems}
+      >
+        {project ? (
+          <Project project={project} />
+        ) : (
+          <NotFound
+            title={t("error.404.project.action")}
+            description={t("error.404.project.description")}
+            href={buildPageUrl(slug)}
+          />
+        )}
+        {project && project.tags && <Tags tags={project.tags} />}
+      </Layout>
+    </>
   );
 };
 

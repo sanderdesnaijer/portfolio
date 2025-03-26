@@ -100,7 +100,12 @@ export const projectQuery = groq`
     "tags": tags[]->{
       _id,
       label
-    }
+    },
+    jsonLdType,
+    jsonLdApplicationCategory,
+    jsonLdOperatingSystem,
+    jsonLdCodeRepository,
+    jsonLdProgrammingLanguage
   }
 `;
 

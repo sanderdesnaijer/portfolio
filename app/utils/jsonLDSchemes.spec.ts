@@ -131,10 +131,13 @@ describe("utils/jsonLDSchemes", () => {
         description: "A selection of projects I have worked on",
       } as PageSanity;
 
-      const projects = [
+      const projects: ProjectTypeSanity[] = [
         {
           title: "Flutter Tabata whip timer",
-          slug: { current: "flutter-tabata-whip-timer" },
+          slug: {
+            current: "flutter-tabata-whip-timer",
+            _type: "slug",
+          },
           imageURL:
             "https://cdn.test.io/images/c6ybobx3/production/1xs367222ba8434fdb83e7481e83391bf604795-2200x1160.png",
 
@@ -152,13 +155,18 @@ describe("utils/jsonLDSchemes", () => {
             },
           ],
           jsonLdType: ["SoftwareApplication", "Product"],
-          applicationCategory: "MobileApplication",
-          operatingSystem: "iOS",
+          jsonLdApplicationCategory: "MobileApplication",
+          jsonLdOperatingSystem: "iOS",
+          publishedAt: "",
+          _id: "",
+          _rev: "",
+          _type: "",
+          _createdAt: "",
+          _updatedAt: "",
         },
-      ] as unknown as ProjectTypeSanity[];
+      ];
 
       const result = getProjectsScheme({ page, projects });
-
       expect(result).toEqual({
         "@context": "https://schema.org",
         "@type": "CollectionPage",
@@ -173,10 +181,10 @@ describe("utils/jsonLDSchemes", () => {
             url: "http://test/projects/flutter-tabata-whip-timer",
             image:
               "https://cdn.test.io/images/c6ybobx3/production/1xs367222ba8434fdb83e7481e83391bf604795-2200x1160.png",
+            operatingSystem: "iOS",
             description:
               "Building my first Flutter app has been an exciting journey...",
             applicationCategory: "MobileApplication",
-            operatingSystem: "iOS",
           },
         ],
       });
@@ -189,18 +197,39 @@ describe("utils/jsonLDSchemes", () => {
         description: "Testing project schema",
       } as PageSanity;
 
-      const projects = [
+      const projects: ProjectTypeSanity[] = [
         {
           title: "Multi-Type Project",
-          slug: { current: "multi-type-project" },
+          slug: {
+            current: "multi-type-project",
+            _type: "slug",
+          },
           imageURL: "http://example.com/image.jpg",
-          body: "A project with multiple types",
+          body: [
+            {
+              _type: "block",
+              children: [
+                {
+                  text: "A project with multiple types",
+                  _type: "span",
+                  marks: [],
+                },
+              ],
+              style: "",
+            },
+          ],
           jsonLdType: ["SoftwareSourceCode", "WebApplication"],
-          applicationCategory: "WebApp",
-          codeRepository: "http://github.com/example",
-          programmingLanguage: "JavaScript",
+          jsonLdApplicationCategory: "WebApp",
+          jsonLdCodeRepository: "http://github.com/example",
+          jsonLdProgrammingLanguage: "JavaScript",
+          publishedAt: "",
+          _id: "",
+          _rev: "",
+          _type: "",
+          _createdAt: "",
+          _updatedAt: "",
         },
-      ] as unknown as ProjectTypeSanity[];
+      ];
 
       const result = getProjectsScheme({ page, projects });
 

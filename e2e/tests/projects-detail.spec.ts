@@ -8,6 +8,8 @@ import {
   getDescriptionFromSanity,
 } from "@/app/utils/utils";
 import { fetchPage, fetchProject } from "@/app/utils/api";
+import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
+import { validateJsonLd } from "../utils/jsonLD";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -100,6 +102,10 @@ test.describe("projects detail", () => {
       publishedTime: project!._createdAt,
       modifiedTime: project!._updatedAt,
     });
+
+    // json-ld
+    const expectedJsonLd = getProjectScheme(project!, data!.slug.current, true);
+    await validateJsonLd(page, expectedJsonLd);
   });
 
   test("show a message when project can not be found", async ({ page }) => {

@@ -71,8 +71,12 @@ export const getAboutScheme = ({
 
 export const getProjectScheme = (
   project: ProjectTypeSanity,
-  pageSlug: string
+  pageSlug: string,
+  shouldIncludeContext = false
 ) => ({
+  ...(shouldIncludeContext && {
+    "@context": "https://schema.org",
+  }),
   "@type":
     project.jsonLdType.length === 1
       ? project.jsonLdType[0]
@@ -83,15 +87,17 @@ export const getProjectScheme = (
   image: project.imageURL,
   description: project.body && toPlainText(project.body),
   // specific
-  ...(project.applicationCategory && {
-    applicationCategory: project.applicationCategory,
+  ...(project.jsonLdApplicationCategory && {
+    applicationCategory: project.jsonLdApplicationCategory,
   }),
-  ...(project.operatingSystem && {
-    operatingSystem: project.operatingSystem,
+  ...(project.jsonLdOperatingSystem && {
+    operatingSystem: project.jsonLdOperatingSystem,
   }),
-  ...(project.codeRepository && { codeRepository: project.codeRepository }),
-  ...(project.programmingLanguage && {
-    programmingLanguage: project.programmingLanguage,
+  ...(project.jsonLdCodeRepository && {
+    codeRepository: project.jsonLdCodeRepository,
+  }),
+  ...(project.jsonLdProgrammingLanguage && {
+    programmingLanguage: project.jsonLdProgrammingLanguage,
   }),
 });
 
