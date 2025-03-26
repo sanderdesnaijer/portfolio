@@ -29,7 +29,6 @@ export default async function Page() {
   });
   const { setting, menuItems } = await fetchCommonData();
   const t = await getTranslations();
-
   const jsonLd =
     page && projects ? getProjectsScheme({ page, projects }) : null;
 
