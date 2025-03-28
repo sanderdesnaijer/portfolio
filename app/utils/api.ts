@@ -1,7 +1,6 @@
 import { QueryParams } from "next-sanity";
 import { MediumArticle } from "../api/medium/types";
 import { REVALIDATE_INTERVAL } from "./constants";
-import { getBaseUrl } from "./routes";
 import {
   JobSanity,
   PageSanity,
@@ -9,8 +8,9 @@ import {
   SettingSanity,
 } from "@/sanity/types";
 import { fetchMediumArticles } from "../api/medium/utils";
+import envConfig from "@/envConfig";
 
-const baseUrl = getBaseUrl();
+const { baseUrl } = envConfig;
 
 async function fetchData<T>(
   endpoint: string,

@@ -9,12 +9,12 @@ import { generateMetaData } from "./utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "./components/NotFound";
-import { getBaseUrl } from "./utils/routes";
 import { generateTitle } from "./utils/utils";
 
 import { cache } from "react";
 import { getWebsiteScheme } from "./utils/jsonLDSchemes";
 import { JsonLd } from "./components/JsonLd";
+import envConfig from "@/envConfig";
 
 const fetchPageData = cache(async function fetchPageData() {
   return sanityFetch<PageSanity>({
@@ -32,7 +32,7 @@ export async function generateMetadata() {
     publishedTime: page._createdAt,
     modifiedTime: page._updatedAt,
     imageUrl: page.imageURL,
-    url: getBaseUrl(),
+    url: envConfig.baseUrl,
   });
 }
 

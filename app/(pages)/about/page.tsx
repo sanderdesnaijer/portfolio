@@ -13,10 +13,11 @@ import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { DynamicElement } from "@/app/components/DynamicElement";
 import { NotFound } from "@/app/components/NotFound";
-import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
+import { pageSlugs } from "@/app/utils/routes";
 import { urlFor } from "@/sanity/lib/image";
 import { getAboutScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
+import envConfig from "@/envConfig";
 
 const mainImageSizeHeigth = 341;
 const mainImageSizeWidtht = 256;
@@ -211,7 +212,7 @@ export default async function Page() {
           <NotFound
             title={t("error.404.generic.action")}
             description={t("error.404.generic.description")}
-            href={getBaseUrl()}
+            href={envConfig.baseUrl}
           />
         )}
       </Layout>

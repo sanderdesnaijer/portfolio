@@ -1,5 +1,5 @@
+import envConfig from "@/envConfig";
 import { AUTHOR_NAME } from "./constants";
-import { getBaseUrl } from "./routes";
 import {
   buildPageUrl,
   convertDate,
@@ -162,18 +162,18 @@ describe("app/utils/utils", () => {
 
   describe("buildPageUrl", () => {
     it("should return the correct URL for a page without a detail slug", () => {
-      expect(buildPageUrl("home")).toBe(`${getBaseUrl()}/home`);
+      expect(buildPageUrl("home")).toBe(`${envConfig.baseUrl}/home`);
     });
 
     it("should return the correct URL for a page with a detail slug", () => {
       expect(buildPageUrl("products", "123")).toBe(
-        `${getBaseUrl()}/products/123`
+        `${envConfig.baseUrl}/products/123`
       );
     });
 
     it("should handle special characters in slugs", () => {
       expect(buildPageUrl("category", "t-shirts")).toBe(
-        `${getBaseUrl()}/category/t-shirts`
+        `${envConfig.baseUrl}/category/t-shirts`
       );
     });
   });

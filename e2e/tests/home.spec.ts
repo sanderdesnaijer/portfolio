@@ -3,11 +3,11 @@ import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
-import { getBaseUrl } from "@/app/utils/routes";
 import { generateTitle } from "@/app/utils/utils";
 import { fetchPage } from "@/app/utils/api";
 import { getWebsiteScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
+import envConfig from "@/envConfig";
 
 async function checkHomePageElements(page: Page) {
   await expect(
@@ -55,7 +55,7 @@ test.describe("home", () => {
     await testPageMetadata(page, {
       title: generateTitle(),
       description: data!.description,
-      url: getBaseUrl(),
+      url: envConfig.baseUrl,
       imageUrl: data!.imageURL,
       imageAlt: data!.imageAlt,
       publishedTime: data!._createdAt,

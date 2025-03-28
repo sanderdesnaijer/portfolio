@@ -4,7 +4,7 @@ import { PageSanity } from "@/sanity/types";
 import { MetadataRoute } from "next";
 import { getMediumArticles } from "./utils/api";
 import { getSlug } from "./utils/utils";
-import { getBaseUrl } from "./utils/routes";
+import envConfig from "@/envConfig";
 
 const formatDate = (date: string) =>
   new Date(date).toISOString().replace(".000", "");
@@ -12,7 +12,7 @@ const formatDate = (date: string) =>
 const getPageSlug = (page?: PageSanity) => page?.slug?.current ?? "";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = getBaseUrl();
+  const { baseUrl } = envConfig;
 
   const [pages, projects, articles] = await Promise.all([
     sanityFetch<PageSanity[]>({ query: allPagesQuery }),

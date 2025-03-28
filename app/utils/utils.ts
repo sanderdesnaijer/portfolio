@@ -1,7 +1,7 @@
 import { AUTHOR_NAME } from "./constants";
 import { toPlainText } from "next-sanity";
 import { Block } from "@/sanity/types/types";
-import { getBaseUrl } from "./routes";
+import envConfig from "@/envConfig";
 
 /**
  * Converts a date string into a formatted date string.
@@ -121,5 +121,5 @@ export const buildPageUrl = (
   pageSlug: string,
   detailPageSlug?: string
 ): string => {
-  return `${getBaseUrl()}/${pageSlug}${detailPageSlug ? `/${detailPageSlug}` : ""}`;
+  return `${envConfig.baseUrl}/${pageSlug}${detailPageSlug ? `/${detailPageSlug}` : ""}`;
 };
