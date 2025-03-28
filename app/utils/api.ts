@@ -8,6 +8,7 @@ import {
   ProjectTypeSanity,
   SettingSanity,
 } from "@/sanity/types";
+import { fetchMediumArticles } from "../api/medium/utils";
 
 const baseUrl = getBaseUrl();
 
@@ -42,13 +43,18 @@ async function fetchData<T>(
 }
 
 export async function getMediumArticles(): Promise<MediumArticle[]> {
-  return (await fetchData<MediumArticle[]>("/api/medium")) || [];
+  return fetchMediumArticles();
 }
 
 export async function getMediumArticle(
   params: QueryParams
 ): Promise<MediumArticle | null> {
-  return fetchData<MediumArticle>(`/api/medium/${params.slug}`);
+  const articles = await fetchMediumArticles();
+  const article = articles.find((item) => item.link.includes(params.slug));
+  if (!article) {
+    return null;
+  }
+  return article;
 }
 
 // following routes are currently only used in e2e test

@@ -1,9 +1,7 @@
 import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 import { MediumArticle } from "./types";
 import { mockArticles } from "@/app/test-utils/mockArticle";
-
-const MEDIUM_URL = process.env.NEXT_PUBLIC_MEDIUM_URL!;
-const RSS_API_URL = process.env.NEXT_PUBLIC_RSS_API_URL!;
+import envConfig from "@/envConfig";
 
 export async function fetchMediumArticles(): Promise<MediumArticle[]> {
   if (process.env.NODE_ENV === "development") {
@@ -11,9 +9,12 @@ export async function fetchMediumArticles(): Promise<MediumArticle[]> {
   }
 
   try {
-    const response = await fetch(`${RSS_API_URL}?rss_url=${MEDIUM_URL}`, {
-      next: { revalidate: REVALIDATE_INTERVAL }, // Revalidate every 10 minutes
-    });
+    const response = await fetch(
+      `${envConfig.rssApiUrl}?rss_url=${envConfig.mediumUrl}`,
+      {
+        next: { revalidate: REVALIDATE_INTERVAL },
+      }
+    );
     if (!response.ok) {
       return [];
     }
