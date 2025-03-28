@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import envConfig from "@/envConfig";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -12,7 +13,7 @@ const montserrat = Montserrat({
   weight: ["200", "400", "700"],
 });
 
-if (process.env.NEXT_PUBLIC_MOCK_API === "true") {
+if (envConfig.isMockApi) {
   import("./mock").then(({ setupMocks }) => {
     setupMocks();
   });
