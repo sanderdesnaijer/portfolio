@@ -14,7 +14,7 @@ const envConfig: Env = {
   mediumUrl: process.env.NEXT_PUBLIC_MEDIUM_URL!,
   rssApiUrl: process.env.NEXT_PUBLIC_RSS_API_URL!,
   // optional
-  isMockApi: process.env.NEXT_PUBLIC_MOCK_API === "true" || true,
+  isMockApi: process.env.NEXT_PUBLIC_MOCK_API === "true" || false,
 };
 
 const requiredTokens: (keyof Env)[] = [
