@@ -1,5 +1,5 @@
+import envConfig from "@/envConfig";
 import { MetadataRoute } from "next";
-import { getBaseUrl } from "./utils/routes";
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: ["/"],
       disallow: ["/studio/"],
     },
-    sitemap: [`${getBaseUrl()}/sitemap.xml`],
+    sitemap: [`${envConfig.baseUrl}/sitemap.xml`],
   };
 }

@@ -3,7 +3,7 @@ import { AUTHOR_NAME } from "./constants";
 import { buildPageUrl, extractTextFromHTML } from "./utils";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { MediumArticle } from "../api/medium/types";
-import { getBaseUrl } from "./routes";
+import envConfig from "@/envConfig";
 
 const createAuthor = (url?: string) => ({
   "@type": "Person",
@@ -16,7 +16,7 @@ const createAuthor = (url?: string) => ({
 export const getWebsiteScheme = (page: PageSanity, authorLink?: string) => ({
   "@context": "https://schema.org",
   "@type": "WebSite",
-  url: getBaseUrl(),
+  url: envConfig.baseUrl,
   name: page.title,
   description: page.description,
   creator: createAuthor(authorLink),

@@ -10,16 +10,12 @@ import {
 import { MediumArticle } from "../api/medium/types";
 
 const mockBaseURL = "https://mocked-url.com";
+
+jest.mock("../../envConfig", () => ({
+  baseUrl: "https://mocked-url.com",
+}));
+
 describe("utils/jsonLDSchemes", () => {
-  beforeAll(() => {
-    process.env.NEXT_PUBLIC_BASE_URL = mockBaseURL;
-  });
-
-  afterAll(() => {
-    // Clean up after the tests to avoid side effects on other tests
-    delete process.env.NEXT_PUBLIC_BASE_URL;
-  });
-
   describe("getWebsiteScheme", () => {
     it("should return a valid schema with required fields", () => {
       const input: PageSanity = {

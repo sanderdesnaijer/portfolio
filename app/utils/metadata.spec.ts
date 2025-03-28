@@ -1,9 +1,9 @@
+import envConfig from "@/envConfig";
 import { mockPage } from "../test-utils/mockPage";
 import { mockProject } from "../test-utils/mockProjects";
 import { AUTHOR_NAME } from "./constants";
 import { generateMetaData, generatePageMetadata } from "./metadata";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { getBaseUrl } from "./routes";
 
 describe("app/utils/metadata", () => {
   afterEach(() => {
@@ -157,7 +157,7 @@ describe("app/utils/metadata", () => {
 
       const result = await generatePageMetadata({ pageSlug });
 
-      expect(result.openGraph.url).toBe(`${getBaseUrl()}/page-slug`);
+      expect(result.openGraph.url).toBe(`${envConfig.baseUrl}/page-slug`);
     });
 
     it("should generate correct metadata with project provided", async () => {

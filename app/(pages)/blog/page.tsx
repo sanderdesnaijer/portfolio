@@ -16,9 +16,10 @@ import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
-import { getBaseUrl, pageSlugs } from "@/app/utils/routes";
+import { pageSlugs } from "@/app/utils/routes";
 import { getBlogsScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
+import envConfig from "@/envConfig";
 
 const { blog: slug } = pageSlugs;
 
@@ -91,7 +92,7 @@ export default async function Page() {
           <NotFound
             title={t("error.404.generic.action")}
             description={t("error.404.generic.description")}
-            href={getBaseUrl()}
+            href={envConfig.baseUrl}
           />
         )}
       </Layout>
