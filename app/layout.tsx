@@ -38,9 +38,10 @@ export default async function RootLayout({
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
-        {envConfig.googleAnalytics && (
-          <GoogleAnalytics gaId={envConfig.googleAnalytics} />
-        )}
+        {envConfig.googleAnalytics &&
+          process.env.NODE_ENV !== "development" && (
+            <GoogleAnalytics gaId={envConfig.googleAnalytics} />
+          )}
       </body>
     </html>
   );
