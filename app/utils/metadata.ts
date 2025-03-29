@@ -34,10 +34,7 @@ export const generateMetaData = ({
       name: author,
     },
   ],
-  ...(keywords &&
-    keywords.length && {
-      keywords,
-    }),
+  ...(keywords?.length ? { keywords } : {}),
   openGraph: {
     title,
     description,
@@ -55,6 +52,7 @@ export const generateMetaData = ({
       },
     ],
     locale: "en_US",
+    site_name: title,
   },
   twitter: {
     card: "summary_large_image",
@@ -73,6 +71,103 @@ export const generateMetaData = ({
   },
   alternates: {
     canonical: canonical || url,
+  },
+  icons: {
+    icon: [
+      {
+        url: "/meta/light/favicon-16x16.png",
+        media: "(prefers-color-scheme: light)",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/meta/dark/favicon-16x16.png",
+        media: "(prefers-color-scheme: dark)",
+        sizes: "16x16",
+        type: "image/png",
+      },
+      {
+        url: "/meta/light/favicon-32x32.png",
+        media: "(prefers-color-scheme: light)",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/meta/dark/favicon-32x32.png",
+        media: "(prefers-color-scheme: dark)",
+        sizes: "32x32",
+        type: "image/png",
+      },
+    ],
+    shortcut: [
+      {
+        url: "/meta/light/favicon-32x32.png",
+        media: "(prefers-color-scheme: light)",
+        sizes: "32x32",
+        type: "image/png",
+      },
+      {
+        url: "/meta/dark/favicon-32x32.png",
+        media: "(prefers-color-scheme: dark)",
+        sizes: "32x32",
+        type: "image/png",
+      },
+    ],
+    apple: [
+      // small
+      {
+        url: "/meta/light/apple-icon.png",
+        sizes: "72x72",
+        type: "image/png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/meta/dark/apple-icon.png",
+        sizes: "72x72",
+        type: "image/png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      // medium
+      {
+        url: "/meta/light/apple-icon@2x.png",
+        sizes: "144x144",
+        type: "image/png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/meta/dark/apple-icon@2x.png",
+        sizes: "144x144",
+        type: "image/png",
+        media: "(prefers-color-scheme: dark)",
+      },
+      // large
+      {
+        url: "/meta/light/apple-icon@3x.png",
+        sizes: "216x216",
+        type: "image/png",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/meta/dark/apple-icon@3x.png",
+        sizes: "216x216",
+        type: "image/png",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+    other: [
+      {
+        rel: "apple-touch-icon-precomposed",
+        url: "/meta/light/apple-touch-icon.png",
+        media: "(prefers-color-scheme: light)",
+        type: "image/png",
+      },
+      {
+        rel: "apple-touch-icon-precomposed",
+        url: "/meta/dark/apple-touch-icon.png",
+        media: "(prefers-color-scheme: dark)",
+        type: "image/png",
+      },
+    ],
   },
 });
 

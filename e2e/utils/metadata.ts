@@ -123,4 +123,106 @@ export async function testPageMetadata(
     "content",
     expectedMeta.imageAlt || expectedMeta.title
   );
+
+  // Favicons
+  const favicons = [
+    {
+      url: "/meta/light/favicon-16x16.png",
+      media: "(prefers-color-scheme: light)",
+      sizes: "16x16",
+    },
+    {
+      url: "/meta/dark/favicon-16x16.png",
+      media: "(prefers-color-scheme: dark)",
+      sizes: "16x16",
+    },
+    {
+      url: "/meta/light/favicon-32x32.png",
+      media: "(prefers-color-scheme: light)",
+      sizes: "32x32",
+    },
+    {
+      url: "/meta/dark/favicon-32x32.png",
+      media: "(prefers-color-scheme: dark)",
+      sizes: "32x32",
+    },
+  ];
+
+  for (const { url, media, sizes } of favicons) {
+    const locator = page.locator(`link[rel="icon"][href="${url}"]`);
+    await expect(locator).toHaveAttribute("sizes", sizes);
+    await expect(locator).toHaveAttribute("media", media);
+  }
+
+  // Shortcut Icons
+  const shortcutIcons = [
+    {
+      url: "/meta/light/favicon-32x32.png",
+      media: "(prefers-color-scheme: light)",
+      sizes: "32x32",
+    },
+    {
+      url: "/meta/dark/favicon-32x32.png",
+      media: "(prefers-color-scheme: dark)",
+      sizes: "32x32",
+    },
+  ];
+
+  for (const { url, media, sizes } of shortcutIcons) {
+    const locator = page.locator(`link[rel="shortcut icon"][href="${url}"]`);
+    await expect(locator).toHaveAttribute("sizes", sizes);
+    await expect(locator).toHaveAttribute("media", media);
+  }
+
+  // Apple Touch Icons
+  const appleIcons = [
+    {
+      url: "/meta/light/apple-icon.png",
+      sizes: "72x72",
+      media: "(prefers-color-scheme: light)",
+    },
+    {
+      url: "/meta/dark/apple-icon.png",
+      sizes: "72x72",
+      media: "(prefers-color-scheme: dark)",
+    },
+    {
+      url: "/meta/light/apple-icon@2x.png",
+      sizes: "144x144",
+      media: "(prefers-color-scheme: light)",
+    },
+    {
+      url: "/meta/dark/apple-icon@2x.png",
+      sizes: "144x144",
+      media: "(prefers-color-scheme: dark)",
+    },
+    {
+      url: "/meta/light/apple-icon@3x.png",
+      sizes: "216x216",
+      media: "(prefers-color-scheme: light)",
+    },
+    {
+      url: "/meta/dark/apple-icon@3x.png",
+      sizes: "216x216",
+      media: "(prefers-color-scheme: dark)",
+    },
+  ];
+
+  for (const { url, sizes, media } of appleIcons) {
+    const locator = page.locator(`link[rel="apple-touch-icon"][href="${url}"]`);
+    await expect(locator).toHaveAttribute("sizes", sizes);
+    await expect(locator).toHaveAttribute("media", media);
+  }
+
+  // Apple Touch Icon Precomposed
+  await expect(
+    page.locator(
+      'link[rel="apple-touch-icon-precomposed"][href="/meta/light/apple-touch-icon.png"]'
+    )
+  ).toHaveAttribute("media", "(prefers-color-scheme: light)");
+  await expect(
+    page.locator(
+      'link[rel="apple-touch-icon-precomposed"][href="/meta/dark/apple-touch-icon.png"]'
+    )
+  ).toHaveAttribute("media", "(prefers-color-scheme: dark)");
 }
