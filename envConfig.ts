@@ -5,6 +5,7 @@ interface Env {
   mediumUrl: string;
   rssApiUrl: string;
   isMockApi?: boolean;
+  googleAnalytics?: string;
 }
 
 const envConfig: Env = {
@@ -15,6 +16,7 @@ const envConfig: Env = {
   rssApiUrl: process.env.NEXT_PUBLIC_RSS_API_URL!,
   // optional
   isMockApi: process.env.NEXT_PUBLIC_MOCK_API === "true" || false,
+  googleAnalytics: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
 };
 
 const requiredTokens: (keyof Env)[] = [

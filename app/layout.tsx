@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import envConfig from "@/envConfig";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -37,6 +38,10 @@ export default async function RootLayout({
             {children}
           </ThemeProvider>
         </NextIntlClientProvider>
+        {envConfig.googleAnalytics &&
+          process.env.NODE_ENV !== "development" && (
+            <GoogleAnalytics gaId={envConfig.googleAnalytics} />
+          )}
       </body>
     </html>
   );

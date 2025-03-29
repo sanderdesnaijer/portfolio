@@ -31,6 +31,7 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
     "@eslint/eslintrc": "^3.3.1",
+    "@next/third-parties": "^15.2.4",
     "@playwright/test": "^1.51.1",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4.0.17",
