@@ -37,6 +37,7 @@ describe("app/utils/metadata", () => {
       expect(result.openGraph.images[0].url).toBe(data.imageUrl);
       expect(result.twitter.card).toBe("summary_large_image");
       expect(result.alternates.canonical).toBe(data.canonical);
+      expect(result.openGraph.site_name).toBe(data.title);
     });
 
     it("should use the default author if none is provided", () => {

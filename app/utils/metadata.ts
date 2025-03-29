@@ -34,10 +34,7 @@ export const generateMetaData = ({
       name: author,
     },
   ],
-  ...(keywords &&
-    keywords.length && {
-      keywords,
-    }),
+  ...(keywords?.length ? { keywords } : {}),
   openGraph: {
     title,
     description,
@@ -55,6 +52,7 @@ export const generateMetaData = ({
       },
     ],
     locale: "en_US",
+    site_name: title,
   },
   twitter: {
     card: "summary_large_image",
