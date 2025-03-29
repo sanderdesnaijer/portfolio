@@ -1,6 +1,5 @@
 {
   "git": {
-    "*": false,
-    "main": true
+    "deploymentEnabled": false
   }
 }
