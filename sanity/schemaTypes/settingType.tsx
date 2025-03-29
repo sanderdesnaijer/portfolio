@@ -19,6 +19,17 @@ export const settingType = defineType({
       name: "socialMedia",
       type: "link",
     }),
+    defineField({
+      name: "siteImage",
+      type: "image",
+      fields: [
+        defineField({
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
+        }),
+      ],
+    }),
   ],
   preview: {
     select: {
