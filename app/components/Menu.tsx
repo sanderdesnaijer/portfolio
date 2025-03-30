@@ -39,7 +39,9 @@ const Menu = React.forwardRef<
         data-sticky
         aria-label={t("generic.mainNavigation")}
         ref={ref}
-        className={className}
+        className={
+          "order-2 flex min-w-[172px] border-none px-6 font-extralight md:flex-col md:justify-end md:py-6 md:text-4xl"
+        }
       >
         <ul className="flex w-full md:absolute md:block">
           {menuItems.map((item, i) => (
