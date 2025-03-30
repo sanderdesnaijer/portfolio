@@ -5,7 +5,7 @@ import Image from "next/image";
 import "./style.css";
 
 export const ThemeToggle: React.FC<{ className?: string }> = ({
-  className = "theme-toggle absolute right-[0px] z-10 cursor-pointer group-[.sticky]:top-[52px] md:relative",
+  className = "theme-toggle absolute right-[0px] z-10 cursor-pointer md:relative",
 }) => {
   const [mounted, setMounted] = React.useState(false);
   const { theme, setTheme } = useTheme();
