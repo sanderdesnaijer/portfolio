@@ -20,23 +20,32 @@ export default function useScrollPosition(
   const ticking = useRef(false);
   const lastY = useRef(0);
 
-  const addStickyClasses = useCallback(
-    (direction: "up" | "down") => {
+  const removeClasses = useCallback(() => {
+    ref.current?.classList.remove(
+      "custom-has-scrolled",
+      "custom-sticky",
+      "custom-sticky-show"
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const addClasses = useCallback(
+    (currentY: number, offsetTop: number) => {
       const classList = ref.current?.classList;
-      if (classList) {
-        classList?.add("sticky");
-        requestAnimationFrame(() => {
-          classList?.add("sticky-transition");
-          classList?.toggle("sticky-show", direction === "up");
-        });
+      const isSticky = offsetTop - currentY <= 0;
+      const direction = currentY > lastY.current ? "down" : "up";
+
+      classList?.toggle("custom-has-scrolled", currentY > 0);
+
+      if (isSticky) {
+        classList?.add("custom-sticky");
+        classList?.toggle("custom-sticky-show", direction === "up");
+      } else {
+        classList?.remove("custom-sticky", "custom-sticky-show");
       }
     },
     [ref]
   );
-
-  const removeStickyClasses = useCallback(() => {
-    ref.current?.classList.remove("sticky", "sticky-show", "sticky-transition");
-  }, [ref]);
 
   const registerScrollPositionTrigger = useCallback(() => {
     if (scrollPositionTrigger.current === null && ref.current) {
@@ -45,8 +54,8 @@ export default function useScrollPosition(
         "[data-sticky]"
       ) as HTMLElement;
       if (stickyElement) {
-        const { top, height } = stickyElement.getBoundingClientRect();
-        scrollPositionTrigger.current = top + height + window.scrollY;
+        const { height } = stickyElement.getBoundingClientRect();
+        scrollPositionTrigger.current = height * 2;
       } else {
         // eslint-disable-next-line no-console
         console.warn(
@@ -65,40 +74,34 @@ export default function useScrollPosition(
         registerScrollPositionTrigger();
       }
 
-      removeStickyClasses();
+      removeClasses();
     },
-    [removeStickyClasses, registerScrollPositionTrigger]
+    [removeClasses, registerScrollPositionTrigger]
   );
+
+  const processScroll = useCallback(() => {
+    const currentY = window.scrollY;
+    const offsetTop = scrollPositionTrigger.current ?? 0;
+    const maxScroll =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    if (currentY >= maxScroll) {
+      lastY.current = maxScroll;
+      ticking.current = false;
+      return;
+    }
+
+    addClasses(currentY, offsetTop);
+    lastY.current = currentY;
+    ticking.current = false;
+  }, [addClasses]);
 
   const handleScroll = useCallback(() => {
     if (!ticking.current && isStickyEnabled) {
       ticking.current = true;
-      requestAnimationFrame(() => {
-        const currentY = window.scrollY;
-        const offsetTop = scrollPositionTrigger.current ?? 0;
-        const maxScroll =
-          document.documentElement.scrollHeight - window.innerHeight;
-
-        if (currentY >= maxScroll) {
-          lastY.current = maxScroll;
-          ticking.current = false;
-          return;
-        }
-
-        const isSticky = offsetTop - currentY <= 0;
-        const direction = currentY > lastY.current ? "down" : "up";
-
-        if (isSticky) {
-          addStickyClasses(direction);
-        } else {
-          removeStickyClasses();
-        }
-
-        lastY.current = currentY;
-        ticking.current = false;
-      });
+      requestAnimationFrame(processScroll);
     }
-  }, [addStickyClasses, isStickyEnabled, removeStickyClasses]);
+  }, [isStickyEnabled, processScroll]);
 
   useEffect(() => {
     const mdQuery = window.matchMedia("(min-width: 48rem)");

@@ -16,7 +16,7 @@ const Menu = React.forwardRef<
 >(
   (
     {
-      className = "order-2 group-[.sticky]:translate-y-full group-[.sticky-show]:translate-y-0 group-[.sticky-transition]:transition-transform flex min-w-[172px] border-none px-6 md:py-6 group-[.sticky]:px-0 font-extralight group-[.sticky]:fixed group-[.sticky]:right-0 group-[.sticky]:bottom-0 group-[.sticky]:left-0 group-[.sticky]:place-content-evenly group-[.sticky]:bg-white group-[.sticky]:py-0 group-[.sticky]:text-2xl group-[.sticky]:shadow-[0_-4px_6px_-1px_var(--tw-shadow-color,rgb(0_0_0_/_0.1))] md:flex-col md:justify-end  md:text-4xl dark:group-[.sticky]:bg-black dark:group-[.sticky]:shadow-[0px_-2px_4px_-2px_rgba(0,0,0,0.8)]",
+      className = "fixed bottom-0 order-2 flex w-full min-w-[172px] border-none bg-white px-6 font-extralight shadow-[-1px_-1px_3px_0_rgba(0,0,0,0.1),_-1px_-1px_2px_-1px_rgba(0,0,0,0.1)] transition-transform group-[.custom-sticky]:translate-y-full group-[.custom-sticky-show]:-translate-y-0 md:relative md:w-auto md:flex-col md:justify-end md:bg-transparent md:py-6 md:text-4xl md:shadow-none dark:bg-black dark:shadow-black dark:md:bg-transparent",
       menuItems,
     },
     ref
@@ -41,11 +41,11 @@ const Menu = React.forwardRef<
         ref={ref}
         className={className}
       >
-        <ul className="flex w-full md:absolute md:block">
+        <ul className="flex w-full justify-around md:absolute md:block">
           {menuItems.map((item, i) => (
-            <li key={i} className="flex group-[.sticky]:w-1/4">
+            <li key={i} className="flex w-1/4">
               <Link
-                className={`${isActive(item) ? "font-bold" : ""} mr-2 block w-full translate-x-0 transition-transform group-[.sticky]:mr-0 group-[.sticky]:pt-4 group-[.sticky]:pb-6 group-[.sticky]:text-center hover:font-bold hover:italic active:font-bold md:mr-auto md:hover:translate-x-2`}
+                className={`${isActive(item) ? "font-bold" : ""} w-full translate-x-0 p-3 text-center transition-transform group-[.home]:p-0 hover:font-bold hover:italic active:font-bold md:p-0 md:text-left md:hover:translate-x-2`}
                 href={item.pathname}
                 {...(isActive(item) && {
                   ["aria-current"]: "page",

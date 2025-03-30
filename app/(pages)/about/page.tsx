@@ -136,13 +136,15 @@ export default async function Page() {
               />
             </div>
             {page?.body ? (
-              <PortableText value={page.body} components={components} />
+              <div className="md:py-10">
+                <PortableText value={page.body} components={components} />
+              </div>
             ) : null}
 
             <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
             <ol
               aria-label={t("pages.about.professionalExperience")}
-              className="not-prose group/list flex list-none flex-col gap-10 p-0"
+              className="not-prose group/list mb-3 flex list-none flex-col gap-10 p-0"
             >
               {jobs?.map((job) => {
                 return (

@@ -39,7 +39,8 @@ export default async function RootLayout({
           </ThemeProvider>
         </NextIntlClientProvider>
         {envConfig.googleAnalytics &&
-          process.env.NODE_ENV !== "development" && (
+          process.env.NODE_ENV !== "development" &&
+          !envConfig.isMockApi && (
             <GoogleAnalytics gaId={envConfig.googleAnalytics} />
           )}
       </body>

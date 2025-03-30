@@ -78,7 +78,7 @@ export default async function Home() {
           <div className="col-span-3 content-center">
             <Menu
               menuItems={menuItems}
-              className="flex flex-col text-7xl font-extralight md:text-9xl [&>ul]:relative [&>ul]:block"
+              className="group home flex flex-col text-7xl font-extralight md:text-9xl [&>ul]:relative [&>ul]:block"
             />
           </div>
         </main>
