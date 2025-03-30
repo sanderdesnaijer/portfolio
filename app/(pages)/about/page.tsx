@@ -136,7 +136,9 @@ export default async function Page() {
               />
             </div>
             {page?.body ? (
-              <PortableText value={page.body} components={components} />
+              <div className="md:py-10">
+                <PortableText value={page.body} components={components} />
+              </div>
             ) : null}
 
             <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>

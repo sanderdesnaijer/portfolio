@@ -45,7 +45,7 @@ const Menu = React.forwardRef<
           {menuItems.map((item, i) => (
             <li key={i} className="flex w-1/4">
               <Link
-                className={`${isActive(item) ? "font-bold" : ""} w-full translate-x-0 p-3 text-center transition-transform hover:font-bold hover:italic active:font-bold md:p-0 md:text-left md:hover:translate-x-2`}
+                className={`${isActive(item) ? "font-bold" : ""} w-full translate-x-0 p-3 text-center transition-transform group-[.home]:p-0 hover:font-bold hover:italic active:font-bold md:p-0 md:text-left md:hover:translate-x-2`}
                 href={item.pathname}
                 {...(isActive(item) && {
                   ["aria-current"]: "page",
