@@ -16,7 +16,7 @@ export const Layout: React.FC<{
 }> = ({ children, pageTitle, socialMedia, authorName, menuItems }) => {
   const stickyRef = React.useRef<HTMLDivElement>(null);
 
-  useScrollPosition(stickyRef);
+  // useScrollPosition(stickyRef);
 
   return (
     <div className="mx-auto grid grid-cols-9 pt-6 md:container md:pt-0">
@@ -25,7 +25,7 @@ export const Layout: React.FC<{
         className="group peer relative top-[0px] z-20 col-span-9 flex flex-col justify-end md:sticky md:top-0 md:col-span-3 md:h-screen md:flex-row md:gap-4 md:px-6 md:py-0 xl:col-span-2"
       >
         <Menu menuItems={menuItems} />
-        <header className="flex flex-col justify-between px-6 py-2 group-[.sticky]:-translate-y-full group-[.sticky]:bg-white group-[.sticky-show]:translate-y-0 group-[.sticky-show]:shadow-md group-[.sticky-transition]:transition-transform md:items-center md:overflow-visible md:bg-transparent md:px-0 md:py-6 dark:group-[.sticky]:bg-black dark:group-[.sticky-show]:shadow-[0px_2px_4px_-2px_rgba(0,0,0,0.8)]">
+        <header className="flex flex-col justify-between px-6 py-2 md:items-center md:overflow-visible md:bg-transparent md:px-0 md:py-6">
           <div className="z-1 order-2 flex justify-between md:block">
             <Link
               href={"/"}
@@ -35,7 +35,7 @@ export const Layout: React.FC<{
             </Link>
             <SocialIcons socialMedia={socialMedia} />
           </div>
-          <div className="relative z-2 order-1 flex group-[.sticky]:translate-y-[-50px]">
+          <div className="relative z-2 order-1 flex">
             <ThemeToggle />
           </div>
         </header>
