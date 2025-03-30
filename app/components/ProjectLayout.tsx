@@ -2,7 +2,7 @@ import { IconLink } from "@/sanity/types/types";
 import { LinkList } from "./LinkList";
 
 const BlogDate: React.FC<{ date: string }> = ({ date }) => (
-  <p className="-mt-8 mb-2 py-2 text-xs font-bold uppercase dark:dark:text-gray-100">
+  <p className="-mt-3.5 mb-2 py-2 text-xs font-bold uppercase md:mt-1.5 dark:dark:text-gray-100">
     {date}
   </p>
 );
