@@ -25,7 +25,7 @@ export const Layout: React.FC<{
         className="group peer sticky top-[0px] z-20 col-span-9 flex flex-col justify-end md:top-0 md:col-span-3 md:h-screen md:flex-row md:gap-4 md:px-6 md:py-0 xl:col-span-2"
       >
         <Menu menuItems={menuItems} />
-        <header className="flex flex-col justify-between bg-white px-6 py-2 md:items-center md:overflow-visible md:bg-transparent md:px-0 md:py-6 dark:bg-black dark:md:bg-transparent">
+        <header className="flex flex-col justify-between bg-white px-6 py-2 shadow-sm md:items-center md:overflow-visible md:bg-transparent md:px-0 md:py-6 md:shadow-none dark:bg-black dark:shadow-black dark:md:bg-transparent">
           <div className="z-1 order-2 flex justify-between md:block">
             <Link
               href={"/"}

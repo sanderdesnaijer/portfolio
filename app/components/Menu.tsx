@@ -16,7 +16,7 @@ const Menu = React.forwardRef<
 >(
   (
     {
-      className = "fixed bottom-0 order-2 flex w-full min-w-[172px] border-none bg-white px-6 font-extralight md:relative md:w-auto md:flex-col md:justify-end md:bg-transparent md:py-6 md:text-4xl dark:bg-black dark:md:bg-transparent",
+      className = "fixed shadow-[-1px_-1px_3px_0_rgba(0,0,0,0.1),_-1px_-1px_2px_-1px_rgba(0,0,0,0.1)] dark:shadow-black md:shadow-none  bottom-0 order-2 flex w-full min-w-[172px] border-none bg-white px-6 font-extralight md:relative md:w-auto md:flex-col md:justify-end md:bg-transparent md:py-6 md:text-4xl dark:bg-black dark:md:bg-transparent",
       menuItems,
     },
     ref
