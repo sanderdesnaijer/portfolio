@@ -142,7 +142,7 @@ export default async function Page() {
             <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
             <ol
               aria-label={t("pages.about.professionalExperience")}
-              className="not-prose group/list flex list-none flex-col gap-10 p-0"
+              className="not-prose group/list mb-3 flex list-none flex-col gap-10 p-0"
             >
               {jobs?.map((job) => {
                 return (
