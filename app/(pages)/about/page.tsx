@@ -33,7 +33,7 @@ const components: Partial<PortableTextReactComponents> = {
       <h2 className="mb-10 w-2/3 text-4xl font-extralight">{children}</h2>
     ),
     span: ({ children }: { children?: React.ReactNode }) => (
-      <span className="mb-10 block w-2/3 text-2xl font-extralight md:text-4xl">
+      <span className="mb-10 block w-2/3 pr-2 text-2xl font-extralight md:text-4xl">
         {children}
       </span>
     ),
@@ -183,7 +183,7 @@ export default async function Page() {
                           >
                             <DynamicElement
                               as="h3"
-                              className="text-lg leading-[18px] font-bold group-hover/item:translate-x-1 group-hover/item:italic"
+                              className="-mt-[3px] text-lg leading-[22px] font-bold group-hover/item:translate-x-1 group-hover/item:italic"
                             >
                               {job.companyName.trim()}
                             </DynamicElement>
