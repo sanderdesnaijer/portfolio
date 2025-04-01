@@ -4,7 +4,6 @@ import { pageQuery } from "@/sanity/lib/queries";
 import { PageSanity } from "@/sanity/types";
 import Menu from "./components/Menu";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
-import { SocialIcons } from "./components/SocialIcons";
 import { generateMetaData } from "./utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
@@ -15,6 +14,8 @@ import { cache } from "react";
 import { getWebsiteScheme } from "./utils/jsonLDSchemes";
 import { JsonLd } from "./components/JsonLd";
 import envConfig from "@/envConfig";
+
+import SiteLogo from "../public/logo.svg";
 
 const fetchPageData = cache(async function fetchPageData() {
   return sanityFetch<PageSanity>({
@@ -59,28 +60,27 @@ export default async function Home() {
         )
       : null;
 
+  const menuItemsWithoutHome = menuItems.filter(
+    (item) => item.title !== "Home"
+  );
+
   return (
     <>
       {jsonLd && <JsonLd value={jsonLd} />}
       <div className="container mx-auto h-screen p-4">
         <ThemeToggle className="theme-toggle absolute right-6 cursor-pointer" />
-        <main className="grid grid-cols-6 gap-4 md:h-full">
-          <div className="col-span-6 md:col-span-2 md:content-center">
-            <h1 className="mb-4 text-3xl font-bold md:text-5xl">
-              {setting.title}
-            </h1>
-            <p className="mb-4 text-xl">{setting.description}</p>
-            <SocialIcons
-              className="flex gap-2"
-              socialMedia={setting.socialMedia}
-            />
+        <main className="flex h-full flex-col md:justify-center">
+          <div className="max-h-1/4 justify-items-center [&>svg]:m-auto [&>svg]:h-full">
+            <SiteLogo />
           </div>
-          <div className="col-span-3 content-center">
-            <Menu
-              menuItems={menuItems}
-              className="group home flex flex-col text-7xl font-extralight md:text-9xl [&>ul]:relative [&>ul]:block"
-            />
-          </div>
+          <h1 className="-mt-5 mb-10 text-center text-lg font-bold">
+            {setting.title}
+          </h1>
+
+          <Menu
+            menuItems={menuItemsWithoutHome}
+            className="group home flex flex-col text-7xl font-extralight [&>ul]:relative [&>ul]:block [&>ul]:h-full [&>ul>li]:mb-2 [&>ul>li]:w-auto [&>ul>li>a]:text-center [&>ul>li>a]:md:hover:translate-x-0"
+          />
         </main>
       </div>
     </>

@@ -33,7 +33,6 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
             alt={getCreatedAtTitle()}
             width={companyIconSize}
             height={companyIconSize}
-            priority
             className="mt-0 mb-0! ml-2"
           />
         </p>

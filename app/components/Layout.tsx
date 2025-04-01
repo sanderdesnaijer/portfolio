@@ -6,6 +6,7 @@ import { SocialIcons } from "./SocialIcons";
 import Link from "next/link";
 import React from "react";
 import useScrollPosition from "../utils/useScrollPosition";
+import SiteLogo from "../../public/logo.svg";
 
 export const Layout: React.FC<{
   children?: React.ReactNode;
@@ -26,16 +27,18 @@ export const Layout: React.FC<{
       >
         <Menu menuItems={menuItems} />
         <header className="flex flex-col justify-between bg-white px-6 py-2 transition-all group-[.custom-has-scrolled]:shadow-sm group-[.custom-sticky]:-translate-y-full group-[.custom-sticky-show]:-translate-y-0 md:translate-y-0 md:items-center md:overflow-visible md:bg-transparent md:px-0 md:py-6 md:shadow-none dark:bg-black dark:shadow-black dark:md:bg-transparent">
-          <div className="z-1 order-2 flex justify-between md:block">
+          <div className="z-1 order-2 flex flex-col justify-between md:flex md:items-center">
             <Link
               href={"/"}
-              className="origin-bottom-right scale-100 text-lg font-bold transition-transform duration-100 hover:scale-105 md:mb-2 md:[writing-mode:vertical-lr]"
+              className="flex h-8 origin-bottom-right scale-100 items-center text-lg font-bold transition-transform duration-100 hover:scale-105 md:mb-2 md:h-auto md:[writing-mode:vertical-lr] [&>svg]:mr-3 [&>svg]:h-10 md:[&>svg]:mr-0 md:[&>svg]:mb-2 md:[&>svg]:h-8 md:[&>svg]:rotate-90"
             >
+              <SiteLogo />
+
               {authorName}
             </Link>
             <SocialIcons socialMedia={socialMedia} />
           </div>
-          <div className="relative z-2 order-1 flex">
+          <div className="relative z-2 order-1 flex md:top-0 [&>button]:top-1">
             <ThemeToggle />
           </div>
         </header>

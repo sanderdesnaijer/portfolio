@@ -41,9 +41,7 @@ describe("app/page", () => {
     render(await Home());
 
     expect(screen.getByText("Test Title")).toBeInTheDocument();
-    expect(screen.getByText("Test Description")).toBeInTheDocument();
-    expect(screen.getByLabelText("facebook icon")).toBeInTheDocument();
-    expect(screen.getByLabelText("twitter icon")).toBeInTheDocument();
+    expect(screen.getByText("svgrurl")).toBeInTheDocument();
   });
 
   it("calls sanityFetch with the correct query", async () => {
