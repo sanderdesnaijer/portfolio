@@ -41,6 +41,7 @@ describe("app/page", () => {
     render(await Home());
 
     expect(screen.getByText("Test Title")).toBeInTheDocument();
+    expect(screen.getByText("svgrurl")).toBeInTheDocument();
   });
 
   it("calls sanityFetch with the correct query", async () => {

@@ -1,6 +1,6 @@
 import { Page, expect } from "@playwright/test";
 
-const navLinks = [
+const allNavLinks = [
   { name: "Home", url: "/", heading: "Home" },
   { name: "About", url: "/about", heading: "About" },
   { name: "Projects", url: "/projects", heading: "Projects" },
@@ -21,6 +21,9 @@ export async function testResponsive(
     xl: { width: 1280, height: 800 },
     "2xl": { width: 1536, height: 800 },
   };
+
+  const navLinks =
+    url === "/" ? allNavLinks.filter((link) => link.url !== "/") : allNavLinks;
 
   // Load the page
   await page.goto(url);
