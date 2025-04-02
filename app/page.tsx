@@ -70,10 +70,10 @@ export default async function Home() {
       <div className="container mx-auto h-screen p-4">
         <ThemeToggle className="theme-toggle absolute right-6 cursor-pointer" />
         <main className="flex h-full flex-col md:justify-center">
-          <div className="max-h-1/4 justify-items-center [&>svg]:m-auto [&>svg]:h-full">
-            <SiteLogo />
+          <div className="max-h-1/4 justify-items-center [&>svg]:m-auto">
+            <SiteLogo className="h-56 transition-colors duration-200 [--logoBgColor:transparent] [--logoShapeColor:#0a0a0a] dark:[--logoShapeColor:white]" />
           </div>
-          <h1 className="-mt-5 mb-10 text-center text-lg font-bold">
+          <h1 className="my-6 mt-5 text-center text-lg font-bold">
             {setting.title}
           </h1>
 

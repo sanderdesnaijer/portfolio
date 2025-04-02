@@ -52,6 +52,9 @@ export async function testResponsive(
       }
     }
 
+    // check logo
+    await expect(page.getByTestId("site-logo")).toBeVisible();
+
     await checkElementsFn(page);
   }
 }
