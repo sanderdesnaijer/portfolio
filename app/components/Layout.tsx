@@ -23,14 +23,14 @@ export const Layout: React.FC<{
     <div className="mx-auto grid grid-cols-9 pt-0 md:container">
       <div
         ref={stickyRef}
-        className="group peer sticky top-[0px] z-20 col-span-9 flex flex-col justify-end md:top-0 md:col-span-3 md:h-screen md:flex-row md:gap-4 md:px-6 md:py-0 xl:col-span-2"
+        className="group sticky top-[0px] z-20 col-span-9 flex flex-col justify-end md:top-0 md:col-span-3 md:h-screen md:flex-row md:gap-4 md:px-6 md:py-0 xl:col-span-2"
       >
         <Menu menuItems={menuItems} />
-        <header className="flex flex-col justify-between bg-white px-6 py-1 transition-all group-[.custom-has-scrolled]:shadow-sm group-[.custom-sticky]:-translate-y-full group-[.custom-sticky-show]:-translate-y-0 md:translate-y-0 md:items-center md:overflow-visible md:bg-transparent md:px-0 md:py-6 md:shadow-none dark:bg-black dark:shadow-black dark:md:bg-transparent">
+        <header className="flex flex-col justify-between bg-white px-6 py-1 transition-all group-[.custom-has-scrolled]:shadow-sm group-[.custom-sticky]:-translate-y-full group-[.custom-sticky-show]:-translate-y-0 md:translate-y-0 md:items-center md:overflow-visible md:bg-transparent md:px-0 md:py-6 md:shadow-none md:transition-none dark:bg-black dark:shadow-black dark:md:bg-transparent">
           <div className="z-1 order-2 flex flex-col justify-between md:flex md:items-center">
             <Link
               href={"/"}
-              className="flex h-8 origin-bottom-right scale-100 items-center text-lg font-bold transition-transform duration-100 hover:scale-105 md:mb-2 md:h-auto md:[writing-mode:vertical-lr] [&>svg]:mr-3 md:[&>svg]:mr-0 md:[&>svg]:mb-2"
+              className="group link flex h-8 origin-bottom-right items-center text-lg font-bold underline-offset-2 hover:underline md:mb-2 md:h-auto md:[writing-mode:vertical-lr] [&>svg]:mr-3 [&>svg]:transition-transform [&>svg]:duration-75 hover:[&>svg]:scale-110 md:[&>svg]:mr-0 md:[&>svg]:mb-2"
             >
               <SiteLogo className="h-8 [--logoBgColor:black] [--logoDisplay:none] [--logoShapeColor:white] dark:[--logoBgColor:white] dark:[--logoShapeColor:black]" />
               {authorName}
