@@ -37,7 +37,7 @@ export const Layout: React.FC<{
             </Link>
             <SocialIcons socialMedia={socialMedia} />
           </div>
-          <div className="relative z-2 order-1 flex md:top-0 [&>button]:top-1">
+          <div className="relative z-2 order-1 flex md:top-0 [&>button]:-top-1">
             <ThemeToggle />
           </div>
         </header>
