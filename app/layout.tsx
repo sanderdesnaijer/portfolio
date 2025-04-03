@@ -6,6 +6,7 @@ import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import envConfig from "@/envConfig";
 import { ConsentWrapper } from "./components/ConsentWrapper";
+import { Suspense } from "react";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -27,6 +28,7 @@ export default async function RootLayout({
 }>) {
   const locale = await getLocale();
   const messages = await getMessages();
+  const title = "Loading...";
 
   return (
     <html lang={locale} suppressHydrationWarning>
@@ -35,7 +37,9 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <ConsentWrapper>{children}</ConsentWrapper>
+            <Suspense fallback={<div>{title}</div>}>
+              <ConsentWrapper>{children}</ConsentWrapper>
+            </Suspense>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

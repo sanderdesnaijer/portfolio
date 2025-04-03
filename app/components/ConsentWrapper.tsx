@@ -45,6 +45,7 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
   }, [consentGiven, pathname, searchParams]);
 
   // const isProd = process.env.NODE_ENV !== "development" && !envConfig.isMockApi;
+  const isDebugMode = process && process.env.NODE_ENV !== "production";
   return (
     <>
       {consentGiven && envConfig.googleAnalytics && (
@@ -61,7 +62,7 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
               gtag('js', new Date());
               gtag('config', '${envConfig.googleAnalytics}', {
                   page_path: window.location.pathname,
-                  debug_mode: true
+                  debug_mode: ${isDebugMode}
               });
             `}
         </Script>
