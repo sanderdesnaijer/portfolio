@@ -28,7 +28,9 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
     };
 
     window.addEventListener("local-storage-change", handleChange);
-    window.removeEventListener("local-storage-change", handleChange);
+    return () => {
+      window.removeEventListener("local-storage-change", handleChange);
+    };
   }, []);
 
   const pathname = usePathname();
@@ -42,7 +44,7 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
     }
   }, [pathname, searchParams]);
 
-  const isProd = process.env.NODE_ENV !== "development" && !envConfig.isMockApi;
+  // const isProd = process.env.NODE_ENV !== "development" && !envConfig.isMockApi;
   return (
     <>
       {consentGiven && envConfig.googleAnalytics && (
@@ -51,7 +53,7 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
           strategy="afterInteractive"
         />
       )}
-      {envConfig.googleAnalytics && (
+      {consentGiven && envConfig.googleAnalytics && (
         <Script id="google-analytics" strategy="afterInteractive">
           {`
               window.dataLayer = window.dataLayer || [];

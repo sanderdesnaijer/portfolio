@@ -19,7 +19,6 @@ export const handlers = [
     return HttpResponse.json({ items: mockArticles });
   }),
   http.all("https://www.google-analytics.com/*", () => {
-    console.log("Mock GA Event:");
     return HttpResponse.json({ status: "success" });
   }),
   // http.all("*sanity*", async ({ request }) => {
@@ -32,8 +31,7 @@ export const handlers = [
 
   //   return passthrough();
   // }),
-  http.all("*", async ({ request }) => {
-    console.log(request.url);
+  http.all("*", async () => {
     return passthrough();
   }),
 ];
