@@ -37,12 +37,12 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const url = pathname + searchParams.toString();
-
-    if (envConfig.googleAnalytics) {
+    const searchParamsString = searchParams.toString();
+    const url = pathname + (searchParamsString ? `?${searchParamsString}` : "");
+    if (envConfig.googleAnalytics && consentGiven) {
       pageview(envConfig.googleAnalytics, url);
     }
-  }, [pathname, searchParams]);
+  }, [consentGiven, pathname, searchParams]);
 
   // const isProd = process.env.NODE_ENV !== "development" && !envConfig.isMockApi;
   return (
