@@ -3,7 +3,7 @@ import envConfig from "@/envConfig";
 import Script from "next/script";
 import { useState, useEffect } from "react";
 import CookieBanner, { getLocalStorage } from "./CookieBanner";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export const pageview = (GA_MEASUREMENT_ID: string, url: string) => {
   if (window.gtag) {
@@ -34,15 +34,16 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
   }, []);
 
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
     const searchParamsString = searchParams.toString();
     const url = pathname + (searchParamsString ? `?${searchParamsString}` : "");
+
     if (envConfig.googleAnalytics && consentGiven) {
       pageview(envConfig.googleAnalytics, url);
     }
-  }, [consentGiven, pathname, searchParams]);
+  }, [consentGiven, pathname]);
 
   // const isProd = process.env.NODE_ENV !== "development" && !envConfig.isMockApi;
   const isDebugMode = process && process.env.NODE_ENV !== "production";
