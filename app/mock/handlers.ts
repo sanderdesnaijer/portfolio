@@ -18,6 +18,10 @@ export const handlers = [
   http.all("*/api.rss2json*", async () => {
     return HttpResponse.json({ items: mockArticles });
   }),
+  http.all("https://www.google-analytics.com/*", () => {
+    console.log("Mock GA Event:");
+    return HttpResponse.json({ status: "success" });
+  }),
   // http.all("*sanity*", async ({ request }) => {
   //   const url = new URL(request.url);
   //   const query = url.searchParams.get("query");
@@ -28,7 +32,8 @@ export const handlers = [
 
   //   return passthrough();
   // }),
-  http.all("*", async () => {
+  http.all("*", async ({ request }) => {
+    console.log(request.url);
     return passthrough();
   }),
 ];
