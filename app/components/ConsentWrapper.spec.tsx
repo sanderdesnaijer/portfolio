@@ -44,6 +44,7 @@ describe("ConsentWrapper", () => {
 
   it("renders child components and cookie banner", () => {
     window.localStorage.setItem("cookie_consent", JSON.stringify("true"));
+
     renderComponent();
     expect(screen.getByText("Child content")).toBeInTheDocument();
     expect(screen.getByTestId("cookie-banner")).toBeInTheDocument();
@@ -51,6 +52,7 @@ describe("ConsentWrapper", () => {
 
   it("does not render GA scripts without consent", () => {
     window.localStorage.setItem("cookie_consent", JSON.stringify("false"));
+
     renderComponent();
     expect(screen.queryByTestId("mock-script")).not.toBeInTheDocument();
   });

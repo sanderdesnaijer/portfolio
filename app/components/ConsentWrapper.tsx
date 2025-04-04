@@ -42,7 +42,7 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
     const searchParamsString = searchParams.toString();
     const url = pathname + (searchParamsString ? `?${searchParamsString}` : "");
 
-    if (envConfig.googleAnalytics && consentGiven && !envConfig.isMockApi) {
+    if (envConfig.googleAnalytics && consentGiven) {
       pageview(envConfig.googleAnalytics, url);
     }
   }, [consentGiven, pathname]);
@@ -52,13 +52,13 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {consentGiven && envConfig.googleAnalytics && !envConfig.isMockApi && (
+      {consentGiven === true && envConfig.googleAnalytics && (
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${envConfig.googleAnalytics}`}
           strategy="afterInteractive"
         />
       )}
-      {consentGiven && envConfig.googleAnalytics && !envConfig.isMockApi && (
+      {consentGiven === true && envConfig.googleAnalytics && (
         <Script id="google-analytics" strategy="afterInteractive">
           {`
               window.dataLayer = window.dataLayer || [];
