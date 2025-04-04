@@ -12,7 +12,6 @@ import {
 
 export const pageview = (GA_MEASUREMENT_ID: string, url: string) => {
   if (window.gtag) {
-    console.log("send google");
     window.gtag("config", GA_MEASUREMENT_ID, {
       page_path: url,
     });
@@ -43,7 +42,7 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
     const searchParamsString = searchParams.toString();
     const url = pathname + (searchParamsString ? `?${searchParamsString}` : "");
 
-    if (envConfig.googleAnalytics && consentGiven) {
+    if (envConfig.googleAnalytics && consentGiven && !envConfig.isMockApi) {
       pageview(envConfig.googleAnalytics, url);
     }
   }, [consentGiven, pathname]);
