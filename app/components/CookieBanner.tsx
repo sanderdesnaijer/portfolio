@@ -3,24 +3,14 @@
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState, useEffect } from "react";
-
-export function getLocalStorage(key: string, defaultValue: unknown) {
-  const stickyValue =
-    typeof window !== "undefined" ? localStorage.getItem(key) : null;
-
-  return stickyValue !== null && stickyValue !== "undefined"
-    ? JSON.parse(stickyValue)
-    : defaultValue;
-}
-
-export function setLocalStorage(key: string, value: unknown) {
-  // TODO: set expiry
-  localStorage.setItem(key, JSON.stringify(value));
-  window.dispatchEvent(new Event("local-storage-change"));
-}
+import {
+  getLocalStorage,
+  KEY_COOKIE_CONSENT,
+  setLocalStorage,
+} from "../utils/localStorage";
 
 export default function CookieBanner() {
-  const hasConsentLocal = getLocalStorage("cookie_consent", null);
+  const hasConsentLocal = getLocalStorage(KEY_COOKIE_CONSENT, null);
   const [cookieConsent, setCookieConsent] = useState(() => hasConsentLocal);
 
   const [isMounted, setIsMounted] = useState(false);
@@ -41,7 +31,7 @@ export default function CookieBanner() {
 
   const onChangeConsent = (isConsent: boolean) => {
     setCookieConsent(isConsent);
-    setLocalStorage("cookie_consent", isConsent);
+    setLocalStorage(KEY_COOKIE_CONSENT, isConsent);
   };
 
   const t = useTranslations("consent");
@@ -69,7 +59,7 @@ export default function CookieBanner() {
         </button>
         <button
           onClick={() => onChangeConsent(true)}
-          className="rounded-lg bg-gray-900 px-5 py-2 text-white"
+          className="rounded-lg bg-gray-900 px-5 py-2 whitespace-nowrap text-white"
         >
           {t("accept")}
         </button>

@@ -2,34 +2,37 @@
 import envConfig from "@/envConfig";
 import Script from "next/script";
 import { useState, useEffect } from "react";
-import CookieBanner, { getLocalStorage } from "./CookieBanner";
+import CookieBanner from "./CookieBanner";
 import { usePathname } from "next/navigation";
+import {
+  getLocalStorage,
+  KEY_COOKIE_CONSENT,
+  localStorageChangeEvent,
+} from "../utils/localStorage";
 
 export const pageview = (GA_MEASUREMENT_ID: string, url: string) => {
   if (window.gtag) {
+    console.log("send google");
     window.gtag("config", GA_MEASUREMENT_ID, {
       page_path: url,
     });
   }
 };
 
-/**
- * Component to handle Google Analytics loading based on consent
- */
 export function ConsentWrapper({ children }: { children: React.ReactNode }) {
-  const [consentGiven, setConsentGiven] = useState(
-    () => getLocalStorage("cookie_consent", null) === "true"
+  const [consentGiven, setConsentGiven] = useState(() =>
+    getLocalStorage(KEY_COOKIE_CONSENT, null)
   );
 
   useEffect(() => {
     const handleChange = () => {
-      const localStorageValue = getLocalStorage("cookie_consent", null);
+      const localStorageValue = getLocalStorage(KEY_COOKIE_CONSENT, null);
       setConsentGiven(localStorageValue);
     };
 
-    window.addEventListener("local-storage-change", handleChange);
+    window.addEventListener(localStorageChangeEvent, handleChange);
     return () => {
-      window.removeEventListener("local-storage-change", handleChange);
+      window.removeEventListener(localStorageChangeEvent, handleChange);
     };
   }, []);
 
@@ -50,13 +53,13 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      {consentGiven && envConfig.googleAnalytics && (
+      {consentGiven && envConfig.googleAnalytics && !envConfig.isMockApi && (
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${envConfig.googleAnalytics}`}
           strategy="afterInteractive"
         />
       )}
-      {consentGiven && envConfig.googleAnalytics && (
+      {consentGiven && envConfig.googleAnalytics && !envConfig.isMockApi && (
         <Script id="google-analytics" strategy="afterInteractive">
           {`
               window.dataLayer = window.dataLayer || [];
