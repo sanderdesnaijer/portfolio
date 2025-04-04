@@ -17,8 +17,8 @@ export const pageview = (GA_MEASUREMENT_ID: string, url: string) => {
  * Component to handle Google Analytics loading based on consent
  */
 export function ConsentWrapper({ children }: { children: React.ReactNode }) {
-  const [consentGiven, setConsentGiven] = useState(() =>
-    getLocalStorage("cookie_consent", null)
+  const [consentGiven, setConsentGiven] = useState(
+    () => getLocalStorage("cookie_consent", null) === "true"
   );
 
   useEffect(() => {
@@ -46,7 +46,8 @@ export function ConsentWrapper({ children }: { children: React.ReactNode }) {
   }, [consentGiven, pathname]);
 
   // const isProd = process.env.NODE_ENV !== "development" && !envConfig.isMockApi;
-  const isDebugMode = process && process.env.NODE_ENV !== "production";
+  const isDebugMode = process.env.NODE_ENV !== "production";
+
   return (
     <>
       {consentGiven && envConfig.googleAnalytics && (
