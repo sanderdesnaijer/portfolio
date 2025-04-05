@@ -29,7 +29,7 @@
   },
   "consent": {
     "message": "We use cookies to track statistics, no personal data",
-    "accept": "Allow Cookies",
+    "accept": "Allow",
     "decline": "Decline"
   },
   "error": {
