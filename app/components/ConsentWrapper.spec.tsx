@@ -99,7 +99,7 @@ describe("ConsentWrapper", () => {
     envConfig.googleAnalytics = "G-TEST123";
     window.localStorage.setItem(
       "cookie_consent",
-      JSON.stringify({ value: false, expiry: null })
+      JSON.stringify({ value: false, expiry: 12345 })
     );
 
     renderComponent();

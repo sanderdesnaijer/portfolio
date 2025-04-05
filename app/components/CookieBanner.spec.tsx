@@ -52,7 +52,10 @@ describe("CookieBanner", () => {
   });
 
   it("hides the banner if consent is already set", () => {
-    localStorageMock.setItem("cookie_consent", JSON.stringify(true));
+    localStorageMock.setItem(
+      "cookie_consent",
+      JSON.stringify({ value: true, expiry: null })
+    );
     render(<CookieBanner />);
     expect(
       screen.queryByText("We use cookies for analytics.")
@@ -60,13 +63,19 @@ describe("CookieBanner", () => {
   });
 
   it("sets consent to 'granted' when Accept is clicked", async () => {
+    const fixedTimestamp = 1712345678901;
+    jest.spyOn(Date, "now").mockReturnValue(fixedTimestamp);
+
     render(<CookieBanner />);
     fireEvent.click(screen.getByText("Accept"));
 
     await waitFor(() => {
       expect(localStorageMock.setItem).toHaveBeenCalledWith(
         "cookie_consent",
-        JSON.stringify(true)
+        JSON.stringify({
+          value: true,
+          expiry: fixedTimestamp + 180 * 24 * 60 * 60 * 1000,
+        })
       );
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
@@ -81,13 +90,19 @@ describe("CookieBanner", () => {
   });
 
   it("sets consent to 'denied' when Decline is clicked", async () => {
+    const fixedTimestamp = 1712345678901;
+    jest.spyOn(Date, "now").mockReturnValue(fixedTimestamp);
+
     render(<CookieBanner />);
     fireEvent.click(screen.getByText("Decline"));
 
     await waitFor(() => {
       expect(localStorageMock.setItem).toHaveBeenCalledWith(
         "cookie_consent",
-        JSON.stringify(false)
+        JSON.stringify({
+          value: false,
+          expiry: fixedTimestamp + 180 * 24 * 60 * 60 * 1000,
+        })
       );
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore

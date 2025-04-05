@@ -29,7 +29,7 @@ export function setLocalStorage(
   const item = {
     value,
     expiry: options?.expiryInDays
-      ? new Date().getTime() + options.expiryInDays * 24 * 60 * 60 * 1000
+      ? Date.now() + options.expiryInDays * 24 * 60 * 60 * 1000
       : null,
   };
 
