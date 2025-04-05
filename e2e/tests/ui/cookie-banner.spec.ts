@@ -46,7 +46,10 @@ test.describe("cookie Banner", () => {
     page,
   }) => {
     await page.addInitScript(() => {
-      localStorage.setItem("cookie_consent", "true");
+      localStorage.setItem(
+        "cookie_consent",
+        JSON.stringify({ value: true, expiry: null })
+      );
     });
     await page.reload();
     await expect(
@@ -58,7 +61,10 @@ test.describe("cookie Banner", () => {
     page,
   }) => {
     await page.addInitScript(() => {
-      localStorage.setItem("cookie_consent", "false");
+      localStorage.setItem(
+        "cookie_consent",
+        JSON.stringify({ value: false, expiry: null })
+      );
     });
     await page.reload();
     await expect(page.getByRole("button", { name: /Decline/i })).toBeHidden();

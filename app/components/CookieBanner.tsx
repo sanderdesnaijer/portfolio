@@ -31,7 +31,7 @@ export default function CookieBanner() {
 
   const onChangeConsent = (isConsent: boolean) => {
     setCookieConsent(isConsent);
-    setLocalStorage(KEY_COOKIE_CONSENT, isConsent);
+    setLocalStorage(KEY_COOKIE_CONSENT, isConsent, { expiryInDays: 180 });
   };
 
   const t = useTranslations("consent");

@@ -43,7 +43,10 @@ describe("ConsentWrapper", () => {
   };
 
   it("renders child components and cookie banner", () => {
-    window.localStorage.setItem("cookie_consent", JSON.stringify("true"));
+    window.localStorage.setItem(
+      "cookie_consent",
+      JSON.stringify({ value: true, expiry: null })
+    );
 
     renderComponent();
     expect(screen.getByText("Child content")).toBeInTheDocument();
@@ -51,7 +54,10 @@ describe("ConsentWrapper", () => {
   });
 
   it("does not render GA scripts without consent", () => {
-    window.localStorage.setItem("cookie_consent", JSON.stringify("false"));
+    window.localStorage.setItem(
+      "cookie_consent",
+      JSON.stringify({ value: false, expiry: null })
+    );
 
     renderComponent();
     expect(screen.queryByTestId("mock-script")).not.toBeInTheDocument();
@@ -59,7 +65,10 @@ describe("ConsentWrapper", () => {
 
   it("renders GA scripts when consent is granted and env is set", async () => {
     envConfig.googleAnalytics = "G-TEST123";
-    window.localStorage.setItem("cookie_consent", "true");
+    window.localStorage.setItem(
+      "cookie_consent",
+      JSON.stringify({ value: true, expiry: null })
+    );
 
     renderComponent();
 
@@ -72,7 +81,10 @@ describe("ConsentWrapper", () => {
 
   it("calls gtag pageview on mount when consent is given", async () => {
     envConfig.googleAnalytics = "G-TEST123";
-    window.localStorage.setItem("cookie_consent", "true");
+    window.localStorage.setItem(
+      "cookie_consent",
+      JSON.stringify({ value: true, expiry: null })
+    );
 
     renderComponent();
 
@@ -85,12 +97,18 @@ describe("ConsentWrapper", () => {
 
   it("updates consent when local-storage-change is dispatched", async () => {
     envConfig.googleAnalytics = "G-TEST123";
-    window.localStorage.setItem("cookie_consent", "false");
+    window.localStorage.setItem(
+      "cookie_consent",
+      JSON.stringify({ value: false, expiry: null })
+    );
 
     renderComponent();
 
     // simulate user accepting
-    window.localStorage.setItem("cookie_consent", "true");
+    window.localStorage.setItem(
+      "cookie_consent",
+      JSON.stringify({ value: true, expiry: null })
+    );
 
     await act(() => {
       window.dispatchEvent(new Event("local-storage-change"));
@@ -98,5 +116,17 @@ describe("ConsentWrapper", () => {
 
     const scripts = await screen.findAllByTestId("mock-script");
     expect(scripts).toHaveLength(2);
+  });
+
+  it("does not use expired consent", () => {
+    const pastExpiry = new Date().getTime() - 1000; // 1 second in the past
+    window.localStorage.setItem(
+      "cookie_consent",
+      JSON.stringify({ value: true, expiry: pastExpiry })
+    );
+
+    renderComponent();
+
+    expect(screen.queryByTestId("mock-script")).not.toBeInTheDocument();
   });
 });
