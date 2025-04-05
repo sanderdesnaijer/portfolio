@@ -5,7 +5,7 @@ import { ThemeProvider } from "next-themes";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import envConfig from "@/envConfig";
-import { GoogleAnalytics } from "@next/third-parties/google";
+import { ConsentWrapper } from "./components/ConsentWrapper";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -35,14 +35,9 @@ export default async function RootLayout({
       >
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            {children}
+            <ConsentWrapper>{children}</ConsentWrapper>
           </ThemeProvider>
         </NextIntlClientProvider>
-        {envConfig.googleAnalytics &&
-          process.env.NODE_ENV !== "development" &&
-          !envConfig.isMockApi && (
-            <GoogleAnalytics gaId={envConfig.googleAnalytics} />
-          )}
       </body>
     </html>
   );

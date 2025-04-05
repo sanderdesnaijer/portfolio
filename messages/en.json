@@ -27,6 +27,11 @@
     "relatedTags": "Related tags",
     "mainNavigation": "Main navigation"
   },
+  "consent": {
+    "message": "We use cookies to track statistics, no personal data",
+    "accept": "Allow",
+    "decline": "Decline"
+  },
   "error": {
     "generic": {
       "title": "An error occurred"

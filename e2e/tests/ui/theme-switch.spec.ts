@@ -1,6 +1,10 @@
+import { mockConsent } from "@/e2e/utils/localStorage";
 import { test, expect } from "@playwright/test";
 
 test.describe("theme-switch dark/light", () => {
+  test.beforeEach(async ({ page }) => {
+    await mockConsent(page);
+  });
   test("toggles dark/light mode correctly", async ({ page }) => {
     await page.goto("/");
 

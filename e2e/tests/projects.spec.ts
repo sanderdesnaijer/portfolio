@@ -8,6 +8,7 @@ import { fetchPage, fetchProjects } from "@/app/utils/api";
 import { getProjectsScheme } from "@/app/utils/jsonLDSchemes";
 
 import { validateJsonLd } from "../utils/jsonLD";
+import { mockConsent } from "../utils/localStorage";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -21,6 +22,7 @@ async function checkPageElements(page: Page) {
 
 test.describe("projects", () => {
   test.beforeEach(async ({ page }) => {
+    await mockConsent(page);
     await page.goto("/projects");
   });
   test("should display correct elements across breakpoints", async ({

@@ -10,6 +10,7 @@ import {
 import { fetchPage, fetchProject } from "@/app/utils/api";
 import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
+import { mockConsent } from "../utils/localStorage";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -31,6 +32,7 @@ async function checkPageElements(page: Page) {
 
 test.describe("projects detail", () => {
   test.beforeEach(async ({ page }) => {
+    await mockConsent(page);
     await page.goto("/projects/flutter-tabata-whip-timer");
   });
 

@@ -9,6 +9,7 @@ import { getAboutScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import { getTranslationKey } from "@/app/test-utils/i18n";
 import { JobSanity } from "@/sanity/types";
+import { mockConsent } from "../utils/localStorage";
 async function checkAboutPageElements(page: Page) {
   await expect(
     page.getByRole("heading", { level: 1, name: /About/i })
@@ -30,6 +31,7 @@ async function checkAboutPageElements(page: Page) {
 
 test.describe("about", () => {
   test.beforeEach(async ({ page }) => {
+    await mockConsent(page);
     await page.goto("/about");
   });
 

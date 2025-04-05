@@ -8,6 +8,7 @@ import { fetchPage } from "@/app/utils/api";
 import { getWebsiteScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import envConfig from "@/envConfig";
+import { mockConsent } from "../utils/localStorage";
 
 async function checkHomePageElements(page: Page) {
   await expect(
@@ -29,6 +30,7 @@ async function checkHomePageElements(page: Page) {
 
 test.describe("home", () => {
   test.beforeEach(async ({ page }) => {
+    await mockConsent(page);
     await page.goto("/");
   });
   test("should display correct elements across breakpoints", async ({
