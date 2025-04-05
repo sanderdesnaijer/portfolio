@@ -12,6 +12,7 @@ import { mockArticles } from "@/app/test-utils/mockArticle";
 import { fetchPage } from "@/app/utils/api";
 import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
+import { mockConsent } from "../utils/localStorage";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -33,6 +34,7 @@ async function checkPageElements(page: Page) {
 
 test.describe("blog detail", () => {
   test.beforeEach(async ({ page }) => {
+    await mockConsent(page);
     await page.goto(
       "blog/building-my-first-flutter-app-challenges-and-lessons-learned"
     );

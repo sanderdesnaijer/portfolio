@@ -42,7 +42,7 @@ export default function CookieBanner() {
 
   return (
     <div
-      className={`fixed right-0 bottom-0 left-0 z-20 m-3 flex max-w-3xl flex-col items-center justify-between rounded-lg bg-gray-700 px-3 py-3 shadow md:mx-auto md:flex-row md:px-4`}
+      className={`fixed right-0 bottom-0 left-0 z-20 m-3 flex max-w-3xl flex-col items-center justify-between rounded-lg bg-black/85 px-3 py-3 shadow md:mx-auto md:flex-row md:px-4`}
     >
       <div className="text-center">
         <Link href="/info/cookies">
@@ -59,7 +59,7 @@ export default function CookieBanner() {
         </button>
         <button
           onClick={() => onChangeConsent(true)}
-          className="cursor-pointer rounded-lg bg-blue-500 px-5 py-2 whitespace-nowrap text-white hover:bg-blue-600"
+          className="cursor-pointer rounded-lg bg-blue-600 px-5 py-2 whitespace-nowrap text-white hover:bg-blue-600"
         >
           {t("accept")}
         </button>

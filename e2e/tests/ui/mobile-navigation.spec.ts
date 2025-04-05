@@ -1,6 +1,11 @@
+import { mockConsent } from "@/e2e/utils/localStorage";
 import { test, expect } from "@playwright/test";
 
 test.describe("mobile navigation", () => {
+  test.beforeEach(async ({ page }) => {
+    await mockConsent(page);
+  });
+
   test("Mobile sticky navigation behavior on scroll and click", async ({
     page,
   }) => {

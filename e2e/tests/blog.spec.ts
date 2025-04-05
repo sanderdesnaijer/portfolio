@@ -8,6 +8,7 @@ import { fetchPage } from "@/app/utils/api";
 import { getBlogsScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import { mockArticles } from "@/app/test-utils/mockArticle";
+import { mockConsent } from "../utils/localStorage";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -23,6 +24,7 @@ async function checkPageElements(page: Page) {
 
 test.describe("blog", () => {
   test.beforeEach(async ({ page }) => {
+    await mockConsent(page);
     await page.goto("/blog");
   });
 
