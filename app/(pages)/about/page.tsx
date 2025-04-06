@@ -11,7 +11,6 @@ import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
-import { DynamicElement } from "@/app/components/DynamicElement";
 import { NotFound } from "@/app/components/NotFound";
 import { pageSlugs } from "@/app/utils/routes";
 import { urlFor } from "@/sanity/lib/image";
@@ -162,7 +161,13 @@ export default async function Page() {
                       </p>
                     </div>
                     <div className="md:w-5/7 md:pl-4">
-                      <div className="mb-2 flex">
+                      <Link
+                        href={job.link}
+                        aria-label={`[Link to] ${job.companyName}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group/link mb-2 flex"
+                      >
                         <Image
                           alt={job.imageURL}
                           src={urlFor(job.imageURL)
@@ -171,33 +176,22 @@ export default async function Page() {
                             .url()}
                           width={companyIconSize}
                           height={companyIconSize}
-                          className="mt-0 h-fit transition group-hover/item:scale-105"
+                          className="mt-0 h-fit transition group-hover/link:scale-105"
                         />
                         <div className="pl-3">
-                          <Link
-                            href={job.link}
-                            aria-label={`[Link to] ${job.companyName}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="before:absolute before:inset-0 before:block before:h-full before:w-full"
-                          >
-                            <DynamicElement
-                              as="h3"
-                              className="-mt-[3px] text-lg leading-[22px] font-bold group-hover/item:translate-x-1 group-hover/item:italic"
-                            >
-                              {job.companyName.trim()}
-                            </DynamicElement>
-                            <p className="text-base transition group-hover/item:translate-x-1">
-                              {job.jobTitle}
-                            </p>
-                            <p className="text-xs text-gray-800 italic transition group-hover/item:translate-x-1 dark:text-gray-100">
-                              {job.employmentType}{" "}
-                              {job.contractName &&
-                                `(${t("pages.about.jobContract")} ${job.contractName})`}
-                            </p>
-                          </Link>
+                          <h3 className="-mt-[3px] text-lg leading-[22px] font-bold transition-transform group-hover/link:translate-x-1 group-hover/link:italic group-hover/link:underline after:absolute after:mt-0.5 after:h-5 after:w-5 after:bg-black after:transition-all after:duration-150 after:[mask-image:url(/icons/chevron-right.svg)] group-hover/link:after:translate-x-1 hover:after:translate-x-1 dark:after:bg-white">
+                            {job.companyName.trim()}
+                          </h3>
+                          <p className="text-base transition group-hover/link:translate-x-1">
+                            {job.jobTitle}
+                          </p>
+                          <p className="text-xs text-gray-800 italic transition group-hover/link:translate-x-1 dark:text-gray-100">
+                            {job.employmentType}{" "}
+                            {job.contractName &&
+                              `(${t("pages.about.jobContract")} ${job.contractName})`}
+                          </p>
                         </div>
-                      </div>
+                      </Link>
                       <PortableText
                         value={job.description}
                         components={jobComponents}

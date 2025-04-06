@@ -42,7 +42,7 @@ export const ProjectListItem = ({
     <div className="col-span-4 px-4 md:col-span-3">
       <Link
         href={href}
-        className="no-underline group-hover/item:italic before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
+        className="no-underline group-hover/item:italic group-hover/item:underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
       >
         <DynamicElement
           as="h2"

@@ -19,7 +19,7 @@ const iconMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   chevronRight: ChevronRight,
 };
 
-export const getIcon = (icon: string) => {
+export const getIcon = (icon: keyof typeof iconMap) => {
   return iconMap[icon] || Missing;
 };
 export const icons = Object.keys(iconMap);
