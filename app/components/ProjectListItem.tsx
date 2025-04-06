@@ -4,7 +4,6 @@ import { convertDate } from "../utils/utils";
 import { Tags } from "./Tags";
 import { TagSanity } from "@/sanity/types/tagType";
 import { DynamicElement } from "./DynamicElement";
-import { getIcon } from "./Icons";
 
 interface ProjectListItemProps {
   imageURL?: string;
@@ -15,8 +14,6 @@ interface ProjectListItemProps {
   body?: string | null;
   tags?: TagSanity[];
 }
-
-const IconComponent = getIcon("chevronRight");
 
 export const ProjectListItem = ({
   imageURL,
@@ -45,17 +42,15 @@ export const ProjectListItem = ({
     <div className="col-span-4 px-4 md:col-span-3">
       <Link
         href={href}
-        className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
+        className="no-underline group-hover/item:italic group-hover/item:underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
       >
-        <h2
-          className="group before:content-[] relative -mt-2 mb-0 transform-gpu bg-[linear-gradient(to_left,_black_50%,_white_50%)] bg-[length:200%] bg-[position:right] text-transparent transition-all duration-200 ease-out group-hover/item:bg-[position:0] before:absolute before:top-0 before:left-0 before:-z-10 before:h-full before:w-0 before:bg-black before:transition-all before:duration-200 group-hover/item:before:w-full dark:bg-[linear-gradient(to_left,_white_50%,_black_50%)] dark:before:bg-white"
-          style={{
-            backgroundClip: "text",
-          }}
+        <DynamicElement
+          as="h2"
+          className={`-mt-2 mb-0 translate-x-0 text-3xl leading-10 group-hover/item:translate-x-2 md:text-[2.5rem] md:leading-11`}
+          size="11"
         >
           {title}
-          <IconComponent className="absolute mt-1 inline h-10 translate-x-0 transform-gpu text-black transition-transform delay-100 duration-75 group-hover/item:translate-x-2 group-hover/item:text-white group-hover/item:hover:delay-200 dark:text-white dark:group-hover/item:text-black" />
-        </h2>
+        </DynamicElement>
       </Link>
       <p className="mt-1 mb-1 py-2 text-xs text-gray-800 uppercase group-hover/item:text-gray-900 dark:text-gray-300 dark:group-hover/item:text-gray-100">
         {convertDate(date)}
