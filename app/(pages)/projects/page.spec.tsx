@@ -35,13 +35,13 @@ describe("app/(pages)/projects/page", () => {
 
     // Check if the links are rendered correctly
     expect(screen.getAllByRole("link", { name: /github icon/i })).toHaveLength(
-      2
+      1
     );
     expect(
       screen.getAllByRole("link", { name: /linkedin icon/i })
-    ).toHaveLength(2);
+    ).toHaveLength(1);
     expect(screen.getAllByRole("link", { name: /gitlab icon/i })).toHaveLength(
-      2
+      1
     );
   });
 

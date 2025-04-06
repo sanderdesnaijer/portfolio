@@ -2,7 +2,6 @@
 import Menu, { MenuItem } from "@/app/components/Menu";
 import { IconLink } from "@/sanity/types/types";
 import { ThemeToggle } from "./ThemeToggle/ThemeToggle";
-import { SocialIcons } from "./SocialIcons";
 import Link from "next/link";
 import React from "react";
 import useScrollPosition from "../utils/useScrollPosition";
@@ -36,7 +35,6 @@ export const Layout: React.FC<{
               <SiteLogo className="h-8 [--logoBgColor:black] [--logoDisplay:none] [--logoShapeColor:white] dark:[--logoBgColor:white] dark:[--logoShapeColor:black]" />
               {authorName}
             </Link>
-            <SocialIcons socialMedia={socialMedia} />
           </div>
           <div className="relative z-2 order-1 flex md:top-0 [&>button]:-top-1">
             <ThemeToggle />
