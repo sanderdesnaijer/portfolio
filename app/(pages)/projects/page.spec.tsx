@@ -34,8 +34,15 @@ describe("app/(pages)/projects/page", () => {
     expect(screen.getByAltText("Project 2 Image Alt")).toBeInTheDocument();
 
     // Check if the links are rendered correctly
-    expect(screen.getByLabelText("github icon")).toBeInTheDocument();
-    expect(screen.getByLabelText("linkedin icon")).toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: /github icon/i })).toHaveLength(
+      1
+    );
+    expect(
+      screen.getAllByRole("link", { name: /linkedin icon/i })
+    ).toHaveLength(1);
+    expect(screen.getAllByRole("link", { name: /gitlab icon/i })).toHaveLength(
+      1
+    );
   });
 
   it("renders correctly when projects are missing", async () => {

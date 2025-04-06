@@ -14,7 +14,7 @@ export const Projects = ({
   const t = useTranslations();
 
   return (
-    <div className="mx-auto md:py-10">
+    <div className="mx-auto md:pt-10">
       <ol
         aria-label={t("pages.project.projects")}
         className="group mt-0 grid gap-10 pl-0"

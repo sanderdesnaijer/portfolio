@@ -53,7 +53,7 @@ export default async function Page() {
         menuItems={menuItems}
       >
         {page ? (
-          <div className="mx-auto grid grid-cols-1 pt-0 md:py-10">
+          <div className="mx-auto grid grid-cols-1 pt-0 md:pt-10">
             <ol
               aria-label={t("pages.blog.articles")}
               className="group mt-0 grid gap-10 pl-0"

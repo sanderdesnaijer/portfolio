@@ -16,6 +16,7 @@ import { JsonLd } from "./components/JsonLd";
 import envConfig from "@/envConfig";
 
 import SiteLogo from "../public/logo.svg";
+import { Footer } from "./components/Footer";
 
 const fetchPageData = cache(async function fetchPageData() {
   return sanityFetch<PageSanity>({
@@ -67,21 +68,22 @@ export default async function Home() {
   return (
     <>
       {jsonLd && <JsonLd value={jsonLd} />}
-      <div className="container mx-auto h-screen p-4">
+      <div className="container mx-auto flex h-dvh flex-col justify-between p-4 md:justify-start">
         <ThemeToggle className="theme-toggle absolute right-6 cursor-pointer" />
-        <main className="flex h-full flex-col md:justify-center">
-          <div className="max-h-1/4 justify-items-center [&>svg]:m-auto">
-            <SiteLogo className="h-56 transition-colors duration-200 [--logoBgColor:transparent] [--logoShapeColor:#0a0a0a] dark:[--logoShapeColor:white]" />
-          </div>
-          <h1 className="my-6 mt-5 text-center text-lg font-bold">
+        <header className="justify-items-center [&>svg]:m-auto">
+          <SiteLogo className="h-56 transition-colors duration-200 [--logoBgColor:transparent] [--logoShapeColor:#0a0a0a] dark:[--logoShapeColor:white]" />
+          <h1 className="my-6 mt-0 text-center text-lg font-bold">
             {setting.title}
           </h1>
-
+        </header>
+        <main className="md:flex-1">
           <Menu
             menuItems={menuItemsWithoutHome}
             className="group home flex flex-col text-7xl font-extralight [&>ul]:relative [&>ul]:block [&>ul]:h-full [&>ul>li]:mb-2 [&>ul>li]:w-auto [&>ul>li>a]:text-center [&>ul>li>a]:md:hover:translate-x-0"
           />
         </main>
+
+        <Footer socialMedia={setting.socialMedia} />
       </div>
     </>
   );
