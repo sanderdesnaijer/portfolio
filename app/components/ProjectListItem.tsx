@@ -4,6 +4,7 @@ import { convertDate } from "../utils/utils";
 import { Tags } from "./Tags";
 import { TagSanity } from "@/sanity/types/tagType";
 import { DynamicElement } from "./DynamicElement";
+import { getIcon } from "./Icons";
 
 interface ProjectListItemProps {
   imageURL?: string;
@@ -14,6 +15,8 @@ interface ProjectListItemProps {
   body?: string | null;
   tags?: TagSanity[];
 }
+
+const IconComponent = getIcon("chevronRight");
 
 export const ProjectListItem = ({
   imageURL,
@@ -44,20 +47,14 @@ export const ProjectListItem = ({
         href={href}
         className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
       >
-        {/* <DynamicElement
-          as="h2"
-          className={`-mt-2 mb-0 translate-x-0 text-3xl leading-10 text-black group-hover/item:translate-x-2 md:text-[2.5rem] md:leading-11`}
-          size="11"
-        >
-          {title}
-        </DynamicElement> */}
         <h2
-          className="group after:content-[] relative -mt-2 mb-0 inline-block bg-[linear-gradient(to_left,_black_50%,_white_50%)] bg-[length:200%] bg-[position:right] text-transparent transition-all duration-75 ease-out group-hover/item:bg-[position:0] after:absolute after:top-0 after:left-0 after:-z-10 after:h-full after:w-0 after:bg-black after:transition-all after:duration-75 group-hover/item:after:w-full dark:bg-[linear-gradient(to_left,_white_50%,_black_50%)] dark:after:bg-white"
+          className="group before:content-[] relative -mt-2 mb-0 transform-gpu bg-[linear-gradient(to_left,_black_50%,_white_50%)] bg-[length:200%] bg-[position:right] text-transparent transition-all duration-200 ease-out group-hover/item:bg-[position:0] before:absolute before:top-0 before:left-0 before:-z-10 before:h-full before:w-0 before:bg-black before:transition-all before:duration-200 group-hover/item:before:w-full dark:bg-[linear-gradient(to_left,_white_50%,_black_50%)] dark:before:bg-white"
           style={{
             backgroundClip: "text",
           }}
         >
           {title}
+          <IconComponent className="absolute mt-1 inline h-10 translate-x-0 transform-gpu text-black transition-transform delay-100 duration-75 group-hover/item:translate-x-2 group-hover/item:text-white group-hover/item:hover:delay-200 dark:text-white dark:group-hover/item:text-black" />
         </h2>
       </Link>
       <p className="mt-1 mb-1 py-2 text-xs text-gray-800 uppercase group-hover/item:text-gray-900 dark:text-gray-300 dark:group-hover/item:text-gray-100">
