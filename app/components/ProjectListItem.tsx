@@ -42,15 +42,23 @@ export const ProjectListItem = ({
     <div className="col-span-4 px-4 md:col-span-3">
       <Link
         href={href}
-        className="no-underline group-hover/item:italic before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
+        className="no-underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
       >
-        <DynamicElement
+        {/* <DynamicElement
           as="h2"
-          className={`-mt-2 mb-0 translate-x-0 text-3xl leading-10 group-hover/item:translate-x-2 md:text-[2.5rem] md:leading-11`}
+          className={`-mt-2 mb-0 translate-x-0 text-3xl leading-10 text-black group-hover/item:translate-x-2 md:text-[2.5rem] md:leading-11`}
           size="11"
         >
           {title}
-        </DynamicElement>
+        </DynamicElement> */}
+        <h2
+          className="group after:content-[] relative -mt-2 mb-0 inline-block bg-[linear-gradient(to_left,_black_50%,_white_50%)] bg-[length:200%] bg-[position:right] text-transparent transition-all duration-75 ease-out group-hover/item:bg-[position:0] after:absolute after:top-0 after:left-0 after:-z-10 after:h-full after:w-0 after:bg-black after:transition-all after:duration-75 group-hover/item:after:w-full dark:bg-[linear-gradient(to_left,_white_50%,_black_50%)] dark:after:bg-white"
+          style={{
+            backgroundClip: "text",
+          }}
+        >
+          {title}
+        </h2>
       </Link>
       <p className="mt-1 mb-1 py-2 text-xs text-gray-800 uppercase group-hover/item:text-gray-900 dark:text-gray-300 dark:group-hover/item:text-gray-100">
         {convertDate(date)}
