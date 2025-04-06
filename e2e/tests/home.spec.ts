@@ -15,7 +15,7 @@ async function checkHomePageElements(page: Page) {
     page.getByRole("heading", { name: /Sander de Snaijer/i })
   ).toBeVisible();
 
-  const socialButtons = ["github", "linkedin", "gitlab"];
+  const socialButtons = ["github", "linkedin", "gitlab", "x"];
   for (const button of socialButtons) {
     await expect(
       page.getByRole("link", { name: `${button} icon` })
