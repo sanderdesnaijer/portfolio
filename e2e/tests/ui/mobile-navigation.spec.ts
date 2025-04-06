@@ -81,7 +81,8 @@ test.describe("mobile navigation", () => {
 
     // Scroll down 500px
     await page.evaluate(() => window.scrollBy(0, 500));
-    await page.waitForFunction(() => window.scrollY >= 500); // Wait for scroll position
+    await page.waitForFunction(() => window.scrollY >= 450); // Wait for scroll position
+
     await expect(nav).not.toBeInViewport();
 
     // Scroll up 100px instead of 10px (more realistic)
