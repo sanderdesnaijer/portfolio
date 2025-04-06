@@ -57,8 +57,8 @@ export const Layout: React.FC<{
           </div>
         </div>
       </main>
-      <footer className="relative col-span-9 after:absolute after:top-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black md:col-span-6 md:col-start-4 md:before:-bottom-10 lg:col-span-5 lg:col-start-4 xl:col-start-3 before:dark:bg-white">
-        <div className="flex items-center justify-center border-t border-black py-4 md:col-span-5 md:justify-end">
+      <footer className="relative col-span-9 after:absolute after:top-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black md:col-span-6 md:col-start-4 md:before:-bottom-10 lg:col-span-5 lg:col-start-4 xl:col-start-3 before:dark:bg-white dark:after:bg-white">
+        <div className="flex items-center justify-center border-t border-black py-4 md:col-span-5 md:justify-end dark:border-white">
           <p className="text-sm">{getFooterText()}</p>
           <SocialIcons
             socialMedia={socialMedia}
