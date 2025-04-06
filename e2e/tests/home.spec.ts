@@ -14,13 +14,13 @@ async function checkHomePageElements(page: Page) {
   await expect(
     page.getByRole("heading", { name: /Sander de Snaijer/i })
   ).toBeVisible();
-  // TODO: fix in https://github.com/users/sanderdesnaijer/projects/2/views/1?pane=issue&itemId=104193598&issue=sanderdesnaijer%7Cportfolio%7C140
-  // const socialButtons = ["github", "linkedin", "gitlab"];
-  // for (const button of socialButtons) {
-  //   await expect(
-  //     page.getByRole("link", { name: `${button} icon` })
-  //   ).toBeVisible();
-  // }
+
+  const socialButtons = ["github", "linkedin", "gitlab"];
+  for (const button of socialButtons) {
+    await expect(
+      page.getByRole("link", { name: `${button} icon` })
+    ).toBeVisible();
+  }
 
   await expect(page.getByTestId("site-logo")).toBeVisible();
   await expect(page.getByRole("link", { name: /About/i })).toBeVisible();
