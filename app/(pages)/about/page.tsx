@@ -179,7 +179,7 @@ export default async function Page() {
                           className="mt-0 h-fit transition group-hover/link:scale-105"
                         />
                         <div className="pl-3">
-                          <h3 className="-mt-[3px] text-lg leading-[22px] font-bold transition-transform group-hover/link:translate-x-1 group-hover/link:italic after:absolute after:h-5 after:w-5 after:bg-black after:transition-all after:duration-150 after:[mask-image:url(/icons/arrow-outward.svg)] group-hover/link:after:translate-x-1 hover:after:translate-x-1 dark:after:bg-white">
+                          <h3 className="-mt-[3px] text-lg leading-[22px] font-bold transition-transform group-hover/link:translate-x-1 group-hover/link:italic group-hover/link:underline after:absolute after:mt-0.5 after:h-5 after:w-5 after:bg-black after:transition-all after:duration-150 after:[mask-image:url(/icons/chevron-right.svg)] group-hover/link:after:translate-x-1 hover:after:translate-x-1 dark:after:bg-white">
                             {job.companyName.trim()}
                           </h3>
                           <p className="text-base transition group-hover/link:translate-x-1">
