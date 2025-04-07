@@ -19,10 +19,9 @@ async function checkHomePageElements(page: Page) {
     "github",
     "linkedin",
     "gitlab",
-    // TODO: enable this
-    // "x",
-    // "instagram",
-    // "youtube",
+    "x",
+    "instagram",
+    "youtube",
   ];
   for (const button of socialButtons) {
     await expect(

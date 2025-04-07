@@ -69,14 +69,15 @@ export default async function Home() {
     <>
       {jsonLd && <JsonLd value={jsonLd} />}
       <div className="container mx-auto flex h-dvh flex-col justify-between p-4 md:justify-start">
-        <ThemeToggle className="theme-toggle absolute right-6 cursor-pointer" />
-        <header className="justify-items-center [&>svg]:m-auto">
-          <SiteLogo className="h-56 transition-colors duration-200 [--logoBgColor:transparent] [--logoShapeColor:#0a0a0a] dark:[--logoShapeColor:white]" />
-          <h1 className="my-6 mt-0 text-center text-lg font-bold">
-            {setting.title}
-          </h1>
-        </header>
-        <main className="md:flex-1">
+        <main className="relative flex flex-col justify-center md:flex-1">
+          <ThemeToggle className="theme-toggle absolute top-0 right-0 cursor-pointer md:right-auto md:left-6" />
+
+          <div className="justify-items-center [&>svg]:m-auto">
+            <SiteLogo className="h-56 transition-colors duration-200 [--logoBgColor:transparent] [--logoShapeColor:#0a0a0a] dark:[--logoShapeColor:white]" />
+            <h1 className="my-6 mt-0 text-center text-lg font-bold">
+              {setting.title}
+            </h1>
+          </div>
           <Menu
             menuItems={menuItemsWithoutHome}
             className="group home flex flex-col text-7xl font-extralight [&>ul]:relative [&>ul]:block [&>ul]:h-full [&>ul>li]:mb-2 [&>ul>li]:w-auto [&>ul>li>a]:text-center [&>ul>li>a]:md:hover:translate-x-0"
