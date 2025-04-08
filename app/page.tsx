@@ -39,8 +39,13 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
-  const { setting, menuItems } = await fetchCommonData();
-  const page = await fetchPageData();
+  const [commonData, page] = await Promise.all([
+    fetchCommonData(),
+    fetchPageData(),
+  ]);
+  console.log(commonData, page);
+
+  const { setting, menuItems } = commonData;
 
   if (!setting || !menuItems) {
     const t = await getTranslations();

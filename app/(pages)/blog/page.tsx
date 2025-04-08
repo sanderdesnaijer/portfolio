@@ -28,17 +28,15 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const page = await sanityFetch<PageSanity>({
-    query: pageQuery,
-    params: { slug },
-  });
-
-  const articles = await getMediumArticles().catch(() => {
-    return [];
-  });
-
-  const { setting, menuItems } = await fetchCommonData();
-  const t = await getTranslations();
+  const [page, articles, { setting, menuItems }, t] = await Promise.all([
+    sanityFetch<PageSanity>({
+      query: pageQuery,
+      params: { slug },
+    }),
+    getMediumArticles().catch(() => []),
+    fetchCommonData(),
+    getTranslations(),
+  ]);
 
   const jsonLd = page && articles ? getBlogsScheme({ page, articles }) : null;
   const title = page ? page.title : t("error.404.generic.title");

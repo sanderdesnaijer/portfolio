@@ -68,9 +68,13 @@ export async function generateMetadata({
 
 const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   const queryParams = await params;
-  const article = await getMediumArticle(queryParams).catch(() => undefined);
-  const { setting, menuItems } = await fetchCommonData();
-  const t = await getTranslations();
+
+  const [article, { setting, menuItems }, t] = await Promise.all([
+    getMediumArticle(queryParams).catch(() => undefined),
+    fetchCommonData(),
+    getTranslations(),
+  ]);
+
   const jsonLd = article ? getArticleScheme(article, true) : null;
 
   const title = article ? article.title : t("error.404.blog.title");

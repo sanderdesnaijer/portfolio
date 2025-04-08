@@ -21,15 +21,18 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const projects = await sanityFetch<ProjectTypeSanity[]>({
-    query: projectsQuery,
-  });
-  const page = await sanityFetch<PageSanity>({
-    query: pageQuery,
-    params: { slug },
-  });
-  const { setting, menuItems } = await fetchCommonData();
-  const t = await getTranslations();
+  const [projects, page, { setting, menuItems }, t] = await Promise.all([
+    sanityFetch<ProjectTypeSanity[]>({
+      query: projectsQuery,
+    }),
+    sanityFetch<PageSanity>({
+      query: pageQuery,
+      params: { slug },
+    }),
+    fetchCommonData(),
+    getTranslations(),
+  ]);
+
   const jsonLd =
     page && projects ? getProjectsScheme({ page, projects }) : null;
 

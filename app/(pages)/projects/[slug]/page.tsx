@@ -43,13 +43,14 @@ export async function generateMetadata({
 }
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {
-  const project = await sanityFetch<ProjectTypeSanity>({
-    query: projectQuery,
-    params,
-  });
-
-  const { setting, menuItems } = await fetchCommonData();
-  const t = await getTranslations();
+  const [project, { setting, menuItems }, t] = await Promise.all([
+    sanityFetch<ProjectTypeSanity>({
+      query: projectQuery,
+      params,
+    }),
+    fetchCommonData(),
+    getTranslations(),
+  ]);
 
   const jsonLd = project ? getProjectScheme(project, slug, true) : null;
 
