@@ -29,11 +29,13 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
             src={urlFor(project.companyLogo!)
               .width(companyIconSize)
               .height(companyIconSize)
+              .auto("format")
               .url()}
             alt={getCreatedAtTitle()}
             width={companyIconSize}
             height={companyIconSize}
             className="mt-0 mb-0! ml-2"
+            loading="lazy"
           />
         </p>
       ) : null}
@@ -42,6 +44,7 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
           src={urlFor(project.mainImage)
             .width(imageWidth)
             .height(imageHeight)
+            .auto("format")
             .url()}
           alt={project.mainImage.alt}
           width={imageWidth}

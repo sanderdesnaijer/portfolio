@@ -124,6 +124,7 @@ export default async function Page() {
                 src={urlFor(page.imageURL)
                   .width(mainImageSizeWidtht)
                   .height(mainImageSizeHeigth)
+                  .auto("format")
                   .url()}
                 width={mainImageSizeWidtht}
                 height={mainImageSizeHeigth}
@@ -169,6 +170,7 @@ export default async function Page() {
                           src={urlFor(job.imageURL)
                             .width(companyIconSize)
                             .height(companyIconSize)
+                            .auto("format")
                             .url()}
                           width={companyIconSize}
                           height={companyIconSize}
