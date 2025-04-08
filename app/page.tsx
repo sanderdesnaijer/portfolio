@@ -43,7 +43,6 @@ export default async function Home() {
     fetchCommonData(),
     fetchPageData(),
   ]);
-  console.log(commonData, page);
 
   const { setting, menuItems } = commonData;
 
