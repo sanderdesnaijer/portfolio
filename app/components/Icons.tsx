@@ -9,6 +9,7 @@ import ChevronRight from "../../public/icons/chevron-right.svg";
 import X from "../../public/icons/x.svg";
 import YouTube from "../../public/icons/youtube.svg";
 import Instagram from "../../public/icons/instagram.svg";
+import Medium from "../../public/icons/medium.svg";
 
 export const iconSize = 24;
 
@@ -23,6 +24,7 @@ const iconMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   x: X,
   youtube: YouTube,
   instagram: Instagram,
+  medium: Medium,
 };
 
 export const getIcon = (icon: keyof typeof iconMap) => {
