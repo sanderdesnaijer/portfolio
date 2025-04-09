@@ -7,7 +7,6 @@ import { JobSanity, PageSanity } from "@/sanity/types";
 import { convertDate } from "@/app/utils/utils";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
@@ -82,7 +81,7 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const [page, jobs, { setting, menuItems }, t] = await Promise.all([
+  const [page, jobs, { setting }, t] = await Promise.all([
     sanityFetch<PageSanity>({ query: pageQuery, params: { slug } }),
     sanityFetch<JobSanity[]>({ query: jobsQuery }),
     fetchCommonData(),
@@ -110,14 +109,13 @@ export default async function Page() {
   return (
     <>
       {jsonLD ? <JsonLd value={jsonLD} /> : null}
-      <Layout
-        pageTitle={title}
-        socialMedia={setting.socialMedia}
-        authorName={setting.title}
-        menuItems={menuItems}
-      >
-        {page ? (
-          <>
+
+      {page ? (
+        <>
+          <h1 className="relative text-5xl font-bold after:absolute after:right-0 after:-bottom-5 after:-left-10 after:h-px after:w-[100vw] after:bg-current md:my-10 md:text-8xl md:after:-bottom-10 md:after:left-[-196px] after:dark:bg-white">
+            {title}
+          </h1>
+          <div className="relative flex-1 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black md:pt-0 md:pb-6 dark:after:bg-white">
             <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[88px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[88px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] md:mt-auto md:mr-auto md:w-auto md:before:top-[168px] md:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
               <Image
                 alt={page.imageAlt}
@@ -201,15 +199,15 @@ export default async function Page() {
                 );
               })}
             </ol>
-          </>
-        ) : (
-          <NotFound
-            title={t("error.404.generic.action")}
-            description={t("error.404.generic.description")}
-            href={envConfig.baseUrl}
-          />
-        )}
-      </Layout>
+          </div>
+        </>
+      ) : (
+        <NotFound
+          title={t("error.404.generic.action")}
+          description={t("error.404.generic.description")}
+          href={envConfig.baseUrl}
+        />
+      )}
     </>
   );
 }

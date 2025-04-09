@@ -3,11 +3,9 @@ import { QueryParams } from "@sanity/client";
 import { projectQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { Layout } from "@/app/components/Layout";
 import Project from "@/app/components/Project";
 import { Tags } from "@/app/components/Tags";
 import { generatePageMetadata } from "@/app/utils/metadata";
-import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
 import { pageSlugs } from "@/app/utils/routes";
@@ -43,12 +41,11 @@ export async function generateMetadata({
 }
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {
-  const [project, { setting, menuItems }, t] = await Promise.all([
+  const [project, t] = await Promise.all([
     sanityFetch<ProjectTypeSanity>({
       query: projectQuery,
       params,
     }),
-    fetchCommonData(),
     getTranslations(),
   ]);
 
@@ -59,23 +56,24 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
   return (
     <>
       {jsonLd && <JsonLd value={jsonLd} />}
-      <Layout
-        pageTitle={title}
-        socialMedia={setting.socialMedia}
-        authorName={setting.title}
-        menuItems={menuItems}
-      >
-        {project ? (
-          <Project project={project} />
-        ) : (
-          <NotFound
-            title={t("error.404.project.action")}
-            description={t("error.404.project.description")}
-            href={buildPageUrl(slug)}
-          />
-        )}
-        {project && project.tags && <Tags tags={project.tags} />}
-      </Layout>
+
+      {project ? (
+        <>
+          <h1 className="relative text-5xl font-bold after:absolute after:right-0 after:-bottom-5 after:-left-10 after:h-px after:w-[100vw] after:bg-current md:my-10 md:text-8xl md:after:-bottom-10 md:after:left-[-196px] after:dark:bg-white">
+            {title}
+          </h1>
+          <div className="relative flex-1 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black md:pt-0 md:pb-6 dark:after:bg-white">
+            <Project project={project} />
+            {project && project.tags && <Tags tags={project.tags} />}
+          </div>
+        </>
+      ) : (
+        <NotFound
+          title={t("error.404.project.action")}
+          description={t("error.404.project.description")}
+          href={buildPageUrl(slug)}
+        />
+      )}
     </>
   );
 };
