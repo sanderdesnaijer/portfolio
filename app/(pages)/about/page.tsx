@@ -82,16 +82,12 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const page = await sanityFetch<PageSanity>({
-    query: pageQuery,
-    params: { slug },
-  });
-
-  const jobs = await sanityFetch<JobSanity[]>({
-    query: jobsQuery,
-  });
-  const { setting, menuItems } = await fetchCommonData();
-  const t = await getTranslations();
+  const [page, jobs, { setting, menuItems }, t] = await Promise.all([
+    sanityFetch<PageSanity>({ query: pageQuery, params: { slug } }),
+    sanityFetch<JobSanity[]>({ query: jobsQuery }),
+    fetchCommonData(),
+    getTranslations(),
+  ]);
 
   const activeJobs = jobs.reduce(
     (list: string[], job) =>
@@ -173,10 +169,12 @@ export default async function Page() {
                           src={urlFor(job.imageURL)
                             .width(companyIconSize)
                             .height(companyIconSize)
+
                             .url()}
                           width={companyIconSize}
                           height={companyIconSize}
                           className="mt-0 h-fit transition group-hover/link:scale-105"
+                          loading="lazy"
                         />
                         <div className="pl-3">
                           <h3 className="-mt-[3px] text-lg leading-[22px] font-bold transition-transform group-hover/link:translate-x-1 group-hover/link:italic group-hover/link:underline after:absolute after:mt-0.5 after:h-5 after:w-5 after:bg-black after:transition-all after:duration-150 after:[mask-image:url(/icons/chevron-right.svg)] group-hover/link:after:translate-x-1 hover:after:translate-x-1 dark:after:bg-white">

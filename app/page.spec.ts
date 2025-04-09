@@ -35,8 +35,8 @@ describe("app/page", () => {
 
     mockSanityFetch
       .mockResolvedValueOnce(mockSettings)
-      .mockResolvedValueOnce(mockPages)
-      .mockResolvedValueOnce(mockPage);
+      .mockResolvedValueOnce(mockPage)
+      .mockResolvedValueOnce(mockPages);
 
     render(await Home());
 
@@ -49,8 +49,8 @@ describe("app/page", () => {
 
     mockSanityFetch
       .mockResolvedValueOnce(mockSettings)
-      .mockResolvedValueOnce(mockPages)
-      .mockResolvedValueOnce(mockPage);
+      .mockResolvedValueOnce(mockPage)
+      .mockResolvedValueOnce(mockPages);
 
     await Home();
 

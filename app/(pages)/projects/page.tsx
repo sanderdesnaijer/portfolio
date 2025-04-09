@@ -13,6 +13,7 @@ import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { pageQuery, projectsQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 
 const { projects: slug } = pageSlugs;
 
@@ -21,21 +22,24 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const projects = await sanityFetch<ProjectTypeSanity[]>({
-    query: projectsQuery,
-  });
-  const page = await sanityFetch<PageSanity>({
-    query: pageQuery,
-    params: { slug },
-  });
-  const { setting, menuItems } = await fetchCommonData();
-  const t = await getTranslations();
+  const [projects, page, { setting, menuItems }, t] = await Promise.all([
+    sanityFetch<ProjectTypeSanity[]>({
+      query: projectsQuery,
+    }),
+    sanityFetch<PageSanity>({
+      query: pageQuery,
+      params: { slug },
+    }),
+    fetchCommonData(),
+    getTranslations(),
+  ]);
+
   const jsonLd =
     page && projects ? getProjectsScheme({ page, projects }) : null;
 
   const title = page ? page.title : t("error.404.generic.title");
   return (
-    <>
+    <Suspense fallback="LOADING">
       {jsonLd && <JsonLd value={jsonLd} />}
       <Layout
         pageTitle={title}
@@ -53,6 +57,6 @@ export default async function Page() {
           />
         )}
       </Layout>
-    </>
+    </Suspense>
   );
 }

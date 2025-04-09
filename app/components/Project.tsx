@@ -34,6 +34,7 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
             width={companyIconSize}
             height={companyIconSize}
             className="mt-0 mb-0! ml-2"
+            loading="lazy"
           />
         </p>
       ) : null}
