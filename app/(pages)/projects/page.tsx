@@ -13,6 +13,7 @@ import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { pageQuery, projectsQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 
 const { projects: slug } = pageSlugs;
 
@@ -38,7 +39,7 @@ export default async function Page() {
 
   const title = page ? page.title : t("error.404.generic.title");
   return (
-    <>
+    <Suspense fallback="LOADING">
       {jsonLd && <JsonLd value={jsonLd} />}
       <Layout
         pageTitle={title}
@@ -56,6 +57,6 @@ export default async function Page() {
           />
         )}
       </Layout>
-    </>
+    </Suspense>
   );
 }
