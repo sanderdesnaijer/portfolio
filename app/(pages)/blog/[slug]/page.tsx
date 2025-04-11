@@ -100,7 +100,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
             ]}
           >
             <div
-              className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3"
+              className="prose prose-lg dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3"
               dangerouslySetInnerHTML={{ __html: article.description }}
             ></div>
           </ProjectLayout>
