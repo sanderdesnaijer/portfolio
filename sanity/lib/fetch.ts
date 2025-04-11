@@ -8,7 +8,7 @@ import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 const DEFAULT_PARAMS = {} as QueryParams;
 const DEFAULT_TAGS = [] as string[];
 
-export const token = process.env.SANITY_API_READ_TOKEN;
+const token = process.env.SANITY_API_READ_TOKEN;
 
 export async function sanityFetch<QueryResponse>({
   query,

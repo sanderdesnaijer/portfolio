@@ -4,7 +4,7 @@ import { ProjectListItem } from "./ProjectListItem";
 import { truncateText } from "../utils/utils";
 import { useTranslations } from "next-intl";
 
-export const Projects = ({
+const Projects = ({
   projects = [],
   pageSlug,
 }: {
