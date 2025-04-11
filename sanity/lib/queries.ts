@@ -112,9 +112,3 @@ export const projectQuery = groq`
     jsonLdIsAuthor
   }
 `;
-
-export const projectPathsQuery = groq`
-  *[_type == "project" && defined(slug.current)][]{
-    "params": { "slug": slug.current }
-  }
-`;
