@@ -2,7 +2,7 @@
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { getLocale, getMessages } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import envConfig from "@/envConfig";
 import { ConsentWrapper } from "./components/ConsentWrapper";
@@ -26,14 +26,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
-  const messages = await getMessages();
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body
         className={`${montserrat.variable} overflow-x-hidden antialiased transition-colors duration-200`}
       >
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <ConsentWrapper>{children}</ConsentWrapper>
           </ThemeProvider>
