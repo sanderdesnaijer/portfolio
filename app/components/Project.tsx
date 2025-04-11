@@ -22,22 +22,6 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
       date={convertDate(project.publishedAt)}
       links={project.links && project.links.length ? project.links : []}
     >
-      {project?.companyName ? (
-        <p className="mt-0 mb-3 flex items-center text-xs italic">
-          {getCreatedAtTitle()}
-          <Image
-            src={urlFor(project.companyLogo!)
-              .width(companyIconSize)
-              .height(companyIconSize)
-              .url()}
-            alt={getCreatedAtTitle()}
-            width={companyIconSize}
-            height={companyIconSize}
-            className="mt-0 mb-0! ml-2"
-            loading="lazy"
-          />
-        </p>
-      ) : null}
       {project?.mainImage && project.mainImage.alt ? (
         <Image
           src={urlFor(project.mainImage)
@@ -50,6 +34,22 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
           priority
           className="mt-0 mb-0"
         />
+      ) : null}
+      {project?.companyName ? (
+        <p className="mt-4 flex items-center text-xs italic">
+          <Image
+            src={urlFor(project.companyLogo!)
+              .width(companyIconSize)
+              .height(companyIconSize)
+              .url()}
+            alt={getCreatedAtTitle()}
+            width={companyIconSize}
+            height={companyIconSize}
+            className="mt-0 mr-2 mb-0"
+            loading="lazy"
+          />
+          {getCreatedAtTitle()}
+        </p>
       ) : null}
 
       {project?.body ? <PortableText value={project.body} /> : null}
