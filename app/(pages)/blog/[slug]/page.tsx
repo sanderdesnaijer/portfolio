@@ -3,7 +3,6 @@ import { QueryParams } from "@sanity/client";
 import { pageQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
-import { Layout } from "@/app/components/Layout";
 import {
   buildPageUrl,
   convertDate,
@@ -15,7 +14,6 @@ import {
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { getMediumArticle } from "@/app/utils/api";
 import { generateMetaData } from "@/app/utils/metadata";
-import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
 import { pageSlugs } from "@/app/utils/routes";
@@ -69,9 +67,8 @@ export async function generateMetadata({
 const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   const queryParams = await params;
 
-  const [article, { setting, menuItems }, t] = await Promise.all([
+  const [article, t] = await Promise.all([
     getMediumArticle(queryParams).catch(() => undefined),
-    fetchCommonData(),
     getTranslations(),
   ]);
 
@@ -82,36 +79,37 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   return (
     <>
       {jsonLd && <JsonLd value={jsonLd} />}
-      <Layout
-        pageTitle={title}
-        socialMedia={setting.socialMedia}
-        authorName={setting.title}
-        menuItems={menuItems}
-      >
-        {article ? (
-          <ProjectLayout
-            date={convertDate(article.pubDate, true)}
-            links={[
-              {
-                title: t("pages.blog.articleLinkMedium"),
-                link: article.link,
-                icon: "article",
-              },
-            ]}
-          >
-            <div
-              className="prose prose-lg dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3"
-              dangerouslySetInnerHTML={{ __html: article.description }}
-            ></div>
-          </ProjectLayout>
-        ) : (
-          <NotFound
-            title={t("error.404.blog.action")}
-            description={t("error.404.blog.description")}
-            href={buildPageUrl(slug)}
-          />
-        )}
-      </Layout>
+
+      {article ? (
+        <>
+          <h1 className="relative text-5xl font-bold after:absolute after:right-0 after:-bottom-5 after:-left-10 after:h-px after:w-[100vw] after:bg-current md:my-10 md:text-8xl md:after:-bottom-10 md:after:left-[-196px] after:dark:bg-white">
+            {title}
+          </h1>
+          <div className="relative flex-1 after:absolute after:top-0 after:right-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black md:pt-0 md:pb-6 dark:after:bg-white">
+            <ProjectLayout
+              date={convertDate(article.pubDate, true)}
+              links={[
+                {
+                  title: t("pages.blog.articleLinkMedium"),
+                  link: article.link,
+                  icon: "article",
+                },
+              ]}
+            >
+              <div
+                className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3"
+                dangerouslySetInnerHTML={{ __html: article.description }}
+              ></div>
+            </ProjectLayout>
+          </div>
+        </>
+      ) : (
+        <NotFound
+          title={t("error.404.blog.action")}
+          description={t("error.404.blog.description")}
+          href={buildPageUrl(slug)}
+        />
+      )}
     </>
   );
 };
