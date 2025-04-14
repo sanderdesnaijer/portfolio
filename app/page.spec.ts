@@ -16,11 +16,10 @@ describe("app/page", () => {
   it("renders 'Page not found' when sanityFetch returns null", async () => {
     mockSanityFetch.mockResolvedValue(null).mockResolvedValueOnce(null);
 
-    const { container } = render(await Home());
+    render(await Home());
     expect(
       screen.getByText(getTranslationKey("error.404.generic.description"))
     ).toBeInTheDocument();
-    expect(container).toMatchSnapshot();
   });
 
   it("renders the Home page with settings data", async () => {

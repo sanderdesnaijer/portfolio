@@ -14,7 +14,7 @@ export default async function SiteLayout({
     <div className="mx-auto grid grid-cols-9 pt-0 md:container">
       <Header menuItems={menuItems} />
       <main className="prose prose-xl dark:prose-invert relative col-span-9 max-w-fit px-6 pb-6 md:col-span-6 md:px-0 md:pt-6 md:pb-0 lg:col-span-5">
-        <div className="flex flex-col">{children}</div>
+        <div className="flex min-h-full flex-col">{children}</div>
       </main>
       <Footer socialMedia={setting.socialMedia} />
     </div>
