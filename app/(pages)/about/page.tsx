@@ -18,8 +18,8 @@ import { JsonLd } from "@/app/components/JsonLd";
 import envConfig from "@/envConfig";
 import { PageLayout } from "@/app/components/PageLayout";
 
-const mainImageSizeHeigth = 341;
-const mainImageSizeWidtht = 256;
+const mainImageSizeHeight = 341;
+const mainImageSizeWidth = 256;
 const companyIconSize = 56;
 const { about: slug } = pageSlugs;
 
@@ -116,11 +116,11 @@ export default async function Page() {
             <Image
               alt={page.imageAlt}
               src={urlFor(page.imageURL)
-                .width(mainImageSizeWidtht)
-                .height(mainImageSizeHeigth)
+                .width(mainImageSizeWidth)
+                .height(mainImageSizeHeight)
                 .url()}
-              width={mainImageSizeWidtht}
-              height={mainImageSizeHeigth}
+              width={mainImageSizeWidth}
+              height={mainImageSizeHeight}
               priority
             />
           </div>
