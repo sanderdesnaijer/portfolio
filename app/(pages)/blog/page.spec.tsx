@@ -3,7 +3,6 @@ import Page from "./page";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
 import { mockPage, mockPages } from "@/app/test-utils/mockPage";
-import { mockSetting } from "@/app/test-utils/mockSetting";
 
 const mockBlogPage: PageSanity = {
   ...mockPage,
