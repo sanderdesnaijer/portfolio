@@ -7,7 +7,6 @@ import { JobSanity, PageSanity } from "@/sanity/types";
 import { convertDate } from "@/app/utils/utils";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import { Layout } from "@/app/components/Layout";
 import { Tags } from "@/app/components/Tags";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
@@ -17,9 +16,10 @@ import { urlFor } from "@/sanity/lib/image";
 import { getAboutScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import envConfig from "@/envConfig";
+import { PageLayout } from "@/app/components/PageLayout";
 
-const mainImageSizeHeigth = 341;
-const mainImageSizeWidtht = 256;
+const mainImageSizeHeight = 341;
+const mainImageSizeWidth = 256;
 const companyIconSize = 56;
 const { about: slug } = pageSlugs;
 
@@ -82,7 +82,7 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const [page, jobs, { setting, menuItems }, t] = await Promise.all([
+  const [page, jobs, { setting }, t] = await Promise.all([
     sanityFetch<PageSanity>({ query: pageQuery, params: { slug } }),
     sanityFetch<JobSanity[]>({ query: jobsQuery }),
     fetchCommonData(),
@@ -110,106 +110,100 @@ export default async function Page() {
   return (
     <>
       {jsonLD ? <JsonLd value={jsonLD} /> : null}
-      <Layout
-        pageTitle={title}
-        socialMedia={setting.socialMedia}
-        authorName={setting.title}
-        menuItems={menuItems}
-      >
-        {page ? (
-          <>
-            <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[88px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[88px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] md:mt-auto md:mr-auto md:w-auto md:before:top-[168px] md:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
-              <Image
-                alt={page.imageAlt}
-                src={urlFor(page.imageURL)
-                  .width(mainImageSizeWidtht)
-                  .height(mainImageSizeHeigth)
-                  .url()}
-                width={mainImageSizeWidtht}
-                height={mainImageSizeHeigth}
-                priority
-              />
+      {page ? (
+        <PageLayout title={title}>
+          <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[88px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[88px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] md:mt-auto md:mr-auto md:w-auto md:before:top-[168px] md:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
+            <Image
+              alt={page.imageAlt}
+              src={urlFor(page.imageURL)
+                .width(mainImageSizeWidth)
+                .height(mainImageSizeHeight)
+                .url()}
+              width={mainImageSizeWidth}
+              height={mainImageSizeHeight}
+              priority
+            />
+          </div>
+          {page?.body ? (
+            <div className="md:py-10">
+              <PortableText value={page.body} components={components} />
             </div>
-            {page?.body ? (
-              <div className="md:py-10">
-                <PortableText value={page.body} components={components} />
-              </div>
-            ) : null}
+          ) : null}
 
-            <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
-            <ol
-              aria-label={t("pages.about.professionalExperience")}
-              className="not-prose group/list mb-3 flex list-none flex-col gap-10 p-0"
-            >
-              {jobs?.map((job) => {
-                return (
-                  <li
-                    key={job._id}
-                    className="group/item relative transition-colors duration-100 md:flex"
-                  >
-                    <div className="md:w-2/7">
-                      <p className="mt-0 mb-2 text-sm text-gray-800 italic md:text-right dark:text-gray-100">
-                        {getExperienceTitle(
-                          job.startDate,
-                          job.endDate,
-                          t("pages.about.datePresent")
-                        )}
-                      </p>
-                    </div>
-                    <div className="md:w-5/7 md:pl-4">
-                      <Link
-                        href={job.link}
-                        aria-label={`[Link to] ${job.companyName}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group/link mb-2 flex"
-                      >
-                        <Image
-                          alt={job.imageURL}
-                          src={urlFor(job.imageURL)
-                            .width(companyIconSize)
-                            .height(companyIconSize)
+          <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
+          <ol
+            aria-label={t("pages.about.professionalExperience")}
+            className="not-prose group/list mb-3 flex list-none flex-col gap-10 p-0"
+          >
+            {jobs?.map((job) => {
+              return (
+                <li
+                  key={job._id}
+                  className="group/item relative transition-colors duration-100 md:flex"
+                >
+                  <div className="md:w-2/7">
+                    <p className="mt-0 mb-2 text-sm text-gray-800 italic md:text-right dark:text-gray-100">
+                      {getExperienceTitle(
+                        job.startDate,
+                        job.endDate,
+                        t("pages.about.datePresent")
+                      )}
+                    </p>
+                  </div>
+                  <div className="md:w-5/7 md:pl-4">
+                    <Link
+                      href={job.link}
+                      aria-label={`[Link to] ${job.companyName}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/link mb-2 flex"
+                    >
+                      <Image
+                        alt={job.imageURL}
+                        src={urlFor(job.imageURL)
+                          .width(companyIconSize)
+                          .height(companyIconSize)
 
-                            .url()}
-                          width={companyIconSize}
-                          height={companyIconSize}
-                          className="mt-0 h-fit transition group-hover/link:scale-105"
-                          loading="lazy"
-                        />
-                        <div className="pl-3">
-                          <h3 className="-mt-[3px] text-lg leading-[22px] font-bold transition-transform group-hover/link:translate-x-1 group-hover/link:italic group-hover/link:underline after:absolute after:mt-0.5 after:h-5 after:w-5 after:bg-black after:[mask-image:url(/icons/chevron-right.svg)] after:transition-all after:duration-150 group-hover/link:after:translate-x-1 hover:after:translate-x-1 dark:after:bg-white">
-                            {job.companyName.trim()}
-                          </h3>
-                          <p className="text-base transition group-hover/link:translate-x-1">
-                            {job.jobTitle}
-                          </p>
-                          <p className="text-xs text-gray-800 italic transition group-hover/link:translate-x-1 dark:text-gray-100">
-                            {job.employmentType}{" "}
-                            {job.contractName &&
-                              `(${t("pages.about.jobContract")} ${job.contractName})`}
-                          </p>
-                        </div>
-                      </Link>
-                      <PortableText
-                        value={job.description}
-                        components={jobComponents}
+                          .url()}
+                        width={companyIconSize}
+                        height={companyIconSize}
+                        className="mt-0 h-fit transition group-hover/link:scale-105"
+                        loading="lazy"
                       />
+                      <div className="pl-3">
+                        <h3 className="-mt-[3px] text-lg leading-[22px] font-bold transition-transform group-hover/link:translate-x-1 group-hover/link:italic group-hover/link:underline after:absolute after:mt-0.5 after:h-5 after:w-5 after:bg-black after:[mask-image:url(/icons/chevron-right.svg)] after:transition-all after:duration-150 group-hover/link:after:translate-x-1 hover:after:translate-x-1 dark:after:bg-white">
+                          {job.companyName.trim()}
+                        </h3>
+                        <p className="text-base transition group-hover/link:translate-x-1">
+                          {job.jobTitle}
+                        </p>
+                        <p className="text-xs text-gray-800 italic transition group-hover/link:translate-x-1 dark:text-gray-100">
+                          {job.employmentType}{" "}
+                          {job.contractName &&
+                            `(${t("pages.about.jobContract")} ${job.contractName})`}
+                        </p>
+                      </div>
+                    </Link>
+                    <PortableText
+                      value={job.description}
+                      components={jobComponents}
+                    />
 
-                      {job.tags && <Tags tags={job.tags} />}
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
-          </>
-        ) : (
-          <NotFound
-            title={t("error.404.generic.action")}
-            description={t("error.404.generic.description")}
-            href={envConfig.baseUrl}
-          />
-        )}
-      </Layout>
+                    {job.tags && <Tags tags={job.tags} />}
+                  </div>
+                </li>
+              );
+            })}
+          </ol>
+        </PageLayout>
+      ) : (
+        <NotFound
+          title={title}
+          action={t("error.404.generic.action")}
+          description={t("error.404.generic.description")}
+          href={envConfig.baseUrl}
+        />
+      )}
     </>
   );
 }

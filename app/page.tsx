@@ -51,7 +51,8 @@ export default async function Home() {
 
     return (
       <NotFound
-        title={t("error.404.generic.action")}
+        title={t("error.404.generic.title")}
+        action={t("error.404.generic.action")}
         description={t("error.404.generic.description")}
       />
     );

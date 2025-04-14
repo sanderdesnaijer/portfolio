@@ -3,10 +3,13 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import ProjectPage from "./page";
 import { mockProject } from "@/app/test-utils/mockProjects";
 import { getTranslationKey } from "@/app/test-utils/i18n";
-import { mockSetting } from "@/app/test-utils/mockSetting";
 import { mockPages } from "@/app/test-utils/mockPage";
 
 describe("app/(pages)/[slug]/page", () => {
+  beforeEach(() => {
+    (sanityFetch as jest.Mock).mockReset();
+  });
+
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -15,7 +18,6 @@ describe("app/(pages)/[slug]/page", () => {
     it("renders the Project component with fetched project data", async () => {
       (sanityFetch as jest.Mock)
         .mockResolvedValueOnce(mockProject)
-        .mockResolvedValueOnce(mockSetting)
         .mockResolvedValueOnce(mockPages);
 
       const params = { slug: "test-project" };
@@ -32,7 +34,6 @@ describe("app/(pages)/[slug]/page", () => {
     it("renders not found when project data is not found", async () => {
       (sanityFetch as jest.Mock)
         .mockResolvedValueOnce(null)
-        .mockResolvedValueOnce(mockSetting)
         .mockResolvedValueOnce(mockPages);
 
       const params = { slug: "nonexistent-project" };

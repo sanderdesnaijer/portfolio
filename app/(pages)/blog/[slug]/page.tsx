@@ -3,7 +3,6 @@ import { QueryParams } from "@sanity/client";
 import { pageQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
-import { Layout } from "@/app/components/Layout";
 import {
   buildPageUrl,
   convertDate,
@@ -15,13 +14,13 @@ import {
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { getMediumArticle } from "@/app/utils/api";
 import { generateMetaData } from "@/app/utils/metadata";
-import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
 import { pageSlugs } from "@/app/utils/routes";
 import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import React from "react";
+import { PageLayout } from "@/app/components/PageLayout";
 
 const { blog: slug } = pageSlugs;
 
@@ -69,9 +68,8 @@ export async function generateMetadata({
 const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   const queryParams = await params;
 
-  const [article, { setting, menuItems }, t] = await Promise.all([
+  const [article, t] = await Promise.all([
     getMediumArticle(queryParams).catch(() => undefined),
-    fetchCommonData(),
     getTranslations(),
   ]);
 
@@ -82,13 +80,9 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   return (
     <>
       {jsonLd && <JsonLd value={jsonLd} />}
-      <Layout
-        pageTitle={title}
-        socialMedia={setting.socialMedia}
-        authorName={setting.title}
-        menuItems={menuItems}
-      >
-        {article ? (
+
+      {article ? (
+        <PageLayout title={title}>
           <ProjectLayout
             date={convertDate(article.pubDate, true)}
             links={[
@@ -100,18 +94,19 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
             ]}
           >
             <div
-              className="prose prose-lg dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3"
+              className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3"
               dangerouslySetInnerHTML={{ __html: article.description }}
             ></div>
           </ProjectLayout>
-        ) : (
-          <NotFound
-            title={t("error.404.blog.action")}
-            description={t("error.404.blog.description")}
-            href={buildPageUrl(slug)}
-          />
-        )}
-      </Layout>
+        </PageLayout>
+      ) : (
+        <NotFound
+          title={title}
+          description={t("error.404.blog.description")}
+          href={buildPageUrl(slug)}
+          action={t("error.404.blog.action")}
+        />
+      )}
     </>
   );
 };

@@ -1,5 +1,4 @@
 "use server";
-import { Layout } from "@/app/components/Layout";
 import {
   convertDate,
   extractTextFromHTML,
@@ -13,13 +12,13 @@ import { ProjectListItem } from "@/app/components/ProjectListItem";
 import { TagSanity } from "@/sanity/types/tagType";
 import { getMediumArticles } from "@/app/utils/api";
 import { generatePageMetadata } from "@/app/utils/metadata";
-import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
 import { pageSlugs } from "@/app/utils/routes";
 import { getBlogsScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import envConfig from "@/envConfig";
+import { PageLayout } from "@/app/components/PageLayout";
 
 const { blog: slug } = pageSlugs;
 
@@ -28,13 +27,12 @@ export async function generateMetadata() {
 }
 
 export default async function Page() {
-  const [page, articles, { setting, menuItems }, t] = await Promise.all([
+  const [page, articles, t] = await Promise.all([
     sanityFetch<PageSanity>({
       query: pageQuery,
       params: { slug },
     }),
     getMediumArticles().catch(() => []),
-    fetchCommonData(),
     getTranslations(),
   ]);
 
@@ -44,13 +42,8 @@ export default async function Page() {
   return (
     <>
       {jsonLd && <JsonLd value={jsonLd} />}
-      <Layout
-        pageTitle={title}
-        socialMedia={setting.socialMedia}
-        authorName={setting.title}
-        menuItems={menuItems}
-      >
-        {page ? (
+      {page ? (
+        <PageLayout title={title}>
           <div className="mx-auto grid grid-cols-1 pt-0 md:pt-10">
             <ol
               aria-label={t("pages.blog.articles")}
@@ -86,14 +79,15 @@ export default async function Page() {
               })}
             </ol>
           </div>
-        ) : (
-          <NotFound
-            title={t("error.404.generic.action")}
-            description={t("error.404.generic.description")}
-            href={envConfig.baseUrl}
-          />
-        )}
-      </Layout>
+        </PageLayout>
+      ) : (
+        <NotFound
+          title={title}
+          action={t("error.404.generic.action")}
+          description={t("error.404.generic.description")}
+          href={envConfig.baseUrl}
+        />
+      )}
     </>
   );
 }
