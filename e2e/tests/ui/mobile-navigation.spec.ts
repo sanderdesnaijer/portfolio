@@ -19,7 +19,7 @@ test.describe("mobile navigation", () => {
     ).toBeVisible();
 
     const nav = page.locator("nav");
-    const navLink = page.locator("nav a").nth(2); // Adjust if needed
+    const navLink = page.getByRole("link", { name: "Projects" });
 
     // Ensure navigation is initially visible
     await expect(nav).toBeVisible();
@@ -34,7 +34,7 @@ test.describe("mobile navigation", () => {
 
     // Scroll up 100px instead of 10px (more realistic)
     await page.evaluate(() => window.scrollBy(0, -100));
-    await page.waitForTimeout(300); // Ensure UI updates
+    await page.waitForTimeout(300);
 
     // Ensure navigation is visible again
     await expect(nav).toBeVisible();
@@ -73,7 +73,7 @@ test.describe("mobile navigation", () => {
     ).toBeVisible();
 
     const nav = page.locator("nav");
-    const navLink = page.locator("nav a").nth(2); // Adjust if needed
+    const navLink = page.getByRole("link", { name: "Projects" });
 
     // Ensure navigation is initially visible
     await expect(nav).toBeVisible();
@@ -87,7 +87,7 @@ test.describe("mobile navigation", () => {
 
     // Scroll up 100px instead of 10px (more realistic)
     await page.evaluate(() => window.scrollBy(0, -100));
-    await page.waitForTimeout(500); // Ensure UI updates
+    await page.waitForTimeout(500);
 
     // Ensure navigation is visible again
     await expect(nav).toBeVisible();

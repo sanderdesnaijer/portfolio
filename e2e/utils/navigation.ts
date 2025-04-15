@@ -2,8 +2,8 @@ import { Page, expect } from "@playwright/test";
 
 const mainNavLinks = [
   { name: "Home", url: "/", heading: "" },
-  { name: "About", url: "/about", heading: "About" },
   { name: "Projects", url: "/projects", heading: "Projects" },
+  { name: "About", url: "/about", heading: "About" },
   { name: "Blog", url: "/blog", heading: "Blog" },
 ];
 
