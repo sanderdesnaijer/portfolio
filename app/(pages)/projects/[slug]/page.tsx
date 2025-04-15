@@ -13,8 +13,14 @@ import { buildPageUrl } from "@/app/utils/utils";
 import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import { PageLayout } from "@/app/components/PageLayout";
+import { fetchProjects } from "@/app/utils/api";
 
 const { projects: slug } = pageSlugs;
+
+export async function generateStaticParams() {
+  const slugs = await fetchProjects();
+  return slugs!.map((slug) => ({ slug: slug.slug.current }));
+}
 
 export async function generateMetadata({
   params,

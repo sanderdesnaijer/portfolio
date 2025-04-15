@@ -12,7 +12,7 @@ import {
   getSlug,
 } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
-import { getMediumArticle } from "@/app/utils/api";
+import { getMediumArticle, getMediumArticles } from "@/app/utils/api";
 import { generateMetaData } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
@@ -23,6 +23,11 @@ import React from "react";
 import { PageLayout } from "@/app/components/PageLayout";
 
 const { blog: slug } = pageSlugs;
+
+export async function generateStaticParams() {
+  const articles = await getMediumArticles();
+  return articles?.map((article) => ({ slug: getSlug(article.link) }));
+}
 
 export async function generateMetadata({
   params,
