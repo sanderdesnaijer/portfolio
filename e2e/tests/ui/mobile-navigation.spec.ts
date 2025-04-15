@@ -34,7 +34,7 @@ test.describe("mobile navigation", () => {
 
     // Scroll up 100px instead of 10px (more realistic)
     await page.evaluate(() => window.scrollBy(0, -100));
-    await page.waitForTimeout(300); // Ensure UI updates
+    await page.waitForTimeout(300);
 
     // Ensure navigation is visible again
     await expect(nav).toBeVisible();
@@ -87,7 +87,7 @@ test.describe("mobile navigation", () => {
 
     // Scroll up 100px instead of 10px (more realistic)
     await page.evaluate(() => window.scrollBy(0, -100));
-    await page.waitForTimeout(500); // Ensure UI updates
+    await page.waitForTimeout(500);
 
     // Ensure navigation is visible again
     await expect(nav).toBeVisible();
