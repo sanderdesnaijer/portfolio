@@ -19,7 +19,7 @@ test.describe("mobile navigation", () => {
     ).toBeVisible();
 
     const nav = page.locator("nav");
-    const navLink = page.locator("nav a").nth(2); // Adjust if needed
+    const navLink = page.getByRole("link", { name: "Projects" });
 
     // Ensure navigation is initially visible
     await expect(nav).toBeVisible();
@@ -73,7 +73,7 @@ test.describe("mobile navigation", () => {
     ).toBeVisible();
 
     const nav = page.locator("nav");
-    const navLink = page.locator("nav a").nth(2); // Adjust if needed
+    const navLink = page.getByRole("link", { name: "Projects" });
 
     // Ensure navigation is initially visible
     await expect(nav).toBeVisible();
