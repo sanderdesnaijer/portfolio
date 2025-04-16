@@ -114,7 +114,7 @@ export const projectQuery = groq`
 `;
 
 export const blogQuery = groq`
-  *[_type == "blogPost" && mediumUrl == $url][0]
+  *[_type == "blogPost" && slug.current == $slug][0]
 `;
 
 export const blogsQuery = groq`

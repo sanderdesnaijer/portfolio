@@ -1,5 +1,4 @@
 import { QueryParams } from "next-sanity";
-import { MediumArticle } from "../api/medium/types";
 import { REVALIDATE_INTERVAL } from "./constants";
 import {
   JobSanity,
@@ -7,7 +6,6 @@ import {
   ProjectTypeSanity,
   SettingSanity,
 } from "@/sanity/types";
-import { fetchMediumArticles } from "../api/medium/utils";
 import envConfig from "@/envConfig";
 
 const { baseUrl } = envConfig;
@@ -40,21 +38,6 @@ async function fetchData<T>(
     console.error(`Error fetching ${endpoint}:`, error);
     return null;
   }
-}
-
-export async function getMediumArticles(): Promise<MediumArticle[]> {
-  return fetchMediumArticles();
-}
-
-export async function getMediumArticle(
-  params: QueryParams
-): Promise<MediumArticle | null> {
-  const articles = await fetchMediumArticles();
-  const article = articles.find((item) => item.link.includes(params.slug));
-  if (!article) {
-    return null;
-  }
-  return article;
 }
 
 // following routes are currently only used in e2e test

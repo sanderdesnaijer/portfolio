@@ -23,11 +23,13 @@ export async function GET() {
     for (const item of feed.items) {
       const existing = await client.fetch(blogQuery, { url: item.link });
 
+      const publishedAt = new Date(item.pubDate).toISOString();
+
       if (!existing) {
         await client.create({
           _type: "blogPost",
           title: item.title,
-          publishedAt: item.pubDate,
+          publishedAt,
           mediumUrl: item.link,
           slug: { current: getSlug(item.link) },
           imageURL: getImageURL(item.description),

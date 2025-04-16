@@ -1,18 +1,20 @@
 import { NextResponse } from "next/server";
-import { fetchMediumArticles } from "../utils";
 import { getTranslations } from "next-intl/server";
+import { BlogSanity } from "@/sanity/types/blogType";
+import { blogQuery } from "@/sanity/lib/queries";
+import { sanityFetch } from "@/sanity/lib/fetch";
 
-// GET handler for /api/medium/[id]
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ slug: string }> }
 ) {
-  const queryParams = await params;
-  const articles = await fetchMediumArticles();
-  const article = articles.find((item) => item.link.includes(queryParams.slug));
-  const t = await getTranslations();
+  const article = await sanityFetch<BlogSanity>({
+    query: blogQuery,
+    params,
+  });
 
   if (!article) {
+    const t = await getTranslations();
     return NextResponse.json(
       { message: t("api.medium.notFound") },
       { status: 404 }
