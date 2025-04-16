@@ -1,5 +1,4 @@
 import { QueryParams } from "next-sanity";
-import { MediumArticle } from "../api/medium/types";
 import { REVALIDATE_INTERVAL } from "./constants";
 import {
   JobSanity,
@@ -7,8 +6,8 @@ import {
   ProjectTypeSanity,
   SettingSanity,
 } from "@/sanity/types";
-import { fetchMediumArticles } from "../api/medium/utils";
 import envConfig from "@/envConfig";
+import { BlogSanity } from "@/sanity/types/blogType";
 
 const { baseUrl } = envConfig;
 
@@ -42,21 +41,6 @@ async function fetchData<T>(
   }
 }
 
-export async function getMediumArticles(): Promise<MediumArticle[]> {
-  return fetchMediumArticles();
-}
-
-export async function getMediumArticle(
-  params: QueryParams
-): Promise<MediumArticle | null> {
-  const articles = await fetchMediumArticles();
-  const article = articles.find((item) => item.link.includes(params.slug));
-  if (!article) {
-    return null;
-  }
-  return article;
-}
-
 // following routes are currently only used in e2e test
 export async function fetchPage(slug = ""): Promise<PageSanity | null> {
   return fetchData<PageSanity>("/api/page", { slug });
@@ -78,4 +62,12 @@ export async function fetchSettings(): Promise<SettingSanity | null> {
 
 export async function fetchJobs(): Promise<JobSanity | null> {
   return fetchData<JobSanity>("/api/jobs");
+}
+
+export async function fetchBlog(slug = ""): Promise<BlogSanity | null> {
+  return fetchData<BlogSanity>("/api/blog", { slug });
+}
+
+export async function fetchBlogs(): Promise<BlogSanity[] | null> {
+  return fetchData<BlogSanity[]>("/api/blog");
 }

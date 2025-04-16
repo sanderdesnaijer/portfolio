@@ -107,7 +107,7 @@ test.describe("blog detail", () => {
       imageUrl: getImageURL(article!.description)!,
       publishedTime: article!.pubDate,
       modifiedTime: article!.pubDate,
-      canonical: article?.link,
+      canonical: article?.mediumUrl,
     });
 
     // json-ld

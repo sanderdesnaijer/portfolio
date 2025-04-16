@@ -1,16 +1,10 @@
 "use server";
-import {
-  convertDate,
-  extractTextFromHTML,
-  getImageURL,
-  getSlug,
-} from "@/app/utils/utils";
+import { extractTextFromHTML } from "@/app/utils/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { pageQuery } from "@/sanity/lib/queries";
+import { blogsQuery, pageQuery } from "@/sanity/lib/queries";
 import { PageSanity } from "@/sanity/types";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
 import { TagSanity } from "@/sanity/types/tagType";
-import { getMediumArticles } from "@/app/utils/api";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
@@ -19,6 +13,7 @@ import { getBlogsScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import envConfig from "@/envConfig";
 import { PageLayout } from "@/app/components/PageLayout";
+import { BlogSanity } from "@/sanity/types/blogType";
 
 const { blog: slug } = pageSlugs;
 
@@ -32,7 +27,9 @@ export default async function Page() {
       query: pageQuery,
       params: { slug },
     }),
-    getMediumArticles().catch(() => []),
+    sanityFetch<BlogSanity[]>({
+      query: blogsQuery,
+    }),
     getTranslations(),
   ]);
 
@@ -50,7 +47,6 @@ export default async function Page() {
               className="group mt-0 grid gap-10 pl-0"
             >
               {articles.map((article, index) => {
-                const imageURL = getImageURL(article.description);
                 const tags = article.categories.map<TagSanity>(
                   (cat, index) => ({
                     label: cat,
@@ -67,10 +63,10 @@ export default async function Page() {
                 return (
                   <ProjectListItem
                     key={index}
-                    href={`${page.slug.current}/${getSlug(article.link)}`}
-                    imageURL={imageURL}
+                    href={`${page.slug.current}/${article.slug.current}`}
+                    imageURL={article.imageURL}
                     imageALT={article.title}
-                    date={convertDate(article.pubDate)}
+                    date={article.publishedAt}
                     title={article.title}
                     body={body}
                     tags={tags}

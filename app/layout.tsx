@@ -14,7 +14,7 @@ const montserrat = Montserrat({
   weight: ["200", "400", "700"],
 });
 
-if (envConfig.isMockApi) {
+if (envConfig.isMockApi === true) {
   import("./mock").then(({ setupMocks }) => {
     setupMocks();
   });
