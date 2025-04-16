@@ -11,7 +11,7 @@ export const handlers = [
     }
     if (query?.includes('*[_type == "blogPost" && slug.current == $slug][0]')) {
       const slug = url.searchParams.get("$slug")!;
-      const articleSlug = slug.replace(/"/g, "");
+      const articleSlug = slug?.replace(/"/g, "");
 
       const article = mockArticles.find((item) =>
         item.mediumUrl.includes(articleSlug)
