@@ -59,19 +59,20 @@ export async function generateMetadata({
     title,
     description,
     url,
-    publishedTime: article.pubDate,
-    modifiedTime: article.pubDate,
+    publishedTime: article.publishedAt,
+    modifiedTime: article.publishedAt,
     imageUrl,
     keywords: article.categories,
-    canonical: article.link,
+    canonical: article.mediumUrl,
   });
 }
 
 const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
+  const resolvedParams = await params;
   const [article, t] = await Promise.all([
     sanityFetch<BlogSanity>({
       query: blogQuery,
-      params,
+      params: { slug: resolvedParams.slug },
     }),
     getTranslations(),
   ]);

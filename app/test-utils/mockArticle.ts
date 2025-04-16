@@ -3,7 +3,7 @@ import { BlogSanity } from "@/sanity/types/blogType";
 export const mockArticles: BlogSanity[] = [
   {
     title: "Mock Building My First Flutter App: Challenges and Lessons Learned",
-    publishedAt: "2025-03-02 08:02:41",
+    publishedAt: "2025-03-02T08:02:41",
     mediumUrl:
       "https://medium.com/@sanderdesnaijer/building-my-first-flutter-app-challenges-and-lessons-learned-49ad913b4941?source=rss-aae3af6fc2dd------2",
     author: "Sander de Snaijer",
@@ -16,30 +16,31 @@ export const mockArticles: BlogSanity[] = [
       "mobile-app-development",
       "software-engineering",
     ],
-    imageURL: "",
+    imageURL:
+      "https://cdn-images-1.medium.com/max/1024/1*0_kChEl_MolaVOZGDOwcoA.png",
     _id: "",
     _rev: "",
     _type: "",
     _createdAt: "",
     _updatedAt: "",
     slug: {
-      current: "",
+      current: "building-my-first-flutter-app-challenges-and-lessons-learned",
     },
   },
   {
     title: "Mock Creating a 3D-Printed Word Clock with Minute Accuracy",
-    pubDate: "2025-02-09 11:18:24",
+    publishedAt: "2025-02-02T08:02:41",
     mediumUrl:
       "https://medium.com/@sanderdesnaijer/creating-a-3d-printed-word-clock-with-minute-accuracy-c8e0fd85bd16?source=rss-aae3af6fc2dd------2",
     author: "Sander de Snaijer",
     description:
       '\n<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*Oood9OBeYQzVldK3RDAQ-g.jpeg"><figcaption>Mock Completed Dutch Word Clock — Accurate to the Minute</figcaption></figure><p>In my spare time, I created a word clock using Arduino. I designed it in Fusion 360 and printed it on the Bambu X1C. Many word clocks you find online have only 5-minute accuracy, which I didn’t like. My goal was to build one from scratch with minute accuracy in Dutch. To achieve this, I had to learn soldering, Arduino programming, and Fusion 360 — skills I had little experience with — making this project a great challenge.</p>\n<p><strong>Prototyping in TypeScript</strong></p>\n<p>Before starting the physical build, I planned everything out and <a href="https://sanderdesnaijer.github.io/typescript-dutch-wordclock/">created a prototype</a> in TypeScript. This allowed me to figure out how to achieve minute accuracy and arrange Dutch words sensibly on the grid. The prototype also helped generate data that I later used in the Arduino C++ code. Since I wasn’t familiar with C++, I researched where to start and found inspiration in a video by Leandro Linares, who upcycled a vintage clock into an Arduino word clock. Although his version had 5-minute accuracy, it gave me a strong foundation to improve upon.</p>\n<figure><img alt="Prototype dutch word clock showing index number" src="https://cdn-images-1.medium.com/max/970/1*iZ0YrsjFTHNI39DXJHY1gQ.png"><figcaption>Typescript prototype</figcaption></figure><p>The prototype was invaluable in refining the layout and fixing logical errors quickly. I used individually addressable LEDs arranged in a snake-like pattern on a 13x12 grid. For example, the first row was indexed from 0 to 12, the second from 25 to 13, the third from 26 to 39, and so on. I ultimately generated a multidimensional grid for every minute of the hour, mapping word positions to LED indices. For instance, at 2:13, the text reads “dertien over [currentHour]” (“thirteen past [currentHour]”). The prototype made it easy to determine which LEDs should light up.</p>\n<p><strong>Electronics &amp; Soldering</strong></p>\n<p>After finalising the prototype, I moved on to the electronics. Since I was new to this, I debugged every step carefully. My LED strip was about 5 meters long, so before cutting it into smaller pieces, I tested it with an Arduino example sketch to ensure it worked. Once confirmed, I proceeded to cut and solder the strips together.</p>\n<p>This step proved more difficult than expected. I struggled for a week with soldering — using different temperatures, flux, and techniques — but the solder wouldn’t stick properly. I eventually discovered that the quality of the solder itself made a huge difference. Upgrading to a better soldering material solved the problem. After connecting each new strip (13 in total), I tested it to catch any issues early. The final strip had 156 LEDs, all functioning correctly with the demo code.</p>\n<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*mTY0gzSDF1Ghw3hFSBgecg.jpeg"><figcaption>All the strips joined with the demo code</figcaption></figure><p><strong>3D Modeling, Coding &amp; Printing</strong></p>\n<p>With the electronics working, I moved on to designing the case in Fusion 360. I started by ensuring that one LED strip fit correctly. After a couple of attempts, I got the right dimensions. I then laid a sheet of paper over the LEDs and sketched the letter positions.</p>\n<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*2jWZ807bRC8xQstPNY76Kw.jpeg"><figcaption>Finding the right dimensions for a row of leds</figcaption></figure><p>At this point, I transitioned to the Arduino code. Porting the TypeScript logic to C++ was straightforward; I simply logged the arrays in JavaScript and used the data in Arduino. One challenge was that C++ requires uniform row lengths in multidimensional arrays. I solved this by padding unused elements with -1. Converting the logic to determine which LEDs should light up was then just a matter of simple loops and conditions.</p>\n<p>For the time I used a RTC (real time clock) module, to keep track of the time even when the Arduino has no power.</p>\n<figure><img alt="" src="https://cdn-images-1.medium.com/max/955/1*097FxjefZkDVS9P4PGRQFw.jpeg"><figcaption>Printed grid with word clock code</figcaption></figure><figure><img alt="" src="https://cdn-images-1.medium.com/max/960/1*lcFWHWLoraFBvotTS8tAgw.jpeg"><figcaption>A paper with some written letters to make sense of the lights</figcaption></figure><p>With the letters and code ready, I ran the first full test. Most lights worked, but a few didn’t due to bad solder joints, which I fixed. The next step was building the rest of the case. This involved trial and error, as I initially didn’t leave enough space for wires, the Arduino, or the clock module. Adjusting these each time in Fusion 360 was frustrating until I discovered <em>variables</em>, which allowed me to change dimensions in one place instead of manually updating multiple values. This way I could easy make smaller prints of sections to try out if it fits before printing the complete model.</p>\n<figure><img alt="" src="https://cdn-images-1.medium.com/max/1024/1*C_Omaf0wffDczbrz7R7JMg.jpeg"></figure><p><strong>Final Touches &amp; Improvements</strong></p>\n<p>For the front panel, I wanted interchangeable letters to allow different fonts for varying moods. I used a monospaced font to evenly space the letters. The first print fit well but had an issue — letters with enclosed areas (e.g., “a,” “q,” “o”) lost their inner sections. I solved this by slightly cutting the inner shapes to keep them connected, which also gave the clock a unique style.</p>\n<figure><img alt="" src="https://cdn-images-1.medium.com/max/960/1*MGX0pIpvCqbgJepaba4H3A.jpeg"><figcaption>Failed print of letters</figcaption></figure><a href="https://medium.com/media/107daabc1e1ef4c4559f30eadf698b01/href">https://medium.com/media/107daabc1e1ef4c4559f30eadf698b01/href</a><p>In the end, the clock worked and I was happy with it. There are still areas for improvement, such as reducing cable length, adding adjustable time settings, implementing more colour effects, improving light diffusion, supporting standard LED strips, and creating an English version. Despite the challenges, this project was an incredible learning experience, and I’m excited to refine it further.</p>\n<a href="https://medium.com/media/c17f2b5eeb41c8cf64d888735c757e1b/href">https://medium.com/media/c17f2b5eeb41c8cf64d888735c757e1b/href</a><figure><img alt="" src="https://cdn-images-1.medium.com/max/960/1*b6_VwLcVZEl7jOB3VuBehA.jpeg"><figcaption>The finished product in the back</figcaption></figure><p>Links:</p>\n<ul>\n<li><a href="https://sanderdesnaijer.github.io/typescript-dutch-wordclock/">prototype demo</a></li>\n<li><a href="https://github.com/sanderdesnaijer/arduino-dutch-wordclock">arduino code</a></li>\n</ul>\n<img src="" width="1" height="1" alt="">\n',
     categories: ["prototyping", "diy-projects", "arduino", "3d-printing"],
-    publishedAt: "",
     slug: {
-      current: "",
+      current: "creating-a-3d-printed-word-clock-with-minute-accuracy",
     },
-    imageURL: "",
+    imageURL:
+      "https://cdn-images-1.medium.com/max/1024/1*Oood9OBeYQzVldK3RDAQ-g.jpeg",
     _id: "",
     _rev: "",
     _type: "",
