@@ -7,7 +7,6 @@ import {
   SettingSanity,
 } from "@/sanity/types";
 import envConfig from "@/envConfig";
-import { BlogSanity } from "@/sanity/types/blogType";
 
 const { baseUrl } = envConfig;
 
@@ -62,12 +61,4 @@ export async function fetchSettings(): Promise<SettingSanity | null> {
 
 export async function fetchJobs(): Promise<JobSanity | null> {
   return fetchData<JobSanity>("/api/jobs");
-}
-
-export async function fetchBlog(slug = ""): Promise<BlogSanity | null> {
-  return fetchData<BlogSanity>("/api/blog", { slug });
-}
-
-export async function fetchBlogs(): Promise<BlogSanity[] | null> {
-  return fetchData<BlogSanity[]>("/api/blog");
 }
