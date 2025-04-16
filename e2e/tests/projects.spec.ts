@@ -37,8 +37,8 @@ test.describe("projects", () => {
     const link = page.getByRole("link", {
       name: /Arduino 3d printed dutch word/i,
     });
-    await link.click();
     const href = await link.getAttribute("href");
+    await link.click();
     await expect(page).toHaveURL(href!);
 
     await expect(

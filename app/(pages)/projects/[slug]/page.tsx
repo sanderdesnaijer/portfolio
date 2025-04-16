@@ -13,8 +13,17 @@ import { buildPageUrl } from "@/app/utils/utils";
 import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import { PageLayout } from "@/app/components/PageLayout";
+import { client } from "@/sanity/lib/client";
 
 const { projects: slug } = pageSlugs;
+
+export async function generateStaticParams() {
+  const slugs = await client.fetch<{ slug: { current: string } }[]>(
+    `*[_type == "project"]{ "slug": slug }`
+  );
+
+  return slugs!.map(({ slug }) => ({ slug: slug.current }));
+}
 
 export async function generateMetadata({
   params,

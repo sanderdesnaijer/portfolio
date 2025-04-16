@@ -102,7 +102,7 @@ test.describe("blog detail", () => {
       description: extractTextFromHTML(article!.description),
       url: buildPageUrl(
         "blog",
-        "building-my-first-flutter-app-challenges-and-lessons-learned"
+        "mock-building-my-first-flutter-app-challenges-and-lessons-learned"
       ),
       imageUrl: getImageURL(article!.description)!,
       publishedTime: article!.pubDate,

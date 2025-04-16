@@ -1,4 +1,3 @@
-"use server";
 import { QueryParams } from "@sanity/client";
 import { blogQuery, pageQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -21,7 +20,17 @@ import React from "react";
 import { PageLayout } from "@/app/components/PageLayout";
 import { BlogSanity } from "@/sanity/types/blogType";
 
+import { client } from "@/sanity/lib/client";
+
 const { blog: slug } = pageSlugs;
+
+export async function generateStaticParams() {
+  const slugs = await client.fetch<{ slug: { current: string } }[]>(
+    `*[_type == "blogPost"]{ "slug": slug }`
+  );
+
+  return slugs!.map(({ slug }) => ({ slug: slug.current }));
+}
 
 export async function generateMetadata({
   params,
