@@ -21,7 +21,9 @@ export async function GET() {
     };
 
     for (const item of feed.items) {
-      const existing = await client.fetch(blogQuery, { url: item.link });
+      const existing = await client.fetch(blogQuery, {
+        slug: getSlug(item.link),
+      });
 
       const publishedAt = new Date(item.pubDate).toISOString();
 
