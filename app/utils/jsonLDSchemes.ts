@@ -2,8 +2,8 @@ import { toPlainText } from "next-sanity";
 import { AUTHOR_NAME } from "./constants";
 import { buildPageUrl, extractTextFromHTML } from "./utils";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
-import { MediumArticle } from "../api/medium/types";
 import envConfig from "@/envConfig";
+import { BlogSanity } from "@/sanity/types/blogType";
 
 const createAuthor = (url?: string) => ({
   "@type": "Person",
@@ -116,23 +116,12 @@ export const getProjectsScheme = ({
   ),
 });
 
-function convertToISO8601(dateString: string): string {
-  // Parse the input date string
-  const date = new Date(dateString);
-
-  // Return the ISO 8601 format
-  return date.toISOString();
-}
-
-export const getArticleScheme = (
-  article: MediumArticle,
-  hasDetail = false
-) => ({
+export const getArticleScheme = (article: BlogSanity, hasDetail = false) => ({
   "@type": "BlogPosting",
-  "@id": article.link,
+  "@id": article.mediumUrl,
   headline: article.title,
-  url: article.link,
-  datePublished: convertToISO8601(article.pubDate),
+  url: article.mediumUrl,
+  datePublished: article.publishedAt,
   author: createAuthor(),
   publisher: {
     "@type": "Organization",
@@ -150,7 +139,7 @@ export const getBlogsScheme = ({
   articles,
 }: {
   page: PageSanity;
-  articles: MediumArticle[];
+  articles: BlogSanity[];
 }) => ({
   "@context": "https://schema.org",
   "@type": "Blog",

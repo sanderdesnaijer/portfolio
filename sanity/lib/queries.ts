@@ -112,3 +112,21 @@ export const projectQuery = groq`
     jsonLdIsAuthor
   }
 `;
+
+export const blogQuery = groq`
+  *[_type == "blogPost" && slug.current == $slug][0]
+`;
+
+export const blogsQuery = groq`
+  *[_type == "blogPost"] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    mediumUrl,
+    imageURL,
+    description,
+    categories,
+    author
+  }
+`;

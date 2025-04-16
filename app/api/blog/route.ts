@@ -1,9 +1,12 @@
+import { sanityFetch } from "@/sanity/lib/fetch";
+import { blogsQuery } from "@/sanity/lib/queries";
+import { BlogSanity } from "@/sanity/types/blogType";
 import { NextResponse } from "next/server";
-import { fetchMediumArticles } from "./utils";
 
-// GET handler for /api/medium
 export async function GET() {
-  const articles = await fetchMediumArticles();
+  const articles = await sanityFetch<BlogSanity[]>({
+    query: blogsQuery,
+  });
 
   return NextResponse.json(articles, {
     status: 200,

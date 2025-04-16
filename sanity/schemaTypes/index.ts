@@ -7,6 +7,7 @@ import { pageType } from "./pageType";
 import { settingType } from "./settingType";
 import { jobType } from "./jobType";
 import { tagType } from "./tagType";
+import { blogType } from "./blogType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -17,5 +18,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     settingType,
     jobType,
     tagType,
+    blogType,
   ],
 };

@@ -1,6 +1,7 @@
 interface Env {
   sanityProjectId: string;
   sanityDataset: string;
+  sanityToken?: string;
   baseUrl: string;
   mediumUrl: string;
   rssApiUrl: string;
@@ -11,6 +12,7 @@ interface Env {
 const envConfig: Env = {
   sanityProjectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
   sanityDataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  sanityToken: process.env.NEXT_PUBLIC_SANITY_TOKEN,
   baseUrl: process.env.NEXT_PUBLIC_BASE_URL!,
   mediumUrl: process.env.NEXT_PUBLIC_MEDIUM_URL!,
   rssApiUrl: process.env.NEXT_PUBLIC_RSS_API_URL!,
