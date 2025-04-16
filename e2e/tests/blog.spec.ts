@@ -38,8 +38,8 @@ test.describe("blog", () => {
     const link = page.getByRole("link", {
       name: /Mock Building My First Flutter App/i,
     });
-    await link.click();
     const href = await link.getAttribute("href");
+    await link.click();
     await expect(page).toHaveURL(href!);
 
     await expect(

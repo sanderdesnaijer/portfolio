@@ -14,7 +14,7 @@ export const handlers = [
       const articleSlug = slug?.replace(/"/g, "");
 
       const article = mockArticles.find((item) =>
-        item.mediumUrl.includes(articleSlug)
+        item.slug.current.includes(articleSlug)
       );
 
       return HttpResponse.json({ result: article }, { status: 200 });
