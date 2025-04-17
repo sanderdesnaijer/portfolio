@@ -8,8 +8,8 @@ import { useTranslations } from "next-intl";
 import { ProjectLayout } from "./ProjectLayout";
 import { urlFor } from "@/sanity/lib/image";
 
-const imageWidth = 800;
-const imageHeight = 400;
+const imageWidth = 860;
+const imageHeight = 440;
 const companyIconSize = 24;
 
 export const Project = ({ project }: { project: ProjectTypeSanity }) => {
@@ -23,17 +23,19 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
       links={project.links && project.links.length ? project.links : []}
     >
       {project?.mainImage && project.mainImage.alt ? (
-        <Image
-          src={urlFor(project.mainImage)
-            .width(imageWidth)
-            .height(imageHeight)
-            .url()}
-          alt={project.mainImage.alt}
-          width={imageWidth}
-          height={imageHeight}
-          priority
-          className="mt-0 mb-0"
-        />
+        <div className="relative aspect-[43/22] w-full">
+          <Image
+            src={urlFor(project.mainImage)
+              .width(imageWidth)
+              .height(imageHeight)
+              .url()}
+            alt={project.mainImage.alt}
+            sizes="(max-width: 768px) 100vw, 860px"
+            fill
+            priority
+            className="mt-0 mb-0 object-cover"
+          />
+        </div>
       ) : null}
       {project?.companyName ? (
         <p className="mt-4 flex items-center text-xs italic">

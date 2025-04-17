@@ -19,7 +19,7 @@ const Projects = ({
         aria-label={t("pages.project.projects")}
         className="group mt-0 grid gap-10 pl-0"
       >
-        {projects.map((project) => {
+        {projects.map((project, index) => {
           const body =
             project?.body && project?.body.length
               ? truncateText(toPlainText(project.body), 200)
@@ -35,6 +35,7 @@ const Projects = ({
               title={project.title}
               tags={project.tags}
               body={body}
+              index={index}
             />
           );
         })}
