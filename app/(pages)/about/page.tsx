@@ -122,6 +122,7 @@ export default async function Page() {
               width={mainImageSizeWidth}
               height={mainImageSizeHeight}
               priority
+              sizes="(max-width: 768px) 120px, 240px"
             />
           </div>
           {page?.body ? (

@@ -70,6 +70,7 @@ export default async function Page() {
                     title={article.title}
                     body={body}
                     tags={tags}
+                    index={index}
                   />
                 );
               })}
