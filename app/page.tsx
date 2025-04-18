@@ -38,6 +38,7 @@ export async function generateMetadata() {
     publishedTime: page._createdAt,
     modifiedTime: page._updatedAt,
     imageUrl: page.imageURL || commonData.setting?.imageURL,
+    imageAlt: page.imageAlt || commonData.setting?.imageAlt,
     url: envConfig.baseUrl,
   });
 }

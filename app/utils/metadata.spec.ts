@@ -173,6 +173,7 @@ describe("app/utils/metadata", () => {
       });
 
       expect(result.title).toBe(`${AUTHOR_NAME} | My page | Project 1`);
+
       expect(result.description).toBe("Mock body content");
       expect(result.openGraph.title).toBe(
         `${AUTHOR_NAME} | My page | Project 1`
