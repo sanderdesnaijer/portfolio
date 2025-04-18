@@ -201,5 +201,70 @@ describe("app/utils/metadata", () => {
       expect(result.openGraph.publishedTime).toBe(mockProject._createdAt);
       expect(result.openGraph.modifiedTime).toBe(mockProject._updatedAt);
     });
+
+    it("should use setting.imageURL as a fallback if no project or page imageURL is provided", async () => {
+      const mockPage = {
+        title: "Page Title",
+        description: "Page Description",
+        _createdAt: "2025-03-01T00:00:00Z",
+        _updatedAt: "2025-03-01T01:00:00Z",
+        slug: { current: "page-slug" },
+      };
+
+      const mockSetting = {
+        imageURL: "https://example.com/setting-image.png",
+      };
+
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(mockSetting);
+
+      const result = await generatePageMetadata({ pageSlug: "page-slug" });
+
+      expect(result.openGraph.images[0].url).toBe(mockSetting.imageURL);
+    });
+
+    it("should use setting.imageALT as a fallback if no project or page imageALT is provided", async () => {
+      const mockPage = {
+        title: "Page Title",
+        description: "Page Description",
+        _createdAt: "2025-03-01T00:00:00Z",
+        _updatedAt: "2025-03-01T01:00:00Z",
+        slug: { current: "page-slug" },
+      };
+
+      const mockSetting = {
+        imageAlt: "Default Setting Image Alt",
+      };
+
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(mockSetting);
+
+      const result = await generatePageMetadata({ pageSlug: "page-slug" });
+
+      expect(result.openGraph.images[0].alt).toBe(mockSetting.imageAlt);
+    });
+
+    it("should use setting.description as a fallback if no project or page description is provided", async () => {
+      const mockPage = {
+        title: "Page Title",
+        _createdAt: "2025-03-01T00:00:00Z",
+        _updatedAt: "2025-03-01T01:00:00Z",
+        slug: { current: "page-slug" },
+      };
+
+      const mockSetting = {
+        description: "Default Setting Description",
+      };
+
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(mockSetting);
+
+      const result = await generatePageMetadata({ pageSlug: "page-slug" });
+
+      expect(result.description).toBe(mockSetting.description);
+    });
   });
 });
