@@ -4,7 +4,7 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl, generateTitle } from "@/app/utils/utils";
-import { fetchPage, fetchProjects } from "@/app/utils/api";
+import { fetchPage, fetchProjects, fetchSettings } from "@/app/utils/api";
 import { getProjectsScheme } from "@/app/utils/jsonLDSchemes";
 
 import { validateJsonLd } from "../utils/jsonLD";
@@ -69,12 +69,13 @@ test.describe("projects", () => {
 
   test("should include accurate metadata", async ({ page }) => {
     const data = await fetchPage("projects");
+    const setting = await fetchSettings();
     await testPageMetadata(page, {
       title: generateTitle("Projects"),
       description: data!.description,
       url: buildPageUrl("projects"),
-      imageUrl: data!.imageURL,
-      imageAlt: data!.imageAlt,
+      imageUrl: setting?.imageURL ?? "",
+      imageAlt: setting?.imageAlt,
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,
     });

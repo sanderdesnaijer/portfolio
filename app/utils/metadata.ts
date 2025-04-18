@@ -192,6 +192,7 @@ export async function generatePageMetadata({
   const url = buildPageUrl(pageSlug, project?.slug.current);
   const imageUrl = project?.imageURL || page.imageURL || setting.imageURL;
   const imageAlt = project?.imageAlt || page.imageAlt || setting.imageAlt;
+
   const keywords = project?.tags?.map((tag) => tag.label);
   const publishedTime = project ? project._createdAt : page._createdAt;
   const modifiedTime = project ? project._updatedAt : page._updatedAt;

@@ -4,7 +4,7 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
 import { generateTitle } from "@/app/utils/utils";
-import { fetchPage } from "@/app/utils/api";
+import { fetchPage, fetchSettings } from "@/app/utils/api";
 import { getWebsiteScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import envConfig from "@/envConfig";
@@ -56,13 +56,14 @@ test.describe("home", () => {
 
   test("should include accurate metadata", async ({ page }) => {
     const data = await fetchPage();
+    const setting = await fetchSettings();
     // general meta data
     await testPageMetadata(page, {
       title: generateTitle(),
       description: data!.description,
       url: envConfig.baseUrl,
-      imageUrl: data!.imageURL,
-      imageAlt: data!.imageAlt,
+      imageUrl: setting?.imageURL ?? "",
+      imageAlt: setting?.imageAlt,
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,
     });
