@@ -5,4 +5,6 @@ export interface SettingSanity extends SanityDocument {
   title: string;
   description: string;
   socialMedia: IconLink[];
+  imageURL: string;
+  imageAlt: string;
 }

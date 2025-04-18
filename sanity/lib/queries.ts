@@ -37,7 +37,9 @@ export const settingsQuery = groq`
       title,
       link,
       icon
-    }
+    },
+    "imageURL": mainImage.asset->url,
+    "imageAlt": mainImage.alt
   }
 `;
 
