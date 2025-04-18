@@ -17,32 +17,33 @@ import envConfig from "@/envConfig";
 
 import SiteLogo from "../public/logo.svg";
 import { Footer } from "./components/Footer";
+import { AUTHOR_NAME } from "./utils/constants";
 
 const fetchPageData = cache(async function fetchPageData() {
-  return sanityFetch<PageSanity>({
-    query: pageQuery,
-    params: { slug: "" },
-  });
+  return Promise.all([
+    fetchCommonData(),
+    sanityFetch<PageSanity>({
+      query: pageQuery,
+      params: { slug: "" },
+    }),
+  ]);
 });
 
 export async function generateMetadata() {
-  const page = await fetchPageData();
+  const [commonData, page] = await fetchPageData();
 
   return generateMetaData({
     title: generateTitle(),
-    description: page.description,
+    description: page.description || commonData.setting.description,
     publishedTime: page._createdAt,
     modifiedTime: page._updatedAt,
-    imageUrl: page.imageURL,
+    imageUrl: page.imageURL || commonData.setting?.imageURL,
     url: envConfig.baseUrl,
   });
 }
 
 export default async function Home() {
-  const [commonData, page] = await Promise.all([
-    fetchCommonData(),
-    fetchPageData(),
-  ]);
+  const [commonData, page] = await fetchPageData();
 
   const { setting, menuItems } = commonData;
 
@@ -80,7 +81,7 @@ export default async function Home() {
           <div className="justify-items-center [&>svg]:m-auto">
             <SiteLogo className="h-56 transition-colors duration-200 [--logoBgColor:transparent] [--logoShapeColor:#0a0a0a] dark:[--logoShapeColor:white]" />
             <h1 className="my-6 mt-0 text-center text-lg font-bold">
-              {setting.title}
+              {AUTHOR_NAME}
             </h1>
           </div>
           <Menu

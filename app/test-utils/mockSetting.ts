@@ -26,4 +26,6 @@ export const mockSetting: SettingSanity = {
   _type: "",
   _createdAt: "",
   _updatedAt: "",
+  imageURL: "",
+  imageAlt: "",
 };

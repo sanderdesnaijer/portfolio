@@ -1,6 +1,6 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { pageQuery } from "@/sanity/lib/queries";
-import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
+import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
+import { PageSanity, ProjectTypeSanity, SettingSanity } from "@/sanity/types";
 import { buildPageUrl, generateTitle, getDescriptionFromSanity } from "./utils";
 import { AUTHOR_NAME } from "./constants";
 
@@ -182,14 +182,16 @@ export async function generatePageMetadata({
     query: pageQuery,
     params: { slug: pageSlug },
   });
+  const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
   const title = generateTitle(page.title, project?.title);
   const description = project?.body
     ? getDescriptionFromSanity(project.body)
-    : page.description;
+    : page.description || setting?.description || "";
+
   const url = buildPageUrl(pageSlug, project?.slug.current);
-  const imageUrl = project?.imageURL || page.imageURL;
-  const imageAlt = project?.imageAlt || page.imageAlt;
+  const imageUrl = project?.imageURL || page.imageURL || setting.imageURL;
+  const imageAlt = project?.imageAlt || page.imageAlt || setting.imageAlt;
   const keywords = project?.tags?.map((tag) => tag.label);
   const publishedTime = project ? project._createdAt : page._createdAt;
   const modifiedTime = project ? project._updatedAt : page._updatedAt;

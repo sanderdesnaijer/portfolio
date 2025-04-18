@@ -5,6 +5,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import Home from "./page";
 import { getTranslationKey } from "./test-utils/i18n";
 import { mockPage, mockPages } from "./test-utils/mockPage";
+import { AUTHOR_NAME } from "./utils/constants";
 
 const mockSanityFetch = sanityFetch as jest.Mock;
 
@@ -24,7 +25,6 @@ describe("app/page", () => {
 
   it("renders the Home page with settings data", async () => {
     const mockSettings = {
-      title: "Test Title",
       description: "Test Description",
       socialMedia: [
         { icon: "facebook", link: "https://facebook.com" },
@@ -39,7 +39,7 @@ describe("app/page", () => {
 
     render(await Home());
 
-    expect(screen.getByText("Test Title")).toBeInTheDocument();
+    expect(screen.getByText(AUTHOR_NAME)).toBeInTheDocument();
     expect(screen.getAllByText("svgrurl")).toHaveLength(3);
   });
 
