@@ -187,7 +187,7 @@ export async function generatePageMetadata({
   const title = generateTitle(page.title, project?.title);
   const description = project?.body
     ? getDescriptionFromSanity(project.body)
-    : page.description;
+    : page.description || setting?.description || "";
 
   const url = buildPageUrl(pageSlug, project?.slug.current);
   const imageUrl = project?.imageURL || page.imageURL || setting.imageURL;
