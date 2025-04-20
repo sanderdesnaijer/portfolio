@@ -47,6 +47,8 @@ export const useScrollPosition = (
         direction = scrollY > lastY ? "down" : "up";
       }
       element.classList.toggle(shadowClassName, scrollY > 0);
+
+      console.log(scrollY > 0);
       element.classList.toggle(className, isPastOffset && direction === "down");
 
       lastY = scrollY;
