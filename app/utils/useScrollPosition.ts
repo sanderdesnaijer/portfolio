@@ -30,7 +30,7 @@ export const useScrollPosition = (
     const mediaQuery = window.matchMedia(mediaQueryMatch);
 
     let direction = "";
-    let lastY: number | null = null;
+    let lastY: number = 0;
     let isPastOffset = false;
     let isDisabled = mediaQuery.matches;
 
@@ -44,9 +44,10 @@ export const useScrollPosition = (
       const isAtBottom =
         scrollY + window.innerHeight >= document.documentElement.scrollHeight;
 
-      if (!isAtBottom && lastY !== null) {
+      if (!isAtBottom) {
         direction = scrollY > lastY ? "down" : "up";
       }
+
       element.classList.toggle(shadowClassName, scrollY > 0);
       element.classList.toggle(className, isPastOffset && direction === "down");
 
