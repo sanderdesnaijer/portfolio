@@ -22,6 +22,7 @@ export const useScrollPosition = (
 
     const offsetElement = element.querySelector(offsetSelector);
     if (!offsetElement) {
+      // eslint-disable-next-line no-console
       console.warn(`No element found for selector "${offsetSelector}"`);
     }
 
@@ -47,8 +48,6 @@ export const useScrollPosition = (
         direction = scrollY > lastY ? "down" : "up";
       }
       element.classList.toggle(shadowClassName, scrollY > 0);
-
-      console.log(scrollY > 0);
       element.classList.toggle(className, isPastOffset && direction === "down");
 
       lastY = scrollY;
@@ -57,8 +56,7 @@ export const useScrollPosition = (
     const onMediaChange = (event: MediaQueryListEvent) => {
       isDisabled = event.matches;
       if (event.matches) {
-        element.classList.remove(className);
-        element.classList.remove(shadowClassName);
+        element.classList.remove(className, shadowClassName);
       }
     };
 
@@ -68,8 +66,7 @@ export const useScrollPosition = (
     return () => {
       window.removeEventListener("scroll", onScroll);
       mediaQuery.removeEventListener("change", onMediaChange);
-      element.classList.remove(className);
-      element.classList.remove(shadowClassName);
+      element.classList.remove(className, shadowClassName);
     };
   }, [headerRef, className, offsetSelector, mediaQueryMatch, shadowClassName]);
 };
