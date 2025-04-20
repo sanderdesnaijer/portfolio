@@ -1,128 +1,73 @@
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useEffect } from "react";
 
-/**
- * Custom hook to manage sticky positioning based on scroll behavior.
- * @param mainRef - Reference to the main container that should contain an element with [data-sticky].
- *                  Example:
- *                  ```tsx
- *                  <div ref={mainRef}>
- *                    <div data-sticky>Sticky Element</div>
- *                  </div>
- *                  ```
- * @returns Object containing sticky state information.
- * @warning The provided `mainRef` must contain an element with `[data-sticky]`, otherwise the hook will not function properly.
- */
-export default function useScrollPosition(
-  ref: React.RefObject<HTMLDivElement | null>
-) {
-  const scrollPositionTrigger = useRef<number | null>(null);
-  const [isStickyEnabled, setIsStickyEnabled] = useState(false);
-  const ticking = useRef(false);
-  const lastY = useRef(0);
+interface UseScrollHeaderOptions {
+  className?: string;
+  shadowClassName?: string;
+  offsetSelector?: string;
+  mediaQueryMatch?: string;
+}
 
-  const removeClasses = useCallback(() => {
-    ref.current?.classList.remove(
-      "custom-has-scrolled",
-      "custom-sticky",
-      "custom-sticky-show"
-    );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const addClasses = useCallback(
-    (currentY: number, offsetTop: number) => {
-      const classList = ref.current?.classList;
-      const isSticky = offsetTop - currentY <= 0;
-      const direction = currentY > lastY.current ? "down" : "up";
-
-      classList?.toggle("custom-has-scrolled", currentY > 0);
-
-      if (isSticky) {
-        classList?.add("custom-sticky");
-        classList?.toggle("custom-sticky-show", direction === "up");
-      } else {
-        classList?.remove("custom-sticky", "custom-sticky-show");
-      }
-    },
-    [ref]
-  );
-
-  const registerScrollPositionTrigger = useCallback(() => {
-    if (scrollPositionTrigger.current === null && ref.current) {
-      // Find element 'data-sticky' (or another selector)
-      const stickyElement = ref.current.querySelector(
-        "[data-sticky]"
-      ) as HTMLElement;
-      if (stickyElement) {
-        const { height } = stickyElement.getBoundingClientRect();
-        scrollPositionTrigger.current = height * 2;
-      } else {
-        // eslint-disable-next-line no-console
-        console.warn(
-          "useScrollPosition: No element with [data-sticky] found inside the provided ref."
-        );
-      }
-    }
-  }, [ref]);
-
-  const handleMediaQueryChange = useCallback(
-    (event: MediaQueryListEvent) => {
-      const shouldEnableSticky = !event.matches;
-      setIsStickyEnabled(shouldEnableSticky);
-
-      if (shouldEnableSticky) {
-        registerScrollPositionTrigger();
-      }
-
-      removeClasses();
-    },
-    [removeClasses, registerScrollPositionTrigger]
-  );
-
-  const processScroll = useCallback(() => {
-    const currentY = window.scrollY;
-    const offsetTop = scrollPositionTrigger.current ?? 0;
-    const maxScroll =
-      document.documentElement.scrollHeight - window.innerHeight;
-
-    if (currentY >= maxScroll) {
-      lastY.current = maxScroll;
-      ticking.current = false;
-      return;
-    }
-
-    addClasses(currentY, offsetTop);
-    lastY.current = currentY;
-    ticking.current = false;
-  }, [addClasses]);
-
-  const handleScroll = useCallback(() => {
-    if (!ticking.current && isStickyEnabled) {
-      ticking.current = true;
-      requestAnimationFrame(processScroll);
-    }
-  }, [isStickyEnabled, processScroll]);
-
+export const useScrollPosition = (
+  headerRef: React.RefObject<HTMLElement | null>,
+  {
+    className = "hide-menu",
+    shadowClassName = "detached-menu",
+    offsetSelector = "[data-scroll-anchor]",
+    mediaQueryMatch = "(min-width: 48rem)",
+  }: UseScrollHeaderOptions = {}
+) => {
   useEffect(() => {
-    const mdQuery = window.matchMedia("(min-width: 48rem)");
-    const shouldEnableSticky = !mdQuery.matches;
-    setIsStickyEnabled(shouldEnableSticky);
+    const element = headerRef.current;
+    if (!element) return;
 
-    if (shouldEnableSticky) {
-      registerScrollPositionTrigger();
-      handleScroll();
+    const offsetElement = element.querySelector(offsetSelector);
+    if (!offsetElement) {
+      console.warn(`No element found for selector "${offsetSelector}"`);
     }
 
-    lastY.current = window.scrollY;
+    const offset = offsetElement?.getBoundingClientRect().height || 0;
+    const mediaQuery = window.matchMedia(mediaQueryMatch);
 
-    mdQuery.addEventListener("change", handleMediaQueryChange);
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    let direction = "";
+    let lastY: number | null = null;
+    let isPastOffset = false;
+    let isDisabled = mediaQuery.matches;
+
+    const onScroll = () => {
+      if (isDisabled) return;
+
+      const { scrollY } = window;
+
+      isPastOffset = scrollY > offset;
+
+      const isAtBottom =
+        scrollY + window.innerHeight >= document.documentElement.scrollHeight;
+
+      if (!isAtBottom && lastY !== null) {
+        direction = scrollY > lastY ? "down" : "up";
+      }
+      element.classList.toggle(shadowClassName, scrollY > 0);
+      element.classList.toggle(className, isPastOffset && direction === "down");
+
+      lastY = scrollY;
+    };
+
+    const onMediaChange = (event: MediaQueryListEvent) => {
+      isDisabled = event.matches;
+      if (event.matches) {
+        element.classList.remove(className);
+        element.classList.remove(shadowClassName);
+      }
+    };
+
+    mediaQuery.addEventListener("change", onMediaChange);
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
-      mdQuery.removeEventListener("change", handleMediaQueryChange);
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", onScroll);
+      mediaQuery.removeEventListener("change", onMediaChange);
+      element.classList.remove(className);
+      element.classList.remove(shadowClassName);
     };
-  }, [handleScroll, handleMediaQueryChange, registerScrollPositionTrigger]);
-
-  return { isStickyEnabled };
-}
+  }, [headerRef, className, offsetSelector, mediaQueryMatch, shadowClassName]);
+};

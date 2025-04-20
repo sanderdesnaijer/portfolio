@@ -16,7 +16,7 @@ const Menu = React.forwardRef<
 >(
   (
     {
-      className = "fixed bottom-0 order-2 flex w-full min-w-[172px] border-none bg-white px-6 font-extralight shadow-[-1px_-1px_3px_0_rgba(0,0,0,0.1),_-1px_-1px_2px_-1px_rgba(0,0,0,0.1)] transition-transform group-[.custom-sticky]:translate-y-full group-[.custom-sticky-show]:-translate-y-0 md:relative md:w-auto md:flex-col md:justify-end md:bg-transparent md:py-6 md:text-4xl md:shadow-none dark:bg-black dark:shadow-black dark:md:bg-transparent",
+      className = "fixed bottom-0 order-2 flex w-full min-w-[172px] border-none bg-white px-6 font-extralight shadow-[-1px_-1px_3px_0_rgba(0,0,0,0.1),_-1px_-1px_2px_-1px_rgba(0,0,0,0.1)] transition-transform group-[.hide-menu]:translate-y-full -translate-y-0 md:relative md:w-auto md:flex-col md:justify-end md:bg-transparent md:py-6 md:text-4xl md:shadow-none dark:bg-black dark:shadow-black dark:md:bg-transparent",
       menuItems,
     },
     ref
@@ -36,7 +36,7 @@ const Menu = React.forwardRef<
 
     return (
       <nav
-        data-sticky
+        data-scroll-anchor
         aria-label={t("generic.mainNavigation")}
         ref={ref}
         className={className}

@@ -5,7 +5,7 @@ import Menu, { MenuItem } from "./Menu";
 import { ThemeToggle } from "./ThemeToggle/ThemeToggle";
 import SiteLogo from "../../public/logo.svg";
 import { useRef } from "react";
-import useScrollPosition from "../utils/useScrollPosition";
+import { useScrollPosition } from "../utils/useScrollPosition";
 
 export const Header = ({ menuItems }: { menuItems: MenuItem[] }) => {
   const stickyRef = useRef<HTMLDivElement>(null);
@@ -17,7 +17,7 @@ export const Header = ({ menuItems }: { menuItems: MenuItem[] }) => {
       className="group sticky top-[0px] z-20 col-span-9 flex flex-col justify-end md:top-0 md:col-span-3 md:h-screen md:flex-row md:gap-4 md:px-6 md:py-0 xl:col-span-2"
     >
       <Menu menuItems={menuItems} />
-      <div className="flex flex-col justify-between bg-white px-6 py-1 transition-all group-[.custom-has-scrolled]:shadow-sm group-[.custom-sticky]:-translate-y-full group-[.custom-sticky-show]:-translate-y-0 md:translate-y-0 md:items-center md:overflow-visible md:bg-transparent md:px-0 md:py-6 md:shadow-none md:transition-none dark:bg-black dark:shadow-black dark:md:bg-transparent">
+      <div className="flex -translate-y-0 flex-col justify-between bg-white px-6 py-1 transition-all group-[.detached-menu]:shadow-sm group-[.hide-menu]:-translate-y-full md:translate-y-0 md:items-center md:overflow-visible md:bg-transparent md:px-0 md:py-6 md:shadow-none md:transition-none dark:bg-black dark:shadow-black dark:md:bg-transparent">
         <div className="z-1 order-2 flex flex-col justify-between md:flex md:items-center">
           <Link
             href={"/"}
