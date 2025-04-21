@@ -49,6 +49,7 @@ export const useScrollPosition = (
     const getOffset = () => {
       const offsetElement = headerRef.current?.querySelector(offsetSelector);
       if (!offsetElement) {
+        // eslint-disable-next-line no-console
         console.warn(`No element found for selector "${offsetSelector}"`);
         return 0;
       }
