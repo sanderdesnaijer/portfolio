@@ -22,8 +22,9 @@ jest.mock("./CookieBanner", () => {
   return {
     __esModule: true,
     default: () => <div data-testid="cookie-banner">CookieBanner</div>,
+    // use globalThis instead of window so the factory doesn't reference out-of-scope vars
     getLocalStorage: jest.fn((key, defaultValue) => {
-      return window.localStorage.getItem(key) || defaultValue;
+      return globalThis.localStorage.getItem(key) || defaultValue;
     }),
   };
 });

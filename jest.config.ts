@@ -34,7 +34,21 @@ const customConfig: Config = {
 
   // Ensure TS/JS go through babel-jest with Next’s preset
   transform: {
-    "^.+\\.(ts|tsx|js|jsx)$": ["babel-jest", { presets: ["next/babel"] }],
+    "^.+\\.(js|jsx|ts|tsx)$": [
+      "babel-jest",
+      {
+        presets: [
+          [
+            "next/babel",
+            {
+              "preset-react": {
+                runtime: "automatic",
+              },
+            },
+          ],
+        ],
+      },
+    ],
   },
 
   // Helps with ESM files shipped as .mjs
