@@ -40,7 +40,7 @@ describe("app/page", () => {
     render(await Home());
 
     expect(screen.getByText(AUTHOR_NAME)).toBeInTheDocument();
-    expect(screen.getAllByText("svgrurl")).toHaveLength(3);
+    expect(screen.getAllByTestId("mocked-svg")).toHaveLength(3);
   });
 
   it("calls sanityFetch with the correct query", async () => {

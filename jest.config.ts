@@ -32,7 +32,7 @@ const customConfig: Config = {
     "node_modules/(?!(@mswjs/interceptors|msw|until-async|next-sanity|@sanity)/)",
   ],
 
-  // Ensure TS/JS go through babel-jest with Next’s preset
+  // Ensure TS/JS go through babel-jest with Next's preset
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": [
       "babel-jest",
