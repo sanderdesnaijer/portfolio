@@ -1,3 +1,5 @@
+import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
+import nextTypescript from "eslint-config-next/typescript";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -12,7 +14,9 @@ const compat = new FlatCompat({
 import noHardcodedAriaLabels from "./eslint-rules/no-hardcoded-aria-labels.js";
 
 const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript", "prettier"),
+  ...nextCoreWebVitals,
+  ...nextTypescript,
+  ...compat.extends("prettier"),
   {
     plugins: {
       "custom-rules": {
@@ -45,6 +49,19 @@ const eslintConfig = [
     rules: {
       "react/jsx-no-literals": "off",
     },
+  },
+  {
+    ignores: [
+      "node_modules/**",
+      ".next/**",
+      "out/**",
+      "build/**",
+      "next-env.d.ts",
+      "e2e/**",
+      "playwright-report/**",
+      "**/*.svg",
+      "coverage/**",
+    ],
   },
 ];
 
