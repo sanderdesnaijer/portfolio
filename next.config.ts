@@ -4,9 +4,6 @@ import type { NextConfig } from "next";
 const withNextIntl = createNextIntlPlugin("./app/utils/i18n.ts");
 
 const nextConfig: NextConfig = {
-  eslint: {
-    dirs: ["app", "e2e", "sanity"],
-  },
   images: {
     remotePatterns: [
       {
@@ -37,11 +34,31 @@ const nextConfig: NextConfig = {
       }
     }
 
+    // Handle SVG files
     config.module.rules.push({
-      test: /\.svg$/,
-      use: ["@svgr/webpack"],
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: [
+        {
+          loader: "@svgr/webpack",
+          options: {
+            typescript: true,
+            ext: "tsx",
+          },
+        },
+      ],
     });
+
     return config;
+  },
+
+  turbopack: {
+    rules: {
+      "*.svg": {
+        loaders: ["@svgr/webpack"],
+        as: "*.js",
+      },
+    },
   },
 };
 

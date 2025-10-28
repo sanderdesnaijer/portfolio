@@ -1,4 +1,3 @@
-import React from "react";
 import { render } from "@testing-library/react";
 import { Tags } from "./Tags";
 import { TagSanity } from "@/sanity/types/tagType";

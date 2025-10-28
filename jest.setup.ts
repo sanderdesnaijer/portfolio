@@ -21,6 +21,24 @@ jest.mock("@/sanity/lib/client", () => ({
   },
 }));
 
+// Mock SVG imports
+jest.mock("*.svg", () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const React = require("react") as typeof import("react");
+  const SvgComponent = React.forwardRef<
+    SVGSVGElement,
+    React.SVGProps<SVGSVGElement>
+  >((props, ref) => {
+    return React.createElement("svg", {
+      ...props,
+      ref,
+      "data-testid": "mocked-svg",
+    } as React.SVGProps<SVGSVGElement>);
+  });
+  SvgComponent.displayName = "SvgComponent";
+  return SvgComponent;
+});
+
 // check if window is defined for node env tests
 if (typeof window !== "undefined") {
   Object.defineProperty(window, "matchMedia", {

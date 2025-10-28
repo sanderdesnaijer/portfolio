@@ -3,7 +3,7 @@ import Link from "next/link";
 import { AUTHOR_NAME } from "../utils/constants";
 import Menu, { MenuItem } from "./Menu";
 import { ThemeToggle } from "./ThemeToggle/ThemeToggle";
-import SiteLogo from "../../public/logo.svg";
+import SiteLogo from "@/public/logo.svg";
 import { useRef } from "react";
 import { useScrollPosition } from "../utils/useScrollPosition";
 
