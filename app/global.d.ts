@@ -15,11 +15,14 @@ declare module "next-intl" {
 }
 
 declare module "*.svg" {
+  const content: string; // For static <img src> usage
+  export default content;
+
   import * as React from "react";
-  const ReactComponent: React.FunctionComponent<
+  export const ReactComponent: React.FunctionComponent<
     React.SVGProps<SVGSVGElement> & { title?: string }
   >;
-  export default ReactComponent;
+  export { ReactComponent as Raw }; // Optional: Fallback to raw SVG string if needed
 }
 
 declare module "*.svg?url" {
