@@ -19,13 +19,15 @@
     "alwaysStrict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
+    "typeRoots": ["./node_modules/@types", "./app/types", "./types"],
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/app/assets/*": ["./app/assets/*"]
     }
   },
   "include": [
@@ -34,6 +36,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/global.d.ts",
+    "app/types/svg.d.ts",
+    "types/svg.d.ts",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules", ".next"]
