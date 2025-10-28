@@ -25,8 +25,7 @@ jest.mock("@/sanity/lib/client", () => ({
 jest.mock("*.svg", () => {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const React = require("react") as typeof import("react");
-  type SvgProps = React.SVGProps<SVGSVGElement>;
-  const SvgComponent = React.forwardRef<SVGSVGElement, SvgProps>(
+  const SvgComponent = React.forwardRef<SVGSVGElement, React.SVGProps<SVGSVGElement>>(
     (props, ref) => {
       return React.createElement("svg", {
         ...props,
