@@ -1,5 +1,5 @@
 import { getIcon, icons, iconSize } from "./Icons";
-import Missing from "@/app/assets/icons/missing.svg";
+import Missing from "@/public/icons/missing.svg";
 
 describe("Icons component", () => {
   it("should return the Missing icon component for an unknown icon", () => {

@@ -15,7 +15,7 @@ import { getWebsiteScheme } from "./utils/jsonLDSchemes";
 import { JsonLd } from "./components/JsonLd";
 import envConfig from "@/envConfig";
 
-import SiteLogo from "@/app/assets/logo.svg";
+import SiteLogo from "@/public/logo.svg";
 import { Footer } from "./components/Footer";
 import { AUTHOR_NAME } from "./utils/constants";
 

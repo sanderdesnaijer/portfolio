@@ -1,15 +1,15 @@
-import Github from "@/app/assets/icons/github.svg";
-import Article from "@/app/assets/icons/article.svg";
-import Download from "@/app/assets/icons/download.svg";
-import Demo from "@/app/assets/icons/demo.svg";
-import Gitlab from "@/app/assets/icons/gitlab.svg";
-import Linkedin from "@/app/assets/icons/linkedin.svg";
-import Missing from "@/app/assets/icons/missing.svg";
-import ChevronRight from "@/app/assets/icons/chevron-right.svg";
-import X from "@/app/assets/icons/x.svg";
-import YouTube from "@/app/assets/icons/youtube.svg";
-import Instagram from "@/app/assets/icons/instagram.svg";
-import Medium from "@/app/assets/icons/medium.svg";
+import Github from "@/public/icons/github.svg";
+import Article from "@/public/icons/article.svg";
+import Download from "@/public/icons/download.svg";
+import Demo from "@/public/icons/demo.svg";
+import Gitlab from "@/public/icons/gitlab.svg";
+import Linkedin from "@/public/icons/linkedin.svg";
+import Missing from "@/public/icons/missing.svg";
+import ChevronRight from "@/public/icons/chevron-right.svg";
+import X from "@/public/icons/x.svg";
+import YouTube from "@/public/icons/youtube.svg";
+import Instagram from "@/public/icons/instagram.svg";
+import Medium from "@/public/icons/medium.svg";
 
 export const iconSize = 24;
 
