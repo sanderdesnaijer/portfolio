@@ -19,7 +19,7 @@
     "alwaysStrict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "typeRoots": ["./node_modules/@types", "./app/types", "./types"],
+    "typeRoots": ["./node_modules/@types", "./app/types"],
     "plugins": [
       {
         "name": "next"
