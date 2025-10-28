@@ -36,8 +36,7 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/global.d.ts",
-    "app/types/svg.d.ts",
-    "types/svg.d.ts",
+    "app/types/svg.d.ts",    
     ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules", ".next"]
