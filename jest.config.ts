@@ -60,7 +60,7 @@ const customConfig: Config = {
 };
 
 // Let next/jest build its base, then force our overrides where needed
-export default async () => {
+const jestConfig = async (): Promise<Config> => {
   const cfg = await createJestConfig(customConfig)();
   return {
     ...cfg,
@@ -69,3 +69,5 @@ export default async () => {
     extensionsToTreatAsEsm: customConfig.extensionsToTreatAsEsm,
   } as Config;
 };
+
+export default jestConfig;
