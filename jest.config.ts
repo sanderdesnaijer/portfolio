@@ -21,6 +21,7 @@ const customConfig: Config = {
   coverageProvider: "v8",
 
   testEnvironment: "jest-fixed-jsdom",
+  setupFiles: ["<rootDir>/jest.polyfills.js"],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
 
   moduleNameMapper: {
@@ -30,7 +31,7 @@ const customConfig: Config = {
 
   // IMPORTANT: transpile ESM packages from node_modules
   transformIgnorePatterns: [
-    "node_modules/(?!(@mswjs/interceptors|msw|until-async|next-sanity|@sanity)/)",
+    "node_modules/(?!(@mswjs/interceptors|msw|until-async|next-sanity|@sanity|@portabletext)/)",
   ],
 
   // Ensure TS/JS go through babel-jest with Next's preset
@@ -59,7 +60,7 @@ const customConfig: Config = {
 };
 
 // Let next/jest build its base, then force our overrides where needed
-export default async () => {
+const jestConfig = async (): Promise<Config> => {
   const cfg = await createJestConfig(customConfig)();
   return {
     ...cfg,
@@ -68,3 +69,5 @@ export default async () => {
     extensionsToTreatAsEsm: customConfig.extensionsToTreatAsEsm,
   } as Config;
 };
+
+export default jestConfig;
