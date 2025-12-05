@@ -19,14 +19,12 @@ const nextConfig: NextConfig = {
     // Medium CDN blocks server-side requests, so images load directly in browser
     // In production, images in dangerouslySetInnerHTML won't be optimized anyway
     unoptimized: process.env.NODE_ENV === "development",
-    // Add headers to image requests to help with Medium CDN
+    // Set minimum cache duration for optimized images (in seconds)
     minimumCacheTTL: 60,
   },
-  // Fix cross-origin warning for Playwright tests and local network access
-  allowedDevOrigins:
-    process.env.NODE_ENV === "development"
-      ? ["192.168.1.12", "localhost", "127.0.0.1"]
-      : undefined,
+  // Note: Cross-origin warnings from local network IPs (e.g., 192.168.1.12) in development
+  // are expected when running Playwright tests. These warnings are informational
+  // and don't affect functionality. Next.js may add allowedDevOrigins in a future version.
   webpack: (config, { isServer }) => {
     if (isServer) {
       // next server build => ignore msw/browser

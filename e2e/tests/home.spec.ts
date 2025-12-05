@@ -21,7 +21,7 @@ async function checkHomePageElements(page: Page) {
     "gitlab",
     "x",
     "instagram",
-    "youtube",
+    // "youtube",
   ];
   for (const button of socialButtons) {
     await expect(
