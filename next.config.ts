@@ -23,9 +23,10 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 60,
   },
   // Fix cross-origin warning for Playwright tests and local network access
-  allowedDevOrigins: process.env.NODE_ENV === "development" 
-    ? ["192.168.1.12", "localhost", "127.0.0.1"]
-    : undefined,
+  allowedDevOrigins:
+    process.env.NODE_ENV === "development"
+      ? ["192.168.1.12", "localhost", "127.0.0.1"]
+      : undefined,
   webpack: (config, { isServer }) => {
     if (isServer) {
       // next server build => ignore msw/browser
