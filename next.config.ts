@@ -15,7 +15,17 @@ const nextConfig: NextConfig = {
         hostname: "cdn-images-1.medium.com",
       },
     ],
+    // Disable optimization in development to avoid 403 errors from Medium CDN
+    // Medium CDN blocks server-side requests, so images load directly in browser
+    // In production, images in dangerouslySetInnerHTML won't be optimized anyway
+    unoptimized: process.env.NODE_ENV === "development",
+    // Add headers to image requests to help with Medium CDN
+    minimumCacheTTL: 60,
   },
+  // Fix cross-origin warning for Playwright tests and local network access
+  allowedDevOrigins: process.env.NODE_ENV === "development" 
+    ? ["192.168.1.12", "localhost", "127.0.0.1"]
+    : undefined,
   webpack: (config, { isServer }) => {
     if (isServer) {
       // next server build => ignore msw/browser
