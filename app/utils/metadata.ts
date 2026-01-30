@@ -3,6 +3,7 @@ import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity, SettingSanity } from "@/sanity/types";
 import { buildPageUrl, generateTitle, getDescriptionFromSanity } from "./utils";
 import { AUTHOR_NAME } from "./constants";
+import envConfig from "@/envConfig";
 
 export const generateMetaData = ({
   title,
@@ -72,6 +73,12 @@ export const generateMetaData = ({
   alternates: {
     canonical: canonical || url,
   },
+  // Google Search Console verification
+  ...(envConfig.googleSiteVerification && {
+    verification: {
+      google: envConfig.googleSiteVerification,
+    },
+  }),
   icons: {
     icon: [
       {

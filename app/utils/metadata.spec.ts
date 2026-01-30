@@ -117,6 +117,50 @@ describe("app/utils/metadata", () => {
 
       expect(result.alternates.canonical).toBe(data.url);
     });
+
+    it("should include Google site verification when env var is set", () => {
+      const originalValue = envConfig.googleSiteVerification;
+      envConfig.googleSiteVerification = "test-verification-code";
+
+      const data = {
+        title: "Article Title",
+        description: "Article Description",
+        url: "https://example.com/article",
+        publishedTime: "2025-03-01T00:00:00Z",
+        modifiedTime: "2025-03-01T01:00:00Z",
+        imageUrl: "https://example.com/image.png",
+      };
+
+      const result = generateMetaData(data);
+
+      expect(result.verification).toEqual({
+        google: "test-verification-code",
+      });
+
+      // Restore original value
+      envConfig.googleSiteVerification = originalValue;
+    });
+
+    it("should not include verification when googleSiteVerification is not set", () => {
+      const originalValue = envConfig.googleSiteVerification;
+      envConfig.googleSiteVerification = undefined;
+
+      const data = {
+        title: "Article Title",
+        description: "Article Description",
+        url: "https://example.com/article",
+        publishedTime: "2025-03-01T00:00:00Z",
+        modifiedTime: "2025-03-01T01:00:00Z",
+        imageUrl: "https://example.com/image.png",
+      };
+
+      const result = generateMetaData(data);
+
+      expect(result.verification).toBeUndefined();
+
+      // Restore original value
+      envConfig.googleSiteVerification = originalValue;
+    });
   });
 
   describe("generatePageMetadata", () => {
