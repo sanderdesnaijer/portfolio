@@ -27,6 +27,7 @@ const customConfig: Config = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
     "\\.svg": "<rootDir>/app/__mocks__/svg.ts",
+    "^@sanity/image-url$": "<rootDir>/app/__mocks__/@sanity/image-url.ts",
   },
 
   // IMPORTANT: transpile ESM packages from node_modules
