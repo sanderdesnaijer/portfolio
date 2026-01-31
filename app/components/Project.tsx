@@ -7,6 +7,7 @@ import { convertDate } from "../utils/utils";
 import { useTranslations } from "next-intl";
 import { ProjectLayout } from "./ProjectLayout";
 import { urlFor } from "@/sanity/lib/image";
+import { portableTextComponents } from "./portableTextComponents";
 
 const imageWidth = 860;
 const imageHeight = 440;
@@ -54,7 +55,12 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
         </p>
       ) : null}
 
-      {project?.body ? <PortableText value={project.body} /> : null}
+      {project?.body ? (
+        <PortableText
+          value={project.body}
+          components={portableTextComponents}
+        />
+      ) : null}
     </ProjectLayout>
   );
 };

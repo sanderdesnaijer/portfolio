@@ -1,5 +1,5 @@
 import { defineType, defineArrayMember } from "sanity";
-import { ImageIcon } from "@sanity/icons";
+import { ImageIcon, PlayIcon } from "@sanity/icons";
 
 /**
  * This is the schema type for block content used in the project document type
@@ -71,6 +71,10 @@ export const blockContentType = defineType({
           title: "Alternative Text",
         },
       ],
+    }),
+    defineArrayMember({
+      type: "youTube",
+      icon: PlayIcon,
     }),
   ],
 });
