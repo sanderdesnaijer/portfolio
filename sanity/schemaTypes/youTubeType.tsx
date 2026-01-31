@@ -29,6 +29,31 @@ export const youTubeType = defineType({
       title: "YouTube video URL",
       description:
         "Paste a YouTube URL (e.g., https://www.youtube.com/watch?v=dQw4w9WgXcQ)",
+      validation: (Rule) =>
+        Rule.required().custom((value) => {
+          if (!value) {
+            return "A YouTube URL is required";
+          }
+
+          try {
+            const parsed = new URL(value);
+            const host = parsed.hostname.toLowerCase();
+
+            const isYouTubeHost =
+              host === "youtube.com" ||
+              host === "www.youtube.com" ||
+              host.endsWith(".youtube.com") ||
+              host === "youtu.be";
+
+            if (!isYouTubeHost) {
+              return "URL must be a YouTube URL (youtube.com or youtu.be)";
+            }
+
+            return true;
+          } catch {
+            return "Invalid URL format";
+          }
+        }),
     }),
   ],
   preview: {

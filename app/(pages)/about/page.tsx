@@ -17,6 +17,7 @@ import { getAboutScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import envConfig from "@/envConfig";
 import { PageLayout } from "@/app/components/PageLayout";
+import { portableTextComponents } from "@/app/components/portableTextComponents";
 
 const mainImageSizeHeight = 341;
 const mainImageSizeWidth = 256;
@@ -24,6 +25,7 @@ const companyIconSize = 56;
 const { about: slug } = pageSlugs;
 
 const components: Partial<PortableTextReactComponents> = {
+  ...portableTextComponents,
   block: {
     normal: ({ children }: { children?: React.ReactNode }) => (
       <p className="text-lg leading-8">{children}</p>
