@@ -48,14 +48,7 @@ export default defineConfig({
 
     {
       name: "firefox",
-      use: {
-        ...devices["Desktop Firefox"],
-        actionTimeout: 6000,
-      },
-      // Increase expect timeout for Firefox (slower in CI)
-      expect: {
-        timeout: 6000,
-      },
+      use: { ...devices["Desktop Firefox"] },
     },
 
     {
