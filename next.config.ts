@@ -18,7 +18,7 @@ const nextConfig: NextConfig = {
     // Disable optimization to avoid 429 rate limit errors from Medium CDN
     // Medium CDN blocks/rate-limits server-side requests
     // Images from Sanity will still work fine without optimization
-    unoptimized: true,
+    unoptimized: process.env.NODE_ENV !== "production",
     // Set minimum cache duration for optimized images (in seconds)
     minimumCacheTTL: 60,
   },
