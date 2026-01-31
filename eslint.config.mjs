@@ -44,6 +44,19 @@ const eslintConfig = [
       "custom-rules/no-hardcoded-aria-labels": "error",
     },
   },
+  // Typed linting for TypeScript files only (required for no-deprecated rule)
+  {
+    files: ["**/*.ts", "**/*.tsx"],
+    languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: __dirname,
+      },
+    },
+    rules: {
+      "@typescript-eslint/no-deprecated": "error",
+    },
+  },
   {
     files: ["**/*.spec.ts", "**/*.spec.tsx"],
     rules: {
@@ -61,6 +74,7 @@ const eslintConfig = [
       "playwright-report/**",
       "**/*.svg",
       "coverage/**",
+      "public/mockServiceWorker.js",
     ],
   },
 ];

@@ -15,10 +15,10 @@ const nextConfig: NextConfig = {
         hostname: "cdn-images-1.medium.com",
       },
     ],
-    // Disable optimization in development to avoid 403 errors from Medium CDN
-    // Medium CDN blocks server-side requests, so images load directly in browser
-    // In production, images in dangerouslySetInnerHTML won't be optimized anyway
-    unoptimized: process.env.NODE_ENV === "development",
+    // Disable optimization to avoid 429 rate limit errors from Medium CDN
+    // Medium CDN blocks/rate-limits server-side requests
+    // Images from Sanity will still work fine without optimization
+    unoptimized: process.env.NODE_ENV !== "production",
     // Set minimum cache duration for optimized images (in seconds)
     minimumCacheTTL: 60,
   },

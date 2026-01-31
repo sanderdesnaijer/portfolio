@@ -13,6 +13,7 @@ import { fetchPage } from "@/app/utils/api";
 import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import { mockConsent } from "../utils/localStorage";
+import { blockExternalImages } from "../utils/mockImages";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -34,6 +35,7 @@ async function checkPageElements(page: Page) {
 
 test.describe("blog detail", () => {
   test.beforeEach(async ({ page }) => {
+    await blockExternalImages(page);
     await mockConsent(page);
     await page.goto(
       "blog/building-my-first-flutter-app-challenges-and-lessons-learned"
@@ -120,6 +122,7 @@ test.describe("blog detail not found", () => {
   test("blog detail show a message when blog can not be found", async ({
     page,
   }) => {
+    await blockExternalImages(page);
     await page.goto("/blog/does-not-exist");
 
     await expect(
