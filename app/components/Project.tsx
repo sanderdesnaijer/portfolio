@@ -56,7 +56,10 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
       ) : null}
 
       {project?.body ? (
-        <PortableText value={project.body} components={portableTextComponents} />
+        <PortableText
+          value={project.body}
+          components={portableTextComponents}
+        />
       ) : null}
     </ProjectLayout>
   );
