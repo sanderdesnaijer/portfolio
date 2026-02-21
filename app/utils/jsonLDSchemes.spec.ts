@@ -259,6 +259,14 @@ describe("utils/jsonLDSchemes", () => {
             description:
               "Building my first Flutter app has been an exciting journey...",
             applicationCategory: "MobileApplication",
+            offers: {
+              "@type": "Offer",
+              "@id":
+                "https://mocked-url.com/projects/flutter-tabata-whip-timer#offer",
+              price: "0.00",
+              priceCurrency: "USD",
+              availability: "https://schema.org/InStock",
+            },
           },
         ],
       });
@@ -358,6 +366,7 @@ describe("utils/jsonLDSchemes", () => {
 
       const result = getProjectsScheme({ page, projects });
       expect(result.hasPart[0]).not.toHaveProperty("applicationCategory");
+      expect(result.hasPart[0]).toHaveProperty("offers");
     });
 
     it("should include downloadUrl and offers when jsonLdDownloadUrl is provided", () => {
@@ -388,8 +397,30 @@ describe("utils/jsonLDSchemes", () => {
         "@id": "https://mocked-url.com/downloadable/downloadable-app#offer",
         price: "0.00",
         priceCurrency: "USD",
-        availability: "https://schema.org/OnlineOnly",
+        availability: "https://schema.org/InStock",
       });
+    });
+
+    it("should not include offers for non-product projects without download url", () => {
+      const page = {
+        title: "No Offer Project",
+        slug: { current: "no-offer" },
+        description: "Test for omitting offers when condition is false",
+      } as PageSanity;
+
+      const projects = [
+        {
+          title: "Web App Without Offer",
+          slug: { current: "web-app-without-offer" },
+          imageURL: "https://example.com/image.jpg",
+          body: "A non-product project without download URL",
+          jsonLdType: ["WebApplication"],
+        },
+      ] as unknown as ProjectTypeSanity[];
+
+      const result = getProjectsScheme({ page, projects });
+
+      expect(result.hasPart[0]).not.toHaveProperty("offers");
     });
 
     it("should include author and publisher when jsonLdIsAuthor is true", () => {
