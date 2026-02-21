@@ -7,8 +7,12 @@ const getFooterText = (): string => {
   return `© ${new Date().getFullYear()} ${AUTHOR_INITIALS}`;
 };
 
-export const Footer: React.FC<{ socialMedia: Array<IconLink> }> = ({
+export const Footer: React.FC<{
+  socialMedia: Array<IconLink>;
+  cookiePolicyLabel?: string;
+}> = ({
   socialMedia,
+  cookiePolicyLabel = "Cookie Policy",
 }) => {
   return (
     <footer className="relative col-span-9 border-black after:absolute after:top-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black md:col-span-6 md:col-start-4 md:before:-bottom-10 lg:col-span-5 lg:col-start-4 xl:col-start-3 before:dark:bg-white dark:after:bg-white">
@@ -17,7 +21,7 @@ export const Footer: React.FC<{ socialMedia: Array<IconLink> }> = ({
           href="/info/cookies"
           className="mb-2 text-sm hover:underline md:mb-0"
         >
-          Cookie Policy
+          {cookiePolicyLabel}
         </Link>
         <div className="flex flex-col items-center md:flex-row">
           <p className="mb-2 text-sm md:mb-0">{getFooterText()}</p>

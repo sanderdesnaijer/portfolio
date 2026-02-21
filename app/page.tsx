@@ -45,12 +45,11 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const [commonData, page] = await fetchPageData();
+  const t = await getTranslations();
 
   const { setting, menuItems } = commonData;
 
   if (!setting || !menuItems) {
-    const t = await getTranslations();
-
     return (
       <NotFound
         title={t("error.404.generic.title")}
@@ -91,7 +90,10 @@ export default async function Home() {
           />
         </main>
 
-        <Footer socialMedia={setting.socialMedia} />
+        <Footer
+          socialMedia={setting.socialMedia}
+          cookiePolicyLabel={t("cookies.title")}
+        />
       </div>
     </>
   );
