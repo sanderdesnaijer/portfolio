@@ -32,7 +32,7 @@ export const Tags: React.FC<TagsProps> = ({
         >
           {renderLinks ? (
             <Link
-              className="no-underline hover:underline"
+              className="relative z-10 no-underline hover:underline"
               href={`/tags/${toTagSlug(tag.label)}`}
             >
               {tag.label}

@@ -97,8 +97,7 @@ export const getProjectScheme = (
         availability: "https://schema.org/InStock",
         hasMerchantReturnPolicy: {
           "@type": "MerchantReturnPolicy",
-          returnPolicyCategory:
-            "https://schema.org/MerchantReturnNotPermitted",
+          returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
         },
         shippingDetails: {
           "@type": "OfferShippingDetails",

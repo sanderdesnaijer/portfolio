@@ -19,7 +19,9 @@ const getMatchingTagLabels = (projects: ProjectTypeSanity[], slug: string) => {
     .flatMap((project) => project.tags?.map((tag) => tag.label) || [])
     .filter((label): label is string => Boolean(label?.trim()));
 
-  return Array.from(new Set(labels)).filter((label) => toTagSlug(label) === slug);
+  return Array.from(new Set(labels)).filter(
+    (label) => toTagSlug(label) === slug
+  );
 };
 
 export async function generateStaticParams() {
@@ -28,7 +30,9 @@ export async function generateStaticParams() {
   );
 
   const slugs = projects
-    .flatMap((project) => project.tags?.map((tag) => toTagSlug(tag.label)) || [])
+    .flatMap(
+      (project) => project.tags?.map((tag) => toTagSlug(tag.label)) || []
+    )
     .filter(Boolean);
 
   return Array.from(new Set(slugs)).map((slug) => ({ slug }));
@@ -36,7 +40,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  const projects = await sanityFetch<ProjectTypeSanity[]>({ query: projectsQuery });
+  const projects = await sanityFetch<ProjectTypeSanity[]>({
+    query: projectsQuery,
+  });
   const labels = getMatchingTagLabels(projects, slug);
   const label = labels[0];
 
@@ -70,8 +76,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     url: buildPageUrl("tags", slug),
     publishedTime:
       filteredProjects.at(-1)?._createdAt || new Date().toISOString(),
-    modifiedTime:
-      filteredProjects[0]?._updatedAt || new Date().toISOString(),
+    modifiedTime: filteredProjects[0]?._updatedAt || new Date().toISOString(),
     imageUrl: envConfig.defaultOGImage,
     keywords,
   });
