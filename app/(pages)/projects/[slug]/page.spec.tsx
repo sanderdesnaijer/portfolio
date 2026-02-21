@@ -6,7 +6,9 @@ import { getTranslationKey } from "@/app/test-utils/i18n";
 import { mockPages } from "@/app/test-utils/mockPage";
 
 jest.mock("@/app/components/RelatedProjects", () => ({
-  RelatedProjects: () => <div data-testid="related-projects">Related Projects</div>,
+  RelatedProjects: () => (
+    <div data-testid="related-projects">Related Projects</div>
+  ),
 }));
 
 describe("app/(pages)/[slug]/page", () => {
