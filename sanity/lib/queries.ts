@@ -116,7 +116,7 @@ export const projectQuery = groq`
 `;
 
 export const relatedProjectsQuery = groq`
-  *[_type == "project" && slug.current != $currentSlug && count((tags[]->label) [@ in $tags]) > 0] | order(publishedAt desc) [0...3] {
+  *[_type == "project" && slug.current != $currentSlug && count(tags[]->label[@ in $tags]) > 0] | order(publishedAt desc) [0...3] {
     _id,
     title,
     slug,
