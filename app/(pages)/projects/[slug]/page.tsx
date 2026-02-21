@@ -69,7 +69,7 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
       {project ? (
         <PageLayout title={title}>
           <Project project={project} />
-          {project.tags && <Tags tags={project.tags} />}
+          {project.tags && <Tags tags={project.tags} context={project.title} />}
           <RelatedProjects
             currentSlug={project.slug.current}
             tags={project.tags?.map((tag) => tag.label) || []}

@@ -25,7 +25,7 @@
     }
   },
   "generic": {
-    "relatedTags": "Related tags",
+    "relatedTags": "Tags{context, select, other { of {context}}}",
     "mainNavigation": "Main navigation"
   },
   "consent": {

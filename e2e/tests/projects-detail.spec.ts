@@ -24,7 +24,9 @@ async function checkPageElements(page: Page) {
   await expect(
     page.getByRole("link", { name: /link to article/i })
   ).toBeVisible();
-  await expect(page.getByRole("list", { name: /Related tags/i })).toBeVisible();
+  await expect(
+    page.getByRole("list", { name: /Tags of Flutter Tabata whip timer/i })
+  ).toBeVisible();
   await expect(
     page.getByRole("list", { name: /Project resources/i })
   ).toBeVisible();
