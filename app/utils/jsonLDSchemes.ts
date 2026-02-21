@@ -56,6 +56,8 @@ export const getProjectScheme = (
   shouldIncludeContext = false
 ) => {
   const url = buildPageUrl(pageSlug, project.slug.current);
+  const hasProductType = project.jsonLdType.includes("Product");
+  const shouldIncludeOffer = hasProductType || Boolean(project.jsonLdDownloadUrl);
   return {
     ...(shouldIncludeContext && {
       "@context": "https://schema.org",
@@ -84,12 +86,15 @@ export const getProjectScheme = (
     }),
     ...(project.jsonLdDownloadUrl && {
       downloadUrl: project.jsonLdDownloadUrl,
+    }),
+    ...(shouldIncludeOffer && {
       offers: {
         "@type": "Offer",
         "@id": `${url}#offer`,
         price: "0.00",
         priceCurrency: "USD",
-        availability: "https://schema.org/OnlineOnly",
+        priceValidUntil: "2099-12-31",
+        availability: "https://schema.org/InStock",
       },
     }),
     ...(project.jsonLdIsAuthor && {
