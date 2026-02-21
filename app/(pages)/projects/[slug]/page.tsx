@@ -5,6 +5,7 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { ProjectTypeSanity } from "@/sanity/types";
 import Project from "@/app/components/Project";
 import { Tags } from "@/app/components/Tags";
+import { RelatedProjects } from "@/app/components/RelatedProjects";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
@@ -68,7 +69,11 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
       {project ? (
         <PageLayout title={title}>
           <Project project={project} />
-          {project.tags && <Tags tags={project.tags} />}
+          {project.tags && <Tags tags={project.tags} context={project.title} />}
+          <RelatedProjects
+            currentSlug={project.slug.current}
+            tags={project.tags?.map((tag) => tag.label) || []}
+          />
         </PageLayout>
       ) : (
         <NotFound

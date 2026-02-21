@@ -20,17 +20,53 @@
     },
     "project": {
       "resources": "Project resources",
-      "projects": "Projects"
+      "projects": "Projects",
+      "relatedProjects": "Related Projects"
     }
   },
   "generic": {
-    "relatedTags": "Related tags",
+    "relatedTags": "Tags{context, select, other { of {context}}}",
     "mainNavigation": "Main navigation"
   },
   "consent": {
     "message": "We use cookies to track statistics, no personal data",
     "accept": "Allow",
     "decline": "Decline"
+  },
+  "cookies": {
+    "title": "Cookie Policy",
+    "lastUpdated": "Last updated:",
+    "lastUpdatedDate": "February 21, 2026",
+    "intro": "This website, sanderdesnaijer.com, uses cookies to ensure the site works properly and to understand how it is used.",
+    "whatAreCookies": {
+      "title": "What are cookies",
+      "description": "Cookies are small text files stored on your device when you visit a website. They help websites function and provide basic information about usage."
+    },
+    "howCookiesAreUsed": {
+      "title": "How cookies are used",
+      "description": "This website uses the following types of cookies:"
+    },
+    "essentialCookies": {
+      "title": "Essential cookies",
+      "description": "These are required for the website to function correctly, such as remembering your cookie preferences and ensuring basic functionality."
+    },
+    "analyticsCookies": {
+      "title": "Analytics cookies (optional)",
+      "description": "These may be used to understand how visitors use the website, such as which pages are visited and how long users stay. This helps improve the website and projects shared here. These cookies are only used with your consent where required."
+    },
+    "thirdPartyServices": {
+      "title": "Third-party services",
+      "description": "Some pages may include content from third-party platforms such as GitHub or YouTube. These services may set their own cookies when you interact with them."
+    },
+    "yourChoices": {
+      "title": "Your choices",
+      "description": "You can accept or reject non-essential cookies using the cookie banner. You can also control or delete cookies through your browser settings."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "If you have questions, you can contact:",
+      "email": "support@metsander.com"
+    }
   },
   "error": {
     "generic": {

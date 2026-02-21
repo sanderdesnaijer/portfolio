@@ -1,7 +1,12 @@
 import { TagSanity } from "@/sanity/types/tagType";
 import { useTranslations } from "next-intl";
 
-export const Tags: React.FC<{ tags: TagSanity[] }> = ({ tags }) => {
+interface TagsProps {
+  tags: TagSanity[];
+  context?: string;
+}
+
+export const Tags: React.FC<TagsProps> = ({ tags, context }) => {
   const t = useTranslations();
 
   if (!tags.length) {
@@ -10,8 +15,8 @@ export const Tags: React.FC<{ tags: TagSanity[] }> = ({ tags }) => {
 
   return (
     <ul
-      aria-label={t("generic.relatedTags")}
-      className="mt-4 -mb-0 flex list-none flex-wrap pl-0 text-xs"
+      aria-label={t("generic.relatedTags", { context: context || "" })}
+      className="0 mt-4 flex list-none flex-wrap pl-0 text-xs"
     >
       {tags.map((tag) => (
         <li
