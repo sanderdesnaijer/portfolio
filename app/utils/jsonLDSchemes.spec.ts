@@ -266,6 +266,15 @@ describe("utils/jsonLDSchemes", () => {
               price: "0.00",
               priceCurrency: "USD",
               availability: "https://schema.org/InStock",
+              hasMerchantReturnPolicy: {
+                "@type": "MerchantReturnPolicy",
+                returnPolicyCategory:
+                  "https://schema.org/MerchantReturnNotPermitted",
+              },
+              shippingDetails: {
+                "@type": "OfferShippingDetails",
+                doesNotShip: true,
+              },
             },
           },
         ],
@@ -398,6 +407,14 @@ describe("utils/jsonLDSchemes", () => {
         price: "0.00",
         priceCurrency: "USD",
         availability: "https://schema.org/InStock",
+        hasMerchantReturnPolicy: {
+          "@type": "MerchantReturnPolicy",
+          returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
+        },
+        shippingDetails: {
+          "@type": "OfferShippingDetails",
+          doesNotShip: true,
+        },
       });
     });
 

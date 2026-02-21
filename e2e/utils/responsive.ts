@@ -34,7 +34,10 @@ export async function testResponsive(
 
     // check navigation
     for (const link of navLinks) {
-      const navLink = page.getByRole("link", { name: link.name });
+      const navLink = page.getByRole("link", {
+        name: link.name,
+        exact: true,
+      });
       // expect(page.getByRole("link", { name: link.name })).toBeInViewport();
       const boundingBox = await navLink.boundingBox();
 

@@ -17,11 +17,13 @@ export async function testNavigation(
   const navLinks = mainNavLinks.filter((link) => link.url !== fromUrl);
 
   for (const link of navLinks) {
-    await expect(page.getByRole("link", { name: link.name })).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: link.name, exact: true })
+    ).toBeVisible();
   }
 
   for (const link of navLinks) {
-    await page.getByRole("link", { name: link.name }).click();
+    await page.getByRole("link", { name: link.name, exact: true }).click();
     await expect(page).toHaveURL(link.url);
     // check for heading if not on home
     if (link.url !== "/") {

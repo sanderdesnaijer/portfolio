@@ -27,8 +27,34 @@ describe("app/components/Tags", () => {
         _updatedAt: "",
       },
     ];
-    const { getByText } = render(<Tags tags={tags} />);
-    expect(getByText("Tag1")).toBeInTheDocument();
-    expect(getByText("Tag2")).toBeInTheDocument();
+    const { getByRole } = render(<Tags tags={tags} />);
+
+    const tag1Link = getByRole("link", { name: "Tag1" });
+    const tag2Link = getByRole("link", { name: "Tag2" });
+
+    expect(tag1Link).toBeInTheDocument();
+    expect(tag1Link).toHaveAttribute("href", "/tags/tag1");
+    expect(tag2Link).toBeInTheDocument();
+    expect(tag2Link).toHaveAttribute("href", "/tags/tag2");
+  });
+
+  it("renders plain text tags when renderLinks is false", () => {
+    const tags: TagSanity[] = [
+      {
+        _id: "1",
+        label: "React",
+        _rev: "",
+        _type: "",
+        _createdAt: "",
+        _updatedAt: "",
+      },
+    ];
+
+    const { queryByRole, getByText } = render(
+      <Tags tags={tags} renderLinks={false} />
+    );
+
+    expect(getByText("React")).toBeInTheDocument();
+    expect(queryByRole("link", { name: "React" })).toBeNull();
   });
 });
