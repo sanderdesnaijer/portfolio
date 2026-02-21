@@ -94,7 +94,6 @@ export const getProjectScheme = (
         "@id": `${url}#offer`,
         price: "0.00",
         priceCurrency: "USD",
-        priceValidUntil: "2099-12-31",
         availability: "https://schema.org/InStock",
       },
     }),
