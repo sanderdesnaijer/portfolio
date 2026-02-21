@@ -4,6 +4,7 @@ import { convertDate } from "../utils/utils";
 import { TagSanity } from "@/sanity/types/tagType";
 
 jest.mock("../utils/utils", () => ({
+  ...jest.requireActual("../utils/utils"),
   convertDate: jest.fn(),
 }));
 
