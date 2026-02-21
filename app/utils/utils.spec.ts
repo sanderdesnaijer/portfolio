@@ -7,6 +7,7 @@ import {
   generateTitle,
   getImageURL,
   getSlug,
+  toTagSlug,
   truncateText,
 } from "./utils";
 
@@ -175,6 +176,18 @@ describe("app/utils/utils", () => {
       expect(buildPageUrl("category", "t-shirts")).toBe(
         `${envConfig.baseUrl}/category/t-shirts`
       );
+    });
+  });
+
+  describe("toTagSlug", () => {
+    it("should convert labels to kebab-case", () => {
+      expect(toTagSlug("NextJS")).toBe("nextjs");
+      expect(toTagSlug("Flutter App")).toBe("flutter-app");
+    });
+
+    it("should remove accents and trim extra separators", () => {
+      expect(toTagSlug("  Développeur  ")).toBe("developpeur");
+      expect(toTagSlug("Firebase / Auth")).toBe("firebase-auth");
     });
   });
 });

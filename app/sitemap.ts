@@ -4,6 +4,7 @@ import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { MetadataRoute } from "next";
 import envConfig from "@/envConfig";
 import { BlogSanity } from "@/sanity/types/blogType";
+import { toTagSlug } from "./utils/utils";
 
 const formatDate = (date: string) =>
   new Date(date).toISOString().replace(".000", "");
@@ -44,5 +45,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  return [...mainPages, ...projectsPages, ...blogPages];
+  const tagSlugs = Array.from(
+    new Set(
+      projects.flatMap(
+        (project) => project.tags?.map((tag) => toTagSlug(tag.label)) || []
+      )
+    )
+  );
+
+  const tagPages = tagSlugs.map((slug) => ({
+    url: `${baseUrl}/tags/${slug}`,
+    lastModified: formatDate(new Date().toISOString()),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...mainPages, ...projectsPages, ...blogPages, ...tagPages];
 }

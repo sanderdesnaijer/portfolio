@@ -123,3 +123,19 @@ export const buildPageUrl = (
 ): string => {
   return `${envConfig.baseUrl}/${pageSlug}${detailPageSlug ? `/${detailPageSlug}` : ""}`;
 };
+
+/**
+ * Converts a tag label to an URL-safe slug.
+ *
+ * @param {string} label - The tag label to convert.
+ * @returns {string} - The normalized slug.
+ */
+export const toTagSlug = (label: string): string => {
+  return label
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+};
