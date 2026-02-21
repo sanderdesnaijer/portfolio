@@ -261,7 +261,8 @@ describe("utils/jsonLDSchemes", () => {
             applicationCategory: "MobileApplication",
             offers: {
               "@type": "Offer",
-              "@id": "https://mocked-url.com/projects/flutter-tabata-whip-timer#offer",
+              "@id":
+                "https://mocked-url.com/projects/flutter-tabata-whip-timer#offer",
               price: "0.00",
               priceCurrency: "USD",
               priceValidUntil: "2099-12-31",

@@ -57,7 +57,8 @@ export const getProjectScheme = (
 ) => {
   const url = buildPageUrl(pageSlug, project.slug.current);
   const hasProductType = project.jsonLdType.includes("Product");
-  const shouldIncludeOffer = hasProductType || Boolean(project.jsonLdDownloadUrl);
+  const shouldIncludeOffer =
+    hasProductType || Boolean(project.jsonLdDownloadUrl);
   return {
     ...(shouldIncludeContext && {
       "@context": "https://schema.org",
