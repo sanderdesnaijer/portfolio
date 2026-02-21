@@ -24,102 +24,102 @@ export async function testPageMetadata(
 
   // Description
   const metaDescription = await page
-    .locator('meta[name="description"]')
+    .locator('head meta[name="description"]')
     .getAttribute("content");
   expect(metaDescription).toBe(expectedMeta.description);
 
   // Author
   const metaAuthor = await page
-    .locator('meta[name="author"]')
+    .locator('head meta[name="author"]')
     .getAttribute("content");
   expect(metaAuthor).toBe(AUTHOR_NAME);
 
   // Canonical URL
   if (expectedMeta.canonical || expectedMeta.url) {
     const canonicalLink = await page
-      .locator('link[rel="canonical"]')
+      .locator('head link[rel="canonical"]')
       .getAttribute("href");
     expect(canonicalLink).toBe(expectedMeta.canonical || expectedMeta.url);
   }
 
   // Open Graph metadata
-  await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+  await expect(page.locator('head meta[property="og:title"]')).toHaveAttribute(
     "content",
     expectedMeta.title
   );
-  await expect(page.locator('meta[property="og:description"]')).toHaveAttribute(
+  await expect(page.locator('head meta[property="og:description"]')).toHaveAttribute(
     "content",
     expectedMeta.description
   );
-  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+  await expect(page.locator('head meta[property="og:url"]')).toHaveAttribute(
     "content",
     expectedMeta.url
   );
-  await expect(page.locator('meta[property="og:locale"]')).toHaveAttribute(
+  await expect(page.locator('head meta[property="og:locale"]')).toHaveAttribute(
     "content",
     "en_US"
   );
-  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+  await expect(page.locator('head meta[property="og:image"]')).toHaveAttribute(
     "content",
     expectedMeta.imageUrl
   );
-  await expect(page.locator('meta[property="og:image:width"]')).toHaveAttribute(
+  await expect(page.locator('head meta[property="og:image:width"]')).toHaveAttribute(
     "content",
     "1200"
   );
   await expect(
-    page.locator('meta[property="og:image:height"]')
+    page.locator('head meta[property="og:image:height"]')
   ).toHaveAttribute("content", "630");
-  await expect(page.locator('meta[property="og:image:alt"]')).toHaveAttribute(
+  await expect(page.locator('head meta[property="og:image:alt"]')).toHaveAttribute(
     "content",
     expectedMeta.imageAlt || expectedMeta.title
   );
-  await expect(page.locator('meta[property="og:image:type"]')).toHaveAttribute(
+  await expect(page.locator('head meta[property="og:image:type"]')).toHaveAttribute(
     "content",
     "image/png"
   );
-  await expect(page.locator('meta[property="og:type"]')).toHaveAttribute(
+  await expect(page.locator('head meta[property="og:type"]')).toHaveAttribute(
     "content",
     "article"
   );
   await expect(
-    page.locator('meta[property="article:published_time"]')
+    page.locator('head meta[property="article:published_time"]')
   ).toHaveAttribute("content", expectedMeta.publishedTime);
   await expect(
-    page.locator('meta[property="article:modified_time"]')
+    page.locator('head meta[property="article:modified_time"]')
   ).toHaveAttribute("content", expectedMeta.modifiedTime);
 
   // Twitter metadata
-  await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+  await expect(page.locator('head meta[name="twitter:card"]')).toHaveAttribute(
     "content",
     "summary_large_image"
   );
-  await expect(page.locator('meta[name="twitter:site"]')).toHaveAttribute(
+  await expect(page.locator('head meta[name="twitter:site"]')).toHaveAttribute(
     "content",
     AUTHOR_NAME
   );
-  await expect(page.locator('meta[name="twitter:creator"]')).toHaveAttribute(
+  await expect(page.locator('head meta[name="twitter:creator"]')).toHaveAttribute(
     "content",
     "@sanderdesnaijer"
   );
-  await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute(
+  await expect(page.locator('head meta[name="twitter:title"]')).toHaveAttribute(
     "content",
     expectedMeta.title
   );
   await expect(
-    page.locator('meta[name="twitter:description"]')
+    page.locator('head meta[name="twitter:description"]')
   ).toHaveAttribute("content", expectedMeta.description);
-  await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+  await expect(page.locator('head meta[name="twitter:image"]')).toHaveAttribute(
     "content",
     expectedMeta.imageUrl
   );
   await expect(
-    page.locator('meta[name="twitter:image:width"]')
+    page.locator('head meta[name="twitter:image:width"]')
   ).toHaveAttribute("content", "1200");
   await expect(
-    page.locator('meta[name="twitter:image:height"]')
+    page.locator('head meta[name="twitter:image:height"]')
   ).toHaveAttribute("content", "675");
-  await expect(page.locator('meta[name="twitter:image:alt"]')).toHaveAttribute(
+  await expect(page.locator('head meta[name="twitter:image:alt"]')).toHaveAttribute(
     "content",
     expectedMeta.imageAlt || expectedMeta.title
   );
@@ -149,7 +149,7 @@ export async function testPageMetadata(
   ];
 
   for (const { url, media, sizes } of favicons) {
-    const locator = page.locator(`link[rel="icon"][href="${url}"]`);
+    const locator = page.locator(`head link[rel="icon"][href="${url}"]`);
     await expect(locator).toHaveAttribute("sizes", sizes);
     await expect(locator).toHaveAttribute("media", media);
   }
@@ -169,7 +169,7 @@ export async function testPageMetadata(
   ];
 
   for (const { url, media, sizes } of shortcutIcons) {
-    const locator = page.locator(`link[rel="shortcut icon"][href="${url}"]`);
+    const locator = page.locator(`head link[rel="shortcut icon"][href="${url}"]`);
     await expect(locator).toHaveAttribute("sizes", sizes);
     await expect(locator).toHaveAttribute("media", media);
   }
@@ -209,7 +209,7 @@ export async function testPageMetadata(
   ];
 
   for (const { url, sizes, media } of appleIcons) {
-    const locator = page.locator(`link[rel="apple-touch-icon"][href="${url}"]`);
+    const locator = page.locator(`head link[rel="apple-touch-icon"][href="${url}"]`);
     await expect(locator).toHaveAttribute("sizes", sizes);
     await expect(locator).toHaveAttribute("media", media);
   }
@@ -217,12 +217,12 @@ export async function testPageMetadata(
   // Apple Touch Icon Precomposed
   await expect(
     page.locator(
-      'link[rel="apple-touch-icon-precomposed"][href="/meta/light/apple-touch-icon.png"]'
+      'head link[rel="apple-touch-icon-precomposed"][href="/meta/light/apple-touch-icon.png"]'
     )
   ).toHaveAttribute("media", "(prefers-color-scheme: light)");
   await expect(
     page.locator(
-      'link[rel="apple-touch-icon-precomposed"][href="/meta/dark/apple-touch-icon.png"]'
+      'head link[rel="apple-touch-icon-precomposed"][href="/meta/dark/apple-touch-icon.png"]'
     )
   ).toHaveAttribute("media", "(prefers-color-scheme: dark)");
 }
