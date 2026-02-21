@@ -20,7 +20,8 @@
     },
     "project": {
       "resources": "Project resources",
-      "projects": "Projects"
+      "projects": "Projects",
+      "relatedProjects": "Related Projects"
     }
   },
   "generic": {
