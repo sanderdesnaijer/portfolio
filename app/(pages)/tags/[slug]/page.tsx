@@ -77,7 +77,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     publishedTime:
       filteredProjects.at(-1)?._createdAt || new Date().toISOString(),
     modifiedTime: filteredProjects[0]?._updatedAt || new Date().toISOString(),
-    imageUrl: envConfig.defaultOGImage,
+    imageUrl: `${envConfig.baseUrl}/meta/light/apple-icon@3x.png`,
     keywords,
   });
 }
