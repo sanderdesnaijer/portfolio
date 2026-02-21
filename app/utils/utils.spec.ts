@@ -189,5 +189,10 @@ describe("app/utils/utils", () => {
       expect(toTagSlug("  Développeur  ")).toBe("developpeur");
       expect(toTagSlug("Firebase / Auth")).toBe("firebase-auth");
     });
+
+    it("should return an empty string when no alphanumeric characters remain", () => {
+      expect(toTagSlug("!!!")).toBe("");
+      expect(toTagSlug("###")).toBe("");
+    });
   });
 });

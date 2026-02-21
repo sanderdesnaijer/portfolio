@@ -14,6 +14,46 @@ import { getTranslations } from "next-intl/server";
 
 type Params = Promise<{ slug: string }>;
 
+const getEarliestIsoDate = (dates: string[], fallback: string) => {
+  const earliestTimestamp = dates.reduce<number | null>((earliest, date) => {
+    const timestamp = Date.parse(date);
+
+    if (Number.isNaN(timestamp)) {
+      return earliest;
+    }
+
+    if (earliest === null) {
+      return timestamp;
+    }
+
+    return Math.min(earliest, timestamp);
+  }, null);
+
+  return earliestTimestamp === null
+    ? fallback
+    : new Date(earliestTimestamp).toISOString();
+};
+
+const getLatestIsoDate = (dates: string[], fallback: string) => {
+  const latestTimestamp = dates.reduce<number | null>((latest, date) => {
+    const timestamp = Date.parse(date);
+
+    if (Number.isNaN(timestamp)) {
+      return latest;
+    }
+
+    if (latest === null) {
+      return timestamp;
+    }
+
+    return Math.max(latest, timestamp);
+  }, null);
+
+  return latestTimestamp === null
+    ? fallback
+    : new Date(latestTimestamp).toISOString();
+};
+
 const getMatchingTagLabels = (projects: ProjectTypeSanity[], slug: string) => {
   const labels = projects
     .flatMap((project) => project.tags?.map((tag) => tag.label) || [])
@@ -63,6 +103,15 @@ export async function generateMetadata({ params }: { params: Params }) {
   const filteredProjects = projects.filter((project) =>
     project.tags?.some((tag) => labels.includes(tag.label))
   );
+  const fallbackTimestamp = new Date().toISOString();
+  const publishedTime = getEarliestIsoDate(
+    filteredProjects.map((project) => project._createdAt),
+    fallbackTimestamp
+  );
+  const modifiedTime = getLatestIsoDate(
+    filteredProjects.map((project) => project._updatedAt),
+    fallbackTimestamp
+  );
 
   const keywords = [
     `${label} developer portfolio`,
@@ -74,9 +123,8 @@ export async function generateMetadata({ params }: { params: Params }) {
     title,
     description,
     url: buildPageUrl("tags", slug),
-    publishedTime:
-      filteredProjects.at(-1)?._createdAt || new Date().toISOString(),
-    modifiedTime: filteredProjects[0]?._updatedAt || new Date().toISOString(),
+    publishedTime,
+    modifiedTime,
     imageUrl: `${envConfig.baseUrl}/meta/light/apple-icon@3x.png`,
     keywords,
   });
