@@ -162,3 +162,26 @@ export const blogsQuery = groq`
     author
   }
 `;
+
+export const latestProjectsQuery = groq`
+  *[_type == "project"] | order(publishedAt desc) [0...2] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    "tags": tags[]->{
+      _id,
+      label
+    }
+  }
+`;
+
+export const latestBlogQuery = groq`
+  *[_type == "blogPost"] | order(publishedAt desc) [0...1] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    categories
+  }
+`;

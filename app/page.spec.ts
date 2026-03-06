@@ -9,6 +9,48 @@ import { AUTHOR_NAME } from "./utils/constants";
 
 const mockSanityFetch = sanityFetch as jest.Mock;
 
+const mockLatestProjects = [
+  {
+    _id: "proj-1",
+    title: "Project One",
+    slug: { current: "project-one" },
+    publishedAt: "2025-01-01",
+    tags: [{ _id: "tag-1", label: "Next.js" }],
+  },
+  {
+    _id: "proj-2",
+    title: "Project Two",
+    slug: { current: "project-two" },
+    publishedAt: "2024-06-01",
+    tags: [{ _id: "tag-2", label: "React Native" }],
+  },
+];
+
+const mockLatestPost = {
+  _id: "blog-1",
+  title: "Blog Post One",
+  slug: { current: "blog-post-one" },
+  publishedAt: "2025-02-01",
+  categories: ["Dev"],
+};
+
+function setupMocks(settingsOverride?: Record<string, unknown>) {
+  const mockSettings = settingsOverride ?? {
+    description: "Test Description",
+    socialMedia: [
+      { icon: "facebook", link: "https://facebook.com" },
+      { icon: "twitter", link: "https://twitter.com" },
+    ],
+  };
+
+  mockSanityFetch
+    .mockResolvedValueOnce(mockSettings) // settingsQuery
+    .mockResolvedValueOnce(mockPage) // pageQuery
+    .mockResolvedValueOnce(mockLatestProjects) // latestProjectsQuery
+    .mockResolvedValueOnce([mockLatestPost]) // latestBlogQuery
+    .mockResolvedValueOnce(mockPages); // allPagesQuery
+}
+
 describe("app/page", () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -24,18 +66,7 @@ describe("app/page", () => {
   });
 
   it("renders the Home page with settings data", async () => {
-    const mockSettings = {
-      description: "Test Description",
-      socialMedia: [
-        { icon: "facebook", link: "https://facebook.com" },
-        { icon: "twitter", link: "https://twitter.com" },
-      ],
-    };
-
-    mockSanityFetch
-      .mockResolvedValueOnce(mockSettings)
-      .mockResolvedValueOnce(mockPage)
-      .mockResolvedValueOnce(mockPages);
+    setupMocks();
 
     render(await Home());
 
@@ -43,13 +74,18 @@ describe("app/page", () => {
     expect(screen.getAllByTestId("mocked-svg")).toHaveLength(3);
   });
 
-  it("calls sanityFetch with the correct query", async () => {
-    const mockSettings = { title: "Test Title", socialMedia: [] };
+  it("renders latest projects and blog post", async () => {
+    setupMocks();
 
-    mockSanityFetch
-      .mockResolvedValueOnce(mockSettings)
-      .mockResolvedValueOnce(mockPage)
-      .mockResolvedValueOnce(mockPages);
+    render(await Home());
+
+    expect(screen.getByText("Project One")).toBeInTheDocument();
+    expect(screen.getByText("Project Two")).toBeInTheDocument();
+    expect(screen.getByText("Blog Post One")).toBeInTheDocument();
+  });
+
+  it("calls sanityFetch with the correct query", async () => {
+    setupMocks({ title: "Test Title", socialMedia: [] });
 
     await Home();
 

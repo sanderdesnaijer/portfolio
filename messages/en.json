@@ -22,6 +22,10 @@
       "resources": "Project resources",
       "projects": "Projects",
       "relatedProjects": "Related Projects"
+    },
+    "home": {
+      "latestProjects": "Latest Projects",
+      "latestPost": "Latest Post"
     }
   },
   "generic": {
