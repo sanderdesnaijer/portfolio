@@ -1,7 +1,12 @@
 "use server";
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { pageQuery } from "@/sanity/lib/queries";
-import { PageSanity } from "@/sanity/types";
+import {
+  pageQuery,
+  latestProjectsQuery,
+  latestBlogQuery,
+} from "@/sanity/lib/queries";
+import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
+import { BlogSanity } from "@/sanity/types/blogType";
 import Menu from "./components/Menu";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
 import { generateMetaData } from "./utils/metadata";
@@ -17,6 +22,7 @@ import envConfig from "@/envConfig";
 
 import SiteLogo from "@/public/logo.svg";
 import { Footer } from "./components/Footer";
+import { LatestSection } from "./components/LatestSection";
 import { AUTHOR_NAME } from "./utils/constants";
 
 const fetchPageData = cache(async function fetchPageData() {
@@ -25,6 +31,12 @@ const fetchPageData = cache(async function fetchPageData() {
     sanityFetch<PageSanity>({
       query: pageQuery,
       params: { slug: "" },
+    }),
+    sanityFetch<ProjectTypeSanity[]>({
+      query: latestProjectsQuery,
+    }),
+    sanityFetch<BlogSanity[]>({
+      query: latestBlogQuery,
     }),
   ]);
 });
@@ -44,7 +56,8 @@ export async function generateMetadata() {
 }
 
 export default async function Home() {
-  const [commonData, page] = await fetchPageData();
+  const [commonData, page, latestProjects, latestPosts] = await fetchPageData();
+  const latestPost = latestPosts?.[0] ?? null;
   const t = await getTranslations();
 
   const { setting, menuItems } = commonData;
@@ -74,8 +87,8 @@ export default async function Home() {
   return (
     <>
       {jsonLd && <JsonLd value={jsonLd} />}
-      <div className="container mx-auto flex h-dvh flex-col justify-between p-4 md:justify-start">
-        <main className="relative flex flex-col justify-center md:flex-1">
+      <div className="container mx-auto flex min-h-dvh flex-col justify-between p-4 md:justify-start">
+        <main className="relative flex flex-col justify-around md:flex-1">
           <ThemeToggle className="theme-toggle absolute top-0 right-0 cursor-pointer md:right-auto md:left-6" />
 
           <div className="justify-items-center [&>svg]:m-auto">
@@ -87,6 +100,13 @@ export default async function Home() {
           <Menu
             menuItems={menuItemsWithoutHome}
             className="group home flex flex-col text-7xl font-extralight [&>ul]:relative [&>ul]:block [&>ul]:h-full [&>ul>li]:mb-2 [&>ul>li]:w-auto [&>ul>li>a]:text-center [&>ul>li>a]:md:hover:translate-x-0"
+          />
+
+          <LatestSection
+            projects={latestProjects ?? []}
+            post={latestPost}
+            latestProjectsLabel={t("pages.home.latestProjects")}
+            latestPostLabel={t("pages.home.latestPost")}
           />
         </main>
 
