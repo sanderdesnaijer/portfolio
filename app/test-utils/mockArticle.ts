@@ -1,23 +1,28 @@
 import { BlogSanity } from "@/sanity/types/blogType";
 
-const createBlock = (text: string, style = "normal") => ({
-  _type: "block" as const,
-  _key: Math.random().toString(36).slice(2, 10),
-  style,
-  children: [
-    {
-      _type: "span" as const,
-      _key: Math.random().toString(36).slice(2, 10),
-      text,
-      marks: [] as string[],
-    },
-  ],
-  markDefs: [],
-});
+let blockCounter = 0;
+
+const createBlock = (text: string, style = "normal") => {
+  const idx = ++blockCounter;
+  return {
+    _type: "block" as const,
+    _key: `mock-block-${idx}`,
+    style,
+    children: [
+      {
+        _type: "span" as const,
+        _key: `mock-span-${idx}`,
+        text,
+        marks: [] as string[],
+      },
+    ],
+    markDefs: [],
+  };
+};
 
 const createImageBlock = (alt: string) => ({
   _type: "image" as const,
-  _key: Math.random().toString(36).slice(2, 10),
+  _key: `mock-image-block-${++blockCounter}`,
   asset: {
     _ref: "image-Tb9Ew8CXIwaY6R1kjMvI0uRR-200x200-png",
     _type: "reference",

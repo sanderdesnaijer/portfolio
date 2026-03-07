@@ -20,7 +20,7 @@ const client = createClient({
   projectId,
   dataset,
   apiVersion: "2025-01-24",
-  useCdn: true,
+  useCdn: false,
 });
 
 interface BlogPost {

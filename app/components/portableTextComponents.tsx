@@ -25,6 +25,7 @@ const CodeBlock = dynamic(
 );
 
 interface ImageValue {
+  _type: "image";
   asset: {
     _ref: string;
     _type: string;
