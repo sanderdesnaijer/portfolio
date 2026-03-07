@@ -64,6 +64,7 @@ test.describe("blog", () => {
     await expect(
       page.getByRole("heading", { level: 1, name: /Blog/i })
     ).toBeVisible();
+    // Mock API uses "Mock Building..."; real Sanity uses "Building..."
     await expect(
       page.getByRole("link", { name: /Building My First Flutter App/i })
     ).toBeVisible();

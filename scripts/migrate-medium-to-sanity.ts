@@ -19,11 +19,11 @@ import sharp from "sharp";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET!;
-const token = process.env.NEXT_PUBLIC_SANITY_TOKEN!;
+const token = process.env.SANITY_API_TOKEN!;
 
 if (!projectId || !dataset || !token) {
   console.error(
-    "Missing env vars: NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET, NEXT_PUBLIC_SANITY_TOKEN"
+    "Missing env vars: NEXT_PUBLIC_SANITY_PROJECT_ID, NEXT_PUBLIC_SANITY_DATASET, SANITY_API_TOKEN"
   );
   process.exit(1);
 }
@@ -691,7 +691,8 @@ async function migrate() {
   let success = 0;
   let failed = 0;
 
-  for (const post of postsToMigrate) {
+  for (let i = 0; i < postsToMigrate.length; i++) {
+    const post = postsToMigrate[i];
     console.log(`━━━ Migrating: "${post.title}" (${post._id}) ━━━`);
 
     try {
@@ -707,7 +708,7 @@ async function migrate() {
       }
 
       console.log(`  Saving ${body.length} blocks to Sanity...`);
-      await client.patch(post._id).set(patch).commit();
+      await client.patch(post._id).set(patch).unset(["imageURL"]).commit();
 
       console.log(`  ✓ Done!\n`);
       success++;
@@ -716,7 +717,7 @@ async function migrate() {
       failed++;
     }
 
-    if (postsToMigrate.indexOf(post) < postsToMigrate.length - 1) {
+    if (i < postsToMigrate.length - 1) {
       console.log(
         `  Waiting ${DELAY_BETWEEN_POSTS_MS / 1000}s before next post...\n`
       );

@@ -49,6 +49,7 @@ const articles: BlogSanity[] = [
     body: [
       {
         _type: "block",
+        _key: "blog-post-1",
         children: [
           {
             text: "First blog post content here.",
@@ -92,6 +93,7 @@ const articles: BlogSanity[] = [
     body: [
       {
         _type: "block",
+        _key: "blog-post-2",
         children: [
           {
             text: "Second blog post content here.",

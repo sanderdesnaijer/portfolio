@@ -7,6 +7,7 @@ export const mockPage: PageSanity = {
   body: [
     {
       _type: "block",
+      _key: "mock-block-1",
       children: [
         {
           text: "Mock body content",
@@ -46,6 +47,7 @@ const mockPage2: PageSanity = {
   body: [
     {
       _type: "block",
+      _key: "mock-block-2",
       children: [
         {
           text: "Mock body content page 2",

@@ -19,7 +19,7 @@ const createImageBlock = (alt: string) => ({
   _type: "image" as const,
   _key: Math.random().toString(36).slice(2, 10),
   asset: {
-    _ref: "image-mock-ref-200x200-png",
+    _ref: "image-Tb9Ew8CXIwaY6R1kjMvI0uRR-200x200-png",
     _type: "reference",
   },
   alt,
@@ -64,7 +64,7 @@ export const mockArticles: BlogSanity[] = [
     mainImage: {
       _type: "image",
       asset: {
-        _ref: "image-mock-ref-200x200-png",
+        _ref: "image-Tb9Ew8CXIwaY6R1kjMvI0uRR-200x200-png",
         _type: "reference",
       },
       alt: "Mock Tabata whip timer app store",
@@ -111,7 +111,7 @@ export const mockArticles: BlogSanity[] = [
     mainImage: {
       _type: "image",
       asset: {
-        _ref: "image-mock-ref-200x200-png",
+        _ref: "image-Tb9Ew8CXIwaY6R1kjMvI0uRR-200x200-png",
         _type: "reference",
       },
       alt: "Mock Completed Dutch Word Clock — Accurate to the Minute",

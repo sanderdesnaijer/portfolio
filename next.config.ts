@@ -20,11 +20,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "cdn.sanity.io",
       },
-      {
-        // TODO: Remove after running migration (migrate:medium-to-sanity)
-        protocol: "https",
-        hostname: "cdn-images-1.medium.com",
-      },
     ],
     minimumCacheTTL: 60,
   },

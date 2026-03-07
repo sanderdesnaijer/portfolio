@@ -1,5 +1,6 @@
 export interface TextBlock {
   _type: "block";
+  _key: string;
   children: Array<{
     _type: "span";
     text: string;
@@ -10,6 +11,7 @@ export interface TextBlock {
 
 export interface ImageBlock {
   _type: "image";
+  _key: string;
   asset: {
     _ref: string;
     _type: string;

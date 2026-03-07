@@ -218,6 +218,7 @@ describe("utils/jsonLDSchemes", () => {
           body: [
             {
               _type: "block",
+              _key: "jsonld-spec-1",
               children: [
                 {
                   text: "Building my first Flutter app has been an exciting journey...",
@@ -299,6 +300,7 @@ describe("utils/jsonLDSchemes", () => {
           body: [
             {
               _type: "block",
+              _key: "jsonld-spec-2",
               children: [
                 {
                   text: "A project with multiple types",
@@ -501,6 +503,7 @@ describe("utils/jsonLDSchemes", () => {
           body: [
             {
               _type: "block",
+              _key: "jsonld-blog-1",
               children: [
                 {
                   text: "First blog post content.",
@@ -537,6 +540,7 @@ describe("utils/jsonLDSchemes", () => {
           body: [
             {
               _type: "block",
+              _key: "jsonld-blog-2",
               children: [
                 {
                   text: "Second blog post content.",
@@ -642,6 +646,7 @@ describe("utils/jsonLDSchemes", () => {
         body: [
           {
             _type: "block",
+            _key: "jsonld-article-1",
             children: [
               {
                 text: "Test article content.",
@@ -701,6 +706,7 @@ describe("utils/jsonLDSchemes", () => {
         body: [
           {
             _type: "block",
+            _key: "jsonld-article-2",
             children: [
               {
                 text: "Detailed article content.",
@@ -760,6 +766,7 @@ describe("utils/jsonLDSchemes", () => {
         body: [
           {
             _type: "block",
+            _key: "jsonld-article-3",
             children: [
               {
                 text: "Detailed article content.",
@@ -793,6 +800,7 @@ describe("utils/jsonLDSchemes", () => {
         body: [
           {
             _type: "block",
+            _key: "jsonld-article-4",
             children: [{ text: "Content.", _type: "span", marks: [] }],
             style: "normal",
           },

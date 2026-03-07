@@ -25,7 +25,6 @@ describe("app/utils/metadata", () => {
         imageUrl: "https://example.com/image.png",
         imageAlt: "Article Image",
         keywords: ["article", "example"],
-        canonical: "https://example.com/article",
       };
 
       const result = generateMetaData(data);
@@ -36,7 +35,6 @@ describe("app/utils/metadata", () => {
       expect(result.openGraph.title).toBe(data.title);
       expect(result.openGraph.images[0].url).toBe(data.imageUrl);
       expect(result.twitter.card).toBe("summary_large_image");
-      expect(result.alternates.canonical).toBe(data.canonical);
       expect(result.openGraph.site_name).toBe(data.title);
     });
 
@@ -101,21 +99,6 @@ describe("app/utils/metadata", () => {
 
       expect(result.openGraph.images[0].alt).toBe(data.imageAlt);
       expect(result.twitter.images[0].alt).toBe(data.imageAlt);
-    });
-
-    it("should use the URL as the canonical if no canonical URL is provided", () => {
-      const data = {
-        title: "Article Title",
-        description: "Article Description",
-        url: "https://example.com/article",
-        publishedTime: "2025-03-01T00:00:00Z",
-        modifiedTime: "2025-03-01T01:00:00Z",
-        imageUrl: "https://example.com/image.png",
-      };
-
-      const result = generateMetaData(data);
-
-      expect(result.alternates.canonical).toBe(data.url);
     });
 
     it("should include Google site verification when env var is set", () => {

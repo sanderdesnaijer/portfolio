@@ -17,22 +17,19 @@ async function checkPageElements(page: Page) {
   ).toBeVisible();
 }
 
+const mockSlug =
+  "mock-building-my-first-flutter-app-challenges-and-lessons-learned";
+
 test.describe("blog detail", () => {
   test.beforeEach(async ({ page }) => {
     await mockConsent(page);
-    await page.goto(
-      "blog/building-my-first-flutter-app-challenges-and-lessons-learned"
-    );
+    await page.goto(`blog/${mockSlug}`);
   });
 
   test("should display correct elements across breakpoints", async ({
     page,
   }) => {
-    await testResponsive(
-      page,
-      "/blog/building-my-first-flutter-app-challenges-and-lessons-learned",
-      checkPageElements
-    );
+    await testResponsive(page, `/blog/${mockSlug}`, checkPageElements);
   });
 
   test("should navigate to the blog overview page and back", async ({
@@ -69,10 +66,7 @@ test.describe("blog detail", () => {
     await testPageMetadata(page, {
       title: generateTitle(pageData!.title, article?.title),
       description: article!.excerpt!,
-      url: buildPageUrl(
-        "blog",
-        "mock-building-my-first-flutter-app-challenges-and-lessons-learned"
-      ),
+      url: buildPageUrl("blog", mockSlug),
       imageUrl: article!.imageURL!,
       publishedTime: article!.publishedAt,
       modifiedTime: article!.publishedAt,

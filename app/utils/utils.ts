@@ -61,10 +61,7 @@ export function generateTitle(
  * @returns {string} - The truncated plain text description.
  */
 export const getDescriptionFromSanity = (sanityBlock: Block[]): string => {
-  const textBlocks = sanityBlock.filter(
-    (block): block is Block & { _type: "block" } => block._type === "block"
-  );
-  return truncateText(toPlainText(textBlocks), 160);
+  return truncateText(toPlainText(sanityBlock), 160);
 };
 
 /**

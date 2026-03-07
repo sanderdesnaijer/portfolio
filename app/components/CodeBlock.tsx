@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useMemo } from "react";
 import hljs from "highlight.js/lib/core";
 import "highlight.js/styles/github-dark.min.css";
 import javascript from "highlight.js/lib/languages/javascript";
@@ -31,12 +31,11 @@ interface CodeBlockProps {
 }
 
 export function CodeBlock({ code, language }: CodeBlockProps) {
-  const codeRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    if (codeRef.current) {
-      hljs.highlightElement(codeRef.current);
+  const highlightedHTML = useMemo(() => {
+    if (language && hljs.getLanguage(language)) {
+      return hljs.highlight(code, { language }).value;
     }
+    return hljs.highlightAuto(code).value;
   }, [code, language]);
 
   return (
@@ -47,9 +46,10 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
         </span>
       )}
       <pre className="overflow-x-auto rounded-lg bg-gray-950 p-4 text-sm leading-relaxed">
-        <code ref={codeRef} className={language ? `language-${language}` : ""}>
-          {code}
-        </code>
+        <code
+          className={language ? `language-${language}` : ""}
+          dangerouslySetInnerHTML={{ __html: highlightedHTML }}
+        />
       </pre>
     </div>
   );
