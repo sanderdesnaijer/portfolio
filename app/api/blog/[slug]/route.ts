@@ -16,7 +16,7 @@ export async function GET(
   if (!article) {
     const t = await getTranslations();
     return NextResponse.json(
-      { message: t("api.medium.notFound") },
+      { message: t("error.404.blog.title") },
       { status: 404 }
     );
   }

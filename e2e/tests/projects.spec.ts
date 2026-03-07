@@ -85,12 +85,14 @@ test.describe("projects", () => {
     const data = await fetchPage("projects");
     const projects = await fetchProjects();
 
-    // json-ld
+    // json-ld: use structure-only validation since SSG content may differ from API at runtime
     const expectedJsonLd = getProjectsScheme({
       page: data!,
       projects: projects!,
     });
-    const validatedJsonLD = await validateJsonLd(page, expectedJsonLd);
+    const validatedJsonLD = await validateJsonLd(page, expectedJsonLd, {
+      strictMatch: false,
+    });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const testProject = (type: string, element: Record<string, any>) => {

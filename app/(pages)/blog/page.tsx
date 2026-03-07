@@ -1,5 +1,4 @@
 "use server";
-import { extractTextFromHTML } from "@/app/utils/utils";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { blogsQuery, pageQuery } from "@/sanity/lib/queries";
 import { PageSanity } from "@/sanity/types";
@@ -14,6 +13,7 @@ import { JsonLd } from "@/app/components/JsonLd";
 import envConfig from "@/envConfig";
 import { PageLayout } from "@/app/components/PageLayout";
 import { BlogSanity } from "@/sanity/types/blogType";
+import { getExcerpt } from "@/app/utils/blogUtils";
 
 const { blog: slug } = pageSlugs;
 
@@ -58,8 +58,6 @@ export default async function Page() {
                   })
                 );
 
-                const body = extractTextFromHTML(article.description);
-
                 return (
                   <ProjectListItem
                     key={index}
@@ -68,7 +66,7 @@ export default async function Page() {
                     imageALT={article.title}
                     date={article.publishedAt}
                     title={article.title}
-                    body={body}
+                    body={getExcerpt(article)}
                     tags={tags}
                     index={index}
                   />

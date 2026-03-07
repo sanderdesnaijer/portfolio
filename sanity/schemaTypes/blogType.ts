@@ -9,16 +9,12 @@ export const blogType = defineType({
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "publishedAt",
       title: "Published At",
       type: "datetime",
-    }),
-    defineField({
-      name: "mediumUrl",
-      title: "Medium URL",
-      type: "url",
     }),
     defineField({
       name: "slug",
@@ -28,17 +24,32 @@ export const blogType = defineType({
         source: "title",
         maxLength: 96,
       },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "imageURL",
-      title: "Image URL",
-      type: "url",
+      name: "mainImage",
+      title: "Featured Image",
+      type: "image",
+      options: { hotspot: true },
+      fields: [
+        {
+          name: "alt",
+          type: "string",
+          title: "Alternative Text",
+        },
+      ],
     }),
     defineField({
-      name: "description",
-      title: "Description (HTML)",
+      name: "excerpt",
+      title: "Excerpt",
       type: "text",
-      description: "Raw HTML content from Medium RSS",
+      rows: 3,
+      description: "Short summary for listings and SEO",
+    }),
+    defineField({
+      name: "body",
+      title: "Content",
+      type: "blockContent",
     }),
     defineField({
       name: "categories",
@@ -51,5 +62,18 @@ export const blogType = defineType({
       title: "Author",
       type: "string",
     }),
+    defineField({
+      name: "mediumUrl",
+      title: "Medium URL (legacy)",
+      type: "url",
+      hidden: true,
+    }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      media: "mainImage",
+      subtitle: "publishedAt",
+    },
+  },
 });

@@ -2,11 +2,16 @@ import { defineConfig, devices } from "@playwright/test";
 
 /**
  * Read environment variables from file.
+ * Use .env.test for e2e to enable mock API; fall back to .env.local.
  * https://github.com/motdotla/dotenv
  */
 import dotenv from "dotenv";
 import path from "path";
-dotenv.config({ path: path.resolve(__dirname, ".env.local") });
+
+const envTestPath = path.resolve(__dirname, ".env.test");
+const envLocalPath = path.resolve(__dirname, ".env.local");
+dotenv.config({ path: envTestPath });
+dotenv.config({ path: envLocalPath, override: false });
 
 if (!process.env.NEXT_PUBLIC_BASE_URL) {
   throw new Error("NEXT_PUBLIC_BASE_URL is missing");

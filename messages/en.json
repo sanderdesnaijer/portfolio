@@ -1,9 +1,6 @@
 {
   "api": {
-    "info": "Api is running",
-    "medium": {
-      "notFound": "Article not found"
-    }
+    "info": "Api is running"
   },
   "pages": {
     "about": {
@@ -15,7 +12,6 @@
       "jobTitle": "Software developer"
     },
     "blog": {
-      "articleLinkMedium": "originally published on Medium",
       "articles": "Blog articles"
     },
     "project": {

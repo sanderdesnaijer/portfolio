@@ -32,6 +32,7 @@ describe("app/(pages)/about-me", () => {
       description: [
         {
           _type: "block",
+          _key: "about-job-desc",
           children: [
             {
               text: "Job description",

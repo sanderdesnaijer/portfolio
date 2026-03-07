@@ -14,6 +14,7 @@ export const mockProject: ProjectTypeSanity = {
   body: [
     {
       _type: "block",
+      _key: "mock-project-block-1",
       children: [{ text: "Mock body content", _type: "span", marks: [] }],
       style: "",
     },

@@ -12,22 +12,23 @@ test.describe("mobile navigation", () => {
     // Set mobile viewport size
     await page.setViewportSize({ width: 375, height: 812 });
 
-    // Navigate to the page
-    await page.goto("/about");
+    // Use blog page for more scrollable content
+    await page.goto("/blog");
     await expect(
-      page.getByRole("heading", { level: 1, name: /About/i })
+      page.getByRole("heading", { level: 1, name: /Blog/i })
     ).toBeVisible();
 
     const nav = page.locator("nav");
-    const navLink = page.getByRole("link", { name: "Projects" });
+    const navLink = nav.getByRole("link", { name: "Projects", exact: true });
 
     // Ensure navigation is initially visible
     await expect(nav).toBeVisible();
     await expect(nav).toBeInViewport();
 
-    // Scroll down 500px
-    await page.evaluate(() => window.scrollBy(0, 500));
-    await page.waitForTimeout(1000); // Ensure scroll event processes
+    // Scroll down using mouse wheel to trigger scroll events
+    await page.mouse.wheel(0, 500);
+    await page.waitForFunction(() => window.scrollY >= 400);
+    await page.waitForTimeout(500); // Allow scroll handler to process
 
     // Check that navigation is NOT in viewport (hidden)
     await expect(nav).not.toBeInViewport();
@@ -55,7 +56,7 @@ test.describe("mobile navigation", () => {
 
     // Go back and verify the URL and nav visibility
     await page.goBack();
-    await expect(page).toHaveURL("/about");
+    await expect(page).toHaveURL("/blog");
     await expect(nav).toBeVisible();
     await expect(nav).toBeInViewport();
   });
@@ -66,27 +67,27 @@ test.describe("mobile navigation", () => {
     // Set mobile viewport size
     await page.setViewportSize({ width: 375, height: 812 });
 
-    // Navigate to the page
-    await page.goto("/about");
+    // Use blog page for more scrollable content
+    await page.goto("/blog");
     await expect(
-      page.getByRole("heading", { level: 1, name: /About/i })
+      page.getByRole("heading", { level: 1, name: /Blog/i })
     ).toBeVisible();
 
     const nav = page.locator("nav");
-    const navLink = page.getByRole("link", { name: "Projects" });
+    const navLink = nav.getByRole("link", { name: "Projects", exact: true });
 
     // Ensure navigation is initially visible
     await expect(nav).toBeVisible();
     await expect(nav).toBeInViewport();
 
-    // Scroll down 500px
-    await page.evaluate(() => window.scrollBy(0, 500));
-    await page.waitForFunction(() => window.scrollY >= 450); // Wait for scroll position
+    // Scroll down using mouse wheel to trigger scroll events
+    await page.mouse.wheel(0, 500);
+    await page.waitForFunction(() => window.scrollY >= 450);
 
     await expect(nav).not.toBeInViewport();
 
-    // Scroll up 100px instead of 10px (more realistic)
-    await page.evaluate(() => window.scrollBy(0, -100));
+    // Scroll up 100px
+    await page.mouse.wheel(0, -100);
     await page.waitForTimeout(500);
 
     // Ensure navigation is visible again
@@ -116,7 +117,7 @@ test.describe("mobile navigation", () => {
 
     // Go back and verify the URL and nav visibility
     await page.goBack();
-    await expect(page).toHaveURL("/about");
+    await expect(page).toHaveURL("/blog");
     await expect(nav).toBeVisible();
     await expect(nav).toBeInViewport();
   });

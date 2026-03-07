@@ -1,9 +1,10 @@
 import { toPlainText } from "next-sanity";
 import { AUTHOR_NAME } from "./constants";
-import { buildPageUrl, extractTextFromHTML } from "./utils";
+import { buildPageUrl } from "./utils";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import envConfig from "@/envConfig";
 import { BlogSanity } from "@/sanity/types/blogType";
+import { getExcerpt } from "./blogUtils";
 
 const createAuthor = (url?: string) => ({
   "@type": "Person",
@@ -129,23 +130,26 @@ export const getProjectsScheme = ({
   ),
 });
 
-export const getArticleScheme = (article: BlogSanity, hasDetail = false) => ({
-  "@type": "BlogPosting",
-  "@id": article.mediumUrl,
-  headline: article.title,
-  url: article.mediumUrl,
-  datePublished: article.publishedAt,
-  author: createAuthor(),
-  publisher: {
-    "@type": "Organization",
-    name: "Medium",
-    url: "https://medium.com",
-  },
-  ...(hasDetail &&
-    article.description && {
-      description: extractTextFromHTML(article.description),
+export const getArticleScheme = (
+  article: BlogSanity,
+  pageSlug: string,
+  hasDetail = false
+) => {
+  const url = buildPageUrl(pageSlug, article.slug.current);
+  return {
+    "@type": "BlogPosting",
+    "@id": url,
+    headline: article.title,
+    url,
+    datePublished: article.publishedAt,
+    author: createAuthor(),
+    publisher: createAuthor(envConfig.baseUrl),
+    ...(article.mediumUrl && { sameAs: article.mediumUrl }),
+    ...(hasDetail && {
+      description: getExcerpt(article),
     }),
-});
+  };
+};
 
 export const getBlogsScheme = ({
   page,
@@ -158,5 +162,7 @@ export const getBlogsScheme = ({
   "@type": "Blog",
   name: page.title,
   url: buildPageUrl(page.slug.current),
-  blogPost: articles.map((article) => getArticleScheme(article)),
+  blogPost: articles.map((article) =>
+    getArticleScheme(article, page.slug.current)
+  ),
 });
