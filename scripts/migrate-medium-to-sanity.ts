@@ -201,6 +201,12 @@ function extractImagesFromHTML(html: string): ImageInfo[] {
   let figMatch;
   while ((figMatch = figureRegex.exec(html)) !== null) {
     const figureContent = figMatch[1];
+    if (
+      /(?:youtube\.com|youtu\.be|medium\.com\/media\/[a-f0-9]+\/href)/.test(
+        figureContent
+      )
+    )
+      continue;
     const imgMatch = figureContent.match(
       /<img[^>]+src="([^">]+)"[^>]*(?:alt="([^"]*)")?[^>]*>/
     );
@@ -297,6 +303,87 @@ function extractCodeBlocks(html: string): {
   return { stripped, codeBlocks };
 }
 
+// Medium embeds videos as medium.com/media/{hash}/href links that redirect to
+// YouTube. Cloudflare blocks automated resolution, so we maintain a manual map.
+// To add a new mapping: visit the medium.com/media URL in a browser, copy the
+// YouTube URL it redirects to, and add the entry here.
+const MEDIUM_MEDIA_TO_YOUTUBE: Record<string, string> = {
+  "5c2f26a23e8472a0867d2f1ab7dcdef4":
+    "https://www.youtube.com/watch?v=6DWWaOKtbLU",
+  "107daabc1e1ef4c4559f30eadf698b01":
+    "https://www.youtube.com/watch?v=iC3d4ZYnlrE",
+  c17f2b5eeb41c8cf64d888735c757e1b:
+    "https://www.youtube.com/watch?v=k4Jy1zu0PXU",
+};
+
+function resolveMediumMediaUrl(mediumUrl: string): string | null {
+  const hashMatch = mediumUrl.match(/medium\.com\/media\/([a-f0-9]+)/);
+  if (!hashMatch) return null;
+  const hash = hashMatch[1];
+  const resolved = MEDIUM_MEDIA_TO_YOUTUBE[hash];
+  if (!resolved) {
+    console.warn(
+      `    Unknown medium.com/media hash: ${hash}\n` +
+        `    Visit https://medium.com/media/${hash}/href in a browser,\n` +
+        `    then add the YouTube URL to MEDIUM_MEDIA_TO_YOUTUBE in this script.`
+    );
+  }
+  return resolved ?? null;
+}
+
+function extractYouTubeEmbeds(html: string): string[] {
+  const urls: string[] = [];
+  const seenHashes = new Set<string>();
+
+  const mediumMediaRegex = /https?:\/\/medium\.com\/media\/([a-f0-9]+)\/href/g;
+  let mediumMatch;
+  while ((mediumMatch = mediumMediaRegex.exec(html)) !== null) {
+    const hash = mediumMatch[1];
+    if (seenHashes.has(hash)) continue;
+    seenHashes.add(hash);
+    const resolved = resolveMediumMediaUrl(mediumMatch[0]);
+    if (resolved) urls.push(resolved);
+  }
+
+  const iframeRegex =
+    /<iframe[^>]+src="([^"]*(?:youtube\.com|youtu\.be)[^"]*)"[^>]*>/g;
+  const existing = new Set(urls);
+  let iframeMatch;
+  while ((iframeMatch = iframeRegex.exec(html)) !== null) {
+    const src = iframeMatch[1];
+    const decodedSrc = decodeURIComponent(src.replace(/&amp;/g, "&"));
+    const embedMatch =
+      decodedSrc.match(/youtube\.com\/embed\/([^?"/]+)/) ||
+      decodedSrc.match(/youtube\.com\/watch\?v=([^&"]+)/);
+    if (!embedMatch) continue;
+    const url = `https://www.youtube.com/watch?v=${embedMatch[1]}`;
+    if (!existing.has(url)) urls.push(url);
+  }
+
+  return urls;
+}
+
+function stripYouTubeFromHTML(html: string): string {
+  let result = html;
+  result = result.replace(
+    /<iframe[^>]+src="[^"]*(?:youtube\.com|youtu\.be)[^"]*"[^>]*>[\s\S]*?<\/iframe>/g,
+    "__YT_PLACEHOLDER__"
+  );
+  result = result.replace(
+    /<a[^>]+href="https?:\/\/medium\.com\/media\/[a-f0-9]+\/href"[^>]*>[\s\S]*?<\/a>/g,
+    "__YT_PLACEHOLDER__"
+  );
+  result = result.replace(
+    /https?:\/\/medium\.com\/media\/[a-f0-9]+\/href/g,
+    "__YT_PLACEHOLDER__"
+  );
+  result = result.replace(
+    /<figure[^>]*>\s*__YT_PLACEHOLDER__\s*<\/figure>/g,
+    "<p>__YT_PLACEHOLDER__</p>"
+  );
+  return result;
+}
+
 async function convertPost(
   post: BlogPost
 ): Promise<{ body: any[]; excerpt: string; mainImageRef: any | null }> {
@@ -364,8 +451,13 @@ async function convertPost(
     if (first) mainImageRef = first.ref;
   }
 
+  const youTubeUrls = extractYouTubeEmbeds(html);
+  console.log(`  Found ${youTubeUrls.length} YouTube embeds in HTML.`);
+
   console.log(`  Converting HTML to Portable Text (text only)...`);
-  const { stripped: codeStrippedHtml, codeBlocks } = extractCodeBlocks(html);
+  const ytStrippedHtml = stripYouTubeFromHTML(html);
+  const { stripped: codeStrippedHtml, codeBlocks } =
+    extractCodeBlocks(ytStrippedHtml);
   console.log(`  Found ${codeBlocks.length} code blocks in HTML.`);
   const strippedHtml = stripImagesFromHTML(codeStrippedHtml);
 
@@ -379,6 +471,7 @@ async function convertPost(
   const finalBlocks: any[] = [];
   let imageIndex = 0;
   let codeIndex = 0;
+  let ytIndex = 0;
 
   for (const block of textBlocks) {
     const children = block.children as any[] | undefined;
@@ -400,6 +493,18 @@ async function convertPost(
     } else if (trimmedText === "__IMG_PLACEHOLDER__") {
       imageIndex++;
     } else if (
+      trimmedText === "__YT_PLACEHOLDER__" &&
+      ytIndex < youTubeUrls.length
+    ) {
+      finalBlocks.push({
+        _type: "youTube",
+        _key: randomKey(),
+        url: youTubeUrls[ytIndex],
+      });
+      ytIndex++;
+    } else if (trimmedText === "__YT_PLACEHOLDER__") {
+      ytIndex++;
+    } else if (
       trimmedText === "__CODE_PLACEHOLDER__" &&
       codeIndex < codeBlocks.length
     ) {
@@ -413,9 +518,10 @@ async function convertPost(
       codeIndex++;
     } else if (
       text.includes("__CODE_PLACEHOLDER__") ||
-      text.includes("__IMG_PLACEHOLDER__")
+      text.includes("__IMG_PLACEHOLDER__") ||
+      text.includes("__YT_PLACEHOLDER__")
     ) {
-      const placeholderRegex = /__(?:CODE|IMG)_PLACEHOLDER__/g;
+      const placeholderRegex = /__(?:CODE|IMG|YT)_PLACEHOLDER__/g;
       let match;
       let cursor = 0;
 
@@ -457,6 +563,18 @@ async function convertPost(
           imageIndex++;
         } else if (match[0] === "__IMG_PLACEHOLDER__") {
           imageIndex++;
+        } else if (
+          match[0] === "__YT_PLACEHOLDER__" &&
+          ytIndex < youTubeUrls.length
+        ) {
+          finalBlocks.push({
+            _type: "youTube",
+            _key: randomKey(),
+            url: youTubeUrls[ytIndex],
+          });
+          ytIndex++;
+        } else if (match[0] === "__YT_PLACEHOLDER__") {
+          ytIndex++;
         }
 
         cursor = match.index + match[0].length;
@@ -501,6 +619,15 @@ async function convertPost(
     codeIndex++;
   }
 
+  while (ytIndex < youTubeUrls.length) {
+    finalBlocks.push({
+      _type: "youTube",
+      _key: randomKey(),
+      url: youTubeUrls[ytIndex],
+    });
+    ytIndex++;
+  }
+
   const excerpt = extractExcerpt(html);
 
   return { body: finalBlocks, excerpt, mainImageRef };
@@ -538,6 +665,12 @@ async function migrate() {
     if (!hasCodeBlocks) {
       const htmlHasCode = /<pre[^>]*>[\s\S]*?<\/pre>/.test(post.description);
       if (htmlHasCode) return true;
+    }
+
+    const hasYouTube = post.body.some((b: any) => b._type === "youTube");
+    if (!hasYouTube) {
+      const htmlYouTube = extractYouTubeEmbeds(post.description);
+      if (htmlYouTube.length > 0) return true;
     }
 
     return false;
