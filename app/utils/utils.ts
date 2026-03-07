@@ -21,28 +21,6 @@ export const convertDate = (date: string, showDay: boolean = false) => {
 };
 
 /**
- * Extracts text content from an HTML string, removing all HTML tags and figcaption elements.
- * The resulting text is trimmed, condensed to a single space between words, and truncated to 200 characters.
- *
- * @param html - The HTML string to extract text from.
- * @returns The extracted and cleaned text, truncated to 200 characters followed by an ellipsis.
- */
-export const extractTextFromHTML = (html: string) => {
-  const withoutFigcaptions = html.replace(
-    /<figcaption>[^]*?<\/figcaption>/g,
-    ""
-  );
-  const text = withoutFigcaptions.replace(/<[^>]*>/g, " ");
-  const cleanText = text.replace(/\s+/g, " ").trim();
-  const maxLength = 200;
-
-  return (
-    cleanText.substring(0, maxLength) +
-    (cleanText.length > maxLength ? "..." : "")
-  );
-};
-
-/**
  * Truncates a given text to a specified length and appends an ellipsis ("...") if the text exceeds that length.
  *
  * @param text - The text to be truncated.
@@ -52,31 +30,6 @@ export const extractTextFromHTML = (html: string) => {
 export const truncateText = (text: string, length: number) => {
   if (text.length <= length) return text;
   return text.slice(0, length) + "...";
-};
-
-/**
- * Extracts the URL of the first image found in the given article description.
- *
- * @param articleDescription - The HTML content of the article description.
- * @returns The URL of the first image if found, otherwise undefined.
- */
-export const getImageURL = (articleDescription: string): string | undefined => {
-  return articleDescription.match(/<img[^>]+src="([^">]+)"/)?.[1];
-};
-
-/**
- * Extracts the slug from a given URL.
- *
- * This function looks for a pattern where the slug is followed by a hyphen
- * and a 12-character alphanumeric ID, before a query parameter (`?`).
- * If no match is found, it returns `"not-found"`.
- *
- * @param {string} url - The URL to extract the slug from.
- * @returns {string} The extracted slug or `"not-found"` if no match is found.
- */
-export const getSlug = (url: string): string => {
-  const match = url.match(/\/([^\/]+)-[a-f0-9]{12}\?/);
-  return match ? match[1] : "not-found";
 };
 
 /**
@@ -107,8 +60,12 @@ export function generateTitle(
  * @param {Block[]} sanityBlock - The Sanity block array containing rich text content.
  * @returns {string} - The truncated plain text description.
  */
-export const getDescriptionFromSanity = (sanityBlock: Block[]): string =>
-  truncateText(toPlainText(sanityBlock), 160);
+export const getDescriptionFromSanity = (sanityBlock: Block[]): string => {
+  const textBlocks = sanityBlock.filter(
+    (block): block is Block & { _type: "block" } => block._type === "block"
+  );
+  return truncateText(toPlainText(textBlocks), 160);
+};
 
 /**
  * Constructs a full URL using the base URL and provided slugs.

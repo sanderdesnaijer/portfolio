@@ -1,16 +1,5 @@
 import { defineType, defineArrayMember } from "sanity";
-import { ImageIcon, PlayIcon } from "@sanity/icons";
-
-/**
- * This is the schema type for block content used in the project document type
- * Importing this type into the studio configuration's `schema` property
- * lets you reuse it in other document types with:
- *  {
- *    name: 'someName',
- *    title: 'Some title',
- *    type: 'blockContent'
- *  }
- */
+import { ImageIcon, PlayIcon, CodeBlockIcon } from "@sanity/icons";
 
 export const blockContentType = defineType({
   title: "Block Content",
@@ -19,28 +8,24 @@ export const blockContentType = defineType({
   of: [
     defineArrayMember({
       type: "block",
-      // Styles let you define what blocks can be marked up as. The default
-      // set corresponds with HTML tags, but you can set any title or value
-      // you want, and decide how you want to deal with it where you want to
-      // use your content.
       styles: [
         { title: "Normal", value: "normal" },
         { title: "H1", value: "h1" },
         { title: "H2", value: "h2" },
         { title: "H3", value: "h3" },
         { title: "H4", value: "h4" },
-        { title: "quote", value: "span" },
+        { title: "Quote", value: "blockquote" },
       ],
-      lists: [{ title: "Bullet", value: "bullet" }],
-      // Marks let you mark up inline text in the Portable Text Editor
+      lists: [
+        { title: "Bullet", value: "bullet" },
+        { title: "Number", value: "number" },
+      ],
       marks: {
-        // Decorators usually describe a single property – e.g. a typographic
-        // preference or highlighting
         decorators: [
           { title: "Strong", value: "strong" },
           { title: "Emphasis", value: "em" },
+          { title: "Code", value: "code" },
         ],
-        // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
           {
             title: "URL",
@@ -57,9 +42,6 @@ export const blockContentType = defineType({
         ],
       },
     }),
-    // You can add additional types here. Note that you can't use
-    // primitive types such as 'string' and 'number' in the same array
-    // as a block type.
     defineArrayMember({
       type: "image",
       icon: ImageIcon,
@@ -75,6 +57,47 @@ export const blockContentType = defineType({
     defineArrayMember({
       type: "youTube",
       icon: PlayIcon,
+    }),
+    defineArrayMember({
+      name: "codeBlock",
+      title: "Code Block",
+      type: "object",
+      icon: CodeBlockIcon,
+      fields: [
+        {
+          name: "code",
+          title: "Code",
+          type: "text",
+        },
+        {
+          name: "language",
+          title: "Language",
+          type: "string",
+          options: {
+            list: [
+              { title: "JavaScript", value: "javascript" },
+              { title: "TypeScript", value: "typescript" },
+              { title: "HTML", value: "html" },
+              { title: "CSS", value: "css" },
+              { title: "JSON", value: "json" },
+              { title: "Bash", value: "bash" },
+              { title: "Python", value: "python" },
+              { title: "Dart", value: "dart" },
+              { title: "YAML", value: "yaml" },
+              { title: "Plain Text", value: "text" },
+            ],
+          },
+        },
+      ],
+      preview: {
+        select: { code: "code", language: "language" },
+        prepare({ code, language }) {
+          return {
+            title: language || "Code",
+            subtitle: code ? code.substring(0, 80) : "",
+          };
+        },
+      },
     }),
   ],
 });

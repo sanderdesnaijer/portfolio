@@ -2,18 +2,12 @@ import { test, expect, Page } from "@playwright/test";
 import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testPageMetadata } from "../utils/metadata";
-import {
-  buildPageUrl,
-  extractTextFromHTML,
-  generateTitle,
-  getImageURL,
-} from "@/app/utils/utils";
+import { buildPageUrl, generateTitle } from "@/app/utils/utils";
 import { mockArticles } from "@/app/test-utils/mockArticle";
 import { fetchPage } from "@/app/utils/api";
 import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import { mockConsent } from "../utils/localStorage";
-import { blockExternalImages } from "../utils/mockImages";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -21,21 +15,10 @@ async function checkPageElements(page: Page) {
       name: /Mock Building My First Flutter App: Challenges and Lessons Learned/i,
     })
   ).toBeVisible();
-
-  await expect(
-    page
-      .getByRole("figure", { name: /Mock Tabata whip timer app/i })
-      .locator("img")
-  ).toBeVisible();
-
-  await expect(
-    page.getByRole("link", { name: /originally published on Medium/i })
-  ).toBeVisible();
 }
 
 test.describe("blog detail", () => {
   test.beforeEach(async ({ page }) => {
-    await blockExternalImages(page);
     await mockConsent(page);
     await page.goto(
       "blog/building-my-first-flutter-app-challenges-and-lessons-learned"
@@ -79,41 +62,23 @@ test.describe("blog detail", () => {
     await runAccessibilityTest(page);
   });
 
-  test("open original medium link", async ({ page }) => {
-    const link = page.getByRole("link", {
-      name: "originally published on Medium",
-    });
-
-    expect(await link.getAttribute("target")).toBe("_blank");
-
-    const [newPage] = await Promise.all([
-      page.waitForEvent("popup"), // Wait for a new tab to open
-      link.click(),
-    ]);
-
-    expect(newPage).toBeTruthy();
-    await newPage.close();
-  });
-
   test("should include accurate metadata", async ({ page }) => {
     const pageData = await fetchPage("blog");
     const article = mockArticles[0];
 
     await testPageMetadata(page, {
       title: generateTitle(pageData!.title, article?.title),
-      description: extractTextFromHTML(article!.description),
+      description: article!.excerpt!,
       url: buildPageUrl(
         "blog",
         "mock-building-my-first-flutter-app-challenges-and-lessons-learned"
       ),
-      imageUrl: getImageURL(article!.description)!,
-      publishedTime: article!.pubDate,
-      modifiedTime: article!.pubDate,
-      canonical: article?.mediumUrl,
+      imageUrl: article!.imageURL!,
+      publishedTime: article!.publishedAt,
+      modifiedTime: article!.publishedAt,
     });
 
-    // json-ld
-    const expectedJsonLd = getArticleScheme(article!, true);
+    const expectedJsonLd = getArticleScheme(article!, "blog", true);
     await validateJsonLd(page, expectedJsonLd);
   });
 });
@@ -122,7 +87,6 @@ test.describe("blog detail not found", () => {
   test("blog detail show a message when blog can not be found", async ({
     page,
   }) => {
-    await blockExternalImages(page);
     await page.goto("/blog/does-not-exist");
 
     await expect(

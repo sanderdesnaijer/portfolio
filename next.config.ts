@@ -1,9 +1,19 @@
 import createNextIntlPlugin from "next-intl/plugin";
 import type { NextConfig } from "next";
+import blogRedirects from "./redirects/blog-redirects.json";
 
 const withNextIntl = createNextIntlPlugin("./app/utils/i18n.ts");
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return blogRedirects
+      .filter((r) => r.new && r.new !== r.old)
+      .map((r) => ({
+        source: `/blog/${r.old}`,
+        destination: `/blog/${r.new}`,
+        permanent: true,
+      }));
+  },
   images: {
     remotePatterns: [
       {
@@ -11,15 +21,11 @@ const nextConfig: NextConfig = {
         hostname: "cdn.sanity.io",
       },
       {
+        // TODO: Remove after running migration (migrate:medium-to-sanity)
         protocol: "https",
         hostname: "cdn-images-1.medium.com",
       },
     ],
-    // Disable optimization to avoid 429 rate limit errors from Medium CDN
-    // Medium CDN blocks/rate-limits server-side requests
-    // Images from Sanity will still work fine without optimization
-    unoptimized: process.env.NODE_ENV !== "production",
-    // Set minimum cache duration for optimized images (in seconds)
     minimumCacheTTL: 60,
   },
   // Note: Cross-origin warnings from local network IPs (e.g., 192.168.1.12) in development

@@ -146,7 +146,25 @@ export const recentProjectsQuery = groq`
 `;
 
 export const blogQuery = groq`
-  *[_type == "blogPost" && slug.current == $slug][0]
+  *[_type == "blogPost" && slug.current == $slug][0]{
+    _id,
+    _createdAt,
+    _updatedAt,
+    title,
+    slug,
+    publishedAt,
+    mainImage,
+    "imageURL": select(
+      defined(mainImage) => mainImage.asset->url,
+      imageURL
+    ),
+    excerpt,
+    body,
+    description,
+    categories,
+    author,
+    mediumUrl
+  }
 `;
 
 export const blogsQuery = groq`
@@ -155,8 +173,12 @@ export const blogsQuery = groq`
     title,
     slug,
     publishedAt,
-    mediumUrl,
-    imageURL,
+    mainImage,
+    "imageURL": select(
+      defined(mainImage) => mainImage.asset->url,
+      imageURL
+    ),
+    excerpt,
     description,
     categories,
     author

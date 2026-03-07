@@ -2,13 +2,7 @@ import { QueryParams } from "@sanity/client";
 import { blogQuery, pageQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
-import {
-  buildPageUrl,
-  convertDate,
-  extractTextFromHTML,
-  generateTitle,
-  getImageURL,
-} from "@/app/utils/utils";
+import { buildPageUrl, convertDate, generateTitle } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { generateMetaData } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
@@ -18,8 +12,9 @@ import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import { PageLayout } from "@/app/components/PageLayout";
 import { BlogSanity } from "@/sanity/types/blogType";
-
+import { BlogContent } from "@/app/components/BlogContent";
 import { client } from "@/sanity/lib/client";
+import { getExcerpt } from "@/app/utils/blogUtils";
 
 const { blog: slug } = pageSlugs;
 
@@ -59,8 +54,8 @@ export async function generateMetadata({
   });
 
   const title = generateTitle(page.title, article.title);
-  const description = extractTextFromHTML(article?.description);
-  const imageUrl = getImageURL(article?.description) || page.imageURL;
+  const description = getExcerpt(article);
+  const imageUrl = article.imageURL || page.imageURL;
   const url = buildPageUrl(page.slug.current, article.slug.current);
 
   return generateMetaData({
@@ -71,7 +66,6 @@ export async function generateMetadata({
     modifiedTime: article.publishedAt,
     imageUrl,
     keywords: article.categories,
-    canonical: article.mediumUrl,
   });
 }
 
@@ -85,9 +79,10 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
     getTranslations(),
   ]);
 
-  const jsonLd = article ? getArticleScheme(article, true) : null;
+  const jsonLd = article ? getArticleScheme(article, slug, true) : null;
 
   const title = article ? article.title : t("error.404.blog.title");
+  const hasPortableText = article?.body && article.body.length > 0;
 
   return (
     <>
@@ -95,20 +90,19 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
 
       {article ? (
         <PageLayout title={title}>
-          <ProjectLayout
-            date={convertDate(article.publishedAt, true)}
-            links={[
-              {
-                title: t("pages.blog.articleLinkMedium"),
-                link: article.mediumUrl,
-                icon: "article",
-              },
-            ]}
-          >
-            <div
-              className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3"
-              dangerouslySetInnerHTML={{ __html: article.description }}
-            ></div>
+          <ProjectLayout date={convertDate(article.publishedAt, true)}>
+            <div className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3">
+              {hasPortableText ? (
+                <BlogContent value={article.body!} />
+              ) : (
+                <div
+                  dangerouslySetInnerHTML={{
+                    // eslint-disable-next-line @typescript-eslint/no-deprecated
+                    __html: article.description || "",
+                  }}
+                />
+              )}
+            </div>
           </ProjectLayout>
         </PageLayout>
       ) : (
