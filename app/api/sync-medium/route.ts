@@ -1,31 +1,73 @@
 import { NextResponse } from "next/server";
+import { XMLParser } from "fast-xml-parser";
 import envConfig from "@/envConfig";
-import { REVALIDATE_INTERVAL } from "@/app/utils/constants";
 import { client } from "@/sanity/lib/client";
 import { getImageURL, getSlug } from "@/app/utils/utils";
 import { blogQuery } from "@/sanity/lib/queries";
 
+interface RSSItem {
+  title: string;
+  link: string;
+  pubDate: string;
+  "content:encoded": string;
+  "dc:creator": string;
+  category: string | string[];
+}
+
+function parseRSSFeed(xml: string): RSSItem[] {
+  const parser = new XMLParser({
+    ignoreAttributes: false,
+    processEntities: true,
+  });
+  const parsed = parser.parse(xml);
+  const items = parsed?.rss?.channel?.item;
+  if (!items) return [];
+  return Array.isArray(items) ? items : [items];
+}
+
 export async function GET() {
   try {
-    const response = await fetch(
-      `${envConfig.rssApiUrl}?rss_url=${envConfig.mediumUrl}`,
-      {
-        next: { revalidate: REVALIDATE_INTERVAL },
-      }
-    );
-    const feed = await response.json();
+    const response = await fetch(envConfig.mediumUrl, {
+      headers: { Accept: "application/rss+xml, application/xml, text/xml" },
+    });
+
+    if (!response.ok) {
+      return NextResponse.json(
+        {
+          status: "error",
+          error: `Failed to fetch RSS feed: ${response.status} ${response.statusText}`,
+        },
+        { status: 502 }
+      );
+    }
+
+    const xml = await response.text();
+    const items = parseRSSFeed(xml);
+
+    if (items.length === 0) {
+      return NextResponse.json(
+        { status: "error", error: "No items found in RSS feed" },
+        { status: 502 }
+      );
+    }
 
     const results: { created: string[]; skipped: string[] } = {
       created: [],
       skipped: [],
     };
 
-    for (const item of feed.items) {
+    for (const item of items) {
       const existing = await client.fetch(blogQuery, {
         slug: getSlug(item.link),
       });
 
       const publishedAt = new Date(item.pubDate).toISOString();
+      const content = item["content:encoded"] || "";
+      const categories = Array.isArray(item.category)
+        ? item.category
+        : item.category
+          ? [item.category]
+          : [];
 
       if (!existing) {
         await client.create({
@@ -34,10 +76,10 @@ export async function GET() {
           publishedAt,
           mediumUrl: item.link,
           slug: { current: getSlug(item.link) },
-          imageURL: getImageURL(item.description),
-          description: item.description,
-          categories: item.categories,
-          author: item.author,
+          imageURL: getImageURL(content),
+          description: content,
+          categories,
+          author: item["dc:creator"],
         });
         results.created.push(item.title);
       } else {
@@ -47,6 +89,10 @@ export async function GET() {
 
     return NextResponse.json({ status: "ok", ...results });
   } catch (err) {
-    return NextResponse.json({ status: "error", error: err }, { status: 500 });
+    const message = err instanceof Error ? err.message : String(err);
+    return NextResponse.json(
+      { status: "error", error: message },
+      { status: 500 }
+    );
   }
 }
