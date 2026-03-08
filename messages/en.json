@@ -12,7 +12,8 @@
       "jobTitle": "Software developer"
     },
     "blog": {
-      "articles": "Blog articles"
+      "articles": "Blog articles",
+      "relatedBlogs": "Related Articles"
     },
     "project": {
       "resources": "Project resources",

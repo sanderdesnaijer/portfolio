@@ -191,6 +191,42 @@ export const blogsQuery = groq`
   }
 `;
 
+export const relatedBlogsQuery = groq`
+  *[_type == "blogPost" && slug.current != $currentSlug && count(tags[]->label[@ in $tags]) > 0] | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    "imageURL": select(
+      defined(mainImage) => mainImage.asset->url,
+      imageURL
+    ),
+    "imageAlt": mainImage.alt,
+    "tags": tags[]->{
+      _id,
+      label
+    }
+  }
+`;
+
+export const recentBlogsQuery = groq`
+  *[_type == "blogPost" && slug.current != $currentSlug && !(_id in $excludeIds)] | order(publishedAt desc) [0...$limit] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    "imageURL": select(
+      defined(mainImage) => mainImage.asset->url,
+      imageURL
+    ),
+    "imageAlt": mainImage.alt,
+    "tags": tags[]->{
+      _id,
+      label
+    }
+  }
+`;
+
 export const latestProjectsQuery = groq`
   *[_type == "project"] | order(publishedAt desc) [0...2] {
     _id,
