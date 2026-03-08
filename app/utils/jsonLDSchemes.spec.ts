@@ -260,6 +260,10 @@ describe("utils/jsonLDSchemes", () => {
             description:
               "Building my first Flutter app has been an exciting journey...",
             applicationCategory: "MobileApplication",
+            brand: {
+              "@type": "Brand",
+              name: "Flutter Tabata whip timer",
+            },
             offers: {
               "@type": "Offer",
               "@id":
@@ -270,12 +274,17 @@ describe("utils/jsonLDSchemes", () => {
               availability: "https://schema.org/InStock",
               hasMerchantReturnPolicy: {
                 "@type": "MerchantReturnPolicy",
+                applicableCountry: "US",
                 returnPolicyCategory:
                   "https://schema.org/MerchantReturnNotPermitted",
               },
               shippingDetails: {
                 "@type": "OfferShippingDetails",
                 doesNotShip: true,
+                shippingDestination: {
+                  "@type": "DefinedRegion",
+                  addressCountry: "US",
+                },
               },
             },
             aggregateRating: {
@@ -398,6 +407,7 @@ describe("utils/jsonLDSchemes", () => {
 
       const result = getProjectsScheme({ page, projects });
       expect(result.hasPart[0]).not.toHaveProperty("applicationCategory");
+      expect(result.hasPart[0]).toHaveProperty("brand");
       expect(result.hasPart[0]).toHaveProperty("offers");
       expect(result.hasPart[0]).toHaveProperty("aggregateRating");
       expect(result.hasPart[0]).toHaveProperty("review");
@@ -435,11 +445,16 @@ describe("utils/jsonLDSchemes", () => {
         availability: "https://schema.org/InStock",
         hasMerchantReturnPolicy: {
           "@type": "MerchantReturnPolicy",
+          applicableCountry: "US",
           returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
         },
         shippingDetails: {
           "@type": "OfferShippingDetails",
           doesNotShip: true,
+          shippingDestination: {
+            "@type": "DefinedRegion",
+            addressCountry: "US",
+          },
         },
       });
       expect(result.hasPart[0]).not.toHaveProperty("aggregateRating");
