@@ -161,7 +161,10 @@ export const blogQuery = groq`
     excerpt,
     body,
     description,
-    categories,
+    "tags": tags[]->{
+      _id,
+      label
+    },
     author,
     mediumUrl
   }
@@ -180,7 +183,10 @@ export const blogsQuery = groq`
     ),
     excerpt,
     description,
-    categories,
+    "tags": tags[]->{
+      _id,
+      label
+    },
     author
   }
 `;
@@ -204,6 +210,9 @@ export const latestBlogQuery = groq`
     title,
     slug,
     publishedAt,
-    categories
+    "tags": tags[]->{
+      _id,
+      label
+    }
   }
 `;

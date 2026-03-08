@@ -37,9 +37,9 @@ export async function sanityFetch<QueryResponse>({
     .fetch<QueryResponse>(query, queryParams, {
       cache: isDevelopment || isDraftMode ? undefined : "force-cache",
       // cache: isDevelopment || isDraftMode ? undefined : "no-store",
+      perspective: isDraftMode ? "previewDrafts" : "published",
       ...(isDraftMode && {
         token,
-        perspective: "previewDrafts",
       }),
       next: {
         revalidate:

@@ -8,8 +8,12 @@ import { buildPageUrl, toTagSlug } from "@/app/utils/utils";
 import envConfig from "@/envConfig";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
-import { projectsQuery } from "@/sanity/lib/queries";
+import { blogsQuery, projectsQuery } from "@/sanity/lib/queries";
 import { ProjectTypeSanity } from "@/sanity/types";
+import { BlogSanity } from "@/sanity/types/blogType";
+import { ProjectListItem } from "@/app/components/ProjectListItem";
+import { getExcerpt } from "@/app/utils/blogUtils";
+import { pageSlugs } from "@/app/utils/routes";
 import { getTranslations } from "next-intl/server";
 
 type Params = Promise<{ slug: string }>;
@@ -54,9 +58,12 @@ const getLatestIsoDate = (dates: string[], fallback: string) => {
     : new Date(latestTimestamp).toISOString();
 };
 
-const getMatchingTagLabels = (projects: ProjectTypeSanity[], slug: string) => {
-  const labels = projects
-    .flatMap((project) => project.tags?.map((tag) => tag.label) || [])
+const getMatchingTagLabels = (
+  items: { tags?: { label: string }[] }[],
+  slug: string
+) => {
+  const labels = items
+    .flatMap((item) => item.tags?.map((tag) => tag.label) || [])
     .filter((label): label is string => Boolean(label?.trim()));
 
   return Array.from(new Set(labels)).filter(
@@ -65,14 +72,17 @@ const getMatchingTagLabels = (projects: ProjectTypeSanity[], slug: string) => {
 };
 
 export async function generateStaticParams() {
-  const projects = await client.fetch<{ tags?: { label: string }[] }[]>(
-    `*[_type == "project"]{ "tags": tags[]->{ label } }`
-  );
+  const [projects, blogs] = await Promise.all([
+    client.fetch<{ tags?: { label: string }[] }[]>(
+      `*[_type == "project"]{ "tags": tags[]->{ label } }`
+    ),
+    client.fetch<{ tags?: { label: string }[] }[]>(
+      `*[_type == "blogPost"]{ "tags": tags[]->{ label } }`
+    ),
+  ]);
 
-  const slugs = projects
-    .flatMap(
-      (project) => project.tags?.map((tag) => toTagSlug(tag.label)) || []
-    )
+  const slugs = [...projects, ...blogs]
+    .flatMap((item) => item.tags?.map((tag) => toTagSlug(tag.label)) || [])
     .filter(Boolean);
 
   return Array.from(new Set(slugs)).map((slug) => ({ slug }));
@@ -80,11 +90,14 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  const projects = await sanityFetch<ProjectTypeSanity[]>({
-    query: projectsQuery,
-  });
-  const labels = getMatchingTagLabels(projects, slug);
-  const label = labels[0];
+  const [projects, blogs] = await Promise.all([
+    sanityFetch<ProjectTypeSanity[]>({ query: projectsQuery }),
+    sanityFetch<BlogSanity[]>({ query: blogsQuery }),
+  ]);
+
+  const projectLabels = getMatchingTagLabels(projects, slug);
+  const blogLabels = getMatchingTagLabels(blogs, slug);
+  const label = projectLabels[0] || blogLabels[0];
 
   if (!label) {
     const t = await getTranslations();
@@ -98,21 +111,26 @@ export async function generateMetadata({ params }: { params: Params }) {
     };
   }
 
-  const title = `${label} Projects`;
-  const description = `Portfolio projects tagged with ${label}.`;
+  const allLabels = Array.from(new Set([...projectLabels, ...blogLabels]));
   const filteredProjects = projects.filter((project) =>
-    project.tags?.some((tag) => labels.includes(tag.label))
+    project.tags?.some((tag) => allLabels.includes(tag.label))
   );
+  const filteredBlogs = blogs.filter((blog) =>
+    blog.tags?.some((tag) => allLabels.includes(tag.label))
+  );
+  const allItems = [...filteredProjects, ...filteredBlogs];
   const fallbackTimestamp = new Date().toISOString();
   const publishedTime = getEarliestIsoDate(
-    filteredProjects.map((project) => project._createdAt),
+    allItems.map((item) => item._createdAt),
     fallbackTimestamp
   );
   const modifiedTime = getLatestIsoDate(
-    filteredProjects.map((project) => project._updatedAt),
+    allItems.map((item) => item._updatedAt),
     fallbackTimestamp
   );
 
+  const title = `${label} Projects & Articles`;
+  const description = `Portfolio projects and articles tagged with ${label}.`;
   const keywords = [
     `${label} developer portfolio`,
     `indie developer ${label} apps`,
@@ -133,13 +151,15 @@ export async function generateMetadata({ params }: { params: Params }) {
 const TagsPage = async ({ params }: { params: Params }) => {
   const { slug } = await params;
 
-  const [projects, t] = await Promise.all([
+  const [projects, blogs, t] = await Promise.all([
     sanityFetch<ProjectTypeSanity[]>({ query: projectsQuery }),
+    sanityFetch<BlogSanity[]>({ query: blogsQuery }),
     getTranslations(),
   ]);
 
-  const labels = getMatchingTagLabels(projects, slug);
-  const label = labels[0];
+  const projectLabels = getMatchingTagLabels(projects, slug);
+  const blogLabels = getMatchingTagLabels(blogs, slug);
+  const label = projectLabels[0] || blogLabels[0];
 
   if (!label) {
     return (
@@ -152,13 +172,42 @@ const TagsPage = async ({ params }: { params: Params }) => {
     );
   }
 
+  const allLabels = Array.from(new Set([...projectLabels, ...blogLabels]));
+
   const taggedProjects = projects.filter((project) =>
-    project.tags?.some((tag) => labels.includes(tag.label))
+    project.tags?.some((tag) => allLabels.includes(tag.label))
+  );
+  const taggedBlogs = blogs.filter((blog) =>
+    blog.tags?.some((tag) => allLabels.includes(tag.label))
   );
 
   return (
     <PageLayout title={label}>
-      <Projects projects={taggedProjects} pageSlug="projects" />
+      {taggedProjects.length > 0 && (
+        <Projects projects={taggedProjects} pageSlug={pageSlugs.projects} />
+      )}
+      {taggedBlogs.length > 0 && (
+        <div className="mx-auto md:pt-10">
+          <ol
+            aria-label={t("pages.blog.articles")}
+            className="group mt-0 grid gap-10 pl-0"
+          >
+            {taggedBlogs.map((article, index) => (
+              <ProjectListItem
+                key={article._id}
+                href={`/${pageSlugs.blog}/${article.slug.current}`}
+                imageURL={article.imageURL}
+                imageALT={article.title}
+                date={article.publishedAt}
+                title={article.title}
+                body={getExcerpt(article)}
+                tags={article.tags}
+                index={index}
+              />
+            ))}
+          </ol>
+        </div>
+      )}
     </PageLayout>
   );
 };

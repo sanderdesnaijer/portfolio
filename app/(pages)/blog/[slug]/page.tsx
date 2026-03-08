@@ -13,6 +13,7 @@ import { JsonLd } from "@/app/components/JsonLd";
 import { PageLayout } from "@/app/components/PageLayout";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { BlogContent } from "@/app/components/BlogContent";
+import { Tags } from "@/app/components/Tags";
 import { client } from "@/sanity/lib/client";
 import { getExcerpt } from "@/app/utils/blogUtils";
 
@@ -65,7 +66,7 @@ export async function generateMetadata({
     publishedTime: article.publishedAt,
     modifiedTime: article.publishedAt,
     imageUrl,
-    keywords: article.categories,
+    keywords: article.tags?.map((tag) => tag.label),
   });
 }
 
@@ -104,6 +105,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
               )}
             </div>
           </ProjectLayout>
+          {article.tags && <Tags tags={article.tags} context={article.title} />}
         </PageLayout>
       ) : (
         <NotFound

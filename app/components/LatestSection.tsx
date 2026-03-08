@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { pageSlugs } from "../utils/routes";
+import { toTagSlug } from "../utils/utils";
 
 type ProjectPreview = Pick<
   ProjectTypeSanity,
@@ -12,7 +13,7 @@ interface LatestSectionProps {
   projects: ProjectPreview[];
   post: Pick<
     BlogSanity,
-    "_id" | "title" | "slug" | "publishedAt" | "categories"
+    "_id" | "title" | "slug" | "publishedAt" | "tags"
   > | null;
   latestProjectsLabel: string;
   latestPostLabel: string;
@@ -25,26 +26,40 @@ function formatMonthYear(date: string): string {
   });
 }
 
+function TagLinks({ tags }: { tags: { label: string }[] }) {
+  return (
+    <>
+      {" · "}
+      {tags.map((tag, i) => (
+        <span key={tag.label}>
+          <Link
+            href={`/tags/${toTagSlug(tag.label)}`}
+            className="relative z-10 hover:underline"
+          >
+            {tag.label}
+          </Link>
+          {i < tags.length - 1 ? ", " : ""}
+        </span>
+      ))}
+    </>
+  );
+}
+
 function ProjectItem({ project }: { project: ProjectPreview }) {
   if (!project?.slug) return null;
   return (
-    <Link
-      href={`/${pageSlugs.projects}/${project.slug.current}`}
-      className="group/latest block no-underline"
-    >
-      <span className="mt-1 block text-lg font-normal text-neutral-900 transition-colors group-hover/latest:underline dark:text-neutral-100">
+    <div className="group/latest">
+      <Link
+        href={`/${pageSlugs.projects}/${project.slug.current}`}
+        className="mt-1 block text-lg font-normal text-neutral-900 no-underline transition-colors group-hover/latest:underline dark:text-neutral-100"
+      >
         {project.title}
-      </span>
+      </Link>
       <span className="text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
         {formatMonthYear(project.publishedAt)}
-        {project.tags?.length ? (
-          <>
-            {" · "}
-            {project.tags.map((t) => t.label).join(", ")}
-          </>
-        ) : null}
+        {project.tags?.length ? <TagLinks tags={project.tags} /> : null}
       </span>
-    </Link>
+    </div>
   );
 }
 
@@ -74,23 +89,18 @@ export const LatestSection = ({
           {latestPostLabel}
         </h2>
         {post?.slug && (
-          <Link
-            href={`/${pageSlugs.blog}/${post.slug.current}`}
-            className="group/latest block no-underline"
-          >
-            <span className="mt-1 block text-lg font-normal text-neutral-900 transition-colors group-hover/latest:underline dark:text-neutral-100">
+          <div className="group/latest">
+            <Link
+              href={`/${pageSlugs.blog}/${post.slug.current}`}
+              className="mt-1 block text-lg font-normal text-neutral-900 no-underline transition-colors group-hover/latest:underline dark:text-neutral-100"
+            >
               {post.title}
-            </span>
+            </Link>
             <span className="text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
               {formatMonthYear(post.publishedAt)}
-              {post.categories?.length ? (
-                <>
-                  {" · "}
-                  {post.categories.join(", ")}
-                </>
-              ) : null}
+              {post.tags?.length ? <TagLinks tags={post.tags} /> : null}
             </span>
-          </Link>
+          </div>
         )}
       </div>
     </section>

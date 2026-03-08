@@ -485,13 +485,7 @@ describe("utils/jsonLDSchemes", () => {
         {
           _id: "D9fCV9f59UZFiLIMN6Zg5d",
           publishedAt: "2023-10-01T12:00:00.000Z",
-          categories: [
-            "sanity",
-            "web-development",
-            "frontend-development",
-            "react",
-            "nextjs",
-          ],
+          tags: [],
           author: "Sander de Snaijer",
           title: "First Blog Post",
           slug: {
@@ -522,13 +516,7 @@ describe("utils/jsonLDSchemes", () => {
         {
           _id: "F1fCV9f59UZFiLIMN6Zg5d",
           publishedAt: "2025-10-02T12:00:00.000Z",
-          categories: [
-            "sanity",
-            "web-development",
-            "frontend-development",
-            "react",
-            "nextjs",
-          ],
+          tags: [],
           author: "Sander de Snaijer",
           title: "Second Blog Post",
           slug: {
@@ -629,13 +617,7 @@ describe("utils/jsonLDSchemes", () => {
       const article: BlogSanity = {
         _id: "F1fCV9f59UZFiLIMN6Zg5d",
         publishedAt: "2023-10-01T12:00:00.000Z",
-        categories: [
-          "sanity",
-          "web-development",
-          "frontend-development",
-          "react",
-          "nextjs",
-        ],
+        tags: [],
         author: "Sander de Snaijer",
         title: "Test Article",
         slug: {
@@ -689,13 +671,7 @@ describe("utils/jsonLDSchemes", () => {
       const article: BlogSanity = {
         _id: "F1fCV9f59UZFiLIMN6Zg5d",
         publishedAt: "2023-10-01T12:00:00.000Z",
-        categories: [
-          "sanity",
-          "web-development",
-          "frontend-development",
-          "react",
-          "nextjs",
-        ],
+        tags: [],
         author: "Sander de Snaijer",
         title: "Detailed Article",
         slug: {
@@ -749,13 +725,7 @@ describe("utils/jsonLDSchemes", () => {
     it("should not include description when hasDetail is false", () => {
       const article: BlogSanity = {
         publishedAt: "2023-10-01T12:00:00.000Z",
-        categories: [
-          "sanity",
-          "web-development",
-          "frontend-development",
-          "react",
-          "nextjs",
-        ],
+        tags: [],
         author: "Sander de Snaijer",
         title: "Detailed Article",
         slug: {
@@ -793,7 +763,7 @@ describe("utils/jsonLDSchemes", () => {
       const article: BlogSanity = {
         _id: "test-id",
         publishedAt: "2023-10-01T12:00:00.000Z",
-        categories: ["test"],
+        tags: [],
         author: "Sander de Snaijer",
         title: "No Medium URL",
         slug: { current: "no-medium-url" },
