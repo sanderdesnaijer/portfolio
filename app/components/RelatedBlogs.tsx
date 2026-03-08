@@ -19,10 +19,7 @@ type RelatedBlog = Pick<
 
 function RelatedBlogCard({ blog }: { blog: RelatedBlog }) {
   return (
-    <Link
-      href={`/${pageSlugs.blog}/${blog.slug.current}`}
-      className="group/card flex flex-col no-underline transition-transform hover:-translate-y-1"
-    >
+    <div className="group/card relative flex flex-col transition-transform hover:-translate-y-1">
       <div className="relative aspect-video w-full overflow-hidden rounded-sm">
         {blog.imageURL && (
           <Image
@@ -34,19 +31,20 @@ function RelatedBlogCard({ blog }: { blog: RelatedBlog }) {
           />
         )}
       </div>
-      <h3 className="mt-2 mb-0 text-base font-bold text-gray-900 group-hover/card:underline dark:text-white">
-        {blog.title}
-      </h3>
+      <Link
+        href={`/${pageSlugs.blog}/${blog.slug.current}`}
+        className="no-underline before:absolute before:inset-0 before:z-0"
+      >
+        <h3 className="mt-2 mb-0 text-base font-bold text-gray-900 group-hover/card:underline dark:text-white">
+          {blog.title}
+        </h3>
+      </Link>
       <div className="[&_ul]:mt-2 [&_ul]:mb-0">
         {blog.tags && blog.tags.length > 0 && (
-          <Tags
-            tags={blog.tags.slice(0, 3)}
-            context={blog.title}
-            renderLinks={false}
-          />
+          <Tags tags={blog.tags.slice(0, 3)} context={blog.title} />
         )}
       </div>
-    </Link>
+    </div>
   );
 }
 
