@@ -155,7 +155,7 @@ export const blogQuery = groq`
     publishedAt,
     mainImage,
     "imageURL": select(
-      defined(mainImage) => mainImage.asset->url,
+      defined(mainImage) => mainImage.asset->url + "?w=1200&h=630&fit=crop&auto=format",
       imageURL
     ),
     excerpt,

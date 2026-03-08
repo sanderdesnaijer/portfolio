@@ -49,7 +49,6 @@ export const generateMetaData = ({
         width: 1200,
         height: 630,
         alt: imageAlt || title,
-        type: "image/png",
       },
     ],
     locale: "en_US",
