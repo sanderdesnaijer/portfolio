@@ -4,7 +4,67 @@ import blogRedirects from "./redirects/blog-redirects.json";
 
 const withNextIntl = createNextIntlPlugin("./app/utils/i18n.ts");
 
+const ContentSecurityPolicy = `
+  default-src 'self';
+  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com;
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' data: blob: https://cdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com;
+  font-src 'self';
+  frame-src https://www.youtube.com https://youtube.com;
+  connect-src 'self' https://*.sanity.io https://cdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://analytics.google.com;
+  media-src 'self';
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+  frame-ancestors 'none';
+`;
+
+const securityHeaders = [
+  {
+    key: "Content-Security-Policy",
+    value: ContentSecurityPolicy.replace(/\s{2,}/g, " ").trim(),
+  },
+  {
+    key: "Strict-Transport-Security",
+    value: "max-age=63072000; includeSubDomains; preload",
+  },
+  {
+    key: "Cross-Origin-Opener-Policy",
+    value: "same-origin",
+  },
+  {
+    key: "X-Frame-Options",
+    value: "DENY",
+  },
+  {
+    key: "X-Content-Type-Options",
+    value: "nosniff",
+  },
+  {
+    key: "Referrer-Policy",
+    value: "strict-origin-when-cross-origin",
+  },
+  {
+    key: "Permissions-Policy",
+    value: "camera=(), microphone=(), geolocation=()",
+  },
+];
+
 const nextConfig: NextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/((?!studio).*)",
+        headers: securityHeaders,
+      },
+      {
+        source: "/studio/:path*",
+        headers: securityHeaders.filter(
+          (h) => h.key !== "Content-Security-Policy"
+        ),
+      },
+    ];
+  },
   async redirects() {
     return blogRedirects
       .filter((r) => r.new && r.new !== r.old)
