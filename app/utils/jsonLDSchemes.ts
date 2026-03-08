@@ -89,6 +89,12 @@ export const getProjectScheme = (
     ...(project.jsonLdDownloadUrl && {
       downloadUrl: project.jsonLdDownloadUrl,
     }),
+    ...(hasProductType && {
+      brand: {
+        "@type": "Brand",
+        name: project.title,
+      },
+    }),
     ...(shouldIncludeOffer && {
       offers: {
         "@type": "Offer",
@@ -99,11 +105,16 @@ export const getProjectScheme = (
         availability: "https://schema.org/InStock",
         hasMerchantReturnPolicy: {
           "@type": "MerchantReturnPolicy",
+          applicableCountry: "US",
           returnPolicyCategory: "https://schema.org/MerchantReturnNotPermitted",
         },
         shippingDetails: {
           "@type": "OfferShippingDetails",
           doesNotShip: true,
+          shippingDestination: {
+            "@type": "DefinedRegion",
+            addressCountry: "US",
+          },
         },
       },
       ...(hasProductType && {
