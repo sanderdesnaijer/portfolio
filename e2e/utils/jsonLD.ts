@@ -23,13 +23,16 @@ export async function validateJsonLd(
   const parsedJsonLd = JSON.parse(jsonLdText!);
 
   if (options?.strictMatch === false) {
-    // Structure-only validation: check top-level schema and that hasPart exists
+    // Structure-only validation: check top-level schema and that items array exists
     expect(parsedJsonLd["@context"]).toBe(expectedJsonLd["@context"]);
     expect(parsedJsonLd["@type"]).toBe(expectedJsonLd["@type"]);
     expect(parsedJsonLd.name).toBe(expectedJsonLd.name);
     expect(parsedJsonLd.url).toBe(expectedJsonLd.url);
-    expect(Array.isArray(parsedJsonLd.hasPart)).toBe(true);
-    expect(parsedJsonLd.hasPart.length).toBeGreaterThan(0);
+    const itemsKey =
+      "blogPost" in (parsedJsonLd as object) ? "blogPost" : "hasPart";
+    const items = (parsedJsonLd as Record<string, unknown>)[itemsKey];
+    expect(Array.isArray(items)).toBe(true);
+    expect((items as unknown[]).length).toBeGreaterThan(0);
   } else {
     expect(parsedJsonLd).toMatchObject(expectedJsonLd);
   }

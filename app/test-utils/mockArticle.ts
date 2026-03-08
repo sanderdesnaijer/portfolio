@@ -59,13 +59,7 @@ export const mockArticles: BlogSanity[] = [
         "Design was an iterative process. I began with a simple, functional interface and refined it over time, improving layout, colours, and user interactions."
       ),
     ],
-    categories: [
-      "flutter",
-      "flutter-app-development",
-      "programming",
-      "mobile-app-development",
-      "software-engineering",
-    ],
+    tags: [],
     mainImage: {
       _type: "image",
       asset: {
@@ -110,7 +104,7 @@ export const mockArticles: BlogSanity[] = [
         "After finalising the prototype, I moved on to the electronics. Since I was new to this, I debugged every step carefully."
       ),
     ],
-    categories: ["prototyping", "diy-projects", "arduino", "3d-printing"],
+    tags: [],
     slug: {
       current: "mock-creating-a-3d-printed-word-clock-with-minute-accuracy",
     },

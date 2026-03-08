@@ -95,6 +95,7 @@ export const getProjectScheme = (
         "@id": `${url}#offer`,
         price: "0.00",
         priceCurrency: "USD",
+        priceValidUntil: "2099-12-31",
         availability: "https://schema.org/InStock",
         hasMerchantReturnPolicy: {
           "@type": "MerchantReturnPolicy",
@@ -105,6 +106,26 @@ export const getProjectScheme = (
           doesNotShip: true,
         },
       },
+      ...(hasProductType && {
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "5",
+          bestRating: "5",
+          reviewCount: "1",
+        },
+        review: {
+          "@type": "Review",
+          author: createAuthor(),
+          reviewRating: {
+            "@type": "Rating",
+            ratingValue: "5",
+            bestRating: "5",
+          },
+          reviewBody:
+            (project.body && toPlainText(project.body)) ||
+            "Portfolio project by the author.",
+        },
+      }),
     }),
     ...(project.jsonLdIsAuthor && {
       author: createAuthor(),

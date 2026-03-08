@@ -3,41 +3,56 @@ import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl, generateTitle } from "@/app/utils/utils";
-import { mockArticles } from "@/app/test-utils/mockArticle";
-import { fetchPage } from "@/app/utils/api";
+import { fetchPage, fetchArticle, fetchArticles } from "@/app/utils/api";
 import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
+import { getExcerpt } from "@/app/utils/blogUtils";
 import { validateJsonLd } from "../utils/jsonLD";
 import { mockConsent } from "../utils/localStorage";
+import { titleRegExp } from "../utils/regex";
 
-async function checkPageElements(page: Page) {
+async function checkPageElements(page: Page, articleTitle: string) {
   await expect(
     page.getByRole("heading", {
-      name: /Mock Building My First Flutter App: Challenges and Lessons Learned/i,
+      name: titleRegExp(articleTitle),
     })
   ).toBeVisible();
 }
 
-const mockSlug =
-  "mock-building-my-first-flutter-app-challenges-and-lessons-learned";
-
 test.describe("blog detail", () => {
+  let articleSlug: string;
+  let firstArticle: Awaited<ReturnType<typeof fetchArticle>>;
+
+  test.beforeAll(async () => {
+    const articles = await fetchArticles();
+    const first = articles?.[0];
+    if (!first) return;
+    articleSlug = first.slug.current;
+    firstArticle = await fetchArticle(articleSlug);
+  });
+
   test.beforeEach(async ({ page }) => {
     await mockConsent(page);
-    await page.goto(`blog/${mockSlug}`);
+    if (articleSlug) {
+      await page.goto(`/blog/${articleSlug}`);
+    }
   });
 
   test("should display correct elements across breakpoints", async ({
     page,
   }) => {
-    await testResponsive(page, `/blog/${mockSlug}`, checkPageElements);
+    test.skip(!firstArticle, "No articles available from API");
+    await testResponsive(page, `/blog/${articleSlug}`, (p) =>
+      checkPageElements(p, firstArticle!.title)
+    );
   });
 
   test("should navigate to the blog overview page and back", async ({
     page,
   }) => {
+    test.skip(!firstArticle, "No articles available from API");
     await expect(
       page.getByRole("heading", {
-        name: /Mock Building My First Flutter App: Challenges and Lessons Learned/i,
+        name: titleRegExp(firstArticle!.title),
       })
     ).toBeVisible();
 
@@ -50,26 +65,28 @@ test.describe("blog detail", () => {
     await page.goBack();
     await expect(
       page.getByRole("heading", {
-        name: /Mock Building My First Flutter App: Challenges and Lessons Learned/i,
+        name: titleRegExp(firstArticle!.title),
       })
     ).toBeVisible();
   });
 
   test("should meet accessibility standards", async ({ page }) => {
+    test.skip(!firstArticle, "No articles available from API");
     await runAccessibilityTest(page);
   });
 
   test("should include accurate metadata", async ({ page }) => {
+    test.skip(!firstArticle, "No articles available from API");
     const pageData = await fetchPage("blog");
-    const article = mockArticles[0];
+    const article = firstArticle!;
 
     await testPageMetadata(page, {
       title: generateTitle(pageData!.title, article?.title),
-      description: article!.excerpt!,
-      url: buildPageUrl("blog", mockSlug),
+      description: getExcerpt(article!),
+      url: buildPageUrl("blog", articleSlug),
       imageUrl: article!.imageURL!,
       publishedTime: article!.publishedAt,
-      modifiedTime: article!.publishedAt,
+      modifiedTime: article!._updatedAt || article!.publishedAt,
     });
 
     const expectedJsonLd = getArticleScheme(article!, "blog", true);
@@ -79,6 +96,7 @@ test.describe("blog detail", () => {
   test("should have a valid og:image URL with sizing parameters", async ({
     page,
   }) => {
+    test.skip(!firstArticle, "No articles available from API");
     const ogImage = await page
       .locator('head meta[property="og:image"]')
       .getAttribute("content");

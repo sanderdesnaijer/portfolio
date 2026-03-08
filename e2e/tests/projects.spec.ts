@@ -74,7 +74,7 @@ test.describe("projects", () => {
       title: generateTitle("Projects"),
       description: data!.description,
       url: buildPageUrl("projects"),
-      imageUrl: setting?.imageURL ?? "",
+      imageUrl: (data?.imageURL || setting?.imageURL) ?? "",
       imageAlt: setting?.imageAlt,
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,

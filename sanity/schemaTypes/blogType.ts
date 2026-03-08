@@ -52,10 +52,10 @@ export const blogType = defineType({
       type: "blockContent",
     }),
     defineField({
-      name: "categories",
-      title: "Categories",
+      name: "tags",
+      title: "Tags",
       type: "array",
-      of: [{ type: "string" }],
+      of: [{ type: "reference", to: [{ type: "tag" }] }],
     }),
     defineField({
       name: "author",

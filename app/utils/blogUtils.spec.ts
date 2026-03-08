@@ -11,7 +11,6 @@ const makeBlog = (overrides: Partial<BlogSanity> = {}): BlogSanity =>
     title: "Test Post",
     publishedAt: "2025-01-01",
     slug: { current: "test-post" },
-    categories: [],
     author: "Test Author",
     ...overrides,
   }) as BlogSanity;

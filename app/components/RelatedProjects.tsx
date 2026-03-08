@@ -22,10 +22,7 @@ type RelatedProject = Pick<
 
 function RelatedProjectCard({ project }: { project: RelatedProject }) {
   return (
-    <Link
-      href={`/${pageSlugs.projects}/${project.slug.current}`}
-      className="group/card flex flex-col no-underline transition-transform hover:-translate-y-1"
-    >
+    <div className="group/card relative flex flex-col transition-transform hover:-translate-y-1">
       <div className="relative aspect-video w-full overflow-hidden rounded-sm">
         {project.imageURL && (
           <Image
@@ -37,19 +34,20 @@ function RelatedProjectCard({ project }: { project: RelatedProject }) {
           />
         )}
       </div>
-      <h3 className="mt-2 mb-0 text-base font-bold text-gray-900 group-hover/card:underline dark:text-white">
-        {project.title}
-      </h3>
+      <Link
+        href={`/${pageSlugs.projects}/${project.slug.current}`}
+        className="no-underline before:absolute before:inset-0 before:z-0"
+      >
+        <h3 className="mt-2 mb-0 text-base font-bold text-gray-900 group-hover/card:underline dark:text-white">
+          {project.title}
+        </h3>
+      </Link>
       <div className="[&_ul]:mt-2 [&_ul]:mb-0">
         {project.tags && project.tags.length > 0 && (
-          <Tags
-            tags={project.tags.slice(0, 3)}
-            context={project.title}
-            renderLinks={false}
-          />
+          <Tags tags={project.tags.slice(0, 3)} context={project.title} />
         )}
       </div>
-    </Link>
+    </div>
   );
 }
 

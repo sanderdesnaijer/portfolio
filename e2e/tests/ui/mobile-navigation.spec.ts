@@ -19,19 +19,22 @@ test.describe("mobile navigation", () => {
     ).toBeVisible();
 
     const nav = page.locator("nav");
+    const header = page.locator("header");
     const navLink = nav.getByRole("link", { name: "Projects", exact: true });
 
     // Ensure navigation is initially visible
     await expect(nav).toBeVisible();
     await expect(nav).toBeInViewport();
 
-    // Scroll down using mouse wheel to trigger scroll events
-    await page.mouse.wheel(0, 500);
-    await page.waitForFunction(() => window.scrollY >= 400);
-    await page.waitForTimeout(500); // Allow scroll handler to process
+    // Scroll incrementally so the scroll handler detects "down" direction
+    // before potentially reaching the page bottom
+    await page.evaluate(() => window.scrollTo(0, 100));
+    await page.waitForTimeout(100);
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await page.waitForTimeout(500);
 
-    // Check that navigation is NOT in viewport (hidden)
-    await expect(nav).not.toBeInViewport();
+    // Check that navigation is hidden (header has hide-menu class)
+    await expect(header).toHaveClass(/hide-menu/);
 
     // Scroll up 100px instead of 10px (more realistic)
     await page.evaluate(() => window.scrollBy(0, -100));
@@ -74,17 +77,22 @@ test.describe("mobile navigation", () => {
     ).toBeVisible();
 
     const nav = page.locator("nav");
+    const header = page.locator("header");
     const navLink = nav.getByRole("link", { name: "Projects", exact: true });
 
     // Ensure navigation is initially visible
     await expect(nav).toBeVisible();
     await expect(nav).toBeInViewport();
 
-    // Scroll down using mouse wheel to trigger scroll events
-    await page.mouse.wheel(0, 500);
-    await page.waitForFunction(() => window.scrollY >= 450);
+    // Scroll incrementally so the scroll handler detects "down" direction
+    // before potentially reaching the page bottom
+    await page.evaluate(() => window.scrollTo(0, 100));
+    await page.waitForTimeout(100);
+    await page.evaluate(() => window.scrollTo(0, 400));
+    await page.waitForTimeout(500);
 
-    await expect(nav).not.toBeInViewport();
+    // Check that navigation is hidden (header has hide-menu class)
+    await expect(header).toHaveClass(/hide-menu/);
 
     // Scroll up 100px
     await page.mouse.wheel(0, -100);

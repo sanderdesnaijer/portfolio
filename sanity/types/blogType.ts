@@ -1,5 +1,6 @@
 import { SanityDocument } from "next-sanity";
 import { Block } from "./types";
+import { TagSanity } from "./tagType";
 
 export interface BlogSanity extends SanityDocument {
   title: string;
@@ -19,7 +20,7 @@ export interface BlogSanity extends SanityDocument {
   body?: Block[];
   /** @deprecated Legacy HTML content from Medium RSS — use `body` (Portable Text) instead */
   description?: string;
-  categories: string[];
+  tags?: TagSanity[];
   author: string;
   mediumUrl?: string;
   imageURL?: string;

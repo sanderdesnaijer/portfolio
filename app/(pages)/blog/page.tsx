@@ -3,7 +3,6 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import { blogsQuery, pageQuery } from "@/sanity/lib/queries";
 import { PageSanity } from "@/sanity/types";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
-import { TagSanity } from "@/sanity/types/tagType";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "@/app/components/NotFound";
@@ -46,32 +45,19 @@ export default async function Page() {
               aria-label={t("pages.blog.articles")}
               className="group mt-0 grid gap-10 pl-0"
             >
-              {articles.map((article, index) => {
-                const tags = article.categories.map<TagSanity>(
-                  (cat, index) => ({
-                    label: cat,
-                    _id: `${cat}-${index}`,
-                    _rev: "",
-                    _type: "tag",
-                    _createdAt: new Date().toISOString(),
-                    _updatedAt: new Date().toISOString(),
-                  })
-                );
-
-                return (
-                  <ProjectListItem
-                    key={index}
-                    href={`${page.slug.current}/${article.slug.current}`}
-                    imageURL={article.imageURL}
-                    imageALT={article.title}
-                    date={article.publishedAt}
-                    title={article.title}
-                    body={getExcerpt(article)}
-                    tags={tags}
-                    index={index}
-                  />
-                );
-              })}
+              {articles.map((article, index) => (
+                <ProjectListItem
+                  key={article._id}
+                  href={`/${slug}/${article.slug.current}`}
+                  imageURL={article.imageURL}
+                  imageALT={article.title}
+                  date={article.publishedAt}
+                  title={article.title}
+                  body={getExcerpt(article)}
+                  tags={article.tags}
+                  index={index}
+                />
+              ))}
             </ol>
           </div>
         </PageLayout>

@@ -31,7 +31,7 @@ const mockLatestPost = {
   title: "Blog Post One",
   slug: { current: "blog-post-one" },
   publishedAt: "2025-02-01",
-  categories: ["Dev"],
+  tags: [],
 };
 
 function setupMocks(settingsOverride?: Record<string, unknown>) {

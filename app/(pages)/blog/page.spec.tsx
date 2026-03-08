@@ -33,13 +33,7 @@ const articles: BlogSanity[] = [
   {
     _id: "D9fCV9f59UZFiLIMN6Zg5d",
     publishedAt: "2023-10-01T12:00:00.000Z",
-    categories: [
-      "sanity",
-      "web-development",
-      "frontend-development",
-      "react",
-      "nextjs",
-    ],
+    tags: [],
     author: "Sander de Snaijer",
     title: "First Blog Post",
     slug: {
@@ -77,13 +71,7 @@ const articles: BlogSanity[] = [
   {
     _id: "F1fCV9f59UZFiLIMN6Zg5d",
     publishedAt: "2025-10-02T12:00:00.000Z",
-    categories: [
-      "sanity",
-      "web-development",
-      "frontend-development",
-      "react",
-      "nextjs",
-    ],
+    tags: [],
     author: "Sander de Snaijer",
     title: "Second Blog Post",
     slug: {

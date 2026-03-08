@@ -55,6 +55,20 @@ export async function fetchProject(
   return fetchData<ProjectTypeSanity>(`/api/projects/${slug}`);
 }
 
+export async function fetchArticles(): Promise<
+  import("@/sanity/types/blogType").BlogSanity[] | null
+> {
+  return fetchData<import("@/sanity/types/blogType").BlogSanity[]>("/api/blog");
+}
+
+export async function fetchArticle(
+  slug: string
+): Promise<import("@/sanity/types/blogType").BlogSanity | null> {
+  return fetchData<import("@/sanity/types/blogType").BlogSanity>(
+    `/api/blog/${slug}`
+  );
+}
+
 export async function fetchSettings(): Promise<SettingSanity | null> {
   return fetchData<SettingSanity>("/api/settings");
 }

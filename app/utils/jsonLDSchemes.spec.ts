@@ -266,6 +266,7 @@ describe("utils/jsonLDSchemes", () => {
                 "https://mocked-url.com/projects/flutter-tabata-whip-timer#offer",
               price: "0.00",
               priceCurrency: "USD",
+              priceValidUntil: "2099-12-31",
               availability: "https://schema.org/InStock",
               hasMerchantReturnPolicy: {
                 "@type": "MerchantReturnPolicy",
@@ -276,6 +277,26 @@ describe("utils/jsonLDSchemes", () => {
                 "@type": "OfferShippingDetails",
                 doesNotShip: true,
               },
+            },
+            aggregateRating: {
+              "@type": "AggregateRating",
+              ratingValue: "5",
+              bestRating: "5",
+              reviewCount: "1",
+            },
+            review: {
+              "@type": "Review",
+              author: {
+                "@type": "Person",
+                name: AUTHOR_NAME,
+              },
+              reviewRating: {
+                "@type": "Rating",
+                ratingValue: "5",
+                bestRating: "5",
+              },
+              reviewBody:
+                "Building my first Flutter app has been an exciting journey...",
             },
           },
         ],
@@ -378,6 +399,8 @@ describe("utils/jsonLDSchemes", () => {
       const result = getProjectsScheme({ page, projects });
       expect(result.hasPart[0]).not.toHaveProperty("applicationCategory");
       expect(result.hasPart[0]).toHaveProperty("offers");
+      expect(result.hasPart[0]).toHaveProperty("aggregateRating");
+      expect(result.hasPart[0]).toHaveProperty("review");
     });
 
     it("should include downloadUrl and offers when jsonLdDownloadUrl is provided", () => {
@@ -408,6 +431,7 @@ describe("utils/jsonLDSchemes", () => {
         "@id": "https://mocked-url.com/downloadable/downloadable-app#offer",
         price: "0.00",
         priceCurrency: "USD",
+        priceValidUntil: "2099-12-31",
         availability: "https://schema.org/InStock",
         hasMerchantReturnPolicy: {
           "@type": "MerchantReturnPolicy",
@@ -418,6 +442,8 @@ describe("utils/jsonLDSchemes", () => {
           doesNotShip: true,
         },
       });
+      expect(result.hasPart[0]).not.toHaveProperty("aggregateRating");
+      expect(result.hasPart[0]).not.toHaveProperty("review");
     });
 
     it("should not include offers for non-product projects without download url", () => {
@@ -485,13 +511,7 @@ describe("utils/jsonLDSchemes", () => {
         {
           _id: "D9fCV9f59UZFiLIMN6Zg5d",
           publishedAt: "2023-10-01T12:00:00.000Z",
-          categories: [
-            "sanity",
-            "web-development",
-            "frontend-development",
-            "react",
-            "nextjs",
-          ],
+          tags: [],
           author: "Sander de Snaijer",
           title: "First Blog Post",
           slug: {
@@ -522,13 +542,7 @@ describe("utils/jsonLDSchemes", () => {
         {
           _id: "F1fCV9f59UZFiLIMN6Zg5d",
           publishedAt: "2025-10-02T12:00:00.000Z",
-          categories: [
-            "sanity",
-            "web-development",
-            "frontend-development",
-            "react",
-            "nextjs",
-          ],
+          tags: [],
           author: "Sander de Snaijer",
           title: "Second Blog Post",
           slug: {
@@ -629,13 +643,7 @@ describe("utils/jsonLDSchemes", () => {
       const article: BlogSanity = {
         _id: "F1fCV9f59UZFiLIMN6Zg5d",
         publishedAt: "2023-10-01T12:00:00.000Z",
-        categories: [
-          "sanity",
-          "web-development",
-          "frontend-development",
-          "react",
-          "nextjs",
-        ],
+        tags: [],
         author: "Sander de Snaijer",
         title: "Test Article",
         slug: {
@@ -689,13 +697,7 @@ describe("utils/jsonLDSchemes", () => {
       const article: BlogSanity = {
         _id: "F1fCV9f59UZFiLIMN6Zg5d",
         publishedAt: "2023-10-01T12:00:00.000Z",
-        categories: [
-          "sanity",
-          "web-development",
-          "frontend-development",
-          "react",
-          "nextjs",
-        ],
+        tags: [],
         author: "Sander de Snaijer",
         title: "Detailed Article",
         slug: {
@@ -749,13 +751,7 @@ describe("utils/jsonLDSchemes", () => {
     it("should not include description when hasDetail is false", () => {
       const article: BlogSanity = {
         publishedAt: "2023-10-01T12:00:00.000Z",
-        categories: [
-          "sanity",
-          "web-development",
-          "frontend-development",
-          "react",
-          "nextjs",
-        ],
+        tags: [],
         author: "Sander de Snaijer",
         title: "Detailed Article",
         slug: {
@@ -793,7 +789,7 @@ describe("utils/jsonLDSchemes", () => {
       const article: BlogSanity = {
         _id: "test-id",
         publishedAt: "2023-10-01T12:00:00.000Z",
-        categories: ["test"],
+        tags: [],
         author: "Sander de Snaijer",
         title: "No Medium URL",
         slug: { current: "no-medium-url" },

@@ -161,7 +161,10 @@ export const blogQuery = groq`
     excerpt,
     body,
     description,
-    categories,
+    "tags": tags[]->{
+      _id,
+      label
+    },
     author,
     mediumUrl
   }
@@ -180,8 +183,47 @@ export const blogsQuery = groq`
     ),
     excerpt,
     description,
-    categories,
+    "tags": tags[]->{
+      _id,
+      label
+    },
     author
+  }
+`;
+
+export const relatedBlogsQuery = groq`
+  *[_type == "blogPost" && slug.current != $currentSlug && count(tags[]->label[@ in $tags]) > 0] | order(publishedAt desc) [0...3] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    "imageURL": select(
+      defined(mainImage) => mainImage.asset->url,
+      imageURL
+    ),
+    "imageAlt": mainImage.alt,
+    "tags": tags[]->{
+      _id,
+      label
+    }
+  }
+`;
+
+export const recentBlogsQuery = groq`
+  *[_type == "blogPost" && slug.current != $currentSlug && !(_id in $excludeIds)] | order(publishedAt desc) [0...$limit] {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    "imageURL": select(
+      defined(mainImage) => mainImage.asset->url,
+      imageURL
+    ),
+    "imageAlt": mainImage.alt,
+    "tags": tags[]->{
+      _id,
+      label
+    }
   }
 `;
 
@@ -204,6 +246,65 @@ export const latestBlogQuery = groq`
     title,
     slug,
     publishedAt,
-    categories
+    "tags": tags[]->{
+      _id,
+      label
+    }
+  }
+`;
+
+/** Minimal projection for metadata: projects with tags (filtered by slug in JS) */
+export const projectsWithTagsQuery = groq`
+  *[_type == "project" && count(tags) > 0] | order(publishedAt desc) {
+    _createdAt,
+    _updatedAt,
+    "tags": tags[]->{ _id, label }
+  }
+`;
+
+/** Minimal projection for metadata: blog posts with tags (filtered by slug in JS) */
+export const blogsWithTagsQuery = groq`
+  *[_type == "blogPost" && count(tags) > 0] | order(publishedAt desc) {
+    _createdAt,
+    _updatedAt,
+    "tags": tags[]->{ _id, label }
+  }
+`;
+
+/** Full projects with tags (filtered by slug in JS) */
+export const projectsWithTagsFullQuery = groq`
+  *[_type == "project" && count(tags) > 0] | order(publishedAt desc) {
+    publishedAt,
+    _updatedAt,
+    _id,
+    title,
+    slug,
+    mainImage,
+    body,
+    "imageURL": mainImage.asset->url,
+    "tags": tags[]->{ _id, label },
+    jsonLdType,
+    jsonLdApplicationCategory,
+    jsonLdOperatingSystem,
+    jsonLdCodeRepository,
+    jsonLdProgrammingLanguage,
+    jsonLdDownloadUrl,
+    jsonLdIsAuthor
+  }
+`;
+
+/** Full blog posts with tags (filtered by slug in JS) */
+export const blogsWithTagsFullQuery = groq`
+  *[_type == "blogPost" && count(tags) > 0] | order(publishedAt desc) {
+    _id,
+    title,
+    slug,
+    publishedAt,
+    mainImage,
+    "imageURL": select(defined(mainImage) => mainImage.asset->url, imageURL),
+    excerpt,
+    description,
+    "tags": tags[]->{ _id, label },
+    author
   }
 `;
