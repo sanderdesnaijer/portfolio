@@ -74,7 +74,8 @@ export const mockArticles: BlogSanity[] = [
       },
       alt: "Mock Tabata whip timer app store",
     },
-    imageURL: "https://cdn.sanity.io/images/mock/production/mock-image.webp",
+    imageURL:
+      "https://cdn.sanity.io/images/mock/production/mock-image.webp?w=1200&h=630&fit=crop&auto=format",
     _id: "mock-flutter-post",
     _rev: "",
     _type: "blogPost",
@@ -121,7 +122,8 @@ export const mockArticles: BlogSanity[] = [
       },
       alt: "Mock Completed Dutch Word Clock — Accurate to the Minute",
     },
-    imageURL: "https://cdn.sanity.io/images/mock/production/mock-image2.webp",
+    imageURL:
+      "https://cdn.sanity.io/images/mock/production/mock-image2.webp?w=1200&h=630&fit=crop&auto=format",
     _id: "mock-wordclock-post",
     _rev: "",
     _type: "blogPost",

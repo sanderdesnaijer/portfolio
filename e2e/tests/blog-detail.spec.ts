@@ -75,6 +75,30 @@ test.describe("blog detail", () => {
     const expectedJsonLd = getArticleScheme(article!, "blog", true);
     await validateJsonLd(page, expectedJsonLd);
   });
+
+  test("should have a valid og:image URL with sizing parameters", async ({
+    page,
+  }) => {
+    const ogImage = await page
+      .locator('head meta[property="og:image"]')
+      .getAttribute("content");
+
+    expect(ogImage).toBeTruthy();
+    expect(ogImage).toMatch(/^https?:\/\//);
+    expect(ogImage).toContain("w=1200");
+    expect(ogImage).toContain("h=630");
+    expect(ogImage).toContain("fit=crop");
+    expect(ogImage).toContain("auto=format");
+
+    const twitterImage = await page
+      .locator('head meta[name="twitter:image"]')
+      .getAttribute("content");
+
+    expect(twitterImage).toBeTruthy();
+    expect(twitterImage).toMatch(/^https?:\/\//);
+    expect(twitterImage).toContain("w=1200");
+    expect(twitterImage).toContain("h=630");
+  });
 });
 
 test.describe("blog detail not found", () => {

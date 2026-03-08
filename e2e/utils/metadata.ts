@@ -71,9 +71,6 @@ export async function testPageMetadata(
   await expect(
     page.locator('head meta[property="og:image:alt"]')
   ).toHaveAttribute("content", expectedMeta.imageAlt || expectedMeta.title);
-  await expect(
-    page.locator('head meta[property="og:image:type"]')
-  ).toHaveAttribute("content", "image/png");
   await expect(page.locator('head meta[property="og:type"]')).toHaveAttribute(
     "content",
     "article"
