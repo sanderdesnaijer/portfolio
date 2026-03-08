@@ -191,9 +191,11 @@ export async function generatePageMetadata({
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
   const title = generateTitle(page.title, project?.title);
-  const description = project?.body
+  const projectDescription = project?.body?.length
     ? getDescriptionFromSanity(project.body)
-    : page.description || setting?.description || "";
+    : "";
+  const description =
+    projectDescription || page.description || setting?.description || "";
 
   const url = buildPageUrl(pageSlug, project?.slug.current);
   const imageUrl = project?.imageURL || page.imageURL || setting.imageURL;

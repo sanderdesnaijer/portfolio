@@ -26,12 +26,12 @@ function formatMonthYear(date: string): string {
   });
 }
 
-function TagLinks({ tags }: { tags: { label: string }[] }) {
+function TagLinks({ tags }: { tags: { _id: string; label: string }[] }) {
   return (
     <>
       {" · "}
       {tags.map((tag, i) => (
-        <span key={tag.label}>
+        <span key={tag._id}>
           <Link
             href={`/tags/${toTagSlug(tag.label)}`}
             className="relative z-10 hover:underline"

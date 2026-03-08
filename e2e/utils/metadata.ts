@@ -140,7 +140,9 @@ export async function testPageMetadata(
   ];
 
   for (const { url, media, sizes } of favicons) {
-    const locator = page.locator(`head link[rel="icon"][href="${url}"]`);
+    const locator = page
+      .locator(`head link[rel="icon"][href="${url}"]`)
+      .first();
     await expect(locator).toHaveAttribute("sizes", sizes);
     await expect(locator).toHaveAttribute("media", media);
   }
@@ -160,9 +162,9 @@ export async function testPageMetadata(
   ];
 
   for (const { url, media, sizes } of shortcutIcons) {
-    const locator = page.locator(
-      `head link[rel="shortcut icon"][href="${url}"]`
-    );
+    const locator = page
+      .locator(`head link[rel="shortcut icon"][href="${url}"]`)
+      .first();
     await expect(locator).toHaveAttribute("sizes", sizes);
     await expect(locator).toHaveAttribute("media", media);
   }
@@ -202,9 +204,9 @@ export async function testPageMetadata(
   ];
 
   for (const { url, sizes, media } of appleIcons) {
-    const locator = page.locator(
-      `head link[rel="apple-touch-icon"][href="${url}"]`
-    );
+    const locator = page
+      .locator(`head link[rel="apple-touch-icon"][href="${url}"]`)
+      .first();
     await expect(locator).toHaveAttribute("sizes", sizes);
     await expect(locator).toHaveAttribute("media", media);
   }

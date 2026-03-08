@@ -47,8 +47,8 @@ export default async function Page() {
             >
               {articles.map((article, index) => (
                 <ProjectListItem
-                  key={index}
-                  href={`${page.slug.current}/${article.slug.current}`}
+                  key={article._id}
+                  href={`/${slug}/${article.slug.current}`}
                   imageURL={article.imageURL}
                   imageALT={article.title}
                   date={article.publishedAt}

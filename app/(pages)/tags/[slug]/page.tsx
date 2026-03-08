@@ -8,7 +8,12 @@ import { buildPageUrl, toTagSlug } from "@/app/utils/utils";
 import envConfig from "@/envConfig";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
-import { blogsQuery, projectsQuery } from "@/sanity/lib/queries";
+import {
+  blogsWithTagsFullQuery,
+  blogsWithTagsQuery,
+  projectsWithTagsFullQuery,
+  projectsWithTagsQuery,
+} from "@/sanity/lib/queries";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
@@ -58,6 +63,14 @@ const getLatestIsoDate = (dates: string[], fallback: string) => {
     : new Date(latestTimestamp).toISOString();
 };
 
+const filterByTagSlug = <T extends { tags?: { label: string }[] }>(
+  items: T[],
+  slug: string
+): T[] =>
+  items.filter((item) =>
+    item.tags?.some((tag) => toTagSlug(tag.label) === slug)
+  );
+
 const getMatchingTagLabels = (
   items: { tags?: { label: string }[] }[],
   slug: string
@@ -88,12 +101,25 @@ export async function generateStaticParams() {
   return Array.from(new Set(slugs)).map((slug) => ({ slug }));
 }
 
+type TagSlugMetaItem = {
+  _createdAt: string;
+  _updatedAt: string;
+  tags?: { _id: string; label: string }[];
+};
+
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  const [projects, blogs] = await Promise.all([
-    sanityFetch<ProjectTypeSanity[]>({ query: projectsQuery }),
-    sanityFetch<BlogSanity[]>({ query: blogsQuery }),
+  const [allProjects, allBlogs] = await Promise.all([
+    sanityFetch<TagSlugMetaItem[]>({
+      query: projectsWithTagsQuery,
+    }),
+    sanityFetch<TagSlugMetaItem[]>({
+      query: blogsWithTagsQuery,
+    }),
   ]);
+
+  const projects = filterByTagSlug(allProjects, slug);
+  const blogs = filterByTagSlug(allBlogs, slug);
 
   const projectLabels = getMatchingTagLabels(projects, slug);
   const blogLabels = getMatchingTagLabels(blogs, slug);
@@ -111,14 +137,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     };
   }
 
-  const allLabels = Array.from(new Set([...projectLabels, ...blogLabels]));
-  const filteredProjects = projects.filter((project) =>
-    project.tags?.some((tag) => allLabels.includes(tag.label))
-  );
-  const filteredBlogs = blogs.filter((blog) =>
-    blog.tags?.some((tag) => allLabels.includes(tag.label))
-  );
-  const allItems = [...filteredProjects, ...filteredBlogs];
+  const allItems = [...projects, ...blogs];
   const fallbackTimestamp = new Date().toISOString();
   const publishedTime = getEarliestIsoDate(
     allItems.map((item) => item._createdAt),
@@ -151,15 +170,23 @@ export async function generateMetadata({ params }: { params: Params }) {
 const TagsPage = async ({ params }: { params: Params }) => {
   const { slug } = await params;
 
-  const [projects, blogs, t] = await Promise.all([
-    sanityFetch<ProjectTypeSanity[]>({ query: projectsQuery }),
-    sanityFetch<BlogSanity[]>({ query: blogsQuery }),
+  const [allProjects, allBlogs, t] = await Promise.all([
+    sanityFetch<ProjectTypeSanity[]>({
+      query: projectsWithTagsFullQuery,
+    }),
+    sanityFetch<BlogSanity[]>({
+      query: blogsWithTagsFullQuery,
+    }),
     getTranslations(),
   ]);
 
-  const projectLabels = getMatchingTagLabels(projects, slug);
-  const blogLabels = getMatchingTagLabels(blogs, slug);
-  const label = projectLabels[0] || blogLabels[0];
+  const taggedProjects = filterByTagSlug(allProjects, slug);
+  const taggedBlogs = filterByTagSlug(allBlogs, slug);
+
+  const label =
+    taggedProjects[0]?.tags?.find((tag) => toTagSlug(tag.label) === slug)
+      ?.label ||
+    taggedBlogs[0]?.tags?.find((tag) => toTagSlug(tag.label) === slug)?.label;
 
   if (!label) {
     return (
@@ -171,15 +198,6 @@ const TagsPage = async ({ params }: { params: Params }) => {
       />
     );
   }
-
-  const allLabels = Array.from(new Set([...projectLabels, ...blogLabels]));
-
-  const taggedProjects = projects.filter((project) =>
-    project.tags?.some((tag) => allLabels.includes(tag.label))
-  );
-  const taggedBlogs = blogs.filter((blog) =>
-    blog.tags?.some((tag) => allLabels.includes(tag.label))
-  );
 
   return (
     <PageLayout title={label}>

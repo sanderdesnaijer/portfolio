@@ -57,7 +57,12 @@ export async function generateMetadata({
 
   const title = generateTitle(page.title, article.title);
   const description = getExcerpt(article);
-  const imageUrl = article.imageURL || page.imageURL;
+  const rawImageUrl = article.imageURL || page.imageURL;
+  const OG_PARAMS = "w=1200&h=630&fit=crop&auto=format";
+  const imageUrl =
+    rawImageUrl && !rawImageUrl.includes("w=1200")
+      ? `${rawImageUrl}${rawImageUrl.includes("?") ? "&" : "?"}${OG_PARAMS}`
+      : rawImageUrl;
   const url = buildPageUrl(page.slug.current, article.slug.current);
 
   return generateMetaData({
@@ -65,7 +70,7 @@ export async function generateMetadata({
     description,
     url,
     publishedTime: article.publishedAt,
-    modifiedTime: article.publishedAt,
+    modifiedTime: article._updatedAt || article.publishedAt,
     imageUrl,
     keywords: article.tags?.map((tag) => tag.label),
   });

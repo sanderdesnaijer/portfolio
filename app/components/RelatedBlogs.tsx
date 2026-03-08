@@ -53,21 +53,30 @@ function RelatedBlogCard({ blog }: { blog: RelatedBlog }) {
 export async function RelatedBlogs({ currentSlug, tags }: RelatedBlogsProps) {
   const t = await getTranslations("pages.blog");
 
-  let relatedBlogs = await sanityFetch<RelatedBlog[]>({
-    query: relatedBlogsQuery,
-    params: { currentSlug, tags },
-  });
+  let relatedBlogs: RelatedBlog[];
 
-  if (relatedBlogs.length < 3) {
-    const excludeIds = relatedBlogs.map((b) => b._id);
-    const limit = 3 - relatedBlogs.length;
-
-    const additionalBlogs = await sanityFetch<RelatedBlog[]>({
+  if (!tags || tags.length === 0) {
+    relatedBlogs = await sanityFetch<RelatedBlog[]>({
       query: recentBlogsQuery,
-      params: { currentSlug, excludeIds, limit },
+      params: { currentSlug, excludeIds: [], limit: 3 },
+    });
+  } else {
+    relatedBlogs = await sanityFetch<RelatedBlog[]>({
+      query: relatedBlogsQuery,
+      params: { currentSlug, tags },
     });
 
-    relatedBlogs = [...relatedBlogs, ...additionalBlogs];
+    if (relatedBlogs.length < 3) {
+      const excludeIds = relatedBlogs.map((b) => b._id);
+      const limit = 3 - relatedBlogs.length;
+
+      const additionalBlogs = await sanityFetch<RelatedBlog[]>({
+        query: recentBlogsQuery,
+        params: { currentSlug, excludeIds, limit },
+      });
+
+      relatedBlogs = [...relatedBlogs, ...additionalBlogs];
+    }
   }
 
   if (relatedBlogs.length === 0) {

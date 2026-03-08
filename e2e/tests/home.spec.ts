@@ -57,12 +57,12 @@ test.describe("home", () => {
   test("should include accurate metadata", async ({ page }) => {
     const data = await fetchPage();
     const setting = await fetchSettings();
-    // general meta data
+    // general meta data - home uses page.imageURL || setting.imageURL
     await testPageMetadata(page, {
       title: generateTitle(),
       description: data!.description,
       url: envConfig.baseUrl,
-      imageUrl: setting?.imageURL ?? "",
+      imageUrl: (data?.imageURL || setting?.imageURL) ?? "",
       imageAlt: setting?.imageAlt,
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,

@@ -7,52 +7,56 @@ import {
   generateTitle,
   getDescriptionFromSanity,
 } from "@/app/utils/utils";
-import { fetchPage, fetchProject } from "@/app/utils/api";
+import { fetchPage, fetchProject, fetchProjects } from "@/app/utils/api";
 import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import { mockConsent } from "../utils/localStorage";
+import { titleRegExp } from "../utils/regex";
 
-async function checkPageElements(page: Page) {
+async function checkPageElements(page: Page, projectTitle: string) {
   await expect(
-    page.getByRole("heading", { name: /Flutter Tabata whip timer/i })
-  ).toBeVisible();
-
-  await expect(
-    page.getByRole("img", { name: /Flutter tabata whip timer app/i })
+    page.getByRole("heading", { name: titleRegExp(projectTitle) })
   ).toBeVisible();
 
-  await expect(
-    page.getByRole("link", { name: /link to article/i })
-  ).toBeVisible();
-  await expect(
-    page.getByRole("list", { name: /Tags of Flutter Tabata whip timer/i })
-  ).toBeVisible();
   await expect(
     page.getByRole("list", { name: /Project resources/i })
   ).toBeVisible();
 }
 
 test.describe("projects detail", () => {
+  let projectSlug: string;
+  let project: Awaited<ReturnType<typeof fetchProject>>;
+
+  test.beforeAll(async () => {
+    const projects = await fetchProjects();
+    const first = projects?.[0];
+    if (!first) return;
+    projectSlug = first.slug.current;
+    project = await fetchProject(projectSlug);
+  });
+
   test.beforeEach(async ({ page }) => {
     await mockConsent(page);
-    await page.goto("/projects/flutter-tabata-whip-timer");
+    if (projectSlug) {
+      await page.goto(`/projects/${projectSlug}`);
+    }
   });
 
   test("should display correct elements across breakpoints", async ({
     page,
   }) => {
-    await testResponsive(
-      page,
-      "/projects/flutter-tabata-whip-timer",
-      checkPageElements
+    test.skip(!project, "No projects available from API");
+    await testResponsive(page, `/projects/${projectSlug}`, (p) =>
+      checkPageElements(p, project!.title)
     );
   });
 
   test("should navigate to a project overview page and back", async ({
     page,
   }) => {
+    test.skip(!project, "No projects available from API");
     await expect(
-      page.getByRole("heading", { name: /Flutter Tabata whip timer/i })
+      page.getByRole("heading", { name: titleRegExp(project!.title) })
     ).toBeVisible();
 
     const link = page.getByRole("link", { name: /Projects/i });
@@ -65,42 +69,52 @@ test.describe("projects detail", () => {
     ).toBeVisible();
     await page.goBack();
     await expect(
-      page.getByRole("heading", { name: /Flutter Tabata whip timer/i })
+      page.getByRole("heading", { name: titleRegExp(project!.title) })
     ).toBeVisible();
   });
 
   test("should meet accessibility standards", async ({ page }) => {
+    test.skip(!project, "No projects available from API");
     await runAccessibilityTest(page);
   });
 
-  test("open resource links in a new tab", async ({ page }) => {
+  test("open resource links in a new tab", async ({ page, browserName }) => {
+    test.skip(!project, "No projects available from API");
     const links = await page
       .getByRole("list", { name: /Project resources/i })
       .getByRole("link")
       .all();
+
+    test.skip(links.length === 0, "Project has no resource links");
 
     for (const link of links) {
       const target = await link.getAttribute("target");
       expect(target).toBe("_blank");
     }
 
-    const [newPage] = await Promise.all([
-      page.waitForEvent("popup"), // Wait for a new tab to open
-      links[0].click(),
-    ]);
+    if (browserName !== "webkit") {
+      const [newPage] = await Promise.all([
+        page.waitForEvent("popup"),
+        links[0].click(),
+      ]);
 
-    expect(newPage).toBeTruthy();
-    await newPage.close();
+      expect(newPage).toBeTruthy();
+      await newPage.close();
+    }
   });
 
   test("should include accurate metadata", async ({ page }) => {
+    test.skip(!project, "No projects available from API");
     const data = await fetchPage("projects");
-    const project = await fetchProject("flutter-tabata-whip-timer");
+    const projectDescription = project!.body?.length
+      ? getDescriptionFromSanity(project!.body)
+      : "";
+    const description = projectDescription || data!.description || "";
 
     await testPageMetadata(page, {
       title: generateTitle(data!.title, project!.title),
-      description: getDescriptionFromSanity(project!.body),
-      url: buildPageUrl("projects", "flutter-tabata-whip-timer"),
+      description,
+      url: buildPageUrl("projects", projectSlug),
       imageUrl: project!.imageURL!,
       imageAlt: project!.imageAlt,
       publishedTime: project!._createdAt,

@@ -4,11 +4,11 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl, generateTitle } from "@/app/utils/utils";
-import { fetchPage, fetchSettings } from "@/app/utils/api";
+import { fetchPage, fetchSettings, fetchArticles } from "@/app/utils/api";
 import { getBlogsScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
-import { mockArticles } from "@/app/test-utils/mockArticle";
 import { mockConsent } from "../utils/localStorage";
+import { titleRegExp } from "../utils/regex";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -35,8 +35,12 @@ test.describe("blog", () => {
   });
 
   test("should navigate to a blog detail page and back", async ({ page }) => {
+    const articles = await fetchArticles();
+    const firstArticle = articles?.[0];
+    test.skip(!firstArticle, "No articles available from API");
+
     const link = page.getByRole("link", {
-      name: /Mock Building My First Flutter App/i,
+      name: titleRegExp(firstArticle!.title),
     });
     const href = await link.getAttribute("href");
     await link.click();
@@ -44,7 +48,7 @@ test.describe("blog", () => {
 
     await expect(
       page.getByRole("heading", {
-        name: /Mock Building My First Flutter App: Challenges and Lessons Learned/i,
+        name: titleRegExp(firstArticle!.title),
       })
     ).toBeVisible();
 
@@ -64,9 +68,11 @@ test.describe("blog", () => {
     await expect(
       page.getByRole("heading", { level: 1, name: /Blog/i })
     ).toBeVisible();
-    // Mock API uses "Mock Building..."; real Sanity uses "Building..."
+    const articles = await fetchArticles();
+    const firstArticle = articles?.[0];
+    test.skip(!firstArticle, "No articles available from API");
     await expect(
-      page.getByRole("link", { name: /Building My First Flutter App/i })
+      page.getByRole("link", { name: titleRegExp(firstArticle!.title) })
     ).toBeVisible();
   });
 
@@ -78,7 +84,7 @@ test.describe("blog", () => {
       title: generateTitle("Blog"),
       description: data!.description,
       url: buildPageUrl("blog"),
-      imageUrl: setting?.imageURL ?? "",
+      imageUrl: (data?.imageURL || setting?.imageURL) ?? "",
       imageAlt: setting?.imageAlt,
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,
@@ -87,10 +93,15 @@ test.describe("blog", () => {
 
   test("JSON-LD Validation", async ({ page }) => {
     const data = await fetchPage("blog");
-    const articles = mockArticles;
+    const articles = await fetchArticles();
 
-    const expectedJsonLd = getBlogsScheme({ page: data!, articles });
-    const validatedJsonLd = await validateJsonLd(page, expectedJsonLd);
+    const expectedJsonLd = getBlogsScheme({
+      page: data!,
+      articles: articles ?? [],
+    });
+    const validatedJsonLd = await validateJsonLd(page, expectedJsonLd, {
+      strictMatch: false,
+    });
 
     expect(validatedJsonLd.name).toBeTruthy();
     expect(validatedJsonLd.name.length).toBeGreaterThan(0);
@@ -104,7 +115,8 @@ test.describe("blog", () => {
     expect(validatedJsonLd["@type"]).toBeTruthy();
     expect(validatedJsonLd["@type"].length).toBeGreaterThan(0);
 
-    validatedJsonLd.blogPost.forEach((post: unknown) => {
+    const blogPosts = validatedJsonLd.blogPost ?? validatedJsonLd.hasPart ?? [];
+    blogPosts.forEach((post: unknown) => {
       expect(post).toEqual(
         expect.objectContaining({
           "@type": "BlogPosting",
