@@ -5,8 +5,12 @@ import { mockProject } from "@/app/test-utils/mockProjects";
 import { mockPages } from "@/app/test-utils/mockPage";
 import { notFound } from "next/navigation";
 
+const NOT_FOUND_ERROR = "NEXT_NOT_FOUND";
+
 jest.mock("next/navigation", () => ({
-  notFound: jest.fn(),
+  notFound: jest.fn(() => {
+    throw new Error(NOT_FOUND_ERROR);
+  }),
 }));
 
 jest.mock("@/app/components/RelatedProjects", () => ({
@@ -46,8 +50,7 @@ describe("app/(pages)/[slug]/page", () => {
 
       const params = { slug: "nonexistent-project" };
 
-      await ProjectPage({ params });
-
+      await expect(ProjectPage({ params })).rejects.toThrow(NOT_FOUND_ERROR);
       expect(notFound).toHaveBeenCalled();
     });
   });
