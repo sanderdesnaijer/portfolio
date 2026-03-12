@@ -8,9 +8,8 @@ import { Tags } from "@/app/components/Tags";
 import { RelatedProjects } from "@/app/components/RelatedProjects";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
-import { NotFound } from "@/app/components/NotFound";
+import { notFound } from "next/navigation";
 import { pageSlugs } from "@/app/utils/routes";
-import { buildPageUrl } from "@/app/utils/utils";
 import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import { PageLayout } from "@/app/components/PageLayout";
@@ -52,37 +51,28 @@ export async function generateMetadata({
 }
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {
-  const [project, t] = await Promise.all([
-    sanityFetch<ProjectTypeSanity>({
-      query: projectQuery,
-      params,
-    }),
-    getTranslations(),
-  ]);
+  const project = await sanityFetch<ProjectTypeSanity>({
+    query: projectQuery,
+    params,
+  });
 
-  const jsonLd = project ? getProjectScheme(project, slug, true) : null;
-  const title = project ? project.title : t("error.404.project.title");
+  if (!project) {
+    notFound();
+  }
+
+  const jsonLd = getProjectScheme(project, slug, true);
 
   return (
     <>
-      {jsonLd && <JsonLd value={jsonLd} />}
-      {project ? (
-        <PageLayout title={title}>
-          <Project project={project} />
-          {project.tags && <Tags tags={project.tags} context={project.title} />}
-          <RelatedProjects
-            currentSlug={project.slug.current}
-            tags={project.tags?.map((tag) => tag.label) || []}
-          />
-        </PageLayout>
-      ) : (
-        <NotFound
-          title={title}
-          action={t("error.404.project.action")}
-          description={t("error.404.project.description")}
-          href={buildPageUrl(slug)}
+      <JsonLd value={jsonLd} />
+      <PageLayout title={project.title}>
+        <Project project={project} />
+        {project.tags && <Tags tags={project.tags} context={project.title} />}
+        <RelatedProjects
+          currentSlug={project.slug.current}
+          tags={project.tags?.map((tag) => tag.label) || []}
         />
-      )}
+      </PageLayout>
     </>
   );
 };

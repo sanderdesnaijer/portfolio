@@ -2,8 +2,16 @@ import { render, screen } from "@testing-library/react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import ProjectPage from "./page";
 import { mockProject } from "@/app/test-utils/mockProjects";
-import { getTranslationKey } from "@/app/test-utils/i18n";
 import { mockPages } from "@/app/test-utils/mockPage";
+import { notFound } from "next/navigation";
+
+const NOT_FOUND_ERROR = "NEXT_NOT_FOUND";
+
+jest.mock("next/navigation", () => ({
+  notFound: jest.fn(() => {
+    throw new Error(NOT_FOUND_ERROR);
+  }),
+}));
 
 jest.mock("@/app/components/RelatedProjects", () => ({
   RelatedProjects: () => (
@@ -37,22 +45,13 @@ describe("app/(pages)/[slug]/page", () => {
       expect(screen.getByText(mockProject.title)).toBeInTheDocument();
     });
 
-    it("renders not found when project data is not found", async () => {
-      (sanityFetch as jest.Mock)
-        .mockResolvedValueOnce(null)
-        .mockResolvedValueOnce(mockPages);
+    it("calls notFound when project data is not found", async () => {
+      (sanityFetch as jest.Mock).mockResolvedValueOnce(null);
 
       const params = { slug: "nonexistent-project" };
 
-      render(await ProjectPage({ params }));
-
-      expect(sanityFetch).toHaveBeenCalledWith({
-        query: expect.any(String),
-        params,
-      });
-      expect(
-        screen.getByText(getTranslationKey("error.404.project.description"))
-      ).toBeInTheDocument();
+      await expect(ProjectPage({ params })).rejects.toThrow(NOT_FOUND_ERROR);
+      expect(notFound).toHaveBeenCalled();
     });
   });
 });

@@ -6,7 +6,7 @@ import { buildPageUrl, convertDate, generateTitle } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { generateMetaData } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
-import { NotFound } from "@/app/components/NotFound";
+import { notFound } from "next/navigation";
 import { pageSlugs } from "@/app/utils/routes";
 import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
@@ -78,53 +78,43 @@ export async function generateMetadata({
 
 const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   const resolvedParams = await params;
-  const [article, t] = await Promise.all([
-    sanityFetch<BlogSanity>({
-      query: blogQuery,
-      params: { slug: resolvedParams.slug },
-    }),
-    getTranslations(),
-  ]);
+  const article = await sanityFetch<BlogSanity>({
+    query: blogQuery,
+    params: { slug: resolvedParams.slug },
+  });
 
-  const jsonLd = article ? getArticleScheme(article, slug, true) : null;
+  if (!article) {
+    notFound();
+  }
 
-  const title = article ? article.title : t("error.404.blog.title");
-  const hasPortableText = article?.body && article.body.length > 0;
+  const jsonLd = getArticleScheme(article, slug, true);
+  const hasPortableText = article.body && article.body.length > 0;
 
   return (
     <>
-      {jsonLd && <JsonLd value={jsonLd} />}
+      <JsonLd value={jsonLd} />
 
-      {article ? (
-        <PageLayout title={title}>
-          <ProjectLayout date={convertDate(article.publishedAt, true)}>
-            <div className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3">
-              {hasPortableText ? (
-                <BlogContent value={article.body!} />
-              ) : (
-                <div
-                  dangerouslySetInnerHTML={{
-                    // eslint-disable-next-line @typescript-eslint/no-deprecated
-                    __html: article.description || "",
-                  }}
-                />
-              )}
-            </div>
-          </ProjectLayout>
-          {article.tags && <Tags tags={article.tags} context={article.title} />}
-          <RelatedBlogs
-            currentSlug={article.slug.current}
-            tags={article.tags?.map((tag) => tag.label) || []}
-          />
-        </PageLayout>
-      ) : (
-        <NotFound
-          title={title}
-          description={t("error.404.blog.description")}
-          href={buildPageUrl(slug)}
-          action={t("error.404.blog.action")}
+      <PageLayout title={article.title}>
+        <ProjectLayout date={convertDate(article.publishedAt, true)}>
+          <div className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3">
+            {hasPortableText ? (
+              <BlogContent value={article.body!} />
+            ) : (
+              <div
+                dangerouslySetInnerHTML={{
+                  // eslint-disable-next-line @typescript-eslint/no-deprecated
+                  __html: article.description || "",
+                }}
+              />
+            )}
+          </div>
+        </ProjectLayout>
+        {article.tags && <Tags tags={article.tags} context={article.title} />}
+        <RelatedBlogs
+          currentSlug={article.slug.current}
+          tags={article.tags?.map((tag) => tag.label) || []}
         />
-      )}
+      </PageLayout>
     </>
   );
 };
