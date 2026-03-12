@@ -28,5 +28,10 @@
     "old": "creating-a-3d-printed-word-clock-with-minute-accuracy",
     "new": "3d-printed-arduino-word-clock",
     "title": "Creating a 3D-Printed Word Clock with Minute Accuracy"
+  },
+  {
+    "old": "sudoku-ultimato-what-i-learned-building-a-multi-language-app-for-two-app-stores",
+    "new": "building-multilanguage-sudoku-app-flutter",
+    "title": "Building a Multi-Language Sudoku App for iOS and Android (Lessons from Sudoku Ultimato)"
   }
 ]
