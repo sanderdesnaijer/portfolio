@@ -30,7 +30,9 @@ function aggregateTags(items: TagItem[]): AggregatedTag[] {
   for (const item of items) {
     if (!item.tags) continue;
     for (const tag of item.tags) {
+      if (!tag.label?.trim()) continue;
       const slug = toTagSlug(tag.label);
+      if (!slug) continue;
       const existing = tagMap.get(slug);
       if (existing) {
         existing.count += 1;

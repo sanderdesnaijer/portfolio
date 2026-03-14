@@ -47,8 +47,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const tagSlugs = Array.from(
     new Set(
-      projects.flatMap(
-        (project) => project.tags?.map((tag) => toTagSlug(tag.label)) || []
+      [...projects, ...articles].flatMap(
+        (item) =>
+          item.tags
+            ?.map((tag) => toTagSlug(tag.label))
+            .filter((slug) => slug.length > 0) || []
       )
     )
   );
