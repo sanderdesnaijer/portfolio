@@ -53,6 +53,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     )
   );
 
+  const tagsIndexPage = {
+    url: `${baseUrl}/tags`,
+    lastModified: formatDate(new Date().toISOString()),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  };
+
   const tagPages = tagSlugs.map((slug) => ({
     url: `${baseUrl}/tags/${slug}`,
     lastModified: formatDate(new Date().toISOString()),
@@ -60,5 +67,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...mainPages, ...projectsPages, ...blogPages, ...tagPages];
+  return [
+    ...mainPages,
+    ...projectsPages,
+    ...blogPages,
+    tagsIndexPage,
+    ...tagPages,
+  ];
 }

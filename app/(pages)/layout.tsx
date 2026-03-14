@@ -9,9 +9,10 @@ export default async function SiteLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [{ setting, menuItems }, t] = await Promise.all([
+  const [{ setting, menuItems }, tCookies, tPages] = await Promise.all([
     fetchCommonData(),
     getTranslations("cookies"),
+    getTranslations("pages"),
   ]);
 
   return (
@@ -22,7 +23,8 @@ export default async function SiteLayout({
       </main>
       <Footer
         socialMedia={setting.socialMedia}
-        cookiePolicyLabel={t("title")}
+        cookiePolicyLabel={tCookies("title")}
+        tagsLabel={tPages("tags.title")}
       />
     </div>
   );
