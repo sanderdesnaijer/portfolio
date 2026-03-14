@@ -23,6 +23,11 @@
     "home": {
       "latestProjects": "Latest Projects",
       "latestPost": "Latest Post"
+    },
+    "tags": {
+      "title": "Tags",
+      "description": "Explore projects and articles by topic.",
+      "metaDescription": "Discover projects and articles organized by topic."
     }
   },
   "generic": {
@@ -88,6 +93,11 @@
         "title": "Blog not found",
         "description": "Sorry, we couldn't find the blog you're looking for.",
         "action": "Go back to the blog overview"
+      },
+      "tag": {
+        "title": "Tag not found",
+        "description": "We couldn't find that tag.",
+        "action": "Browse all tags"
       }
     }
   }

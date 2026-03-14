@@ -47,11 +47,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const tagSlugs = Array.from(
     new Set(
-      projects.flatMap(
-        (project) => project.tags?.map((tag) => toTagSlug(tag.label)) || []
+      [...projects, ...articles].flatMap(
+        (item) =>
+          item.tags
+            ?.map((tag) => toTagSlug(tag.label))
+            .filter((slug) => slug.length > 0) || []
       )
     )
   );
+
+  const tagsIndexPage = {
+    url: `${baseUrl}/tags`,
+    lastModified: formatDate(new Date().toISOString()),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  };
 
   const tagPages = tagSlugs.map((slug) => ({
     url: `${baseUrl}/tags/${slug}`,
@@ -60,5 +70,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  return [...mainPages, ...projectsPages, ...blogPages, ...tagPages];
+  return [
+    ...mainPages,
+    ...projectsPages,
+    ...blogPages,
+    tagsIndexPage,
+    ...tagPages,
+  ];
 }

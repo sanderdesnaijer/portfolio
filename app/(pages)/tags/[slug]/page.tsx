@@ -128,8 +128,8 @@ export async function generateMetadata({ params }: { params: Params }) {
   if (!label) {
     const t = await getTranslations();
     return {
-      title: t("error.404.generic.title"),
-      description: t("error.404.generic.description"),
+      title: t("error.404.tag.title"),
+      description: t("error.404.tag.description"),
       robots: {
         index: false,
         follow: true,
@@ -191,10 +191,10 @@ const TagsPage = async ({ params }: { params: Params }) => {
   if (!label) {
     return (
       <NotFound
-        title={t("error.404.generic.title")}
-        description={t("error.404.generic.description")}
-        action={t("error.404.generic.action")}
-        href={envConfig.baseUrl}
+        title={t("error.404.tag.title")}
+        description={t("error.404.tag.description")}
+        action={t("error.404.tag.action")}
+        href="/tags"
       />
     );
   }
