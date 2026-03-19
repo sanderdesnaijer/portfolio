@@ -26,9 +26,33 @@ const { about: slug } = pageSlugs;
 
 const components: Partial<PortableTextReactComponents> = {
   ...portableTextComponents,
+  list: {
+    bullet: ({ children }: { children?: React.ReactNode }) => (
+      <ul className="my-6 list-outside list-disc space-y-2 pl-6 marker:text-current">
+        {children}
+      </ul>
+    ),
+    number: ({ children }: { children?: React.ReactNode }) => (
+      <ol className="my-6 list-outside list-decimal space-y-2 pl-6 marker:text-current">
+        {children}
+      </ol>
+    ),
+  },
+  listItem: {
+    bullet: ({ children }: { children?: React.ReactNode }) => (
+      <li className="pl-1 leading-relaxed [&>p]:mb-2 [&>p:last-child]:mb-0">
+        {children}
+      </li>
+    ),
+    number: ({ children }: { children?: React.ReactNode }) => (
+      <li className="pl-1 leading-relaxed [&>p]:mb-2 [&>p:last-child]:mb-0">
+        {children}
+      </li>
+    ),
+  },
   block: {
     normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="text-lg leading-8">{children}</p>
+      <p className="text-lg leading-relaxed">{children}</p>
     ),
     h2: ({ children }: { children?: React.ReactNode }) => (
       <h2 className="mb-10 w-2/3 text-4xl font-extralight">{children}</h2>
@@ -118,24 +142,27 @@ export default async function Page() {
       {jsonLD ? <JsonLd value={jsonLD} /> : null}
       {page ? (
         <PageLayout title={title}>
-          <div className="not-prose absolute -top-[169px] -right-[100px] z-10 mt-[60px] mr-[100px] w-[120px] border-b-1 border-black border-b-black bg-white p-2 before:absolute before:top-[88px] before:right-0 before:bottom-0 before:border-r before:border-black before:content-[''] after:absolute after:top-[88px] after:bottom-0 after:left-0 after:border-l after:border-black after:content-[''] md:mt-auto md:mr-auto md:w-auto md:before:top-[168px] md:after:top-[168px] dark:border-white dark:bg-black dark:before:border-white dark:after:border-white">
-            <Image
-              alt={page.imageAlt}
-              src={urlFor(page.imageURL)
-                .width(mainImageSizeWidth)
-                .height(mainImageSizeHeight)
-                .url()}
-              width={mainImageSizeWidth}
-              height={mainImageSizeHeight}
-              priority
-              sizes="(max-width: 768px) 120px, 240px"
-            />
-          </div>
-          {page?.body ? (
-            <div className="md:py-10">
-              <PortableText value={page.body} components={components} />
+          <div className="flex flex-col gap-10 md:py-10">
+            <div className="not-prose flex justify-center md:justify-start">
+              <Image
+                alt={page.imageAlt}
+                src={urlFor(page.imageURL)
+                  .width(mainImageSizeWidth)
+                  .height(mainImageSizeHeight)
+                  .url()}
+                width={mainImageSizeWidth}
+                height={mainImageSizeHeight}
+                priority
+                sizes="(max-width: 768px) min(100vw, 320px), 320px"
+                className="h-auto w-full max-w-[min(100%,320px)]"
+              />
             </div>
-          ) : null}
+            {page?.body?.length ? (
+              <div className="min-w-0">
+                <PortableText value={page.body} components={components} />
+              </div>
+            ) : null}
+          </div>
 
           <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
           <ol
