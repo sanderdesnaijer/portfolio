@@ -5,25 +5,25 @@ import { BlogSanity } from "@/sanity/types/blogType";
 import { pageSlugs } from "../utils/routes";
 import { toTagSlug } from "../utils/utils";
 
-type ProjectPreview = Pick<
+export type LatestProjectPreview = Pick<
   ProjectTypeSanity,
   "_id" | "title" | "slug" | "publishedAt" | "tags"
 > & {
-  imageURL?: string;
-  imageAlt?: string;
+  imageURL?: string | null;
+  imageAlt?: string | null;
 };
 
-type PostPreview = Pick<
+export type LatestPostPreview = Pick<
   BlogSanity,
   "_id" | "title" | "slug" | "publishedAt" | "tags"
 > & {
-  imageURL?: string;
-  imageAlt?: string;
+  imageURL?: string | null;
+  imageAlt?: string | null;
 };
 
 interface LatestSectionProps {
-  projects: ProjectPreview[];
-  posts: PostPreview[];
+  projects: LatestProjectPreview[];
+  posts: LatestPostPreview[];
   latestProjectsLabel: string;
   latestPostsLabel: string;
 }
@@ -55,7 +55,18 @@ function TagLinks({ tags }: { tags: { _id: string; label: string }[] }) {
 }
 
 function buildImageUrl(url: string): string {
-  return `${url}?fm=webp&w=600&h=360&fit=crop&auto=format`;
+  try {
+    const urlObj = new URL(url);
+    urlObj.searchParams.set("fm", "webp");
+    urlObj.searchParams.set("w", "600");
+    urlObj.searchParams.set("h", "360");
+    urlObj.searchParams.set("fit", "crop");
+    urlObj.searchParams.set("auto", "format");
+    return urlObj.toString();
+  } catch {
+    const separator = url.includes("?") ? "&" : "?";
+    return `${url}${separator}fm=webp&w=600&h=360&fit=crop&auto=format`;
+  }
 }
 
 interface LatestItemProps {
@@ -63,8 +74,8 @@ interface LatestItemProps {
   href: string;
   publishedAt: string;
   tags?: { _id: string; label: string }[];
-  imageURL?: string;
-  imageAlt?: string;
+  imageURL?: string | null;
+  imageAlt?: string | null;
   priority?: boolean;
 }
 
@@ -96,7 +107,7 @@ function LatestItem({
       <div className="p-4">
         <Link
           href={href}
-          className="mt-0 text-base font-normal text-neutral-900 no-underline transition-colors group-hover/latest:underline before:absolute before:inset-0 before:opacity-0 dark:text-neutral-100"
+          className="mt-0 text-base font-normal text-neutral-900 no-underline transition-colors group-hover/latest:underline before:absolute before:inset-0 before:z-0 before:opacity-0 before:content-[''] dark:text-neutral-100"
         >
           {title}
         </Link>

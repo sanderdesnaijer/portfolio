@@ -248,10 +248,7 @@ export const latestBlogQuery = groq`
     title,
     slug,
     publishedAt,
-    "imageURL": select(
-      defined(mainImage) => mainImage.asset->url,
-      imageURL
-    ),
+    "imageURL": mainImage.asset->url,
     "imageAlt": mainImage.alt,
     "tags": tags[]->{
       _id,

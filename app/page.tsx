@@ -6,8 +6,11 @@ import {
   latestProjectsQuery,
   latestBlogQuery,
 } from "@/sanity/lib/queries";
-import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
-import { BlogSanity } from "@/sanity/types/blogType";
+import { PageSanity } from "@/sanity/types";
+import {
+  LatestPostPreview,
+  LatestProjectPreview,
+} from "./components/LatestSection";
 import Link from "next/link";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
 import { generateMetaData } from "./utils/metadata";
@@ -31,10 +34,10 @@ const fetchPageData = cache(async function fetchPageData() {
       query: pageQuery,
       params: { slug: "" },
     }),
-    sanityFetch<ProjectTypeSanity[]>({
+    sanityFetch<LatestProjectPreview[]>({
       query: latestProjectsQuery,
     }),
-    sanityFetch<BlogSanity[]>({
+    sanityFetch<LatestPostPreview[]>({
       query: latestBlogQuery,
     }),
   ]);
