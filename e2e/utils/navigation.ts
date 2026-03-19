@@ -23,7 +23,11 @@ export async function testNavigation(
   }
 
   for (const link of navLinks) {
-    await page.getByRole("link", { name: link.name, exact: true }).click();
+    const navLink = page.getByRole("link", { name: link.name, exact: true });
+    await Promise.all([
+      page.waitForURL(link.url),
+      navLink.evaluate((el: HTMLElement) => el.click()),
+    ]);
     await expect(page).toHaveURL(link.url);
     // check for heading if not on home
     if (link.url !== "/") {

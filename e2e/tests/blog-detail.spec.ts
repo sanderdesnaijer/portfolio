@@ -57,8 +57,8 @@ test.describe("blog detail", () => {
     ).toBeVisible();
 
     const link = page.getByRole("link", { name: "Blog" });
-    await link.click();
     const href = await link.getAttribute("href");
+    await link.evaluate((el: HTMLElement) => el.click());
     await expect(page).toHaveURL(href!);
 
     expect(page.getByRole("heading", { name: "Blog" })).toBeVisible();

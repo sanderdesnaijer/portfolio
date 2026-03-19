@@ -9,6 +9,7 @@ import { getProjectsScheme } from "@/app/utils/jsonLDSchemes";
 
 import { validateJsonLd } from "../utils/jsonLD";
 import { mockConsent } from "../utils/localStorage";
+import messages from "../../messages/en.json";
 
 async function checkPageElements(page: Page) {
   await expect(
@@ -72,7 +73,7 @@ test.describe("projects", () => {
     const setting = await fetchSettings();
     await testPageMetadata(page, {
       title: generateTitle("Projects"),
-      description: data!.description,
+      description: messages.pages.project.metaDescription,
       url: buildPageUrl("projects"),
       imageUrl: (data?.imageURL || setting?.imageURL) ?? "",
       imageAlt: setting?.imageAlt,

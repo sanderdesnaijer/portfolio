@@ -8,6 +8,7 @@ import { fetchPage, fetchSettings, fetchArticles } from "@/app/utils/api";
 import { getBlogsScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import { mockConsent } from "../utils/localStorage";
+import messages from "../../messages/en.json";
 import { titleRegExp } from "../utils/regex";
 
 async function checkPageElements(page: Page) {
@@ -82,7 +83,7 @@ test.describe("blog", () => {
 
     await testPageMetadata(page, {
       title: generateTitle("Blog"),
-      description: data!.description,
+      description: messages.pages.blog.metaDescription,
       url: buildPageUrl("blog"),
       imageUrl: (data?.imageURL || setting?.imageURL) ?? "",
       imageAlt: setting?.imageAlt,

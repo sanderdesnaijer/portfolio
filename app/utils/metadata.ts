@@ -180,9 +180,11 @@ export const generateMetaData = ({
 export async function generatePageMetadata({
   pageSlug,
   project,
+  description: descriptionOverride,
 }: {
   pageSlug: string;
   project?: ProjectTypeSanity;
+  description?: string;
 }) {
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
@@ -195,7 +197,11 @@ export async function generatePageMetadata({
     ? getDescriptionFromSanity(project.body)
     : "";
   const description =
-    projectDescription || page.description || setting?.description || "";
+    descriptionOverride ||
+    projectDescription ||
+    page.description ||
+    setting?.description ||
+    "";
 
   const url = buildPageUrl(pageSlug, project?.slug.current);
   const imageUrl = project?.imageURL || page.imageURL || setting.imageURL;

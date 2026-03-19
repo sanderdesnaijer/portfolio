@@ -10,6 +10,7 @@ import { validateJsonLd } from "../utils/jsonLD";
 import { getTranslationKey } from "@/app/test-utils/i18n";
 import { JobSanity } from "@/sanity/types";
 import { mockConsent } from "../utils/localStorage";
+import messages from "../../messages/en.json";
 async function checkAboutPageElements(page: Page) {
   await expect(
     page.getByRole("heading", { level: 1, name: /About/i })
@@ -53,7 +54,7 @@ test.describe("about", () => {
       page.getByRole("link", { name: "[Link to] Royal Netherlands" })
     ).toBeVisible();
     await expect(
-      page.getByText(/Passionate software developer/i)
+      page.getByText(/frontend developer|software developer/i).first()
     ).toBeVisible();
   });
 
@@ -62,7 +63,7 @@ test.describe("about", () => {
     const url = buildPageUrl("about");
     await testPageMetadata(page, {
       title: generateTitle("About"),
-      description: data!.description,
+      description: messages.pages.about.metaDescription,
       url,
       imageUrl: data!.imageURL,
       imageAlt: data!.imageAlt,

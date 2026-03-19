@@ -294,5 +294,38 @@ describe("app/utils/metadata", () => {
 
       expect(result.description).toBe(mockSetting.description);
     });
+
+    it("should prefer description override over page, project body, and setting descriptions", async () => {
+      const pageWithDescription = {
+        ...mockPage,
+        description: "Description from page document",
+      };
+      const mockSetting = {
+        description: "Description from settings",
+      };
+
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(pageWithDescription)
+        .mockResolvedValueOnce(mockSetting);
+
+      const override = "Explicit meta description override";
+
+      const withoutProject = await generatePageMetadata({
+        pageSlug: "page-slug",
+        description: override,
+      });
+      expect(withoutProject.description).toBe(override);
+
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(pageWithDescription)
+        .mockResolvedValueOnce(mockSetting);
+
+      const withProject = await generatePageMetadata({
+        pageSlug: "page-slug",
+        project: mockProject,
+        description: override,
+      });
+      expect(withProject.description).toBe(override);
+    });
   });
 });

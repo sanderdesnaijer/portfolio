@@ -16,7 +16,11 @@ import { getTranslations } from "next-intl/server";
 const { projects: slug } = pageSlugs;
 
 export async function generateMetadata() {
-  return generatePageMetadata({ pageSlug: slug });
+  const t = await getTranslations();
+  return generatePageMetadata({
+    pageSlug: slug,
+    description: t("pages.project.metaDescription"),
+  });
 }
 
 export default async function Page() {

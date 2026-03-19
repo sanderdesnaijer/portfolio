@@ -3,8 +3,8 @@ import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
-import { generateTitle } from "@/app/utils/utils";
 import { fetchPage, fetchSettings } from "@/app/utils/api";
+import messages from "../../messages/en.json";
 import { getWebsiteScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import envConfig from "@/envConfig";
@@ -59,8 +59,8 @@ test.describe("home", () => {
     const setting = await fetchSettings();
     // general meta data - home uses page.imageURL || setting.imageURL
     await testPageMetadata(page, {
-      title: generateTitle(),
-      description: data!.description,
+      title: messages.pages.home.title,
+      description: messages.pages.home.metaDescription,
       url: envConfig.baseUrl,
       imageUrl: (data?.imageURL || setting?.imageURL) ?? "",
       imageAlt: setting?.imageAlt,
