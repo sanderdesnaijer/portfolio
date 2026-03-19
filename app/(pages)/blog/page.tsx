@@ -17,7 +17,11 @@ import { getExcerpt } from "@/app/utils/blogUtils";
 const { blog: slug } = pageSlugs;
 
 export async function generateMetadata() {
-  return generatePageMetadata({ pageSlug: slug });
+  const t = await getTranslations();
+  return generatePageMetadata({
+    pageSlug: slug,
+    description: t("pages.blog.metaDescription"),
+  });
 }
 
 export default async function Page() {

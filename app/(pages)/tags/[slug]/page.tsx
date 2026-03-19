@@ -148,8 +148,14 @@ export async function generateMetadata({ params }: { params: Params }) {
     fallbackTimestamp
   );
 
+  const t = await getTranslations();
   const title = `${label} Projects & Articles`;
-  const description = `Portfolio projects and articles tagged with ${label}.`;
+  const slugMetaDescriptions = t.raw(
+    "pages.tags.slugMetaDescriptions"
+  ) as Record<string, string>;
+  const description =
+    slugMetaDescriptions[slug] ??
+    `Portfolio projects and articles tagged with ${label}.`;
   const keywords = [
     `${label} developer portfolio`,
     `indie developer ${label} apps`,
@@ -199,8 +205,12 @@ const TagsPage = async ({ params }: { params: Params }) => {
     );
   }
 
+  const slugIntros = t.raw("pages.tags.slugIntros") as Record<string, string>;
+  const intro = slugIntros[slug];
+
   return (
     <PageLayout title={label}>
+      {intro && <p className="mt-4 text-lg leading-8">{intro}</p>}
       {taggedProjects.length > 0 && (
         <Projects projects={taggedProjects} pageSlug={pageSlugs.projects} />
       )}

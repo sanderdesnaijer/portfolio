@@ -80,7 +80,11 @@ const getExperienceTitle = (
 };
 
 export async function generateMetadata() {
-  return generatePageMetadata({ pageSlug: slug });
+  const t = await getTranslations();
+  return generatePageMetadata({
+    pageSlug: slug,
+    description: t("pages.about.metaDescription"),
+  });
 }
 
 export default async function Page() {

@@ -1,4 +1,5 @@
 "use server";
+import type { ReactNode } from "react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
   pageQuery,
@@ -7,14 +8,12 @@ import {
 } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
-import Menu from "./components/Menu";
+import Link from "next/link";
 import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
 import { generateMetaData } from "./utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "./components/NotFound";
-import { generateTitle } from "./utils/utils";
-
 import { cache } from "react";
 import { getWebsiteScheme } from "./utils/jsonLDSchemes";
 import { JsonLd } from "./components/JsonLd";
@@ -43,10 +42,11 @@ const fetchPageData = cache(async function fetchPageData() {
 
 export async function generateMetadata() {
   const [commonData, page] = await fetchPageData();
+  const t = await getTranslations();
 
   return generateMetaData({
-    title: generateTitle(),
-    description: page.description || commonData.setting.description,
+    title: t("pages.home.title"),
+    description: t("pages.home.metaDescription"),
     publishedTime: page._createdAt,
     modifiedTime: page._updatedAt,
     imageUrl: page.imageURL || commonData.setting?.imageURL,
@@ -57,7 +57,6 @@ export async function generateMetadata() {
 
 export default async function Home() {
   const [commonData, page, latestProjects, latestPosts] = await fetchPageData();
-  const latestPost = latestPosts?.[0] ?? null;
   const t = await getTranslations();
 
   const { setting, menuItems } = commonData;
@@ -87,26 +86,54 @@ export default async function Home() {
   return (
     <>
       {jsonLd && <JsonLd value={jsonLd} />}
-      <div className="container mx-auto flex min-h-dvh flex-col justify-between p-4 md:justify-start">
-        <main className="relative flex flex-col justify-around md:flex-1">
-          <ThemeToggle className="theme-toggle absolute top-0 right-0 cursor-pointer md:right-auto md:left-6" />
+      <div className="container mx-auto flex min-h-dvh flex-col p-4">
+        <header className="flex items-center justify-between py-2">
+          <ThemeToggle className="theme-toggle cursor-pointer" />
+          <nav aria-label={t("generic.mainNavigation")}>
+            <ul className="flex items-center gap-6 md:gap-8">
+              {menuItemsWithoutHome.map((item) => (
+                <li key={item.pathname}>
+                  <Link
+                    href={item.pathname}
+                    className="text-sm font-medium tracking-wide transition-all hover:font-bold hover:italic"
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </header>
 
-          <div className="justify-items-center [&>svg]:m-auto">
-            <SiteLogo className="h-56 transition-colors duration-200 [--logoBgColor:transparent] [--logoShapeColor:#0a0a0a] dark:[--logoShapeColor:white]" />
-            <h1 className="my-6 mt-0 text-center text-lg font-bold">
+        <main className="flex flex-1 flex-col">
+          <div className="my-8 flex flex-col items-center text-center md:my-12 [&>svg]:m-auto">
+            <SiteLogo className="h-48 transition-colors duration-200 [--logoBgColor:transparent] [--logoShapeColor:#0a0a0a] md:h-56 dark:[--logoShapeColor:white]" />
+            <h1 className="mt-4 mb-2 text-center text-lg font-bold">
               {AUTHOR_NAME}
             </h1>
           </div>
-          <Menu
-            menuItems={menuItemsWithoutHome}
-            className="group home flex flex-col text-7xl font-extralight [&>ul]:relative [&>ul]:block [&>ul]:h-full [&>ul>li]:mb-2 [&>ul>li]:w-auto [&>ul>li>a]:text-center [&>ul>li>a]:md:hover:translate-x-0"
-          />
+
+          <section
+            aria-label={t("pages.home.introSectionAriaLabel")}
+            className="mx-auto max-w-xl px-2 py-2 text-center md:max-w-2xl md:py-4"
+          >
+            <p className="mb-3 text-sm leading-relaxed text-neutral-600 md:text-base dark:text-neutral-400">
+              {t.rich("pages.home.introLead", {
+                knmi: (chunks: ReactNode) => (
+                  <abbr title={t("pages.home.knmiAbbrTitle")}>{chunks}</abbr>
+                ),
+              })}
+            </p>
+            <p className="text-sm leading-relaxed text-neutral-500 md:text-base dark:text-neutral-500">
+              {t("pages.home.introClosing")}
+            </p>
+          </section>
 
           <LatestSection
             projects={latestProjects ?? []}
-            post={latestPost}
+            posts={latestPosts ?? []}
             latestProjectsLabel={t("pages.home.latestProjects")}
-            latestPostLabel={t("pages.home.latestPost")}
+            latestPostsLabel={t("pages.home.latestPosts")}
           />
         </main>
 

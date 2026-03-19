@@ -228,11 +228,13 @@ export const recentBlogsQuery = groq`
 `;
 
 export const latestProjectsQuery = groq`
-  *[_type == "project"] | order(publishedAt desc) [0...2] {
+  *[_type == "project"] | order(publishedAt desc) [0...3] {
     _id,
     title,
     slug,
     publishedAt,
+    "imageURL": mainImage.asset->url,
+    "imageAlt": mainImage.alt,
     "tags": tags[]->{
       _id,
       label
@@ -241,11 +243,16 @@ export const latestProjectsQuery = groq`
 `;
 
 export const latestBlogQuery = groq`
-  *[_type == "blogPost"] | order(publishedAt desc) [0...1] {
+  *[_type == "blogPost"] | order(publishedAt desc) [0...3] {
     _id,
     title,
     slug,
     publishedAt,
+    "imageURL": select(
+      defined(mainImage) => mainImage.asset->url,
+      imageURL
+    ),
+    "imageAlt": mainImage.alt,
     "tags": tags[]->{
       _id,
       label
