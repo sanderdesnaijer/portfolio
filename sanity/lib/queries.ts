@@ -160,6 +160,7 @@ export const blogQuery = groq`
     ),
     excerpt,
     body,
+    links,
     description,
     "tags": tags[]->{
       _id,

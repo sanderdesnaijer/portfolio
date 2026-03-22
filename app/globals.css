@@ -52,3 +52,21 @@ body {
   background: var(--background);
   font-family: var(--font-montserrat);
 }
+
+.prose :where(code:not(pre code)) {
+  color: #db2777;
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.dark .prose :where(code:not(pre code)) {
+  color: #f472b6;
+  background-color: #1f2937;
+}
+
+.prose code::before,
+.prose code::after {
+  content: none;
+}

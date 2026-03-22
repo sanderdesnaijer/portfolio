@@ -95,7 +95,10 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
       <JsonLd value={jsonLd} />
 
       <PageLayout title={article.title}>
-        <ProjectLayout date={convertDate(article.publishedAt, true)}>
+        <ProjectLayout
+          date={convertDate(article.publishedAt, true)}
+          links={article.links?.length ? article.links : []}
+        >
           <div className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3">
             {hasPortableText ? (
               <BlogContent value={article.body!} />

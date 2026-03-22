@@ -63,6 +63,10 @@ export const blogType = defineType({
       type: "string",
     }),
     defineField({
+      name: "links",
+      type: "link",
+    }),
+    defineField({
       name: "mediumUrl",
       title: "Medium URL (legacy)",
       type: "url",
