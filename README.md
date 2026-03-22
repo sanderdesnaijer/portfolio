@@ -19,11 +19,13 @@ Live at: [sanderdesnaijer.com](https://www.sanderdesnaijer.com)
 ## Getting Started
 
 Copy `.env.example` to `.env.local` and fill in the required values:
+
 ```bash
 cp .env.example .env.local
 ```
 
 Then run the development server:
+
 ```bash
 npm run dev
 ```
