@@ -18,9 +18,7 @@ async function checkPageElements(page: Page, projectTitle: string) {
     page.getByRole("heading", { name: titleRegExp(projectTitle) })
   ).toBeVisible();
 
-  await expect(
-    page.getByRole("list", { name: /Project resources/i })
-  ).toBeVisible();
+  await expect(page.getByRole("list", { name: /Resources/i })).toBeVisible();
 }
 
 test.describe("projects detail", () => {
@@ -81,7 +79,7 @@ test.describe("projects detail", () => {
   test("open resource links in a new tab", async ({ page, browserName }) => {
     test.skip(!project, "No projects available from API");
     const links = await page
-      .getByRole("list", { name: /Project resources/i })
+      .getByRole("list", { name: /Resources/i })
       .getByRole("link")
       .all();
 

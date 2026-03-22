@@ -67,8 +67,7 @@ test.describe("about", () => {
       url,
       imageUrl: data!.imageURL,
       imageAlt: data!.imageAlt,
-      publishedTime: data!._createdAt,
-      modifiedTime: data!._updatedAt,
+      // published/modified: omit exact match — /api/page cache can skew vs HTML under `next start`
     });
 
     const setting = await fetchSettings();

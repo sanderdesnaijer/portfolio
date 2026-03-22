@@ -21,7 +21,7 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
   return (
     <ProjectLayout
       date={convertDate(project.publishedAt)}
-      links={project.links && project.links.length ? project.links : []}
+      links={project.links && project.links.length ? project.links : undefined}
     >
       {project?.mainImage && project.mainImage.alt ? (
         <div className="relative aspect-[43/22] w-full">
