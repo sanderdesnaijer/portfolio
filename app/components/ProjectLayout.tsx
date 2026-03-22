@@ -21,6 +21,6 @@ export const ProjectLayout: React.FC<ProjectProps> = ({
   <>
     <BlogDate date={date} />
     {children}
-    {links ? <LinkList links={links} /> : null}
+    {links?.length ? <LinkList links={links} /> : null}
   </>
 );
