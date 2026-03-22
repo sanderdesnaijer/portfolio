@@ -64,7 +64,17 @@ export const blogType = defineType({
     }),
     defineField({
       name: "links",
+      title: "Links",
       type: "link",
+      validation: (Rule) =>
+        Rule.custom((value: unknown) => {
+          if (!value) return true;
+          const link = value as Record<string, unknown>;
+          if (!link.title) return "Link title is required.";
+          if (!link.link) return "Link URL is required.";
+          if (!link.icon) return "Link icon is required.";
+          return true;
+        }),
     }),
     defineField({
       name: "mediumUrl",

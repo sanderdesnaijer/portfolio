@@ -21,7 +21,7 @@ export interface BlogSanity extends SanityDocument {
   /** @deprecated Legacy HTML content from Medium RSS — use `body` (Portable Text) instead */
   description?: string;
   tags?: TagSanity[];
-  links?: Array<IconLink>;
+  links?: Array<Partial<IconLink>>;
   author: string;
   mediumUrl?: string;
   imageURL?: string;
