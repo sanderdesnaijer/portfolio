@@ -1,40 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# sanderdesnaijer.com
 
-## Install
+Personal portfolio and blog of **Sander de Snaijer**, a frontend developer from the Netherlands.
 
-- copy and paste and rename `.env.example` to `.env.local` and fill in the correct values
+Built with Next.js, TypeScript, and Sanity CMS. The site showcases creative side projects — like face-controlled Tetris, webcam-based games, and 3D printing experiments — alongside writing about what I learn along the way.
+
+Live at: [sanderdesnaijer.com](https://www.sanderdesnaijer.com)
+
+## Tech Stack
+
+- [Next.js](https://nextjs.org) — React framework with App Router
+- [TypeScript](https://www.typescriptlang.org) — type-safe JavaScript
+- [Sanity](https://www.sanity.io) — headless CMS for content
+- [Tailwind CSS](https://tailwindcss.com) — utility-first styling
+- [Playwright](https://playwright.dev) — end-to-end testing
+- [Jest](https://jestjs.io) — unit testing
+- Deployed on [Vercel](https://vercel.com)
 
 ## Getting Started
 
-First, run the development server:
-
+Copy `.env.example` to `.env.local` and fill in the required values:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cp .env.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then run the development server:
+```bash
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Open [http://localhost:3000](http://localhost:3000) to see the result.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project Structure
 
-## Learn More
+- `app/` — Next.js App Router pages and layouts
+- `sanity/` — Sanity schema and studio config
+- `e2e/` — Playwright end-to-end tests
+- `messages/` — i18n translation files
+- `public/` — static assets
 
-To learn more about Next.js, take a look at the following resources:
+## Environment Variables
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+See `.env.example` for all required variables. You'll need credentials for Sanity and any other connected services.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
