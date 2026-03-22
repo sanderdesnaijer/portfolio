@@ -12,6 +12,7 @@ import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import { PageLayout } from "@/app/components/PageLayout";
 import { BlogSanity } from "@/sanity/types/blogType";
+import { IconLink } from "@/sanity/types/types";
 import { BlogContent } from "@/app/components/BlogContent";
 import { Tags } from "@/app/components/Tags";
 import { RelatedBlogs } from "@/app/components/RelatedBlogs";
@@ -89,13 +90,19 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
 
   const jsonLd = getArticleScheme(article, slug, true);
   const hasPortableText = article.body && article.body.length > 0;
+  const validLinks = article.links?.filter(
+    (l): l is IconLink => !!l.title && !!l.link && !!l.icon
+  );
 
   return (
     <>
       <JsonLd value={jsonLd} />
 
       <PageLayout title={article.title}>
-        <ProjectLayout date={convertDate(article.publishedAt, true)}>
+        <ProjectLayout
+          date={convertDate(article.publishedAt, true)}
+          links={validLinks?.length ? validLinks : undefined}
+        >
           <div className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3">
             {hasPortableText ? (
               <BlogContent value={article.body!} />

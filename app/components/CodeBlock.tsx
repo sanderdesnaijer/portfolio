@@ -45,9 +45,9 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
           {language}
         </span>
       )}
-      <pre className="overflow-x-auto rounded-lg bg-gray-950 p-4 text-sm leading-relaxed">
+      <pre className="overflow-x-auto rounded-lg bg-gray-950 p-4 text-sm leading-relaxed text-gray-200">
         <code
-          className={language ? `language-${language}` : ""}
+          className={`hljs${language ? ` language-${language}` : ""}`}
           dangerouslySetInnerHTML={{ __html: highlightedHTML }}
         />
       </pre>

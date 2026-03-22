@@ -133,7 +133,7 @@ export const LatestSection = ({
           {latestProjectsLabel}
         </h2>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-          {projects.map((project, i) =>
+          {projects.map((project) =>
             project.slug ? (
               <LatestItem
                 key={project._id}
@@ -143,7 +143,7 @@ export const LatestSection = ({
                 tags={project.tags}
                 imageURL={project.imageURL}
                 imageAlt={project.imageAlt}
-                priority={i === 0}
+                priority
               />
             ) : null
           )}

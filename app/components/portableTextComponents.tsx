@@ -72,9 +72,7 @@ export const portableTextComponents: Partial<PortableTextReactComponents> = {
   },
   marks: {
     code: ({ children }) => (
-      <code className="rounded bg-gray-100 px-1.5 py-0.5 font-mono text-[0.875em] dark:bg-gray-800">
-        {children}
-      </code>
+      <code className="rounded font-mono text-[0.875em]">{children}</code>
     ),
   },
 };
