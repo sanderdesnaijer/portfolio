@@ -36,9 +36,9 @@ test.describe("mobile navigation", () => {
     // Check that navigation is hidden (header has hide-menu class)
     await expect(header).toHaveClass(/hide-menu/);
 
-    // Scroll up 100px instead of 10px (more realistic)
-    await page.evaluate(() => window.scrollBy(0, -100));
-    await page.waitForTimeout(300);
+    // Scroll up (wheel is more reliable than programmatic scroll on WebKit)
+    await page.mouse.wheel(0, -100);
+    await expect(header).not.toHaveClass(/hide-menu/, { timeout: 5000 });
 
     // Ensure navigation is visible again
     await expect(nav).toBeVisible();
@@ -96,7 +96,7 @@ test.describe("mobile navigation", () => {
 
     // Scroll up 100px
     await page.mouse.wheel(0, -100);
-    await page.waitForTimeout(500);
+    await expect(header).not.toHaveClass(/hide-menu/, { timeout: 5000 });
 
     // Ensure navigation is visible again
     await expect(nav).toBeVisible();

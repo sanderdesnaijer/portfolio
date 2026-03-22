@@ -1,6 +1,9 @@
 import { AUTHOR_NAME } from "@/app/utils/constants";
 import { expect } from "@playwright/test";
 
+const ISO_DATE_TIME =
+  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
+
 /**
  * Helper function to test if metadata exists on a page.
  * @param {import('@playwright/test').Page} page - The Playwright page object.
@@ -14,8 +17,9 @@ export async function testPageMetadata(
     url: string;
     imageUrl: string;
     imageAlt?: string;
-    publishedTime: string;
-    modifiedTime: string;
+    /** Omit both to only assert valid ISO timestamps and modified >= published (avoids stale /api vs HTML cache skew). */
+    publishedTime?: string;
+    modifiedTime?: string;
     canonical?: string;
   }
 ) {
@@ -75,12 +79,34 @@ export async function testPageMetadata(
     "content",
     "article"
   );
-  await expect(
-    page.locator('head meta[property="article:published_time"]')
-  ).toHaveAttribute("content", expectedMeta.publishedTime);
-  await expect(
-    page.locator('head meta[property="article:modified_time"]')
-  ).toHaveAttribute("content", expectedMeta.modifiedTime);
+  const publishedLocator = page.locator(
+    'head meta[property="article:published_time"]'
+  );
+  const modifiedLocator = page.locator(
+    'head meta[property="article:modified_time"]'
+  );
+
+  if (
+    expectedMeta.publishedTime !== undefined &&
+    expectedMeta.modifiedTime !== undefined
+  ) {
+    await expect(publishedLocator).toHaveAttribute(
+      "content",
+      expectedMeta.publishedTime
+    );
+    await expect(modifiedLocator).toHaveAttribute(
+      "content",
+      expectedMeta.modifiedTime
+    );
+  } else {
+    const published = await publishedLocator.getAttribute("content");
+    const modified = await modifiedLocator.getAttribute("content");
+    expect(published).toMatch(ISO_DATE_TIME);
+    expect(modified).toMatch(ISO_DATE_TIME);
+    expect(new Date(modified!).getTime()).toBeGreaterThanOrEqual(
+      new Date(published!).getTime()
+    );
+  }
 
   // Twitter metadata
   await expect(page.locator('head meta[name="twitter:card"]')).toHaveAttribute(
