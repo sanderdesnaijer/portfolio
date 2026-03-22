@@ -69,10 +69,12 @@ export const blogType = defineType({
       validation: (Rule) =>
         Rule.custom((value: unknown) => {
           if (!value) return true;
-          const link = value as Record<string, unknown>;
-          if (!link.title) return "Link title is required.";
-          if (!link.link) return "Link URL is required.";
-          if (!link.icon) return "Link icon is required.";
+          const links = value as Array<Record<string, unknown>>;
+          for (const link of links) {
+            if (!link.title) return "Link title is required.";
+            if (!link.link) return "Link URL is required.";
+            if (!link.icon) return "Link icon is required.";
+          }
           return true;
         }),
     }),
