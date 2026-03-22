@@ -69,6 +69,9 @@ export const blogType = defineType({
       validation: (Rule) =>
         Rule.custom((value: unknown) => {
           if (!value) return true;
+          if (!Array.isArray(value)) {
+            return "Links must be a list of link items.";
+          }
           const links = value as Array<Record<string, unknown>>;
           for (const link of links) {
             if (!link.title) return "Link title is required.";

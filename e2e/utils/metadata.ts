@@ -86,25 +86,28 @@ export async function testPageMetadata(
     'head meta[property="article:modified_time"]'
   );
 
-  if (
-    expectedMeta.publishedTime !== undefined &&
-    expectedMeta.modifiedTime !== undefined
-  ) {
-    await expect(publishedLocator).toHaveAttribute(
-      "content",
-      expectedMeta.publishedTime
+  const { publishedTime, modifiedTime } = expectedMeta;
+  if ((publishedTime === undefined) !== (modifiedTime === undefined)) {
+    throw new Error(
+      "testPageMetadata: pass both `publishedTime` and `modifiedTime`, or omit both."
     );
-    await expect(modifiedLocator).toHaveAttribute(
-      "content",
-      expectedMeta.modifiedTime
-    );
+  }
+
+  if (publishedTime !== undefined && modifiedTime !== undefined) {
+    await expect(publishedLocator).toHaveAttribute("content", publishedTime);
+    await expect(modifiedLocator).toHaveAttribute("content", modifiedTime);
   } else {
     const published = await publishedLocator.getAttribute("content");
     const modified = await modifiedLocator.getAttribute("content");
+    if (published === null || modified === null) {
+      throw new Error(
+        `Missing article timestamp meta content (published=${String(published)}, modified=${String(modified)})`
+      );
+    }
     expect(published).toMatch(ISO_DATE_TIME);
     expect(modified).toMatch(ISO_DATE_TIME);
-    expect(new Date(modified!).getTime()).toBeGreaterThanOrEqual(
-      new Date(published!).getTime()
+    expect(new Date(modified).getTime()).toBeGreaterThanOrEqual(
+      new Date(published).getTime()
     );
   }
 
