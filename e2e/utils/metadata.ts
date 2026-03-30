@@ -23,13 +23,15 @@ export async function testPageMetadata(
     canonical?: string;
   }
 ) {
+  await page.waitForLoadState("load");
+
   // Title
   await expect(page).toHaveTitle(expectedMeta.title);
 
   // Description
-  const metaDescription = await page
-    .locator('head meta[name="description"]')
-    .getAttribute("content");
+  const metaDescLocator = page.locator('head meta[name="description"]').first();
+  await expect(metaDescLocator).toBeAttached({ timeout: 60_000 });
+  const metaDescription = await metaDescLocator.getAttribute("content");
   expect(metaDescription).toBe(expectedMeta.description);
 
   // Author
@@ -240,15 +242,15 @@ export async function testPageMetadata(
     await expect(locator).toHaveAttribute("media", media);
   }
 
-  // Apple Touch Icon Precomposed
+  // Apple Touch Icon Precomposed (match href by suffix — Next may emit absolute URLs)
   await expect(
     page.locator(
-      'head link[rel="apple-touch-icon-precomposed"][href="/meta/light/apple-touch-icon.png"]'
+      'head link[rel="apple-touch-icon-precomposed"][href$="/meta/light/apple-touch-icon.png"]'
     )
   ).toHaveAttribute("media", "(prefers-color-scheme: light)");
   await expect(
     page.locator(
-      'head link[rel="apple-touch-icon-precomposed"][href="/meta/dark/apple-touch-icon.png"]'
+      'head link[rel="apple-touch-icon-precomposed"][href$="/meta/dark/apple-touch-icon.png"]'
     )
   ).toHaveAttribute("media", "(prefers-color-scheme: dark)");
 }

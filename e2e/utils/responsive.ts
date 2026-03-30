@@ -55,8 +55,8 @@ export async function testResponsive(
       }
     }
 
-    // check logo
-    await expect(page.getByTestId("site-logo")).toBeVisible();
+    // check logo (home can render SiteLogo in header and in main)
+    await expect(page.getByTestId("site-logo").first()).toBeVisible();
 
     await checkElementsFn(page);
   }
