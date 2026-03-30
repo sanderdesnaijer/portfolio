@@ -18,7 +18,7 @@ test.describe("mobile navigation", () => {
       page.getByRole("heading", { level: 1, name: /Blog/i })
     ).toBeVisible();
 
-    const nav = page.locator("nav");
+    const nav = page.locator("nav[data-scroll-anchor]");
     const header = page.locator("header");
     const navLink = nav.getByRole("link", { name: "Projects", exact: true });
 
@@ -76,7 +76,7 @@ test.describe("mobile navigation", () => {
       page.getByRole("heading", { level: 1, name: /Blog/i })
     ).toBeVisible();
 
-    const nav = page.locator("nav");
+    const nav = page.locator("nav[data-scroll-anchor]");
     const header = page.locator("header");
     const navLink = nav.getByRole("link", { name: "Projects", exact: true });
 

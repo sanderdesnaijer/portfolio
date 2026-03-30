@@ -29,7 +29,7 @@ async function checkHomePageElements(page: Page) {
     ).toBeVisible();
   }
 
-  await expect(page.getByTestId("site-logo")).toBeVisible();
+  await expect(page.getByRole("main").getByTestId("site-logo")).toBeVisible();
   await expect(page.getByRole("link", { name: /About/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Projects/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Blog/i })).toBeVisible();

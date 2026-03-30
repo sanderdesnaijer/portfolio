@@ -121,7 +121,11 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
           )}
         </button>
       </div>
-      <pre className="overflow-x-auto p-4 text-sm leading-relaxed text-gray-200">
+      <pre
+        className="overflow-x-auto p-4 text-sm leading-relaxed text-gray-200"
+        tabIndex={0}
+        aria-label={`${label} code sample`}
+      >
         <code
           className={`hljs${language ? ` language-${language}` : ""}`}
           dangerouslySetInnerHTML={{ __html: highlightedHTML }}

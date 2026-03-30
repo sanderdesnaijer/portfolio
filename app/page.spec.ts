@@ -70,8 +70,11 @@ describe("app/page", () => {
 
     render(await Home());
 
-    expect(screen.getByText(AUTHOR_NAME)).toBeInTheDocument();
-    expect(screen.getAllByTestId("mocked-svg")).toHaveLength(3);
+    expect(
+      screen.getByRole("heading", { level: 1, name: AUTHOR_NAME })
+    ).toBeInTheDocument();
+    // SiteLogo in Header + hero, plus two social icons from mock settings
+    expect(screen.getAllByTestId("mocked-svg")).toHaveLength(4);
   });
 
   it("renders latest projects and blog post", async () => {
