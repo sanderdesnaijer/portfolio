@@ -128,6 +128,7 @@ export function CodeBlock({ code, language }: CodeBlockProps) {
       >
         <code
           className={`hljs${language ? ` language-${language}` : ""}`}
+          tabIndex={0}
           dangerouslySetInnerHTML={{ __html: highlightedHTML }}
         />
       </pre>
