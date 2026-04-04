@@ -38,7 +38,6 @@ function formatMonthYear(date: string): string {
 function TagLinks({ tags }: { tags: { _id: string; label: string }[] }) {
   return (
     <>
-      {" · "}
       {tags.map((tag, i) => (
         <span key={tag._id}>
           <Link
@@ -59,13 +58,14 @@ function buildImageUrl(url: string): string {
     const urlObj = new URL(url);
     urlObj.searchParams.set("fm", "webp");
     urlObj.searchParams.set("w", "600");
-    urlObj.searchParams.set("h", "360");
+    urlObj.searchParams.set("h", "450");
     urlObj.searchParams.set("fit", "crop");
+    urlObj.searchParams.set("crop", "top");
     urlObj.searchParams.set("auto", "format");
     return urlObj.toString();
   } catch {
     const separator = url.includes("?") ? "&" : "?";
-    return `${url}${separator}fm=webp&w=600&h=360&fit=crop&auto=format`;
+    return `${url}${separator}fm=webp&w=600&h=450&fit=crop&crop=top&auto=format`;
   }
 }
 
@@ -91,30 +91,36 @@ function LatestItem({
   return (
     <div className="group/latest relative flex flex-col overflow-hidden rounded-md border border-neutral-200 transition-all hover:border-neutral-400 dark:border-neutral-800 dark:hover:border-neutral-600">
       {imageURL ? (
-        <div className="relative aspect-video overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+        <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
           <Image
             src={buildImageUrl(imageURL)}
             alt={imageAlt || title}
             fill
-            className="object-cover transition-transform duration-300 group-hover/latest:scale-105"
+            className="!mt-0 object-cover object-top transition-transform duration-300 group-hover/latest:scale-105"
             sizes="(max-width: 768px) 100vw, 33vw"
             priority={priority}
           />
         </div>
       ) : (
-        <div className="aspect-video bg-neutral-100 dark:bg-neutral-900" />
+        <div className="aspect-[4/3] bg-neutral-100 dark:bg-neutral-900" />
       )}
       <div className="p-4">
-        <Link
-          href={href}
-          className="mt-0 text-base font-normal text-neutral-900 no-underline transition-colors group-hover/latest:underline before:absolute before:inset-0 before:z-0 before:opacity-0 before:content-[''] dark:text-neutral-100"
-        >
-          {title}
-        </Link>
-        <p className="relative z-10 mt-1 mb-0 text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
+        <p className="relative z-10 mt-0 mb-1 text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
           {formatMonthYear(publishedAt)}
-          {tags?.length ? <TagLinks tags={tags} /> : null}
         </p>
+        <div className="[line-height:1.2]">
+          <Link
+            href={href}
+            className="mt-0 text-base font-normal text-neutral-900 no-underline transition-colors group-hover/latest:underline before:absolute before:inset-0 before:z-0 before:opacity-0 before:content-[''] dark:text-neutral-100"
+          >
+            {title}
+          </Link>
+        </div>
+        {tags?.length ? (
+          <p className="relative z-10 mt-2 mb-0 text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
+            <TagLinks tags={tags} />
+          </p>
+        ) : null}
       </div>
     </div>
   );
