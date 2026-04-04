@@ -20,7 +20,7 @@ export const Footer: React.FC<{
 }) => {
   return (
     <footer
-      className={`relative col-span-9 border-black md:col-span-6 md:col-start-4 md:before:-bottom-10 lg:col-span-5 lg:col-start-4 xl:col-start-3 before:dark:bg-white${showSeparator ? "after:absolute after:top-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black dark:after:bg-white" : ""}`}
+      className={`relative col-span-9 border-black md:col-span-6 md:col-start-4 md:before:-bottom-10 lg:col-span-5 lg:col-start-4 xl:col-start-3 before:dark:bg-white ${showSeparator ? "after:absolute after:top-0 after:bottom-0 after:left-[-196px] after:w-px after:bg-black dark:after:bg-white" : ""}`}
     >
       <div className="flex w-[100%] flex-col items-center justify-between border-t border-black py-4 pr-2 md:col-span-5 md:flex-row md:py-6 dark:border-white">
         <div className="mb-2 flex gap-4 md:mb-0">
