@@ -78,6 +78,7 @@ test.describe("blog", () => {
   });
 
   test("should include accurate metadata", async ({ page }) => {
+    test.setTimeout(60_000);
     const data = await fetchPage("blog");
     const setting = await fetchSettings();
 

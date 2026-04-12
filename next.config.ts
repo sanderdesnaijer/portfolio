@@ -4,9 +4,11 @@ import blogRedirects from "./redirects/blog-redirects.json";
 
 const withNextIntl = createNextIntlPlugin("./app/utils/i18n.ts");
 
+const isDev = process.env.NODE_ENV === "development";
+
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com;
+  script-src 'self' 'unsafe-inline' ${isDev ? "'unsafe-eval' " : ""}https://www.googletagmanager.com https://www.google-analytics.com https://www.youtube.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: blob: https://cdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com;
   font-src 'self';
