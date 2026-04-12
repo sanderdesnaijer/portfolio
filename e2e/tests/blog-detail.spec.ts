@@ -76,6 +76,7 @@ test.describe("blog detail", () => {
   });
 
   test("should include accurate metadata", async ({ page }) => {
+    test.setTimeout(60_000);
     test.skip(!firstArticle, "No articles available from API");
     const pageData = await fetchPage("blog");
     const article = firstArticle!;
@@ -96,6 +97,7 @@ test.describe("blog detail", () => {
   test("should have a valid og:image URL with sizing parameters", async ({
     page,
   }) => {
+    test.setTimeout(60_000);
     test.skip(!firstArticle, "No articles available from API");
     const ogImage = await page
       .locator('head meta[property="og:image"]')

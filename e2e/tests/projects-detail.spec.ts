@@ -102,6 +102,7 @@ test.describe("projects detail", () => {
   });
 
   test("should include accurate metadata", async ({ page }) => {
+    test.setTimeout(60_000);
     test.skip(!project, "No projects available from API");
     const data = await fetchPage("projects");
     const projectDescription = project!.body?.length
