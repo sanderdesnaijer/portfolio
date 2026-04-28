@@ -86,14 +86,25 @@ test.describe("projects detail", () => {
     test.skip(links.length === 0, "Project has no resource links");
 
     for (const link of links) {
+      const href = await link.getAttribute("href");
       const target = await link.getAttribute("target");
-      expect(target).toBe("_blank");
+      const isInternal =
+        href?.startsWith("/") || href?.startsWith("#") || false;
+      expect(target).toBe(isInternal ? "_self" : "_blank");
     }
 
-    if (browserName !== "webkit") {
+    const externalLinks = [];
+    for (const link of links) {
+      const href = await link.getAttribute("href");
+      const isInternal =
+        href?.startsWith("/") || href?.startsWith("#") || false;
+      if (!isInternal) externalLinks.push(link);
+    }
+
+    if (browserName !== "webkit" && externalLinks.length > 0) {
       const [newPage] = await Promise.all([
         page.waitForEvent("popup"),
-        links[0].click(),
+        externalLinks[0].click(),
       ]);
 
       expect(newPage).toBeTruthy();
