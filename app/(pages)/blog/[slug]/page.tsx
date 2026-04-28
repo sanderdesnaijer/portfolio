@@ -121,8 +121,8 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
               <section>
                 <h2>{t("faqHeading")}</h2>
                 <dl>
-                  {article.faq!.map((item, index) => (
-                    <div key={index}>
+                  {article.faq!.map((item) => (
+                    <div key={item._key}>
                       <dt className="font-semibold">{item.question}</dt>
                       <dd>{item.answer}</dd>
                     </div>

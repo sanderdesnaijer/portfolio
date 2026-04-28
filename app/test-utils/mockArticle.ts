@@ -81,11 +81,13 @@ export const mockArticles: BlogSanity[] = [
     },
     faq: [
       {
+        _key: "faq-flutter-what",
         question: "What is Flutter?",
         answer:
           "Flutter is an open source UI toolkit by Google for building natively compiled applications for mobile, web, and desktop from a single codebase.",
       },
       {
+        _key: "faq-flutter-mac",
         question: "Do I need a Mac to develop Flutter apps?",
         answer:
           "You need a Mac to build and publish iOS apps, but you can develop Flutter apps for Android and web on Windows or Linux.",

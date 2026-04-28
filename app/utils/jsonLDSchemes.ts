@@ -73,8 +73,9 @@ export const getProjectScheme = (
     url,
     image: project.imageURL,
     description: project.body && toPlainText(project.body),
-    datePublished: project._createdAt,
-    dateModified: project._updatedAt || project._createdAt,
+    datePublished: project.publishedAt || project._createdAt,
+    dateModified:
+      project._updatedAt || project.publishedAt || project._createdAt,
     ...(project.tags?.length && {
       keywords: project.tags.map((tag) => tag.label).join(", "),
     }),

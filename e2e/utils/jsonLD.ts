@@ -18,20 +18,23 @@ export async function validateJsonLd(
   const count = await jsonLdHandles.count();
   expect(count).toBeGreaterThan(0);
 
-  const expectedType = expectedJsonLd["@type"];
+  const toTypeArray = (value: unknown): string[] =>
+    Array.isArray(value) ? (value as string[]) : value ? [value as string] : [];
+  const expectedTypes = toTypeArray(expectedJsonLd["@type"]);
   let matched: Record<string, any> | undefined;
   for (let i = 0; i < count; i++) {
     const text = await jsonLdHandles.nth(i).textContent();
     expect(text).not.toBeNull();
     const parsed = JSON.parse(text!);
-    if (parsed["@type"] === expectedType) {
+    const parsedTypes = toTypeArray(parsed["@type"]);
+    if (expectedTypes.some((t) => parsedTypes.includes(t))) {
       matched = parsed;
       break;
     }
   }
   if (!matched) {
     throw new Error(
-      `No JSON-LD script with @type="${String(expectedType)}" found on page`
+      `No JSON-LD script with @type="${expectedTypes.join("|")}" found on page`
     );
   }
   const parsedJsonLd: Record<string, any> = matched;
