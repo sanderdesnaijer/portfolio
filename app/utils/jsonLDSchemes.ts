@@ -73,6 +73,11 @@ export const getProjectScheme = (
     url,
     image: project.imageURL,
     description: project.body && toPlainText(project.body),
+    datePublished: project._createdAt,
+    dateModified: project._updatedAt || project._createdAt,
+    ...(project.tags?.length && {
+      keywords: project.tags.map((tag) => tag.label).join(", "),
+    }),
     // specific
     ...(project.jsonLdApplicationCategory && {
       applicationCategory: project.jsonLdApplicationCategory,
@@ -174,14 +179,33 @@ export const getArticleScheme = (
     headline: article.title,
     url,
     datePublished: article.publishedAt,
+    dateModified: article._updatedAt || article.publishedAt,
     author: createAuthor(),
     publisher: createAuthor(envConfig.baseUrl),
+    ...(article.tags?.length && {
+      keywords: article.tags.map((tag) => tag.label).join(", "),
+    }),
     ...(article.mediumUrl && { sameAs: article.mediumUrl }),
     ...(hasDetail && {
       description: getExcerpt(article),
     }),
   };
 };
+
+export const getFAQScheme = (
+  faq: Array<{ question: string; answer: string }>
+) => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+});
 
 export const getBlogsScheme = ({
   page,

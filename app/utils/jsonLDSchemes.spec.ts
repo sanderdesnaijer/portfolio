@@ -6,6 +6,7 @@ import {
   getProjectsScheme,
   getBlogsScheme,
   getArticleScheme,
+  getFAQScheme,
 } from "./jsonLDSchemes";
 import { BlogSanity } from "@/sanity/types/blogType";
 
@@ -259,6 +260,8 @@ describe("utils/jsonLDSchemes", () => {
             operatingSystem: "iOS",
             description:
               "Building my first Flutter app has been an exciting journey...",
+            datePublished: "",
+            dateModified: "",
             applicationCategory: "MobileApplication",
             brand: {
               "@type": "Brand",
@@ -602,6 +605,7 @@ describe("utils/jsonLDSchemes", () => {
             headline: "First Blog Post",
             url: "https://mocked-url.com/blog/creating-a-headless-cms-portfolio-using-next-js-and-sanity",
             datePublished: "2023-10-01T12:00:00.000Z",
+            dateModified: "2023-10-01T12:00:00.000Z",
             author: {
               "@type": "Person",
               name: AUTHOR_NAME,
@@ -620,6 +624,7 @@ describe("utils/jsonLDSchemes", () => {
             headline: "Second Blog Post",
             url: "https://mocked-url.com/blog/creating-a-headless-cms-portfolio-using-next-js-and-sanity",
             datePublished: "2025-10-02T12:00:00.000Z",
+            dateModified: "2025-10-02T12:00:00.000Z",
             author: {
               "@type": "Person",
               name: AUTHOR_NAME,
@@ -695,6 +700,7 @@ describe("utils/jsonLDSchemes", () => {
         headline: "Test Article",
         url: "https://mocked-url.com/blog/creating-a-headless-cms-portfolio-using-next-js-and-sanity",
         datePublished: "2023-10-01T12:00:00.000Z",
+        dateModified: "2023-10-01T12:00:00.000Z",
         author: {
           "@type": "Person",
           name: AUTHOR_NAME,
@@ -749,6 +755,7 @@ describe("utils/jsonLDSchemes", () => {
         headline: "Detailed Article",
         url: "https://mocked-url.com/blog/creating-a-headless-cms-portfolio-using-next-js-and-sanity",
         datePublished: "2023-10-01T12:00:00.000Z",
+        dateModified: "2023-10-01T12:00:00.000Z",
         author: {
           "@type": "Person",
           name: AUTHOR_NAME,
@@ -800,6 +807,34 @@ describe("utils/jsonLDSchemes", () => {
       expect(result).not.toHaveProperty("description");
     });
 
+    it("should use _updatedAt for dateModified when available", () => {
+      const article: BlogSanity = {
+        _id: "test-id",
+        publishedAt: "2023-10-01T12:00:00.000Z",
+        tags: [],
+        author: "Sander de Snaijer",
+        title: "Updated Article",
+        slug: { current: "updated-article" },
+        body: [
+          {
+            _type: "block",
+            _key: "jsonld-article-5",
+            children: [{ text: "Content.", _type: "span", marks: [] }],
+            style: "normal",
+          },
+        ],
+        _rev: "",
+        _type: "blogPost",
+        _createdAt: "2023-10-01T12:00:00.000Z",
+        _updatedAt: "2024-05-15T09:30:00.000Z",
+      };
+
+      const result = getArticleScheme(article, "blog");
+
+      expect(result.datePublished).toBe("2023-10-01T12:00:00.000Z");
+      expect(result.dateModified).toBe("2024-05-15T09:30:00.000Z");
+    });
+
     it("should not include sameAs when mediumUrl is not provided", () => {
       const article: BlogSanity = {
         _id: "test-id",
@@ -825,6 +860,139 @@ describe("utils/jsonLDSchemes", () => {
       const result = getArticleScheme(article, "blog");
 
       expect(result).not.toHaveProperty("sameAs");
+    });
+
+    it("should include keywords when tags are provided", () => {
+      const article: BlogSanity = {
+        _id: "test-id",
+        publishedAt: "2023-10-01T12:00:00.000Z",
+        tags: [
+          {
+            _id: "tag-1",
+            label: "TypeScript",
+            _rev: "",
+            _type: "tag",
+            _createdAt: "",
+            _updatedAt: "",
+          },
+          {
+            _id: "tag-2",
+            label: "React",
+            _rev: "",
+            _type: "tag",
+            _createdAt: "",
+            _updatedAt: "",
+          },
+        ],
+        author: "Sander de Snaijer",
+        title: "Tagged Article",
+        slug: { current: "tagged-article" },
+        body: [
+          {
+            _type: "block",
+            _key: "jsonld-article-6",
+            children: [{ text: "Content.", _type: "span", marks: [] }],
+            style: "normal",
+          },
+        ],
+        _rev: "",
+        _type: "blogPost",
+        _createdAt: "",
+        _updatedAt: "",
+      };
+
+      const result = getArticleScheme(article, "blog");
+
+      expect(result).toHaveProperty("keywords", "TypeScript, React");
+    });
+
+    it("should not include keywords when tags are empty", () => {
+      const article: BlogSanity = {
+        _id: "test-id",
+        publishedAt: "2023-10-01T12:00:00.000Z",
+        tags: [],
+        author: "Sander de Snaijer",
+        title: "No Tags Article",
+        slug: { current: "no-tags" },
+        body: [
+          {
+            _type: "block",
+            _key: "jsonld-article-7",
+            children: [{ text: "Content.", _type: "span", marks: [] }],
+            style: "normal",
+          },
+        ],
+        _rev: "",
+        _type: "blogPost",
+        _createdAt: "",
+        _updatedAt: "",
+      };
+
+      const result = getArticleScheme(article, "blog");
+
+      expect(result).not.toHaveProperty("keywords");
+    });
+  });
+
+  describe("getFAQScheme", () => {
+    it("should return a valid FAQPage schema with multiple items", () => {
+      const faq = [
+        { question: "What is this?", answer: "A test project." },
+        { question: "How does it work?", answer: "It works well." },
+      ];
+
+      const result = getFAQScheme(faq);
+
+      expect(result).toEqual({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [
+          {
+            "@type": "Question",
+            name: "What is this?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "A test project.",
+            },
+          },
+          {
+            "@type": "Question",
+            name: "How does it work?",
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: "It works well.",
+            },
+          },
+        ],
+      });
+    });
+
+    it("should return a valid FAQPage schema with a single item", () => {
+      const faq = [{ question: "Is this free?", answer: "Yes." }];
+
+      const result = getFAQScheme(faq);
+
+      expect(result["@context"]).toBe("https://schema.org");
+      expect(result["@type"]).toBe("FAQPage");
+      expect(result.mainEntity).toHaveLength(1);
+      expect(result.mainEntity[0]).toEqual({
+        "@type": "Question",
+        name: "Is this free?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes.",
+        },
+      });
+    });
+
+    it("should return an empty mainEntity array when faq is empty", () => {
+      const result = getFAQScheme([]);
+
+      expect(result).toEqual({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: [],
+      });
     });
   });
 });

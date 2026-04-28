@@ -1,6 +1,7 @@
 import { type SchemaTypeDefinition } from "sanity";
 
 import { blockContentType } from "./blockContentType";
+import { faqType } from "./faqType";
 import { linkType } from "./linkType";
 import { projectType } from "./projectType";
 import { pageType } from "./pageType";
@@ -14,6 +15,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     pageType,
     blockContentType,
+    faqType,
     linkType,
     projectType,
     settingType,
