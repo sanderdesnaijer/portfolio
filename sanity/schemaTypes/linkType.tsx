@@ -18,7 +18,7 @@ export const linkType = defineType({
           name: "link",
           type: "url",
           title: "Link",
-          validation: (Rule) => Rule.uri({ allowRelative: false }),
+          validation: (Rule) => Rule.uri({ allowRelative: true }),
         }),
         defineField({
           name: "icon",
