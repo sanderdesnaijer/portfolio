@@ -13,14 +13,31 @@ export async function validateJsonLd(
   page: Page,
   expectedJsonLd: Record<string, unknown>,
   options?: { strictMatch?: boolean }
-) {
-  const jsonLdHandle = page.locator('script[type="application/ld+json"]');
-  await expect(jsonLdHandle).toHaveCount(1);
+): Promise<Record<string, any>> {
+  const jsonLdHandles = page.locator('script[type="application/ld+json"]');
+  const count = await jsonLdHandles.count();
+  expect(count).toBeGreaterThan(0);
 
-  const jsonLdText = await jsonLdHandle.textContent();
-  expect(jsonLdText).not.toBeNull();
-
-  const parsedJsonLd = JSON.parse(jsonLdText!);
+  const toTypeArray = (value: unknown): string[] =>
+    Array.isArray(value) ? (value as string[]) : value ? [value as string] : [];
+  const expectedTypes = toTypeArray(expectedJsonLd["@type"]);
+  let matched: Record<string, any> | undefined;
+  for (let i = 0; i < count; i++) {
+    const text = await jsonLdHandles.nth(i).textContent();
+    expect(text).not.toBeNull();
+    const parsed = JSON.parse(text!);
+    const parsedTypes = toTypeArray(parsed["@type"]);
+    if (expectedTypes.some((t) => parsedTypes.includes(t))) {
+      matched = parsed;
+      break;
+    }
+  }
+  if (!matched) {
+    throw new Error(
+      `No JSON-LD script with @type="${expectedTypes.join("|")}" found on page`
+    );
+  }
+  const parsedJsonLd: Record<string, any> = matched;
 
   if (options?.strictMatch === false) {
     // Structure-only validation: check top-level schema and that items array exists
@@ -30,7 +47,7 @@ export async function validateJsonLd(
     expect(parsedJsonLd.url).toBe(expectedJsonLd.url);
     const itemsKey =
       "blogPost" in (parsedJsonLd as object) ? "blogPost" : "hasPart";
-    const items = (parsedJsonLd as Record<string, unknown>)[itemsKey];
+    const items = parsedJsonLd[itemsKey];
     expect(Array.isArray(items)).toBe(true);
     expect((items as unknown[]).length).toBeGreaterThan(0);
   } else {

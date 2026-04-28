@@ -22,6 +22,7 @@ export interface BlogSanity extends SanityDocument {
   description?: string;
   tags?: TagSanity[];
   links?: Array<Partial<IconLink>>;
+  faq?: Array<{ _key: string; question: string; answer: string }>;
   author: string;
   mediumUrl?: string;
   imageURL?: string;

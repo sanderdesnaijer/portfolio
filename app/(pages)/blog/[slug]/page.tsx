@@ -8,7 +8,7 @@ import { generateMetaData } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { pageSlugs } from "@/app/utils/routes";
-import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
+import { getArticleScheme, getFAQScheme } from "@/app/utils/jsonLDSchemes";
 import { JsonLd } from "@/app/components/JsonLd";
 import { PageLayout } from "@/app/components/PageLayout";
 import { BlogSanity } from "@/sanity/types/blogType";
@@ -88,7 +88,9 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
     notFound();
   }
 
+  const t = await getTranslations("pages.blog");
   const jsonLd = getArticleScheme(article, slug, true);
+  const hasFaq = article.faq && article.faq.length > 0;
   const hasPortableText = article.body && article.body.length > 0;
   const validLinks = article.links?.filter(
     (l): l is IconLink => !!l.title && !!l.link && !!l.icon
@@ -97,6 +99,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   return (
     <>
       <JsonLd value={jsonLd} />
+      {hasFaq && <JsonLd value={getFAQScheme(article.faq!)} />}
 
       <PageLayout title={article.title}>
         <ProjectLayout
@@ -113,6 +116,19 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
                   __html: article.description || "",
                 }}
               />
+            )}
+            {hasFaq && (
+              <section>
+                <h2>{t("faqHeading")}</h2>
+                <dl>
+                  {article.faq!.map((item) => (
+                    <div key={item._key}>
+                      <dt className="font-semibold">{item.question}</dt>
+                      <dd>{item.answer}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
             )}
           </div>
         </ProjectLayout>

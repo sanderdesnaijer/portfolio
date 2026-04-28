@@ -82,6 +82,13 @@ export const blogType = defineType({
         }),
     }),
     defineField({
+      name: "faq",
+      title: "FAQ",
+      type: "faq",
+      description:
+        "Frequently asked questions shown at the bottom of the post and used for FAQ schema markup",
+    }),
+    defineField({
       name: "mediumUrl",
       title: "Medium URL (legacy)",
       type: "url",
