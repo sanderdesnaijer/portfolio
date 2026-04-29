@@ -2,13 +2,18 @@ import { QueryParams } from "@sanity/client";
 import { blogQuery, pageQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { PageSanity } from "@/sanity/types";
-import { buildPageUrl, convertDate, generateTitle } from "@/app/utils/utils";
+import {
+  buildPageUrl,
+  convertDate,
+  generateContentTitle,
+} from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { generateMetaData } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { pageSlugs } from "@/app/utils/routes";
 import { getArticleScheme, getFAQScheme } from "@/app/utils/jsonLDSchemes";
+import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
 import { JsonLd } from "@/app/components/JsonLd";
 import { PageLayout } from "@/app/components/PageLayout";
 import { BlogSanity } from "@/sanity/types/blogType";
@@ -56,7 +61,7 @@ export async function generateMetadata({
     params: { slug },
   });
 
-  const title = generateTitle(page.title, article.title);
+  const title = generateContentTitle(article.title);
   const description = getExcerpt(article);
   const rawImageUrl = article.imageURL || page.imageURL;
   const OG_PARAMS = "w=1200&h=630&fit=crop&auto=format";
@@ -90,6 +95,11 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
 
   const t = await getTranslations("pages.blog");
   const jsonLd = getArticleScheme(article, slug, true);
+  const breadcrumbJsonLd = buildBreadcrumbList({
+    type: "blog",
+    slug: article.slug.current,
+    title: article.title,
+  });
   const hasFaq = article.faq && article.faq.length > 0;
   const hasPortableText = article.body && article.body.length > 0;
   const validLinks = article.links?.filter(
@@ -99,6 +109,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   return (
     <>
       <JsonLd value={jsonLd} />
+      <JsonLd value={breadcrumbJsonLd} />
       {hasFaq && <JsonLd value={getFAQScheme(article.faq!)} />}
 
       <PageLayout title={article.title}>

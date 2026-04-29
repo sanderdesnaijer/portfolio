@@ -2,8 +2,8 @@ import { test, expect, Page } from "@playwright/test";
 import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testPageMetadata } from "../utils/metadata";
-import { buildPageUrl, generateTitle } from "@/app/utils/utils";
-import { fetchPage, fetchArticle, fetchArticles } from "@/app/utils/api";
+import { buildPageUrl, generateContentTitle } from "@/app/utils/utils";
+import { fetchArticle, fetchArticles } from "@/app/utils/api";
 import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
 import { getExcerpt } from "@/app/utils/blogUtils";
 import { validateJsonLd } from "../utils/jsonLD";
@@ -78,11 +78,10 @@ test.describe("blog detail", () => {
   test("should include accurate metadata", async ({ page }) => {
     test.setTimeout(60_000);
     test.skip(!firstArticle, "No articles available from API");
-    const pageData = await fetchPage("blog");
     const article = firstArticle!;
 
     await testPageMetadata(page, {
-      title: generateTitle(pageData!.title, article?.title),
+      title: generateContentTitle(article.title),
       description: getExcerpt(article!),
       url: buildPageUrl("blog", articleSlug),
       imageUrl: article!.imageURL!,

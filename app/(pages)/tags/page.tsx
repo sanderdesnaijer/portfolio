@@ -2,8 +2,12 @@
 
 import { PageLayout } from "@/app/components/PageLayout";
 import { generateMetaData } from "@/app/utils/metadata";
-import { buildPageUrl, toTagSlug } from "@/app/utils/utils";
-import { AUTHOR_NAME } from "@/app/utils/constants";
+import {
+  buildPageUrl,
+  generateContentTitle,
+  toTagSlug,
+} from "@/app/utils/utils";
+import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
 import envConfig from "@/envConfig";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
@@ -13,6 +17,7 @@ import {
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { pageSlugs } from "@/app/utils/routes";
+import { JsonLd } from "@/app/components/JsonLd";
 
 type TagItem = {
   tags?: { _id: string; label: string }[];
@@ -50,7 +55,7 @@ function aggregateTags(items: TagItem[]): AggregatedTag[] {
 export async function generateMetadata() {
   const t = await getTranslations();
 
-  const title = `${AUTHOR_NAME} | ${t("pages.tags.title")}`;
+  const title = generateContentTitle(t("pages.tags.title"));
   const description = t("pages.tags.metaDescription");
 
   return generateMetaData({
@@ -72,22 +77,26 @@ export default async function TagsIndexPage() {
   ]);
 
   const tags = aggregateTags([...allProjects, ...allBlogs]);
+  const breadcrumbJsonLd = buildBreadcrumbList({ type: "tag" });
 
   return (
-    <PageLayout title={t("pages.tags.title")}>
-      <p className="mt-4 text-lg leading-8">{t("pages.tags.description")}</p>
-      <ul className="mt-6 grid grid-cols-2 gap-3 pl-0 sm:grid-cols-3">
-        {tags.map(({ label, slug, count }) => (
-          <li key={slug} className="mt-0 list-none pl-0">
-            <Link
-              href={`/${pageSlugs.tags}/${slug}`}
-              className="block rounded border border-current px-4 py-3 text-center text-base font-bold no-underline hover:underline"
-            >
-              {`${label} (${count})`}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </PageLayout>
+    <>
+      <JsonLd value={breadcrumbJsonLd} />
+      <PageLayout title={t("pages.tags.title")}>
+        <p className="mt-4 text-lg leading-8">{t("pages.tags.description")}</p>
+        <ul className="mt-6 grid grid-cols-2 gap-3 pl-0 sm:grid-cols-3">
+          {tags.map(({ label, slug, count }) => (
+            <li key={slug} className="mt-0 list-none pl-0">
+              <Link
+                href={`/${pageSlugs.tags}/${slug}`}
+                className="block rounded border border-current px-4 py-3 text-center text-base font-bold no-underline hover:underline"
+              >
+                {`${label} (${count})`}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </PageLayout>
+    </>
   );
 }

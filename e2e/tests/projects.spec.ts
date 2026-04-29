@@ -3,7 +3,7 @@ import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
-import { buildPageUrl, generateTitle } from "@/app/utils/utils";
+import { buildPageUrl, generateContentTitle } from "@/app/utils/utils";
 import { fetchPage, fetchProjects, fetchSettings } from "@/app/utils/api";
 import { getProjectsScheme } from "@/app/utils/jsonLDSchemes";
 
@@ -72,7 +72,7 @@ test.describe("projects", () => {
     const data = await fetchPage("projects");
     const setting = await fetchSettings();
     await testPageMetadata(page, {
-      title: generateTitle("Projects"),
+      title: generateContentTitle("Projects"),
       description: messages.pages.project.metaDescription,
       url: buildPageUrl("projects"),
       imageUrl: (data?.imageURL || setting?.imageURL) ?? "",

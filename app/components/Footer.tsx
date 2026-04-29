@@ -1,7 +1,10 @@
 import { IconLink } from "@/sanity/types/types";
 import { AUTHOR_INITIALS } from "../utils/constants";
 import { SocialIcons } from "./SocialIcons";
+import { getIcon } from "./Icons";
 import Link from "next/link";
+
+const ExternalLinkIcon = getIcon("externalLink");
 
 const getFooterText = (): string => {
   return `© ${new Date().getFullYear()} ${AUTHOR_INITIALS}`;
@@ -11,11 +14,13 @@ export const Footer: React.FC<{
   socialMedia: Array<IconLink>;
   cookiePolicyLabel?: string;
   tagsLabel?: string;
+  demosLabel?: string;
   showSeparator?: boolean;
 }> = ({
   socialMedia,
   cookiePolicyLabel = "Cookie Policy",
   tagsLabel = "Tags",
+  demosLabel = "Demos",
   showSeparator = true,
 }) => {
   return (
@@ -29,6 +34,15 @@ export const Footer: React.FC<{
           </Link>
           <Link href="/tags" className="text-sm hover:underline">
             {tagsLabel}
+          </Link>
+          <Link
+            href="https://demos.sanderdesnaijer.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 text-sm hover:underline"
+          >
+            {demosLabel}
+            <ExternalLinkIcon className="h-3 w-3 opacity-50" />
           </Link>
         </div>
         <div className="flex flex-col items-center md:flex-row">

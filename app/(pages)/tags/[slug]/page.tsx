@@ -4,7 +4,11 @@ import { NotFound } from "@/app/components/NotFound";
 import { PageLayout } from "@/app/components/PageLayout";
 import Projects from "@/app/components/Projects";
 import { generateMetaData } from "@/app/utils/metadata";
-import { buildPageUrl, toTagSlug } from "@/app/utils/utils";
+import {
+  buildPageUrl,
+  generateContentTitle,
+  toTagSlug,
+} from "@/app/utils/utils";
 import envConfig from "@/envConfig";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
@@ -20,6 +24,8 @@ import { ProjectListItem } from "@/app/components/ProjectListItem";
 import { getExcerpt } from "@/app/utils/blogUtils";
 import { pageSlugs } from "@/app/utils/routes";
 import { getTranslations } from "next-intl/server";
+import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
+import { JsonLd } from "@/app/components/JsonLd";
 
 type Params = Promise<{ slug: string }>;
 
@@ -149,7 +155,7 @@ export async function generateMetadata({ params }: { params: Params }) {
   );
 
   const t = await getTranslations();
-  const title = `${label} Projects & Articles`;
+  const title = generateContentTitle(`${label} Projects & Articles`);
   const slugMetaDescriptions = t.raw(
     "pages.tags.slugMetaDescriptions"
   ) as Record<string, string>;
@@ -207,36 +213,44 @@ const TagsPage = async ({ params }: { params: Params }) => {
 
   const slugIntros = t.raw("pages.tags.slugIntros") as Record<string, string>;
   const intro = slugIntros[slug];
+  const breadcrumbJsonLd = buildBreadcrumbList({
+    type: "tag",
+    slug,
+    title: label,
+  });
 
   return (
-    <PageLayout title={label}>
-      {intro && <p className="mt-4 text-lg leading-8">{intro}</p>}
-      {taggedProjects.length > 0 && (
-        <Projects projects={taggedProjects} pageSlug={pageSlugs.projects} />
-      )}
-      {taggedBlogs.length > 0 && (
-        <div className="mx-auto md:pt-10">
-          <ol
-            aria-label={t("pages.blog.articles")}
-            className="group mt-0 grid gap-10 pl-0"
-          >
-            {taggedBlogs.map((article, index) => (
-              <ProjectListItem
-                key={article._id}
-                href={`/${pageSlugs.blog}/${article.slug.current}`}
-                imageURL={article.imageURL}
-                imageALT={article.title}
-                date={article.publishedAt}
-                title={article.title}
-                body={getExcerpt(article)}
-                tags={article.tags}
-                index={index}
-              />
-            ))}
-          </ol>
-        </div>
-      )}
-    </PageLayout>
+    <>
+      <JsonLd value={breadcrumbJsonLd} />
+      <PageLayout title={label}>
+        {intro && <p className="mt-4 text-lg leading-8">{intro}</p>}
+        {taggedProjects.length > 0 && (
+          <Projects projects={taggedProjects} pageSlug={pageSlugs.projects} />
+        )}
+        {taggedBlogs.length > 0 && (
+          <div className="mx-auto md:pt-10">
+            <ol
+              aria-label={t("pages.blog.articles")}
+              className="group mt-0 grid gap-10 pl-0"
+            >
+              {taggedBlogs.map((article, index) => (
+                <ProjectListItem
+                  key={article._id}
+                  href={`/${pageSlugs.blog}/${article.slug.current}`}
+                  imageURL={article.imageURL}
+                  imageALT={article.title}
+                  date={article.publishedAt}
+                  title={article.title}
+                  body={getExcerpt(article)}
+                  tags={article.tags}
+                  index={index}
+                />
+              ))}
+            </ol>
+          </div>
+        )}
+      </PageLayout>
+    </>
   );
 };
 
