@@ -133,7 +133,7 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
   test.describe("Tags index page", () => {
     test("should have content-first title", async ({ page }) => {
       await page.goto("/tags");
-      await expect(page).toHaveTitle(/\| Sander de Snaijer$/);
+      await expect(page).toHaveTitle(/^Tags \| Sander de Snaijer$/);
       await expect(page).not.toHaveTitle(/^Sander de Snaijer \|/);
     });
 

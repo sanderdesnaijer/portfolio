@@ -7,6 +7,7 @@ import {
   getBlogsScheme,
   getArticleScheme,
   getFAQScheme,
+  getProjectScheme,
 } from "./jsonLDSchemes";
 import { BlogSanity } from "@/sanity/types/blogType";
 
@@ -1064,6 +1065,41 @@ describe("utils/jsonLDSchemes", () => {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         mainEntity: [],
+      });
+    });
+  });
+
+  describe("getProjectScheme", () => {
+    it("should include context and page relationships when shouldIncludeContext is true", () => {
+      const project: ProjectTypeSanity = {
+        title: "Flutter Tabata whip timer",
+        slug: {
+          current: "flutter-tabata-whip-timer",
+          _type: "slug",
+        },
+        imageURL:
+          "https://cdn.test.io/images/c6ybobx3/production/1xs367222ba8434fdb83e7481e83391bf604795-2200x1160.png",
+        body: [],
+        jsonLdType: ["SoftwareApplication"],
+        publishedAt: "2023-01-01T00:00:00.000Z",
+        _id: "",
+        _rev: "",
+        _type: "",
+        _createdAt: "2023-01-01T00:00:00.000Z",
+        _updatedAt: "2023-01-02T00:00:00.000Z",
+      };
+
+      const result = getProjectScheme(project, "projects", true);
+
+      expect(result["@context"]).toBe("https://schema.org");
+      expect(result.mainEntityOfPage).toEqual({
+        "@type": "WebPage",
+        "@id": "https://mocked-url.com/projects/flutter-tabata-whip-timer",
+      });
+      expect(result.isPartOf).toEqual({
+        "@type": "CollectionPage",
+        "@id": "https://mocked-url.com/projects",
+        name: "Projects",
       });
     });
   });

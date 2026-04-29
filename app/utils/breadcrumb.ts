@@ -42,10 +42,14 @@ export function buildBreadcrumbList({
   const segments: BreadcrumbSegment[] = [home, sectionMap[type]];
 
   if (slug && title) {
-    const pathPrefix = type === "project" ? "projects" : type;
+    const pathPrefixMap: Record<BreadcrumbType, string> = {
+      blog: "blog",
+      project: "projects",
+      tag: "tags",
+    };
     segments.push({
       name: title,
-      url: buildPageUrl(pathPrefix, slug),
+      url: buildPageUrl(pathPrefixMap[type], slug),
     });
   }
 
