@@ -17,7 +17,7 @@ export const LinkList: React.FC<{ links: Array<IconLink> }> = ({ links }) => {
           const IconComponent = getIcon(link.icon);
           return (
             <li
-              key={link.title}
+              key={link.link}
               aria-label={`${link.icon} icon`}
               title={link.icon}
               className="group/item mt-4 mb-4 items-center p-0 transition-transform"

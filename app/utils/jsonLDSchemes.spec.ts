@@ -749,6 +749,7 @@ describe("utils/jsonLDSchemes", () => {
       const result = getArticleScheme(article, "blog", true);
 
       expect(result).toEqual({
+        "@context": "https://schema.org",
         "@type": "BlogPosting",
         "@id":
           "https://mocked-url.com/blog/creating-a-headless-cms-portfolio-using-next-js-and-sanity",
@@ -768,6 +769,67 @@ describe("utils/jsonLDSchemes", () => {
         sameAs: "https://example.com/detailed-article",
         description: "This is a detailed article.",
       });
+    });
+
+    it("should not include @context when hasDetail is false (collection mode)", () => {
+      const article: BlogSanity = {
+        _id: "id",
+        publishedAt: "2023-10-01T12:00:00.000Z",
+        tags: [],
+        author: "Sander de Snaijer",
+        title: "Collection Article",
+        slug: { current: "collection-article" },
+        body: [],
+        _rev: "",
+        _type: "blogPost",
+        _createdAt: "",
+        _updatedAt: "",
+      };
+
+      const result = getArticleScheme(article, "blog");
+
+      expect(result).not.toHaveProperty("@context");
+    });
+
+    it("should include image when imageURL is provided", () => {
+      const article: BlogSanity = {
+        _id: "id",
+        publishedAt: "2023-10-01T12:00:00.000Z",
+        tags: [],
+        author: "Sander de Snaijer",
+        title: "Article With Image",
+        slug: { current: "with-image" },
+        body: [],
+        imageURL: "https://example.com/cover.jpg",
+        _rev: "",
+        _type: "blogPost",
+        _createdAt: "",
+        _updatedAt: "",
+      };
+
+      const result = getArticleScheme(article, "blog");
+
+      expect(result).toHaveProperty("image", "https://example.com/cover.jpg");
+    });
+
+    it("should not include image when imageURL is missing", () => {
+      const article: BlogSanity = {
+        _id: "id",
+        publishedAt: "2023-10-01T12:00:00.000Z",
+        tags: [],
+        author: "Sander de Snaijer",
+        title: "Article Without Image",
+        slug: { current: "no-image" },
+        body: [],
+        _rev: "",
+        _type: "blogPost",
+        _createdAt: "",
+        _updatedAt: "",
+      };
+
+      const result = getArticleScheme(article, "blog");
+
+      expect(result).not.toHaveProperty("image");
     });
 
     it("should not include description when hasDetail is false", () => {

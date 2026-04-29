@@ -24,6 +24,16 @@ const CodeBlock = dynamic(
   }
 );
 
+const EmbedBlock = dynamic(
+  () => import("./EmbedBlock").then((mod) => mod.EmbedBlock),
+  {
+    loading: () => (
+      <div className="my-6 aspect-video w-full animate-pulse rounded-lg bg-gray-200 dark:bg-gray-800" />
+    ),
+    ssr: false,
+  }
+);
+
 interface ImageValue {
   _type: "image";
   asset: {
@@ -36,6 +46,20 @@ interface ImageValue {
 interface CodeBlockValue {
   code: string;
   language?: string;
+}
+
+interface TableBlockValue {
+  caption?: string;
+  headers: string[];
+  rows: Array<{ _key: string; cells: string[] }>;
+}
+
+interface EmbedBlockValue {
+  type: "component" | "iframe";
+  componentId?: string;
+  url?: string;
+  caption?: string;
+  height?: string;
 }
 
 export const portableTextComponents: Partial<PortableTextReactComponents> = {
@@ -68,6 +92,60 @@ export const portableTextComponents: Partial<PortableTextReactComponents> = {
     codeBlock: ({ value }: { value: CodeBlockValue }) => {
       if (!value?.code) return null;
       return <CodeBlock code={value.code} language={value.language} />;
+    },
+    table: ({ value }: { value: TableBlockValue }) => {
+      if (!value?.headers || !value?.rows) return null;
+      return (
+        <figure className="my-6 overflow-x-auto">
+          <table className="w-full border-collapse text-sm">
+            <thead>
+              <tr className="border-b border-gray-200 dark:border-gray-700">
+                {value.headers.map((header, i) => (
+                  <th
+                    key={i}
+                    className="px-3 py-2 text-left font-semibold text-gray-900 dark:text-gray-100"
+                  >
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {value.rows.map((row) => (
+                <tr
+                  key={row._key}
+                  className="border-b border-gray-100 dark:border-gray-800"
+                >
+                  {(row.cells || []).map((cell, i) => (
+                    <td
+                      key={i}
+                      className="px-3 py-2 text-gray-700 dark:text-gray-300"
+                    >
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {value.caption && (
+            <figcaption className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">
+              {value.caption}
+            </figcaption>
+          )}
+        </figure>
+      );
+    },
+    embed: ({ value }: { value: EmbedBlockValue }) => {
+      return (
+        <EmbedBlock
+          type={value.type}
+          componentId={value.componentId}
+          url={value.url}
+          caption={value.caption}
+          height={value.height}
+        />
+      );
     },
   },
   marks: {

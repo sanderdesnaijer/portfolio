@@ -1,5 +1,11 @@
 import { defineType, defineArrayMember } from "sanity";
-import { ImageIcon, PlayIcon, CodeBlockIcon } from "@sanity/icons";
+import {
+  ImageIcon,
+  PlayIcon,
+  CodeBlockIcon,
+  ComponentIcon,
+  ThListIcon,
+} from "@sanity/icons";
 
 export const blockContentType = defineType({
   title: "Block Content",
@@ -95,6 +101,196 @@ export const blockContentType = defineType({
           return {
             title: language || "Code",
             subtitle: code ? code.substring(0, 80) : "",
+          };
+        },
+      },
+    }),
+    defineArrayMember({
+      name: "table",
+      title: "Table",
+      type: "object",
+      icon: ThListIcon,
+      fields: [
+        {
+          name: "caption",
+          title: "Caption",
+          type: "string",
+          description: "Optional caption shown below the table",
+        },
+        {
+          name: "headers",
+          title: "Column Headers",
+          type: "array",
+          of: [{ type: "string" }],
+          validation: (rule) => rule.required().min(2),
+        },
+        {
+          name: "rows",
+          title: "Rows",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                {
+                  name: "cells",
+                  title: "Cells",
+                  type: "array",
+                  of: [{ type: "string" }],
+                },
+              ],
+              preview: {
+                select: { cells: "cells" },
+                prepare({ cells }: { cells?: string[] }) {
+                  return {
+                    title: cells?.join(" | ") || "Empty row",
+                  };
+                },
+              },
+            },
+          ],
+        },
+      ],
+      preview: {
+        select: { caption: "caption", headers: "headers", rows: "rows" },
+        prepare({
+          caption,
+          headers,
+          rows,
+        }: {
+          caption?: string;
+          headers?: string[];
+          rows?: unknown[];
+        }) {
+          return {
+            title: caption || headers?.join(" | ") || "Table",
+            subtitle: `${rows?.length || 0} rows, ${headers?.length || 0} columns`,
+          };
+        },
+      },
+    }),
+    defineArrayMember({
+      name: "embed",
+      title: "Interactive Embed",
+      type: "object",
+      icon: ComponentIcon,
+      fields: [
+        {
+          name: "type",
+          title: "Embed Type",
+          type: "string",
+          options: {
+            list: [
+              { title: "Inline Component", value: "component" },
+              { title: "Iframe (external URL)", value: "iframe" },
+            ],
+            layout: "radio",
+          },
+          initialValue: "component",
+          validation: (rule) => rule.required(),
+        },
+        {
+          name: "componentId",
+          title: "Component ID",
+          type: "string",
+          description:
+            "Identifier for the React component (e.g. faceMeshChart)",
+          hidden: ({ parent }: { parent: { type?: string } }) =>
+            parent?.type !== "component",
+        },
+        {
+          name: "url",
+          title: "URL",
+          type: "url",
+          description:
+            "URL to embed (e.g. https://demos.sanderdesnaijer.com/face-mesh-explorer)",
+          hidden: ({ parent }: { parent: { type?: string } }) =>
+            parent?.type !== "iframe",
+        },
+        {
+          name: "caption",
+          title: "Caption",
+          type: "string",
+        },
+        {
+          name: "height",
+          title: "Height",
+          type: "string",
+          description: "CSS height value (e.g. 600px, 80vh). Defaults to auto.",
+        },
+      ],
+      validation: (rule) =>
+        rule.custom(
+          (
+            embed:
+              | {
+                  type?: string;
+                  componentId?: string;
+                  url?: string;
+                }
+              | undefined
+          ) => {
+            if (!embed?.type) {
+              return true;
+            }
+            if (embed.type === "component") {
+              const id = embed.componentId?.trim();
+              if (!id) {
+                return "Component ID is required for inline component embeds.";
+              }
+              const allowedComponentIds = ["faceMeshChart"];
+              if (!allowedComponentIds.includes(id)) {
+                return `Component ID must be one of: ${allowedComponentIds.join(", ")}`;
+              }
+            }
+            if (embed.type === "iframe") {
+              const url = embed.url?.trim();
+              if (!url) {
+                return "URL is required for iframe embeds.";
+              }
+              try {
+                const parsed = new URL(url);
+                if (parsed.protocol !== "https:") {
+                  return "Iframe URL must use https.";
+                }
+                const allowedHosts = [
+                  "demos.sanderdesnaijer.com",
+                  "www.youtube.com",
+                  "youtube.com",
+                ];
+                if (!allowedHosts.includes(parsed.hostname)) {
+                  return `Iframe host must match an origin allowed by the site CSP: ${allowedHosts.join(", ")}`;
+                }
+              } catch {
+                return "Iframe URL must be a valid https URL.";
+              }
+            }
+            return true;
+          }
+        ),
+      preview: {
+        select: {
+          type: "type",
+          componentId: "componentId",
+          url: "url",
+          caption: "caption",
+        },
+        prepare({
+          type,
+          componentId,
+          url,
+          caption,
+        }: {
+          type?: string;
+          componentId?: string;
+          url?: string;
+          caption?: string;
+        }) {
+          const source =
+            type === "iframe" ? url || "no URL" : componentId || "no component";
+          return {
+            title: caption || source,
+            subtitle: `${type === "iframe" ? "Iframe" : "Component"}: ${source}`,
           };
         },
       },

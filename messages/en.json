@@ -116,6 +116,12 @@
     "relatedTags": "Tags{context, select, other { of {context}}}",
     "mainNavigation": "Main navigation"
   },
+  "embed": {
+    "unknownComponent": "Unknown embed component:",
+    "interactiveDemo": "Interactive demo",
+    "faceMeshChartHeading": "Landmark distribution across 478 face mesh points",
+    "faceMeshChartAriaLabel": "Horizontal bar chart showing how 478 MediaPipe Face Mesh landmarks are distributed across face regions"
+  },
   "consent": {
     "message": "We use cookies to track statistics, no personal data",
     "accept": "Allow",
