@@ -11,6 +11,8 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { pageSlugs } from "@/app/utils/routes";
 import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
+import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
+import { generateContentTitle } from "@/app/utils/utils";
 import { JsonLd } from "@/app/components/JsonLd";
 import { PageLayout } from "@/app/components/PageLayout";
 import { client } from "@/sanity/lib/client";
@@ -47,7 +49,9 @@ export async function generateMetadata({
     };
   }
 
-  return generatePageMetadata({ pageSlug: slug, project });
+  const metadata = await generatePageMetadata({ pageSlug: slug, project });
+  const title = generateContentTitle(project.title);
+  return { ...metadata, title, openGraph: { ...metadata.openGraph, title } };
 }
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {
@@ -61,10 +65,16 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
   }
 
   const jsonLd = getProjectScheme(project, slug, true);
+  const breadcrumbJsonLd = buildBreadcrumbList({
+    type: "project",
+    slug: project.slug.current,
+    title: project.title,
+  });
 
   return (
     <>
       <JsonLd value={jsonLd} />
+      <JsonLd value={breadcrumbJsonLd} />
       <PageLayout title={project.title}>
         <Project project={project} />
         {project.tags && <Tags tags={project.tags} context={project.title} />}

@@ -55,6 +55,18 @@ export function generateTitle(
 }
 
 /**
+ * Generates a content-first title string: "Title | Author Name".
+ * Use this for detail pages and index pages where the topic should
+ * lead the title tag (better for SEO click-through rates).
+ *
+ * @param {string} title - The content title (article name, project name, or section name).
+ * @returns {string} - The generated title with content first, then brand.
+ */
+export function generateContentTitle(title: string): string {
+  return `${title} | ${AUTHOR_NAME}`;
+}
+
+/**
  * Extracts a plain text description from a Sanity block array and truncates it to 160 characters.
  *
  * @param {Block[]} sanityBlock - The Sanity block array containing rich text content.

@@ -768,6 +768,16 @@ describe("utils/jsonLDSchemes", () => {
         },
         sameAs: "https://example.com/detailed-article",
         description: "This is a detailed article.",
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id":
+            "https://mocked-url.com/blog/creating-a-headless-cms-portfolio-using-next-js-and-sanity",
+        },
+        isPartOf: {
+          "@type": "Blog",
+          "@id": "https://mocked-url.com/blog",
+          name: "Blog",
+        },
       });
     });
 

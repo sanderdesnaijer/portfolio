@@ -6,6 +6,8 @@ import Projects from "@/app/components/Projects";
 import { getProjectsScheme } from "@/app/utils/jsonLDSchemes";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { pageSlugs } from "@/app/utils/routes";
+import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
+import { generateContentTitle } from "@/app/utils/utils";
 import envConfig from "@/envConfig";
 
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -17,10 +19,12 @@ const { projects: slug } = pageSlugs;
 
 export async function generateMetadata() {
   const t = await getTranslations();
-  return generatePageMetadata({
+  const metadata = await generatePageMetadata({
     pageSlug: slug,
     description: t("pages.project.metaDescription"),
   });
+  const title = generateContentTitle("Projects");
+  return { ...metadata, title, openGraph: { ...metadata.openGraph, title } };
 }
 
 export default async function Page() {
@@ -37,11 +41,13 @@ export default async function Page() {
 
   const jsonLd =
     page && projects ? getProjectsScheme({ page, projects }) : null;
+  const breadcrumbJsonLd = buildBreadcrumbList({ type: "project" });
   const title = page ? page.title : t("error.404.generic.title");
 
   return (
     <>
       {jsonLd && <JsonLd value={jsonLd} />}
+      <JsonLd value={breadcrumbJsonLd} />
 
       {projects && page ? (
         <PageLayout title={title}>

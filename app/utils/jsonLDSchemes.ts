@@ -148,6 +148,17 @@ export const getProjectScheme = (
       author: createAuthor(),
       publisher: createAuthor(),
     }),
+    ...(shouldIncludeContext && {
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": url,
+      },
+      isPartOf: {
+        "@type": "CollectionPage",
+        "@id": buildPageUrl(pageSlug),
+        name: "Projects",
+      },
+    }),
   };
 };
 
@@ -191,6 +202,15 @@ export const getArticleScheme = (
     ...(article.mediumUrl && { sameAs: article.mediumUrl }),
     ...(hasDetail && {
       description: getExcerpt(article),
+      mainEntityOfPage: {
+        "@type": "WebPage",
+        "@id": url,
+      },
+      isPartOf: {
+        "@type": "Blog",
+        "@id": buildPageUrl(pageSlug),
+        name: "Blog",
+      },
     }),
   };
 };
