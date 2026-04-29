@@ -65,15 +65,19 @@ describe("EmbedBlock", () => {
     });
 
     it("renders nothing when iframe url is missing", () => {
-      renderWithIntl(<EmbedBlock type="iframe" />);
-      expect(screen.queryByRole("figure")).not.toBeInTheDocument();
+      const { container } = renderWithIntl(<EmbedBlock type="iframe" />);
+      expect(container.querySelector("figure")).toBeNull();
+      expect(container.querySelector("iframe")).toBeNull();
     });
   });
 
   describe("component type", () => {
     it("renders nothing when componentId is missing", () => {
-      renderWithIntl(<EmbedBlock type="component" />);
-      expect(screen.queryByRole("figure")).not.toBeInTheDocument();
+      const { container } = renderWithIntl(<EmbedBlock type="component" />);
+      expect(container.querySelector("figure")).toBeNull();
+      expect(
+        screen.queryByText(/Unknown embed component:/i)
+      ).not.toBeInTheDocument();
     });
 
     it("renders nothing in production when componentId is unknown", () => {
@@ -83,10 +87,13 @@ describe("EmbedBlock", () => {
         configurable: true,
       });
 
-      renderWithIntl(
+      const { container } = renderWithIntl(
         <EmbedBlock type="component" componentId="does-not-exist" />
       );
-      expect(screen.queryByRole("figure")).not.toBeInTheDocument();
+      expect(container.querySelector("figure")).toBeNull();
+      expect(
+        screen.queryByText(/Unknown embed component:/i)
+      ).not.toBeInTheDocument();
 
       Object.defineProperty(process.env, "NODE_ENV", {
         value: original,
@@ -115,11 +122,12 @@ describe("EmbedBlock", () => {
 
   describe("invalid input", () => {
     it("renders nothing for an unsupported type", () => {
-      renderWithIntl(
+      const { container } = renderWithIntl(
         // @ts-expect-error testing invalid runtime input
         <EmbedBlock type="other" />
       );
-      expect(screen.queryByRole("figure")).not.toBeInTheDocument();
+      expect(container.querySelector("figure")).toBeNull();
+      expect(container.querySelector("iframe")).toBeNull();
     });
   });
 });

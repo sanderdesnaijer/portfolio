@@ -219,6 +219,55 @@ export const blockContentType = defineType({
           description: "CSS height value (e.g. 600px, 80vh). Defaults to auto.",
         },
       ],
+      validation: (rule) =>
+        rule.custom(
+          (
+            embed:
+              | {
+                  type?: string;
+                  componentId?: string;
+                  url?: string;
+                }
+              | undefined
+          ) => {
+            if (!embed?.type) {
+              return true;
+            }
+            if (embed.type === "component") {
+              const id = embed.componentId?.trim();
+              if (!id) {
+                return "Component ID is required for inline component embeds.";
+              }
+              const allowedComponentIds = ["faceMeshChart"];
+              if (!allowedComponentIds.includes(id)) {
+                return `Component ID must be one of: ${allowedComponentIds.join(", ")}`;
+              }
+            }
+            if (embed.type === "iframe") {
+              const url = embed.url?.trim();
+              if (!url) {
+                return "URL is required for iframe embeds.";
+              }
+              try {
+                const parsed = new URL(url);
+                if (parsed.protocol !== "https:") {
+                  return "Iframe URL must use https.";
+                }
+                const allowedHosts = [
+                  "demos.sanderdesnaijer.com",
+                  "www.youtube.com",
+                  "youtube.com",
+                ];
+                if (!allowedHosts.includes(parsed.hostname)) {
+                  return `Iframe host must match an origin allowed by the site CSP: ${allowedHosts.join(", ")}`;
+                }
+              } catch {
+                return "Iframe URL must be a valid https URL.";
+              }
+            }
+            return true;
+          }
+        ),
       preview: {
         select: {
           type: "type",

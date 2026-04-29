@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import type { ComponentType } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import messages from "../../messages/en.json";
 import { portableTextComponents } from "./portableTextComponents";
@@ -11,13 +12,12 @@ const renderType = <K extends keyof Types>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props: any
 ) => {
-  const Component = portableTextComponents.types![type] as (
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    p: any
-  ) => React.ReactElement | null;
+  const Component = portableTextComponents.types![type] as ComponentType<
+    Record<string, unknown>
+  >;
   return render(
     <NextIntlClientProvider locale="en" messages={messages}>
-      <>{Component(props)}</>
+      <Component {...props} />
     </NextIntlClientProvider>
   );
 };
