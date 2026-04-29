@@ -33,10 +33,13 @@ export default function FaceMeshLandmarkChart() {
     canvas.height = height * dpr;
     ctx.scale(dpr, dpr);
 
-    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    const textColor = isDark ? "rgba(255,255,255,0.75)" : "rgba(0,0,0,0.7)";
-    const mutedText = isDark ? "rgba(255,255,255,0.4)" : "rgba(0,0,0,0.35)";
-    const gridColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)";
+    const textColor = "rgba(255,255,255,0.75)";
+    const mutedText = "rgba(255,255,255,0.4)";
+    const gridColor = "rgba(255,255,255,0.06)";
+
+    // Dark background fill
+    ctx.fillStyle = "#1e293b";
+    ctx.fillRect(0, 0, width, height);
 
     const paddingLeft = 110;
     const paddingRight = 60;
@@ -120,7 +123,7 @@ export default function FaceMeshLandmarkChart() {
       </h3>
       <canvas
         ref={canvasRef}
-        className="h-[360px] w-full"
+        className="h-[360px] w-full rounded-lg"
         role="img"
         aria-label={t("embed.faceMeshChartAriaLabel")}
       />
