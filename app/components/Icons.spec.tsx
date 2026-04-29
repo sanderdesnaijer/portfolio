@@ -23,6 +23,7 @@ describe("Icons component", () => {
       "youtube",
       "instagram",
       "medium",
+      "externalLink",
     ]);
   });
 });
