@@ -4,7 +4,7 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testPageMetadata } from "../utils/metadata";
 import {
   buildPageUrl,
-  generateTitle,
+  generateContentTitle,
   getDescriptionFromSanity,
 } from "@/app/utils/utils";
 import { fetchPage, fetchProject, fetchProjects } from "@/app/utils/api";
@@ -122,7 +122,7 @@ test.describe("projects detail", () => {
     const description = projectDescription || data!.description || "";
 
     await testPageMetadata(page, {
-      title: generateTitle(data!.title, project!.title),
+      title: generateContentTitle(project!.title),
       description,
       url: buildPageUrl("projects", projectSlug),
       imageUrl: project!.imageURL!,

@@ -24,7 +24,12 @@ export async function generateMetadata() {
     description: t("pages.project.metaDescription"),
   });
   const title = generateContentTitle("Projects");
-  return { ...metadata, title, openGraph: { ...metadata.openGraph, title } };
+  return {
+    ...metadata,
+    title,
+    openGraph: { ...metadata.openGraph, title },
+    twitter: { ...metadata.twitter, title },
+  };
 }
 
 export default async function Page() {

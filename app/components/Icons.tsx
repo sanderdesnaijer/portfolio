@@ -10,6 +10,7 @@ import X from "@/public/icons/x.svg";
 import YouTube from "@/public/icons/youtube.svg";
 import Instagram from "@/public/icons/instagram.svg";
 import Medium from "@/public/icons/medium.svg";
+import ExternalLink from "@/public/icons/external-link.svg";
 
 export const iconSize = 24;
 
@@ -25,6 +26,7 @@ const iconMap: Record<string, React.FC<React.SVGProps<SVGSVGElement>>> = {
   youtube: YouTube,
   instagram: Instagram,
   medium: Medium,
+  externalLink: ExternalLink,
 };
 
 export const getIcon = (icon: keyof typeof iconMap) => {

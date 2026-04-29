@@ -8,14 +8,11 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
       // Find the first blog link and navigate to it
       const firstLink = page.locator("ol a").first();
       await firstLink.click();
-      await page.waitForLoadState("domcontentloaded");
-
-      const title = await page.title();
-
+      await page.waitForURL(/\/blog\/.+/);
       // Title should be "Article Title | Sander de Snaijer"
-      expect(title).toMatch(/^.+ \| Sander de Snaijer$/);
+      await expect(page).toHaveTitle(/^.+ \| Sander de Snaijer$/);
       // Title should NOT start with "Sander de Snaijer"
-      expect(title).not.toMatch(/^Sander de Snaijer \|/);
+      await expect(page).not.toHaveTitle(/^Sander de Snaijer \|/);
     });
 
     test("should have BreadcrumbList JSON-LD", async ({ page }) => {
@@ -23,7 +20,7 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
 
       const firstLink = page.locator("ol a").first();
       await firstLink.click();
-      await page.waitForLoadState("domcontentloaded");
+      await page.waitForURL(/\/blog\/.+/);
 
       const jsonLdScripts = await page.locator(
         'script[type="application/ld+json"]'
@@ -50,9 +47,7 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
   test.describe("Blog index page", () => {
     test("should have content-first title", async ({ page }) => {
       await page.goto("/blog");
-
-      const title = await page.title();
-      expect(title).toMatch(/^Blog \| Sander de Snaijer$/);
+      await expect(page).toHaveTitle(/^Blog \| Sander de Snaijer$/);
     });
 
     test("should have 2-level BreadcrumbList JSON-LD", async ({ page }) => {
@@ -80,11 +75,9 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
 
       const firstLink = page.locator("a[href^='/projects/']").first();
       await firstLink.click();
-      await page.waitForLoadState("domcontentloaded");
-
-      const title = await page.title();
-      expect(title).toMatch(/^.+ \| Sander de Snaijer$/);
-      expect(title).not.toMatch(/^Sander de Snaijer \|/);
+      await page.waitForURL(/\/projects\/.+/);
+      await expect(page).toHaveTitle(/^.+ \| Sander de Snaijer$/);
+      await expect(page).not.toHaveTitle(/^Sander de Snaijer \|/);
     });
 
     test("should have BreadcrumbList JSON-LD", async ({ page }) => {
@@ -92,7 +85,7 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
 
       const firstLink = page.locator("a[href^='/projects/']").first();
       await firstLink.click();
-      await page.waitForLoadState("domcontentloaded");
+      await page.waitForURL(/\/projects\/.+/);
 
       const jsonLdScripts = await page.locator(
         'script[type="application/ld+json"]'
@@ -115,9 +108,7 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
   test.describe("Projects index page", () => {
     test("should have content-first title", async ({ page }) => {
       await page.goto("/projects");
-
-      const title = await page.title();
-      expect(title).toMatch(/^Projects \| Sander de Snaijer$/);
+      await expect(page).toHaveTitle(/^Projects \| Sander de Snaijer$/);
     });
 
     test("should have 2-level BreadcrumbList JSON-LD", async ({ page }) => {
@@ -142,10 +133,8 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
   test.describe("Tags index page", () => {
     test("should have content-first title", async ({ page }) => {
       await page.goto("/tags");
-
-      const title = await page.title();
-      expect(title).toMatch(/\| Sander de Snaijer$/);
-      expect(title).not.toMatch(/^Sander de Snaijer \|/);
+      await expect(page).toHaveTitle(/\| Sander de Snaijer$/);
+      await expect(page).not.toHaveTitle(/^Sander de Snaijer \|/);
     });
 
     test("should have 2-level BreadcrumbList JSON-LD", async ({ page }) => {

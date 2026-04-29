@@ -51,7 +51,12 @@ export async function generateMetadata({
 
   const metadata = await generatePageMetadata({ pageSlug: slug, project });
   const title = generateContentTitle(project.title);
-  return { ...metadata, title, openGraph: { ...metadata.openGraph, title } };
+  return {
+    ...metadata,
+    title,
+    openGraph: { ...metadata.openGraph, title },
+    twitter: { ...metadata.twitter, title },
+  };
 }
 
 const ProductPage = async ({ params }: { params: QueryParams }) => {
