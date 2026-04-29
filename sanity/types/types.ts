@@ -26,7 +26,30 @@ export interface CodeBlock {
   language?: string;
 }
 
-export type Block = TextBlock | ImageBlock | CodeBlock;
+export interface EmbedBlock {
+  _type: "embed";
+  _key: string;
+  type: "component" | "iframe";
+  componentId?: string;
+  url?: string;
+  caption?: string;
+  height?: string;
+}
+
+export interface TableBlock {
+  _type: "table";
+  _key: string;
+  caption?: string;
+  headers: string[];
+  rows: Array<{ _key: string; cells: string[] }>;
+}
+
+export type Block =
+  | TextBlock
+  | ImageBlock
+  | CodeBlock
+  | EmbedBlock
+  | TableBlock;
 
 export interface IconLink {
   title: string;

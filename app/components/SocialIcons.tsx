@@ -16,7 +16,7 @@ export const SocialIcons: React.FC<{
         const IconComponent = getIcon(icon);
         return (
           <li
-            key={icon}
+            key={link}
             className="scale-100 transition-transform duration-100 hover:scale-110"
           >
             <Link

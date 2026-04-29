@@ -175,10 +175,12 @@ export const getArticleScheme = (
 ) => {
   const url = buildPageUrl(pageSlug, article.slug.current);
   return {
+    ...(hasDetail && { "@context": "https://schema.org" }),
     "@type": "BlogPosting",
     "@id": url,
     headline: article.title,
     url,
+    ...(article.imageURL && { image: article.imageURL }),
     datePublished: article.publishedAt,
     dateModified: article._updatedAt || article.publishedAt,
     author: createAuthor(),

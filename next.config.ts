@@ -12,7 +12,7 @@ const ContentSecurityPolicy = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' data: blob: https://cdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://www.google.com;
   font-src 'self';
-  frame-src https://www.youtube.com https://youtube.com;
+  frame-src https://www.youtube.com https://youtube.com https://demos.sanderdesnaijer.com;
   connect-src 'self' https://*.sanity.io https://cdn.sanity.io https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://analytics.google.com;
   media-src 'self';
   object-src 'none';
@@ -48,7 +48,8 @@ const securityHeaders = [
   },
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=()",
+    value:
+      'camera=(self "https://demos.sanderdesnaijer.com"), microphone=(), geolocation=()',
   },
 ];
 
