@@ -122,6 +122,9 @@
     "faceMeshChartHeading": "Landmark distribution across 478 face mesh points",
     "faceMeshChartAriaLabel": "Horizontal bar chart showing how 478 MediaPipe Face Mesh landmarks are distributed across face regions"
   },
+  "video": {
+    "watchOnYouTube": "Watch video on YouTube"
+  },
   "consent": {
     "message": "We use cookies to track statistics, no personal data",
     "accept": "Allow",

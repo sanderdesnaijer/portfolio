@@ -12,9 +12,14 @@ import { generateMetaData } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { pageSlugs } from "@/app/utils/routes";
-import { getArticleScheme, getFAQScheme } from "@/app/utils/jsonLDSchemes";
+import {
+  getArticleScheme,
+  getFAQScheme,
+  getVideoScheme,
+} from "@/app/utils/jsonLDSchemes";
 import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
 import { JsonLd } from "@/app/components/JsonLd";
+import { extractVideoInfo } from "@/app/utils/videoUtils";
 import { PageLayout } from "@/app/components/PageLayout";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { IconLink } from "@/sanity/types/types";
@@ -102,6 +107,8 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   });
   const hasFaq = article.faq && article.faq.length > 0;
   const hasPortableText = article.body && article.body.length > 0;
+  const pageUrl = buildPageUrl(slug, article.slug.current);
+  const videos = extractVideoInfo(article.body);
   const validLinks = article.links?.filter(
     (l): l is IconLink => !!l.title && !!l.link && !!l.icon
   );
@@ -111,6 +118,18 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
       <JsonLd value={jsonLd} />
       <JsonLd value={breadcrumbJsonLd} />
       {hasFaq && <JsonLd value={getFAQScheme(article.faq!)} />}
+      {videos.map((video) => (
+        <JsonLd
+          key={video.videoId}
+          value={getVideoScheme({
+            video,
+            name: article.title,
+            description: getExcerpt(article),
+            uploadDate: article.publishedAt,
+            pageUrl,
+          })}
+        />
+      ))}
 
       <PageLayout title={article.title}>
         <ProjectLayout

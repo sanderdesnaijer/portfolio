@@ -44,12 +44,19 @@ export interface TableBlock {
   rows: Array<{ _key: string; cells: string[] }>;
 }
 
+export interface YouTubeBlock {
+  _type: "youTube";
+  _key: string;
+  url: string;
+}
+
 export type Block =
   | TextBlock
   | ImageBlock
   | CodeBlock
   | EmbedBlock
-  | TableBlock;
+  | TableBlock
+  | YouTubeBlock;
 
 export interface IconLink {
   title: string;

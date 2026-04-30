@@ -10,10 +10,12 @@ import { generatePageMetadata } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { pageSlugs } from "@/app/utils/routes";
-import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
+import { getProjectScheme, getVideoScheme } from "@/app/utils/jsonLDSchemes";
 import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
-import { generateContentTitle } from "@/app/utils/utils";
+import { buildPageUrl, generateContentTitle } from "@/app/utils/utils";
 import { JsonLd } from "@/app/components/JsonLd";
+import { extractVideoInfo } from "@/app/utils/videoUtils";
+import { toPlainText } from "next-sanity";
 import { PageLayout } from "@/app/components/PageLayout";
 import { client } from "@/sanity/lib/client";
 
@@ -75,11 +77,27 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
     slug: project.slug.current,
     title: project.title,
   });
+  const pageUrl = buildPageUrl(slug, project.slug.current);
+  const videos = extractVideoInfo(project.body);
+  const projectDescription =
+    (project.body && toPlainText(project.body)) || project.title;
 
   return (
     <>
       <JsonLd value={jsonLd} />
       <JsonLd value={breadcrumbJsonLd} />
+      {videos.map((video) => (
+        <JsonLd
+          key={video.videoId}
+          value={getVideoScheme({
+            video,
+            name: project.title,
+            description: projectDescription,
+            uploadDate: project.publishedAt || project._createdAt,
+            pageUrl,
+          })}
+        />
+      ))}
       <PageLayout title={project.title}>
         <Project project={project} />
         {project.tags && <Tags tags={project.tags} context={project.title} />}
