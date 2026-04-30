@@ -5,6 +5,7 @@ import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
 import envConfig from "@/envConfig";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { getExcerpt } from "./blogUtils";
+import { VideoInfo } from "./videoUtils";
 
 const createAuthor = (url?: string) => ({
   "@type": "Person",
@@ -244,4 +245,40 @@ export const getBlogsScheme = ({
   blogPost: articles.map((article) =>
     getArticleScheme(article, page.slug.current)
   ),
+});
+
+/**
+ * Generates VideoObject JSON-LD structured data for a video embedded on a page.
+ * See: https://developers.google.com/search/docs/appearance/structured-data/video
+ */
+export const getVideoScheme = ({
+  video,
+  name,
+  description,
+  uploadDate,
+  pageUrl,
+}: {
+  video: VideoInfo;
+  name: string;
+  description: string;
+  uploadDate: string;
+  pageUrl: string;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  name,
+  description,
+  thumbnailUrl: video.thumbnailUrl,
+  uploadDate,
+  contentUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
+  embedUrl: video.embedUrl,
+  publisher: {
+    "@type": "Person",
+    name: AUTHOR_NAME,
+    url: envConfig.baseUrl,
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": pageUrl,
+  },
 });

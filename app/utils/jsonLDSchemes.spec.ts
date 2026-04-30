@@ -8,7 +8,9 @@ import {
   getArticleScheme,
   getFAQScheme,
   getProjectScheme,
+  getVideoScheme,
 } from "./jsonLDSchemes";
+import { VideoInfo } from "./videoUtils";
 import { BlogSanity } from "@/sanity/types/blogType";
 
 const mockBaseURL = "https://mocked-url.com";
@@ -1065,6 +1067,45 @@ describe("utils/jsonLDSchemes", () => {
         "@context": "https://schema.org",
         "@type": "FAQPage",
         mainEntity: [],
+      });
+    });
+  });
+
+  describe("getVideoScheme", () => {
+    it("should return a valid VideoObject schema", () => {
+      const video: VideoInfo = {
+        url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        videoId: "dQw4w9WgXcQ",
+        embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        thumbnailUrl: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+      };
+
+      const result = getVideoScheme({
+        video,
+        name: "Test Video Post",
+        description: "A test video description.",
+        uploadDate: "2024-01-15T12:00:00.000Z",
+        pageUrl: "https://mocked-url.com/blog/test-post",
+      });
+
+      expect(result).toEqual({
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        name: "Test Video Post",
+        description: "A test video description.",
+        thumbnailUrl: "https://img.youtube.com/vi/dQw4w9WgXcQ/hqdefault.jpg",
+        uploadDate: "2024-01-15T12:00:00.000Z",
+        contentUrl: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        publisher: {
+          "@type": "Person",
+          name: AUTHOR_NAME,
+          url: mockBaseURL,
+        },
+        mainEntityOfPage: {
+          "@type": "WebPage",
+          "@id": "https://mocked-url.com/blog/test-post",
+        },
       });
     });
   });

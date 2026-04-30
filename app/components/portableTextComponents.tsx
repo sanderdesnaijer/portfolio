@@ -5,6 +5,7 @@ import Image from "next/image";
 import { PortableTextReactComponents } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import { LinkMark } from "./LinkMark";
+import { YouTubeFallback } from "./YouTubeFallback";
 
 const YouTube = dynamic(() => import("./YouTube").then((mod) => mod.YouTube), {
   loading: () => (
@@ -66,7 +67,12 @@ interface EmbedBlockValue {
 export const portableTextComponents: Partial<PortableTextReactComponents> = {
   types: {
     youTube: ({ value }: { value: { url: string } }) => {
-      return <YouTube url={value.url} />;
+      return (
+        <>
+          <YouTube url={value.url} />
+          <YouTubeFallback url={value.url} />
+        </>
+      );
     },
     image: ({ value }: { value: ImageValue }) => {
       if (!value?.asset) return null;
