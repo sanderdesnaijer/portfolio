@@ -18,6 +18,7 @@ import { JsonLd } from "@/app/components/JsonLd";
 import envConfig from "@/envConfig";
 import { PageLayout } from "@/app/components/PageLayout";
 import { portableTextComponents } from "@/app/components/portableTextComponents";
+import { LinkMark } from "@/app/components/LinkMark";
 
 const mainImageSizeHeight = 341;
 const mainImageSizeWidth = 256;
@@ -64,22 +65,7 @@ const components: Partial<PortableTextReactComponents> = {
     ),
   },
   marks: {
-    link: ({
-      children,
-      value,
-    }: {
-      children?: React.ReactNode;
-      value?: { href: string };
-    }) => (
-      <Link
-        href={value?.href || "#"}
-        className="underline underline-offset-2 transition-all duration-100 hover:underline-offset-4"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {children}
-      </Link>
-    ),
+    link: LinkMark,
   },
 };
 
@@ -92,22 +78,7 @@ const jobComponents: Partial<PortableTextReactComponents> = {
     ),
   },
   marks: {
-    link: ({
-      children,
-      value,
-    }: {
-      children?: React.ReactNode;
-      value?: { href: string };
-    }) => (
-      <Link
-        href={value?.href || "#"}
-        className="underline underline-offset-2 transition-all duration-100 hover:underline-offset-4"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {children}
-      </Link>
-    ),
+    link: LinkMark,
   },
 };
 

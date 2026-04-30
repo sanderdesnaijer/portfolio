@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { PortableTextReactComponents } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
+import { LinkMark } from "./LinkMark";
 
 const YouTube = dynamic(() => import("./YouTube").then((mod) => mod.YouTube), {
   loading: () => (
@@ -152,5 +153,6 @@ export const portableTextComponents: Partial<PortableTextReactComponents> = {
     code: ({ children }) => (
       <code className="rounded font-mono text-[0.875em]">{children}</code>
     ),
+    link: LinkMark,
   },
 };
