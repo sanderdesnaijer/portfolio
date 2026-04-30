@@ -91,6 +91,24 @@ const jobComponents: Partial<PortableTextReactComponents> = {
       </p>
     ),
   },
+  marks: {
+    link: ({
+      children,
+      value,
+    }: {
+      children?: React.ReactNode;
+      value?: { href: string };
+    }) => (
+      <Link
+        href={value?.href || "#"}
+        className="underline underline-offset-2 transition-all duration-100 hover:underline-offset-4"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </Link>
+    ),
+  },
 };
 
 const getExperienceTitle = (
