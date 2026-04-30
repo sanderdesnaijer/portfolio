@@ -49,4 +49,3 @@ node_modules/
 /playwright/.cache/
 
 .claude/*
-seo-content-audit.md
