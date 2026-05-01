@@ -3,6 +3,9 @@ import Link from "next/link";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { pageSlugs } from "../utils/routes";
+import { toTagSlug } from "../utils/utils";
+
+const MAX_TAGS = 3;
 
 export type LatestProjectPreview = Pick<
   ProjectTypeSanity,
@@ -54,6 +57,7 @@ interface LatestItemProps {
   title: string;
   href: string;
   publishedAt: string;
+  tags?: { _id: string; label: string }[];
   imageURL?: string | null;
   imageAlt?: string | null;
   priority?: boolean;
@@ -63,10 +67,12 @@ function LatestItem({
   title,
   href,
   publishedAt,
+  tags,
   imageURL,
   imageAlt,
   priority,
 }: LatestItemProps) {
+  const visibleTags = tags?.slice(0, MAX_TAGS);
   return (
     <div className="group/latest relative flex flex-col overflow-hidden rounded-md border border-neutral-200 transition-all hover:border-neutral-400 dark:border-neutral-800 dark:hover:border-neutral-600">
       {imageURL ? (
@@ -94,6 +100,21 @@ function LatestItem({
           >
             {title}
           </Link>
+          {visibleTags?.length ? (
+            <p className="relative z-10 mt-2 mb-0 text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
+              {visibleTags.map((tag, i) => (
+                <span key={tag._id}>
+                  <Link
+                    href={`/tags/${toTagSlug(tag.label)}`}
+                    className="relative z-10 hover:underline"
+                  >
+                    {tag.label}
+                  </Link>
+                  {i < visibleTags.length - 1 ? ", " : ""}
+                </span>
+              ))}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>
@@ -120,6 +141,7 @@ export const LatestSection = ({
                 title={project.title}
                 href={`/${pageSlugs.projects}/${project.slug.current}`}
                 publishedAt={project.publishedAt}
+                tags={project.tags}
                 imageURL={project.imageURL}
                 imageAlt={project.imageAlt}
                 priority
@@ -141,6 +163,7 @@ export const LatestSection = ({
                 title={post.title}
                 href={`/${pageSlugs.blog}/${post.slug.current}`}
                 publishedAt={post.publishedAt}
+                tags={post.tags}
                 imageURL={post.imageURL}
                 imageAlt={post.imageAlt}
                 priority={i === 0}
