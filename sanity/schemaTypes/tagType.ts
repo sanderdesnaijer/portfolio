@@ -20,11 +20,17 @@ export const tagType = defineType({
         isUnique: async (slug, context) => {
           const { document, getClient } = context;
           const client = getClient({ apiVersion: "2025-01-24" });
-          const id = document?._id.replace(/^drafts\./, "");
-          const count = await client.fetch<number>(
-            `count(*[_type == "tag" && slug.current == $slug && !(_id in [$id, $draftId])])`,
-            { slug, id, draftId: `drafts.${id}` }
-          );
+          const id = document?._id?.replace(/^drafts\./, "");
+
+          const count = id
+            ? await client.fetch<number>(
+                `count(*[_type == "tag" && slug.current == $slug && !(_id in [$id, $draftId])])`,
+                { slug, id, draftId: `drafts.${id}` }
+              )
+            : await client.fetch<number>(
+                `count(*[_type == "tag" && slug.current == $slug])`,
+                { slug }
+              );
           return count === 0;
         },
       },
