@@ -14,6 +14,7 @@ interface ProjectListItemProps {
   body?: string | null;
   tags?: TagSanity[];
   index?: number;
+  headingLevel?: "h2" | "h3";
 }
 
 export const ProjectListItem = ({
@@ -25,6 +26,7 @@ export const ProjectListItem = ({
   body,
   tags,
   index,
+  headingLevel = "h2",
 }: ProjectListItemProps) => {
   return (
     <li className="group/item relative mt-0 mb-0 grid grid-cols-5 justify-between pl-0 no-underline transition-opacity duration-200">
@@ -49,7 +51,7 @@ export const ProjectListItem = ({
           className="no-underline group-hover/item:italic group-hover/item:underline before:absolute before:right-0 before:left-0 before:h-full before:opacity-0"
         >
           <DynamicElement
-            as="h2"
+            as={headingLevel}
             className={`-mt-2 mb-0 translate-x-0 text-3xl leading-10 group-hover/item:translate-x-2 md:text-[2.5rem] md:leading-11`}
             size="11"
           >

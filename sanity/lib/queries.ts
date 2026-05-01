@@ -259,6 +259,31 @@ export const latestBlogQuery = groq`
   }
 `;
 
+/** Minimal projection for metadata: jobs with tags (filtered by slug in JS) */
+export const jobsWithTagsQuery = groq`
+  *[_type == "job" && count(tags) > 0] | order(startDate desc) {
+    _createdAt,
+    _updatedAt,
+    "tags": tags[]->{ _id, label }
+  }
+`;
+
+/** Full jobs with tags (filtered by slug in JS) */
+export const jobsWithTagsFullQuery = groq`
+  *[_type == "job" && count(tags) > 0] | order(startDate desc) {
+    _id,
+    companyName,
+    jobTitle,
+    startDate,
+    endDate,
+    link,
+    "tags": tags[]->{ _id, label },
+    "imageURL": logo.asset->url,
+    employmentType,
+    "contractName": contractName->companyName
+  }
+`;
+
 /** Minimal projection for metadata: projects with tags (filtered by slug in JS) */
 export const projectsWithTagsQuery = groq`
   *[_type == "project" && count(tags) > 0] | order(publishedAt desc) {

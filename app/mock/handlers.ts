@@ -20,7 +20,24 @@ async function getQueryAndParams(request: Request) {
   return { query, params };
 }
 
+// 1x1 transparent PNG placeholder for mock image requests
+const PLACEHOLDER_PNG = Buffer.from(
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+  "base64"
+);
+
 export const handlers = [
+  // Intercept Sanity CDN image requests to prevent "upstream image response failed" noise
+  http.get("https://cdn.sanity.io/images/*", () => {
+    return new HttpResponse(PLACEHOLDER_PNG, {
+      status: 200,
+      headers: {
+        "Content-Type": "image/png",
+        "Cache-Control": "public, max-age=31536000",
+      },
+    });
+  }),
+
   http.all("*sanity*", async ({ request }) => {
     const { query, params } = await getQueryAndParams(request);
 
