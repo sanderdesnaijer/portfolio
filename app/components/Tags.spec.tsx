@@ -13,6 +13,7 @@ describe("app/components/Tags", () => {
       {
         _id: "1",
         label: "Tag1",
+        slug: { current: "tag1" },
         _rev: "",
         _type: "",
         _createdAt: "",
@@ -21,6 +22,7 @@ describe("app/components/Tags", () => {
       {
         _id: "2",
         label: "Tag2",
+        slug: { current: "tag2" },
         _rev: "",
         _type: "",
         _createdAt: "",
@@ -43,6 +45,7 @@ describe("app/components/Tags", () => {
       {
         _id: "1",
         label: "React",
+        slug: { current: "react" },
         _rev: "",
         _type: "",
         _createdAt: "",

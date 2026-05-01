@@ -945,6 +945,7 @@ describe("utils/jsonLDSchemes", () => {
           {
             _id: "tag-1",
             label: "TypeScript",
+            slug: { current: "typescript" },
             _rev: "",
             _type: "tag",
             _createdAt: "",
@@ -953,6 +954,7 @@ describe("utils/jsonLDSchemes", () => {
           {
             _id: "tag-2",
             label: "React",
+            slug: { current: "react" },
             _rev: "",
             _type: "tag",
             _createdAt: "",

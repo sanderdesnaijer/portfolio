@@ -339,3 +339,14 @@ export const blogsWithTagsFullQuery = groq`
     author
   }
 `;
+
+/** Fetch a single tag by its slug */
+export const tagBySlugQuery = groq`
+  *[_type == "tag" && slug.current == $slug][0] {
+    _id,
+    label,
+    "slug": slug.current,
+    metaDescription,
+    intro
+  }
+`;
