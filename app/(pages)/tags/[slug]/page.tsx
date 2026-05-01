@@ -20,8 +20,9 @@ import {
   projectsWithTagsFullQuery,
   projectsWithTagsQuery,
   settingsQuery,
+  tagBySlugQuery,
 } from "@/sanity/lib/queries";
-import { ProjectTypeSanity, SettingSanity } from "@/sanity/types";
+import { ProjectTypeSanity, SettingSanity, TagSanity } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { JobSanity } from "@/sanity/types/jobType";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
@@ -123,7 +124,7 @@ type TagSlugMetaItem = {
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  const [allProjects, allBlogs, allJobs, setting] = await Promise.all([
+  const [allProjects, allBlogs, allJobs, setting, tag] = await Promise.all([
     sanityFetch<TagSlugMetaItem[]>({
       query: projectsWithTagsQuery,
     }),
@@ -134,6 +135,10 @@ export async function generateMetadata({ params }: { params: Params }) {
       query: jobsWithTagsQuery,
     }),
     sanityFetch<SettingSanity>({ query: settingsQuery }),
+    sanityFetch<TagSanity | null>({
+      query: tagBySlugQuery,
+      params: { slug },
+    }),
   ]);
 
   const projects = filterByTagSlug(allProjects, slug);
@@ -143,7 +148,7 @@ export async function generateMetadata({ params }: { params: Params }) {
   const projectLabels = getMatchingTagLabels(projects, slug);
   const blogLabels = getMatchingTagLabels(blogs, slug);
   const jobLabels = getMatchingTagLabels(jobs, slug);
-  const label = projectLabels[0] || blogLabels[0] || jobLabels[0];
+  const label = tag?.label || projectLabels[0] || blogLabels[0] || jobLabels[0];
 
   if (!label) {
     const t = await getTranslations();
@@ -168,7 +173,6 @@ export async function generateMetadata({ params }: { params: Params }) {
     fallbackTimestamp
   );
 
-  const t = await getTranslations();
   const contentTypes = [
     projects.length > 0 && "Projects",
     blogs.length > 0 && "Articles",
@@ -177,11 +181,8 @@ export async function generateMetadata({ params }: { params: Params }) {
   const titleSuffix =
     contentTypes.length > 0 ? contentTypes.join(" & ") : "Projects & Articles";
   const title = generateContentTitle(`${label} ${titleSuffix}`);
-  const slugMetaDescriptions = t.raw(
-    "pages.tags.slugMetaDescriptions"
-  ) as Record<string, string>;
   const description =
-    slugMetaDescriptions[slug] ??
+    tag?.metaDescription ??
     `Portfolio ${titleSuffix.toLowerCase()} tagged with ${label}.`;
   const keywords = [
     `${label} developer portfolio`,
@@ -204,7 +205,7 @@ export async function generateMetadata({ params }: { params: Params }) {
 const TagsPage = async ({ params }: { params: Params }) => {
   const { slug } = await params;
 
-  const [allProjects, allBlogs, allJobs, t] = await Promise.all([
+  const [allProjects, allBlogs, allJobs, t, tag] = await Promise.all([
     sanityFetch<ProjectTypeSanity[]>({
       query: projectsWithTagsFullQuery,
     }),
@@ -215,6 +216,10 @@ const TagsPage = async ({ params }: { params: Params }) => {
       query: jobsWithTagsFullQuery,
     }),
     getTranslations(),
+    sanityFetch<TagSanity | null>({
+      query: tagBySlugQuery,
+      params: { slug },
+    }),
   ]);
 
   const taggedProjects = filterByTagSlug(allProjects, slug);
@@ -222,10 +227,10 @@ const TagsPage = async ({ params }: { params: Params }) => {
   const taggedJobs = filterByTagSlug(allJobs, slug);
 
   const label =
-    taggedProjects[0]?.tags?.find((tag) => toTagSlug(tag.label) === slug)
-      ?.label ||
-    taggedBlogs[0]?.tags?.find((tag) => toTagSlug(tag.label) === slug)?.label ||
-    taggedJobs[0]?.tags?.find((tag) => toTagSlug(tag.label) === slug)?.label;
+    tag?.label ||
+    taggedProjects[0]?.tags?.find((t) => toTagSlug(t.label) === slug)?.label ||
+    taggedBlogs[0]?.tags?.find((t) => toTagSlug(t.label) === slug)?.label ||
+    taggedJobs[0]?.tags?.find((t) => toTagSlug(t.label) === slug)?.label;
 
   if (!label) {
     return (
@@ -238,8 +243,7 @@ const TagsPage = async ({ params }: { params: Params }) => {
     );
   }
 
-  const slugIntros = t.raw("pages.tags.slugIntros") as Record<string, string>;
-  const intro = slugIntros[slug];
+  const intro = tag?.intro;
   const breadcrumbJsonLd = buildBreadcrumbList({
     type: "tag",
     slug,

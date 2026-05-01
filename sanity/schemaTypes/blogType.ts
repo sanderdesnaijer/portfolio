@@ -56,6 +56,8 @@ export const blogType = defineType({
       title: "Tags",
       type: "array",
       of: [{ type: "reference", to: [{ type: "tag" }] }],
+      validation: (rule) =>
+        rule.unique().error("Each tag can only be added once."),
     }),
     defineField({
       name: "author",
