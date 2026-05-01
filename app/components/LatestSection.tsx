@@ -5,6 +5,8 @@ import { BlogSanity } from "@/sanity/types/blogType";
 import { pageSlugs } from "../utils/routes";
 import { toTagSlug } from "../utils/utils";
 
+const MAX_TAGS = 3;
+
 export type LatestProjectPreview = Pick<
   ProjectTypeSanity,
   "_id" | "title" | "slug" | "publishedAt" | "tags"
@@ -33,24 +35,6 @@ function formatMonthYear(date: string): string {
     month: "short",
     year: "numeric",
   });
-}
-
-function TagLinks({ tags }: { tags: { _id: string; label: string }[] }) {
-  return (
-    <>
-      {tags.map((tag, i) => (
-        <span key={tag._id}>
-          <Link
-            href={`/tags/${toTagSlug(tag.label)}`}
-            className="relative z-10 hover:underline"
-          >
-            {tag.label}
-          </Link>
-          {i < tags.length - 1 ? ", " : ""}
-        </span>
-      ))}
-    </>
-  );
 }
 
 function buildImageUrl(url: string): string {
@@ -88,6 +72,7 @@ function LatestItem({
   imageAlt,
   priority,
 }: LatestItemProps) {
+  const visibleTags = tags?.slice(0, MAX_TAGS);
   return (
     <div className="group/latest relative flex flex-col overflow-hidden rounded-md border border-neutral-200 transition-all hover:border-neutral-400 dark:border-neutral-800 dark:hover:border-neutral-600">
       {imageURL ? (
@@ -115,12 +100,22 @@ function LatestItem({
           >
             {title}
           </Link>
+          {visibleTags?.length ? (
+            <p className="relative z-10 mt-2 mb-0 text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
+              {visibleTags.map((tag, i) => (
+                <span key={tag._id}>
+                  <Link
+                    href={`/tags/${toTagSlug(tag.label)}`}
+                    className="relative z-10 hover:underline"
+                  >
+                    {tag.label}
+                  </Link>
+                  {i < visibleTags.length - 1 ? ", " : ""}
+                </span>
+              ))}
+            </p>
+          ) : null}
         </div>
-        {tags?.length ? (
-          <p className="relative z-10 mt-2 mb-0 text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
-            <TagLinks tags={tags} />
-          </p>
-        ) : null}
       </div>
     </div>
   );
@@ -156,7 +151,7 @@ export const LatestSection = ({
         </div>
       </div>
 
-      <div className="border-t border-neutral-300 pt-8 dark:border-neutral-700">
+      <div className="border-neutral-300 pb-6 dark:border-neutral-700">
         <h2 className="mb-4 text-xs font-bold tracking-widest text-neutral-500 uppercase dark:text-neutral-400">
           {latestPostsLabel}
         </h2>
