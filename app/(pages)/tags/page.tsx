@@ -8,12 +8,13 @@ import {
   toTagSlug,
 } from "@/app/utils/utils";
 import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
-import envConfig from "@/envConfig";
+import { SettingSanity } from "@/sanity/types";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
   blogsWithTagsQuery,
   jobsWithTagsQuery,
   projectsWithTagsQuery,
+  settingsQuery,
 } from "@/sanity/lib/queries";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
@@ -54,7 +55,10 @@ function aggregateTags(items: TagItem[]): AggregatedTag[] {
 }
 
 export async function generateMetadata() {
-  const t = await getTranslations();
+  const [t, setting] = await Promise.all([
+    getTranslations(),
+    sanityFetch<SettingSanity>({ query: settingsQuery }),
+  ]);
 
   const title = generateContentTitle(t("pages.tags.title"));
   const description = t("pages.tags.metaDescription");
@@ -65,7 +69,8 @@ export async function generateMetadata() {
     url: buildPageUrl(pageSlugs.tags),
     publishedTime: new Date().toISOString(),
     modifiedTime: new Date().toISOString(),
-    imageUrl: `${envConfig.baseUrl}/meta/light/apple-icon@3x.png`,
+    imageUrl: setting?.imageURL,
+    imageAlt: setting?.imageAlt,
     keywords: ["tags", "topics", "projects", "articles"],
   });
 }

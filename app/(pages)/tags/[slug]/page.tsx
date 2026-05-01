@@ -9,7 +9,6 @@ import {
   toTagSlug,
   truncateText,
 } from "@/app/utils/utils";
-import envConfig from "@/envConfig";
 import { toPlainText } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
@@ -20,8 +19,9 @@ import {
   jobsWithTagsQuery,
   projectsWithTagsFullQuery,
   projectsWithTagsQuery,
+  settingsQuery,
 } from "@/sanity/lib/queries";
-import { ProjectTypeSanity } from "@/sanity/types";
+import { ProjectTypeSanity, SettingSanity } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { JobSanity } from "@/sanity/types/jobType";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
@@ -123,7 +123,7 @@ type TagSlugMetaItem = {
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  const [allProjects, allBlogs, allJobs] = await Promise.all([
+  const [allProjects, allBlogs, allJobs, setting] = await Promise.all([
     sanityFetch<TagSlugMetaItem[]>({
       query: projectsWithTagsQuery,
     }),
@@ -133,6 +133,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     sanityFetch<TagSlugMetaItem[]>({
       query: jobsWithTagsQuery,
     }),
+    sanityFetch<SettingSanity>({ query: settingsQuery }),
   ]);
 
   const projects = filterByTagSlug(allProjects, slug);
@@ -194,7 +195,8 @@ export async function generateMetadata({ params }: { params: Params }) {
     url: buildPageUrl("tags", slug),
     publishedTime,
     modifiedTime,
-    imageUrl: `${envConfig.baseUrl}/meta/light/apple-icon@3x.png`,
+    imageUrl: setting?.imageURL,
+    imageAlt: setting?.imageAlt,
     keywords,
   });
 }
