@@ -20,6 +20,23 @@ export const convertDate = (date: string, showDay: boolean = false) => {
   return new Date(date).toLocaleDateString("en-GB", format);
 };
 
+const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+
+/**
+ * Returns the updatedAt date string only when it is meaningfully newer than
+ * the publishedAt date (more than 7 days apart). Returns null otherwise.
+ */
+export const getSignificantUpdateDate = (
+  publishedAt: string,
+  updatedAt?: string
+): string | null => {
+  if (!updatedAt) return null;
+  const published = new Date(publishedAt).getTime();
+  const updated = new Date(updatedAt).getTime();
+  if (Number.isNaN(published) || Number.isNaN(updated)) return null;
+  return updated - published > SEVEN_DAYS_MS ? updatedAt : null;
+};
+
 /**
  * Truncates a given text to a specified length and appends an ellipsis ("...") if the text exceeds that length.
  *

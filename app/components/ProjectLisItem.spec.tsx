@@ -88,7 +88,7 @@ describe("ProjectListItem Component", () => {
     );
 
     expect(screen.getByText("January 1, 2023")).toBeInTheDocument();
-    expect(convertDate).toHaveBeenCalledWith("2023-01-01");
+    expect(convertDate).toHaveBeenCalledWith("2023-01-01", true);
   });
 
   it("renders the body text when provided", () => {

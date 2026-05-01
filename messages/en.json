@@ -16,13 +16,15 @@
       "metaDescription": "Tutorials and write-ups on frontend development, Flutter, Next.js, and maker projects like 3D printing and Arduino. Written by Sander de Snaijer.",
       "articles": "Blog articles",
       "relatedBlogs": "Related Articles",
-      "faqHeading": "Frequently Asked Questions"
+      "faqHeading": "Frequently Asked Questions",
+      "updatedAt": "Updated {date}"
     },
     "project": {
       "metaDescription": "Explore side projects by Sander de Snaijer — webcam games, Flutter apps, Arduino clocks, and 3D-printed experiments, all built in spare time.",
       "resources": "Resources",
       "projects": "Projects",
-      "relatedProjects": "Related Projects"
+      "relatedProjects": "Related Projects",
+      "updatedAt": "Updated {date}"
     },
     "home": {
       "title": "Sander de Snaijer — Frontend Developer | React, TypeScript, Next.js",

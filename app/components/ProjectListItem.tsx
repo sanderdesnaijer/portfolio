@@ -59,7 +59,7 @@ export const ProjectListItem = ({
           </DynamicElement>
         </Link>
         <p className="mt-1 mb-1 py-2 text-xs text-gray-800 uppercase group-hover/item:text-gray-900 dark:text-gray-300 dark:group-hover/item:text-gray-100">
-          {convertDate(date)}
+          {convertDate(date, true)}
         </p>
 
         {body ? (
