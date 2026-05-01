@@ -7,9 +7,11 @@ import { useTranslations } from "next-intl";
 const Projects = ({
   projects = [],
   pageSlug,
+  headingLevel = "h2",
 }: {
   projects: ProjectTypeSanity[];
   pageSlug: string;
+  headingLevel?: "h2" | "h3";
 }) => {
   const t = useTranslations();
 
@@ -36,6 +38,7 @@ const Projects = ({
               tags={project.tags}
               body={body}
               index={index}
+              headingLevel={headingLevel}
             />
           );
         })}

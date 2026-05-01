@@ -12,6 +12,7 @@ import envConfig from "@/envConfig";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
   blogsWithTagsQuery,
+  jobsWithTagsQuery,
   projectsWithTagsQuery,
 } from "@/sanity/lib/queries";
 import { getTranslations } from "next-intl/server";
@@ -70,13 +71,14 @@ export async function generateMetadata() {
 }
 
 export default async function TagsIndexPage() {
-  const [allProjects, allBlogs, t] = await Promise.all([
+  const [allProjects, allBlogs, allJobs, t] = await Promise.all([
     sanityFetch<TagItem[]>({ query: projectsWithTagsQuery }),
     sanityFetch<TagItem[]>({ query: blogsWithTagsQuery }),
+    sanityFetch<TagItem[]>({ query: jobsWithTagsQuery }),
     getTranslations(),
   ]);
 
-  const tags = aggregateTags([...allProjects, ...allBlogs]);
+  const tags = aggregateTags([...allProjects, ...allBlogs, ...allJobs]);
   const breadcrumbJsonLd = buildBreadcrumbList({ type: "tag" });
 
   return (

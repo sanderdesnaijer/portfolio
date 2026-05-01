@@ -2,25 +2,30 @@
 
 import { NotFound } from "@/app/components/NotFound";
 import { PageLayout } from "@/app/components/PageLayout";
-import Projects from "@/app/components/Projects";
 import { generateMetaData } from "@/app/utils/metadata";
 import {
   buildPageUrl,
   generateContentTitle,
   toTagSlug,
+  truncateText,
 } from "@/app/utils/utils";
 import envConfig from "@/envConfig";
+import { toPlainText } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
 import {
   blogsWithTagsFullQuery,
   blogsWithTagsQuery,
+  jobsWithTagsFullQuery,
+  jobsWithTagsQuery,
   projectsWithTagsFullQuery,
   projectsWithTagsQuery,
 } from "@/sanity/lib/queries";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
+import { JobSanity } from "@/sanity/types/jobType";
 import { ProjectListItem } from "@/app/components/ProjectListItem";
+import { ExperienceListItem } from "@/app/components/ExperienceListItem";
 import { getExcerpt } from "@/app/utils/blogUtils";
 import { pageSlugs } from "@/app/utils/routes";
 import { getTranslations } from "next-intl/server";
@@ -91,16 +96,19 @@ const getMatchingTagLabels = (
 };
 
 export async function generateStaticParams() {
-  const [projects, blogs] = await Promise.all([
+  const [projects, blogs, jobs] = await Promise.all([
     client.fetch<{ tags?: { label: string }[] }[]>(
       `*[_type == "project"]{ "tags": tags[]->{ label } }`
     ),
     client.fetch<{ tags?: { label: string }[] }[]>(
       `*[_type == "blogPost"]{ "tags": tags[]->{ label } }`
     ),
+    client.fetch<{ tags?: { label: string }[] }[]>(
+      `*[_type == "job"]{ "tags": tags[]->{ label } }`
+    ),
   ]);
 
-  const slugs = [...projects, ...blogs]
+  const slugs = [...projects, ...blogs, ...jobs]
     .flatMap((item) => item.tags?.map((tag) => toTagSlug(tag.label)) || [])
     .filter(Boolean);
 
@@ -115,21 +123,26 @@ type TagSlugMetaItem = {
 
 export async function generateMetadata({ params }: { params: Params }) {
   const { slug } = await params;
-  const [allProjects, allBlogs] = await Promise.all([
+  const [allProjects, allBlogs, allJobs] = await Promise.all([
     sanityFetch<TagSlugMetaItem[]>({
       query: projectsWithTagsQuery,
     }),
     sanityFetch<TagSlugMetaItem[]>({
       query: blogsWithTagsQuery,
     }),
+    sanityFetch<TagSlugMetaItem[]>({
+      query: jobsWithTagsQuery,
+    }),
   ]);
 
   const projects = filterByTagSlug(allProjects, slug);
   const blogs = filterByTagSlug(allBlogs, slug);
+  const jobs = filterByTagSlug(allJobs, slug);
 
   const projectLabels = getMatchingTagLabels(projects, slug);
   const blogLabels = getMatchingTagLabels(blogs, slug);
-  const label = projectLabels[0] || blogLabels[0];
+  const jobLabels = getMatchingTagLabels(jobs, slug);
+  const label = projectLabels[0] || blogLabels[0] || jobLabels[0];
 
   if (!label) {
     const t = await getTranslations();
@@ -143,7 +156,7 @@ export async function generateMetadata({ params }: { params: Params }) {
     };
   }
 
-  const allItems = [...projects, ...blogs];
+  const allItems = [...projects, ...blogs, ...jobs];
   const fallbackTimestamp = new Date().toISOString();
   const publishedTime = getEarliestIsoDate(
     allItems.map((item) => item._createdAt),
@@ -155,13 +168,20 @@ export async function generateMetadata({ params }: { params: Params }) {
   );
 
   const t = await getTranslations();
-  const title = generateContentTitle(`${label} Projects & Articles`);
+  const contentTypes = [
+    projects.length > 0 && "Projects",
+    blogs.length > 0 && "Articles",
+    jobs.length > 0 && "Experience",
+  ].filter(Boolean);
+  const titleSuffix =
+    contentTypes.length > 0 ? contentTypes.join(" & ") : "Projects & Articles";
+  const title = generateContentTitle(`${label} ${titleSuffix}`);
   const slugMetaDescriptions = t.raw(
     "pages.tags.slugMetaDescriptions"
   ) as Record<string, string>;
   const description =
     slugMetaDescriptions[slug] ??
-    `Portfolio projects and articles tagged with ${label}.`;
+    `Portfolio ${titleSuffix.toLowerCase()} tagged with ${label}.`;
   const keywords = [
     `${label} developer portfolio`,
     `indie developer ${label} apps`,
@@ -182,23 +202,28 @@ export async function generateMetadata({ params }: { params: Params }) {
 const TagsPage = async ({ params }: { params: Params }) => {
   const { slug } = await params;
 
-  const [allProjects, allBlogs, t] = await Promise.all([
+  const [allProjects, allBlogs, allJobs, t] = await Promise.all([
     sanityFetch<ProjectTypeSanity[]>({
       query: projectsWithTagsFullQuery,
     }),
     sanityFetch<BlogSanity[]>({
       query: blogsWithTagsFullQuery,
     }),
+    sanityFetch<JobSanity[]>({
+      query: jobsWithTagsFullQuery,
+    }),
     getTranslations(),
   ]);
 
   const taggedProjects = filterByTagSlug(allProjects, slug);
   const taggedBlogs = filterByTagSlug(allBlogs, slug);
+  const taggedJobs = filterByTagSlug(allJobs, slug);
 
   const label =
     taggedProjects[0]?.tags?.find((tag) => toTagSlug(tag.label) === slug)
       ?.label ||
-    taggedBlogs[0]?.tags?.find((tag) => toTagSlug(tag.label) === slug)?.label;
+    taggedBlogs[0]?.tags?.find((tag) => toTagSlug(tag.label) === slug)?.label ||
+    taggedJobs[0]?.tags?.find((tag) => toTagSlug(tag.label) === slug)?.label;
 
   if (!label) {
     return (
@@ -225,12 +250,45 @@ const TagsPage = async ({ params }: { params: Params }) => {
       <PageLayout title={label}>
         {intro && <p className="mt-4 text-lg leading-8">{intro}</p>}
         {taggedProjects.length > 0 && (
-          <Projects projects={taggedProjects} pageSlug={pageSlugs.projects} />
+          <div className="mx-auto">
+            <h2 className="mb-4 text-2xl font-normal">
+              {t("pages.tags.tagProjects", { label })}
+            </h2>
+            <ol
+              aria-label={t("pages.tags.tagProjects", { label })}
+              className="group mt-0 grid gap-10 pl-0"
+            >
+              {taggedProjects.map((project, index) => {
+                const body =
+                  project?.body && project?.body.length
+                    ? truncateText(toPlainText(project.body), 200)
+                    : null;
+
+                return (
+                  <ProjectListItem
+                    key={project._id}
+                    href={`/${pageSlugs.projects}/${project.slug.current}`}
+                    date={project.publishedAt}
+                    imageURL={project.imageURL}
+                    imageALT={project.mainImage?.alt}
+                    title={project.title}
+                    tags={project.tags}
+                    body={body}
+                    index={index}
+                    headingLevel="h3"
+                  />
+                );
+              })}
+            </ol>
+          </div>
         )}
         {taggedBlogs.length > 0 && (
-          <div className="mx-auto md:pt-10">
+          <div className="mx-auto">
+            <h2 className="mb-4 text-2xl font-normal">
+              {t("pages.tags.tagArticles", { label })}
+            </h2>
             <ol
-              aria-label={t("pages.blog.articles")}
+              aria-label={t("pages.tags.tagArticles", { label })}
               className="group mt-0 grid gap-10 pl-0"
             >
               {taggedBlogs.map((article, index) => (
@@ -244,9 +302,34 @@ const TagsPage = async ({ params }: { params: Params }) => {
                   body={getExcerpt(article)}
                   tags={article.tags}
                   index={index}
+                  headingLevel="h3"
                 />
               ))}
             </ol>
+          </div>
+        )}
+        {taggedJobs.length > 0 && (
+          <div className="mx-auto">
+            <h2 className="mb-4 text-2xl font-normal">
+              {t("pages.tags.tagExperience", { label })}
+            </h2>
+            <ul
+              aria-label={t("pages.tags.experience")}
+              className="mt-0 divide-y divide-gray-100 pl-0 dark:divide-gray-800"
+            >
+              {taggedJobs.map((job) => (
+                <ExperienceListItem
+                  key={job._id}
+                  companyName={job.companyName}
+                  jobTitle={job.jobTitle}
+                  startDate={job.startDate}
+                  endDate={job.endDate}
+                  link={job.link}
+                  imageURL={job.imageURL}
+                  presentLabel={t("pages.about.datePresent")}
+                />
+              ))}
+            </ul>
           </div>
         )}
       </PageLayout>
