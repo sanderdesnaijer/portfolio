@@ -3,7 +3,7 @@
 import { PortableText } from "@portabletext/react";
 import Image from "next/image";
 import { ProjectTypeSanity } from "@/sanity/types";
-import { convertDate } from "../utils/utils";
+import { convertDate, getSignificantUpdateDate } from "../utils/utils";
 import { useTranslations } from "next-intl";
 import { ProjectLayout } from "./ProjectLayout";
 import { urlFor } from "@/sanity/lib/image";
@@ -18,9 +18,20 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
   const getCreatedAtTitle = (): string =>
     `${t("pages.about.projectCreatedAt")} ${project.companyName}`;
 
+  const significantUpdate = getSignificantUpdateDate(
+    project.publishedAt,
+    project._updatedAt
+  );
+  const updatedDate = significantUpdate
+    ? t("pages.project.updatedAt", {
+        date: convertDate(significantUpdate, true),
+      })
+    : undefined;
+
   return (
     <ProjectLayout
-      date={convertDate(project.publishedAt)}
+      date={convertDate(project.publishedAt, true)}
+      updatedDate={updatedDate}
       links={project.links && project.links.length ? project.links : undefined}
     >
       {project?.mainImage && project.mainImage.alt ? (

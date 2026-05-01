@@ -5,6 +5,7 @@ import {
   truncateText,
   buildPageUrl,
   toTagSlug,
+  getSignificantUpdateDate,
 } from "./utils";
 import { AUTHOR_NAME } from "./constants";
 
@@ -97,6 +98,38 @@ describe("utils/utils", () => {
 
     it("should strip diacritics and punctuation", () => {
       expect(toTagSlug("Café Racer!")).toBe("cafe-racer");
+    });
+  });
+
+  describe("getSignificantUpdateDate", () => {
+    it("should return null when updatedAt is undefined", () => {
+      expect(
+        getSignificantUpdateDate("2025-01-01T00:00:00Z", undefined)
+      ).toBeNull();
+    });
+
+    it("should return null when dates are less than 7 days apart", () => {
+      expect(
+        getSignificantUpdateDate("2025-01-01T00:00:00Z", "2025-01-05T00:00:00Z")
+      ).toBeNull();
+    });
+
+    it("should return null when dates are exactly 7 days apart", () => {
+      expect(
+        getSignificantUpdateDate("2025-01-01T00:00:00Z", "2025-01-08T00:00:00Z")
+      ).toBeNull();
+    });
+
+    it("should return the updatedAt date when more than 7 days apart", () => {
+      expect(
+        getSignificantUpdateDate("2025-01-01T00:00:00Z", "2025-03-15T00:00:00Z")
+      ).toBe("2025-03-15T00:00:00Z");
+    });
+
+    it("should return null for invalid date strings", () => {
+      expect(
+        getSignificantUpdateDate("not-a-date", "2025-01-01T00:00:00Z")
+      ).toBeNull();
     });
   });
 });

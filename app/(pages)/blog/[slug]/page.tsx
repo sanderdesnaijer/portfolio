@@ -6,6 +6,7 @@ import {
   buildPageUrl,
   convertDate,
   generateContentTitle,
+  getSignificantUpdateDate,
 } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
 import { generateMetaData } from "@/app/utils/metadata";
@@ -112,6 +113,13 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
   const validLinks = article.links?.filter(
     (l): l is IconLink => !!l.title && !!l.link && !!l.icon
   );
+  const significantUpdate = getSignificantUpdateDate(
+    article.publishedAt,
+    article._updatedAt
+  );
+  const updatedDate = significantUpdate
+    ? t("updatedAt", { date: convertDate(significantUpdate, true) })
+    : undefined;
 
   return (
     <>
@@ -134,6 +142,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
       <PageLayout title={article.title}>
         <ProjectLayout
           date={convertDate(article.publishedAt, true)}
+          updatedDate={updatedDate}
           links={validLinks?.length ? validLinks : undefined}
         >
           <div className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3">
