@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { pageSlugs } from "../utils/routes";
-import { toTagSlug } from "../utils/utils";
 
 export type LatestProjectPreview = Pick<
   ProjectTypeSanity,
@@ -35,24 +34,6 @@ function formatMonthYear(date: string): string {
   });
 }
 
-function TagLinks({ tags }: { tags: { _id: string; label: string }[] }) {
-  return (
-    <>
-      {tags.map((tag, i) => (
-        <span key={tag._id}>
-          <Link
-            href={`/tags/${toTagSlug(tag.label)}`}
-            className="relative z-10 hover:underline"
-          >
-            {tag.label}
-          </Link>
-          {i < tags.length - 1 ? ", " : ""}
-        </span>
-      ))}
-    </>
-  );
-}
-
 function buildImageUrl(url: string): string {
   try {
     const urlObj = new URL(url);
@@ -73,7 +54,6 @@ interface LatestItemProps {
   title: string;
   href: string;
   publishedAt: string;
-  tags?: { _id: string; label: string }[];
   imageURL?: string | null;
   imageAlt?: string | null;
   priority?: boolean;
@@ -83,7 +63,6 @@ function LatestItem({
   title,
   href,
   publishedAt,
-  tags,
   imageURL,
   imageAlt,
   priority,
@@ -116,11 +95,6 @@ function LatestItem({
             {title}
           </Link>
         </div>
-        {tags?.length ? (
-          <p className="relative z-10 mt-2 mb-0 text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
-            <TagLinks tags={tags} />
-          </p>
-        ) : null}
       </div>
     </div>
   );
@@ -146,7 +120,6 @@ export const LatestSection = ({
                 title={project.title}
                 href={`/${pageSlugs.projects}/${project.slug.current}`}
                 publishedAt={project.publishedAt}
-                tags={project.tags}
                 imageURL={project.imageURL}
                 imageAlt={project.imageAlt}
                 priority
@@ -156,7 +129,7 @@ export const LatestSection = ({
         </div>
       </div>
 
-      <div className="border-t border-neutral-300 pt-8 dark:border-neutral-700">
+      <div className="border-neutral-300 pb-6 dark:border-neutral-700">
         <h2 className="mb-4 text-xs font-bold tracking-widest text-neutral-500 uppercase dark:text-neutral-400">
           {latestPostsLabel}
         </h2>
@@ -168,7 +141,6 @@ export const LatestSection = ({
                 title={post.title}
                 href={`/${pageSlugs.blog}/${post.slug.current}`}
                 publishedAt={post.publishedAt}
-                tags={post.tags}
                 imageURL={post.imageURL}
                 imageAlt={post.imageAlt}
                 priority={i === 0}
