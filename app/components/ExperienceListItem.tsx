@@ -7,7 +7,7 @@ interface ExperienceListItemProps {
   companyName: string;
   jobTitle: string;
   startDate: string;
-  endDate?: string;
+  endDate?: string | null;
   link: string;
   imageURL: string;
   presentLabel: string;

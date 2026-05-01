@@ -21,10 +21,23 @@ async function getQueryAndParams(request: Request) {
 }
 
 // 1x1 transparent PNG placeholder for mock image requests
-const PLACEHOLDER_PNG = Buffer.from(
-  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
-  "base64"
-);
+const PLACEHOLDER_PNG_BASE64 =
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
+
+function decodeBase64ToBytes(base64: string): Uint8Array {
+  if (typeof Buffer !== "undefined") {
+    return Uint8Array.from(Buffer.from(base64, "base64"));
+  }
+
+  const binary = atob(base64);
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < binary.length; i += 1) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return bytes;
+}
+
+const PLACEHOLDER_PNG = decodeBase64ToBytes(PLACEHOLDER_PNG_BASE64);
 
 export const handlers = [
   // Intercept Sanity CDN image requests to prevent "upstream image response failed" noise
