@@ -29,6 +29,8 @@ import { Tags } from "@/app/components/Tags";
 import { RelatedBlogs } from "@/app/components/RelatedBlogs";
 import { client } from "@/sanity/lib/client";
 import { getExcerpt } from "@/app/utils/blogUtils";
+import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
 
 const { blog: slug } = pageSlugs;
 
@@ -145,6 +147,18 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
           updatedDate={updatedDate}
           links={validLinks?.length ? validLinks : undefined}
         >
+          {article.mainImage?.alt && (
+            <div className="relative -mt-6 mb-8 aspect-[43/22] w-full overflow-hidden">
+              <Image
+                src={urlFor(article.mainImage).width(860).height(440).url()}
+                alt={article.mainImage.alt}
+                sizes="(max-width: 768px) 100vw, 860px"
+                fill
+                priority
+                className="object-cover"
+              />
+            </div>
+          )}
           <div className="prose prose-xl dark:prose-invert break-words [&>p>a]:underline-offset-2 [&>p>a]:hover:underline-offset-3 [&>ul>li>a]:underline-offset-2 [&>ul>li>a]:hover:underline-offset-3">
             {hasPortableText ? (
               <BlogContent value={article.body!} />
