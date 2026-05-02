@@ -1,6 +1,12 @@
 import { SanityDocument } from "next-sanity";
-import { Block, IconLink } from "./types";
+import { Block, IconLink, TextBlock } from "./types";
 import { TagSanity } from "./tagType";
+
+export interface FaqItem {
+  _key: string;
+  question: string;
+  answer: TextBlock[];
+}
 
 export interface BlogSanity extends SanityDocument {
   title: string;
@@ -22,7 +28,7 @@ export interface BlogSanity extends SanityDocument {
   description?: string;
   tags?: TagSanity[];
   links?: Array<Partial<IconLink>>;
-  faq?: Array<{ _key: string; question: string; answer: string }>;
+  faq?: FaqItem[];
   author: string;
   mediumUrl?: string;
   imageURL?: string;

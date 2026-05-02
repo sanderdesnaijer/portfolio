@@ -163,7 +163,9 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
                   {article.faq!.map((item) => (
                     <div key={item._key}>
                       <dt className="font-semibold">{item.question}</dt>
-                      <dd>{item.answer}</dd>
+                      <dd>
+                        <BlogContent value={item.answer} />
+                      </dd>
                     </div>
                   ))}
                 </dl>

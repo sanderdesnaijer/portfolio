@@ -1012,10 +1012,27 @@ describe("utils/jsonLDSchemes", () => {
   });
 
   describe("getFAQScheme", () => {
+    const toBlock = (text: string) => [
+      {
+        _type: "block" as const,
+        _key: "test-key",
+        style: "normal" as const,
+        children: [
+          {
+            _type: "span" as const,
+            _key: "test-span",
+            text,
+            marks: [] as string[],
+          },
+        ],
+        markDefs: [],
+      },
+    ];
+
     it("should return a valid FAQPage schema with multiple items", () => {
       const faq = [
-        { question: "What is this?", answer: "A test project." },
-        { question: "How does it work?", answer: "It works well." },
+        { question: "What is this?", answer: toBlock("A test project.") },
+        { question: "How does it work?", answer: toBlock("It works well.") },
       ];
 
       const result = getFAQScheme(faq);
@@ -1045,7 +1062,7 @@ describe("utils/jsonLDSchemes", () => {
     });
 
     it("should return a valid FAQPage schema with a single item", () => {
-      const faq = [{ question: "Is this free?", answer: "Yes." }];
+      const faq = [{ question: "Is this free?", answer: toBlock("Yes.") }];
 
       const result = getFAQScheme(faq);
 

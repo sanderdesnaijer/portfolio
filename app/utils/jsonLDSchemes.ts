@@ -2,6 +2,7 @@ import { toPlainText } from "next-sanity";
 import { AUTHOR_NAME } from "./constants";
 import { buildPageUrl } from "./utils";
 import { PageSanity, ProjectTypeSanity } from "@/sanity/types";
+import { TextBlock } from "@/sanity/types/types";
 import envConfig from "@/envConfig";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { getExcerpt } from "./blogUtils";
@@ -217,7 +218,7 @@ export const getArticleScheme = (
 };
 
 export const getFAQScheme = (
-  faq: Array<{ question: string; answer: string }>
+  faq: Array<{ question: string; answer: TextBlock[] }>
 ) => ({
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -226,7 +227,7 @@ export const getFAQScheme = (
     name: item.question,
     acceptedAnswer: {
       "@type": "Answer",
-      text: item.answer,
+      text: toPlainText(item.answer),
     },
   })),
 });
