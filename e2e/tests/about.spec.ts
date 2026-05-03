@@ -15,8 +15,8 @@ async function checkAboutPageElements(page: Page) {
   await expect(
     page.getByRole("heading", { level: 1, name: /About/i })
   ).toBeVisible();
-  expect(
-    page.getByRole("img", { name: /Profile picture Sander de Snaijer/i })
+  await expect(
+    page.getByRole("img", { name: /Sander de Snaijer/i }).first()
   ).toBeVisible();
 
   // // Check if the job experience section is present

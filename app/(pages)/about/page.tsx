@@ -20,8 +20,8 @@ import { PageLayout } from "@/app/components/PageLayout";
 import { portableTextComponents } from "@/app/components/portableTextComponents";
 import { LinkMark } from "@/app/components/LinkMark";
 
-const mainImageSizeHeight = 341;
-const mainImageSizeWidth = 256;
+const mainImageSizeHeight = 720;
+const mainImageSizeWidth = 1280;
 const companyIconSize = 56;
 const { about: slug } = pageSlugs;
 
@@ -132,22 +132,20 @@ export default async function Page() {
       {page ? (
         <PageLayout title={title}>
           <div className="flex flex-col gap-10 md:py-10">
-            <div className="not-prose flex justify-center md:justify-start">
-              <Image
-                alt={page.imageAlt}
-                src={urlFor(page.imageURL)
-                  .width(mainImageSizeWidth)
-                  .height(mainImageSizeHeight)
-                  .url()}
-                width={mainImageSizeWidth}
-                height={mainImageSizeHeight}
-                priority
-                sizes="(max-width: 768px) min(100vw, 320px), 320px"
-                className="h-auto w-full max-w-[min(100%,320px)]"
-              />
-            </div>
             {page?.body?.length ? (
               <div className="min-w-0">
+                <Image
+                  alt={page.imageAlt}
+                  src={urlFor(page.imageURL)
+                    .width(mainImageSizeWidth)
+                    .height(mainImageSizeHeight)
+                    .url()}
+                  width={mainImageSizeWidth}
+                  height={mainImageSizeHeight}
+                  priority
+                  sizes="(max-width: 1280px) 100vw, 1280px"
+                  className="mt-0 mb-0 block h-auto w-full"
+                />
                 <PortableText value={page.body} components={components} />
               </div>
             ) : null}
