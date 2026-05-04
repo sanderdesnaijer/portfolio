@@ -78,7 +78,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const tagsIndexPage = {
     url: `${baseUrl}/tags`,
     lastModified: formatDate(
-      tagsIndexTs ? new Date(tagsIndexTs).toISOString() : new Date().toISOString()
+      tagsIndexTs
+        ? new Date(tagsIndexTs).toISOString()
+        : new Date().toISOString()
     ),
     changeFrequency: "monthly" as const,
     priority: 0.7,
