@@ -153,9 +153,9 @@ describe("app/utils/metadata", () => {
       const pageSlug = "page-slug";
       const result = await generatePageMetadata({ pageSlug });
 
-      expect(result.title).toBe(`${AUTHOR_NAME} | My page`);
+      expect(result.title).toBe(`My page | ${AUTHOR_NAME}`);
       expect(result.description).toBe(mockPage.description);
-      expect(result.openGraph.title).toBe(`${AUTHOR_NAME} | My page`);
+      expect(result.openGraph.title).toBe(`My page | ${AUTHOR_NAME}`);
       expect(result.openGraph.images[0].url).toBe(mockPage.imageURL);
       expect(result.keywords).toBeUndefined();
     });
@@ -192,19 +192,17 @@ describe("app/utils/metadata", () => {
       const pageSlug = "page-slug";
       (sanityFetch as jest.Mock)
         .mockResolvedValueOnce(mockPage)
-        .mockResolvedValueOnce(mockProject);
+        .mockResolvedValueOnce(undefined);
 
       const result = await generatePageMetadata({
         pageSlug,
         project: mockProject,
       });
 
-      expect(result.title).toBe(`${AUTHOR_NAME} | My page | Project 1`);
+      expect(result.title).toBe(`Project 1 | ${AUTHOR_NAME}`);
 
       expect(result.description).toBe("Mock body content");
-      expect(result.openGraph.title).toBe(
-        `${AUTHOR_NAME} | My page | Project 1`
-      );
+      expect(result.openGraph.title).toBe(`Project 1 | ${AUTHOR_NAME}`);
       expect(result.openGraph.images[0].url).toBe(mockProject.imageURL);
       expect(result.keywords).toEqual(["React", "Typescript"]);
     });
@@ -293,6 +291,47 @@ describe("app/utils/metadata", () => {
       const result = await generatePageMetadata({ pageSlug: "page-slug" });
 
       expect(result.description).toBe(mockSetting.description);
+    });
+
+    it("should use pageTitle override instead of the Sanity page title", async () => {
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(undefined);
+
+      const result = await generatePageMetadata({
+        pageSlug: "page-slug",
+        pageTitle: "Custom SEO Base Title",
+      });
+
+      expect(result.title).toBe(`Custom SEO Base Title | ${AUTHOR_NAME}`);
+    });
+
+    it("should omit the brand suffix when disableBrandTitleSuffix is true", async () => {
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(undefined);
+
+      const result = await generatePageMetadata({
+        pageSlug: "page-slug",
+        pageTitle: "Already Branded Title",
+        disableBrandTitleSuffix: true,
+      });
+
+      expect(result.title).toBe("Already Branded Title");
+    });
+
+    it("should use envConfig.baseUrl when pageSlug is empty", async () => {
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(undefined);
+
+      const result = await generatePageMetadata({
+        pageSlug: "",
+        pageTitle: "Home",
+        disableBrandTitleSuffix: true,
+      });
+
+      expect(result.openGraph.url).toBe(envConfig.baseUrl);
     });
 
     it("should prefer description override over page, project body, and setting descriptions", async () => {

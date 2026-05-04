@@ -1,7 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { pageQuery, settingsQuery } from "@/sanity/lib/queries";
 import { PageSanity, ProjectTypeSanity, SettingSanity } from "@/sanity/types";
-import { buildPageUrl, generateTitle, getDescriptionFromSanity } from "./utils";
+import { buildPageUrl, getDescriptionFromSanity } from "./utils";
 import { AUTHOR_NAME } from "./constants";
 import envConfig from "@/envConfig";
 
@@ -181,10 +181,14 @@ export async function generatePageMetadata({
   pageSlug,
   project,
   description: descriptionOverride,
+  pageTitle,
+  disableBrandTitleSuffix,
 }: {
   pageSlug: string;
   project?: ProjectTypeSanity;
   description?: string;
+  pageTitle?: string;
+  disableBrandTitleSuffix?: boolean;
 }) {
   const page = await sanityFetch<PageSanity>({
     query: pageQuery,
@@ -192,24 +196,32 @@ export async function generatePageMetadata({
   });
   const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
 
-  const title = generateTitle(page.title, project?.title);
+  const brand = setting?.title || AUTHOR_NAME;
+  const baseTitle = pageTitle ?? (project ? project.title : page?.title);
+  const title = disableBrandTitleSuffix ? baseTitle : `${baseTitle} | ${brand}`;
+
   const projectDescription = project?.body?.length
     ? getDescriptionFromSanity(project.body)
     : "";
   const description =
     descriptionOverride ||
     projectDescription ||
-    page.description ||
+    page?.description ||
     setting?.description ||
     "";
 
-  const url = buildPageUrl(pageSlug, project?.slug.current);
-  const imageUrl = project?.imageURL || page.imageURL || setting.imageURL;
-  const imageAlt = project?.imageAlt || page.imageAlt || setting.imageAlt;
+  const url = pageSlug
+    ? buildPageUrl(pageSlug, project?.slug.current)
+    : envConfig.baseUrl;
+  const imageUrl = project?.imageURL || page?.imageURL || setting?.imageURL;
+  const imageAlt = project?.imageAlt || page?.imageAlt || setting?.imageAlt;
 
   const keywords = project?.tags?.map((tag) => tag.label);
-  const publishedTime = project ? project._createdAt : page._createdAt;
-  const modifiedTime = project ? project._updatedAt : page._updatedAt;
+  const fallbackTimestamp = new Date().toISOString();
+  const publishedTime =
+    project?._createdAt || page?._createdAt || fallbackTimestamp;
+  const modifiedTime =
+    project?._updatedAt || page?._updatedAt || fallbackTimestamp;
 
   return generateMetaData({
     title,

@@ -96,7 +96,9 @@ export async function generateMetadata() {
   const t = await getTranslations();
   return generatePageMetadata({
     pageSlug: slug,
+    pageTitle: t("pages.about.title"),
     description: t("pages.about.metaDescription"),
+    disableBrandTitleSuffix: true,
   });
 }
 

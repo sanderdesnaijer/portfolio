@@ -24,7 +24,7 @@ export default async function SiteLayout({
       <Footer
         socialMedia={setting.socialMedia}
         cookiePolicyLabel={tCookies("title")}
-        tagsLabel={tPages("tags.title")}
+        tagsLabel={tPages("tags.label")}
       />
     </div>
   );

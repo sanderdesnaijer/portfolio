@@ -7,7 +7,6 @@ import { getProjectsScheme } from "@/app/utils/jsonLDSchemes";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { pageSlugs } from "@/app/utils/routes";
 import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
-import { generateContentTitle } from "@/app/utils/utils";
 import envConfig from "@/envConfig";
 
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -19,17 +18,11 @@ const { projects: slug } = pageSlugs;
 
 export async function generateMetadata() {
   const t = await getTranslations();
-  const metadata = await generatePageMetadata({
+  return generatePageMetadata({
     pageSlug: slug,
+    pageTitle: t("pages.project.title"),
     description: t("pages.project.metaDescription"),
   });
-  const title = generateContentTitle("Projects");
-  return {
-    ...metadata,
-    title,
-    openGraph: { ...metadata.openGraph, title },
-    twitter: { ...metadata.twitter, title },
-  };
 }
 
 export default async function Page() {
