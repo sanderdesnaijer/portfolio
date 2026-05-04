@@ -4,6 +4,9 @@ import { expect } from "@playwright/test";
 const ISO_DATE_TIME =
   /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/;
 
+const escapeRegExp = (value: string) =>
+  value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
 /**
  * Helper function to test if metadata exists on a page.
  * @param {import('@playwright/test').Page} page - The Playwright page object.
@@ -32,33 +35,39 @@ export async function testPageMetadata(
 ) {
   await page.waitForLoadState("load");
 
-  // Title — verify exact match if provided, else structural invariants.
-  const actualTitle = await page.title();
+  // Title — use Playwright's auto-waiting `toHaveTitle` so the assertion
+  // tolerates Next streaming/metadata updates that arrive after `load`.
+  let titleForOg: string;
   if (expectedMeta.title !== undefined) {
-    expect(actualTitle).toBe(expectedMeta.title);
+    await expect(page).toHaveTitle(expectedMeta.title);
+    titleForOg = expectedMeta.title;
   } else {
-    expect(actualTitle.length).toBeGreaterThanOrEqual(10);
-    expect(actualTitle.length).toBeLessThanOrEqual(70);
-    if (expectedMeta.disableBrandSuffix) {
-      expect(actualTitle).toContain(AUTHOR_NAME);
-    } else {
-      expect(actualTitle.endsWith(` | ${AUTHOR_NAME}`)).toBe(true);
-    }
+    const brandPattern = expectedMeta.disableBrandSuffix
+      ? new RegExp(escapeRegExp(AUTHOR_NAME))
+      : new RegExp(`.+ \\| ${escapeRegExp(AUTHOR_NAME)}$`);
+    await expect(page).toHaveTitle(brandPattern);
+    // Title has now stabilized — safe to read for length-bound checks.
+    titleForOg = await page.title();
+    expect(titleForOg.length).toBeGreaterThanOrEqual(10);
+    expect(titleForOg.length).toBeLessThanOrEqual(70);
   }
-  const titleForOg = expectedMeta.title ?? actualTitle;
 
-  // Description — verify exact match if provided, else structural invariants.
+  // Description — same pattern: auto-wait via `toHaveAttribute` before reading.
   const metaDescLocator = page.locator('head meta[name="description"]').first();
   await expect(metaDescLocator).toBeAttached({ timeout: 60_000 });
-  const actualDescription = await metaDescLocator.getAttribute("content");
+  let descriptionForOg: string;
   if (expectedMeta.description !== undefined) {
-    expect(actualDescription).toBe(expectedMeta.description);
+    await expect(metaDescLocator).toHaveAttribute(
+      "content",
+      expectedMeta.description
+    );
+    descriptionForOg = expectedMeta.description;
   } else {
-    expect(actualDescription).toBeTruthy();
-    expect(actualDescription!.length).toBeGreaterThanOrEqual(50);
-    expect(actualDescription!.length).toBeLessThanOrEqual(160);
+    await expect(metaDescLocator).toHaveAttribute("content", /.+/);
+    descriptionForOg = (await metaDescLocator.getAttribute("content"))!;
+    expect(descriptionForOg.length).toBeGreaterThanOrEqual(50);
+    expect(descriptionForOg.length).toBeLessThanOrEqual(160);
   }
-  const descriptionForOg = expectedMeta.description ?? actualDescription!;
 
   // Author
   const metaAuthor = await page
