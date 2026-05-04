@@ -42,13 +42,18 @@ const fetchPageData = cache(async function fetchPageData() {
 });
 
 export async function generateMetadata() {
-  const t = await getTranslations();
+  const [[commonData, page], t] = await Promise.all([
+    fetchPageData(),
+    getTranslations(),
+  ]);
 
   return generatePageMetadata({
     pageSlug: "",
     pageTitle: t("pages.home.title"),
     description: t("pages.home.metaDescription"),
     disableBrandTitleSuffix: true,
+    page,
+    setting: commonData.setting,
   });
 }
 

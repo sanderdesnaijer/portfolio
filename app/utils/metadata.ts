@@ -183,21 +183,28 @@ export async function generatePageMetadata({
   description: descriptionOverride,
   pageTitle,
   disableBrandTitleSuffix,
+  page: preloadedPage,
+  setting: preloadedSetting,
 }: {
   pageSlug: string;
   project?: ProjectTypeSanity;
   description?: string;
   pageTitle?: string;
   disableBrandTitleSuffix?: boolean;
+  page?: PageSanity | null;
+  setting?: SettingSanity | null;
 }) {
-  const page = await sanityFetch<PageSanity>({
-    query: pageQuery,
-    params: { slug: pageSlug },
-  });
-  const setting = await sanityFetch<SettingSanity>({ query: settingsQuery });
+  const [page, setting] = await Promise.all([
+    preloadedPage ??
+      sanityFetch<PageSanity>({
+        query: pageQuery,
+        params: { slug: pageSlug },
+      }),
+    preloadedSetting ?? sanityFetch<SettingSanity>({ query: settingsQuery }),
+  ]);
 
   const brand = setting?.title || AUTHOR_NAME;
-  const baseTitle = pageTitle ?? (project ? project.title : page?.title);
+  const baseTitle = pageTitle ?? project?.title ?? page?.title ?? brand;
   const title = disableBrandTitleSuffix ? baseTitle : `${baseTitle} | ${brand}`;
 
   const projectDescription = project?.body?.length

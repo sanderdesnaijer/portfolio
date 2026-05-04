@@ -366,5 +366,41 @@ describe("app/utils/metadata", () => {
       });
       expect(withProject.description).toBe(override);
     });
+
+    it("should fall back to the brand when no page, project, or pageTitle are available", async () => {
+      const mockSetting = {
+        title: "Site Brand",
+        description: "Default Setting Description",
+      };
+
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(undefined)
+        .mockResolvedValueOnce(mockSetting);
+
+      const result = await generatePageMetadata({ pageSlug: "missing-slug" });
+
+      expect(result.title).toBe("Site Brand | Site Brand");
+      expect(result.description).toBe(mockSetting.description);
+    });
+
+    it("should use pre-fetched page and setting when provided", async () => {
+      const mockSetting = {
+        title: "Site Brand",
+        description: "Default Setting Description",
+        imageURL: "https://example.com/setting-image.png",
+        imageAlt: "Default Setting Image Alt",
+      };
+
+      const result = await generatePageMetadata({
+        pageSlug: "page-slug",
+        pageTitle: "Custom SEO Base Title",
+        page: mockPage,
+        setting: mockSetting,
+      });
+
+      expect(sanityFetch).not.toHaveBeenCalled();
+      expect(result.title).toBe("Custom SEO Base Title | Site Brand");
+      expect(result.description).toBe(mockSetting.description);
+    });
   });
 });
