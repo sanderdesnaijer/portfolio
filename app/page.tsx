@@ -116,6 +116,7 @@ export default async function Home() {
         <Footer
           socialMedia={setting.socialMedia}
           cookiePolicyLabel={t("cookies.title")}
+          footerItems={commonData.footerItems}
           showSeparator={false}
         />
       </div>

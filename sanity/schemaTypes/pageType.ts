@@ -67,6 +67,21 @@ export const pageType = defineType({
       description: "Set a custom order for sorting pages",
     }),
     defineField({
+      name: "navigationLocation",
+      title: "Navigation location",
+      type: "string",
+      description:
+        "Where this page is linked from. 'Main navigation' is the header menu; 'Footer' renders it in the site footer.",
+      options: {
+        list: [
+          { title: "Main navigation", value: "main" },
+          { title: "Footer", value: "footer" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "main",
+    }),
+    defineField({
       name: "body",
       type: "blockContent",
     }),

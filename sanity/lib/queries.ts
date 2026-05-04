@@ -10,6 +10,7 @@ export const allPagesQuery = groq`
     content,
     name,
     order,
+    navigationLocation,
     "imageURL": mainImage.asset->url
   }
 `;
