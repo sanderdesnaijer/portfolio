@@ -45,11 +45,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.7,
   }));
 
-  const tagLastMod = new Map<string, string>();
+  const tagLastMod = new Map<string, number>();
   const trackTag = (slug: string, date?: string) => {
     if (!slug || !date) return;
+    const ts = Date.parse(date);
+    if (Number.isNaN(ts)) return;
     const prev = tagLastMod.get(slug);
-    if (!prev || date > prev) tagLastMod.set(slug, date);
+    if (prev === undefined || ts > prev) tagLastMod.set(slug, ts);
   };
   for (const project of projects) {
     for (const tag of project.tags ?? []) {
@@ -58,26 +60,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }
   for (const article of articles) {
     for (const tag of article.tags ?? []) {
-      trackTag(toTagSlug(tag.label), article.publishedAt);
+      trackTag(toTagSlug(tag.label), article._updatedAt ?? article.publishedAt);
     }
   }
 
-  const tagPages = Array.from(tagLastMod.entries()).map(([slug, date]) => ({
+  const tagPages = Array.from(tagLastMod.entries()).map(([slug, ts]) => ({
     url: `${baseUrl}/tags/${slug}`,
-    lastModified: formatDate(date),
+    lastModified: formatDate(new Date(ts).toISOString()),
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));
 
-  const tagsIndexLastMod = Array.from(tagLastMod.values()).reduce(
-    (max, date) => (date > max ? date : max),
-    ""
+  const tagsIndexTs = Array.from(tagLastMod.values()).reduce(
+    (max, ts) => (ts > max ? ts : max),
+    0
   );
   const tagsIndexPage = {
     url: `${baseUrl}/tags`,
-    lastModified: tagsIndexLastMod
-      ? formatDate(tagsIndexLastMod)
-      : formatDate(new Date().toISOString()),
+    lastModified: formatDate(
+      tagsIndexTs ? new Date(tagsIndexTs).toISOString() : new Date().toISOString()
+    ),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   };
