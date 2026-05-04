@@ -8,15 +8,22 @@ const ISO_DATE_TIME =
  * Helper function to test if metadata exists on a page.
  * @param {import('@playwright/test').Page} page - The Playwright page object.
  * @param {Object} expectedMeta - Expected metadata values.
+ *
+ * Title / description: omit `title` and `description` to assert only structural
+ * invariants (non-empty, sensible length, brand-suffix rule) and verify that
+ * OG / Twitter tags mirror the rendered <title> and meta description. This
+ * avoids coupling e2e tests to copy stored in Sanity.
  */
 export async function testPageMetadata(
   page: import("@playwright/test").Page,
   expectedMeta: {
-    title: string;
-    description: string;
+    title?: string;
+    description?: string;
     url: string;
     imageUrl: string;
     imageAlt?: string;
+    /** Set to true for pages that already include the brand in the SEO title (home, about). */
+    disableBrandSuffix?: boolean;
     /** Omit both to only assert valid ISO timestamps and modified >= published (avoids stale /api vs HTML cache skew). */
     publishedTime?: string;
     modifiedTime?: string;
@@ -25,14 +32,33 @@ export async function testPageMetadata(
 ) {
   await page.waitForLoadState("load");
 
-  // Title
-  await expect(page).toHaveTitle(expectedMeta.title);
+  // Title — verify exact match if provided, else structural invariants.
+  const actualTitle = await page.title();
+  if (expectedMeta.title !== undefined) {
+    expect(actualTitle).toBe(expectedMeta.title);
+  } else {
+    expect(actualTitle.length).toBeGreaterThanOrEqual(10);
+    expect(actualTitle.length).toBeLessThanOrEqual(70);
+    if (expectedMeta.disableBrandSuffix) {
+      expect(actualTitle).toContain(AUTHOR_NAME);
+    } else {
+      expect(actualTitle.endsWith(` | ${AUTHOR_NAME}`)).toBe(true);
+    }
+  }
+  const titleForOg = expectedMeta.title ?? actualTitle;
 
-  // Description
+  // Description — verify exact match if provided, else structural invariants.
   const metaDescLocator = page.locator('head meta[name="description"]').first();
   await expect(metaDescLocator).toBeAttached({ timeout: 60_000 });
-  const metaDescription = await metaDescLocator.getAttribute("content");
-  expect(metaDescription).toBe(expectedMeta.description);
+  const actualDescription = await metaDescLocator.getAttribute("content");
+  if (expectedMeta.description !== undefined) {
+    expect(actualDescription).toBe(expectedMeta.description);
+  } else {
+    expect(actualDescription).toBeTruthy();
+    expect(actualDescription!.length).toBeGreaterThanOrEqual(50);
+    expect(actualDescription!.length).toBeLessThanOrEqual(160);
+  }
+  const descriptionForOg = expectedMeta.description ?? actualDescription!;
 
   // Author
   const metaAuthor = await page
@@ -51,11 +77,11 @@ export async function testPageMetadata(
   // Open Graph metadata
   await expect(page.locator('head meta[property="og:title"]')).toHaveAttribute(
     "content",
-    expectedMeta.title
+    titleForOg
   );
   await expect(
     page.locator('head meta[property="og:description"]')
-  ).toHaveAttribute("content", expectedMeta.description);
+  ).toHaveAttribute("content", descriptionForOg);
   await expect(page.locator('head meta[property="og:url"]')).toHaveAttribute(
     "content",
     expectedMeta.url
@@ -76,7 +102,7 @@ export async function testPageMetadata(
   ).toHaveAttribute("content", "630");
   await expect(
     page.locator('head meta[property="og:image:alt"]')
-  ).toHaveAttribute("content", expectedMeta.imageAlt || expectedMeta.title);
+  ).toHaveAttribute("content", expectedMeta.imageAlt || titleForOg);
   await expect(page.locator('head meta[property="og:type"]')).toHaveAttribute(
     "content",
     "article"
@@ -127,11 +153,11 @@ export async function testPageMetadata(
   ).toHaveAttribute("content", "@sanderdesnaijer");
   await expect(page.locator('head meta[name="twitter:title"]')).toHaveAttribute(
     "content",
-    expectedMeta.title
+    titleForOg
   );
   await expect(
     page.locator('head meta[name="twitter:description"]')
-  ).toHaveAttribute("content", expectedMeta.description);
+  ).toHaveAttribute("content", descriptionForOg);
   await expect(page.locator('head meta[name="twitter:image"]')).toHaveAttribute(
     "content",
     expectedMeta.imageUrl
@@ -144,7 +170,7 @@ export async function testPageMetadata(
   ).toHaveAttribute("content", "675");
   await expect(
     page.locator('head meta[name="twitter:image:alt"]')
-  ).toHaveAttribute("content", expectedMeta.imageAlt || expectedMeta.title);
+  ).toHaveAttribute("content", expectedMeta.imageAlt || titleForOg);
 
   // Favicons
   const favicons = [

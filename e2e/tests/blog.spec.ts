@@ -4,12 +4,10 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl } from "@/app/utils/utils";
-import { AUTHOR_NAME } from "@/app/utils/constants";
 import { fetchPage, fetchSettings, fetchArticles } from "@/app/utils/api";
 import { getBlogsScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import { mockConsent } from "../utils/localStorage";
-import messages from "../../messages/en.json";
 import { titleRegExp } from "../utils/regex";
 
 async function checkPageElements(page: Page) {
@@ -84,8 +82,6 @@ test.describe("blog", () => {
     const setting = await fetchSettings();
 
     await testPageMetadata(page, {
-      title: `${messages.pages.blog.title} | ${AUTHOR_NAME}`,
-      description: messages.pages.blog.metaDescription,
       url: buildPageUrl("blog"),
       imageUrl: (data?.imageURL || setting?.imageURL) ?? "",
       imageAlt: setting?.imageAlt,

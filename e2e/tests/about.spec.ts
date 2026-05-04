@@ -10,7 +10,6 @@ import { validateJsonLd } from "../utils/jsonLD";
 import { getTranslationKey } from "@/app/test-utils/i18n";
 import { JobSanity } from "@/sanity/types";
 import { mockConsent } from "../utils/localStorage";
-import messages from "../../messages/en.json";
 async function checkAboutPageElements(page: Page) {
   await expect(
     page.getByRole("heading", { level: 1, name: /About/i })
@@ -62,11 +61,10 @@ test.describe("about", () => {
     const data = await fetchPage("about");
     const url = buildPageUrl("about");
     await testPageMetadata(page, {
-      title: messages.pages.about.title,
-      description: messages.pages.about.metaDescription,
       url,
       imageUrl: data!.imageURL,
       imageAlt: data!.imageAlt,
+      disableBrandSuffix: true,
       // published/modified: omit exact match — /api/page cache can skew vs HTML under `next start`
     });
 

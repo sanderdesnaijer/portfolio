@@ -3,7 +3,6 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { mockConsent } from "../utils/localStorage";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl } from "@/app/utils/utils";
-import { AUTHOR_NAME } from "@/app/utils/constants";
 import { fetchPage, fetchSettings } from "@/app/utils/api";
 import messages from "../../messages/en.json";
 
@@ -55,8 +54,6 @@ test.describe("tags", () => {
     const data = await fetchPage("tags");
     const setting = await fetchSettings();
     await testPageMetadata(page, {
-      title: `${messages.pages.tags.title} | ${AUTHOR_NAME}`,
-      description: messages.pages.tags.metaDescription,
       url: buildPageUrl("tags"),
       imageUrl: (data?.imageURL || setting?.imageURL) ?? "",
       imageAlt: setting?.imageAlt,

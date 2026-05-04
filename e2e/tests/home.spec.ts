@@ -4,7 +4,6 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
 import { fetchPage, fetchSettings } from "@/app/utils/api";
-import messages from "../../messages/en.json";
 import { getWebsiteScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import envConfig from "@/envConfig";
@@ -59,11 +58,10 @@ test.describe("home", () => {
     const setting = await fetchSettings();
     // home uses page.imageURL || setting.imageURL and disables the brand suffix
     await testPageMetadata(page, {
-      title: messages.pages.home.title,
-      description: messages.pages.home.metaDescription,
       url: envConfig.baseUrl,
       imageUrl: (data?.imageURL || setting?.imageURL) ?? "",
       imageAlt: setting?.imageAlt,
+      disableBrandSuffix: true,
       publishedTime: data!._createdAt,
       modifiedTime: data!._updatedAt,
     });

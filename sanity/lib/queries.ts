@@ -21,8 +21,10 @@ export const pageQuery = groq`
     _updatedAt,
     title,
     description,
+    seoTitleBase,
+    disableBrandTitleSuffix,
     slug,
-    body,    
+    body,
     "imageAlt": mainImage.alt,
     "imageURL": mainImage.asset->url
   }

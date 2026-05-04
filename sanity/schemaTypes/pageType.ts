@@ -21,6 +21,21 @@ export const pageType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "seoTitleBase",
+      title: "SEO title (base)",
+      type: "string",
+      description:
+        "Base text used for the <title> tag. The site brand is appended unless 'Disable brand suffix' is on.",
+    }),
+    defineField({
+      name: "disableBrandTitleSuffix",
+      title: "Disable brand suffix",
+      type: "boolean",
+      description:
+        "If on, the SEO title is used as-is without appending ' | <brand>'. Use for titles that already include the brand.",
+      initialValue: false,
+    }),
+    defineField({
       name: "slug",
       type: "slug",
       options: {
