@@ -13,10 +13,21 @@ export async function fetchCommonData() {
       // console.log(error);
       return [];
     });
-  const menuItems = pages.map<MenuItem>(({ title, slug }) => ({
+  const toMenuItem = ({
+    title,
+    slug,
+  }: Pick<PageSanity, "title" | "slug">): MenuItem => ({
     title,
     pathname: `/${slug && slug.current ? slug.current : ""}`,
-  }));
+  });
 
-  return { setting, menuItems };
+  const menuItems = pages
+    .filter((page) => (page.navigationLocation ?? "main") === "main")
+    .map(toMenuItem);
+
+  const footerItems = pages
+    .filter((page) => page.navigationLocation === "footer")
+    .map(toMenuItem);
+
+  return { setting, menuItems, footerItems };
 }

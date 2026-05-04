@@ -8,12 +8,14 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import {
   blogsWithTagsQuery,
   jobsWithTagsQuery,
+  pageQuery,
   projectsWithTagsQuery,
 } from "@/sanity/lib/queries";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { pageSlugs } from "@/app/utils/routes";
 import { JsonLd } from "@/app/components/JsonLd";
+import { PageSanity } from "@/sanity/types";
 
 type TagItem = {
   tags?: { _id: string; label: string }[];
@@ -49,29 +51,29 @@ function aggregateTags(items: TagItem[]): AggregatedTag[] {
 }
 
 export async function generateMetadata() {
-  const t = await getTranslations();
-  return generatePageMetadata({
-    pageSlug: pageSlugs.tags,
-    pageTitle: t("pages.tags.title"),
-    description: t("pages.tags.metaDescription"),
-  });
+  return generatePageMetadata({ pageSlug: pageSlugs.tags });
 }
 
 export default async function TagsIndexPage() {
-  const [allProjects, allBlogs, allJobs, t] = await Promise.all([
+  const [allProjects, allBlogs, allJobs, page, t] = await Promise.all([
     sanityFetch<TagItem[]>({ query: projectsWithTagsQuery }),
     sanityFetch<TagItem[]>({ query: blogsWithTagsQuery }),
     sanityFetch<TagItem[]>({ query: jobsWithTagsQuery }),
+    sanityFetch<PageSanity>({
+      query: pageQuery,
+      params: { slug: pageSlugs.tags },
+    }),
     getTranslations(),
   ]);
 
   const tags = aggregateTags([...allProjects, ...allBlogs, ...allJobs]);
   const breadcrumbJsonLd = buildBreadcrumbList({ type: "tag" });
+  const title = page?.title ?? t("pages.tags.label");
 
   return (
     <>
       <JsonLd value={breadcrumbJsonLd} />
-      <PageLayout title={t("pages.tags.label")}>
+      <PageLayout title={title}>
         <p className="mt-4 text-lg leading-8">{t("pages.tags.description")}</p>
         <ul className="mt-6 grid grid-cols-2 gap-3 pl-0 sm:grid-cols-3">
           {tags.map(({ label, slug, count }) => (

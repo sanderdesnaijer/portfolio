@@ -1,12 +1,13 @@
 import { test, expect } from "@playwright/test";
 import { AUTHOR_NAME } from "@/app/utils/constants";
-import messages from "../../messages/en.json";
 
 const escapeRegExp = (value: string) =>
   value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-const expectedIndexTitle = (base: string) =>
-  new RegExp(`^${escapeRegExp(base)} \\| ${escapeRegExp(AUTHOR_NAME)}$`);
+// Index pages without `disableBrandTitleSuffix` end with " | <brand>".
+// Asserting the structural pattern (rather than exact copy) keeps tests
+// resilient to title changes made in Sanity.
+const indexTitlePattern = new RegExp(`^.+ \\| ${escapeRegExp(AUTHOR_NAME)}$`);
 
 test.describe("Breadcrumb JSON-LD and title strategy", () => {
   test.describe("Blog detail page", () => {
@@ -55,9 +56,7 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
   test.describe("Blog index page", () => {
     test("should have content-first title", async ({ page }) => {
       await page.goto("/blog");
-      await expect(page).toHaveTitle(
-        expectedIndexTitle(messages.pages.blog.title)
-      );
+      await expect(page).toHaveTitle(indexTitlePattern);
     });
 
     test("should have 2-level BreadcrumbList JSON-LD", async ({ page }) => {
@@ -118,9 +117,7 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
   test.describe("Projects index page", () => {
     test("should have content-first title", async ({ page }) => {
       await page.goto("/projects");
-      await expect(page).toHaveTitle(
-        expectedIndexTitle(messages.pages.project.title)
-      );
+      await expect(page).toHaveTitle(indexTitlePattern);
     });
 
     test("should have 2-level BreadcrumbList JSON-LD", async ({ page }) => {
@@ -145,9 +142,7 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
   test.describe("Tags index page", () => {
     test("should have content-first title", async ({ page }) => {
       await page.goto("/tags");
-      await expect(page).toHaveTitle(
-        expectedIndexTitle(messages.pages.tags.title)
-      );
+      await expect(page).toHaveTitle(indexTitlePattern);
       await expect(page).not.toHaveTitle(/^Sander de Snaijer \|/);
     });
 

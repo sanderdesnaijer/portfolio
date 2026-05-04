@@ -3,6 +3,7 @@ import { AUTHOR_INITIALS } from "../utils/constants";
 import { SocialIcons } from "./SocialIcons";
 import { getIcon } from "./Icons";
 import Link from "next/link";
+import { MenuItem } from "./Menu";
 
 const ExternalLinkIcon = getIcon("externalLink");
 
@@ -13,14 +14,14 @@ const getFooterText = (): string => {
 export const Footer: React.FC<{
   socialMedia: Array<IconLink>;
   cookiePolicyLabel?: string;
-  tagsLabel?: string;
   demosLabel?: string;
+  footerItems?: MenuItem[];
   showSeparator?: boolean;
 }> = ({
   socialMedia,
   cookiePolicyLabel = "Cookie Policy",
-  tagsLabel = "Tags",
   demosLabel = "Demos",
+  footerItems = [],
   showSeparator = true,
 }) => {
   return (
@@ -32,9 +33,15 @@ export const Footer: React.FC<{
           <Link href="/info/cookies" className="text-sm hover:underline">
             {cookiePolicyLabel}
           </Link>
-          <Link href="/tags" className="text-sm hover:underline">
-            {tagsLabel}
-          </Link>
+          {footerItems.map(({ pathname, title }) => (
+            <Link
+              key={pathname}
+              href={pathname}
+              className="text-sm hover:underline"
+            >
+              {title}
+            </Link>
+          ))}
           <Link
             href="https://demos.sanderdesnaijer.com"
             target="_blank"

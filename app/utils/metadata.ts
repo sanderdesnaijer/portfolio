@@ -204,8 +204,12 @@ export async function generatePageMetadata({
   ]);
 
   const brand = setting?.title || AUTHOR_NAME;
-  const baseTitle = pageTitle ?? project?.title ?? page?.title ?? brand;
-  const title = disableBrandTitleSuffix ? baseTitle : `${baseTitle} | ${brand}`;
+  const baseTitle =
+    project?.title ?? page?.seoTitleBase ?? pageTitle ?? page?.title ?? brand;
+  const disableBrand = project
+    ? (disableBrandTitleSuffix ?? false)
+    : (page?.disableBrandTitleSuffix ?? disableBrandTitleSuffix ?? false);
+  const title = disableBrand ? baseTitle : `${baseTitle} | ${brand}`;
 
   const projectDescription = project?.body?.length
     ? getDescriptionFromSanity(project.body)

@@ -384,6 +384,48 @@ describe("app/utils/metadata", () => {
       expect(result.description).toBe(mockSetting.description);
     });
 
+    it("should prefer page.seoTitleBase from Sanity over the pageTitle override", async () => {
+      const pageWithSeoTitle = {
+        ...mockPage,
+        seoTitleBase: "Sanity SEO Base",
+      };
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(pageWithSeoTitle)
+        .mockResolvedValueOnce(undefined);
+
+      const result = await generatePageMetadata({
+        pageSlug: "page-slug",
+        pageTitle: "Legacy Override",
+      });
+
+      expect(result.title).toBe(`Sanity SEO Base | ${AUTHOR_NAME}`);
+    });
+
+    it("should omit the brand suffix when page.disableBrandTitleSuffix is true", async () => {
+      const pageWithFlag = {
+        ...mockPage,
+        seoTitleBase: "Already Branded From Sanity",
+        disableBrandTitleSuffix: true,
+      };
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(pageWithFlag)
+        .mockResolvedValueOnce(undefined);
+
+      const result = await generatePageMetadata({ pageSlug: "page-slug" });
+
+      expect(result.title).toBe("Already Branded From Sanity");
+    });
+
+    it("should fall back from seoTitleBase to page.title when seoTitleBase is missing", async () => {
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(undefined);
+
+      const result = await generatePageMetadata({ pageSlug: "page-slug" });
+
+      expect(result.title).toBe(`My page | ${AUTHOR_NAME}`);
+    });
+
     it("should use pre-fetched page and setting when provided", async () => {
       const result = await generatePageMetadata({
         pageSlug: "page-slug",

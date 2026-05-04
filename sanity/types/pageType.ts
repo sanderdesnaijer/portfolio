@@ -5,6 +5,9 @@ export interface PageSanity extends SanityDocument {
   name: string;
   title: string;
   description: string;
+  seoTitleBase?: string;
+  disableBrandTitleSuffix?: boolean;
+  navigationLocation?: "main" | "footer";
   slug: {
     _type: "slug";
     current: string;

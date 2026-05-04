@@ -21,6 +21,21 @@ export const pageType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "seoTitleBase",
+      title: "SEO title (base)",
+      type: "string",
+      description:
+        "Base text used for the <title> tag. The site brand is appended unless 'Disable brand suffix' is on.",
+    }),
+    defineField({
+      name: "disableBrandTitleSuffix",
+      title: "Disable brand suffix",
+      type: "boolean",
+      description:
+        "If on, the SEO title is used as-is without appending ' | <brand>'. Use for titles that already include the brand.",
+      initialValue: false,
+    }),
+    defineField({
       name: "slug",
       type: "slug",
       options: {
@@ -50,6 +65,21 @@ export const pageType = defineType({
       title: "Order",
       type: "number",
       description: "Set a custom order for sorting pages",
+    }),
+    defineField({
+      name: "navigationLocation",
+      title: "Navigation location",
+      type: "string",
+      description:
+        "Where this page is linked from. 'Main navigation' is the header menu; 'Footer' renders it in the site footer.",
+      options: {
+        list: [
+          { title: "Main navigation", value: "main" },
+          { title: "Footer", value: "footer" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "main",
     }),
     defineField({
       name: "body",

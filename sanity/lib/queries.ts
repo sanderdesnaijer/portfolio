@@ -10,19 +10,22 @@ export const allPagesQuery = groq`
     content,
     name,
     order,
+    navigationLocation,
     "imageURL": mainImage.asset->url
   }
 `;
 
 export const pageQuery = groq`
-  *[_type == "pages" && (slug.current == $slug || $slug == "")][0]{
+  *[_type == "pages" && coalesce(slug.current, "") == $slug] | order(coalesce(order, 9999) asc) [0] {
     _id,
     _createdAt,
     _updatedAt,
     title,
     description,
+    seoTitleBase,
+    disableBrandTitleSuffix,
     slug,
-    body,    
+    body,
     "imageAlt": mainImage.alt,
     "imageURL": mainImage.asset->url
   }
