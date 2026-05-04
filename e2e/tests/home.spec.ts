@@ -57,7 +57,7 @@ test.describe("home", () => {
   test("should include accurate metadata", async ({ page }) => {
     const data = await fetchPage();
     const setting = await fetchSettings();
-    // general meta data - home uses page.imageURL || setting.imageURL
+    // home uses page.imageURL || setting.imageURL and disables the brand suffix
     await testPageMetadata(page, {
       title: messages.pages.home.title,
       description: messages.pages.home.metaDescription,

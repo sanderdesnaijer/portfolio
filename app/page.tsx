@@ -11,14 +11,13 @@ import {
   LatestPostPreview,
   LatestProjectPreview,
 } from "./components/LatestSection";
-import { generateMetaData } from "./utils/metadata";
+import { generatePageMetadata } from "./utils/metadata";
 import { fetchCommonData } from "@/sanity/lib/fetchCommonData";
 import { getTranslations } from "next-intl/server";
 import { NotFound } from "./components/NotFound";
 import { cache } from "react";
 import { getWebsiteScheme } from "./utils/jsonLDSchemes";
 import { JsonLd } from "./components/JsonLd";
-import envConfig from "@/envConfig";
 
 import SiteLogo from "@/public/logo.svg";
 import { Footer } from "./components/Footer";
@@ -43,17 +42,18 @@ const fetchPageData = cache(async function fetchPageData() {
 });
 
 export async function generateMetadata() {
-  const [commonData, page] = await fetchPageData();
-  const t = await getTranslations();
+  const [[commonData, page], t] = await Promise.all([
+    fetchPageData(),
+    getTranslations(),
+  ]);
 
-  return generateMetaData({
-    title: t("pages.home.title"),
+  return generatePageMetadata({
+    pageSlug: "",
+    pageTitle: t("pages.home.title"),
     description: t("pages.home.metaDescription"),
-    publishedTime: page._createdAt,
-    modifiedTime: page._updatedAt,
-    imageUrl: page.imageURL || commonData.setting?.imageURL,
-    imageAlt: page.imageAlt || commonData.setting?.imageAlt,
-    url: envConfig.baseUrl,
+    disableBrandTitleSuffix: true,
+    page,
+    setting: commonData.setting,
   });
 }
 

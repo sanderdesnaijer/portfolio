@@ -5,25 +5,28 @@ import Link from "next/link";
 import { AUTHOR_NAME } from "@/app/utils/constants";
 import { getTranslations } from "next-intl/server";
 
-const title = "Cookie Policy";
-const description =
-  "Learn how sanderdesnaijer.com uses cookies to ensure the site works properly and to understand how it is used.";
 const url = `${envConfig.baseUrl}/info/cookies`;
 
-export const metadata: Metadata = {
-  title,
-  description,
-  authors: [{ name: AUTHOR_NAME }],
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations();
+  const title = `${t("pages.cookies.title")} | ${AUTHOR_NAME}`;
+  const description = t("pages.cookies.metaDescription");
+
+  return {
     title,
     description,
-    type: "website",
-    url,
-  },
-  alternates: {
-    canonical: url,
-  },
-};
+    authors: [{ name: AUTHOR_NAME }],
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url,
+    },
+    alternates: {
+      canonical: url,
+    },
+  };
+}
 
 export default async function CookiePolicyPage() {
   const t = await getTranslations("cookies");

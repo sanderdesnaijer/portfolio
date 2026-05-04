@@ -1,6 +1,7 @@
 import envConfig from "@/envConfig";
 import { mockPage } from "../test-utils/mockPage";
 import { mockProject } from "../test-utils/mockProjects";
+import { mockSetting as baseSettingMock } from "../test-utils/mockSetting";
 import { AUTHOR_NAME } from "./constants";
 import { generateMetaData, generatePageMetadata } from "./metadata";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -153,9 +154,9 @@ describe("app/utils/metadata", () => {
       const pageSlug = "page-slug";
       const result = await generatePageMetadata({ pageSlug });
 
-      expect(result.title).toBe(`${AUTHOR_NAME} | My page`);
+      expect(result.title).toBe(`My page | ${AUTHOR_NAME}`);
       expect(result.description).toBe(mockPage.description);
-      expect(result.openGraph.title).toBe(`${AUTHOR_NAME} | My page`);
+      expect(result.openGraph.title).toBe(`My page | ${AUTHOR_NAME}`);
       expect(result.openGraph.images[0].url).toBe(mockPage.imageURL);
       expect(result.keywords).toBeUndefined();
     });
@@ -192,19 +193,17 @@ describe("app/utils/metadata", () => {
       const pageSlug = "page-slug";
       (sanityFetch as jest.Mock)
         .mockResolvedValueOnce(mockPage)
-        .mockResolvedValueOnce(mockProject);
+        .mockResolvedValueOnce(undefined);
 
       const result = await generatePageMetadata({
         pageSlug,
         project: mockProject,
       });
 
-      expect(result.title).toBe(`${AUTHOR_NAME} | My page | Project 1`);
+      expect(result.title).toBe(`Project 1 | ${AUTHOR_NAME}`);
 
       expect(result.description).toBe("Mock body content");
-      expect(result.openGraph.title).toBe(
-        `${AUTHOR_NAME} | My page | Project 1`
-      );
+      expect(result.openGraph.title).toBe(`Project 1 | ${AUTHOR_NAME}`);
       expect(result.openGraph.images[0].url).toBe(mockProject.imageURL);
       expect(result.keywords).toEqual(["React", "Typescript"]);
     });
@@ -295,6 +294,47 @@ describe("app/utils/metadata", () => {
       expect(result.description).toBe(mockSetting.description);
     });
 
+    it("should use pageTitle override instead of the Sanity page title", async () => {
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(undefined);
+
+      const result = await generatePageMetadata({
+        pageSlug: "page-slug",
+        pageTitle: "Custom SEO Base Title",
+      });
+
+      expect(result.title).toBe(`Custom SEO Base Title | ${AUTHOR_NAME}`);
+    });
+
+    it("should omit the brand suffix when disableBrandTitleSuffix is true", async () => {
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(undefined);
+
+      const result = await generatePageMetadata({
+        pageSlug: "page-slug",
+        pageTitle: "Already Branded Title",
+        disableBrandTitleSuffix: true,
+      });
+
+      expect(result.title).toBe("Already Branded Title");
+    });
+
+    it("should use envConfig.baseUrl when pageSlug is empty", async () => {
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(undefined);
+
+      const result = await generatePageMetadata({
+        pageSlug: "",
+        pageTitle: "Home",
+        disableBrandTitleSuffix: true,
+      });
+
+      expect(result.openGraph.url).toBe(envConfig.baseUrl);
+    });
+
     it("should prefer description override over page, project body, and setting descriptions", async () => {
       const pageWithDescription = {
         ...mockPage,
@@ -326,6 +366,37 @@ describe("app/utils/metadata", () => {
         description: override,
       });
       expect(withProject.description).toBe(override);
+    });
+
+    it("should fall back to the brand when no page, project, or pageTitle are available", async () => {
+      const mockSetting = {
+        title: "Site Brand",
+        description: "Default Setting Description",
+      };
+
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(undefined)
+        .mockResolvedValueOnce(mockSetting);
+
+      const result = await generatePageMetadata({ pageSlug: "missing-slug" });
+
+      expect(result.title).toBe("Site Brand | Site Brand");
+      expect(result.description).toBe(mockSetting.description);
+    });
+
+    it("should use pre-fetched page and setting when provided", async () => {
+      const result = await generatePageMetadata({
+        pageSlug: "page-slug",
+        pageTitle: "Custom SEO Base Title",
+        page: mockPage,
+        setting: baseSettingMock,
+      });
+
+      expect(sanityFetch).not.toHaveBeenCalled();
+      expect(result.title).toBe(
+        `Custom SEO Base Title | ${baseSettingMock.title}`
+      );
+      expect(result.description).toBe(baseSettingMock.description);
     });
   });
 });

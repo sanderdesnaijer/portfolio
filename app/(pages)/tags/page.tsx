@@ -1,20 +1,14 @@
 "use server";
 
 import { PageLayout } from "@/app/components/PageLayout";
-import { generateMetaData } from "@/app/utils/metadata";
-import {
-  buildPageUrl,
-  generateContentTitle,
-  toTagSlug,
-} from "@/app/utils/utils";
+import { generatePageMetadata } from "@/app/utils/metadata";
+import { toTagSlug } from "@/app/utils/utils";
 import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
-import { SettingSanity } from "@/sanity/types";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
   blogsWithTagsQuery,
   jobsWithTagsQuery,
   projectsWithTagsQuery,
-  settingsQuery,
 } from "@/sanity/lib/queries";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
@@ -55,23 +49,11 @@ function aggregateTags(items: TagItem[]): AggregatedTag[] {
 }
 
 export async function generateMetadata() {
-  const [t, setting] = await Promise.all([
-    getTranslations(),
-    sanityFetch<SettingSanity>({ query: settingsQuery }),
-  ]);
-
-  const title = generateContentTitle(t("pages.tags.title"));
-  const description = t("pages.tags.metaDescription");
-
-  return generateMetaData({
-    title,
-    description,
-    url: buildPageUrl(pageSlugs.tags),
-    publishedTime: new Date().toISOString(),
-    modifiedTime: new Date().toISOString(),
-    imageUrl: setting?.imageURL,
-    imageAlt: setting?.imageAlt,
-    keywords: ["tags", "topics", "projects", "articles"],
+  const t = await getTranslations();
+  return generatePageMetadata({
+    pageSlug: pageSlugs.tags,
+    pageTitle: t("pages.tags.title"),
+    description: t("pages.tags.metaDescription"),
   });
 }
 
@@ -89,7 +71,7 @@ export default async function TagsIndexPage() {
   return (
     <>
       <JsonLd value={breadcrumbJsonLd} />
-      <PageLayout title={t("pages.tags.title")}>
+      <PageLayout title={t("pages.tags.label")}>
         <p className="mt-4 text-lg leading-8">{t("pages.tags.description")}</p>
         <ul className="mt-6 grid grid-cols-2 gap-3 pl-0 sm:grid-cols-3">
           {tags.map(({ label, slug, count }) => (

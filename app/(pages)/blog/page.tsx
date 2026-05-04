@@ -9,7 +9,6 @@ import { NotFound } from "@/app/components/NotFound";
 import { pageSlugs } from "@/app/utils/routes";
 import { getBlogsScheme } from "@/app/utils/jsonLDSchemes";
 import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
-import { generateContentTitle } from "@/app/utils/utils";
 import { JsonLd } from "@/app/components/JsonLd";
 import envConfig from "@/envConfig";
 import { PageLayout } from "@/app/components/PageLayout";
@@ -20,17 +19,11 @@ const { blog: slug } = pageSlugs;
 
 export async function generateMetadata() {
   const t = await getTranslations();
-  const metadata = await generatePageMetadata({
+  return generatePageMetadata({
     pageSlug: slug,
+    pageTitle: t("pages.blog.title"),
     description: t("pages.blog.metaDescription"),
   });
-  const title = generateContentTitle("Blog");
-  return {
-    ...metadata,
-    title,
-    openGraph: { ...metadata.openGraph, title },
-    twitter: { ...metadata.twitter, title },
-  };
 }
 
 export default async function Page() {

@@ -4,7 +4,8 @@
   },
   "pages": {
     "about": {
-      "metaDescription": "Sander de Snaijer is a frontend developer with 10+ years of experience at companies like KNMI, Bynder and Dutch government. Based in the Netherlands.",
+      "title": "About Sander de Snaijer | Frontend Developer (15+ Years)",
+      "metaDescription": "Sander de Snaijer is a frontend developer with 15+ years of experience at companies like KNMI, Bynder and Dutch government. Based in the Netherlands.",
       "datePresent": "present",
       "jobExperience": "Experience",
       "jobContract": "via",
@@ -13,6 +14,7 @@
       "jobTitle": "Software developer"
     },
     "blog": {
+      "title": "Blog: React, MediaPipe, Flutter",
       "metaDescription": "Tutorials and write-ups on frontend development, Flutter, Next.js, and maker projects like 3D printing and Arduino. Written by Sander de Snaijer.",
       "articles": "Blog articles",
       "relatedBlogs": "Related Articles",
@@ -20,6 +22,7 @@
       "updatedAt": "Updated {date}"
     },
     "project": {
+      "title": "Projects: WebGL, Arduino, Flutter",
       "metaDescription": "Explore side projects by Sander de Snaijer — webcam games, Flutter apps, Arduino clocks, and 3D-printed experiments, all built in spare time.",
       "resources": "Resources",
       "projects": "Projects",
@@ -27,7 +30,7 @@
       "updatedAt": "Updated {date}"
     },
     "home": {
-      "title": "Sander de Snaijer — Frontend Developer | React, TypeScript, Next.js",
+      "title": "Sander de Snaijer | Frontend Developer (React, Next.js)",
       "metaDescription": "Frontend developer from the Netherlands building React apps, side projects, and unusual things with 3D printers. Projects, tutorials, and blog posts.",
       "latestProjects": "Latest Projects",
       "latestPosts": "Latest Posts",
@@ -37,13 +40,18 @@
       "introClosing": "This site is where I document the experiments, write about what I learn, and show what I've built."
     },
     "tags": {
-      "title": "Tags",
+      "title": "Topics",
+      "label": "Tags",
       "description": "Explore projects and articles by topic.",
       "experience": "Experience",
       "tagProjects": "{label} projects",
       "tagArticles": "{label} articles",
       "tagExperience": "Work experience with {label}",
       "metaDescription": "Discover projects and articles organized by topic."
+    },
+    "cookies": {
+      "title": "Cookie Policy",
+      "metaDescription": "Learn how sanderdesnaijer.com uses cookies to ensure the site works properly and to understand how it is used."
     }
   },
   "generic": {

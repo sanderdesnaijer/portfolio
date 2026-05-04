@@ -1,10 +1,15 @@
 import { test, expect, Page } from "@playwright/test";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { mockConsent } from "../utils/localStorage";
+import { testPageMetadata } from "../utils/metadata";
+import { buildPageUrl } from "@/app/utils/utils";
+import { AUTHOR_NAME } from "@/app/utils/constants";
+import { fetchPage, fetchSettings } from "@/app/utils/api";
+import messages from "../../messages/en.json";
 
 async function checkTagsPageElements(page: Page) {
   await expect(
-    page.getByRole("heading", { level: 1, name: /Tags/i })
+    page.getByRole("heading", { level: 1, name: messages.pages.tags.label })
   ).toBeVisible();
 
   const tagLinks = page.getByRole("list").getByRole("link");
@@ -44,5 +49,18 @@ test.describe("tags", () => {
 
   test("should meet accessibility standards", async ({ page }) => {
     await runAccessibilityTest(page);
+  });
+
+  test("should include accurate metadata", async ({ page }) => {
+    const data = await fetchPage("tags");
+    const setting = await fetchSettings();
+    await testPageMetadata(page, {
+      title: `${messages.pages.tags.title} | ${AUTHOR_NAME}`,
+      description: messages.pages.tags.metaDescription,
+      url: buildPageUrl("tags"),
+      imageUrl: (data?.imageURL || setting?.imageURL) ?? "",
+      imageAlt: setting?.imageAlt,
+      // published/modified: omit exact match — depends on Sanity page timestamps
+    });
   });
 });
