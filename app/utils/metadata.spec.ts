@@ -1,6 +1,7 @@
 import envConfig from "@/envConfig";
 import { mockPage } from "../test-utils/mockPage";
 import { mockProject } from "../test-utils/mockProjects";
+import { mockSetting as baseSettingMock } from "../test-utils/mockSetting";
 import { AUTHOR_NAME } from "./constants";
 import { generateMetaData, generatePageMetadata } from "./metadata";
 import { sanityFetch } from "@/sanity/lib/fetch";
@@ -384,23 +385,18 @@ describe("app/utils/metadata", () => {
     });
 
     it("should use pre-fetched page and setting when provided", async () => {
-      const mockSetting = {
-        title: "Site Brand",
-        description: "Default Setting Description",
-        imageURL: "https://example.com/setting-image.png",
-        imageAlt: "Default Setting Image Alt",
-      };
-
       const result = await generatePageMetadata({
         pageSlug: "page-slug",
         pageTitle: "Custom SEO Base Title",
         page: mockPage,
-        setting: mockSetting,
+        setting: baseSettingMock,
       });
 
       expect(sanityFetch).not.toHaveBeenCalled();
-      expect(result.title).toBe("Custom SEO Base Title | Site Brand");
-      expect(result.description).toBe(mockSetting.description);
+      expect(result.title).toBe(
+        `Custom SEO Base Title | ${baseSettingMock.title}`
+      );
+      expect(result.description).toBe(baseSettingMock.description);
     });
   });
 });
