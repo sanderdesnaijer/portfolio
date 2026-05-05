@@ -198,12 +198,13 @@ describe("app/utils/metadata", () => {
       const result = await generatePageMetadata({
         pageSlug,
         project: mockProject,
+        disableBrandTitleSuffix: true,
       });
 
-      expect(result.title).toBe(`Project 1 | ${AUTHOR_NAME}`);
+      expect(result.title).toBe("Project 1");
 
       expect(result.description).toBe("Mock body content");
-      expect(result.openGraph.title).toBe(`Project 1 | ${AUTHOR_NAME}`);
+      expect(result.openGraph.title).toBe("Project 1");
       expect(result.openGraph.images[0].url).toBe(mockProject.imageURL);
       expect(result.keywords).toEqual(["React", "Typescript"]);
     });

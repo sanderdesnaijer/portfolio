@@ -1,5 +1,6 @@
 import { DocumentTextIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
+import { MAX_SEO_TITLE_LENGTH } from "./constants";
 
 export const projectType = defineType({
   name: "project",
@@ -17,6 +18,12 @@ export const projectType = defineType({
     defineField({
       name: "title",
       type: "string",
+      validation: (Rule) =>
+        Rule.required()
+          .max(MAX_SEO_TITLE_LENGTH)
+          .warning(
+            `Aim for project titles under ${MAX_SEO_TITLE_LENGTH} characters so they don't get truncated in search results`
+          ),
     }),
     defineField({
       name: "slug",

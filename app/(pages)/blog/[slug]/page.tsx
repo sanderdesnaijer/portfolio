@@ -5,7 +5,6 @@ import { PageSanity } from "@/sanity/types";
 import {
   buildPageUrl,
   convertDate,
-  generateContentTitle,
   getSignificantUpdateDate,
 } from "@/app/utils/utils";
 import { ProjectLayout } from "@/app/components/ProjectLayout";
@@ -69,7 +68,7 @@ export async function generateMetadata({
     params: { slug },
   });
 
-  const title = generateContentTitle(article.title);
+  const { title } = article;
   const description = getExcerpt(article);
   const rawImageUrl = article.imageURL || page.imageURL;
   const OG_PARAMS = "w=1200&h=630&fit=crop&auto=format";
