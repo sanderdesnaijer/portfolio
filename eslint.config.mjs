@@ -71,6 +71,7 @@ const eslintConfig = [
       "**/*.svg",
       "coverage/**",
       "public/mockServiceWorker.js",
+      ".claude",
     ],
   },
 ];

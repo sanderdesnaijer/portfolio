@@ -2,11 +2,7 @@ import { test, expect, Page } from "@playwright/test";
 import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testPageMetadata } from "../utils/metadata";
-import {
-  buildPageUrl,
-  generateContentTitle,
-  getDescriptionFromSanity,
-} from "@/app/utils/utils";
+import { buildPageUrl, getDescriptionFromSanity } from "@/app/utils/utils";
 import { fetchPage, fetchProject, fetchProjects } from "@/app/utils/api";
 import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
@@ -122,13 +118,14 @@ test.describe("projects detail", () => {
     const description = projectDescription || data!.description || "";
 
     await testPageMetadata(page, {
-      title: generateContentTitle(project!.title),
+      title: project!.title,
       description,
       url: buildPageUrl("projects", projectSlug),
       imageUrl: project!.imageURL!,
       imageAlt: project!.imageAlt,
       publishedTime: project!._createdAt,
       modifiedTime: project!._updatedAt,
+      disableBrandSuffix: true,
     });
 
     // json-ld

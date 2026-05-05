@@ -1,4 +1,5 @@
 import { defineField, defineType } from "sanity";
+import { MAX_SEO_TITLE_LENGTH } from "./constants";
 
 export const blogType = defineType({
   name: "blogPost",
@@ -11,9 +12,9 @@ export const blogType = defineType({
       type: "string",
       validation: (Rule) =>
         Rule.required()
-          .max(46)
+          .max(MAX_SEO_TITLE_LENGTH)
           .warning(
-            "Title + ' | Sander de Snaijer' should stay under 65 chars total"
+            `Aim for titles under ${MAX_SEO_TITLE_LENGTH} characters so they don't get truncated in search results`
           ),
     }),
     defineField({

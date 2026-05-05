@@ -12,7 +12,7 @@ import { notFound } from "next/navigation";
 import { pageSlugs } from "@/app/utils/routes";
 import { getProjectScheme, getVideoScheme } from "@/app/utils/jsonLDSchemes";
 import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
-import { buildPageUrl, generateContentTitle } from "@/app/utils/utils";
+import { buildPageUrl } from "@/app/utils/utils";
 import { JsonLd } from "@/app/components/JsonLd";
 import { extractVideoInfo } from "@/app/utils/videoUtils";
 import { toPlainText } from "next-sanity";
@@ -51,8 +51,12 @@ export async function generateMetadata({
     };
   }
 
-  const metadata = await generatePageMetadata({ pageSlug: slug, project });
-  const title = generateContentTitle(project.title);
+  const metadata = await generatePageMetadata({
+    pageSlug: slug,
+    project,
+    disableBrandTitleSuffix: true,
+  });
+  const { title } = project;
   return {
     ...metadata,
     title,
