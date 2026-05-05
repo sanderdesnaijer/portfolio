@@ -2,7 +2,7 @@ import { test, expect, Page } from "@playwright/test";
 import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testPageMetadata } from "../utils/metadata";
-import { buildPageUrl, generateContentTitle } from "@/app/utils/utils";
+import { buildPageUrl } from "@/app/utils/utils";
 import { fetchArticle, fetchArticles } from "@/app/utils/api";
 import { getArticleScheme } from "@/app/utils/jsonLDSchemes";
 import { getExcerpt } from "@/app/utils/blogUtils";
@@ -81,12 +81,13 @@ test.describe("blog detail", () => {
     const article = firstArticle!;
 
     await testPageMetadata(page, {
-      title: generateContentTitle(article.title),
+      title: article.title,
       description: getExcerpt(article!),
       url: buildPageUrl("blog", articleSlug),
       imageUrl: article!.imageURL!,
       publishedTime: article!.publishedAt,
       modifiedTime: article!._updatedAt || article!.publishedAt,
+      disableBrandSuffix: true,
     });
 
     const expectedJsonLd = getArticleScheme(article!, "blog", true);

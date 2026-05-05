@@ -11,16 +11,16 @@ const indexTitlePattern = new RegExp(`^.+ \\| ${escapeRegExp(AUTHOR_NAME)}$`);
 
 test.describe("Breadcrumb JSON-LD and title strategy", () => {
   test.describe("Blog detail page", () => {
-    test("should have content-first title", async ({ page }) => {
+    test("should have content-only title (no brand suffix)", async ({
+      page,
+    }) => {
       await page.goto("/blog");
 
-      // Find the first blog link and navigate to it
       const firstLink = page.locator("ol a").first();
       await firstLink.click();
       await page.waitForURL(/\/blog\/.+/);
-      // Title should be "Article Title | Sander de Snaijer"
-      await expect(page).toHaveTitle(/^.+ \| Sander de Snaijer$/);
-      // Title should NOT start with "Sander de Snaijer"
+      await expect(page).toHaveTitle(/^.+$/);
+      await expect(page).not.toHaveTitle(/\| Sander de Snaijer$/);
       await expect(page).not.toHaveTitle(/^Sander de Snaijer \|/);
     });
 
@@ -79,13 +79,16 @@ test.describe("Breadcrumb JSON-LD and title strategy", () => {
   });
 
   test.describe("Project detail page", () => {
-    test("should have content-first title", async ({ page }) => {
+    test("should have content-only title (no brand suffix)", async ({
+      page,
+    }) => {
       await page.goto("/projects");
 
       const firstLink = page.locator("a[href^='/projects/']").first();
       await firstLink.click();
       await page.waitForURL(/\/projects\/.+/);
-      await expect(page).toHaveTitle(/^.+ \| Sander de Snaijer$/);
+      await expect(page).toHaveTitle(/^.+$/);
+      await expect(page).not.toHaveTitle(/\| Sander de Snaijer$/);
       await expect(page).not.toHaveTitle(/^Sander de Snaijer \|/);
     });
 
