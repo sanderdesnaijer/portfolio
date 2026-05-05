@@ -14,12 +14,16 @@ export async function fetchCommonData() {
       return [];
     });
   const toMenuItem = ({
+    name,
     title,
     slug,
-  }: Pick<PageSanity, "title" | "slug">): MenuItem => ({
-    title,
-    pathname: `/${slug && slug.current ? slug.current : ""}`,
-  });
+  }: Pick<PageSanity, "name" | "title" | "slug">): MenuItem => {
+    const label = (name?.trim() || title) ?? "";
+    return {
+      title: label.charAt(0).toUpperCase() + label.slice(1),
+      pathname: `/${slug && slug.current ? slug.current : ""}`,
+    };
+  };
 
   const menuItems = pages
     .filter((page) => (page.navigationLocation ?? "main") === "main")

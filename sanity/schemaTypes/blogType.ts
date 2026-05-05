@@ -9,7 +9,12 @@ export const blogType = defineType({
       name: "title",
       title: "Title",
       type: "string",
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.required()
+          .max(46)
+          .warning(
+            "Title + ' | Sander de Snaijer' should stay under 65 chars total"
+          ),
     }),
     defineField({
       name: "publishedAt",
@@ -44,7 +49,9 @@ export const blogType = defineType({
       title: "Excerpt",
       type: "text",
       rows: 3,
-      description: "Short summary for listings and SEO",
+      description: "Short summary for listings and SEO (max 160 characters)",
+      validation: (Rule) =>
+        Rule.max(160).warning("Excerpt should be under 160 characters for SEO"),
     }),
     defineField({
       name: "body",

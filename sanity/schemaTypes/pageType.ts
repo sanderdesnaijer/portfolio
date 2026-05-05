@@ -10,6 +10,8 @@ export const pageType = defineType({
     defineField({
       name: "name",
       type: "string",
+      description:
+        "Short label used in the navigation and footer menu. Falls back to Title if empty.",
     }),
     defineField({
       name: "title",
