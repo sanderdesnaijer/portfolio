@@ -1,6 +1,6 @@
 "use server";
 
-import { NotFound } from "@/app/components/NotFound";
+import { notFound } from "next/navigation";
 import { PageLayout } from "@/app/components/PageLayout";
 import { generateMetaData } from "@/app/utils/metadata";
 import {
@@ -233,14 +233,7 @@ const TagsPage = async ({ params }: { params: Params }) => {
     taggedJobs[0]?.tags?.find((t) => toTagSlug(t.label) === slug)?.label;
 
   if (!label) {
-    return (
-      <NotFound
-        title={t("error.404.tag.title")}
-        description={t("error.404.tag.description")}
-        action={t("error.404.tag.action")}
-        href="/tags"
-      />
-    );
+    notFound();
   }
 
   const intro = tag?.intro;
