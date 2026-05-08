@@ -10,8 +10,8 @@ const CHART_DATA = [
   { label: "Nose", count: 30, color: "#059669" },
   { label: "Cheeks", count: 28, color: "#db2777" },
   { label: "Eyebrows", count: 20, color: "#d97706" },
-  { label: "Forehead", count: 12, color: "#4f46e5" },
-  { label: "Tessellation", count: 228, color: "#94a3b8" },
+  { label: "Forehead", count: 23, color: "#4f46e5" },
+  { label: "Tessellation", count: 217, color: "#94a3b8" },
 ];
 
 const TOTAL = 478;
