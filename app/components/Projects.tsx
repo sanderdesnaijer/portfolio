@@ -1,7 +1,6 @@
-import { toPlainText } from "next-sanity";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { ProjectListItem } from "./ProjectListItem";
-import { truncateText } from "../utils/utils";
+import { getProjectExcerpt } from "../utils/utils";
 import { useTranslations } from "next-intl";
 
 const Projects = ({
@@ -21,27 +20,20 @@ const Projects = ({
         aria-label={t("pages.project.projects")}
         className="group mt-0 grid gap-10 pl-0"
       >
-        {projects.map((project, index) => {
-          const body =
-            project?.body && project?.body.length
-              ? truncateText(toPlainText(project.body), 200)
-              : null;
-
-          return (
-            <ProjectListItem
-              key={project._id}
-              href={`/${pageSlug}/${project.slug.current}`}
-              date={project.publishedAt}
-              imageURL={project.imageURL}
-              imageALT={project.mainImage?.alt}
-              title={project.title}
-              tags={project.tags}
-              body={body}
-              index={index}
-              headingLevel={headingLevel}
-            />
-          );
-        })}
+        {projects.map((project, index) => (
+          <ProjectListItem
+            key={project._id}
+            href={`/${pageSlug}/${project.slug.current}`}
+            date={project.publishedAt}
+            imageURL={project.imageURL}
+            imageALT={project.mainImage?.alt}
+            title={project.title}
+            tags={project.tags}
+            body={getProjectExcerpt(project)}
+            index={index}
+            headingLevel={headingLevel}
+          />
+        ))}
       </ol>
     </div>
   );

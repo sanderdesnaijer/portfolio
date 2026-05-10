@@ -126,7 +126,7 @@ function LatestItem({
           </Link>
         </div>
         {excerpt ? (
-          <p className="relative z-10 mt-1 mb-0 text-sm text-neutral-600 dark:text-neutral-400">
+          <p className="relative z-10 mt-1 mb-0 line-clamp-3 text-sm text-neutral-600 dark:text-neutral-400">
             {excerpt}
           </p>
         ) : null}

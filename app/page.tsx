@@ -57,6 +57,13 @@ export default async function Home() {
 
   const { setting, menuItems } = commonData;
 
+  const heroHeading = t("pages.home.heroHeadingStart");
+  const lastSpaceIndex = heroHeading.lastIndexOf(" ");
+  const firstLine =
+    lastSpaceIndex !== -1 ? heroHeading.slice(0, lastSpaceIndex) : heroHeading;
+  const secondLine =
+    lastSpaceIndex !== -1 ? heroHeading.slice(lastSpaceIndex + 1) : "";
+
   if (!setting || !menuItems) {
     return (
       <NotFound
@@ -86,8 +93,14 @@ export default async function Home() {
               aria-label={t("pages.home.introSectionAriaLabel")}
               className="my-8 mb-0 md:my-12 md:mb-0"
             >
-              <h1 className="mb-0 text-center text-4xl font-extrabold tracking-tight md:text-left md:text-5xl lg:text-6xl">
-                {t("pages.home.heroHeadingStart")}
+              <h1 className="mb-0 text-center text-5xl font-extrabold tracking-tight md:text-left md:text-8xl">
+                {firstLine}
+                {secondLine && (
+                  <>
+                    <br />
+                    {secondLine}
+                  </>
+                )}
               </h1>
               <div className="mb-6 flex flex-col-reverse items-center gap-8 md:flex-row md:items-center md:gap-12">
                 <p className="flex-1 text-center text-sm leading-relaxed text-neutral-600 md:text-left md:text-base dark:text-neutral-400">

@@ -6,10 +6,9 @@ import { generateMetaData } from "@/app/utils/metadata";
 import {
   buildPageUrl,
   generateContentTitle,
+  getProjectExcerpt,
   toTagSlug,
-  truncateText,
 } from "@/app/utils/utils";
-import { toPlainText } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { client } from "@/sanity/lib/client";
 import {
@@ -257,27 +256,20 @@ const TagsPage = async ({ params }: { params: Params }) => {
               aria-label={t("pages.tags.tagProjects", { label })}
               className="group mt-0 grid gap-10 pl-0"
             >
-              {taggedProjects.map((project, index) => {
-                const body =
-                  project?.body && project?.body.length
-                    ? truncateText(toPlainText(project.body), 200)
-                    : null;
-
-                return (
-                  <ProjectListItem
-                    key={project._id}
-                    href={`/${pageSlugs.projects}/${project.slug.current}`}
-                    date={project.publishedAt}
-                    imageURL={project.imageURL}
-                    imageALT={project.mainImage?.alt}
-                    title={project.title}
-                    tags={project.tags}
-                    body={body}
-                    index={index}
-                    headingLevel="h3"
-                  />
-                );
-              })}
+              {taggedProjects.map((project, index) => (
+                <ProjectListItem
+                  key={project._id}
+                  href={`/${pageSlugs.projects}/${project.slug.current}`}
+                  date={project.publishedAt}
+                  imageURL={project.imageURL}
+                  imageALT={project.mainImage?.alt}
+                  title={project.title}
+                  tags={project.tags}
+                  body={getProjectExcerpt(project)}
+                  index={index}
+                  headingLevel="h3"
+                />
+              ))}
             </ol>
           </div>
         )}

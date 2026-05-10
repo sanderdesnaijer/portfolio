@@ -73,7 +73,8 @@ export const projectsQuery = groq`
     title,
     slug,
     mainImage,
-    body,    
+    body,
+    excerpt,
     "imageURL": mainImage.asset->url,
     "tags": tags[]->{
       _id,
@@ -319,6 +320,7 @@ export const projectsWithTagsFullQuery = groq`
     slug,
     mainImage,
     body,
+    excerpt,
     "imageURL": mainImage.asset->url,
     "tags": tags[]->{ _id, label },
     jsonLdType,
