@@ -2,6 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { Project } from "./Project";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { mockProject } from "../test-utils/mockProjects";
+import { getTranslationKey } from "../test-utils/i18n";
 
 jest.mock("@portabletext/react", () => ({
   PortableText: ({ value }: { value: unknown }) => (
@@ -129,7 +130,9 @@ describe("Project Component", () => {
     render(<Project project={projectWithFaq} />);
 
     expect(
-      screen.getByRole("heading", { name: "Frequently Asked Questions" })
+      screen.getByRole("heading", {
+        name: getTranslationKey("pages.project.faqHeading"),
+      })
     ).toBeInTheDocument();
     expect(screen.getByText("What is this project?")).toBeInTheDocument();
     expect(screen.getByText("How does it work?")).toBeInTheDocument();
@@ -138,7 +141,9 @@ describe("Project Component", () => {
   it("does not render the FAQ section when faq is empty", () => {
     render(<Project project={{ ...mockProject, faq: [] }} />);
     expect(
-      screen.queryByRole("heading", { name: "Frequently Asked Questions" })
+      screen.queryByRole("heading", {
+        name: getTranslationKey("pages.project.faqHeading"),
+      })
     ).not.toBeInTheDocument();
   });
 

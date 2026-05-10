@@ -48,14 +48,15 @@ export const Tags: React.FC<TagsProps> = ({
     return null;
   }
 
-  const sortedTags = maxTags ? prioritizeTags(tags) : tags;
-  const visibleTags = maxTags ? sortedTags.slice(0, maxTags) : sortedTags;
-  const remainingCount = maxTags ? tags.length - visibleTags.length : 0;
+  const hasMaxTags = maxTags !== undefined;
+  const sortedTags = hasMaxTags ? prioritizeTags(tags) : tags;
+  const visibleTags = hasMaxTags ? sortedTags.slice(0, maxTags) : sortedTags;
+  const remainingCount = hasMaxTags ? tags.length - visibleTags.length : 0;
 
   return (
     <ul
       aria-label={t("generic.relatedTags", { context: context || "" })}
-      className="0 mt-4 flex list-none flex-wrap pl-0 text-xs"
+      className="mt-4 flex list-none flex-wrap pl-0 text-xs"
     >
       {visibleTags.map((tag) => (
         <li

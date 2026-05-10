@@ -1,5 +1,4 @@
 "use server";
-// import type { ReactNode } from "react";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
   pageQuery,
@@ -22,7 +21,6 @@ import { JsonLd } from "./components/JsonLd";
 import SiteLogo from "@/public/logo.svg";
 import { Footer } from "./components/Footer";
 import { LatestSection } from "./components/LatestSection";
-// import { AUTHOR_NAME } from "./utils/constants";
 import { Header } from "./components/Header";
 import Link from "next/link";
 import { toTagSlug } from "./utils/utils";
