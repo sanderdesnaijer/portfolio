@@ -83,6 +83,65 @@ describe("Project Component", () => {
     expect(screen.queryByText("Website")).not.toBeInTheDocument();
   });
 
+  it("renders the FAQ section when faq items are provided", () => {
+    const projectWithFaq: ProjectTypeSanity = {
+      ...mockProject,
+      faq: [
+        {
+          _key: "faq-1",
+          question: "What is this project?",
+          answer: [
+            {
+              _type: "block",
+              _key: "faq-1-answer",
+              children: [
+                {
+                  _type: "span",
+                  text: "It is a test project answer.",
+                  marks: [],
+                },
+              ],
+              style: "normal",
+            },
+          ],
+        },
+        {
+          _key: "faq-2",
+          question: "How does it work?",
+          answer: [
+            {
+              _type: "block",
+              _key: "faq-2-answer",
+              children: [
+                {
+                  _type: "span",
+                  text: "It works by rendering blocks.",
+                  marks: [],
+                },
+              ],
+              style: "normal",
+            },
+          ],
+        },
+      ],
+    };
+
+    render(<Project project={projectWithFaq} />);
+
+    expect(
+      screen.getByRole("heading", { name: "Frequently Asked Questions" })
+    ).toBeInTheDocument();
+    expect(screen.getByText("What is this project?")).toBeInTheDocument();
+    expect(screen.getByText("How does it work?")).toBeInTheDocument();
+  });
+
+  it("does not render the FAQ section when faq is empty", () => {
+    render(<Project project={{ ...mockProject, faq: [] }} />);
+    expect(
+      screen.queryByRole("heading", { name: "Frequently Asked Questions" })
+    ).not.toBeInTheDocument();
+  });
+
   it("renders correctly with an empty project object", () => {
     const emptyProject = {} as ProjectTypeSanity;
     render(<Project project={emptyProject} />);

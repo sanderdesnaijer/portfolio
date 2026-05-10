@@ -112,9 +112,9 @@ test.describe("projects detail", () => {
     test.setTimeout(60_000);
     test.skip(!project, "No projects available from API");
     const data = await fetchPage("projects");
-    const projectDescription = project!.body?.length
-      ? getDescriptionFromSanity(project!.body)
-      : "";
+    const projectDescription =
+      project!.excerpt ||
+      (project!.body?.length ? getDescriptionFromSanity(project!.body) : "");
     const description = projectDescription || data!.description || "";
 
     await testPageMetadata(page, {

@@ -1130,6 +1130,69 @@ describe("utils/jsonLDSchemes", () => {
   });
 
   describe("getProjectScheme", () => {
+    it("should prefer excerpt over body text for description", () => {
+      const project: ProjectTypeSanity = {
+        title: "Excerpt Project",
+        slug: { current: "excerpt-project", _type: "slug" },
+        imageURL: "https://example.com/image.jpg",
+        excerpt: "Concise excerpt for SEO.",
+        body: [
+          {
+            _type: "block",
+            _key: "jsonld-excerpt-1",
+            children: [
+              {
+                text: "Long body content that should not be used.",
+                _type: "span",
+                marks: [],
+              },
+            ],
+            style: "",
+          },
+        ],
+        jsonLdType: ["WebApplication"],
+        publishedAt: "2023-01-01T00:00:00.000Z",
+        _id: "",
+        _rev: "",
+        _type: "",
+        _createdAt: "2023-01-01T00:00:00.000Z",
+        _updatedAt: "2023-01-02T00:00:00.000Z",
+      };
+
+      const result = getProjectScheme(project, "projects");
+
+      expect(result.description).toBe("Concise excerpt for SEO.");
+    });
+
+    it("should fall back to body text when excerpt is missing", () => {
+      const project: ProjectTypeSanity = {
+        title: "Body Only Project",
+        slug: { current: "body-only", _type: "slug" },
+        imageURL: "https://example.com/image.jpg",
+        body: [
+          {
+            _type: "block",
+            _key: "jsonld-body-only-1",
+            children: [
+              { text: "Body fallback content.", _type: "span", marks: [] },
+            ],
+            style: "",
+          },
+        ],
+        jsonLdType: ["WebApplication"],
+        publishedAt: "2023-01-01T00:00:00.000Z",
+        _id: "",
+        _rev: "",
+        _type: "",
+        _createdAt: "2023-01-01T00:00:00.000Z",
+        _updatedAt: "2023-01-02T00:00:00.000Z",
+      };
+
+      const result = getProjectScheme(project, "projects");
+
+      expect(result.description).toBe("Body fallback content.");
+    });
+
     it("should include context and page relationships when shouldIncludeContext is true", () => {
       const project: ProjectTypeSanity = {
         title: "Flutter Tabata whip timer",

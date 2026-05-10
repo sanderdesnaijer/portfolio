@@ -209,6 +209,23 @@ describe("app/utils/metadata", () => {
       expect(result.keywords).toEqual(["React", "Typescript"]);
     });
 
+    it("should prefer project.excerpt over project body for description", async () => {
+      (sanityFetch as jest.Mock)
+        .mockResolvedValueOnce(mockPage)
+        .mockResolvedValueOnce(undefined);
+
+      const result = await generatePageMetadata({
+        pageSlug: "page-slug",
+        project: {
+          ...mockProject,
+          excerpt: "Short SEO-friendly excerpt",
+        },
+        disableBrandTitleSuffix: true,
+      });
+
+      expect(result.description).toBe("Short SEO-friendly excerpt");
+    });
+
     it("should correctly set publishedTime and modifiedTime without project", async () => {
       (sanityFetch as jest.Mock).mockResolvedValueOnce(mockPage);
       const pageSlug = "page-slug";
