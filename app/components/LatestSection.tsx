@@ -4,6 +4,7 @@ import { ProjectTypeSanity } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
 import { pageSlugs } from "../utils/routes";
 import { toTagSlug } from "../utils/utils";
+import ChevronRight from "@/public/icons/chevron-right.svg";
 
 const MAX_TAGS = 3;
 
@@ -28,6 +29,8 @@ interface LatestSectionProps {
   posts: LatestPostPreview[];
   latestProjectsLabel: string;
   latestPostsLabel: string;
+  viewProjectsLabel: string;
+  readArticlesLabel: string;
 }
 
 function formatMonthYear(date: string): string {
@@ -121,18 +124,31 @@ function LatestItem({
   );
 }
 
+const ctaLinkClass =
+  "group/cta inline-flex shrink-0 items-center gap-1 text-sm font-medium no-underline hover:underline";
+const ctaIconClass =
+  "h-4 w-4 transition-transform group-hover/cta:translate-x-1";
+
 export const LatestSection = ({
   projects,
   posts,
   latestProjectsLabel,
   latestPostsLabel,
+  viewProjectsLabel,
+  readArticlesLabel,
 }: LatestSectionProps) => {
   return (
     <section className="mt-12 space-y-8 pb-4 md:mt-16">
       <div>
-        <h2 className="mb-4 text-xs font-bold tracking-widest text-neutral-500 uppercase dark:text-neutral-400">
-          {latestProjectsLabel}
-        </h2>
+        <div className="mb-4 flex items-center justify-between gap-4">
+          <h2 className="m-0 text-xs font-bold tracking-widest text-neutral-500 uppercase dark:text-neutral-400">
+            {latestProjectsLabel}
+          </h2>
+          <Link href={`/${pageSlugs.projects}`} className={ctaLinkClass}>
+            {viewProjectsLabel}
+            <ChevronRight aria-hidden="true" className={ctaIconClass} />
+          </Link>
+        </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {projects.map((project) =>
             project.slug ? (
@@ -152,9 +168,15 @@ export const LatestSection = ({
       </div>
 
       <div className="border-neutral-300 pb-6 dark:border-neutral-700">
-        <h2 className="mb-4 text-xs font-bold tracking-widest text-neutral-500 uppercase dark:text-neutral-400">
-          {latestPostsLabel}
-        </h2>
+        <div className="mb-4 flex items-center justify-between gap-4">
+          <h2 className="m-0 text-xs font-bold tracking-widest text-neutral-500 uppercase dark:text-neutral-400">
+            {latestPostsLabel}
+          </h2>
+          <Link href={`/${pageSlugs.blog}`} className={ctaLinkClass}>
+            {readArticlesLabel}
+            <ChevronRight aria-hidden="true" className={ctaIconClass} />
+          </Link>
+        </div>
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {posts.map((post, i) =>
             post.slug ? (

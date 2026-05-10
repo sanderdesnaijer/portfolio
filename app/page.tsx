@@ -25,6 +25,7 @@ import { LatestSection } from "./components/LatestSection";
 // import { AUTHOR_NAME } from "./utils/constants";
 import { Header } from "./components/Header";
 import Link from "next/link";
+import { toTagSlug } from "./utils/utils";
 
 const fetchPageData = cache(async function fetchPageData() {
   return Promise.all([
@@ -85,53 +86,40 @@ export default async function Home() {
           <div className="flex min-h-full flex-col">
             <section
               aria-label={t("pages.home.introSectionAriaLabel")}
-              className="my-8 flex flex-col-reverse items-center gap-8 md:my-12 md:flex-row md:items-center md:gap-12"
+              className="my-8 mb-0 md:my-12 md:mb-0"
             >
-              <div className="flex-1 text-center md:text-left">
-                <h1 className="mb-4 text-4xl font-extrabold tracking-tight md:text-5xl lg:text-6xl">
-                  {t("pages.home.heroHeadingStart")}
-                </h1>
-                <p className="mb-6 text-sm leading-relaxed text-neutral-600 md:text-base dark:text-neutral-400">
+              <h1 className="mb-0 text-center text-4xl font-extrabold tracking-tight md:text-left md:text-5xl lg:text-6xl">
+                {t("pages.home.heroHeadingStart")}
+              </h1>
+              <div className="mb-6 flex flex-col-reverse items-center gap-8 md:flex-row md:items-center md:gap-12">
+                <p className="flex-1 text-center text-sm leading-relaxed text-neutral-600 md:text-left md:text-base dark:text-neutral-400">
                   {t("pages.home.heroSubtitle")}
                 </p>
-                <div className="mb-6 flex flex-wrap justify-center gap-2 md:justify-start">
-                  {[
-                    "React",
-                    "TypeScript",
-                    "MediaPipe",
-                    "WebGL",
-                    "OpenLayers",
-                    "Arduino",
-                  ].map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full border border-neutral-200 px-3 py-1 text-xs font-medium text-neutral-700 dark:border-neutral-700 dark:text-neutral-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                <div className="relative flex shrink-0 flex-col items-center">
+                  <SiteLogo className="h-36 transition-colors duration-200 [--logoBgColor:transparent] [--logoShapeColor:#0a0a0a] md:h-48 dark:[--logoShapeColor:white]" />
+                  <ul className="mt-1 flex max-w-36 list-none flex-wrap justify-center pl-0 text-xs md:max-w-48">
+                    {[
+                      "React",
+                      "TypeScript",
+                      "MediaPipe",
+                      "WebGL",
+                      "OpenLayers",
+                      "Arduino",
+                    ].map((tech) => (
+                      <li
+                        key={tech}
+                        className="mt-0 pr-2 pl-0 font-bold text-gray-600 dark:text-gray-400"
+                      >
+                        <Link
+                          className="relative z-10 no-underline hover:underline"
+                          href={`/tags/${toTagSlug(tech)}`}
+                        >
+                          {tech}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <div className="flex flex-wrap justify-center gap-3 md:justify-start">
-                  <Link
-                    href="/projects"
-                    className="inline-flex items-center gap-1 rounded-full bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white no-underline transition-colors hover:bg-neutral-700 dark:bg-white dark:text-neutral-900 dark:hover:bg-neutral-200"
-                  >
-                    {t("pages.home.viewProjects")}
-                    <span aria-hidden="true">&rarr;</span>
-                  </Link>
-                  <Link
-                    href="/blog"
-                    className="inline-flex items-center rounded-full border border-neutral-300 px-5 py-2.5 text-sm font-medium text-neutral-900 no-underline transition-colors hover:bg-neutral-100 dark:border-neutral-600 dark:text-white dark:hover:bg-neutral-800"
-                  >
-                    {t("pages.home.readArticles")}
-                  </Link>
-                </div>
-              </div>
-              <div className="relative flex shrink-0 flex-col items-center">
-                <SiteLogo className="h-36 transition-colors duration-200 [--logoBgColor:transparent] [--logoShapeColor:#0a0a0a] md:h-48 dark:[--logoShapeColor:white]" />
-                {/* <span className="mt-3 text-center text-xs text-neutral-400 italic dark:text-neutral-500">
-                  {t("pages.home.heroAnnotation")}
-                </span> */}
               </div>
             </section>
 
@@ -140,6 +128,8 @@ export default async function Home() {
               posts={latestPosts ?? []}
               latestProjectsLabel={t("pages.home.latestProjects")}
               latestPostsLabel={t("pages.home.latestPosts")}
+              viewProjectsLabel={t("pages.home.viewProjects")}
+              readArticlesLabel={t("pages.home.readArticles")}
             />
           </div>
         </main>
