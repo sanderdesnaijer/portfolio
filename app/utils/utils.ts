@@ -1,7 +1,7 @@
 import { AUTHOR_NAME } from "./constants";
 import { toPlainText } from "next-sanity";
-import { Block } from "@/sanity/types/types";
-import { ProjectTypeSanity } from "@/sanity/types";
+import type { Block } from "@/sanity/types/types";
+import type { ProjectTypeSanity } from "@/sanity/types";
 import envConfig from "@/envConfig";
 
 /**
@@ -98,9 +98,10 @@ export const getDescriptionFromSanity = (sanityBlock: Block[]): string => {
  * Returns the card/listing description for a project: prefers the authored
  * excerpt, falls back to a truncated body, or null when neither exists.
  */
-export const getProjectExcerpt = (
-  project: Pick<ProjectTypeSanity, "excerpt" | "body">
-): string | null => {
+export const getProjectExcerpt = (project: {
+  excerpt?: ProjectTypeSanity["excerpt"];
+  body?: ProjectTypeSanity["body"] | null;
+}): string | null => {
   if (project.excerpt) return project.excerpt;
   if (project.body && project.body.length > 0) {
     return getDescriptionFromSanity(project.body);
