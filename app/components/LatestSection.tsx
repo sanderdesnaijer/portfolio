@@ -141,7 +141,7 @@ export const LatestSection = ({
     <section className="mt-12 space-y-8 pb-4 md:mt-16">
       <div>
         <div className="mb-4 flex items-center justify-between gap-4">
-          <h2 className="m-0 text-xs font-bold tracking-widest text-neutral-500 uppercase dark:text-neutral-400">
+          <h2 className="m-0 text-base font-semibold text-neutral-900 dark:text-neutral-100">
             {latestProjectsLabel}
           </h2>
           <Link href={`/${pageSlugs.projects}`} className={ctaLinkClass}>
@@ -169,7 +169,7 @@ export const LatestSection = ({
 
       <div className="border-neutral-300 pb-6 dark:border-neutral-700">
         <div className="mb-4 flex items-center justify-between gap-4">
-          <h2 className="m-0 text-xs font-bold tracking-widest text-neutral-500 uppercase dark:text-neutral-400">
+          <h2 className="m-0 text-base font-semibold text-neutral-900 dark:text-neutral-100">
             {latestPostsLabel}
           </h2>
           <Link href={`/${pageSlugs.blog}`} className={ctaLinkClass}>
