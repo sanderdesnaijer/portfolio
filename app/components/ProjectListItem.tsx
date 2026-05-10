@@ -70,7 +70,7 @@ export const ProjectListItem = ({
         )}
 
         {body ? (
-          <p className="mt-0 text-base text-gray-800 group-hover/item:text-gray-900 dark:text-gray-100 dark:group-hover/item:text-gray-50">
+          <p className="mt-0 line-clamp-3 text-base text-gray-800 group-hover/item:text-gray-900 dark:text-gray-100 dark:group-hover/item:text-gray-50">
             {body}
           </p>
         ) : null}
