@@ -211,9 +211,11 @@ export async function generatePageMetadata({
     : (page?.disableBrandTitleSuffix ?? disableBrandTitleSuffix ?? false);
   const title = disableBrand ? baseTitle : `${baseTitle} | ${brand}`;
 
-  const projectDescription = project?.body?.length
-    ? getDescriptionFromSanity(project.body)
-    : "";
+  const projectDescription = project?.excerpt
+    ? project.excerpt
+    : project?.body?.length
+      ? getDescriptionFromSanity(project.body)
+      : "";
   const description =
     descriptionOverride ||
     projectDescription ||

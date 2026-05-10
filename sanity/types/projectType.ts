@@ -1,6 +1,12 @@
 import { SanityDocument } from "@sanity/client";
-import { Block, IconLink } from "./types";
+import { Block, IconLink, TextBlock } from "./types";
 import { TagSanity } from "./tagType";
+
+export interface FaqItem {
+  _key: string;
+  question: string;
+  answer: TextBlock[];
+}
 
 export interface ProjectTypeSanity extends SanityDocument {
   title: string;
@@ -17,8 +23,10 @@ export interface ProjectTypeSanity extends SanityDocument {
     alt: string;
   };
   publishedAt: string;
+  excerpt?: string;
   body: Array<Block>;
   links?: Array<IconLink>;
+  faq?: FaqItem[];
   companyName?: string;
   companyLogo?: string;
   tags?: TagSanity[];

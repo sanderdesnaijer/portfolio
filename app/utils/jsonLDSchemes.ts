@@ -74,7 +74,7 @@ export const getProjectScheme = (
     name: project.title,
     url,
     image: project.imageURL,
-    description: project.body && toPlainText(project.body),
+    description: project.excerpt || (project.body && toPlainText(project.body)),
     datePublished: project.publishedAt || project._createdAt,
     dateModified:
       project._updatedAt || project.publishedAt || project._createdAt,

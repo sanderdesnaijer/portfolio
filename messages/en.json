@@ -21,7 +21,8 @@
       "resources": "Resources",
       "projects": "Projects",
       "relatedProjects": "Related Projects",
-      "updatedAt": "Updated {date}"
+      "updatedAt": "Updated {date}",
+      "faqHeading": "Frequently Asked Questions"
     },
     "home": {
       "latestProjects": "Latest Projects",

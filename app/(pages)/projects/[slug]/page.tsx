@@ -10,7 +10,11 @@ import { generatePageMetadata } from "@/app/utils/metadata";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { pageSlugs } from "@/app/utils/routes";
-import { getProjectScheme, getVideoScheme } from "@/app/utils/jsonLDSchemes";
+import {
+  getFAQScheme,
+  getProjectScheme,
+  getVideoScheme,
+} from "@/app/utils/jsonLDSchemes";
 import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
 import { buildPageUrl } from "@/app/utils/utils";
 import { JsonLd } from "@/app/components/JsonLd";
@@ -84,12 +88,16 @@ const ProductPage = async ({ params }: { params: QueryParams }) => {
   const pageUrl = buildPageUrl(slug, project.slug.current);
   const videos = extractVideoInfo(project.body);
   const projectDescription =
-    (project.body && toPlainText(project.body)) || project.title;
+    project.excerpt ||
+    (project.body && toPlainText(project.body)) ||
+    project.title;
+  const hasFaq = project.faq && project.faq.length > 0;
 
   return (
     <>
       <JsonLd value={jsonLd} />
       <JsonLd value={breadcrumbJsonLd} />
+      {hasFaq && <JsonLd value={getFAQScheme(project.faq!)} />}
       {videos.map((video) => (
         <JsonLd
           key={video.videoId}

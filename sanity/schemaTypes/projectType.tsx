@@ -152,12 +152,28 @@ export const projectType = defineType({
       type: "datetime",
     }),
     defineField({
+      name: "excerpt",
+      title: "Excerpt",
+      type: "text",
+      rows: 3,
+      description: "Short summary for listings and SEO (max 160 characters)",
+      validation: (Rule) =>
+        Rule.max(160).warning("Excerpt should be under 160 characters for SEO"),
+    }),
+    defineField({
       name: "body",
       type: "blockContent",
     }),
     defineField({
       name: "links",
       type: "link",
+    }),
+    defineField({
+      name: "faq",
+      title: "FAQ",
+      type: "faq",
+      description:
+        "Frequently asked questions shown at the bottom of the project and used for FAQ schema markup",
     }),
     defineField({
       name: "job",
