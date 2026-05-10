@@ -41,7 +41,7 @@ function RelatedBlogCard({ blog }: { blog: RelatedBlog }) {
       </Link>
       <div className="[&_ul]:mt-2 [&_ul]:mb-0">
         {blog.tags && blog.tags.length > 0 && (
-          <Tags tags={blog.tags.slice(0, 3)} context={blog.title} />
+          <Tags tags={blog.tags} maxTags={3} context={blog.title} />
         )}
       </div>
     </div>

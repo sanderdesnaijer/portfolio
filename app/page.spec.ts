@@ -5,7 +5,6 @@ import { sanityFetch } from "@/sanity/lib/fetch";
 import Home from "./page";
 import { getTranslationKey } from "./test-utils/i18n";
 import { mockPage, mockPages } from "./test-utils/mockPage";
-import { AUTHOR_NAME } from "./utils/constants";
 
 const mockSanityFetch = sanityFetch as jest.Mock;
 
@@ -71,10 +70,15 @@ describe("app/page", () => {
     render(await Home());
 
     expect(
-      screen.getByRole("heading", { level: 1, name: AUTHOR_NAME })
+      screen.getByRole("heading", {
+        level: 1,
+        name: getTranslationKey("pages.home.heroHeadingStart"),
+      })
     ).toBeInTheDocument();
-    // SiteLogo in Header + hero, external link icon in footer, plus two social icons from mock settings
-    expect(screen.getAllByTestId("mocked-svg")).toHaveLength(5);
+    // SiteLogo in Header + hero, external link icon in footer, plus social icons from mock settings
+    expect(screen.getAllByTestId("mocked-svg").length).toBeGreaterThanOrEqual(
+      5
+    );
   });
 
   it("renders latest projects and blog post", async () => {

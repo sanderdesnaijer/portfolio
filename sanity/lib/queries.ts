@@ -96,9 +96,11 @@ export const projectQuery = groq`
     publishedAt,
     title,
     description,
+    excerpt,
     mainImage,
     body,
     links,
+    faq,
     slug,
     "companyName": job->companyName,
     "companyLogo": job->logo.asset->url,
@@ -240,6 +242,7 @@ export const latestProjectsQuery = groq`
     publishedAt,
     "imageURL": mainImage.asset->url,
     "imageAlt": mainImage.alt,
+    "excerpt": coalesce(excerpt, pt::text(body)[0..150]),
     "tags": tags[]->{
       _id,
       label
@@ -255,6 +258,7 @@ export const latestBlogQuery = groq`
     publishedAt,
     "imageURL": mainImage.asset->url,
     "imageAlt": mainImage.alt,
+    "excerpt": coalesce(excerpt, pt::text(body)[0..150]),
     "tags": tags[]->{
       _id,
       label

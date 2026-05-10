@@ -11,7 +11,7 @@ import { mockConsent } from "../utils/localStorage";
 
 async function checkHomePageElements(page: Page) {
   await expect(
-    page.getByRole("heading", { name: /Sander de Snaijer/i })
+    page.getByRole("heading", { name: /Hi, I'm Sander/i })
   ).toBeVisible();
 
   const socialButtons = [
@@ -29,9 +29,15 @@ async function checkHomePageElements(page: Page) {
   }
 
   await expect(page.getByRole("main").getByTestId("site-logo")).toBeVisible();
-  await expect(page.getByRole("link", { name: /About/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Projects/i })).toBeVisible();
-  await expect(page.getByRole("link", { name: /Blog/i })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "About", exact: true })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Projects", exact: true })
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Blog", exact: true })
+  ).toBeVisible();
 }
 
 test.describe("home", () => {
@@ -50,7 +56,7 @@ test.describe("home", () => {
   });
 
   test("should navigate between home and subpages", async ({ page }) => {
-    await testNavigation(page, "/", "Sander de Snaijer");
+    await testNavigation(page, "/", "Hi, I'm Sander");
   });
 
   test("should include accurate metadata", async ({ page }) => {

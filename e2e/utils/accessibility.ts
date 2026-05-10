@@ -8,7 +8,8 @@ export async function runAccessibilityTest(page: Page) {
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
     .include("main")
-    .exclude(["iframe", "youtube-video"])
+    .exclude("iframe")
+    .exclude("youtube-video")
     .disableRules(["heading-order", "frame-title"])
     .analyze();
 

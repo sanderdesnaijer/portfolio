@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { ProjectLayout } from "./ProjectLayout";
 import { urlFor } from "@/sanity/lib/image";
 import { portableTextComponents } from "./portableTextComponents";
+import { BlogContent } from "./BlogContent";
 
 const imageWidth = 860;
 const imageHeight = 440;
@@ -72,6 +73,21 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
           components={portableTextComponents}
         />
       ) : null}
+      {project?.faq && project.faq.length > 0 && (
+        <section>
+          <h2>{t("pages.project.faqHeading")}</h2>
+          <dl>
+            {project.faq.map((item) => (
+              <div key={item._key}>
+                <dt className="font-semibold">{item.question}</dt>
+                <dd>
+                  <BlogContent value={item.answer} />
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )}
     </ProjectLayout>
   );
 };
