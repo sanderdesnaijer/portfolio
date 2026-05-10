@@ -105,7 +105,7 @@ function LatestItem({
                 <Link
                   key={tag._id}
                   href={`/tags/${toTagSlug(tag.label)}`}
-                  className="inline-flex items-center rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-neutral-900 no-underline shadow-sm ring-1 ring-black/5 backdrop-blur-sm hover:no-underline dark:bg-black/70 dark:text-neutral-100"
+                  className="inline-flex items-center bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-neutral-900 no-underline shadow-sm ring-1 ring-black/5 backdrop-blur-sm hover:no-underline dark:bg-black/70 dark:text-neutral-100"
                 >
                   {tag.label}
                 </Link>
