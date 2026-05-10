@@ -44,7 +44,7 @@ function RelatedProjectCard({ project }: { project: RelatedProject }) {
       </Link>
       <div className="[&_ul]:mt-2 [&_ul]:mb-0">
         {project.tags && project.tags.length > 0 && (
-          <Tags tags={project.tags.slice(0, 3)} context={project.title} />
+          <Tags tags={project.tags} maxTags={3} context={project.title} />
         )}
       </div>
     </div>

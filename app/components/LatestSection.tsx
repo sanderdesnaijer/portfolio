@@ -2,8 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { ProjectTypeSanity } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
+import { TagSanity } from "@/sanity/types/tagType";
 import { pageSlugs } from "../utils/routes";
 import { toTagSlug } from "../utils/utils";
+import { prioritizeTags } from "./Tags";
 import ChevronRight from "@/public/icons/chevron-right.svg";
 
 const MAX_TAGS = 3;
@@ -62,7 +64,7 @@ interface LatestItemProps {
   title: string;
   href: string;
   publishedAt: string;
-  tags?: { _id: string; label: string }[];
+  tags?: TagSanity[];
   imageURL?: string | null;
   imageAlt?: string | null;
   excerpt?: string | null;
@@ -79,7 +81,9 @@ function LatestItem({
   excerpt,
   priority,
 }: LatestItemProps) {
-  const visibleTags = tags?.slice(0, MAX_TAGS);
+  const visibleTags = tags
+    ? prioritizeTags(tags).slice(0, MAX_TAGS)
+    : undefined;
   return (
     <div className="group/latest relative flex flex-col overflow-hidden transition-all">
       {imageURL ? (
@@ -122,7 +126,7 @@ function LatestItem({
           </Link>
         </div>
         {excerpt ? (
-          <p className="relative z-10 mt-1 mb-0 line-clamp-2 text-sm text-neutral-600 dark:text-neutral-400">
+          <p className="relative z-10 mt-1 mb-0 text-sm text-neutral-600 dark:text-neutral-400">
             {excerpt}
           </p>
         ) : null}

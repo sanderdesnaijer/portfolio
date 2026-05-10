@@ -28,11 +28,16 @@ export const ProjectListItem = ({
   index,
   headingLevel = "h2",
 }: ProjectListItemProps) => {
+  const formattedDate = convertDate(date, true);
+
   return (
     <li className="group/item relative mt-0 mb-0 grid grid-cols-5 justify-between pl-0 no-underline transition-opacity duration-200">
       <div className="col-span-1 md:col-span-2">
         {imageURL && imageALT && (
-          <div className="inline-block overflow-hidden">
+          <div className="relative inline-block overflow-hidden">
+            <p className="absolute top-0 right-0 z-10 mt-0 bg-neutral-900/90 px-2.5 py-0.5 text-[10px] font-semibold tracking-wide text-neutral-50 uppercase shadow-sm ring-1 ring-black/10 dark:bg-white/90 dark:text-neutral-900 dark:ring-white/40">
+              {formattedDate}
+            </p>
             <Image
               className="mt-0 mb-0 scale-100 object-fill transition group-hover:blur-[2px] group-hover/item:scale-105 group-hover/item:blur-none md:transform-gpu"
               src={imageURL}
@@ -52,15 +57,17 @@ export const ProjectListItem = ({
         >
           <DynamicElement
             as={headingLevel}
-            className={`-mt-2 mb-0 translate-x-0 text-3xl leading-10 group-hover/item:translate-x-2 md:text-[2.5rem] md:leading-11`}
+            className={`-mt-2 mb-4 translate-x-0 text-3xl leading-10 group-hover/item:translate-x-2 md:text-[2.5rem] md:leading-11`}
             size="11"
           >
             {title}
           </DynamicElement>
         </Link>
-        <p className="mt-1 mb-1 py-2 text-xs text-gray-800 uppercase group-hover/item:text-gray-900 dark:text-gray-300 dark:group-hover/item:text-gray-100">
-          {convertDate(date, true)}
-        </p>
+        {(!imageURL || !imageALT) && (
+          <p className="mt-1 mb-1 py-2 text-xs text-gray-800 uppercase group-hover/item:text-gray-900 dark:text-gray-300 dark:group-hover/item:text-gray-100">
+            {formattedDate}
+          </p>
+        )}
 
         {body ? (
           <p className="mt-0 text-base text-gray-800 group-hover/item:text-gray-900 dark:text-gray-100 dark:group-hover/item:text-gray-50">
@@ -68,7 +75,7 @@ export const ProjectListItem = ({
           </p>
         ) : null}
 
-        {tags && <Tags tags={tags} />}
+        {tags && <Tags tags={tags} maxTags={3} />}
       </div>
     </li>
   );
