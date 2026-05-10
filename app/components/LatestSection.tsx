@@ -77,7 +77,7 @@ function LatestItem({
 }: LatestItemProps) {
   const visibleTags = tags?.slice(0, MAX_TAGS);
   return (
-    <div className="group/latest relative flex flex-col overflow-hidden rounded-md border border-neutral-200 transition-all hover:border-neutral-400 dark:border-neutral-800 dark:hover:border-neutral-600">
+    <div className="group/latest relative flex flex-col overflow-hidden transition-all">
       {imageURL ? (
         <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
           <Image
@@ -88,36 +88,34 @@ function LatestItem({
             sizes="(max-width: 768px) 100vw, 33vw"
             priority={priority}
           />
+          {visibleTags?.length ? (
+            <div className="absolute inset-x-3 bottom-3 z-10 flex flex-wrap gap-1">
+              {visibleTags.map((tag) => (
+                <Link
+                  key={tag._id}
+                  href={`/tags/${toTagSlug(tag.label)}`}
+                  className="inline-flex items-center rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-neutral-900 no-underline shadow-sm ring-1 ring-black/5 backdrop-blur-sm hover:no-underline dark:bg-black/70 dark:text-neutral-100"
+                >
+                  {tag.label}
+                </Link>
+              ))}
+            </div>
+          ) : null}
         </div>
       ) : (
         <div className="aspect-[4/3] bg-neutral-100 dark:bg-neutral-900" />
       )}
-      <div className="p-4">
+      <div className="px-0 pt-3 pb-0">
         <p className="relative z-10 mt-0 mb-1 text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
           {formatMonthYear(publishedAt)}
         </p>
         <div className="[line-height:1.2]">
           <Link
             href={href}
-            className="mt-0 text-base font-normal text-neutral-900 no-underline transition-colors group-hover/latest:underline before:absolute before:inset-0 before:z-0 before:opacity-0 before:content-[''] dark:text-neutral-100"
+            className="mt-0 text-base font-semibold text-neutral-900 no-underline transition-colors group-hover/latest:underline before:absolute before:inset-0 before:z-0 before:opacity-0 before:content-[''] dark:text-neutral-100"
           >
             {title}
           </Link>
-          {visibleTags?.length ? (
-            <p className="relative z-10 mt-2 mb-0 text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
-              {visibleTags.map((tag, i) => (
-                <span key={tag._id}>
-                  <Link
-                    href={`/tags/${toTagSlug(tag.label)}`}
-                    className="relative z-10 hover:underline"
-                  >
-                    {tag.label}
-                  </Link>
-                  {i < visibleTags.length - 1 ? ", " : ""}
-                </span>
-              ))}
-            </p>
-          ) : null}
         </div>
       </div>
     </div>

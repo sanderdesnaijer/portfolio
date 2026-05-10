@@ -25,14 +25,14 @@
       "faqHeading": "Frequently Asked Questions"
     },
     "home": {
-      "latestProjects": "Latest Projects",
-      "latestPosts": "Latest Posts",
+      "latestProjects": "Latest projects",
+      "latestPosts": "Latest articles",
       "introSectionAriaLabel": "Introduction",
       "knmiAbbrTitle": "Royal Netherlands Meteorological Institute",
       "heroHeadingStart": "Hi, I'm Sander",
       "heroSubtitle": "Frontend developer from the Netherlands with a thing for building things that probably shouldn’t exist. By day I write React and TypeScript at KNMI. By night I build eyebrow-controlled Tetris, webcam duck hunts, AI experiments, Arduino gadgets, Flutter apps, 3D-printed stained glass, and chocolate molds from my 3D printer.",
-      "viewProjects": "View Projects",
-      "readArticles": "Read Articles",
+      "viewProjects": "View all projects",
+      "readArticles": "Read all articles",
       "introLead": "Hi, I'm Sander, a frontend developer from the Netherlands with a thing for building things that shouldn't exist. By day I write React and TypeScript at <knmi>KNMI</knmi> (the Dutch weather institute). By night I experiment: face-controlled Tetris, 3D-printed stained glass, Flutter apps, and webcam duck hunts."
     },
     "tags": {
