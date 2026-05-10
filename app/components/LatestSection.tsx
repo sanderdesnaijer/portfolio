@@ -14,6 +14,7 @@ export type LatestProjectPreview = Pick<
 > & {
   imageURL?: string | null;
   imageAlt?: string | null;
+  excerpt?: string | null;
 };
 
 export type LatestPostPreview = Pick<
@@ -22,6 +23,7 @@ export type LatestPostPreview = Pick<
 > & {
   imageURL?: string | null;
   imageAlt?: string | null;
+  excerpt?: string | null;
 };
 
 interface LatestSectionProps {
@@ -63,6 +65,7 @@ interface LatestItemProps {
   tags?: { _id: string; label: string }[];
   imageURL?: string | null;
   imageAlt?: string | null;
+  excerpt?: string | null;
   priority?: boolean;
 }
 
@@ -73,6 +76,7 @@ function LatestItem({
   tags,
   imageURL,
   imageAlt,
+  excerpt,
   priority,
 }: LatestItemProps) {
   const visibleTags = tags?.slice(0, MAX_TAGS);
@@ -80,6 +84,9 @@ function LatestItem({
     <div className="group/latest relative flex flex-col overflow-hidden transition-all">
       {imageURL ? (
         <div className="relative aspect-[4/3] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+          <p className="absolute top-0 right-0 z-10 mt-0 bg-neutral-900/90 px-2.5 py-0.5 text-[10px] font-semibold tracking-wide text-neutral-50 uppercase shadow-sm ring-1 ring-black/10 dark:bg-white/90 dark:text-neutral-900 dark:ring-white/40">
+            {formatMonthYear(publishedAt)}
+          </p>
           <Image
             src={buildImageUrl(imageURL)}
             alt={imageAlt || title}
@@ -106,9 +113,6 @@ function LatestItem({
         <div className="aspect-[4/3] bg-neutral-100 dark:bg-neutral-900" />
       )}
       <div className="px-0 pt-3 pb-0">
-        <p className="relative z-10 mt-0 mb-1 text-[10px] tracking-wide text-neutral-500 uppercase dark:text-neutral-400">
-          {formatMonthYear(publishedAt)}
-        </p>
         <div className="[line-height:1.2]">
           <Link
             href={href}
@@ -117,6 +121,11 @@ function LatestItem({
             {title}
           </Link>
         </div>
+        {excerpt ? (
+          <p className="relative z-10 mt-1 mb-0 line-clamp-2 text-sm text-neutral-600 dark:text-neutral-400">
+            {excerpt}
+          </p>
+        ) : null}
       </div>
     </div>
   );
@@ -138,7 +147,7 @@ export const LatestSection = ({
   return (
     <section className="mt-12 space-y-8 pb-4 md:mt-16">
       <div>
-        <div className="mb-4 flex items-center justify-between gap-4">
+        <div className="mb-0 flex items-center justify-between gap-4">
           <h2 className="m-0 text-base font-semibold text-neutral-900 dark:text-neutral-100">
             {latestProjectsLabel}
           </h2>
@@ -158,6 +167,7 @@ export const LatestSection = ({
                 tags={project.tags}
                 imageURL={project.imageURL}
                 imageAlt={project.imageAlt}
+                excerpt={project.excerpt}
                 priority
               />
             ) : null
@@ -166,7 +176,7 @@ export const LatestSection = ({
       </div>
 
       <div className="border-neutral-300 pb-6 dark:border-neutral-700">
-        <div className="mb-4 flex items-center justify-between gap-4">
+        <div className="mb-2 flex items-center justify-between gap-4">
           <h2 className="m-0 text-base font-semibold text-neutral-900 dark:text-neutral-100">
             {latestPostsLabel}
           </h2>
@@ -186,6 +196,7 @@ export const LatestSection = ({
                 tags={post.tags}
                 imageURL={post.imageURL}
                 imageAlt={post.imageAlt}
+                excerpt={post.excerpt}
                 priority={i === 0}
               />
             ) : null

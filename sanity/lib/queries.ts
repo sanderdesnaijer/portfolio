@@ -242,6 +242,7 @@ export const latestProjectsQuery = groq`
     publishedAt,
     "imageURL": mainImage.asset->url,
     "imageAlt": mainImage.alt,
+    "excerpt": coalesce(excerpt, pt::text(body)[0..150]),
     "tags": tags[]->{
       _id,
       label
@@ -257,6 +258,7 @@ export const latestBlogQuery = groq`
     publishedAt,
     "imageURL": mainImage.asset->url,
     "imageAlt": mainImage.alt,
+    "excerpt": coalesce(excerpt, pt::text(body)[0..150]),
     "tags": tags[]->{
       _id,
       label
