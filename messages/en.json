@@ -9,7 +9,8 @@
       "jobContract": "via",
       "projectCreatedAt": "created at",
       "professionalExperience": "Professional Experience",
-      "jobTitle": "Software developer"
+      "jobTitle": "Software developer",
+      "findMeOnline": "Find me online"
     },
     "blog": {
       "articles": "Blog articles",
@@ -50,7 +51,8 @@
   },
   "generic": {
     "relatedTags": "Tags{context, select, other { of {context}}}",
-    "mainNavigation": "Main navigation"
+    "mainNavigation": "Main navigation",
+    "footerNavigation": "Footer navigation"
   },
   "embed": {
     "unknownComponent": "Unknown embed component:",

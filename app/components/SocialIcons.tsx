@@ -5,9 +5,11 @@ import Link from "next/link";
 export const SocialIcons: React.FC<{
   socialMedia: IconLink[];
   className?: string;
+  iconClassName?: string;
 }> = ({
   socialMedia = [],
   className = "group left-0 md:flex gap-2 md:flex-col hidden",
+  iconClassName,
 }) => {
   return (
     <ul className={className}>
@@ -25,6 +27,7 @@ export const SocialIcons: React.FC<{
               aria-label={`${icon} icon`}
               title={icon}
               rel="noopener noreferrer"
+              className={iconClassName}
             >
               <IconComponent />
             </Link>
