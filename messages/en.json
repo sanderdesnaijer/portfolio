@@ -54,6 +54,9 @@
     "mainNavigation": "Main navigation",
     "footerNavigation": "Footer navigation"
   },
+  "footer": {
+    "description": "Frontend developer building creative browser experiments with MediaPipe, computer vision, React and hardware projects."
+  },
   "embed": {
     "unknownComponent": "Unknown embed component:",
     "interactiveDemo": "Interactive demo",

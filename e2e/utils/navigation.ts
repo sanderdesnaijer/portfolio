@@ -15,15 +15,16 @@ export async function testNavigation(
   await page.goto(fromUrl);
 
   const navLinks = mainNavLinks.filter((link) => link.url !== fromUrl);
+  const mainNav = page.getByRole("navigation", { name: "Main navigation" });
 
   for (const link of navLinks) {
     await expect(
-      page.getByRole("link", { name: link.name, exact: true })
+      mainNav.getByRole("link", { name: link.name, exact: true })
     ).toBeVisible();
   }
 
   for (const link of navLinks) {
-    const navLink = page.getByRole("link", { name: link.name, exact: true });
+    const navLink = mainNav.getByRole("link", { name: link.name, exact: true });
     await Promise.all([
       page.waitForURL(link.url),
       navLink.evaluate((el: HTMLElement) => el.click()),

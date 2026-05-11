@@ -28,13 +28,15 @@ export async function testResponsive(
   // Load the page
   await page.goto(url);
 
+  const mainNav = page.getByRole("navigation", { name: "Main navigation" });
+
   // Test each breakpoint in sequence
   for (const [, size] of Object.entries(breakpoints)) {
     await page.setViewportSize(size);
 
     // check navigation
     for (const link of navLinks) {
-      const navLink = page.getByRole("link", {
+      const navLink = mainNav.getByRole("link", {
         name: link.name,
         exact: true,
       });

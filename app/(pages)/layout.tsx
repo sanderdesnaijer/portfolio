@@ -27,6 +27,7 @@ export default async function SiteLayout({
         footerItems={footerItems}
         menuItems={menuItems}
         footerNavigationLabel={t("generic.footerNavigation")}
+        description={t("footer.description")}
       />
     </div>
   );

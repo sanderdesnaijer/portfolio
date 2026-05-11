@@ -10,9 +10,6 @@ const ExternalLinkIcon = getIcon("externalLink");
 /** Social platforms to keep in the global footer */
 const FOOTER_SOCIAL_ICONS = ["github", "linkedin", "x", "youtube"];
 
-const FOOTER_DESCRIPTION =
-  "Frontend developer building creative browser experiments with MediaPipe, computer vision, React and hardware projects.";
-
 const getFooterText = (): string => {
   return `© ${new Date().getFullYear()} ${AUTHOR_INITIALS}`;
 };
@@ -25,6 +22,7 @@ type FooterProps = {
   menuItems?: MenuItem[];
   showSeparator?: boolean;
   footerNavigationLabel: string;
+  description: string;
 };
 
 export function Footer({
@@ -35,6 +33,7 @@ export function Footer({
   menuItems = [],
   showSeparator = true,
   footerNavigationLabel,
+  description,
 }: FooterProps) {
   const footerSocials = socialMedia.filter((s) =>
     FOOTER_SOCIAL_ICONS.includes(s.icon)
@@ -97,7 +96,7 @@ export function Footer({
           {/* Description + copyright */}
           <div className="flex flex-col gap-2">
             <p className="text-xs leading-relaxed text-gray-700 dark:text-gray-300">
-              {FOOTER_DESCRIPTION}
+              {description}
             </p>
             <p className="text-xs text-gray-600 dark:text-gray-400">
               {getFooterText()}
