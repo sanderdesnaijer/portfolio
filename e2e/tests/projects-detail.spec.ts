@@ -53,7 +53,9 @@ test.describe("projects detail", () => {
       page.getByRole("heading", { name: titleRegExp(project!.title) })
     ).toBeVisible();
 
-    const link = page.getByRole("link", { name: /Projects/i });
+    const link = page
+      .getByRole("navigation", { name: "Main navigation" })
+      .getByRole("link", { name: /Projects/i });
     const href = await link.getAttribute("href");
     await link.evaluate((el: HTMLElement) => el.click());
     await expect(page).toHaveURL(href!);

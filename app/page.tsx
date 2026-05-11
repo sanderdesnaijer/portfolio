@@ -135,7 +135,10 @@ export default async function Home() {
           socialMedia={setting.socialMedia}
           cookiePolicyLabel={t("cookies.title")}
           footerItems={commonData.footerItems}
+          menuItems={menuItems}
           showSeparator={false}
+          footerNavigationLabel={t("generic.footerNavigation")}
+          description={t("footer.description")}
         />
       </div>
     </>

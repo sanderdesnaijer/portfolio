@@ -72,6 +72,7 @@ const eslintConfig = [
       "coverage/**",
       "public/mockServiceWorker.js",
       ".claude",
+      "**/migrations/**",
     ],
   },
 ];

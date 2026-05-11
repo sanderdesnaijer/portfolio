@@ -19,6 +19,7 @@ import envConfig from "@/envConfig";
 import { PageLayout } from "@/app/components/PageLayout";
 import { portableTextComponents } from "@/app/components/portableTextComponents";
 import { LinkMark } from "@/app/components/LinkMark";
+import { SocialIcons } from "@/app/components/SocialIcons";
 
 const mainImageSizeHeight = 720;
 const mainImageSizeWidth = 1280;
@@ -147,7 +148,7 @@ export default async function Page() {
             ) : null}
           </div>
 
-          <h2 className="font-normal">{t("pages.about.jobExperience")}</h2>
+          <h2>{t("pages.about.jobExperience")}</h2>
           <ol
             aria-label={t("pages.about.professionalExperience")}
             className="not-prose group/list mb-3 flex list-none flex-col gap-10 p-0"
@@ -212,6 +213,12 @@ export default async function Page() {
               );
             })}
           </ol>
+
+          <h2>{t("pages.about.findMeOnline")}</h2>
+          <SocialIcons
+            socialMedia={setting.socialMedia}
+            className="not-prose flex flex-row flex-wrap gap-4"
+          />
         </PageLayout>
       ) : (
         <NotFound

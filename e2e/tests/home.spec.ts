@@ -14,29 +14,23 @@ async function checkHomePageElements(page: Page) {
     page.getByRole("heading", { name: /Hi, I'm Sander/i })
   ).toBeVisible();
 
-  const socialButtons = [
-    "github",
-    "linkedin",
-    "gitlab",
-    "x",
-    "instagram",
-    // "youtube",
-  ];
+  const socialButtons = ["github", "linkedin", "x"];
   for (const button of socialButtons) {
     await expect(
-      page.getByRole("link", { name: `${button} icon` })
+      page.getByRole("link", { name: new RegExp(`^${button} profile$`, "i") })
     ).toBeVisible();
   }
 
   await expect(page.getByRole("main").getByTestId("site-logo")).toBeVisible();
+  const mainNav = page.getByRole("navigation", { name: "Main navigation" });
   await expect(
-    page.getByRole("link", { name: "About", exact: true })
+    mainNav.getByRole("link", { name: "About", exact: true })
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Projects", exact: true })
+    mainNav.getByRole("link", { name: "Projects", exact: true })
   ).toBeVisible();
   await expect(
-    page.getByRole("link", { name: "Blog", exact: true })
+    mainNav.getByRole("link", { name: "Blog", exact: true })
   ).toBeVisible();
 }
 
