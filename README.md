@@ -13,19 +13,19 @@ This site is where code meets creativity: webcam-controlled browser games built 
 
 ## What's on the site
 
-- **Projects** -- face-controlled Tetris, webcam Duck Hunt with hand tracking, a 3D-printed Arduino word clock, a multi-language Sudoku app, geospatial weather tools, and more
-- **Blog** -- step-by-step guides on 3D printing with resin, MediaPipe hand and face tracking in the browser, building with Next.js and Sanity, Flutter app development, and creative coding
-- **Tags** -- 50+ topic pages that group projects and articles by technology (React, Flutter, MediaPipe, Arduino, 3D printing, etc.)
+- **Projects** / face-controlled Tetris, webcam Duck Hunt with hand tracking, a 3D-printed Arduino word clock, a multi-language Sudoku app, geospatial weather tools, and more
+- **Blog** / step-by-step guides on 3D printing with resin, MediaPipe hand and face tracking in the browser, building with Next.js and Sanity, Flutter app development, and creative coding
+- **Tags** / 50+ topic pages that group projects and articles by technology (React, Flutter, MediaPipe, Arduino, 3D printing, etc.)
 
 ## Tech stack
 
-- **[Next.js 16](https://nextjs.org)** -- App Router, static generation with ISR, dynamic metadata
-- **[TypeScript](https://www.typescriptlang.org)** -- end-to-end type safety
-- **[Sanity](https://www.sanity.io)** -- headless CMS with real-time previews and structured content
-- **[Tailwind CSS](https://tailwindcss.com)** -- utility-first styling
-- **[Playwright](https://playwright.dev)** -- end-to-end testing
-- **[Jest](https://jestjs.io)** -- unit testing
-- **[Vercel](https://vercel.com)** -- deployment with preview branches
+- **[Next.js 16](https://nextjs.org)** / App Router, static generation with ISR, dynamic metadata
+- **[TypeScript](https://www.typescriptlang.org)** / end-to-end type safety
+- **[Sanity](https://www.sanity.io)** / headless CMS with real-time previews and structured content
+- **[Tailwind CSS](https://tailwindcss.com)** / utility-first styling
+- **[Playwright](https://playwright.dev)** / end-to-end testing
+- **[Jest](https://jestjs.io)** / unit testing
+- **[Vercel](https://vercel.com)** / deployment with preview branches
 
 ## SEO features
 
