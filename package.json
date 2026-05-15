@@ -15,7 +15,8 @@
     "test:e2e": "npx playwright test",
     "test:e2e-ui": "npx playwright test --ui",
     "snapshot:blog-slugs": "npx ts-node --compiler-options '{\"module\":\"commonjs\",\"moduleResolution\":\"node\"}' scripts/snapshot-blog-slugs.ts",
-    "migrate:medium-to-sanity": "npx ts-node --compiler-options '{\"module\":\"commonjs\",\"moduleResolution\":\"node\"}' scripts/migrate-medium-to-sanity.ts"
+    "migrate:medium-to-sanity": "npx ts-node --compiler-options '{\"module\":\"commonjs\",\"moduleResolution\":\"node\"}' scripts/migrate-medium-to-sanity.ts",
+    "export:devto": "npx ts-node --compiler-options '{\"module\":\"commonjs\",\"moduleResolution\":\"node\"}' scripts/export-to-devto.ts"
   },
   "dependencies": {
     "@sanity/icons": "^3.7.4",

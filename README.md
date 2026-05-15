@@ -68,6 +68,40 @@ scripts/       Build and migration scripts
 
 See `.env.example` for all required variables. You'll need credentials for Sanity, Vercel, and Google site verification.
 
+## Exporting blog posts to dev.to
+
+Export a blog post from Sanity to dev.to-compatible markdown:
+
+```bash
+npm run export:devto -- <slug>
+```
+
+List all available blog post slugs:
+
+```bash
+npm run export:devto
+```
+
+The exported markdown file lands in `scripts/devto-exports/<slug>.md` with frontmatter, cover image, tags, and canonical URL pre-filled. Review the content and paste into [dev.to/new](https://dev.to/new). Set `published: true` when ready to go live.
+
+## IndexNow
+
+The site supports [IndexNow](https://www.indexnow.org/) for instant URL submission to Bing, Yandex, and other participating search engines. The verification key is served from `public/`.
+
+Submit all pages from the sitemap:
+
+```bash
+node scripts/indexnow.mjs
+```
+
+Submit specific URLs after publishing new content:
+
+```bash
+node scripts/indexnow.mjs https://sanderdesnaijer.com/blog/my-new-post
+```
+
+Run once per publish. Don't resubmit the same URLs repeatedly.
+
 ## License
 
 MIT
