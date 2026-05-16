@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /**
  * Export a Sanity blog post to dev.to-compatible markdown.
  *
@@ -151,7 +152,7 @@ interface BlogPost {
 // ---------------------------------------------------------------------------
 
 function spanToMarkdown(span: Span, markDefs: MarkDef[]): string {
-  let text = span.text;
+  let { text } = span;
   if (!span.marks || span.marks.length === 0) return text;
 
   for (const mark of span.marks) {
