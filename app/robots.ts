@@ -12,26 +12,32 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "GPTBot",
         allow: ["/"],
+        disallow: ["/studio/"],
       },
       {
         userAgent: "ChatGPT-User",
         allow: ["/"],
+        disallow: ["/studio/"],
       },
       {
         userAgent: "anthropic-ai",
         allow: ["/"],
+        disallow: ["/studio/"],
       },
       {
         userAgent: "ClaudeBot",
         allow: ["/"],
+        disallow: ["/studio/"],
       },
       {
         userAgent: "PerplexityBot",
         allow: ["/"],
+        disallow: ["/studio/"],
       },
       {
         userAgent: "Google-Extended",
         allow: ["/"],
+        disallow: ["/studio/"],
       },
     ],
     sitemap: [

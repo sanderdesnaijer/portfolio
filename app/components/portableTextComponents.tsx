@@ -7,6 +7,47 @@ import { urlFor } from "@/sanity/lib/image";
 import { LinkMark } from "./LinkMark";
 import { YouTubeFallback } from "./YouTubeFallback";
 
+function slugify(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function HeadingWithAnchor({
+  children,
+  level,
+}: {
+  children?: React.ReactNode;
+  level: 2 | 3 | 4;
+}) {
+  const text =
+    typeof children === "string"
+      ? children
+      : Array.isArray(children)
+        ? children
+            .map((child) =>
+              typeof child === "string" ? child : (child?.props?.children ?? "")
+            )
+            .join("")
+        : "";
+  const id = slugify(text);
+  const Tag = `h${level}` as const;
+
+  return (
+    <Tag id={id} className="group scroll-mt-24">
+      {children}
+      <a
+        href={`#${id}`}
+        className="ml-2 text-gray-300 no-underline opacity-0 transition-opacity group-hover:opacity-100 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-400"
+        aria-label={`Link to ${text}`}
+      >
+        {"#"}
+      </a>
+    </Tag>
+  );
+}
+
 const YouTube = dynamic(() => import("./YouTube").then((mod) => mod.YouTube), {
   loading: () => (
     <div className="my-6 aspect-video w-full animate-pulse rounded-lg bg-gray-200 dark:bg-gray-800" />
@@ -154,6 +195,17 @@ export const portableTextComponents: Partial<PortableTextReactComponents> = {
         />
       );
     },
+  },
+  block: {
+    h2: ({ children }: { children?: React.ReactNode }) => (
+      <HeadingWithAnchor level={2}>{children}</HeadingWithAnchor>
+    ),
+    h3: ({ children }: { children?: React.ReactNode }) => (
+      <HeadingWithAnchor level={3}>{children}</HeadingWithAnchor>
+    ),
+    h4: ({ children }: { children?: React.ReactNode }) => (
+      <HeadingWithAnchor level={4}>{children}</HeadingWithAnchor>
+    ),
   },
   marks: {
     code: ({ children }) => (

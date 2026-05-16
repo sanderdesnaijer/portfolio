@@ -252,6 +252,10 @@ const TagsPage = async ({ params }: { params: Params }) => {
       name: a.title,
       url: `${buildPageUrl(pageSlugs.blog, a.slug.current)}`,
     })),
+    ...taggedJobs.map((j) => ({
+      name: `${j.jobTitle} at ${j.companyName}`,
+      url: j.link || buildPageUrl("tags", slug),
+    })),
   ];
 
   const collectionJsonLd = getTagCollectionScheme({

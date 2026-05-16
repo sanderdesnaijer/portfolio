@@ -9,6 +9,7 @@ import {
   getFAQScheme,
   getProjectScheme,
   getVideoScheme,
+  getTagCollectionScheme,
 } from "./jsonLDSchemes";
 import { VideoInfo } from "./videoUtils";
 import { BlogSanity } from "@/sanity/types/blogType";
@@ -160,6 +161,33 @@ describe("utils/jsonLDSchemes", () => {
           { "@type": "Organization", name: "Company B" },
         ],
         image: page.imageURL,
+        description:
+          "Frontend developer building creative browser experiments with MediaPipe, computer vision, React and hardware projects.",
+        knowsAbout: [
+          "MediaPipe",
+          "Face Mesh",
+          "Hand Tracking",
+          "Computer Vision",
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Next.js",
+          "WebGL",
+          "OpenLayers",
+          "Google Maps",
+          "Leaflet",
+          "Gesture Recognition",
+          "ESP32",
+          "Arduino",
+          "Flutter",
+          "Dart",
+          "3D Printing",
+          "Sanity CMS",
+        ],
+        nationality: {
+          "@type": "Country",
+          name: "Netherlands",
+        },
       });
     });
 
@@ -1126,6 +1154,68 @@ describe("utils/jsonLDSchemes", () => {
           "@id": "https://mocked-url.com/blog/test-post",
         },
       });
+    });
+  });
+
+  describe("getTagCollectionScheme", () => {
+    it("should return a valid CollectionPage schema with ItemList", () => {
+      const result = getTagCollectionScheme({
+        label: "MediaPipe",
+        description: "MediaPipe projects and articles.",
+        url: "https://mocked-url.com/tags/mediapipe",
+        items: [
+          {
+            name: "Eyebrow Tetris",
+            url: "https://mocked-url.com/projects/eyebrow-tetris",
+          },
+          {
+            name: "Face Mesh Landmarks",
+            url: "https://mocked-url.com/blog/mediapipe-face-mesh-landmarks",
+          },
+        ],
+      });
+
+      expect(result).toEqual({
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        name: "MediaPipe Projects & Articles",
+        description: "MediaPipe projects and articles.",
+        url: "https://mocked-url.com/tags/mediapipe",
+        about: {
+          "@type": "Thing",
+          name: "MediaPipe",
+        },
+        mainEntity: {
+          "@type": "ItemList",
+          numberOfItems: 2,
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Eyebrow Tetris",
+              url: "https://mocked-url.com/projects/eyebrow-tetris",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Face Mesh Landmarks",
+              url: "https://mocked-url.com/blog/mediapipe-face-mesh-landmarks",
+            },
+          ],
+        },
+      });
+    });
+
+    it("should handle an empty items array", () => {
+      const result = getTagCollectionScheme({
+        label: "EmptyTag",
+        description: "No items here.",
+        url: "https://mocked-url.com/tags/empty",
+        items: [],
+      });
+
+      expect(result.mainEntity.numberOfItems).toBe(0);
+      expect(result.mainEntity.itemListElement).toEqual([]);
     });
   });
 
