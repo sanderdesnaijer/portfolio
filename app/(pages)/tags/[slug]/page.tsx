@@ -31,6 +31,7 @@ import { pageSlugs } from "@/app/utils/routes";
 import { getTranslations } from "next-intl/server";
 import { buildBreadcrumbList } from "@/app/utils/breadcrumb";
 import { JsonLd } from "@/app/components/JsonLd";
+import { getTagCollectionScheme } from "@/app/utils/jsonLDSchemes";
 
 type Params = Promise<{ slug: string }>;
 
@@ -242,9 +243,30 @@ const TagsPage = async ({ params }: { params: Params }) => {
     title: label,
   });
 
+  const collectionItems = [
+    ...taggedProjects.map((p) => ({
+      name: p.title,
+      url: `${buildPageUrl(pageSlugs.projects, p.slug.current)}`,
+    })),
+    ...taggedBlogs.map((a) => ({
+      name: a.title,
+      url: `${buildPageUrl(pageSlugs.blog, a.slug.current)}`,
+    })),
+  ];
+
+  const collectionJsonLd = getTagCollectionScheme({
+    label,
+    description:
+      tag?.metaDescription ??
+      `Projects and articles tagged with ${label} by Sander de Snaijer.`,
+    url: buildPageUrl("tags", slug),
+    items: collectionItems,
+  });
+
   return (
     <>
       <JsonLd value={breadcrumbJsonLd} />
+      <JsonLd value={collectionJsonLd} />
       <PageLayout title={label}>
         {intro && <p className="mt-4 text-lg leading-8">{intro}</p>}
         {taggedProjects.length > 0 && (
