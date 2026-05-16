@@ -317,18 +317,20 @@ export const getVideoScheme = ({
  */
 export const getTagCollectionScheme = ({
   label,
+  name,
   description,
   url,
   items,
 }: {
   label: string;
+  name: string;
   description: string;
   url: string;
   items: Array<{ name: string; url: string }>;
 }) => ({
   "@context": "https://schema.org",
   "@type": "CollectionPage",
-  name: `${label} Projects & Articles`,
+  name,
   description,
   url,
   about: {

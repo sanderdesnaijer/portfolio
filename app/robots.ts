@@ -40,9 +40,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/studio/"],
       },
     ],
-    sitemap: [
-      `${envConfig.baseUrl}/sitemap.xml`,
-      `${envConfig.baseUrl}/video-sitemap.xml`,
-    ],
+    sitemap: [`${envConfig.baseUrl}/sitemap.xml`],
   };
 }

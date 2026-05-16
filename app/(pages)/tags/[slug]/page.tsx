@@ -252,14 +252,27 @@ const TagsPage = async ({ params }: { params: Params }) => {
       name: a.title,
       url: `${buildPageUrl(pageSlugs.blog, a.slug.current)}`,
     })),
-    ...taggedJobs.map((j) => ({
-      name: `${j.jobTitle} at ${j.companyName}`,
-      url: j.link || buildPageUrl("tags", slug),
-    })),
+    ...taggedJobs
+      .filter((j) => Boolean(j.link))
+      .map((j) => ({
+        name: `${j.jobTitle} at ${j.companyName}`,
+        url: j.link!,
+      })),
   ];
+
+  const contentTypes = [
+    taggedProjects.length > 0 && "Projects",
+    taggedBlogs.length > 0 && "Articles",
+    taggedJobs.length > 0 && "Experience",
+  ].filter(Boolean);
+  const collectionName =
+    contentTypes.length > 0
+      ? `${label} ${contentTypes.join(" & ")}`
+      : `${label} Projects & Articles`;
 
   const collectionJsonLd = getTagCollectionScheme({
     label,
+    name: collectionName,
     description:
       tag?.metaDescription ??
       `Projects and articles tagged with ${label} by Sander de Snaijer.`,

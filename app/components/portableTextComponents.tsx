@@ -14,6 +14,19 @@ function slugify(text: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
+const usedIds = new Set<string>();
+
+function uniqueId(base: string): string {
+  let id = base;
+  let counter = 1;
+  while (usedIds.has(id)) {
+    id = `${base}-${counter}`;
+    counter++;
+  }
+  usedIds.add(id);
+  return id;
+}
+
 function HeadingWithAnchor({
   children,
   level,
@@ -31,7 +44,7 @@ function HeadingWithAnchor({
             )
             .join("")
         : "";
-  const id = slugify(text);
+  const id = uniqueId(slugify(text));
   const Tag = `h${level}` as const;
 
   return (
@@ -39,7 +52,7 @@ function HeadingWithAnchor({
       {children}
       <a
         href={`#${id}`}
-        className="ml-2 text-gray-300 no-underline opacity-0 transition-opacity group-hover:opacity-100 hover:text-gray-500 dark:text-gray-600 dark:hover:text-gray-400"
+        className="ml-2 text-gray-300 no-underline opacity-0 transition-opacity group-hover:opacity-100 hover:text-gray-500 focus-visible:opacity-100 dark:text-gray-600 dark:hover:text-gray-400"
         aria-label={`Link to ${text}`}
       >
         {"#"}

@@ -1,21 +1,35 @@
 import { sanityFetch } from "@/sanity/lib/fetch";
-import { blogsQuery, projectsQuery } from "@/sanity/lib/queries";
-import { ProjectTypeSanity } from "@/sanity/types";
-import { BlogSanity } from "@/sanity/types/blogType";
 import envConfig from "@/envConfig";
 
 export const revalidate = 86400; // 24 hours
+
+type LlmsSummaryItem = {
+  title: string;
+  slug: { current: string };
+  excerpt?: string;
+};
+
+const llmsProjectsQuery = `*[_type == "project"] | order(publishedAt desc) [0...10] {
+  title,
+  slug,
+  excerpt
+}`;
+
+const llmsBlogsQuery = `*[_type == "blogPost"] | order(publishedAt desc) [0...10] {
+  title,
+  slug,
+  excerpt
+}`;
 
 export async function GET() {
   const { baseUrl } = envConfig;
 
   const [projects, articles] = await Promise.all([
-    sanityFetch<ProjectTypeSanity[]>({ query: projectsQuery }),
-    sanityFetch<BlogSanity[]>({ query: blogsQuery }),
+    sanityFetch<LlmsSummaryItem[]>({ query: llmsProjectsQuery }),
+    sanityFetch<LlmsSummaryItem[]>({ query: llmsBlogsQuery }),
   ]);
 
   const projectLines = projects
-    .slice(0, 10)
     .map(
       (p) =>
         `- [${p.title}](${baseUrl}/projects/${p.slug.current}): ${p.excerpt || ""}`
@@ -23,7 +37,6 @@ export async function GET() {
     .join("\n");
 
   const articleLines = articles
-    .slice(0, 10)
     .map(
       (a) =>
         `- [${a.title}](${baseUrl}/blog/${a.slug.current}): ${a.excerpt || ""}`

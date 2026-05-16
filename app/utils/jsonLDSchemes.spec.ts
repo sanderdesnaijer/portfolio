@@ -1161,6 +1161,7 @@ describe("utils/jsonLDSchemes", () => {
     it("should return a valid CollectionPage schema with ItemList", () => {
       const result = getTagCollectionScheme({
         label: "MediaPipe",
+        name: "MediaPipe Projects & Articles",
         description: "MediaPipe projects and articles.",
         url: "https://mocked-url.com/tags/mediapipe",
         items: [
@@ -1209,6 +1210,7 @@ describe("utils/jsonLDSchemes", () => {
     it("should handle an empty items array", () => {
       const result = getTagCollectionScheme({
         label: "EmptyTag",
+        name: "EmptyTag Projects & Articles",
         description: "No items here.",
         url: "https://mocked-url.com/tags/empty",
         items: [],
