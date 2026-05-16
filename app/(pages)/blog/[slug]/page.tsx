@@ -171,7 +171,7 @@ const BlogPage = async ({ params }: { params: Promise<QueryParams> }) => {
             )}
             {hasFaq && (
               <section>
-                <h2>{t("faqHeading")}</h2>
+                <h2 id="frequently-asked-questions">{t("faqHeading")}</h2>
                 <dl>
                   {article.faq!.map((item) => (
                     <div key={item._key}>

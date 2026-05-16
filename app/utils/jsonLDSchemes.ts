@@ -51,6 +51,33 @@ export const getAboutScheme = ({
     name: job,
   })),
   image: page.imageURL,
+  description:
+    "Frontend developer building creative browser experiments with MediaPipe, computer vision, React and hardware projects.",
+  knowsAbout: [
+    "MediaPipe",
+    "Face Mesh",
+    "Hand Tracking",
+    "Computer Vision",
+    "JavaScript",
+    "TypeScript",
+    "React",
+    "Next.js",
+    "WebGL",
+    "OpenLayers",
+    "Google Maps",
+    "Leaflet",
+    "Gesture Recognition",
+    "ESP32",
+    "Arduino",
+    "Flutter",
+    "Dart",
+    "3D Printing",
+    "Sanity CMS",
+  ],
+  nationality: {
+    "@type": "Country",
+    name: "Netherlands",
+  },
 });
 
 export const getProjectScheme = (
@@ -281,5 +308,43 @@ export const getVideoScheme = ({
   mainEntityOfPage: {
     "@type": "WebPage",
     "@id": pageUrl,
+  },
+});
+
+/**
+ * Generates CollectionPage + ItemList JSON-LD for tag pages.
+ * Helps LLMs and search engines understand tag pages as topic hubs.
+ */
+export const getTagCollectionScheme = ({
+  label,
+  name,
+  description,
+  url,
+  items,
+}: {
+  label: string;
+  name: string;
+  description: string;
+  url: string;
+  items: Array<{ name: string; url: string }>;
+}) => ({
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name,
+  description,
+  url,
+  about: {
+    "@type": "Thing",
+    name: label,
+  },
+  mainEntity: {
+    "@type": "ItemList",
+    numberOfItems: items.length,
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      url: item.url,
+    })),
   },
 });
