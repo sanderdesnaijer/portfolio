@@ -75,7 +75,9 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
       ) : null}
       {project?.faq && project.faq.length > 0 && (
         <section>
-          <h2>{t("pages.project.faqHeading")}</h2>
+          <h2 id="frequently-asked-questions">
+            {t("pages.project.faqHeading")}
+          </h2>
           <dl>
             {project.faq.map((item) => (
               <div key={item._key}>
