@@ -10,7 +10,7 @@ export const runtime = "nodejs";
  * Configure in Sanity:
  *   URL:    https://www.sanderdesnaijer.com/api/revalidate
  *   Secret: same value as SANITY_REVALIDATE_SECRET in .env.local
- *   Filter: _type in ["project", "blogPost", "tag", "job", "page", "settings"]
+ *   Filter: _type in ["project", "blogPost", "tag", "job", "pages", "setting"]
  */
 
 type SanityWebhookBody = {
@@ -51,7 +51,7 @@ function getPathsToRevalidate(body: SanityWebhookBody): string[] {
     case "job":
       return ["/about", "/tags"];
 
-    case "page":
+    case "pages":
       return [
         "/",
         "/about",
@@ -61,7 +61,7 @@ function getPathsToRevalidate(body: SanityWebhookBody): string[] {
         ...(slugValue ? [`/${slugValue}`] : []),
       ];
 
-    case "settings":
+    case "setting":
       return ["/"];
 
     default:
