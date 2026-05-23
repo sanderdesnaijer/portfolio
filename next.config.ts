@@ -84,7 +84,7 @@ const nextConfig: NextConfig = {
         hostname: "cdn.sanity.io",
       },
     ],
-    minimumCacheTTL: 60,
+    minimumCacheTTL: 86400,
   },
   // Note: Cross-origin warnings from local network IPs (e.g., 192.168.1.12) in development
   // are expected when running Playwright tests. These warnings are informational
