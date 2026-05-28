@@ -30,7 +30,9 @@ function getPathsToRevalidate(body: SanityWebhookBody): string[] {
         "/projects",
         "/tags",
         "/api/projects",
-        ...(slugValue ? [`/projects/${slugValue}`, `/api/projects/${slugValue}`] : []),
+        ...(slugValue
+          ? [`/projects/${slugValue}`, `/api/projects/${slugValue}`]
+          : []),
       ];
 
     case "blogPost":
