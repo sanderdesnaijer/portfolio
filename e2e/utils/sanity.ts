@@ -15,6 +15,7 @@ import {
   settingsQuery,
   jobsQuery,
 } from "@/sanity/lib/queries";
+import { apiVersion, dataset, projectId } from "@/sanity/env";
 import {
   ProjectTypeSanity,
   SettingSanity,
@@ -24,38 +25,55 @@ import {
 import { BlogSanity } from "@/sanity/types/blogType";
 
 const client = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-  apiVersion: "2025-01-24",
+  projectId,
+  dataset,
+  apiVersion,
   useCdn: true,
 });
 
+/**
+ * Wrapper that catches Sanity/network errors and returns null,
+ * matching the behaviour of the removed fetchData helper.
+ */
+async function safeFetch<T>(
+  query: string,
+  params: Record<string, unknown> = {}
+): Promise<T | null> {
+  try {
+    return await client.fetch<T>(query, params);
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(`[e2e sanity] fetch failed:`, error);
+    return null;
+  }
+}
+
 export async function fetchPage(slug = ""): Promise<PageSanity | null> {
-  return client.fetch<PageSanity | null>(pageQuery, { slug });
+  return safeFetch<PageSanity>(pageQuery, { slug });
 }
 
 export async function fetchProjects(): Promise<ProjectTypeSanity[] | null> {
-  return client.fetch<ProjectTypeSanity[]>(projectsQuery);
+  return safeFetch<ProjectTypeSanity[]>(projectsQuery);
 }
 
 export async function fetchProject(
   slug = ""
 ): Promise<ProjectTypeSanity | null> {
-  return client.fetch<ProjectTypeSanity | null>(projectQuery, { slug });
+  return safeFetch<ProjectTypeSanity>(projectQuery, { slug });
 }
 
 export async function fetchArticles(): Promise<BlogSanity[] | null> {
-  return client.fetch<BlogSanity[]>(blogsQuery);
+  return safeFetch<BlogSanity[]>(blogsQuery);
 }
 
 export async function fetchArticle(slug: string): Promise<BlogSanity | null> {
-  return client.fetch<BlogSanity | null>(blogQuery, { slug });
+  return safeFetch<BlogSanity>(blogQuery, { slug });
 }
 
 export async function fetchSettings(): Promise<SettingSanity | null> {
-  return client.fetch<SettingSanity | null>(settingsQuery);
+  return safeFetch<SettingSanity>(settingsQuery);
 }
 
-export async function fetchJobs(): Promise<JobSanity | null> {
-  return client.fetch<JobSanity | null>(jobsQuery);
+export async function fetchJobs(): Promise<JobSanity[] | null> {
+  return safeFetch<JobSanity[]>(jobsQuery);
 }
