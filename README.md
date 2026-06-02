@@ -64,9 +64,9 @@ redirects/     Blog redirect mappings (old Medium slugs)
 scripts/       Build and migration scripts
 ```
 
-## Updating e2e fixtures
+## Updating E2E fixtures
 
-E2e tests run against local JSON fixtures instead of live Sanity, making them offline, deterministic, and free of API usage. After publishing new content in Sanity, update the fixtures:
+E2E tests run against local JSON fixtures instead of live Sanity, making them offline, deterministic, and free of API usage. After publishing new content in Sanity, update the fixtures:
 
 ```bash
 npx tsx e2e/scripts/snapshot-fixtures.ts

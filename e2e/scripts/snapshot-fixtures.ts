@@ -36,7 +36,7 @@ const client = createClient({
 const isDryRun = process.argv.includes("--dry-run");
 const fixturesDir = resolve(__dirname, "../fixtures");
 
-/** All queries mirror sanity/lib/queries.ts exactly */
+/** Queries are supersets of those in sanity/lib/queries.ts (extra fields are harmless) */
 const queries: Record<
   string,
   { query: string; params?: Record<string, unknown> }
