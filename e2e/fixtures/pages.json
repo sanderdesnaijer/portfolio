@@ -1,0 +1,373 @@
+[
+  {
+    "_createdAt": "2025-01-25T08:27:32Z",
+    "_id": "1d886ea5-091f-4eac-890e-c8d8a87d0607",
+    "_updatedAt": "2026-05-04T14:11:59Z",
+    "body": null,
+    "content": null,
+    "description": "Frontend developer from the Netherlands building React apps, side projects, and unusual things with 3D printers. Projects, tutorials, and blog posts.",
+    "disableBrandTitleSuffix": true,
+    "imageAlt": null,
+    "imageURL": null,
+    "name": "home",
+    "navigationLocation": null,
+    "order": 0,
+    "seoTitleBase": "Sander de Snaijer | Frontend Developer (React, Next.js)",
+    "slug": null,
+    "title": "Home"
+  },
+  {
+    "_createdAt": "2025-01-25T08:33:31Z",
+    "_id": "2a50de34-9d45-4b28-99bf-4f3b6c1512ae",
+    "_updatedAt": "2026-05-05T05:05:37Z",
+    "body": null,
+    "content": null,
+    "description": "Explore projects by Sander de Snaijer; webcam games, Flutter apps, Arduino clocks, and 3D-printed experiments",
+    "disableBrandTitleSuffix": null,
+    "imageAlt": null,
+    "imageURL": null,
+    "name": "projects",
+    "navigationLocation": null,
+    "order": 1,
+    "seoTitleBase": "Projects: Webcam Games, Arduino & Flutter",
+    "slug": {
+      "_type": "slug",
+      "current": "projects"
+    },
+    "title": "Projects & Experiments"
+  },
+  {
+    "_createdAt": "2025-01-25T08:31:11Z",
+    "_id": "f03086af-d6e3-47a5-a612-2a5f03b4cf76",
+    "_updatedAt": "2026-05-06T08:14:30Z",
+    "body": [
+      {
+        "_key": "339f6a6fcf14",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fdf90221cd0e",
+            "_type": "span",
+            "marks": [],
+            "text": "Hi, I'm Sander de Snaijer, a frontend developer from the Netherlands (Hoeksche Waard) with over 15 years of experience turning ideas into real, working products. I work across web apps, mobile apps, and creative experiments that combine software with hardware. Lately, that has turned into a mix of Next.js projects, Flutter apps, and interactive browser experiences using things like MediaPipe webcam tracking and 3D printing with Arduino."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2f4639ec4858",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3e898131f192",
+            "_type": "span",
+            "marks": [],
+            "text": "I work across web apps, mobile apps, and creative experiments that combine software with hardware. Lately, that has turned into a mix of Next.js projects, Flutter apps, and interactive browser experiences using things like webcam tracking and 3D rendering."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "9040a4c1eb8c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fca3d6bac6d3",
+            "_type": "span",
+            "marks": [],
+            "text": "Some recent projects include:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e62a1f285898",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "764b04e2f02c",
+            "_type": "span",
+            "marks": ["5cfb2b0f826a"],
+            "text": "Map Gesture Controls"
+          },
+          {
+            "_key": "87d3a955106b",
+            "_type": "span",
+            "marks": [],
+            "text": ": an open-source library for controlling maps with hand gestures, supporting OpenLayers, Google Maps, and Leaflet"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [
+          {
+            "_key": "5cfb2b0f826a",
+            "_type": "link",
+            "href": "/projects/map-gesture-controls"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "646c20bef868",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "03c1900a73c1",
+            "_type": "span",
+            "marks": ["10e9fb12c1ea"],
+            "text": "Eyebrow-controlled Tetris"
+          },
+          {
+            "_key": "47dfea6c48cd",
+            "_type": "span",
+            "marks": [],
+            "text": ": a browser game where you play Tetris using facial gestures via your webcam"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [
+          {
+            "_key": "10e9fb12c1ea",
+            "_type": "link",
+            "href": "/projects/eyebrow-tetris"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "357624e97605",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a7ee3fb946ca",
+            "_type": "span",
+            "marks": ["3b55d264f982"],
+            "text": "Pug's Hunt"
+          },
+          {
+            "_key": "2b64835f4989",
+            "_type": "span",
+            "marks": [],
+            "text": ": a Duck Hunt-inspired game controlled with hand tracking through your webcam"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [
+          {
+            "_key": "3b55d264f982",
+            "_type": "link",
+            "href": "/projects/pug-s-hunt-a-webcam-controlled-duck-hunt-built-with-hand-tracking"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "36aa70f54194",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "11cf23f2cce5",
+            "_type": "span",
+            "marks": ["9b774ff00d66"],
+            "text": "Sudoku Ultimato"
+          },
+          {
+            "_key": "59f405b83e43",
+            "_type": "span",
+            "marks": [],
+            "text": ": a feature-rich mobile Sudoku app with multiple game modes, daily puzzles, and leaderboards"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [
+          {
+            "_key": "9b774ff00d66",
+            "_type": "link",
+            "href": "/projects/sudoku-ultimato"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "2deedfbbb375",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0156165c14da",
+            "_type": "span",
+            "marks": ["15e84f76fe33"],
+            "text": "Arduino Word Clock"
+          },
+          {
+            "_key": "85d2465f6548",
+            "_type": "span",
+            "marks": [],
+            "text": ": a fully custom-built clock with 3D-printed case and embedded electronics"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [
+          {
+            "_key": "15e84f76fe33",
+            "_type": "link",
+            "href": "/projects/arduino-3d-printed-dutch-word-clock"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "3ff58d9294d7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "dc00620ddbe0",
+            "_type": "span",
+            "marks": [],
+            "text": "Professionally, I currently work at "
+          },
+          {
+            "_key": "5d98bdb9b56e",
+            "_type": "span",
+            "marks": ["d823e8f5bb45"],
+            "text": "KNMI"
+          },
+          {
+            "_key": "89bc0c59b6ef",
+            "_type": "span",
+            "marks": [],
+            "text": " (the Dutch weather institute) via The NextGen, contributing to "
+          },
+          {
+            "_key": "b880e6e2cf0c",
+            "_type": "span",
+            "marks": ["8397b3163844"],
+            "text": "Open GeoWeb"
+          },
+          {
+            "_key": "1d001de14560",
+            "_type": "span",
+            "marks": [],
+            "text": ", an open-source mapping platform for real-time weather monitoring and geo-referenced data analysis."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "d823e8f5bb45",
+            "_type": "link",
+            "href": "https://www.knmi.nl/"
+          },
+          {
+            "_key": "8397b3163844",
+            "_type": "link",
+            "href": "/projects/opengeoweb"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "d62d1697def1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2a5112ac4cc5",
+            "_type": "span",
+            "marks": [],
+            "text": "I like building things that feel a bit unexpected. Projects that make people think “wait, how does that even work?” while still being technically solid."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3a9eff793132",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a982e6815722",
+            "_type": "span",
+            "marks": [],
+            "text": "With experience ranging from startups and agencies to enterprise and government, I bring a mix of technical depth and practical thinking. I’m currently working as a frontend developer for the Dutch Meteorological Institute (KNMI), contributing to the open-source project Open GeoWeb together with teams in Finland and Norway."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6db73503172a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "40b9db503d20",
+            "_type": "span",
+            "marks": [],
+            "text": "Outside of work, I spend time experimenting with 3D printing, electronics, and small creative builds. That hobby pulled me into soldering, CAD design, and hardware tinkering, which now feeds back into my software projects."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "content": null,
+    "description": "Sander de Snaijer is a frontend developer with 15+ years of experience at companies like KNMI, Bynder and Dutch government. Based in the Netherlands.",
+    "disableBrandTitleSuffix": true,
+    "imageAlt": "3D face mesh wireframe portrait of Sander de Snaijer using MediaPipe face tracking technology",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/bb91b982d1da045d59845e99cc0f19af92857301-1280x720.webp",
+    "name": "about",
+    "navigationLocation": null,
+    "order": 2,
+    "seoTitleBase": "About Sander de Snaijer | Frontend Developer (15+ Years)",
+    "slug": {
+      "_type": "slug",
+      "current": "about"
+    },
+    "title": "About Sander de Snaijer"
+  },
+  {
+    "_createdAt": "2025-01-25T08:33:49Z",
+    "_id": "f4272834-d121-49b8-b6a9-e1f0b9e1d476",
+    "_updatedAt": "2026-05-05T05:08:34Z",
+    "body": null,
+    "content": null,
+    "description": "Tutorials and write-ups on frontend development, Flutter, Next.js, and maker projects like 3D printing and Arduino. Written by Sander de Snaijer.",
+    "disableBrandTitleSuffix": null,
+    "imageAlt": null,
+    "imageURL": null,
+    "name": "blog",
+    "navigationLocation": null,
+    "order": 3,
+    "seoTitleBase": "Blog: React, MediaPipe, Flutter",
+    "slug": {
+      "_type": "slug",
+      "current": "blog"
+    },
+    "title": "Blog: Code, Craft & Creative Tech"
+  },
+  {
+    "_createdAt": "2026-05-04T14:18:44Z",
+    "_id": "4e89c1e6-bde2-448d-b110-0586cb31a03e",
+    "_updatedAt": "2026-05-04T14:32:54Z",
+    "body": null,
+    "content": null,
+    "description": "Discover projects and articles organized by topic.",
+    "disableBrandTitleSuffix": false,
+    "imageAlt": null,
+    "imageURL": null,
+    "name": "tags",
+    "navigationLocation": "footer",
+    "order": null,
+    "seoTitleBase": "Topics",
+    "slug": {
+      "_type": "slug",
+      "current": "tags"
+    },
+    "title": "Tags"
+  }
+]

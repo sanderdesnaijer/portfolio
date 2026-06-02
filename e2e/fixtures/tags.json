@@ -1,0 +1,898 @@
+[
+  {
+    "_createdAt": "2026-03-08T07:05:40Z",
+    "_id": "1fcde828-df68-466a-8050-73ec2f3d5e48",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvU37",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:24Z",
+    "intro": "3D modelling for makers: designing printable parts in Fusion 360, from chocolate bar molds to word clock housings.",
+    "label": "3D modelling",
+    "metaDescription": "3D modelling projects by Sander de Snaijer: designing parts in Fusion 360 for 3D printing, including molds, clock housings, and custom enclosures.",
+    "slug": {
+      "_type": "slug",
+      "current": "3d-modelling"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:37:10Z",
+    "_id": "019329da-422e-47d2-b5ff-b9c86bf5b14d",
+    "_rev": "BC4J7AbAtkE560ki9DaGBs",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:00Z",
+    "intro": "3D printing projects: Arduino word clocks, stained glass with resin, chocolate bar molds, and other experiments printed on a Bambu X1C.",
+    "label": "3D printing ",
+    "metaDescription": "3D printing projects and guides by Sander de Snaijer: word clocks, resin stained glass, silicone molds, and maker experiments with Bambu X1C.",
+    "slug": {
+      "_type": "slug",
+      "current": "3d-printing"
+    }
+  },
+  {
+    "_createdAt": "2026-01-31T14:16:22Z",
+    "_id": "93b63d44-0e2f-4c53-8eeb-bf426d315666",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvQeL",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:03Z",
+    "intro": "Android development with Flutter: shipping to Google Play, handling multi-language support, and building cross-platform apps from a single codebase.",
+    "label": "Android",
+    "metaDescription": "Android app development projects by Sander de Snaijer: Flutter apps on Google Play, cross-platform builds with Dart, and Play Store publishing guides.",
+    "slug": {
+      "_type": "slug",
+      "current": "android"
+    }
+  },
+  {
+    "_createdAt": "2025-02-16T16:33:30Z",
+    "_id": "2a366d9d-acc4-4170-a673-485b88de16b5",
+    "_rev": "BC4J7AbAtkE560ki9DaNP8",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:52Z",
+    "intro": "AngularJS: earlier professional frontend work with the first-generation Angular framework, before moving to React.",
+    "label": "AngularJS",
+    "metaDescription": "AngularJS experience by Sander de Snaijer: early frontend framework development in professional projects before transitioning to React and modern JavaScript tooling.",
+    "slug": {
+      "_type": "slug",
+      "current": "angularjs"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:33:52Z",
+    "_id": "c367dc6b-f51e-4a17-9e08-c77b17bcd209",
+    "_rev": "BC4J7AbAtkE560ki9DaHQ0",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:11Z",
+    "intro": "Arduino projects: hardware builds combining microcontrollers, 3D-printed enclosures, and custom firmware, like a word clock with minute-level accuracy.",
+    "label": "Arduino",
+    "metaDescription": "Arduino projects by Sander de Snaijer: custom word clock with C++ firmware, 3D-printed housing, and step-by-step build guides for makers.",
+    "slug": {
+      "_type": "slug",
+      "current": "arduino"
+    }
+  },
+  {
+    "_createdAt": "2026-04-28T10:26:59Z",
+    "_id": "c30b8ce0-c32d-43fb-b108-d786eeb62d41",
+    "_rev": "BC4J7AbAtkE560ki9DaKdq",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:33Z",
+    "intro": "Bambu X1C printing projects: word clocks, resin molds, chocolate bars, and other maker experiments printed on a Bambu Lab X1 Carbon.",
+    "label": "Bambu X1C",
+    "metaDescription": "Bambu X1C 3D printing projects by Sander de Snaijer: word clocks, resin molds, chocolate bar molds, and maker experiments printed on a Bambu Lab X1 Carbon.",
+    "slug": {
+      "_type": "slug",
+      "current": "bambu-x1c"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:38:50Z",
+    "_id": "b8525754-7561-45ae-bb5e-61e74d6c01ae",
+    "_rev": "BC4J7AbAtkE560ki9DaHeH",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:12Z",
+    "intro": "C++ for hardware projects: writing firmware for Arduino microcontrollers to drive LED matrices, timekeeping, and physical devices.",
+    "label": "C++",
+    "metaDescription": "C++ Arduino projects by Sander de Snaijer: firmware for word clocks and LED hardware, written by a frontend developer stepping into embedded code.",
+    "slug": {
+      "_type": "slug",
+      "current": "c"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:31:57Z",
+    "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+    "_rev": "BC4J7AbAtkE560ki9DaFxb",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:36:59Z",
+    "intro": "CSS projects and tutorials: responsive layouts, scroll effects, dark mode, and component styling without reaching for a framework.",
+    "label": "CSS3",
+    "metaDescription": "CSS3 tutorials and projects by Sander de Snaijer: responsive headers, dark mode, mobile-first layouts, and practical styling techniques.",
+    "slug": {
+      "_type": "slug",
+      "current": "css3"
+    }
+  },
+  {
+    "_createdAt": "2026-03-22T13:13:23Z",
+    "_id": "40d6d5d3-a8b9-45d8-9b34-abe84c41ab15",
+    "_rev": "435Ie2iQQo8YROLXZiu76v",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:32Z",
+    "intro": "HTML5 Canvas projects: 2D rendering for browser games, visualizations, and interactive experiments drawn frame by frame in JavaScript.",
+    "label": "Canvas",
+    "metaDescription": "HTML5 Canvas projects by Sander de Snaijer: 2D rendering for browser games, data visualizations, and interactive webcam experiments built with JavaScript.",
+    "slug": {
+      "_type": "slug",
+      "current": "canvas"
+    }
+  },
+  {
+    "_createdAt": "2026-03-22T13:13:36Z",
+    "_id": "02a88284-ab90-44a5-a858-abfb625f1fd5",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvUae",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:29Z",
+    "intro": "Computer vision in the browser: using MediaPipe to detect faces and hands through a webcam, then turning that data into playable games.",
+    "label": "Computer vision",
+    "metaDescription": "Computer vision projects by Sander de Snaijer: using MediaPipe face and hand tracking in the browser to build webcam-controlled games with JavaScript.",
+    "slug": {
+      "_type": "slug",
+      "current": "computer-vision"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T18:01:47Z",
+    "_id": "a6c3af19-34c7-40e0-b79f-b929a7715724",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvT7d",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:18Z",
+    "intro": "Cypress for end-to-end testing: browser automation tests for React apps, ensuring navigation, forms, and dynamic content work as expected.",
+    "label": "Cypress",
+    "metaDescription": "Cypress testing by Sander de Snaijer: end-to-end browser tests for React and Next.js apps, covering navigation, layout, and dynamic content.",
+    "slug": {
+      "_type": "slug",
+      "current": "cypress"
+    }
+  },
+  {
+    "_createdAt": "2026-03-08T06:58:09Z",
+    "_id": "fa22da2f-035a-4a36-ab73-6b20f1ac66e6",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvR2I",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:04Z",
+    "intro": "DIY projects where code meets craft: 3D printed molds, resin casting, Arduino builds, and things that are more fun to make than to buy.",
+    "label": "DIY",
+    "metaDescription": "DIY maker projects by Sander de Snaijer: 3D printing, resin casting, silicone molds, and hands-on builds combining craft and technology.",
+    "slug": {
+      "_type": "slug",
+      "current": "diy"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:59:21Z",
+    "_id": "c0cc2ac9-d869-410a-8aad-201c48b90b79",
+    "_rev": "BC4J7AbAtkE560ki9DaGQ9",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:01Z",
+    "intro": "Dart projects: the language behind Flutter, used to build cross-platform mobile apps for iOS and Android including Sudoku Ultimato.",
+    "label": "Dart",
+    "metaDescription": "Dart projects and Flutter apps by Sander de Snaijer: cross-platform mobile development for iOS and Android, written by a frontend web developer.",
+    "slug": {
+      "_type": "slug",
+      "current": "dart"
+    }
+  },
+  {
+    "_createdAt": "2026-05-08T13:51:11Z",
+    "_id": "101f410e-9ce9-448f-8460-eb63630a11ba",
+    "_rev": "4RdK7qOjWqtybalByYMsyt",
+    "_type": "tag",
+    "_updatedAt": "2026-05-08T13:52:32Z",
+    "intro": "ESP32 experiments and tutorials focused on creative hardware, browser integrations, OLED displays, webcam streaming and Arduino projects.",
+    "label": "ESP32",
+    "metaDescription": "ESP32 projects, tutorials and creative experiments using Arduino, OLED displays, webcam streaming, MediaPipe and real-time browser integrations.",
+    "slug": {
+      "_type": "slug",
+      "current": "esp32"
+    }
+  },
+  {
+    "_createdAt": "2025-02-16T16:33:55Z",
+    "_id": "ae7fab67-6369-49a3-931a-7b1c73ddb98a",
+    "_rev": "435Ie2iQQo8YROLXZiu9k9",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:53Z",
+    "intro": "Ember.js: web application development with the convention-over-configuration framework in earlier professional roles.",
+    "label": "EmberJS",
+    "metaDescription": "Ember.js experience by Sander de Snaijer: building web applications with the convention-over-configuration framework in earlier professional frontend roles.",
+    "slug": {
+      "_type": "slug",
+      "current": "emberjs"
+    }
+  },
+  {
+    "_createdAt": "2025-04-14T15:15:18Z",
+    "_id": "7ff0b1d1-6c47-4208-a389-38a10d8da409",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvQ6o",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:36:58Z",
+    "intro": "Figma in practice: designing UI components, mobile layouts, and full product flows before writing a single line of code.",
+    "label": "Figma",
+    "metaDescription": "Figma design projects by Sander de Snaijer: UI design for mobile apps, portfolio layouts, and developer-focused design-to-code workflows.",
+    "slug": {
+      "_type": "slug",
+      "current": "figma"
+    }
+  },
+  {
+    "_createdAt": "2026-01-18T08:42:18Z",
+    "_id": "265c8475-5262-4284-95cb-d7391f585eee",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvSa6",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:15Z",
+    "intro": "Firebase used as a backend for Sudoku Ultimato: handling real-time data, user state, and analytics for a cross-platform mobile app.",
+    "label": "Firebase",
+    "metaDescription": "Firebase project by Sander de Snaijer: backend integration for Sudoku Ultimato, a cross-platform Flutter app for iOS and Android.",
+    "slug": {
+      "_type": "slug",
+      "current": "firebase"
+    }
+  },
+  {
+    "_createdAt": "2025-02-16T16:34:40Z",
+    "_id": "9c45d7cd-fe08-42b7-9073-da45161de96d",
+    "_rev": "BC4J7AbAtkE560ki9DaMwa",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:49Z",
+    "intro": "Flash and ActionScript: early career interactive web development, before the industry moved to HTML5, CSS3, and JavaScript frameworks.",
+    "label": "Flash",
+    "metaDescription": "Flash development history by Sander de Snaijer: early career work building interactive web content with Adobe Flash and ActionScript before the shift to modern JavaScript.",
+    "slug": {
+      "_type": "slug",
+      "current": "flash"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:55:09Z",
+    "_id": "73236a57-9df3-48f5-aa79-bc55fa8f8271",
+    "_rev": "435Ie2iQQo8YROLXZiu25J",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:36:57Z",
+    "intro": "Flutter projects and tutorials: building cross-platform iOS and Android apps as a frontend web developer, including a Sudoku app and a Tabata timer.",
+    "label": "Flutter",
+    "metaDescription": "Flutter tutorials and apps by Sander de Snaijer: cross-platform iOS and Android development, Dart, localization, and App Store publishing guides.",
+    "slug": {
+      "_type": "slug",
+      "current": "flutter"
+    }
+  },
+  {
+    "_createdAt": "2025-02-16T16:31:18Z",
+    "_id": "cdeb4b16-efd7-407f-88ed-5a67079db42d",
+    "_rev": "435Ie2iQQo8YROLXZiu9Rb",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:48Z",
+    "intro": "GeoServer: geospatial data services used at KNMI for serving weather layers and map data to the OpenGeoWeb frontend.",
+    "label": "GeoServer",
+    "metaDescription": "GeoServer experience by Sander de Snaijer: working with geospatial data services at KNMI for weather visualization and mapping in the OpenGeoWeb platform.",
+    "slug": {
+      "_type": "slug",
+      "current": "geoserver"
+    }
+  },
+  {
+    "_createdAt": "2026-03-22T13:13:47Z",
+    "_id": "cdab0cfe-b048-45b9-a9ed-c4261341e9eb",
+    "_rev": "435Ie2iQQo8YROLXZiu6Vp",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:30Z",
+    "intro": "Gesture recognition experiments: detecting head tilts, eyebrow raises, and hand positions with MediaPipe to replace traditional game controls.",
+    "label": "Gesture recognition",
+    "metaDescription": "Gesture recognition projects by Sander de Snaijer: detecting facial expressions and head movements with MediaPipe to control browser-based games in real time.",
+    "slug": {
+      "_type": "slug",
+      "current": "gesture-recognition"
+    }
+  },
+  {
+    "_createdAt": "2026-04-27T13:09:53Z",
+    "_id": "732ae390-540d-4f14-be2f-78e2172da22f",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvXgG",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:41Z",
+    "intro": "Google Maps integration: location-based features and interactive map interfaces in frontend web applications.",
+    "label": "Google Maps",
+    "metaDescription": "Google Maps projects by Sander de Snaijer: map integration in frontend applications, location-based features, and interactive geospatial interfaces.",
+    "slug": {
+      "_type": "slug",
+      "current": "google-maps"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:31:06Z",
+    "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvRV2",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:07Z",
+    "intro": "HTML projects and tutorials: semantic markup, accessibility, and the foundation beneath every project on this site.",
+    "label": "HTML",
+    "metaDescription": "HTML tutorials and projects by Sander de Snaijer: semantic markup, accessible structure, and responsive web layouts from scratch.",
+    "slug": {
+      "_type": "slug",
+      "current": "html"
+    }
+  },
+  {
+    "_createdAt": "2025-02-16T16:35:08Z",
+    "_id": "2907ae3c-5f23-47b5-951b-9c5825362a7e",
+    "_rev": "435Ie2iQQo8YROLXZiu8fN",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:39Z",
+    "intro": "Adobe Illustrator: vector graphics and icon work used in frontend projects and visual design alongside web development.",
+    "label": "Illustrator",
+    "metaDescription": "Adobe Illustrator work by Sander de Snaijer: vector graphics and icon design used in professional frontend projects and visual assets for web applications.",
+    "slug": {
+      "_type": "slug",
+      "current": "illustrator"
+    }
+  },
+  {
+    "_createdAt": "2026-04-28T10:22:29Z",
+    "_id": "d5663735-16cc-468b-9775-9839a455d538",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvYlK",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:45Z",
+    "intro": "JSON-LD structured data: adding Schema.org markup to Next.js pages for better search engine understanding of articles, projects, and videos.",
+    "label": "JSON-LD",
+    "metaDescription": "JSON-LD structured data by Sander de Snaijer: implementing Schema.org markup for SEO in Next.js, including articles, projects, breadcrumbs, and video objects.",
+    "slug": {
+      "_type": "slug",
+      "current": "json-ld"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T18:00:32Z",
+    "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+    "_rev": "435Ie2iQQo8YROLXZiu0t7",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:36:53Z",
+    "intro": "Projects and posts using JavaScript: from browser games with webcam controls to interactive tools and frontend experiments.",
+    "label": "Javascript",
+    "metaDescription": "JavaScript projects and tutorials by Sander de Snaijer: browser games, interactive tools, webcam experiments, and frontend development.",
+    "slug": {
+      "_type": "slug",
+      "current": "javascript"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T18:01:26Z",
+    "_id": "101cc581-a777-45f0-b1d8-325a84fbbb72",
+    "_rev": "435Ie2iQQo8YROLXZiu4Th",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:17Z",
+    "intro": "Jest for unit testing: testing React components and utility functions, used across multiple client projects and open-source tools.",
+    "label": "Jest",
+    "metaDescription": "Jest testing projects by Sander de Snaijer: unit tests for React components and TypeScript utilities in Next.js and enterprise frontend apps.",
+    "slug": {
+      "_type": "slug",
+      "current": "jest"
+    }
+  },
+  {
+    "_createdAt": "2026-04-29T14:18:24Z",
+    "_id": "facc5b05-fd88-4db1-a099-5f80e36bf57a",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvZc1",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:47Z",
+    "intro": "Face landmarks: working with MediaPipe's 478-point mesh to map facial features in real time for browser-based interaction and game controls.",
+    "label": "Landmarks",
+    "metaDescription": "Face landmark projects by Sander de Snaijer: working with MediaPipe's 478-point face mesh to detect and map facial features for browser-based interaction.",
+    "slug": {
+      "_type": "slug",
+      "current": "landmarks"
+    }
+  },
+  {
+    "_createdAt": "2026-04-27T13:10:07Z",
+    "_id": "99fe8860-251c-47ac-afa8-1b171764b506",
+    "_rev": "BC4J7AbAtkE560ki9DaLnD",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:42Z",
+    "intro": "Leaflet map projects: lightweight, interactive maps for web applications and geospatial frontend work.",
+    "label": "Leaflet",
+    "metaDescription": "Leaflet projects by Sander de Snaijer: lightweight interactive maps for web applications, used in geospatial and location-based frontend projects.",
+    "slug": {
+      "_type": "slug",
+      "current": "leaflet"
+    }
+  },
+  {
+    "_createdAt": "2026-03-06T08:58:32Z",
+    "_id": "25efe796-f5f2-462b-8754-55815a7f9440",
+    "_rev": "435Ie2iQQo8YROLXZiu3LD",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:09Z",
+    "intro": "MediaPipe in the browser: real-time face and hand tracking used to build webcam-controlled games without any server-side processing.",
+    "label": "MediaPipe",
+    "metaDescription": "MediaPipe browser projects by Sander de Snaijer: face landmark detection and hand tracking in React and Next.js for webcam-controlled games.",
+    "slug": {
+      "_type": "slug",
+      "current": "mediapipe"
+    }
+  },
+  {
+    "_createdAt": "2025-02-16T16:28:55Z",
+    "_id": "2583ede8-2270-4223-b4db-1d47647acfde",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvaJ8",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:51Z",
+    "intro": "Nx monorepo tooling: managing large frontend codebases with shared libraries and coordinated builds across multiple packages.",
+    "label": "NX",
+    "metaDescription": "Nx monorepo projects by Sander de Snaijer: managing multi-package frontend codebases with shared libraries, used in large-scale React and TypeScript applications.",
+    "slug": {
+      "_type": "slug",
+      "current": "nx"
+    }
+  },
+  {
+    "_createdAt": "2025-04-14T15:14:19Z",
+    "_id": "d5957908-8f89-462f-a5e1-9a49c0963175",
+    "_rev": "435Ie2iQQo8YROLXZiu1bd",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:36:56Z",
+    "intro": "Next.js projects and tutorials: this portfolio, the Sudoku Ultimato site, browser games, and guides on the App Router, Sanity CMS, and deployment.",
+    "label": "NextJS",
+    "metaDescription": "Next.js tutorials and projects by Sander de Snaijer: portfolio setup, headless CMS integration with Sanity, App Router, and browser game development.",
+    "slug": {
+      "_type": "slug",
+      "current": "nextjs"
+    }
+  },
+  {
+    "_createdAt": "2026-05-01T09:16:54Z",
+    "_id": "0d98d371-259c-4037-8bf3-bd067b4b0184",
+    "_rev": "3G6c9f5mj4VqcP9h5qW5ss",
+    "_type": "tag",
+    "_updatedAt": "2026-05-06T08:09:06Z",
+    "intro": "Open GeoWeb: an open-source weather visualization platform built at KNMI, combining interactive maps, geospatial data layers, and React-based UI components.",
+    "label": "Open GeoWeb",
+    "metaDescription": "Open GeoWeb project by Sander de Snaijer: an open-source weather visualization platform built at KNMI with React, TypeScript, OpenLayers, and GeoServer.",
+    "slug": {
+      "_type": "slug",
+      "current": "open-geoweb"
+    }
+  },
+  {
+    "_createdAt": "2026-04-28T05:40:41Z",
+    "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+    "_rev": "435Ie2iQQo8YROLXZiu65r",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:28Z",
+    "intro": "Open-source projects and contributions: browser games, geospatial tools, and portfolio code, all publicly available on GitHub.",
+    "label": "Open Source",
+    "metaDescription": "Open-source projects by Sander de Snaijer: contributions to geospatial weather tools, browser games, and publicly available React and TypeScript code.",
+    "slug": {
+      "_type": "slug",
+      "current": "open-source"
+    }
+  },
+  {
+    "_createdAt": "2026-04-04T13:39:32Z",
+    "_id": "263f9d7a-92fb-401c-80a5-86335078aa82",
+    "_rev": "gHKwkGs4Xi1feI6L96c4fq",
+    "_type": "tag",
+    "_updatedAt": "2026-05-06T08:24:01Z",
+    "intro": "OpenLayers projects and tutorials: gesture-controlled maps with MediaPipe, the Open GeoWeb weather platform, and interactive map rendering with React and TypeScript.",
+    "label": "OpenLayers",
+    "metaDescription": "OpenLayers projects and tutorials: gesture-controlled maps with MediaPipe, the Open GeoWeb weather platform, and interactive map rendering with React and TypeScript.",
+    "slug": {
+      "_type": "slug",
+      "current": "openlayers"
+    }
+  },
+  {
+    "_createdAt": "2025-02-16T16:35:24Z",
+    "_id": "5337ef4b-78a2-4410-b692-48d45eb96e06",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvXN6",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:40Z",
+    "intro": "Adobe Photoshop: image editing and asset preparation for web projects, part of the design-to-development workflow.",
+    "label": "Photoshop",
+    "metaDescription": "Adobe Photoshop work by Sander de Snaijer: image editing and asset preparation for web projects, used alongside frontend development workflows.",
+    "slug": {
+      "_type": "slug",
+      "current": "photoshop"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:55:30Z",
+    "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvPne",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:36:56Z",
+    "intro": "React projects and posts: from large-scale enterprise apps to side projects, games, and portfolio work. Component architecture, hooks, and real-world patterns.",
+    "label": "React",
+    "metaDescription": "React tutorials and projects by Sander de Snaijer: Next.js apps, Redux state management, browser games, and open-source geospatial tools.",
+    "slug": {
+      "_type": "slug",
+      "current": "react"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:55:37Z",
+    "_id": "28b1de79-f2c6-40a6-a6bf-2fd36a47b6f8",
+    "_rev": "435Ie2iQQo8YROLXZiu4Er",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:13Z",
+    "intro": "Redux state management: used in large-scale React applications at companies like Bynder, KNMI, and Dutch government projects.",
+    "label": "Redux",
+    "metaDescription": "Redux projects by Sander de Snaijer: state management in React apps, including large enterprise dashboards and open-source geospatial tools.",
+    "slug": {
+      "_type": "slug",
+      "current": "redux"
+    }
+  },
+  {
+    "_createdAt": "2026-03-08T06:57:49Z",
+    "_id": "6029f5d4-958d-4433-8fa2-93b13c647215",
+    "_rev": "435Ie2iQQo8YROLXZiu4iX",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:20Z",
+    "intro": "Resin casting projects: using coloured UV resin together with 3D printed frames to create stained glass artwork without cutting real glass.",
+    "label": "Resin",
+    "metaDescription": "Resin crafting project by Sander de Snaijer: a step-by-step guide to making stained glass effects using coloured resin and 3D printed frames.",
+    "slug": {
+      "_type": "slug",
+      "current": "resin"
+    }
+  },
+  {
+    "_createdAt": "2026-05-13T14:53:17Z",
+    "_id": "d950456e-f314-4594-94b0-7484c21c9000",
+    "_rev": "e6iUU3SSuNaR8oFd4Eq0Zc",
+    "_type": "tag",
+    "_updatedAt": "2026-05-13T14:53:52Z",
+    "intro": "SEO strategies, case studies, and lessons learned from growing organic search traffic on a developer portfolio. From structured data and meta tags to content strategy and Search Console analysis.",
+    "label": "SEO",
+    "metaDescription": "Articles and projects about search engine optimization, structured data, and growing organic traffic. Case studies with real Search Console data and results.",
+    "slug": {
+      "_type": "slug",
+      "current": "seo"
+    }
+  },
+  {
+    "_createdAt": "2026-04-28T10:22:14Z",
+    "_id": "bee712ba-fd1f-432c-a334-1350d78fd6f4",
+    "_rev": "435Ie2iQQo8YROLXZiu91d",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:44Z",
+    "intro": "Static site generation: pre-rendering Next.js pages at build time with Sanity CMS for fast load times and strong SEO.",
+    "label": "SSG",
+    "metaDescription": "Static site generation projects by Sander de Snaijer: building fast, pre-rendered Next.js pages with Sanity CMS for a developer portfolio and project sites.",
+    "slug": {
+      "_type": "slug",
+      "current": "ssg"
+    }
+  },
+  {
+    "_createdAt": "2026-04-28T10:21:32Z",
+    "_id": "f3bc8e3e-e236-463c-ac2c-be66ca2c163a",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvZ9H",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:46Z",
+    "intro": "Sanity CMS: headless content management for this portfolio, with custom document schemas, GROQ queries, and real-time editing previews.",
+    "label": "Sanity ",
+    "metaDescription": "Sanity CMS projects by Sander de Snaijer: headless content management for a Next.js portfolio, with custom schemas, GROQ queries, and real-time previews.",
+    "slug": {
+      "_type": "slug",
+      "current": "sanity"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:55:43Z",
+    "_id": "c78b4dc8-a770-4dfe-8748-e38604bece58",
+    "_rev": "tH7pKqxWJKBceTcovjdgWx",
+    "_type": "tag",
+    "_updatedAt": "2026-05-06T08:26:31Z",
+    "intro": "Storybook for component development: used in the Open GeoWeb project to develop and document React UI components in isolation.",
+    "label": "Storybook",
+    "metaDescription": "Storybook project by Sander de Snaijer: component-driven development for the Open GeoWeb weather mapping platform, built with React and TypeScript.",
+    "slug": {
+      "_type": "slug",
+      "current": "storybook"
+    }
+  },
+  {
+    "_createdAt": "2026-02-01T07:51:38Z",
+    "_id": "0d23f922-7c19-4b20-8e79-090ebc974bd8",
+    "_rev": "435Ie2iQQo8YROLXZiu2vF",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:06Z",
+    "intro": "Tailwind CSS in practice: utility-first styling for Next.js apps, dark mode, responsive design, and why the long class names are worth it.",
+    "label": "Tailwind CSS",
+    "metaDescription": "Tailwind CSS projects and notes by Sander de Snaijer: utility-first styling in Next.js, dark mode support, and responsive layout techniques.",
+    "slug": {
+      "_type": "slug",
+      "current": "tailwind-css"
+    }
+  },
+  {
+    "_createdAt": "2026-03-06T07:47:08Z",
+    "_id": "3ed24b85-6a8c-4d02-88af-30ee861b3107",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvSLj",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:14Z",
+    "intro": "Three.js in the browser: 3D WebGL rendering used to build the Toilet Paper Roll Simulator, a surprisingly delightful physics experiment.",
+    "label": "Three.js",
+    "metaDescription": "Three.js browser projects by Sander de Snaijer: 3D WebGL rendering in Next.js, including an interactive toilet paper roll physics simulator.",
+    "slug": {
+      "_type": "slug",
+      "current": "three-js"
+    }
+  },
+  {
+    "_createdAt": "2025-02-11T17:37:35Z",
+    "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+    "_rev": "435Ie2iQQo8YROLXZiu1J5",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:36:54Z",
+    "intro": "TypeScript projects and write-ups: safer JavaScript for frontend apps, games, and tools, with real examples from production and side projects.",
+    "label": "Typescript",
+    "metaDescription": "TypeScript tutorials and projects by Sander de Snaijer: typed JavaScript in Next.js apps, Flutter, browser games, and open-source tools.",
+    "slug": {
+      "_type": "slug",
+      "current": "typescript"
+    }
+  },
+  {
+    "_createdAt": "2026-04-28T10:22:00Z",
+    "_id": "aac48aa8-0748-4a1a-bdca-af51c4d3313b",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvY90",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:43Z",
+    "intro": "Vercel for deployment: hosting Next.js sites with static generation, preview URLs, and continuous deployment from GitHub.",
+    "label": "Vercel",
+    "metaDescription": "Vercel deployment projects by Sander de Snaijer: hosting Next.js applications with static generation, preview deployments, and continuous integration from GitHub.",
+    "slug": {
+      "_type": "slug",
+      "current": "vercel"
+    }
+  },
+  {
+    "_createdAt": "2026-03-06T07:47:39Z",
+    "_id": "c5de379f-b43b-4ca5-b60a-e4f8139df0bf",
+    "_rev": "435Ie2iQQo8YROLXZiu3dl",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:10Z",
+    "intro": "WebGL browser experiments: 3D rendering and graphics in the browser, used in webcam games and interactive visual projects.",
+    "label": "WebGL",
+    "metaDescription": "WebGL projects by Sander de Snaijer: 3D browser rendering with Three.js and WebGL, used in interactive games and visual web experiments.",
+    "slug": {
+      "_type": "slug",
+      "current": "webgl"
+    }
+  },
+  {
+    "_createdAt": "2026-05-31T12:27:12Z",
+    "_id": "tag-websocket",
+    "_rev": "1RGsrS1mZgtX3UhmgUh2Us",
+    "_type": "tag",
+    "_updatedAt": "2026-05-31T12:27:12Z",
+    "intro": null,
+    "label": "WebSocket",
+    "metaDescription": null,
+    "slug": {
+      "_type": "slug",
+      "current": "websocket"
+    }
+  },
+  {
+    "_createdAt": "2026-03-06T08:59:36Z",
+    "_id": "68a3161b-e6a1-4e5c-8774-7c5d54ada0ad",
+    "_rev": "BC4J7AbAtkE560ki9DaH6y",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:08Z",
+    "intro": "Webcam-powered browser projects: face tracking, hand detection, and games controlled by nothing but a camera and a bit of MediaPipe magic.",
+    "label": "Webcam",
+    "metaDescription": "Webcam browser projects by Sander de Snaijer: face-controlled Tetris, hand-tracked Duck Hunt, and experiments using MediaPipe in the browser.",
+    "slug": {
+      "_type": "slug",
+      "current": "webcam"
+    }
+  },
+  {
+    "_createdAt": "2026-03-08T07:00:51Z",
+    "_id": "bd3ec6ed-4115-4c12-a268-0aa3931ecd65",
+    "_rev": "BC4J7AbAtkE560ki9DaJPi",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:26Z",
+    "intro": "App development from a web developer's perspective: building and shipping cross-platform mobile apps with Flutter, covering the full journey from idea to store.",
+    "label": "app development",
+    "metaDescription": "Mobile app development by Sander de Snaijer: building Flutter apps for iOS and Android as a frontend web developer, with honest lessons from the process.",
+    "slug": {
+      "_type": "slug",
+      "current": "app-development"
+    }
+  },
+  {
+    "_createdAt": "2026-03-08T06:58:47Z",
+    "_id": "210414ca-c7b4-453f-8380-7df4f2b6d2c2",
+    "_rev": "BC4J7AbAtkE560ki9DaI6p",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:20Z",
+    "intro": "Arts and crafts projects where technology meets handcraft: 3D printed frames, resin pours, and things that live somewhere between making and building.",
+    "label": "arts and crafts ",
+    "metaDescription": "Arts and crafts projects by Sander de Snaijer: handmade creations using 3D printing and resin, blending technology with traditional craft techniques.",
+    "slug": {
+      "_type": "slug",
+      "current": "arts-and-crafts"
+    }
+  },
+  {
+    "_createdAt": "2026-04-28T10:38:52Z",
+    "_id": "59e6d3fb-185b-4c22-a3fb-3b5df5fb9310",
+    "_rev": "435Ie2iQQo8YROLXZiu8QX",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:38Z",
+    "intro": "Browser games: playable experiments built with JavaScript, from webcam-controlled Tetris to Conway's Game of Life and hand-tracked Duck Hunt.",
+    "label": "browser game",
+    "metaDescription": "Browser games by Sander de Snaijer: webcam-controlled Tetris, hand-tracked Duck Hunt, Conway's Game of Life, and other playable experiments built with JavaScript.",
+    "slug": {
+      "_type": "slug",
+      "current": "browser-game"
+    }
+  },
+  {
+    "_createdAt": "2026-03-08T07:01:52Z",
+    "_id": "06020007-80fd-4068-8542-c86e92c2aa1f",
+    "_rev": "435Ie2iQQo8YROLXZiu5nJ",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:27Z",
+    "intro": "Electronics projects: soldering, wiring, and building hardware-powered devices, like an Arduino word clock with an LED matrix and custom firmware.",
+    "label": "electronics",
+    "metaDescription": "Electronics maker project by Sander de Snaijer: building an Arduino word clock with soldering, LED wiring, and custom C++ firmware in a 3D printed case.",
+    "slug": {
+      "_type": "slug",
+      "current": "electronics"
+    }
+  },
+  {
+    "_createdAt": "2026-04-28T10:38:27Z",
+    "_id": "dc090de6-5ab5-408e-ba86-fda6d1036cc1",
+    "_rev": "435Ie2iQQo8YROLXZiu8FP",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:37Z",
+    "intro": "Face mesh tracking: using MediaPipe's 478-point landmark model to read facial expressions and head movements for browser-based game controls.",
+    "label": "face mesh",
+    "metaDescription": "Face mesh projects by Sander de Snaijer: using MediaPipe's 478-point face landmark model to track expressions and head pose for webcam-controlled browser games.",
+    "slug": {
+      "_type": "slug",
+      "current": "face-mesh"
+    }
+  },
+  {
+    "_createdAt": "2026-04-28T10:15:46Z",
+    "_id": "a4f3ce2f-aa05-42cb-bb44-93829a8b141a",
+    "_rev": "435Ie2iQQo8YROLXZiu6oN",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:31Z",
+    "intro": "Gesture-controlled projects: browser games where the keyboard stays untouched and the webcam does all the work.",
+    "label": "gesture controls",
+    "metaDescription": "Gesture-controlled browser projects by Sander de Snaijer: replacing keyboard and mouse input with head tilts, eyebrow raises, and hand movements via webcam.",
+    "slug": {
+      "_type": "slug",
+      "current": "gesture-controls"
+    }
+  },
+  {
+    "_createdAt": "2026-04-04T13:40:00Z",
+    "_id": "be24be94-24bf-4ff6-8753-4c957195f831",
+    "_rev": "435Ie2iQQo8YROLXZiu84H",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:35Z",
+    "intro": "Hand tracking in the browser: using MediaPipe hand landmarks to detect finger positions and gestures for webcam-controlled games.",
+    "label": "hand tracking",
+    "metaDescription": "Hand tracking browser projects by Sander de Snaijer: using MediaPipe hand landmarks to detect gestures and control webcam-powered games in the browser.",
+    "slug": {
+      "_type": "slug",
+      "current": "hand-tracking"
+    }
+  },
+  {
+    "_createdAt": "2026-03-08T07:03:02Z",
+    "_id": "26fab2b7-cbe4-488b-b78f-0b2829802bf7",
+    "_rev": "BC4J7AbAtkE560ki9DaJ1v",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:25Z",
+    "intro": "Headless CMS with Sanity: separating content from code in a Next.js portfolio, with custom schemas, real-time previews, and structured content.",
+    "label": "headless CMS",
+    "metaDescription": "Headless CMS guide by Sander de Snaijer: setting up Sanity with Next.js for a developer portfolio, including schemas, queries, and Vercel deployment.",
+    "slug": {
+      "_type": "slug",
+      "current": "headless-cms"
+    }
+  },
+  {
+    "_createdAt": "2026-01-18T08:22:49Z",
+    "_id": "42107bc2-1cc6-4842-b4d9-d1037674efe1",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvQLB",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:02Z",
+    "intro": "iOS app development with Flutter: building, testing, and shipping to the App Store as a developer coming from a web background.",
+    "label": "iOS",
+    "metaDescription": "iOS app development projects by Sander de Snaijer: Flutter apps for iPhone, App Store submission, and cross-platform mobile development guides.",
+    "slug": {
+      "_type": "slug",
+      "current": "ios"
+    }
+  },
+  {
+    "_createdAt": "2026-03-08T06:59:58Z",
+    "_id": "ac23153f-88ff-47a6-a51b-782864192583",
+    "_rev": "435Ie2iQQo8YROLXZiu4tf",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:22Z",
+    "intro": "Localization in Flutter: adding multi-language support to iOS and Android apps, covering string management, locale detection, and App Store requirements.",
+    "label": "localization",
+    "metaDescription": "Flutter localization guide by Sander de Snaijer: adding multi-language support to iOS and Android apps, including Dutch and English for Sudoku Ultimato.",
+    "slug": {
+      "_type": "slug",
+      "current": "localization"
+    }
+  },
+  {
+    "_createdAt": "2026-03-08T06:58:33Z",
+    "_id": "6688186a-b082-4670-a468-25cad9d7cced",
+    "_rev": "BC4J7AbAtkE560ki9DaGeQ",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:05Z",
+    "intro": "Maker projects: hardware, 3D printing, soldering, and hands-on builds. The place where software instincts meet physical materials.",
+    "label": "makers",
+    "metaDescription": "Maker projects by Sander de Snaijer: Arduino builds, 3D printing, resin casting, electronics, and step-by-step guides for hands-on creators.",
+    "slug": {
+      "_type": "slug",
+      "current": "makers"
+    }
+  },
+  {
+    "_createdAt": "2026-04-04T13:40:17Z",
+    "_id": "aafce187-d58c-4fe5-a7e3-5582ed64be8a",
+    "_rev": "Z7R1jAzR2Hn70OJfhQvW8S",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:36Z",
+    "intro": "Map and geospatial projects: interactive weather data visualization with OpenLayers, built for professional and open-source applications.",
+    "label": "maps",
+    "metaDescription": "Map-based projects by Sander de Snaijer: interactive geospatial tools for weather data visualization, built with OpenLayers, React, and open-source mapping libraries.",
+    "slug": {
+      "_type": "slug",
+      "current": "maps"
+    }
+  },
+  {
+    "_createdAt": "2026-03-08T07:05:01Z",
+    "_id": "00830982-0993-49d5-985c-e409dc79d828",
+    "_rev": "BC4J7AbAtkE560ki9DaIUc",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:23Z",
+    "intro": "Silicone mold making: casting food-safe molds from 3D printed masters to create custom chocolate bars with any logo or shape.",
+    "label": "silicone molds",
+    "metaDescription": "Silicone mold project by Sander de Snaijer: how to cast food-safe silicone molds from 3D printed masters and use them to make custom chocolate bars.",
+    "slug": {
+      "_type": "slug",
+      "current": "silicone-molds"
+    }
+  },
+  {
+    "_createdAt": "2026-04-28T10:26:41Z",
+    "_id": "b5d4e339-da85-4e7d-b8e9-b869593186e9",
+    "_rev": "BC4J7AbAtkE560ki9DaNAr",
+    "_type": "tag",
+    "_updatedAt": "2026-05-01T09:37:50Z",
+    "intro": "Stained glass with 3D printing: creating colourful faux stained glass artwork by filling 3D printed frames with UV resin.",
+    "label": "stained glass",
+    "metaDescription": "Stained glass project by Sander de Snaijer: creating faux stained glass artwork by combining 3D printed frames with coloured UV resin, no glass cutting required.",
+    "slug": {
+      "_type": "slug",
+      "current": "stained-glass"
+    }
+  }
+]

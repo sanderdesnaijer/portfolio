@@ -1,0 +1,6048 @@
+[
+  {
+    "_createdAt": "2026-05-31T12:27:13Z",
+    "_id": "project-1-bit-doom",
+    "_updatedAt": "2026-05-31T12:38:00Z",
+    "body": [
+      {
+        "_key": "6e20f502-72d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "91bbf8c7-15b",
+            "_type": "span",
+            "marks": [],
+            "text": "I just finished Doom: The Dark Ages, and after replaying all the other Doom games I was completely hooked. Around the same time I had been working on my "
+          },
+          {
+            "_key": "971ca884-3ca",
+            "_type": "span",
+            "marks": ["1fe5151f-d08"],
+            "text": "ESP32 Mini OLED Webcam Stream"
+          },
+          {
+            "_key": "1bebf87b-c86",
+            "_type": "span",
+            "marks": [],
+            "text": " project, streaming a live webcam feed to a tiny 128x64 SSD1306 OLED over WiFi. That got me thinking: what else can we stream to this thing?"
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "1fe5151f-d08",
+            "_type": "link",
+            "href": "/projects/esp32-mini-oled-webcam-stream"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "c1f622b6-2d5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "290528e7-627",
+            "_type": "span",
+            "marks": [],
+            "text": "The obvious answer was Doom."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "cd18a41d-5aa",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a80a0613-3cc",
+            "_type": "span",
+            "marks": [],
+            "text": "But does it run Doom?"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "c0ed6da9-b08",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6d3ab6c5-db2",
+            "_type": "span",
+            "marks": [],
+            "text": "The classic question. And before even trying to run Doom on the ESP32, I wanted to answer a more basic one: is Doom even readable on a 128x64 monochrome display? There is no point in porting an entire game engine to a microcontroller if you cannot tell what is happening on screen."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c54e0bae-ab3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "038887e3-8b0",
+            "_type": "span",
+            "marks": [],
+            "text": "Native ESP32 Doom ports do exist. Espressif published a "
+          },
+          {
+            "_key": "61821f7e-7ed",
+            "_type": "span",
+            "marks": ["4535de03-2b0"],
+            "text": "proof-of-concept PrBoom port"
+          },
+          {
+            "_key": "02ab2ab6-f9e",
+            "_type": "span",
+            "marks": [],
+            "text": ", but it requires an ESP32-WROVER module with 4MB of PSRAM. The "
+          },
+          {
+            "_key": "1eb8a93a-88d",
+            "_type": "span",
+            "marks": ["0ad5c7e1-e10"],
+            "text": "Arduino Nano ESP32"
+          },
+          {
+            "_key": "49063214-967",
+            "_type": "span",
+            "marks": [],
+            "text": " (based on the ESP32-S3) can also run it. I have a basic ESP32 DevKit without PSRAM, so running Doom natively was not an option with the hardware I had."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "4535de03-2b0",
+            "_type": "link",
+            "href": "https://github.com/espressif/esp32-doom"
+          },
+          {
+            "_key": "0ad5c7e1-e10",
+            "_type": "link",
+            "href": "https://hackaday.io/project/192783-yes-arduino-nano-esp32-can-play-doom"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "8c9cd301-e3c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "65a2e8c7-58d",
+            "_type": "span",
+            "marks": [],
+            "text": "So instead of porting the game, I built something more generic. The project uses "
+          },
+          {
+            "_key": "b11e258b-454",
+            "_type": "span",
+            "marks": ["28ab62a3-b49"],
+            "text": "js-dos"
+          },
+          {
+            "_key": "20af032a-86c",
+            "_type": "span",
+            "marks": [],
+            "text": " to run any DOS game in the browser and streams the dithered video output to the ESP32 over WebSocket. The ESP32 does not run Doom or any game. It just acts as a tiny wireless monitor. Doom was my test case, but the system works with any "
+          },
+          {
+            "_key": "5ae25341-c17",
+            "_type": "span",
+            "marks": ["code"],
+            "text": ".jsdos"
+          },
+          {
+            "_key": "a78d2f31-381",
+            "_type": "span",
+            "marks": [],
+            "text": " game bundle you drag and drop into the browser."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "28ab62a3-b49",
+            "_type": "link",
+            "href": "https://js-dos.com"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "5947166f-bb4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e19aa1e4-857",
+            "_type": "span",
+            "marks": [],
+            "text": "This let me focus on the actual question: can you play Doom on a 1-bit screen?"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b93d6eec-6d9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b3ac96a1-4f8",
+            "_type": "span",
+            "marks": [],
+            "text": "Can you play Doom on a 1-bit screen?"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "93bea827-163",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c35d9bd3-b8a",
+            "_type": "span",
+            "marks": [],
+            "text": "A single frame has to survive being cropped, downscaled to 128x64 pixels, dithered to pure black and white, and packed into 1024 bytes. That is the entire SSD1306 display buffer. Every frame."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "ada28350-7e8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3544a5dd-ee5",
+            "_type": "span",
+            "marks": [],
+            "text": "It turned out better than expected. You can navigate levels, spot enemies, and play through the game. The screen is tiny and the dithering loses detail in dark areas, but it is surprisingly playable."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "993a9643-c81",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ad977ac5-43a",
+            "_type": "span",
+            "marks": [],
+            "text": "Dithering makes all the difference"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "b6688ca3-700",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f5a41189-e46",
+            "_type": "span",
+            "marks": [],
+            "text": "The project supports multiple 1-bit dithering algorithms: Bayer ordered dithering at 2x2, 4x4, and 8x8, plus Floyd-Steinberg and Atkinson error diffusion. Each one gives the image a different character. Bayer is fast and produces a clean pattern, good for maintaining high frame rates. Atkinson creates that classic Macintosh look with more contrast. Floyd-Steinberg sits somewhere in between."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "988ecd4d-a28",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c4f027c6-1f3",
+            "_type": "span",
+            "marks": [],
+            "text": "You can switch between them in real time and see the result both in the browser preview and on the physical OLED. There are also controls for contrast, brightness, and cropping from all four sides, so you can frame just the gameplay area and cut out the HUD."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "36374b7e-023",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "411b548a-21a",
+            "_type": "span",
+            "marks": [],
+            "text": "Browser-to-microcontroller streaming pipeline"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "7046ad58-b3e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "669db056-fbd",
+            "_type": "span",
+            "marks": [],
+            "text": "The whole streaming pipeline runs in the browser with vanilla JavaScript, zero dependencies, no build step. It captures the "
+          },
+          {
+            "_key": "6e4ab003-5ff",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "js-dos"
+          },
+          {
+            "_key": "9c914f65-489",
+            "_type": "span",
+            "marks": [],
+            "text": " canvas, crops and resizes to 128x64, applies the selected dithering algorithm, packs the result into SSD1306 page format, and sends it over WebSocket. The ESP32 firmware copies the incoming bytes straight into the display buffer with "
+          },
+          {
+            "_key": "2f67100b-f75",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "memcpy"
+          },
+          {
+            "_key": "7d48279f-104",
+            "_type": "span",
+            "marks": [],
+            "text": ". No "
+          },
+          {
+            "_key": "092ffce3-a19",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "clearDisplay"
+          },
+          {
+            "_key": "3586aa13-bbd",
+            "_type": "span",
+            "marks": [],
+            "text": ", no "
+          },
+          {
+            "_key": "206bfbcd-659",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "drawBitmap"
+          },
+          {
+            "_key": "6546201e-62b",
+            "_type": "span",
+            "marks": [],
+            "text": ", just a direct buffer write."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "49c1dd2a-89b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e2a2136a-5db",
+            "_type": "span",
+            "marks": [],
+            "text": "With backpressure protection on the WebSocket client, it sustains 15 to 20 FPS without frame buildup."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "7cf5e135-6b7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "df4b743c-1c4",
+            "_type": "span",
+            "marks": [],
+            "text": "Holiday hardware constraints"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "e71a5a0d-ae4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b59aa77d-8ec",
+            "_type": "span",
+            "marks": [],
+            "text": "I started this project on holiday with nothing but an ESP32, the SSD1306 OLED display, and four jump wires. The same minimal setup from the "
+          },
+          {
+            "_key": "d665fda2-26e",
+            "_type": "span",
+            "marks": ["30bc64e5-dfb"],
+            "text": "webcam streaming project"
+          },
+          {
+            "_key": "40dcc507-ee1",
+            "_type": "span",
+            "marks": [],
+            "text": ". No breadboard, no extra components. Just the board, the screen, and a USB cable for power. The same holiday where I built the "
+          },
+          {
+            "_key": "e06c69c6-72b",
+            "_type": "span",
+            "marks": ["648418c3-959"],
+            "text": "ESP32 OLED Pinball"
+          },
+          {
+            "_key": "92cf0b77-b74",
+            "_type": "span",
+            "marks": [],
+            "text": " game with the exact same hardware."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "30bc64e5-dfb",
+            "_type": "link",
+            "href": "/projects/esp32-mini-oled-webcam-stream"
+          },
+          {
+            "_key": "648418c3-959",
+            "_type": "link",
+            "href": "/projects/esp32-pinball"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "ef90134a-d8d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1fd82632-2b6",
+            "_type": "span",
+            "marks": [],
+            "text": "What's next"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "4609845a-2d9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5680833f-b52",
+            "_type": "span",
+            "marks": [],
+            "text": "Now that I know the display works for Doom, the interesting next step is actually running it natively on the hardware. That would mean an ESP32-S3 with PSRAM, since the existing Doom ports require it. This streaming project was the first step: proving the screen can handle the game before investing in the hardware to run it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "Stream DOS games to a 128x64 SSD1306 OLED on an ESP32 over WiFi. Browser-based 1-bit dithering converts each frame for a tiny monochrome display.",
+    "faq": [
+      {
+        "_key": "a91cfb4cbeeb",
+        "answer": [
+          {
+            "_key": "6fb1c4e0ca76",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "f1d93f53919d",
+                "_type": "span",
+                "marks": [],
+                "text": "No. The ESP32 does not run any game. Doom (or any other DOS game) runs in the browser using "
+              },
+              {
+                "_key": "3de08590c6a6",
+                "_type": "span",
+                "marks": ["61755ec79418"],
+                "text": "js-dos"
+              },
+              {
+                "_key": "eaea2491eb45",
+                "_type": "span",
+                "marks": [],
+                "text": ". The ESP32 receives dithered 1-bit video frames over WebSocket and displays them on the SSD1306 OLED. It acts as a tiny wireless monitor."
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "61755ec79418",
+                "_type": "link",
+                "href": "https://js-dos.com"
+              }
+            ],
+            "style": "normal"
+          }
+        ],
+        "question": "Does this project actually run Doom on the ESP32?"
+      },
+      {
+        "_key": "3f9423bf5a96",
+        "answer": [
+          {
+            "_key": "15a0e95b53a1",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "b6b343da234f",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes, but it requires an ESP32-WROVER with 4MB PSRAM or an ESP32-S3 board. Espressif has published a "
+              },
+              {
+                "_key": "f07458766f1a",
+                "_type": "span",
+                "marks": ["b13f2c30f70c"],
+                "text": "PrBoom port"
+              },
+              {
+                "_key": "0b9a1765c1ef",
+                "_type": "span",
+                "marks": [],
+                "text": " that runs on these modules. A basic ESP32 DevKit without PSRAM cannot run it."
+              }
+            ],
+            "markDefs": [
+              {
+                "_key": "b13f2c30f70c",
+                "_type": "link",
+                "href": "https://github.com/espressif/esp32-doom"
+              }
+            ],
+            "style": "normal"
+          }
+        ],
+        "question": "Can you run Doom natively on an ESP32?"
+      },
+      {
+        "_key": "aa00b11aceb6",
+        "answer": [
+          {
+            "_key": "f166fef4fc2f",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "0f7b0a5b9438",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes. You can drag and drop any .jsdos file into the browser interface to load other DOS games. The streaming and dithering pipeline works the same way regardless of the game."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "Can I stream other games besides Doom?"
+      },
+      {
+        "_key": "53e91b176ed0",
+        "answer": [
+          {
+            "_key": "1fd77873e9c7",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "19c21e6c1df6",
+                "_type": "span",
+                "marks": [],
+                "text": "It depends on what you value. Atkinson dithering gives the most contrast and a classic Macintosh aesthetic. Bayer 4x4 is the best balance of speed and visual quality. Floyd-Steinberg produces the smoothest gradients but can look noisy on a tiny screen."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "Which dithering algorithm looks best for Doom?"
+      },
+      {
+        "_key": "72004210541f",
+        "answer": [
+          {
+            "_key": "6675c7a79d7e",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "981cb7c71465",
+                "_type": "span",
+                "marks": [],
+                "text": "The system sustains 15 to 20 FPS over WiFi with WebSocket backpressure protection to prevent frame buildup."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "What frame rate does the streaming achieve?"
+      }
+    ],
+    "imageAlt": "Doom title screen dithered to 1-bit and displayed on a 128x64 SSD1306 OLED connected to an ESP32 DevKit, mounted inside a cardboard enclosure",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/21f38282e281becc97326414ebe7b104d0f7ac04-1200x630.webp",
+    "jsonLdApplicationCategory": null,
+    "jsonLdCodeRepository": "https://github.com/sanderdesnaijer/1-bit-doom-stream",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "C++, JavaScript",
+    "jsonLdType": ["SoftwareSourceCode", "CreativeWork"],
+    "links": [
+      {
+        "_key": "0772e6dc-ec3",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/1-bit-doom-stream",
+        "title": "1-Bit Doom source code on GitHub"
+      },
+      {
+        "_key": "0e3ab04a-b2f",
+        "icon": "github",
+        "link": "https://github.com/espressif/esp32-doom",
+        "title": "Espressif ESP32 Doom (PrBoom port)"
+      },
+      {
+        "_key": "9873d7f5-edd",
+        "icon": "article",
+        "link": "/projects/esp32-mini-oled-webcam-stream",
+        "title": "ESP32 Mini OLED Webcam Stream"
+      },
+      {
+        "_key": "a292669b-315",
+        "icon": "article",
+        "link": "/projects/esp32-pinball",
+        "title": "ESP32 OLED Pinball"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Doom title screen dithered to 1-bit and displayed on a 128x64 SSD1306 OLED connected to an ESP32 DevKit, mounted inside a cardboard enclosure",
+      "asset": {
+        "_ref": "image-21f38282e281becc97326414ebe7b104d0f7ac04-1200x630-webp",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-05-31T12:27:13.317Z",
+    "slug": {
+      "_type": "slug",
+      "current": "1-bit-doom"
+    },
+    "tags": [
+      {
+        "_id": "101f410e-9ce9-448f-8460-eb63630a11ba",
+        "label": "ESP32"
+      },
+      {
+        "_id": "c367dc6b-f51e-4a17-9e08-c77b17bcd209",
+        "label": "Arduino"
+      },
+      {
+        "_id": "06020007-80fd-4068-8542-c86e92c2aa1f",
+        "label": "electronics"
+      },
+      {
+        "_id": "tag-websocket",
+        "label": "WebSocket"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      }
+    ],
+    "title": "1-Bit Doom: Stream DOS Games to ESP32 OLED Over WiFi"
+  },
+  {
+    "_createdAt": "2026-05-23T14:30:29Z",
+    "_id": "c94f6356-f60d-4adf-bd38-d24e4f09cdb1",
+    "_updatedAt": "2026-05-23T16:15:08Z",
+    "body": [
+      {
+        "_key": "a84450e8443e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7fea5ea30d7b",
+            "_type": "span",
+            "marks": [],
+            "text": "I was on holiday with nothing but an ESP32, a tiny OLED display, and a handful of jump wires. No buttons, no sensors, no breadboard. I wanted to make something fun with what I had, so I built a pinball machine."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2634f381ab91",
+        "_type": "youTube",
+        "url": "https://www.youtube.com/watch?v=_fYJRqrt3yo"
+      },
+      {
+        "_key": "aed92bc12fd3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3148e2977432",
+            "_type": "span",
+            "marks": [],
+            "text": "Touch pins as flippers"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "4040a4d152ab",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b95f9dc3c43a",
+            "_type": "span",
+            "marks": [],
+            "text": "Since I didn't have a controller or buttons with me, I had to come up with another way of controlling the flippers. The key trick was the ESP32's built-in capacitive touch pins. Touch a bare GPIO pin with your finger and the chip picks up the change in capacitance. No buttons, no extra components. I picked two pins on opposite sides of the board and mapped them to left and right flippers. It works surprisingly well for a game that needs fast, responsive input."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "24e59957d5d6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b95f9dc3c43a",
+            "_type": "span",
+            "marks": [],
+            "text": "Ball physics on a microcontroller"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "a31cf74ca2c8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b6eff78a33ba",
+            "_type": "span",
+            "marks": [],
+            "text": "The game is written from scratch in C++ on top of the Adafruit SSD1306 driver. All game logic, physics, and rendering are custom. The ball has real physics with gravity, friction, and collision detection against seven bumpers and a set of guide walls. The display is a 128x64 monochrome OLED rotated 90 degrees for vertical gameplay, so the game actually runs in a 64x128 pixel space. Every frame, the ball position updates, collisions resolve, and a 1024-byte pixel buffer flushes to the screen."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e949006a715c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2d74d955318d",
+            "_type": "span",
+            "marks": [],
+            "text": "There is a title screen, score tracking, a ball counter, and a game-over flow. It plays like an actual pinball machine, just very small."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1c1a9800a97a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0f639c9c4f51",
+            "_type": "span",
+            "marks": [],
+            "text": "The cigarette case enclosure"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "c55b78b123ee",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "34b4606f3cc3",
+            "_type": "span",
+            "marks": [],
+            "text": "Holding a bare board while tapping pins was not great. The display shifted every time you touched something. I did not have a 3D printer with me, but I did have an empty cigarette case. A few cuts with scissors and everything fit inside. The touch pins stick out just enough to reach with your thumbs. There is even room left for a battery pack if I ever want to make it fully portable."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "83b8d59e72e8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "34b4606f3cc3",
+            "_type": "span",
+            "marks": [],
+            "text": "What I learned"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "a5f4dd69d1ed",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c14c8307f813",
+            "_type": "span",
+            "marks": [],
+            "text": "Building a game for a 64x128 screen forces you to think about every pixel. There is no room for anti-aliasing, no alpha blending, no floating-point shortcuts. Collision detection has to be tight because a one-pixel error is visible. The constraints made the project more fun, not less."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "51fa16948a7f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c14c8307f813",
+            "_type": "span",
+            "marks": [],
+            "text": "The source code is on GitHub if you want to flash it to your own ESP32. All you need is a board, an SSD1306 display, and four wires. It uses the same hardware as my "
+          },
+          {
+            "_key": "036306a182a7",
+            "_type": "span",
+            "marks": ["fa24d040c8de"],
+            "text": "ESP32 Mini OLED Webcam Stream"
+          },
+          {
+            "_key": "59e53252a892",
+            "_type": "span",
+            "marks": [],
+            "text": ", just running a game instead of a video feed."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "fa24d040c8de",
+            "_type": "link",
+            "href": "/projects/esp32-mini-oled-webcam-stream)"
+          }
+        ],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "A pinball game built from scratch in C++ for the ESP32 and a 128x64 OLED, using capacitive touch pins as flippers and a cigarette case as the enclosure. ",
+    "faq": null,
+    "imageAlt": "ESP32 pinball game running on a tiny OLED display, housed inside a cigarette case with the board and USB cable visible",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/0d6a8f698f3850e098dd9a97c9d25c77f71f6444-1200x630.webp",
+    "jsonLdApplicationCategory": null,
+    "jsonLdCodeRepository": "https://github.com/sanderdesnaijer/esp32-pinball",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "C++",
+    "jsonLdType": ["SoftwareSourceCode"],
+    "links": [
+      {
+        "_key": "27f14a1c0a4a",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/esp32-pinball",
+        "title": "ESP32 pinball source code on GitHub"
+      },
+      {
+        "_key": "36803883dc72",
+        "icon": "youtube",
+        "link": "https://www.youtube.com/watch?v=_fYJRqrt3yo",
+        "title": "Watch the build video"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "ESP32 pinball game running on a tiny OLED display, housed inside a cigarette case with the board and USB cable visible",
+      "asset": {
+        "_ref": "image-0d6a8f698f3850e098dd9a97c9d25c77f71f6444-1200x630-webp",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-05-17T14:53:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "esp32-pinball"
+    },
+    "tags": [
+      {
+        "_id": "101f410e-9ce9-448f-8460-eb63630a11ba",
+        "label": "ESP32"
+      },
+      {
+        "_id": "06020007-80fd-4068-8542-c86e92c2aa1f",
+        "label": "electronics"
+      },
+      {
+        "_id": "c367dc6b-f51e-4a17-9e08-c77b17bcd209",
+        "label": "Arduino"
+      },
+      {
+        "_id": "b8525754-7561-45ae-bb5e-61e74d6c01ae",
+        "label": "C++"
+      }
+    ],
+    "title": "ESP32 OLED Pinball with Capacitive Touch"
+  },
+  {
+    "_createdAt": "2026-05-23T05:56:25Z",
+    "_id": "xfhA6WlRU3jtmS68mzcOBV",
+    "_updatedAt": "2026-05-23T06:36:02Z",
+    "body": [
+      {
+        "_key": "f56c83e9-526",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1f0ef3c5-955",
+            "_type": "span",
+            "marks": [],
+            "text": "An interactive tool for exploring all 478 MediaPipe face mesh landmarks using your webcam. Hover over any point to see its index, click to pin it, filter by face region, and copy landmark indices with one button. It runs entirely in the browser with no server or installation needed."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "7a7fa580-711",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "25590a68-31c",
+            "_type": "span",
+            "marks": [],
+            "text": "It started with curiosity about "
+          },
+          {
+            "_key": "788709585e06",
+            "_type": "span",
+            "marks": ["9caea5bc8c5a"],
+            "text": "search data"
+          },
+          {
+            "_key": "f0721d9e90d7",
+            "_type": "span",
+            "marks": [],
+            "text": ". I noticed people were searching for specific MediaPipe landmark indices and face regions, so I wrote "
+          },
+          {
+            "_key": "40c72672-7e6",
+            "_type": "span",
+            "marks": ["3d22efc8-f79"],
+            "text": "a complete guide to all 478 face mesh landmark points"
+          },
+          {
+            "_key": "79efd967-0b2",
+            "_type": "span",
+            "marks": [],
+            "text": ". But a static reference felt incomplete. I wanted people to actually see the landmarks on their own face, so I built this interactive explorer to go with it."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "3d22efc8-f79",
+            "_type": "link",
+            "href": "/blog/mediapipe-face-mesh-landmarks"
+          },
+          {
+            "_key": "9caea5bc8c5a",
+            "_type": "link",
+            "href": "/blog/from-zero-to-27k-impressions-seo"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "11a88eb5-304",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "17e1e13d-65d",
+            "_type": "span",
+            "marks": [],
+            "text": "The explorer was meant to be a companion to the blog, but the more I worked on it, the more it grew into its own thing."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a2330ecc3084",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a250a7c85c3e",
+            "_type": "span",
+            "marks": [],
+            "text": "Freeze frame and region filtering"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "9ec2451c-e4e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fa3712f8-741",
+            "_type": "span",
+            "marks": [],
+            "text": "When I needed screenshots for the blog, I wanted consistent images showing each region on the same face pose. That meant I needed a freeze frame feature. So I built one. You hit a button or press Space, and the mesh freezes in place while you still hover and interact with all the points. I made it for the screenshots, but it turned out to be genuinely useful for anyone exploring the landmarks."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "5bb60a279121",
+        "_type": "image",
+        "alt": "MediaPipe face mesh explorer in wireframe mode with wireframe mode active, hovering over face regions.",
+        "asset": {
+          "_ref": "image-549aa990dccaf3299694bd74ea11a2ed1e921576-640x324-gif",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "3f40d1183eb7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "238d9c3d4976",
+            "_type": "span",
+            "marks": [],
+            "text": "Custom colors and wireframe mode"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "025de64d-a36",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "753775ac-8cd",
+            "_type": "span",
+            "marks": [],
+            "text": "Then came the colours. Each region had its own colour, which looked great in the interactive explorer but was distracting in blog images where you only want to highlight one area. So I added a theme panel where users can pick custom colours per region, adjust the dot size, and toggle a neon glow effect. "
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8c30d290-c86",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7f2d8e46-540",
+            "_type": "span",
+            "marks": [],
+            "text": "One happy accident came from the wireframe mode. I was switching tabs and the camera feed dropped, but the mesh kept rendering on a black background. It looked striking, so I kept it as a dedicated mode. It ended up being perfect for the blog images too, where a clean wireframe makes the landmark points much easier to read. Since the explorer also lives embedded in the blog via an iframe, I cleaned up the layout with container queries so it works at smaller sizes and stays usable on narrow screens."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "fd89caaa-8ed",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "56524d66-d6f",
+            "_type": "span",
+            "marks": [],
+            "text": "What started as a blog illustration turned into the most useful part of the article. The blog itself kept growing too. I added tables in Sanity to present the landmark data per region, embedded the explorer as an iframe so readers can try it without leaving the page, and made section headings clickable for easy linking. No other article on this site pushed me to build this many features around it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "Interactive browser tool for exploring all 478 MediaPipe face mesh landmarks with your webcam. Pin points, filter by region, and copy indices in one click.",
+    "faq": null,
+    "imageAlt": "Wireframe view of the face landmark explorer with four pinned points highlighted.",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/669c9828d31e9624ed3b5e58a0171b181f10bae7-1200x630.webp",
+    "jsonLdApplicationCategory": "WebApp",
+    "jsonLdCodeRepository": "https://github.com/sanderdesnaijer/demos/tree/main/demos/face-mesh-explorer",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "JavaScript",
+    "jsonLdType": ["SoftwareSourceCode", "WebApplication"],
+    "links": [
+      {
+        "_key": "fff1a09c-e9d",
+        "icon": "demo",
+        "link": "https://demos.sanderdesnaijer.com/demos/face-mesh-explorer/",
+        "title": "Try the face mesh explorer"
+      },
+      {
+        "_key": "ef73b8ab-c2d",
+        "icon": "article",
+        "link": "/blog/mediapipe-face-mesh-landmarks",
+        "title": "Read the article about MediaPipe face mesh landmarks"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Wireframe view of the face landmark explorer with four pinned points highlighted.",
+      "asset": {
+        "_ref": "image-669c9828d31e9624ed3b5e58a0171b181f10bae7-1200x630-webp",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-05-03T05:56:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "mediapipe-face-landmark-explorer"
+    },
+    "tags": [
+      {
+        "_id": "25efe796-f5f2-462b-8754-55815a7f9440",
+        "label": "MediaPipe"
+      },
+      {
+        "_id": "dc090de6-5ab5-408e-ba86-fda6d1036cc1",
+        "label": "face mesh"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "02a88284-ab90-44a5-a858-abfb625f1fd5",
+        "label": "Computer vision"
+      },
+      {
+        "_id": "68a3161b-e6a1-4e5c-8774-7c5d54ada0ad",
+        "label": "Webcam"
+      },
+      {
+        "_id": "facc5b05-fd88-4db1-a099-5f80e36bf57a",
+        "label": "Landmarks"
+      }
+    ],
+    "title": "MediaPipe Face Landmark Explorer"
+  },
+  {
+    "_createdAt": "2026-05-08T13:50:42Z",
+    "_id": "023dc8f1-0e94-4d28-9ca2-807d3943e77e",
+    "_updatedAt": "2026-05-23T15:00:26Z",
+    "body": [
+      {
+        "_key": "81deda2e0ace",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e768aeff5463",
+            "_type": "span",
+            "marks": [],
+            "text": "What started as curiosity about small displays turned into a full creative tech experiment. The ESP32 hosts a web page over HTTPS (so mobile browsers allow camera access), and the browser handles everything: face detection, dithering, style rendering. The ESP32 just receives a 1024-byte frame and draws it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "7e3667801a35",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e768aeff5463",
+            "_type": "span",
+            "marks": [],
+            "text": "The entire project lives in a single Arduino sketch file on purpose. I wanted someone who's never touched an ESP32 before to be able to open one file, paste in their WiFi credentials and a certificate, and hit upload. No library maze, no folder structure to get wrong. If you can get the Arduino IDE running, you can get this working. I also made a "
+          },
+          {
+            "_key": "f6a4a4c0f240",
+            "_type": "span",
+            "marks": ["16dd17426b76"],
+            "text": "video tutorial"
+          },
+          {
+            "_key": "98cf9a9f07d0",
+            "_type": "span",
+            "marks": [],
+            "text": " about it, see the video below."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "16dd17426b76",
+            "_type": "link",
+            "href": "https://www.youtube.com/watch?v=MOwyMbOZq-Y&t=37s"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "96b71a0e8860",
+        "_type": "youTube",
+        "url": "https://www.youtube.com/watch?v=MOwyMbOZq-Y"
+      },
+      {
+        "_key": "6206f901317e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e768aeff5463",
+            "_type": "span",
+            "marks": [],
+            "text": "It works on phones too. You can walk around with your iPhone or Android, watching this tiny screen try to make sense of your face at one bit per pixel. The result is lo-fi, sometimes barely recognizable, and honestly pretty funny."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "9beba0a186ea",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e768aeff5463",
+            "_type": "span",
+            "marks": [],
+            "text": "Seven styles are live-switchable: Dithered, Edges, Motion Trail, Scanlines, Skull, Glitch, and SHODAN (from the classic game System Shock). The last two use MediaPipe "
+          },
+          {
+            "_key": "3b8b95e265e0",
+            "_type": "span",
+            "marks": ["24e083a4d086"],
+            "text": "Face Landmarker"
+          },
+          {
+            "_key": "21e71bf0ed87",
+            "_type": "span",
+            "marks": [],
+            "text": " to track facial features and overlay custom graphics."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "24e083a4d086",
+            "_type": "link",
+            "href": "/blog/mediapipe-face-mesh-landmarks"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "dcf0ed2c5202",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e768aeff5463",
+            "_type": "span",
+            "marks": [],
+            "text": "Built with an ESP32 dev board, a 0.96-inch SSD1306 OLED, and four jumper wires. I later used the same setup to build a pinball game with capacitive touch pins as flippers. See "
+          },
+          {
+            "_key": "9b985e5d5af3",
+            "_type": "span",
+            "marks": ["a59a0cb52baf"],
+            "text": "ESP32 OLED Pinball with Capacitive Touch"
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "a59a0cb52baf",
+            "_type": "link",
+            "href": "/projects/esp32-pinball"
+          }
+        ],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "Stream your webcam to a tiny ESP32 OLED display with MediaPipe face detection and seven dithering styles. Runs from a single Arduino sketch file.",
+    "faq": [
+      {
+        "_key": "6dbd421fac4a",
+        "answer": [
+          {
+            "_key": "3c5b59a0e60b",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "761751babe11",
+                "_type": "span",
+                "marks": [],
+                "text": "The ESP32 hosts a web page over HTTPS so mobile browsers allow camera access. The browser handles face detection and dithering using JavaScript, then sends a 1024-byte frame to the ESP32 over WebSocket. The ESP32 draws it on a 0.96-inch SSD1306 OLED. The entire project runs from a single Arduino sketch file with no external libraries required."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "How do I stream a webcam to an ESP32 OLED display?"
+      },
+      {
+        "_key": "e1088829ce34",
+        "answer": [
+          {
+            "_key": "8ff369f41b5a",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "689453a4491a",
+                "_type": "span",
+                "marks": [],
+                "text": "An ESP32 dev board, a 0.96-inch SSD1306 OLED display, and four jumper wires. The display connects via I2C (SDA, SCL, VCC, GND). No breadboard, shields, or additional components are needed. The setup works with any phone or laptop that has a camera and a browser."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "What hardware do I need for an ESP32 OLED webcam stream?"
+      },
+      {
+        "_key": "b180e72ac27a",
+        "answer": [
+          {
+            "_key": "33a4bb6b1bee",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "f26882a9da01",
+                "_type": "span",
+                "marks": [],
+                "text": "MediaPipe does not run on the ESP32 itself. The face detection runs in the browser on your phone or laptop using MediaPipe Face Landmarker. The browser processes the camera feed, applies one of seven visual styles (including two that use facial landmark tracking for custom overlays), and sends only the final 1-bit dithered frame to the ESP32 for display."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "Can MediaPipe face detection run on an ESP32?"
+      }
+    ],
+    "imageAlt": "A tiny OLED display connected to an ESP32 showing a live webcam feed in a dithered 1-bit pixel style, streamed wirelessly from the browser over Wi-Fi.",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/e96f815f1c272728c0e6b7586879244896c2166d-1280x720.webp",
+    "jsonLdApplicationCategory": null,
+    "jsonLdCodeRepository": "https://github.com/sanderdesnaijer/esp32-mini-oled-webcam-stream-mediapipe",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "JavaScript",
+    "jsonLdType": ["SoftwareSourceCode", "CreativeWork"],
+    "links": [
+      {
+        "_key": "5d80f95b986b",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/esp32-mini-oled-webcam-stream-mediapipe",
+        "title": "Download the code and run it yourself "
+      },
+      {
+        "_key": "88095ebdbf00",
+        "icon": "youtube",
+        "link": "https://www.youtube.com/watch?v=MOwyMbOZq-Y",
+        "title": "Watch the full ESP32 OLED setup tutorial"
+      },
+      {
+        "_key": "be53969b70e9",
+        "icon": "youtube",
+        "link": "https://youtube.com/shorts/lPPGVqqw6uc ",
+        "title": "See the ESP32 Mini OLED in action "
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "A tiny OLED display connected to an ESP32 showing a live webcam feed in a dithered 1-bit pixel style, streamed wirelessly from the browser over Wi-Fi.",
+      "asset": {
+        "_ref": "image-e96f815f1c272728c0e6b7586879244896c2166d-1280x720-webp",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-04-16T13:57:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "esp32-mini-oled-webcam-stream"
+    },
+    "tags": [
+      {
+        "_id": "101f410e-9ce9-448f-8460-eb63630a11ba",
+        "label": "ESP32"
+      },
+      {
+        "_id": "c367dc6b-f51e-4a17-9e08-c77b17bcd209",
+        "label": "Arduino"
+      },
+      {
+        "_id": "25efe796-f5f2-462b-8754-55815a7f9440",
+        "label": "MediaPipe"
+      },
+      {
+        "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+        "label": "Open Source"
+      },
+      {
+        "_id": "b8525754-7561-45ae-bb5e-61e74d6c01ae",
+        "label": "C++"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "68a3161b-e6a1-4e5c-8774-7c5d54ada0ad",
+        "label": "Webcam"
+      }
+    ],
+    "title": "ESP32 Mini OLED Webcam Stream"
+  },
+  {
+    "_createdAt": "2026-04-04T13:37:13Z",
+    "_id": "2a342e90-8019-48f9-997e-f89e0ee7fec8",
+    "_updatedAt": "2026-05-10T10:02:43Z",
+    "body": [
+      {
+        "_key": "804c481efd81",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e040f20d7b54",
+            "_type": "span",
+            "marks": [],
+            "text": "Ever wanted to pan, zoom, rotate, and reset a map without touching anything? I built an open-source library that lets you control web maps using just your hands. No mouse, no touchscreen, no backend. Everything runs in the browser. It now supports OpenLayers, Google Maps, and Leaflet."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6c75e3672ff6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6f6747d10830",
+            "_type": "span",
+            "marks": [],
+            "text": "Why I built this"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "90f87f2f88de",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "037d3bd19588",
+            "_type": "span",
+            "marks": [],
+            "text": "I've been into webcam-based interactions for a while now (some of you might know "
+          },
+          {
+            "_key": "63148183dd2d",
+            "_type": "span",
+            "marks": ["0563d864482c"],
+            "text": "Eyebrow Tetris"
+          },
+          {
+            "_key": "3e042592e25b",
+            "_type": "span",
+            "marks": [],
+            "text": ". The idea of controlling things with your body instead of a mouse or keyboard just clicks with me. So when I started thinking about maps in kiosk setups, museum exhibits, and accessibility scenarios, it felt like a natural next step."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "0563d864482c",
+            "_type": "link",
+            "href": "/projects/eyebrow-tetris"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "c7c3a61ee5fb",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f440ec0d0105",
+            "_type": "span",
+            "marks": [],
+            "text": "What if you could just hold up your fist and drag a map around? Or spread two open hands apart to zoom in? That's exactly what "
+          },
+          {
+            "_key": "d5c84ec63a31",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "map-gesture-controls "
+          },
+          {
+            "_key": "bec6a1d492f9",
+            "_type": "span",
+            "marks": [],
+            "text": "does."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4e18ce3a63c5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b26c07ec83e3",
+            "_type": "span",
+            "marks": [],
+            "text": "How it works"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "c4e22c33a5cb",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ffe9da69177c",
+            "_type": "span",
+            "marks": [],
+            "text": "The library uses "
+          },
+          {
+            "_key": "2ee3c822c3de",
+            "_type": "span",
+            "marks": ["1b372a080299"],
+            "text": "MediaPipe"
+          },
+          {
+            "_key": "c1966a6cfb46",
+            "_type": "span",
+            "marks": [],
+            "text": " hand tracking, running as WASM entirely in the browser. Your webcam feed never leaves the device. Privacy is built in, not bolted on."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "1b372a080299",
+            "_type": "link",
+            "href": "https://developers.google.com/mediapipe"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "eb2d8f4ee4e3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "bfecf82a5800",
+            "_type": "span",
+            "marks": [],
+            "text": "Here's the basic flow:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "91639b843451",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "69cbb982801a",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Webcam capture"
+          },
+          {
+            "_key": "51876c867a6e",
+            "_type": "span",
+            "marks": [],
+            "text": " opens your camera and feeds each frame to the MediaPipe Hand Landmarker, which returns 21 3D landmarks per detected hand.\n"
+          }
+        ],
+        "level": 1,
+        "listItem": "number",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1bf3132ee9fb",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5ad5d9281570",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Gesture classification"
+          },
+          {
+            "_key": "23a166d39a99",
+            "_type": "span",
+            "marks": [],
+            "text": " A fist or pinch with your left hand means pan. Same gesture with your right hand means zoom. Both hands tilting means rotate. Hands together in a prayer pose means reset. A state machine with dwell timers and grace periods makes sure brief tracking hiccups don't trigger accidental actions.\n"
+          }
+        ],
+        "level": 1,
+        "listItem": "number",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8fe2b82b7929",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "dc69b6ab3f12",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Map library integration"
+          },
+          {
+            "_key": "b19ad30cae63",
+            "_type": "span",
+            "marks": [],
+            "text": " translates the hand movement into actual map interactions, with dead-zone filtering and smooth transitions so it doesn't feel jittery."
+          }
+        ],
+        "level": 1,
+        "listItem": "number",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "400e31e8563f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "dfc217dc8131",
+            "_type": "span",
+            "marks": [],
+            "text": "There's a configurable dwell timer to prevent accidental triggers and a grace period that smooths out those moments when tracking briefly drops. It feels surprisingly natural once you try it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3689d4baf0f3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3c2e70adde3e",
+            "_type": "span",
+            "marks": [],
+            "text": "The gestures"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "a2aeab2bdfa2",
+        "_type": "image",
+        "alt": "Demo of map-gesture-controls: a person uses hand gestures in front of a webcam to control an OpenLayers map. A small overlay in the corner shows the webcam feed and a legend listing the available gestures: pan, zoom, rotate, reset, and idle",
+        "asset": {
+          "_ref": "image-ac11812b27ea4a3ec7d9ba70929f512310152f2c-600x338-gif",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "bef8964f265e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7f7131e46f15",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Pan"
+          },
+          {
+            "_key": "c7a99651222b",
+            "_type": "span",
+            "marks": [],
+            "text": ": Make a fist or pinch with your left hand, then move it around. The map follows."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "30a872cbdcdc",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a1a6a8252ec5",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Zoom"
+          },
+          {
+            "_key": "16cf649605a3",
+            "_type": "span",
+            "marks": [],
+            "text": ": Make a fist or pinch with your right hand, then move it up to zoom in or down to zoom out."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1cdaedf718b5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3cf743506929",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Rotate"
+          },
+          {
+            "_key": "6331dad515a7",
+            "_type": "span",
+            "marks": [],
+            "text": ": Hold up both hands (fist or pinch) and tilt your wrists. The map rotates with you."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e7dbd0767039",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4c273721083d",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Reset"
+          },
+          {
+            "_key": "1f2aa703fb16",
+            "_type": "span",
+            "marks": [],
+            "text": ": Bring both hands together like a prayer and hold for one second. The map snaps back to where it started."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1a30c2ba9f37",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0e86a359370c",
+            "_type": "span",
+            "marks": [],
+            "text": "Fist or pinch both work for every gesture, so just do whatever feels natural to you."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d7d3b4a1d2d3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "57d1b8c8e80a",
+            "_type": "span",
+            "marks": [],
+            "text": "Getting started"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "bab81ff69e43",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1377c402447b",
+            "_type": "span",
+            "marks": [],
+            "text": "If you want to try it yourself:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8856ed9f37e8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1377c402447b",
+            "_type": "span",
+            "marks": [],
+            "text": "OpenLayers"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "4ab6c8cdae5f",
+        "_type": "codeBlock",
+        "code": "npm install @map-gesture-controls/ol ol",
+        "language": "bash"
+      },
+      {
+        "_key": "f717a8deadf8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e5dd9dee5929",
+            "_type": "span",
+            "marks": [],
+            "text": "Then wire it up to your OpenLayers map:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0562a13333e4",
+        "_type": "codeBlock",
+        "code": "import Map from 'ol/Map.js';\nimport View from 'ol/View.js';\nimport TileLayer from 'ol/layer/Tile.js';\nimport OSM from 'ol/source/OSM.js';\nimport { fromLonLat } from 'ol/proj.js';\nimport { GestureMapController } from '@map-gesture-controls/ol';\nimport '@map-gesture-controls/ol/style.css';\n\nconst map = new Map({\n  target: 'map',\n  layers: [new TileLayer({ source: new OSM() })],\n  view: new View({ center: fromLonLat([0, 0]), zoom: 2 }),\n});\n\nconst controller = new GestureMapController({ map });\n\n// Must be called from a user gesture (e.g. button click) for webcam permission\nawait controller.start();\n\ncontroller.stop(); // tear down webcam and overlay",
+        "language": "typescript"
+      },
+      {
+        "_key": "e4265816b35c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4c78c9f33716",
+            "_type": "span",
+            "marks": [],
+            "text": "That's it. A few lines and you've got gesture-controlled maps. The "
+          },
+          {
+            "_key": "7d9ed31d1797",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "start()"
+          },
+          {
+            "_key": "840c2ecd5673",
+            "_type": "span",
+            "marks": [],
+            "text": " call needs to happen from a user interaction (like a button click) because of browser webcam permission rules."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0eaa5bef3fb9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "10469fbf12f7",
+            "_type": "span",
+            "marks": [],
+            "text": "Google Maps"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "0201b86de08e",
+        "_type": "codeBlock",
+        "code": "npm install @map-gesture-controls/google-maps @googlemaps/js-api-loader",
+        "language": "bash"
+      },
+      {
+        "_key": "539def8bf5b1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "383f059fe849",
+            "_type": "span",
+            "marks": [],
+            "text": "You need a Google Maps API key and a Map ID from the Google Cloud Console. Create the Map ID with the Vector map type to enable rotation support."
+          }
+        ],
+        "markDefs": [],
+        "style": "blockquote"
+      },
+      {
+        "_key": "dcda14a301e6",
+        "_type": "codeBlock",
+        "code": "import { Loader } from '@googlemaps/js-api-loader';\nimport { GestureMapController } from '@map-gesture-controls/google-maps';\nimport '@map-gesture-controls/google-maps/style.css';\n\nconst loader = new Loader({ apiKey: 'YOUR_API_KEY', version: 'weekly' });\nconst { Map } = await loader.importLibrary('maps');\n\nconst map = new Map(document.getElementById('map')!, {\n  center: { lat: 0, lng: 0 },\n  zoom: 2,\n  mapId: 'YOUR_MAP_ID',\n});\n\nconst controller = new GestureMapController({ map });\nawait controller.start();",
+        "language": "typescript"
+      },
+      {
+        "_key": "0ea613245746",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fa4e156fdeb3",
+            "_type": "span",
+            "marks": [],
+            "text": "Leaflet"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "dc39da422d26",
+        "_type": "codeBlock",
+        "code": "npm install @map-gesture-controls/leaflet leaflet",
+        "language": "bash"
+      },
+      {
+        "_key": "a4ab5c8fc0ae",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b7903647c204",
+            "_type": "span",
+            "marks": [],
+            "text": "No API key needed. Leaflet uses OpenStreetMap tiles by default. Rotation is supported via CSS transforms on the map pane."
+          }
+        ],
+        "markDefs": [],
+        "style": "blockquote"
+      },
+      {
+        "_key": "9d6d50274f72",
+        "_type": "codeBlock",
+        "code": "import L from 'leaflet';\nimport 'leaflet/dist/leaflet.css';\nimport { GestureMapController } from '@map-gesture-controls/leaflet';\nimport '@map-gesture-controls/leaflet/style.css';\n\nconst map = L.map('map').setView([52.37, 4.9], 10);\nL.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {\n  attribution: '&copy; OpenStreetMap contributors',\n}).addTo(map);\n\nconst controller = new GestureMapController({ map });\nawait controller.start();",
+        "language": "typescript"
+      },
+      {
+        "_key": "8c65a9bbe726",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2a1d77132634",
+            "_type": "span",
+            "marks": [],
+            "text": "The API is the same across all three libraries. Pick the package that matches your map, wire up "
+          },
+          {
+            "_key": "b7c5e000d8cf",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "GestureMapController"
+          },
+          {
+            "_key": "c71a4838b12a",
+            "_type": "span",
+            "marks": [],
+            "text": ", and call "
+          },
+          {
+            "_key": "66c5031cbfe9",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "start()"
+          },
+          {
+            "_key": "1cf73bc5ee15",
+            "_type": "span",
+            "marks": [],
+            "text": "."
+          }
+        ],
+        "markDefs": [],
+        "style": "blockquote"
+      },
+      {
+        "_key": "cc3ba6e8b308",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e97f049d81f3",
+            "_type": "span",
+            "marks": [],
+            "text": "Use cases"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "6a72e0a32248",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f247d9055d32",
+            "_type": "span",
+            "marks": [],
+            "text": "This isn't just a fun demo (though it is fun). There are real situations where touchless map interaction makes a difference:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "ab6e979a212e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f3f89ec40d8e",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Kiosks and exhibits"
+          },
+          {
+            "_key": "a7f2557bd5dd",
+            "_type": "span",
+            "marks": [],
+            "text": ": museums, visitor centers, trade shows. Nobody wants to touch a shared screen."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "348838998725",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2ebdb4a5bbdb",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Accessibility"
+          },
+          {
+            "_key": "e340f0cf2789",
+            "_type": "span",
+            "marks": [],
+            "text": ": for users with limited mobility who can move their hands but can't grip a mouse or use a touchscreen precisely."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "26a885ad51bf",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "21e573d98c10",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Touchless environments"
+          },
+          {
+            "_key": "58aeada9269c",
+            "_type": "span",
+            "marks": [],
+            "text": ": think medical settings, clean rooms, or food service areas where you don't want to touch shared devices."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d549806ea825",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "274dfcb69d20",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Creative installations"
+          },
+          {
+            "_key": "274f955e04f4",
+            "_type": "span",
+            "marks": [],
+            "text": ": interactive art, data visualizations, or any project where the UI itself is part of the experience."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "69798412f3c6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "deb0b3ff1acf",
+            "_type": "span",
+            "marks": [],
+            "text": "What's under the hood"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "f0ed8c838ce5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c0684d6099c5",
+            "_type": "span",
+            "marks": [],
+            "text": "The project is split into four packages:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2c668b14bf2c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "081c6d5e87e3",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "@map-gesture-controls/core"
+          },
+          {
+            "_key": "82226aa2b040",
+            "_type": "span",
+            "marks": [],
+            "text": ": the gesture detection engine. It's map-agnostic, so you could hook it up to anything."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "74c6257dbf2e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "eec393636f37",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "@map-gesture-controls/ol"
+          },
+          {
+            "_key": "d1bb9811d8a8",
+            "_type": "span",
+            "marks": [],
+            "text": ": the OpenLayers integration."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "02c5bbc6e245",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ff28451c5fca",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "@map-gesture-controls/google-maps"
+          },
+          {
+            "_key": "09bff0182db9",
+            "_type": "span",
+            "marks": [],
+            "text": ": the Google Maps integration."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8c9b9ca6b1d7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d0189daca507",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "@map-gesture-controls/leaflet"
+          },
+          {
+            "_key": "e164a76d64e2",
+            "_type": "span",
+            "marks": [],
+            "text": ": the Leaflet integration."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2507693819d1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e0c7fd4b11a7",
+            "_type": "span",
+            "marks": [],
+            "text": "Most people just need the npm package for their map library, since each one re-exports everything from core. It's written in TypeScript, fully typed, and the bundle is small. The MediaPipe WASM model (~10 MB) loads on first start, and after that it's all local processing."
+          }
+        ],
+        "markDefs": [],
+        "style": "blockquote"
+      },
+      {
+        "_key": "a286b796d454",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "21525c92a74b",
+            "_type": "span",
+            "marks": [],
+            "text": "What changed"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "e4e39a2448e2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "baee610c982a",
+            "_type": "span",
+            "marks": [],
+            "text": "After the project hit 20 stars on GitHub, I figured there were enough people finding it useful to justify expanding beyond OpenLayers. I already expected that more map libraries would follow, so I set it up as a monorepo from the start. I built the Google Maps adapter first. Not long after, someone opened a GitHub issue asking for Leaflet support, so I built that too. All three integrations share the same gesture engine and the same API surface."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "39dd6b28536c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "baee610c982a",
+            "_type": "span",
+            "marks": [],
+            "text": "This project didn't stay the way I first shipped it. The original zoom gesture used two spread hands moving apart, like a pinch in the air. It worked, but people told me it felt tiring and unnatural. So I reworked the controls to use simpler fist and pinch gestures with single-hand movements. The reset gesture was also a feature asked by the community. People wanted a quick way to snap back to the starting view without reloading."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "020d39df7686",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "baee610c982a",
+            "_type": "span",
+            "marks": [],
+            "text": "The project now has 90+ stars and all of this happened in the open on GitHub. It's open source and MIT-licensed. If something feels off, open an issue or send a PR."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "Open source library for controlling OpenLayers, Google Maps, and Leaflet with hand gestures. Pan, zoom, and rotate maps without touching the screen.",
+    "faq": null,
+    "imageAlt": "Screen recording of the map gesture control demo showing an OpenLayers map with a small webcam preview in the corner. A user pans the map by making a fist and moving their hand, then zooms by spreading two open hands apart. All hand tracking and gesture detection runs in the browser using MediaPipe WASM with no backend.",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/dc80f0ecd59418de3ddc40ec95c15eb877e3c1b0-1245x721.png",
+    "jsonLdApplicationCategory": null,
+    "jsonLdCodeRepository": "https://github.com/sanderdesnaijer/map-gesture-controls",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "TypeScript",
+    "jsonLdType": ["SoftwareSourceCode"],
+    "links": [
+      {
+        "_key": "9eb25c29ae4a",
+        "icon": "demo",
+        "link": "https://sanderdesnaijer.github.io/map-gesture-controls/",
+        "title": "Live Demo & Docs "
+      },
+      {
+        "_key": "bfa68f8dee80",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/map-gesture-controls",
+        "title": "View on GitHub "
+      },
+      {
+        "_key": "d11dcf3ce2f5",
+        "icon": "article",
+        "link": "/blog/gesture-controls-openlayers-mediapipe",
+        "title": "How I built it (blog)"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Screen recording of the map gesture control demo showing an OpenLayers map with a small webcam preview in the corner. A user pans the map by making a fist and moving their hand, then zooms by spreading two open hands apart. All hand tracking and gesture detection runs in the browser using MediaPipe WASM with no backend.",
+      "asset": {
+        "_ref": "image-dc80f0ecd59418de3ddc40ec95c15eb877e3c1b0-1245x721-png",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-04-03T13:41:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "map-gesture-controls"
+    },
+    "tags": [
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      },
+      {
+        "_id": "263f9d7a-92fb-401c-80a5-86335078aa82",
+        "label": "OpenLayers"
+      },
+      {
+        "_id": "25efe796-f5f2-462b-8754-55815a7f9440",
+        "label": "MediaPipe"
+      },
+      {
+        "_id": "cdab0cfe-b048-45b9-a9ed-c4261341e9eb",
+        "label": "Gesture recognition"
+      },
+      {
+        "_id": "be24be94-24bf-4ff6-8753-4c957195f831",
+        "label": "hand tracking"
+      },
+      {
+        "_id": "68a3161b-e6a1-4e5c-8774-7c5d54ada0ad",
+        "label": "Webcam"
+      },
+      {
+        "_id": "aafce187-d58c-4fe5-a7e3-5582ed64be8a",
+        "label": "maps"
+      },
+      {
+        "_id": "732ae390-540d-4f14-be2f-78e2172da22f",
+        "label": "Google Maps"
+      },
+      {
+        "_id": "99fe8860-251c-47ac-afa8-1b171764b506",
+        "label": "Leaflet"
+      },
+      {
+        "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+        "label": "Open Source"
+      },
+      {
+        "_id": "a4f3ce2f-aa05-42cb-bb44-93829a8b141a",
+        "label": "gesture controls"
+      },
+      {
+        "_id": "02a88284-ab90-44a5-a858-abfb625f1fd5",
+        "label": "Computer vision"
+      }
+    ],
+    "title": "Open Source Hand Gesture Controls for Maps in the Browser"
+  },
+  {
+    "_createdAt": "2026-03-15T16:12:40Z",
+    "_id": "9a0b238b-a5af-4ac8-9f6b-c7ffe1cd918d",
+    "_updatedAt": "2026-05-10T10:03:00Z",
+    "body": [
+      {
+        "_key": "964218ca1bf4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "14f37c1d33a5",
+            "_type": "span",
+            "marks": [],
+            "text": "A browser-based game that uses MediaPipe face mesh tracking to control falling Tetris blocks with head movements. Tilt your head left or right to move pieces, look up to rotate. Runs entirely in the browser using your webcam."
+          }
+        ],
+        "markDefs": [],
+        "style": "blockquote"
+      },
+      {
+        "_key": "5db6f1e150d8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8f0bcc258507",
+            "_type": "span",
+            "marks": [],
+            "text": "The classic Tetris formula has been implemented countless times, but almost always with a keyboard or controller."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "46d28a331230",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "51c2fc0e72ce",
+            "_type": "span",
+            "marks": [],
+            "text": "For this project I wanted to explore a different question:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b659c197dc13",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d40bfd7d94ab",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "What if a game could be controlled entirely by your face?"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "5a819de2e36a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a7b3f634c54a",
+            "_type": "span",
+            "marks": [],
+            "text": "Eyebrow Tetris is a browser-based Tetris game where the player uses facial gestures instead of traditional input devices. Using real-time facial landmark detection, the game tracks eyebrow movements and mouth gestures through the webcam and converts them into game controls."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "85cd30d3f21f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "75b5132e27b7",
+            "_type": "span",
+            "marks": [],
+            "text": "Controls:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0f1d2b83cc7d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "87402e466e7c",
+            "_type": "span",
+            "marks": [],
+            "text": "Raise your "
+          },
+          {
+            "_key": "c8bd86da6b1c",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "left eyebrow"
+          },
+          {
+            "_key": "f3a4fe33fe97",
+            "_type": "span",
+            "marks": [],
+            "text": " to move left"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0109811d445a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "09aa2fbae60a",
+            "_type": "span",
+            "marks": [],
+            "text": "Raise your "
+          },
+          {
+            "_key": "4281319486d5",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "right eyebrow"
+          },
+          {
+            "_key": "6391e2dfda06",
+            "_type": "span",
+            "marks": [],
+            "text": " to move right"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "acfd359b0700",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "675c5a8b5d2c",
+            "_type": "span",
+            "marks": [],
+            "text": "Raise "
+          },
+          {
+            "_key": "5a4ded6637e0",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "both eyebrows"
+          },
+          {
+            "_key": "ff4217a3c5a4",
+            "_type": "span",
+            "marks": [],
+            "text": " to rotate the piece"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c422d42375b5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "cccdf91dd6e4",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Open your mouth"
+          },
+          {
+            "_key": "c024ca557afa",
+            "_type": "span",
+            "marks": [],
+            "text": " to drop the piece"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6d74d424d177",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e46665c5b4e1",
+            "_type": "span",
+            "marks": [],
+            "text": "The result is a deliberately ridiculous but surprisingly playable control system."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4d77c6d1aac5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2ee460bfa3ef",
+            "_type": "span",
+            "marks": [],
+            "text": "The idea plays with accessibility in reverse, summarized by the project’s tagline:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "51af40f79fca",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ba42d1fc0a78",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "“Accessibility is important. So I made the least accessible game possible.”"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3b82cf53d703",
+        "_type": "youTube",
+        "url": "https://www.youtube.com/watch?v=caKzOIyuYm0"
+      },
+      {
+        "_key": "e0c6ed46e3ad",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f87af94199ba",
+            "_type": "span",
+            "marks": [],
+            "text": "Technical Highlights"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "3a342196ef90",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4fe86691aa51",
+            "_type": "span",
+            "marks": [],
+            "text": "Eyebrow Tetris runs entirely inside the browser and combines several real-time systems working together."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0f1a5f1b9bc1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "abcda9d217f8",
+            "_type": "span",
+            "marks": [],
+            "text": "The game continuously processes webcam input, detects facial landmarks, and translates those movements into gameplay actions while rendering the Tetris board at the same time."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1824e81a712e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4cc42b0933d2",
+            "_type": "span",
+            "marks": [],
+            "text": "Key technical aspects include:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6d7419eb8aef",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8c3924e48ac4",
+            "_type": "span",
+            "marks": [],
+            "text": "Real-time "
+          },
+          {
+            "_key": "309e12ae51b9",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "facial landmark tracking"
+          },
+          {
+            "_key": "bab644004264",
+            "_type": "span",
+            "marks": [],
+            "text": " using MediaPipe Face Landmarker"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "21727593e271",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0e275a384c29",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Gesture detection logic"
+          },
+          {
+            "_key": "468f6f58ec84",
+            "_type": "span",
+            "marks": [],
+            "text": " for eyebrows and mouth movements"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4b61ec040a4e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4018dc77902a",
+            "_type": "span",
+            "marks": [],
+            "text": "Calibration and hysteresis to avoid accidental triggers"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "179a200ce1e4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c01537d99638",
+            "_type": "span",
+            "marks": [],
+            "text": "Canvas-based rendering for the game board and animations"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "940c17e61ce0",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a8c76e732e7e",
+            "_type": "span",
+            "marks": [],
+            "text": "A Supabase-backed "
+          },
+          {
+            "_key": "61bca5b702a0",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "global leaderboard"
+          },
+          {
+            "_key": "c74372d43bf2",
+            "_type": "span",
+            "marks": [],
+            "text": " with separate rankings for face vs keyboard input"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "664d4def594c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "24f32c6dee65",
+            "_type": "span",
+            "marks": [],
+            "text": "One of the biggest challenges was making the gesture detection stable enough so the game feels responsive instead of chaotic."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "9c7eca41a1a7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "220c4b714987",
+            "_type": "span",
+            "marks": [],
+            "text": "Small details like eyebrow thresholds, drop timing, and input smoothing made a huge difference in playability."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "39fe3f9f6dbc",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7e3fabc760f2",
+            "_type": "span",
+            "marks": [],
+            "text": "Technology Stack"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "11c8b7b0f602",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5a14b45f5a55",
+            "_type": "span",
+            "marks": [],
+            "text": "The project combines modern browser APIs with a lightweight game engine built entirely on the front end."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4d7619a628f7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "459818539a8d",
+            "_type": "span",
+            "marks": [],
+            "text": "Main technologies used:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c103da07e601",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d3e09c49b868",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Next.js"
+          },
+          {
+            "_key": "4338128b1cf7",
+            "_type": "span",
+            "marks": [],
+            "text": " for the application framework"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d5ca2a2fcfb6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9011ae76fb2c",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "React + TypeScript"
+          },
+          {
+            "_key": "51f2614d9927",
+            "_type": "span",
+            "marks": [],
+            "text": " for game logic and UI"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "83b4e4c1d26c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6fec2e22f93f",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "MediaPipe Face Landmarker"
+          },
+          {
+            "_key": "6b93f6873916",
+            "_type": "span",
+            "marks": [],
+            "text": " for facial gesture detection"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "44cbfc8f54c8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1fefc51703d1",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "WebRTC / getUserMedia"
+          },
+          {
+            "_key": "b9b1fb525d92",
+            "_type": "span",
+            "marks": [],
+            "text": " for webcam access"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "7c6545b5a051",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a6580a5d1041",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "HTML Canvas"
+          },
+          {
+            "_key": "6ece2667616d",
+            "_type": "span",
+            "marks": [],
+            "text": " for game rendering and effects"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "30ca78d1359c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3a28cf3bc547",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Tailwind CSS"
+          },
+          {
+            "_key": "06394d7d41bb",
+            "_type": "span",
+            "marks": [],
+            "text": " for styling"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "986290c1088a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e2723547377c",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Supabase"
+          },
+          {
+            "_key": "d1067f0b467e",
+            "_type": "span",
+            "marks": [],
+            "text": " for leaderboard storage"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4921d20c765c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "906ea8c7534c",
+            "_type": "span",
+            "marks": [],
+            "text": "The entire game runs "
+          },
+          {
+            "_key": "f3b5642051bf",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "client-side in the browser"
+          },
+          {
+            "_key": "3a45b5b9c665",
+            "_type": "span",
+            "marks": [],
+            "text": ", meaning video processing never leaves the player’s device."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c591cecb1413",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e73a01790c17",
+            "_type": "span",
+            "marks": [],
+            "text": "Features"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "0e429f3d85a7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "402011d8047c",
+            "_type": "span",
+            "marks": [],
+            "text": "Compared to a typical Tetris clone, the project adds several playful mechanics and visual effects."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "da026fac5fb6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "cfc746b0ed4f",
+            "_type": "span",
+            "marks": [],
+            "text": "Notable features include:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3338ffd431f7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "52f81e345317",
+            "_type": "span",
+            "marks": [],
+            "text": "Face-controlled gameplay using eyebrow and mouth gestures"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3a59cb6ffc6e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "066b7f8e4fb4",
+            "_type": "span",
+            "marks": [],
+            "text": "Keyboard fallback controls for accessibility"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "761f997e7a55",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9a22b43cdd5d",
+            "_type": "span",
+            "marks": [],
+            "text": "Global leaderboard separating "
+          },
+          {
+            "_key": "9420ade6035e",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "face mode vs keyboard mode"
+          },
+          {
+            "_key": "de265fbe400f",
+            "_type": "span",
+            "marks": [],
+            "text": " scores"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "49de7417ee03",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "04c7e1ba1c49",
+            "_type": "span",
+            "marks": [],
+            "text": "Cosmetic overlays such as "
+          },
+          {
+            "_key": "d3a51b895e9f",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "googly eyes, clown mode, and moustaches"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8933245849a0",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "55234128a5b7",
+            "_type": "span",
+            "marks": [],
+            "text": "Retro neon arcade aesthetic with pixel fonts"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2db7f942fe7f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "438890c7ad78",
+            "_type": "span",
+            "marks": [],
+            "text": "Custom "
+          },
+          {
+            "_key": "a48745eadd72",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "melting game-over animation"
+          },
+          {
+            "_key": "b102a8e0d819",
+            "_type": "span",
+            "marks": [],
+            "text": " with glitch effects"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4c62cf18a571",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "93484a8638ce",
+            "_type": "span",
+            "marks": [],
+            "text": "Canvas confetti celebrations for high scores"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "27c9eb496479",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "768c7db42676",
+            "_type": "span",
+            "marks": [],
+            "text": "Fully playable directly in the browser without installation"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b7000a5bc83f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7fe37179a146",
+            "_type": "span",
+            "marks": [],
+            "text": "The cosmetic modes intentionally lean into the absurdity of playing a game with facial expressions."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3a722511d741",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "954bb2a29b9b",
+            "_type": "span",
+            "marks": [],
+            "text": "Why I Built This"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "5fc42fb10b3d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3b7e05e9401c",
+            "_type": "span",
+            "marks": [],
+            "text": "This project started as an experiment to see how far browser-based computer vision could be pushed in a simple web game."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "10e39d490c6a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fbef22329220",
+            "_type": "span",
+            "marks": [],
+            "text": "Modern browsers now allow:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a9950d5a75b9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4afcb7810f23",
+            "_type": "span",
+            "marks": [],
+            "text": "real-time computer vision"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "975704827f55",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7621e7d37664",
+            "_type": "span",
+            "marks": [],
+            "text": "webcam processing"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d4d42f85495b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "84bf6b3fb2ce",
+            "_type": "span",
+            "marks": [],
+            "text": "responsive rendering"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e714a1437bf7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ddf2fc5d1967",
+            "_type": "span",
+            "marks": [],
+            "text": "online leaderboards"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "bb847f929edb",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7611c961e179",
+            "_type": "span",
+            "marks": [],
+            "text": "All without native apps or additional hardware."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "41546a5b04b9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e62194778469",
+            "_type": "span",
+            "marks": [],
+            "text": "Eyebrow Tetris became a playful demonstration of how "
+          },
+          {
+            "_key": "c6deed769226",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "face tracking, gesture detection, and browser games"
+          },
+          {
+            "_key": "c2caf433effc",
+            "_type": "span",
+            "marks": [],
+            "text": " can be combined into something unusual and memorable."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "A browser Tetris game controlled by your face. Raise your eyebrows to rotate, tilt your head to move pieces. Built with MediaPipe face mesh tracking.",
+    "faq": null,
+    "imageAlt": "Face-controlled Tetris game where a player moves pieces by raising eyebrows and opening their mouth using webcam face detection.",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/c24ad3b4d8bd5718eb136249ffd33cf23969616e-1200x630.webp",
+    "jsonLdApplicationCategory": "Game",
+    "jsonLdCodeRepository": "https://github.com/sanderdesnaijer/eyebrow-tetris",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "Typescript",
+    "jsonLdType": ["SoftwareSourceCode", "WebApplication", "CreativeWork"],
+    "links": [
+      {
+        "_key": "c4b0424bf812",
+        "icon": "demo",
+        "link": "https://eyebrow-tetris.sanderdesnaijer.com/",
+        "title": "Play Eyebrow Tetris"
+      },
+      {
+        "_key": "3cc36cbfac0d",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/eyebrow-tetris",
+        "title": "Source code"
+      },
+      {
+        "_key": "90d340e9f215",
+        "icon": "article",
+        "link": "/blog/mediapipe-face-mesh-landmarks",
+        "title": "Also check: MediaPipe Face Mesh Landmark Index: Visual Guide to All 478 Points"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Face-controlled Tetris game where a player moves pieces by raising eyebrows and opening their mouth using webcam face detection.",
+      "asset": {
+        "_ref": "image-c24ad3b4d8bd5718eb136249ffd33cf23969616e-1200x630-webp",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-03-15T16:13:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "eyebrow-tetris"
+    },
+    "tags": [
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      },
+      {
+        "_id": "d5957908-8f89-462f-a5e1-9a49c0963175",
+        "label": "NextJS"
+      },
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "0d23f922-7c19-4b20-8e79-090ebc974bd8",
+        "label": "Tailwind CSS"
+      },
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "68a3161b-e6a1-4e5c-8774-7c5d54ada0ad",
+        "label": "Webcam"
+      },
+      {
+        "_id": "25efe796-f5f2-462b-8754-55815a7f9440",
+        "label": "MediaPipe"
+      },
+      {
+        "_id": "c5de379f-b43b-4ca5-b60a-e4f8139df0bf",
+        "label": "WebGL"
+      },
+      {
+        "_id": "dc090de6-5ab5-408e-ba86-fda6d1036cc1",
+        "label": "face mesh"
+      },
+      {
+        "_id": "59e6d3fb-185b-4c22-a3fb-3b5df5fb9310",
+        "label": "browser game"
+      },
+      {
+        "_id": "02a88284-ab90-44a5-a858-abfb625f1fd5",
+        "label": "Computer vision"
+      },
+      {
+        "_id": "40d6d5d3-a8b9-45d8-9b34-abe84c41ab15",
+        "label": "Canvas"
+      },
+      {
+        "_id": "cdab0cfe-b048-45b9-a9ed-c4261341e9eb",
+        "label": "Gesture recognition"
+      },
+      {
+        "_id": "a4f3ce2f-aa05-42cb-bb44-93829a8b141a",
+        "label": "gesture controls"
+      }
+    ],
+    "title": "Eyebrow Tetris: Face Controlled Browser Game"
+  },
+  {
+    "_createdAt": "2026-03-06T08:49:08Z",
+    "_id": "44c4ff5d-ab49-4b70-a975-a0d1fc12c979",
+    "_updatedAt": "2026-05-10T10:03:48Z",
+    "body": [
+      {
+        "_key": "009abd12babc",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1b7db9793d3d",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Pug’s Hunt is a browser game inspired by the classic NES Duck Hunt, controlled entirely through your webcam using hand tracking and facial gestures. Players aim by pointing their finger and shoot by opening their mouth, recreating the physical feel of the original light gun experience directly in the browser."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8f4430c14d07",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5ebcba8a4d49",
+            "_type": "span",
+            "marks": [],
+            "text": "Play the game:\n"
+          },
+          {
+            "_key": "a5ebd544ada7",
+            "_type": "span",
+            "marks": ["ba64faf14a0d"],
+            "text": "https://pugshunt.com"
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "ba64faf14a0d",
+            "_type": "link",
+            "href": "https://pugshunt.com"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "730b4b62652f",
+        "_type": "youTube",
+        "url": "https://youtu.be/bQ-VZe6e_cY"
+      },
+      {
+        "_key": "8a68e9214583",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c8214bd29c2f",
+            "_type": "span",
+            "marks": [],
+            "text": "Concept"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "e4cfe1b8f191",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "cdb79c41c513",
+            "_type": "span",
+            "marks": [],
+            "text": "The original NES Duck Hunt relied on a physical light gun aimed at a CRT screen. For this project I wanted to recreate that physical interaction using only a webcam and modern browser APIs."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "55b9fc831f05",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "251c4cd94a80",
+            "_type": "span",
+            "marks": [],
+            "text": "Instead of tracking a controller, the game tracks the player’s hand position and facial gestures in real time. This allows the browser to translate natural movements into gameplay actions."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f6063afbf84b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6652860f35ae",
+            "_type": "span",
+            "marks": [],
+            "text": "Controls:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "08c0001552d1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9ca67f4ed8d2",
+            "_type": "span",
+            "marks": [],
+            "text": "Point with your index finger to aim"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f8e774147a10",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "add330296383",
+            "_type": "span",
+            "marks": [],
+            "text": "Open your mouth to shoot"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6a5b4082ff68",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "cf7fe2a8e6bf",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Dual mode"
+          },
+          {
+            "_key": "c513b4220e61",
+            "_type": "span",
+            "marks": [],
+            "text": " where two hands can control two guns"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "66bead224bd0",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "890d5553285a",
+            "_type": "span",
+            "marks": [],
+            "text": "Because the input is camera-based, the interaction feels surprisingly close to the arcade experience."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f52bd4e5c6ec",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "26096dd47a9e",
+            "_type": "span",
+            "marks": [],
+            "text": "Technical Highlights"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "171f0c12c889",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4e94f83e1d30",
+            "_type": "span",
+            "marks": [],
+            "text": "Pug’s Hunt runs entirely in the browser and combines several real-time systems:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "546de229eaba",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1449879a4e6d",
+            "_type": "span",
+            "marks": [],
+            "text": "Webcam video processing"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2b5988398318",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8d077f43c077",
+            "_type": "span",
+            "marks": [],
+            "text": "Hand tracking for aiming"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "18f7b81047f2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c10603b9934d",
+            "_type": "span",
+            "marks": [],
+            "text": "Face detection for shooting gestures"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4170f1ede9d1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e450477961e1",
+            "_type": "span",
+            "marks": [],
+            "text": "Game logic and rendering running in sync with camera input"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4879641ea756",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3808095cb3fd",
+            "_type": "span",
+            "marks": [],
+            "text": "The challenge was keeping the interaction responsive while running computer vision models in the browser."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1a8ff78fc995",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c029dc516dd7",
+            "_type": "span",
+            "marks": [],
+            "text": "Latency and gesture stability were key factors to make the gameplay feel natural rather than gimmicky."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "9e7c87cadda7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1ddf15c0e677",
+            "_type": "span",
+            "marks": [],
+            "text": "Technology Stack"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "4abd92c9eb15",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b2dcc615478e",
+            "_type": "span",
+            "marks": [],
+            "text": "The project combines modern web technologies with real-time input processing."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "be2ce0b252d6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "61b5b087c47f",
+            "_type": "span",
+            "marks": [],
+            "text": "Main technologies used:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "219d23f4dd51",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "122028cad7f0",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Next.js"
+          },
+          {
+            "_key": "e661bd84e8e2",
+            "_type": "span",
+            "marks": [],
+            "text": " for the application framework"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "07cf96ab4bb5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "aca58d90ed8c",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Webcam API (getUserMedia)"
+          },
+          {
+            "_key": "f2c220e70de9",
+            "_type": "span",
+            "marks": [],
+            "text": " for camera access"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f582ce210bcd",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d11a2d0103f4",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Hand tracking models (MediaPipe style)"
+          },
+          {
+            "_key": "cb04f354ffdf",
+            "_type": "span",
+            "marks": [],
+            "text": " for gesture recognition"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "06cf60be7637",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f632923e8c35",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "HTML Canvas"
+          },
+          {
+            "_key": "cdc8c24af902",
+            "_type": "span",
+            "marks": [],
+            "text": " for rendering the game scene"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "213cd005588d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "919873c793c0",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Tailwind CSS"
+          },
+          {
+            "_key": "1cb9b7a9ab52",
+            "_type": "span",
+            "marks": [],
+            "text": " for UI styling"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1af1e1025312",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ef367e93fb0d",
+            "_type": "span",
+            "marks": [],
+            "text": "The entire game runs client-side in the browser without plugins or downloads."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0d1f0be8e8c9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "641de5e859b3",
+            "_type": "span",
+            "marks": [],
+            "text": "Features"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "195ac26d8b7a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "90d7ea2c8125",
+            "_type": "span",
+            "marks": [],
+            "text": "Compared to the original Duck Hunt, several additional mechanics were added:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0ba4e08991af",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "68e14c0cb5ba",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Dual Mode"
+          },
+          {
+            "_key": "ea1fa8120f52",
+            "_type": "span",
+            "marks": [],
+            "text": " where two hands control two guns"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "74e178c199b9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9c26133e1e51",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Two-player mode"
+          },
+          {
+            "_key": "643ae4803e08",
+            "_type": "span",
+            "marks": [],
+            "text": " on a single webcam"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b6931e8c1094",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5d37228e2de2",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Mobile support"
+          },
+          {
+            "_key": "9025749c7c3a",
+            "_type": "span",
+            "marks": [],
+            "text": " so the game can run on phones"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c147619ec763",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0ce694bd7a6f",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "High score tracking"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4150c343eae1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8bc602301f94",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Retro pixel UI"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b755811e7245",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "20b2376f1ee3",
+            "_type": "span",
+            "marks": [],
+            "text": "The dog character is inspired by my own pug, and some of the sounds used in the game come from recordings of my dog Rambo."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a9dafb603802",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "097b8418ab9f",
+            "_type": "span",
+            "marks": [],
+            "text": "Why I Built This"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "369c17526cab",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a07557a8dedf",
+            "_type": "span",
+            "marks": [],
+            "text": "This project started as a weekend experiment to see if it was possible to recreate the feel of the NES Zapper using only a webcam and browser-based computer vision."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3a6ca9b52fac",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "56e18a5db691",
+            "_type": "span",
+            "marks": [],
+            "text": "It quickly turned into a small but complete browser game that combines:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "995ba1902b37",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "474249ecf332",
+            "_type": "span",
+            "marks": [],
+            "text": "computer vision"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6ae95da89e9a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d6481735912d",
+            "_type": "span",
+            "marks": [],
+            "text": "real-time gesture detection"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "622fc71ea38c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8daf93276ca8",
+            "_type": "span",
+            "marks": [],
+            "text": "classic arcade gameplay"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e770d4b079de",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "51153774a2bf",
+            "_type": "span",
+            "marks": [],
+            "text": "The result is a playful demonstration of how modern browsers can combine physical interaction and games without additional hardware."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "A webcam-controlled browser game inspired by Duck Hunt. Point your hand to aim, make a finger gun to shoot. Built with MediaPipe hand tracking and Next.js.",
+    "faq": null,
+    "imageAlt": "Pug's Hunt browser game using webcam hand tracking to aim and shoot ducks",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/1147bb297627ea6515a52412be1edd552c2e14ef-1200x630.png",
+    "jsonLdApplicationCategory": "Game",
+    "jsonLdCodeRepository": null,
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": "Web Browser",
+    "jsonLdProgrammingLanguage": null,
+    "jsonLdType": ["SoftwareApplication"],
+    "links": [
+      {
+        "_key": "ed39620e9a48",
+        "icon": "demo",
+        "link": "https://pugshunt.com/",
+        "title": "Play Pug's Hunt "
+      },
+      {
+        "_key": "24b702181abd",
+        "icon": "article",
+        "link": "/blog/mediapipe-face-mesh-landmarks",
+        "title": "Also check out: MediaPipe Face Mesh Landmark Index: Visual Guide to All 478 Points"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Pug's Hunt browser game using webcam hand tracking to aim and shoot ducks",
+      "asset": {
+        "_ref": "image-1147bb297627ea6515a52412be1edd552c2e14ef-1200x630-png",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-03-02T08:51:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "pug-s-hunt-a-webcam-controlled-duck-hunt-built-with-hand-tracking"
+    },
+    "tags": [
+      {
+        "_id": "d5957908-8f89-462f-a5e1-9a49c0963175",
+        "label": "NextJS"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      },
+      {
+        "_id": "25efe796-f5f2-462b-8754-55815a7f9440",
+        "label": "MediaPipe"
+      },
+      {
+        "_id": "68a3161b-e6a1-4e5c-8774-7c5d54ada0ad",
+        "label": "Webcam"
+      },
+      {
+        "_id": "59e6d3fb-185b-4c22-a3fb-3b5df5fb9310",
+        "label": "browser game"
+      },
+      {
+        "_id": "a4f3ce2f-aa05-42cb-bb44-93829a8b141a",
+        "label": "gesture controls"
+      },
+      {
+        "_id": "40d6d5d3-a8b9-45d8-9b34-abe84c41ab15",
+        "label": "Canvas"
+      },
+      {
+        "_id": "02a88284-ab90-44a5-a858-abfb625f1fd5",
+        "label": "Computer vision"
+      },
+      {
+        "_id": "c5de379f-b43b-4ca5-b60a-e4f8139df0bf",
+        "label": "WebGL"
+      }
+    ],
+    "title": "Pug's Hunt: Webcam Duck Hunt with Hand Tracking"
+  },
+  {
+    "_createdAt": "2026-03-06T07:43:08Z",
+    "_id": "b116202e-f715-469e-b7bd-eeb765aa18d0",
+    "_updatedAt": "2026-05-10T10:04:03Z",
+    "body": [
+      {
+        "_key": "aa040c6649fc",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b1a4a90b411c",
+            "_type": "span",
+            "marks": [],
+            "text": "This project started while I was experimenting with a label generator for small bars. Thermal printers allow you to control the exact length of paper and where it cuts, which made me wonder what else you could do with it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2e09958cdda0",
+        "_type": "youTube",
+        "url": "https://youtube.com/shorts/8F_Q17GT8Ss"
+      },
+      {
+        "_key": "21b90bb0b7bf",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "af0edaeb2f0e",
+            "_type": "span",
+            "marks": [],
+            "text": "Instead of building something useful, I decided to build something completely unnecessary."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c50e3157862d",
+        "_type": "youTube",
+        "url": "https://youtube.com/shorts/CoDqEwYAJCQ"
+      },
+      {
+        "_key": "7fc97a171ae8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9054849dccee",
+            "_type": "span",
+            "marks": [],
+            "text": "I created a browser-based 3D toilet paper roll that you can drag and unroll in real time. The physics simulation measures the exact paper length in centimeters. When you stop, the result is printed on a real thermal receipt printer using raw ESC/POS commands."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b417c58a5c04",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b6eb970f333a",
+            "_type": "span",
+            "marks": [],
+            "text": "The project combines WebGL rendering, physics simulation, and hardware control from a web application."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "00a82ce72f95",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7369b4a0560b",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Tech highlights"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "36c44f4da28b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "552f5cf0cfbd",
+            "_type": "span",
+            "marks": [],
+            "text": "Three.js for the 3D scene"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1a0bddbc3be6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "28a98ec57742",
+            "_type": "span",
+            "marks": [],
+            "text": "Physics simulation for the rolling paper"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d88400e5b247",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d5f48e4e0edd",
+            "_type": "span",
+            "marks": [],
+            "text": "Real-world measurement of paper length"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "91f947071c02",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d2057342f6d4",
+            "_type": "span",
+            "marks": [],
+            "text": "Direct ESC/POS printing to a thermal printer"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "02d6681b3fe3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5cfd7d579ea7",
+            "_type": "span",
+            "marks": [],
+            "text": "Built with Next.js"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e8afae0c0a10",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3c7d1f691bd1",
+            "_type": "span",
+            "marks": [],
+            "text": "It’s a completely useless prototype, but a fun exploration of how far a web browser can go when it starts interacting with the physical world."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "A 3D toilet paper roll simulator with Three.js that prints whatever you type on a real thermal printer. Drag to unroll, watch the paper stack on the floor.",
+    "faq": null,
+    "imageAlt": "3D Toilet Paper Roll Simulator",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/1ab2590287005bd3a97dd104bc01a972eee62dee-1536x1024.png",
+    "jsonLdApplicationCategory": null,
+    "jsonLdCodeRepository": "https://github.com/sanderdesnaijer/toilet-paper-generator",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "TypeScript",
+    "jsonLdType": ["SoftwareSourceCode"],
+    "links": [
+      {
+        "_key": "890b8c6dff07",
+        "icon": "demo",
+        "link": "https://unroll.metsander.com",
+        "title": "Live Demo"
+      },
+      {
+        "_key": "444c4ff2548a",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/toilet-paper-generator",
+        "title": "Source Code "
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "3D Toilet Paper Roll Simulator",
+      "asset": {
+        "_ref": "image-1ab2590287005bd3a97dd104bc01a972eee62dee-1536x1024-png",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-02-18T07:49:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "3d-toilet-paper-roll-simulator-with-real-thermal-printing"
+    },
+    "tags": [
+      {
+        "_id": "d5957908-8f89-462f-a5e1-9a49c0963175",
+        "label": "NextJS"
+      },
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "3ed24b85-6a8c-4d02-88af-30ee861b3107",
+        "label": "Three.js"
+      },
+      {
+        "_id": "c5de379f-b43b-4ca5-b60a-e4f8139df0bf",
+        "label": "WebGL"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      },
+      {
+        "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+        "label": "Open Source"
+      }
+    ],
+    "title": "3D Toilet Paper Roll Simulator with Real Thermal Printing"
+  },
+  {
+    "_createdAt": "2026-01-18T08:21:07Z",
+    "_id": "c6280c93-edfb-4128-bbca-32d57c38a4b5",
+    "_updatedAt": "2026-06-01T05:30:00Z",
+    "body": [
+      {
+        "_key": "7a9afbbbd364",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "20842b760f2f",
+            "_type": "span",
+            "marks": [],
+            "text": "Sudoku Ultimato started for a simple reason. My dad wanted to play Sudoku without subscriptions, pop-ups, or constant interruptions. At the same time, I was getting tired of ads, locked features, and missing game modes in most Sudoku apps. I wanted Killer Sudoku, different board sizes, landscape support, and proper statistics. So I decided to build it myself."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a9f5f8ed118d",
+        "_type": "youTube",
+        "url": "https://www.youtube.com/shorts/r9uxd65gljM"
+      },
+      {
+        "_key": "1558d0b119f1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3be8ad9c5a84",
+            "_type": "span",
+            "marks": [],
+            "text": "What began as a small personal project grew into a full mobile app. Along the way, I learned Android development, built online leaderboards, and figured out how to ship the same app to iOS and Android from one codebase."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "7750ba8c63fc",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f11e55ad1a45",
+            "_type": "span",
+            "marks": [],
+            "text": "Sudoku Ultimato is meant to feel quiet and flexible. You can play a quick puzzle on a small grid or spend more time on a large board. Switching between Classic and Killer mode is easy, and accessibility options like zoom and larger text are there if you need them. Daily puzzles add something new each day, while Killer cages give extra challenge for players who enjoy deeper logic."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1f07bd38ab04",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6f3a27edf161",
+            "_type": "span",
+            "marks": [],
+            "text": ""
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "90c094568b00",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b1837990e761",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Main features"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8a2de88abbf4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2a0a3e33f4e0",
+            "_type": "span",
+            "marks": [],
+            "text": "Classic Sudoku and Killer Sudoku"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "bbbee18bc660",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3ec976212dda",
+            "_type": "span",
+            "marks": [],
+            "text": "Endless puzzles generated instantly from seeds"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "99d036f374ba",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2a9a6e4f6b43",
+            "_type": "span",
+            "marks": [],
+            "text": "Daily challenge mode"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6755ecd29716",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "71da1536f7eb",
+            "_type": "span",
+            "marks": [],
+            "text": "Board sizes 4×4, 9×9, and 16×16"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f725a182bae9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "de8d99d6a277",
+            "_type": "span",
+            "marks": [],
+            "text": "Light and dark themes"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b9513c64eda2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "25305661f06d",
+            "_type": "span",
+            "marks": [],
+            "text": "Accessibility options such as zoom, text size, and haptics"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "66ff5c0f7566",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "64d15ceaeae0",
+            "_type": "span",
+            "marks": [],
+            "text": "Landscape support on phones and tablets"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3c615b59440d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6cbe0957af72",
+            "_type": "span",
+            "marks": [],
+            "text": "Fast input with minimal distractions"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "791a148d172f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0a3b9f734b16",
+            "_type": "span",
+            "marks": [],
+            "text": "Limited and non-intrusive ads"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1f234d81afdd",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5312d7e2c132",
+            "_type": "span",
+            "marks": [],
+            "text": "Available in English, Dutch, Thai, German, French, Portuguese, and Italian"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2bc8956de202",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ba8ccef0c36d",
+            "_type": "span",
+            "marks": [],
+            "text": "Available on the App Store and Google Play"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a1b8f40caac5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2d08595abb00",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "How it is build"
+          },
+          {
+            "_key": "a59a34d2b299",
+            "_type": "span",
+            "marks": [],
+            "text": "\nThe app is built with Flutter, using one shared codebase for iOS and Android. Firebase is used for authentication, analytics, leaderboards, and syncing player statistics between devices."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a965f9babc40",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8ac4bd47d564",
+            "_type": "span",
+            "marks": [],
+            "text": "Each puzzle is generated and solved using custom Dart logic. A seed system stores the puzzle setup, including board size, game mode, difficulty, and puzzle number. This makes it possible to replay the same puzzle or compare results across devices."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0f6911114eaa",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "36d2b8521dba",
+            "_type": "span",
+            "marks": [],
+            "text": "The product website is built with Next.js and Tailwind CSS and is deployed as a static site with multi-language support."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "A free Sudoku app with no ads, no subscriptions, and no pop-ups. Built with Flutter for iOS and Android with offline play, hints, and daily puzzles.",
+    "faq": null,
+    "imageAlt": "Sudoku Ultimato, Sudoku & Killer Sudoku Without Intrusive Ads",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/80b140a6762b9074440aadbe02c3f2fc3a60287e-1920x1080.png",
+    "jsonLdApplicationCategory": "Game",
+    "jsonLdCodeRepository": null,
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": "iOS",
+    "jsonLdProgrammingLanguage": null,
+    "jsonLdType": ["SoftwareApplication", "Product"],
+    "links": [
+      {
+        "_key": "02783a3e5234",
+        "icon": "download",
+        "link": "https://apps.apple.com/us/app/sudoku-ultimato/id6755356402 ",
+        "title": "Download Sudoku Ultimato in the App Store"
+      },
+      {
+        "_key": "c6513ce73d73",
+        "icon": "download",
+        "link": "https://play.google.com/store/apps/details?id=com.metsander.sudoku",
+        "title": "Download Sudoku Ultimato in the Play Store"
+      },
+      {
+        "_key": "9ce7518e33d4",
+        "icon": "demo",
+        "link": "https://sudokuultimato.sanderdesnaijer.com/",
+        "title": "Sudoku Ultimato official website"
+      },
+      {
+        "_key": "0e23fc0166ff",
+        "icon": "article",
+        "link": "/blog/building-multilanguage-sudoku-app-flutter",
+        "title": "Read what I learned building this"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Sudoku Ultimato, Sudoku & Killer Sudoku Without Intrusive Ads",
+      "asset": {
+        "_ref": "image-80b140a6762b9074440aadbe02c3f2fc3a60287e-1920x1080-png",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-01-17T08:23:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "sudoku-ultimato"
+    },
+    "tags": [
+      {
+        "_id": "73236a57-9df3-48f5-aa79-bc55fa8f8271",
+        "label": "Flutter"
+      },
+      {
+        "_id": "7ff0b1d1-6c47-4208-a389-38a10d8da409",
+        "label": "Figma"
+      },
+      {
+        "_id": "d5957908-8f89-462f-a5e1-9a49c0963175",
+        "label": "NextJS"
+      },
+      {
+        "_id": "c0cc2ac9-d869-410a-8aad-201c48b90b79",
+        "label": "Dart"
+      },
+      {
+        "_id": "42107bc2-1cc6-4842-b4d9-d1037674efe1",
+        "label": "iOS"
+      },
+      {
+        "_id": "265c8475-5262-4284-95cb-d7391f585eee",
+        "label": "Firebase"
+      },
+      {
+        "_id": "93b63d44-0e2f-4c53-8eeb-bf426d315666",
+        "label": "Android"
+      },
+      {
+        "_id": "0d23f922-7c19-4b20-8e79-090ebc974bd8",
+        "label": "Tailwind CSS"
+      },
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "ac23153f-88ff-47a6-a51b-782864192583",
+        "label": "localization"
+      },
+      {
+        "_id": "bd3ec6ed-4115-4c12-a268-0aa3931ecd65",
+        "label": "app development"
+      }
+    ],
+    "title": "Sudoku Ultimato: Free Sudoku App, No Intrusive Ads"
+  },
+  {
+    "_createdAt": "2025-04-14T15:13:30Z",
+    "_id": "6af6c700-5728-4dc1-8ae2-58bf3193d188",
+    "_updatedAt": "2026-05-27T07:48:18Z",
+    "body": [
+      {
+        "_key": "275d9d8b9469",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f2f104f2f5b8",
+            "_type": "span",
+            "marks": [],
+            "text": "I built this portfolio from the ground up to showcase my projects, experiments, and professional work. My goal was to create something fast, easy to update, and enjoyable to browse, both on desktop and mobile. The result is a clean and lightweight site powered by modern tooling."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0daca08d447b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "63d4585ea04c",
+            "_type": "span",
+            "marks": [],
+            "text": "Under the hood, it's built with a React-based stack and fully customizable content management via Sanity. I also put effort into testing and SEO to make sure the site is reliable and discoverable."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0509b12a3609",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6c75063e5a93",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Next.js (App Router) "
+          },
+          {
+            "_key": "fef00ebe490c",
+            "_type": "span",
+            "marks": [],
+            "text": "with SSG "
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "cf6d4a6d4ffd",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "14e212da5231",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Sanity CMS"
+          },
+          {
+            "_key": "824487f228ba",
+            "_type": "span",
+            "marks": [],
+            "text": " for content management"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4d15dfc01e03",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9af77fe46951",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Tailwind CSS"
+          },
+          {
+            "_key": "0c50ba7218e4",
+            "_type": "span",
+            "marks": [],
+            "text": " for styling"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a1f190ff819f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "29bccca1ec6d",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Playwright & Jest"
+          },
+          {
+            "_key": "c6543cb8e9a5",
+            "_type": "span",
+            "marks": [],
+            "text": " for testing"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "195ed4f4667f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4b6955642b31",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "SEO"
+          },
+          {
+            "_key": "3683fd75c011",
+            "_type": "span",
+            "marks": [],
+            "text": " with metadata, JSON-LD, and OpenGraph"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "A developer portfolio built with Next.js and Sanity CMS. Statically generated, fully accessible, with structured data and SEO built in from the start.",
+    "faq": null,
+    "imageAlt": "Screenshot of project page showing portfolio ",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/a73524546169c484d9ee871c32ab2328466dabb1-3420x1720.png",
+    "jsonLdApplicationCategory": "WebApp",
+    "jsonLdCodeRepository": "https://github.com/sanderdesnaijer/portfolio",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "TypeScript",
+    "jsonLdType": ["SoftwareSourceCode", "WebApplication"],
+    "links": [
+      {
+        "_key": "dca83fb7b4b4",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/portfolio",
+        "title": "Source code "
+      },
+      {
+        "_key": "bd7e6d5f12f0",
+        "icon": "article",
+        "link": "/blog/nextjs-sanity-portfolio-headless-cms",
+        "title": "Read how I built this"
+      },
+      {
+        "_key": "20c9e32913df",
+        "icon": "article",
+        "link": "/blog/from-zero-to-27k-impressions-seo",
+        "title": "See the SEO results"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Screenshot of project page showing portfolio ",
+      "asset": {
+        "_ref": "image-a73524546169c484d9ee871c32ab2328466dabb1-3420x1720-png",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2025-04-10T15:16:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "portfolio"
+    },
+    "tags": [
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "d5957908-8f89-462f-a5e1-9a49c0963175",
+        "label": "NextJS"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "7ff0b1d1-6c47-4208-a389-38a10d8da409",
+        "label": "Figma"
+      },
+      {
+        "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+        "label": "Open Source"
+      },
+      {
+        "_id": "aac48aa8-0748-4a1a-bdca-af51c4d3313b",
+        "label": "Vercel"
+      },
+      {
+        "_id": "26fab2b7-cbe4-488b-b78f-0b2829802bf7",
+        "label": "headless CMS"
+      },
+      {
+        "_id": "bee712ba-fd1f-432c-a334-1350d78fd6f4",
+        "label": "SSG"
+      },
+      {
+        "_id": "d5663735-16cc-468b-9775-9839a455d538",
+        "label": "JSON-LD"
+      },
+      {
+        "_id": "f3bc8e3e-e236-463c-ac2c-be66ca2c163a",
+        "label": "Sanity "
+      },
+      {
+        "_id": "a6c3af19-34c7-40e0-b79f-b929a7715724",
+        "label": "Cypress"
+      },
+      {
+        "_id": "101cc581-a777-45f0-b1d8-325a84fbbb72",
+        "label": "Jest"
+      }
+    ],
+    "title": "Developer Portfolio Built with Next.js and Sanity CMS"
+  },
+  {
+    "_createdAt": "2025-01-26T05:46:56Z",
+    "_id": "a2bb33ea-153e-4c33-ab4d-c601f6be83cb",
+    "_updatedAt": "2026-05-11T04:29:37Z",
+    "body": [
+      {
+        "_key": "c01c69df0ea6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "726afe607ef8",
+            "_type": "span",
+            "marks": [],
+            "text": "Building my first Flutter app has been an exciting journey, filled with challenges, discoveries, and valuable learning moments. I've documented "
+          },
+          {
+            "_key": "d84d8c78730c",
+            "_type": "span",
+            "marks": ["76370ba8aa90"],
+            "text": "my experience in a blog "
+          },
+          {
+            "_key": "b47c17184be1",
+            "_type": "span",
+            "marks": [],
+            "text": "and you can download the app from the store, see the links below."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "76370ba8aa90",
+            "_type": "link",
+            "href": "/blog/building-first-flutter-app-lessons"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "36666e80a0fc",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fa198ca3ad87",
+            "_type": "span",
+            "marks": [],
+            "text": "The app is called Tabata Whip Timer, a free interval training timer built for iPhone. The idea came from a personal frustration: most tabata timer apps are subscription based, so I decided to build my own. It also turned out to be the perfect excuse to finally learn"
+          },
+          {
+            "_key": "92c9e495a166",
+            "_type": "span",
+            "marks": ["3d55f15f906b"],
+            "text": " "
+          },
+          {
+            "_key": "0b7c51dc23fa",
+            "_type": "span",
+            "marks": [],
+            "text": "Flutter, something I had been thinking about since attending the Frontmania conference in 2022."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "3d55f15f906b",
+            "_type": "link",
+            "href": "/blog/building-first-flutter-app-lessons"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "22a17bdb3200",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6a8ddc12c54b",
+            "_type": "span",
+            "marks": [],
+            "text": "Coming from a React background, picking up Flutter felt surprisingly natural. The reactive programming model was conceptually familiar, and the hot reload feature made development fast and enjoyable, seeing changes reflected instantly on both laptop and phone. The app is built with Flutter and Dart, uses SQLite for local storage, and includes features like haptic feedback, workout statistics, landscape mode, and customisable interval controls."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "bc713dc33e1c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d7f421a83c4b",
+            "_type": "span",
+            "marks": [],
+            "text": "The whole process, from writing the first line of code on November 4, 2024 to publishing version 1.0.1 on January 6, 2025, took just over two months. Key lessons along the way included working with Flutter's strict type system, the value of writing tests early, and the surprisingly smooth experience of shipping to the Apple App Store for the first time."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "A Tabata workout timer built with Flutter as a first app project. Features custom intervals, audio cues, and a whip crack sound to keep you moving.",
+    "faq": [
+      {
+        "_key": "2bf8e332313c",
+        "answer": [
+          {
+            "_key": "25761279c667",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "609e4953dfdf",
+                "_type": "span",
+                "marks": [],
+                "text": "Tabata is a form of high-intensity interval training (HIIT) that follows a specific pattern: 20 seconds of intense exercise followed by 10 seconds of rest, repeated for 8 rounds (4 minutes total). The Tabata Whip Timer app lets you customize these intervals and track your workouts over time."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "What is Tabata training?"
+      },
+      {
+        "_key": "d02cd5889d7e",
+        "answer": [
+          {
+            "_key": "958bf9706740",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "b67b13061fb1",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes. Coming from a React background, the reactive programming model in Flutter feels conceptually familiar. State management, component composition, and the declarative UI approach all translate well. The "
+              },
+              {
+                "_key": "c08371dc3701",
+                "_type": "span",
+                "marks": ["code"],
+                "text": "hot reload"
+              },
+              {
+                "_key": "24e5b5eafb81",
+                "_type": "span",
+                "marks": [],
+                "text": " feature makes the development loop fast, similar to hot module replacement in React. This project went from zero Flutter experience to a published App Store app in just over two months."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "0f73ae9731cf",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "692858be21d0",
+                "_type": "span",
+                "marks": [],
+                "text": ""
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "Is Flutter a good choice for React developers?"
+      },
+      {
+        "_key": "9b7bdfb4ad7a",
+        "answer": [
+          {
+            "_key": "1549e8c04796",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "226c13c78b0a",
+                "_type": "span",
+                "marks": [],
+                "text": "The app includes customizable interval controls for work, rest, and rounds, haptic feedback during workout transitions, workout statistics and history, landscape mode support, and local storage using "
+              },
+              {
+                "_key": "f7f7c35a7754",
+                "_type": "span",
+                "marks": ["code"],
+                "text": "SQLite"
+              },
+              {
+                "_key": "8fc279755731",
+                "_type": "span",
+                "marks": [],
+                "text": " so all data stays on your device. The app is completely free with no subscriptions or ads. It was built out of frustration with existing tabata timer apps that lock basic features behind paywalls."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "6c8cf23c3883",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "8884f40ec402",
+                "_type": "span",
+                "marks": [],
+                "text": ""
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "What features does the Tabata Whip Timer have?"
+      }
+    ],
+    "imageAlt": "Flutter tabata whip timer app store",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/157e567222ba8434fdb83e7481e83391bf604795-2200x1160.png",
+    "jsonLdApplicationCategory": "MobileApplication",
+    "jsonLdCodeRepository": null,
+    "jsonLdDownloadUrl": "https://apps.apple.com/us/app/tabata-whip-timer/id6740058591",
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": "iOS",
+    "jsonLdProgrammingLanguage": null,
+    "jsonLdType": ["SoftwareApplication", "Product"],
+    "links": [
+      {
+        "_key": "4ce117760917c5fe6f43e4fc94e6b5cf",
+        "icon": "article",
+        "link": "https://www.sanderdesnaijer.com/blog/building-first-flutter-app-lessons",
+        "title": "What I learned from building my first Flutter app"
+      },
+      {
+        "_key": "003811a86c7f03c1e83d38618bbb0ac4",
+        "icon": "download",
+        "link": "https://apps.apple.com/us/app/tabata-whip-timer/id6740058591",
+        "title": "Download Tabata Whip Timer"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Flutter tabata whip timer app store",
+      "asset": {
+        "_ref": "image-157e567222ba8434fdb83e7481e83391bf604795-2200x1160-png",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2025-01-06T15:14:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "flutter-tabata-whip-timer"
+    },
+    "tags": [
+      {
+        "_id": "73236a57-9df3-48f5-aa79-bc55fa8f8271",
+        "label": "Flutter"
+      },
+      {
+        "_id": "c0cc2ac9-d869-410a-8aad-201c48b90b79",
+        "label": "Dart"
+      },
+      {
+        "_id": "bd3ec6ed-4115-4c12-a268-0aa3931ecd65",
+        "label": "app development"
+      },
+      {
+        "_id": "42107bc2-1cc6-4842-b4d9-d1037674efe1",
+        "label": "iOS"
+      },
+      {
+        "_id": "7ff0b1d1-6c47-4208-a389-38a10d8da409",
+        "label": "Figma"
+      }
+    ],
+    "title": "Flutter Tabata Whip Timer"
+  },
+  {
+    "_createdAt": "2025-01-26T05:43:35Z",
+    "_id": "1cc3afcd-919b-4969-a3d8-a774ac634843",
+    "_updatedAt": "2026-05-10T10:04:48Z",
+    "body": [
+      {
+        "_key": "554a85b50b6f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "657934ce7dbe",
+            "_type": "span",
+            "marks": [],
+            "text": "In my spare time, I built a custom Arduino word clock with minute accuracy, unlike most word clocks that only update every five minutes. I designed it in Fusion 360, 3D printed it on a Bambu X1C, and developed a TypeScript prototype to refine the time logic before writing the final Arduino code."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a19d5b197d42",
+        "_type": "youTube",
+        "url": "https://www.youtube.com/shorts/iC3d4ZYnlrE"
+      },
+      {
+        "_key": "0a75ad027150",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "57f20c186e1c",
+            "_type": "span",
+            "marks": [],
+            "text": "I documented the entire process from start to finish, including prototyping, soldering, coding, and 3D modeling. Check out the links below to learn more."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8ed934cc73b7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d16182c48021",
+            "_type": "span",
+            "marks": [],
+            "text": ""
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "522bd89d2907",
+        "_type": "youTube",
+        "url": "https://www.youtube.com/shorts/k4Jy1zu0PXU"
+      },
+      {
+        "_key": "32f871a200f1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8564154dc9c9",
+            "_type": "span",
+            "marks": [],
+            "text": "Want to build your own? I wrote a detailed build guide covering the full process from design to working clock, including the Fusion 360 modeling, 3D printing on a Bambu X1C, soldering the LED matrix, and writing the Arduino code.\""
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "A 3D printed Dutch word clock with minute accuracy, built with Arduino. Unlike most word clocks that update every five minutes, this one shows the exact time.",
+    "faq": null,
+    "imageAlt": "Arduino 3d printed wordclock ",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/f918f7178e2706302215869f322adbada9eca139-4032x3024.jpg",
+    "jsonLdApplicationCategory": null,
+    "jsonLdCodeRepository": "https://github.com/sanderdesnaijer/arduino-dutch-wordclock",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "C++",
+    "jsonLdType": ["CreativeWork", "SoftwareSourceCode"],
+    "links": [
+      {
+        "_key": "c7bd684c5ca7",
+        "icon": "article",
+        "link": "/blog/3d-printed-arduino-word-clock",
+        "title": "Full build guide: 3D printed Arduino word clock"
+      },
+      {
+        "_key": "d7c597b5763f",
+        "icon": "demo",
+        "link": "https://sanderdesnaijer.github.io/typescript-dutch-wordclock/",
+        "title": "Try the prototype"
+      },
+      {
+        "_key": "d8edff83f5ad",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/typescript-dutch-wordclock",
+        "title": "Prototype source code"
+      },
+      {
+        "_key": "775a8a4db1fc",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/arduino-dutch-wordclock",
+        "title": "Arduino source code"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Arduino 3d printed wordclock ",
+      "asset": {
+        "_ref": "image-f918f7178e2706302215869f322adbada9eca139-4032x3024-jpg",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2024-08-04T08:34:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "arduino-3d-printed-dutch-word-clock"
+    },
+    "tags": [
+      {
+        "_id": "c367dc6b-f51e-4a17-9e08-c77b17bcd209",
+        "label": "Arduino"
+      },
+      {
+        "_id": "019329da-422e-47d2-b5ff-b9c86bf5b14d",
+        "label": "3D printing "
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      },
+      {
+        "_id": "b8525754-7561-45ae-bb5e-61e74d6c01ae",
+        "label": "C++"
+      },
+      {
+        "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+        "label": "Open Source"
+      },
+      {
+        "_id": "06020007-80fd-4068-8542-c86e92c2aa1f",
+        "label": "electronics"
+      },
+      {
+        "_id": "c30b8ce0-c32d-43fb-b108-d786eeb62d41",
+        "label": "Bambu X1C"
+      },
+      {
+        "_id": "1fcde828-df68-466a-8050-73ec2f3d5e48",
+        "label": "3D modelling"
+      },
+      {
+        "_id": "fa22da2f-035a-4a36-ab73-6b20f1ac66e6",
+        "label": "DIY"
+      },
+      {
+        "_id": "6688186a-b082-4670-a468-25cad9d7cced",
+        "label": "makers"
+      }
+    ],
+    "title": "Arduino 3d printed dutch word clock with minute accuracy "
+  },
+  {
+    "_createdAt": "2025-02-09T05:03:49Z",
+    "_id": "90a81cc3-96d3-47fb-a337-8de0bf2f0b17",
+    "_updatedAt": "2026-05-27T07:49:15Z",
+    "body": [
+      {
+        "_key": "80c5f14cf3a8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1e17877309ab",
+            "_type": "span",
+            "marks": [],
+            "text": "Open GeoWeb is a powerful system for real-time weather monitoring, geo-referenced data analysis, and the generation of forecasts and alerts. What sets it apart is its ability to support both operations and research, enabling seamless integration of new meteorological insights. Developed in collaboration with the meteorological institutes of Finland (FMI) and Norway (MetNorway), Open GeoWeb follows a modular approach, allowing users to integrate only the components they need."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "66cab391f79d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "db01016e0964",
+            "_type": "span",
+            "marks": [],
+            "text": "The Royal Netherlands Meteorological Institute (KNMI) had previously developed GeoWeb, an open source mapping tool library, but it faced significant challenges, including poor scalability and a lack of tests. Scrum/Agile had just been introduced, and the team was still refining its workflow. When work restarted in collaboration with Finland and Norway, a key decision had to be made: rebuild from scratch or improve the existing version. Drawing from past project experiences, we chose the latter."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0eee5759b4ae",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4aacc8b82396",
+            "_type": "span",
+            "marks": [],
+            "text": "To ensure safer refactoring, TypeScript and unit tests were introduced. Existing code was reused and refined, allowing the project to progress without delays. This approach delivered quick results to the client while gradually enhancing the application. Over time, GeoWeb matured significantly, more than 10 modules were developed, it became an essential tool in the weather office, and the team continued to grow. It’s "
+          },
+          {
+            "_key": "ce091443d199",
+            "_type": "span",
+            "marks": ["2e26a68d4995"],
+            "text": "open source"
+          },
+          {
+            "_key": "0d3607230301",
+            "_type": "span",
+            "marks": [],
+            "text": ", so everyone can use it. For more details, usage instructions, and access to the project, refer to the links below."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "2e26a68d4995",
+            "_type": "link",
+            "href": "/tags/open-source"
+          }
+        ],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": "https://cdn.sanity.io/images/c6ybobx3/production/e3ee9676e6e6942f18a72325ed6519bf5def97ce-200x200.jpg",
+    "companyName": "Royal Netherlands Meteorological Institute",
+    "description": null,
+    "excerpt": "Open source web platform for real-time weather monitoring and geospatial data visualization. Built for meteorologists to create forecasts, alerts, and warnings.",
+    "faq": null,
+    "imageAlt": "Open GeoWeb ",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/15917f6586d3117050c4af22e4fd00cd1ec10d39-3446x1744.png",
+    "jsonLdApplicationCategory": "WeatherApp",
+    "jsonLdCodeRepository": "https://gitlab.com/opengeoweb/opengeoweb",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": null,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "TypeScript",
+    "jsonLdType": ["Product", "SoftwareSourceCode", "WebApplication"],
+    "links": [
+      {
+        "_key": "da07be8f969c",
+        "icon": "demo",
+        "link": "https://opengeoweb.com/",
+        "title": "Open GeoWeb"
+      },
+      {
+        "_key": "e0d501659ee1",
+        "icon": "gitlab",
+        "link": "https://gitlab.com/opengeoweb/opengeoweb",
+        "title": "Source code on GitLab"
+      },
+      {
+        "_key": "a81612d477d9",
+        "icon": "article",
+        "link": "https://opengeoweb.gitlab.io/opengeoweb/docs/documentation",
+        "title": "Open GeoWeb documentation"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Open GeoWeb ",
+      "asset": {
+        "_ref": "image-15917f6586d3117050c4af22e4fd00cd1ec10d39-3446x1744-png",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2020-01-01T05:07:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "opengeoweb"
+    },
+    "tags": [
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "28b1de79-f2c6-40a6-a6bf-2fd36a47b6f8",
+        "label": "Redux"
+      },
+      {
+        "_id": "c78b4dc8-a770-4dfe-8748-e38604bece58",
+        "label": "Storybook"
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "101cc581-a777-45f0-b1d8-325a84fbbb72",
+        "label": "Jest"
+      },
+      {
+        "_id": "a6c3af19-34c7-40e0-b79f-b929a7715724",
+        "label": "Cypress"
+      },
+      {
+        "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+        "label": "Open Source"
+      },
+      {
+        "_id": "aafce187-d58c-4fe5-a7e3-5582ed64be8a",
+        "label": "maps"
+      },
+      {
+        "_id": "263f9d7a-92fb-401c-80a5-86335078aa82",
+        "label": "OpenLayers"
+      },
+      {
+        "_id": "0d98d371-259c-4037-8bf3-bd067b4b0184",
+        "label": "Open GeoWeb"
+      }
+    ],
+    "title": "Open GeoWeb: Open Source Weather and Geospatial Platform"
+  },
+  {
+    "_createdAt": "2025-02-08T18:02:34Z",
+    "_id": "9d1da56b-8ad6-4133-b216-c185ebceead9",
+    "_updatedAt": "2026-05-10T10:05:14Z",
+    "body": [
+      {
+        "_key": "6cb675f33972",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3535b5c13e28",
+            "_type": "span",
+            "marks": [],
+            "text": "John Conway's Game of Life, built with React and Redux. The Game of Life is a classic cellular automaton and zero-player game invented by mathematician John Conway in 1970. Once set in motion, the simulation runs entirely on its own, no further input needed."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f22f4683998d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9500150b8456",
+            "_type": "span",
+            "marks": [],
+            "text": "Each cell on the grid is either alive or dead, and its next state is determined by four simple rules based on its neighbours: underpopulation kills cells with fewer than two live neighbours, cells with two or three live neighbours survive to the next generation, overpopulation kills cells with more than three live neighbours, and reproduction brings a dead cell back to life if it has exactly three live neighbours."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "525d67336d6d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "83a26f5a66d5",
+            "_type": "span",
+            "marks": [],
+            "text": "This implementation uses React for rendering the grid and Redux for managing the simulation state, making it a great hands-on example of how Redux handles frequent, predictable state updates. The project demonstrates component-driven UI architecture alongside a classic algorithm from the history of computing."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "Conway's Game of Life built with React and Redux. Watch cellular automata evolve, draw your own patterns, and adjust speed. Runs entirely in the browser.",
+    "faq": null,
+    "imageAlt": "Game of Life in react/redux",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/1068d75e6cef33140ffa3505a9906ec63dd5f65a-2480x1570.png",
+    "jsonLdApplicationCategory": "Game",
+    "jsonLdCodeRepository": "https://github.com/sanderdesnaijer/game-of-life-redux",
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": "JavaScript",
+    "jsonLdType": ["SoftwareSourceCode", "WebApplication"],
+    "links": [
+      {
+        "_key": "54b3bfb3db6a",
+        "icon": "demo",
+        "link": "https://sanderdesnaijer.github.io/game-of-life-redux/",
+        "title": "Play Game of Life"
+      },
+      {
+        "_key": "a9501b416d84",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/game-of-life-redux",
+        "title": "Source code on GitHub"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Game of Life in react/redux",
+      "asset": {
+        "_ref": "image-1068d75e6cef33140ffa3505a9906ec63dd5f65a-2480x1570-png",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2018-11-22T18:04:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "john-conway-s-game-of-life-in-react-redux"
+    },
+    "tags": [
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "28b1de79-f2c6-40a6-a6bf-2fd36a47b6f8",
+        "label": "Redux"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+        "label": "Open Source"
+      },
+      {
+        "_id": "59e6d3fb-185b-4c22-a3fb-3b5df5fb9310",
+        "label": "browser game"
+      },
+      {
+        "_id": "40d6d5d3-a8b9-45d8-9b34-abe84c41ab15",
+        "label": "Canvas"
+      }
+    ],
+    "title": "John Conway's game of life in react/redux"
+  },
+  {
+    "_createdAt": "2025-02-08T14:33:14Z",
+    "_id": "afc342f5-4299-48b0-88d9-3751ab25ed04",
+    "_updatedAt": "2026-05-10T10:05:23Z",
+    "body": [
+      {
+        "_key": "e02072e74985",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5409b1586fa1",
+            "_type": "span",
+            "marks": [],
+            "text": "Campina is a well-known Dutch dairy cooperative with deep roots in the Netherlands. This website was created to promote their BOER en LAND product line, a name that literally translates to \"farm and land\" but together evokes the broader meaning of farmland, reflecting the rural, honest character of the brand."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "79b42178ee84",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "15bd3fed6c60",
+            "_type": "span",
+            "marks": [],
+            "text": "The design was created by a separate agency and was nothing short of outstanding. My role was to bring it to life through HTML, CSS, and JavaScript, including all animations and sound effects. Translating a rich visual design into a fully interactive, animated web experience is always a rewarding challenge, and this project stands out as one of the most enjoyable of my career at Label A."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "adf7d7e24f78",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8fe8398cb506",
+            "_type": "span",
+            "marks": [],
+            "text": "Every detail was crafted to match the warmth and authenticity of the BOER en LAND brand. The combination of smooth animations and carefully placed sound effects gave the site a real sense of atmosphere, turning what could have been a straightforward product page into something genuinely immersive."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": "https://cdn.sanity.io/images/c6ybobx3/production/622e87b7f28db9b895d348abdb915e099a4d9f8f-200x200.jpg",
+    "companyName": "Label A",
+    "description": null,
+    "excerpt": "A promotional website for Campina's BOER en LAND dairy product line. Built to highlight sustainable Dutch farming with interactive maps and farm stories.",
+    "faq": null,
+    "imageAlt": "Campina BOER en LAND",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/15302200cda5e2769f8415d96cc26e41a55f5d3a-3412x1594.png",
+    "jsonLdApplicationCategory": "Business",
+    "jsonLdCodeRepository": null,
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": null,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": null,
+    "jsonLdType": ["WebApplication"],
+    "links": [
+      {
+        "_key": "f40dd995bcb1",
+        "icon": "demo",
+        "link": "https://web.archive.org/web/20140517042556/http://campinaboerenland.nl/",
+        "title": "View Campina BOER en LAND"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Campina BOER en LAND",
+      "asset": {
+        "_ref": "image-15302200cda5e2769f8415d96cc26e41a55f5d3a-3412x1594-png",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2013-06-30T14:38:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "campina-boer-en-land"
+    },
+    "tags": [
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      }
+    ],
+    "title": "Campina BOER en LAND "
+  }
+]

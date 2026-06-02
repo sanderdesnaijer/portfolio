@@ -49,6 +49,7 @@ node_modules/
 /playwright/.cache/
 
 .claude/*
+CLAUDE.md
 
 # migration/seed scripts (local reference only)
 /scripts/migrations/
