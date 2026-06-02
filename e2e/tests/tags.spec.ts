@@ -3,7 +3,7 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { mockConsent } from "../utils/localStorage";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl } from "@/app/utils/utils";
-import { fetchPage, fetchSettings } from "@/app/utils/api";
+import { fetchPage, fetchSettings } from "../utils/sanity";
 import messages from "../../messages/en.json";
 
 async function checkTagsPageElements(page: Page) {

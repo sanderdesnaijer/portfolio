@@ -3,7 +3,7 @@ import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
-import { fetchPage, fetchSettings } from "@/app/utils/api";
+import { fetchPage, fetchSettings } from "../utils/sanity";
 import { getWebsiteScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import envConfig from "@/envConfig";

@@ -3,7 +3,7 @@ import { testResponsive } from "../utils/responsive";
 import { runAccessibilityTest } from "../utils/accessibility";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl, getDescriptionFromSanity } from "@/app/utils/utils";
-import { fetchPage, fetchProject, fetchProjects } from "@/app/utils/api";
+import { fetchPage, fetchProject, fetchProjects } from "../utils/sanity";
 import { getProjectScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import { mockConsent } from "../utils/localStorage";

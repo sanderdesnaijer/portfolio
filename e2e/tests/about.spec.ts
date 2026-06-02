@@ -4,7 +4,7 @@ import { runAccessibilityTest } from "../utils/accessibility";
 import { testNavigation } from "../utils/navigation";
 import { testPageMetadata } from "../utils/metadata";
 import { buildPageUrl } from "@/app/utils/utils";
-import { fetchJobs, fetchPage, fetchSettings } from "@/app/utils/api";
+import { fetchJobs, fetchPage, fetchSettings } from "../utils/sanity";
 import { getAboutScheme } from "@/app/utils/jsonLDSchemes";
 import { validateJsonLd } from "../utils/jsonLD";
 import { getTranslationKey } from "@/app/test-utils/i18n";
