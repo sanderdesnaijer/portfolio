@@ -57,12 +57,22 @@ Open [http://localhost:3000](http://localhost:3000) to see the result.
 ```
 app/           Next.js App Router pages, components, and utilities
 sanity/        Sanity schema definitions and studio config
-e2e/           Playwright end-to-end tests
+e2e/           Playwright end-to-end tests, fixtures, and snapshot tooling
 messages/      i18n translation files
 public/        Static assets and favicons
 redirects/     Blog redirect mappings (old Medium slugs)
 scripts/       Build and migration scripts
 ```
+
+## Updating E2E fixtures
+
+E2E tests run against local JSON fixtures instead of live Sanity, making them offline, deterministic, and free of API usage. After publishing new content in Sanity, update the fixtures:
+
+```bash
+npx tsx e2e/scripts/snapshot-fixtures.ts
+```
+
+This pulls current production data and writes it to `e2e/fixtures/`. Commit the updated fixtures so CI uses them too.
 
 ## Environment variables
 

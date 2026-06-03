@@ -1,0 +1,910 @@
+[
+  {
+    "_id": "69c3c72f-f928-412e-9129-7ca3fc17b20d",
+    "companyName": "Royal Netherlands Meteorological Institute",
+    "contractName": "The NextGen",
+    "description": [
+      {
+        "_key": "b5c185f0051c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "feefe01bb9ff",
+            "_type": "span",
+            "marks": [],
+            "text": "When I joined KNMI, the team had an existing open-source mapping application called "
+          },
+          {
+            "_key": "dbbb859b5b9b",
+            "_type": "span",
+            "marks": ["e7f823afba1d"],
+            "text": "GeoWeb"
+          },
+          {
+            "_key": "11c1a20f5d0e",
+            "_type": "span",
+            "marks": [],
+            "text": ", but it was struggling with scalability issues and had no test coverage. Scrum had just been introduced and the team was still finding its rhythm. Together with meteorological institutes in Finland and Norway, we had to decide whether to rebuild from scratch or improve what existed. Drawing from past experience, we chose to evolve the existing codebase."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "e7f823afba1d",
+            "_type": "link",
+            "href": "/projects/opengeoweb"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "dff02e6a9c51",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f6f768621c0d",
+            "_type": "span",
+            "marks": [],
+            "text": "I introduced "
+          },
+          {
+            "_key": "9621b0784229",
+            "_type": "span",
+            "marks": ["0568a65e6e19"],
+            "text": "TypeScript"
+          },
+          {
+            "_key": "15094fa4ddca",
+            "_type": "span",
+            "marks": [],
+            "text": " and "
+          },
+          {
+            "_key": "7ada2501ab02",
+            "_type": "span",
+            "marks": ["bb676bf75fee"],
+            "text": "unit testing with Jest"
+          },
+          {
+            "_key": "7306a13666cf",
+            "_type": "span",
+            "marks": [],
+            "text": " to make refactoring safer, and we reused and refined existing code so the project could keep moving without delays. This approach delivered quick results while gradually raising the quality of the application. Over time, GeoWeb grew into a mature platform with more than 10 modules, became an essential tool in the weather room, and the team continued to expand."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "0568a65e6e19",
+            "_type": "link",
+            "href": "/tags/typescript"
+          },
+          {
+            "_key": "bb676bf75fee",
+            "_type": "link",
+            "href": "/tags/jest"
+          }
+        ],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "contract",
+    "endDate": null,
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/e3ee9676e6e6942f18a72325ed6519bf5def97ce-200x200.jpg",
+    "jobTitle": "Front-end developer",
+    "link": "https://www.knmi.nl/",
+    "startDate": "2020-01-01T09:47:00.000Z",
+    "tags": [
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      },
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "28b1de79-f2c6-40a6-a6bf-2fd36a47b6f8",
+        "label": "Redux"
+      },
+      {
+        "_id": "101cc581-a777-45f0-b1d8-325a84fbbb72",
+        "label": "Jest"
+      },
+      {
+        "_id": "2583ede8-2270-4223-b4db-1d47647acfde",
+        "label": "NX"
+      },
+      {
+        "_id": "a6c3af19-34c7-40e0-b79f-b929a7715724",
+        "label": "Cypress"
+      },
+      {
+        "_id": "263f9d7a-92fb-401c-80a5-86335078aa82",
+        "label": "OpenLayers"
+      },
+      {
+        "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+        "label": "Open Source"
+      },
+      {
+        "_id": "0d98d371-259c-4037-8bf3-bd067b4b0184",
+        "label": "Open GeoWeb"
+      },
+      {
+        "_id": "aafce187-d58c-4fe5-a7e3-5582ed64be8a",
+        "label": "maps"
+      }
+    ]
+  },
+  {
+    "_id": "2359c8af-d920-417e-879b-841011d59648",
+    "companyName": "Ministry of the Interior and Kingdom Relations\t",
+    "contractName": "The NextGen",
+    "description": [
+      {
+        "_key": "89cd8d795666",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0d806f05714c",
+            "_type": "span",
+            "marks": [],
+            "text": "I built a new search engine for the Ministry of the Interior and Kingdom Relations. It wasn't a large application, but the real challenge was in optimising its speed and performance, making every millisecond count for the end user."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "contract",
+    "endDate": "2020-01-31T09:44:00.000Z",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/e57f9acf1dcf41d8b6ed7a7196d410d74da28b4a-200x200.jpg",
+    "jobTitle": "Front-end developer",
+    "link": "https://www.rijksoverheid.nl/ministeries/ministerie-van-binnenlandse-zaken-en-koninkrijksrelaties",
+    "startDate": "2019-05-01T09:44:00.000Z",
+    "tags": [
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "28b1de79-f2c6-40a6-a6bf-2fd36a47b6f8",
+        "label": "Redux"
+      },
+      {
+        "_id": "101cc581-a777-45f0-b1d8-325a84fbbb72",
+        "label": "Jest"
+      },
+      {
+        "_id": "a6c3af19-34c7-40e0-b79f-b929a7715724",
+        "label": "Cypress"
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      }
+    ]
+  },
+  {
+    "_id": "2f88e86d-ad84-4ff5-af9e-7a55e51f48d9",
+    "companyName": "Cyclomedia",
+    "contractName": "The NextGen",
+    "description": [
+      {
+        "_key": "e68dacb584d6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "81093efdaaf0",
+            "_type": "span",
+            "marks": [],
+            "text": "Cyclomedia maps the environment by driving camera-equipped cars through streets, capturing imagery and LiDAR data. Sometimes routes get missed. In the Netherlands that's easy to fix since the country is small, but in the United States it leads to costly delays."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f5b2f44dea0c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "554498d2c733",
+            "_type": "span",
+            "marks": [],
+            "text": "I built a dashboard from scratch that lets drivers check which roads still need to be covered. It was a focused three-month project where I owned the entire front end, using "
+          },
+          {
+            "_key": "ba3893147ca4",
+            "_type": "span",
+            "marks": ["ef6083aabd3a"],
+            "text": "React"
+          },
+          {
+            "_key": "0e6956c4f6f8",
+            "_type": "span",
+            "marks": [],
+            "text": " with GeoServer for map rendering."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "ef6083aabd3a",
+            "_type": "link",
+            "href": "/tags/react"
+          }
+        ],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "contract",
+    "endDate": "2019-04-30T09:40:00.000Z",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/587bd0ff1ce866fb6acdf648e92c1383c1fb0f35-225x225.png",
+    "jobTitle": "Software Developer",
+    "link": "https://www.cyclomedia.com",
+    "startDate": "2019-02-01T16:59:00.000Z",
+    "tags": [
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "28b1de79-f2c6-40a6-a6bf-2fd36a47b6f8",
+        "label": "Redux"
+      },
+      {
+        "_id": "101cc581-a777-45f0-b1d8-325a84fbbb72",
+        "label": "Jest"
+      },
+      {
+        "_id": "cdeb4b16-efd7-407f-88ed-5a67079db42d",
+        "label": "GeoServer"
+      },
+      {
+        "_id": "aafce187-d58c-4fe5-a7e3-5582ed64be8a",
+        "label": "maps"
+      },
+      {
+        "_id": "263f9d7a-92fb-401c-80a5-86335078aa82",
+        "label": "OpenLayers"
+      }
+    ]
+  },
+  {
+    "_id": "53ac01df-2ec7-48ac-82d3-37c9b3ddee9c",
+    "companyName": "The NextGen",
+    "contractName": null,
+    "description": [
+      {
+        "_key": "ec22a3174312",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b59ddfe15fed",
+            "_type": "span",
+            "marks": [],
+            "text": "Since 2019, I've been working at The NextGen, a consultancy firm that connects IT professionals with a diverse range of clients and projects. Through The NextGen, I've been placed at organisations like "
+          },
+          {
+            "_key": "0c135aabf182",
+            "_type": "span",
+            "marks": ["e2d56ff96751"],
+            "text": "KNMI"
+          },
+          {
+            "_key": "d27a9d6a36d5",
+            "_type": "span",
+            "marks": [],
+            "text": ", Cyclomedia, and the Dutch government."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "e2d56ff96751",
+            "_type": "link",
+            "href": "https://www.knmi.nl/"
+          }
+        ],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "full-time",
+    "endDate": null,
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/c52989f2d77c03d45feded1366110e33971cea4b-200x200.jpg",
+    "jobTitle": "Software developer",
+    "link": "https://www.thenextgen.nl/",
+    "startDate": "2019-02-01T15:08:00.000Z",
+    "tags": [
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "732ae390-540d-4f14-be2f-78e2172da22f",
+        "label": "Google Maps"
+      },
+      {
+        "_id": "263f9d7a-92fb-401c-80a5-86335078aa82",
+        "label": "OpenLayers"
+      },
+      {
+        "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+        "label": "Open Source"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      },
+      {
+        "_id": "cdeb4b16-efd7-407f-88ed-5a67079db42d",
+        "label": "GeoServer"
+      },
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "28b1de79-f2c6-40a6-a6bf-2fd36a47b6f8",
+        "label": "Redux"
+      },
+      {
+        "_id": "0d98d371-259c-4037-8bf3-bd067b4b0184",
+        "label": "Open GeoWeb"
+      },
+      {
+        "_id": "aafce187-d58c-4fe5-a7e3-5582ed64be8a",
+        "label": "maps"
+      }
+    ]
+  },
+  {
+    "_id": "de1428c7-fb68-4fe8-9848-18e057aff0c2",
+    "companyName": "Bynder",
+    "contractName": null,
+    "description": [
+      {
+        "_key": "11d058909a9d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7afef22c209e",
+            "_type": "span",
+            "marks": [],
+            "text": "Bynder started in the kitchen of Label A and grew into a major digital asset management platform. When I joined, we were building a completely new version from the ground up using "
+          },
+          {
+            "_key": "3cf2d7b3b86e",
+            "_type": "span",
+            "marks": ["f5714a29a96b"],
+            "text": "React"
+          },
+          {
+            "_key": "d1faa2d3675b",
+            "_type": "span",
+            "marks": [],
+            "text": ", which gave us a much faster and smoother user experience."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "f5714a29a96b",
+            "_type": "link",
+            "href": "/tags/react"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "069d1e3f0949",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "bd5cd46441ad",
+            "_type": "span",
+            "marks": [],
+            "text": "After a year and a half, we reassessed based on customer feedback and adoption rates. Many customers still depended on the existing version, so instead of forcing a switch, we focused on gradually enhancing the platform. Performance and functionality improved without disrupting anyone. It was a valuable lesson for me: sometimes evolving what exists beats replacing it entirely."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "full-time",
+    "endDate": "2018-12-31T15:00:00.000Z",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/0428f2ccde983832c4a865842ba038ebcc9f9f91-200x200.jpg",
+    "jobTitle": "Frontend developer",
+    "link": "https://www.bynder.com",
+    "startDate": "2017-02-01T15:00:00.000Z",
+    "tags": [
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "28b1de79-f2c6-40a6-a6bf-2fd36a47b6f8",
+        "label": "Redux"
+      },
+      {
+        "_id": "101cc581-a777-45f0-b1d8-325a84fbbb72",
+        "label": "Jest"
+      },
+      {
+        "_id": "732ae390-540d-4f14-be2f-78e2172da22f",
+        "label": "Google Maps"
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      }
+    ]
+  },
+  {
+    "_id": "1274b249-8d6b-424a-8bac-3ae64c4a3b72",
+    "companyName": "Essent",
+    "contractName": "Label A",
+    "description": [
+      {
+        "_key": "420efb0f5e9d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d5b645c3236e",
+            "_type": "span",
+            "marks": [],
+            "text": "A short project via Label A and HintTech where I developed an energy calculator widget for Essent, letting users estimate their energy usage and costs."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "contract",
+    "endDate": "2013-01-31T09:17:00.000Z",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/15a67a6fa9113bc0a77047260bd214c446e8d1a3-200x200.jpg",
+    "jobTitle": "Front-end developer",
+    "link": "https://www.essent.nl/",
+    "startDate": "2012-09-01T09:16:00.000Z",
+    "tags": [
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      }
+    ]
+  },
+  {
+    "_id": "e39cf9e5-1bf8-455c-b1b3-50d21662ce12",
+    "companyName": "Label A",
+    "contractName": null,
+    "description": [
+      {
+        "_key": "c89afdc4a0d3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "beb8a2f871a3",
+            "_type": "span",
+            "marks": [],
+            "text": "After a few years in game development I missed the faster pace of web work, so I returned to Label A. When I first interned there it was a three-person startup. By the time I came back it had grown to over 20 people across two offices. I worked on a wide range of applications, from small widgets to full platforms:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c7b2fcec56b2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "bae00d0bd5cf",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "WoW KNMI"
+          },
+          {
+            "_key": "5754ee6f5fa7",
+            "_type": "span",
+            "marks": [],
+            "text": "\nA map showing user measurement stations where visitors can compare stations and view detailed data. (This was actually my first introduction to KNMI, years before I'd join them full-time.)"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a166647396a4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "040e283e42a1",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "RIVM"
+          },
+          {
+            "_key": "8a45c33cfe1a",
+            "_type": "span",
+            "marks": [],
+            "text": "\nA map displaying real-time air quality measurements across the Netherlands."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "97bad251ad97",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9f3bc6cd0a0f",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Taxi Electric"
+          },
+          {
+            "_key": "2fe4189275e1",
+            "_type": "span",
+            "marks": [],
+            "text": "\nFor a new electric taxi company, we developed an application that allowed users to book a taxi. Administrators could track taxi locations, monitor their remaining range, and schedule ride; all in real time."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "77872f2056c4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "cba0a553b78e",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Veilig Verkeer Nederland (Safe Traffic Netherlands)"
+          },
+          {
+            "_key": "d5106f1e00ec",
+            "_type": "span",
+            "marks": [],
+            "text": "\nAn application that let users report unsafe traffic situations on a map. We used "
+          },
+          {
+            "_key": "fe36c359ccd6",
+            "_type": "span",
+            "marks": ["6f5d74b3b983"],
+            "text": "GeoServer"
+          },
+          {
+            "_key": "afd7cc09d83a",
+            "_type": "span",
+            "marks": [],
+            "text": " to keep map performance smooth at scale."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "6f5d74b3b983",
+            "_type": "link",
+            "href": "/tags/geoserver"
+          }
+        ],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "full-time",
+    "endDate": "2017-01-31T08:49:00.000Z",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/622e87b7f28db9b895d348abdb915e099a4d9f8f-200x200.jpg",
+    "jobTitle": "Front-end developer",
+    "link": "https://www.labela.nl",
+    "startDate": "2012-03-01T08:48:00.000Z",
+    "tags": [
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "28b1de79-f2c6-40a6-a6bf-2fd36a47b6f8",
+        "label": "Redux"
+      },
+      {
+        "_id": "2a366d9d-acc4-4170-a673-485b88de16b5",
+        "label": "AngularJS"
+      },
+      {
+        "_id": "ae7fab67-6369-49a3-931a-7b1c73ddb98a",
+        "label": "EmberJS"
+      },
+      {
+        "_id": "cdeb4b16-efd7-407f-88ed-5a67079db42d",
+        "label": "GeoServer"
+      },
+      {
+        "_id": "732ae390-540d-4f14-be2f-78e2172da22f",
+        "label": "Google Maps"
+      },
+      {
+        "_id": "263f9d7a-92fb-401c-80a5-86335078aa82",
+        "label": "OpenLayers"
+      },
+      {
+        "_id": "101cc581-a777-45f0-b1d8-325a84fbbb72",
+        "label": "Jest"
+      },
+      {
+        "_id": "aafce187-d58c-4fe5-a7e3-5582ed64be8a",
+        "label": "maps"
+      }
+    ]
+  },
+  {
+    "_id": "585e63df-64b7-47e1-b036-82937ca22b5b",
+    "companyName": "Shifft",
+    "contractName": null,
+    "description": [
+      {
+        "_key": "37dcc64a5e0f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f8007fde2a65",
+            "_type": "span",
+            "marks": [],
+            "text": "During my studies, a group of us built a serious game in the Games & Simulations minor where players gained in-game advantages by saving electricity at home. After graduation, the company hired me to finish it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "fd13511a2dae",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "72258e9de444",
+            "_type": "span",
+            "marks": [],
+            "text": "We originally used Unity, but with a much smaller team than we'd had as students, we needed to compromise. We switched to 2D and moved to Flash to save development time. In the end we shipped a working game that connected to real smart meters."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "full-time",
+    "endDate": "2012-03-31T07:15:00.000Z",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/a2c6d5990b62e90e662c0b126b393042a5dec676-200x200.jpg",
+    "jobTitle": "Creative Developer",
+    "link": "https://www.linkedin.com/company/shifft/",
+    "startDate": "2010-09-01T07:14:00.000Z",
+    "tags": [
+      {
+        "_id": "9c45d7cd-fe08-42b7-9073-da45161de96d",
+        "label": "Flash"
+      },
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "2907ae3c-5f23-47b5-951b-9c5825362a7e",
+        "label": "Illustrator"
+      },
+      {
+        "_id": "5337ef4b-78a2-4410-b692-48d45eb96e06",
+        "label": "Photoshop"
+      }
+    ]
+  },
+  {
+    "_id": "4590fedb-6179-44f1-b2a4-657b25c908b2",
+    "companyName": "Ranj",
+    "contractName": null,
+    "description": [
+      {
+        "_key": "bda428a64ba7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "52f431aedc55",
+            "_type": "span",
+            "marks": [],
+            "text": "My final internship for Communication and Multimedia Design. I designed and prototyped a serious game in Flash where player competencies could be measured through gameplay."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "080ac6203885",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fba89601a2e4",
+            "_type": "span",
+            "marks": [],
+            "text": ""
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "intern",
+    "endDate": "2010-07-31T06:43:00.000Z",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/847562e039bc2f4b9361d6538a44a58343018b26-1200x630.png",
+    "jobTitle": "Game designer",
+    "link": "https://www.ranj.com/",
+    "startDate": "2010-02-01T06:42:00.000Z",
+    "tags": [
+      {
+        "_id": "9c45d7cd-fe08-42b7-9073-da45161de96d",
+        "label": "Flash"
+      },
+      {
+        "_id": "2907ae3c-5f23-47b5-951b-9c5825362a7e",
+        "label": "Illustrator"
+      },
+      {
+        "_id": "5337ef4b-78a2-4410-b692-48d45eb96e06",
+        "label": "Photoshop"
+      }
+    ]
+  },
+  {
+    "_id": "f49af012-093a-4a27-b7d0-672f21c8532b",
+    "companyName": "Label A",
+    "contractName": null,
+    "description": [
+      {
+        "_key": "1b890f23f78b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2217157bf8bd",
+            "_type": "span",
+            "marks": [],
+            "text": "My first internship when I was studying Communication and Multimedia Design, at a startup called Label A in Rotterdam. I built and maintained websites and newsletters, learning the basics of "
+          },
+          {
+            "_key": "5cb5a821995c",
+            "_type": "span",
+            "marks": ["b30783b08f40"],
+            "text": "HTML"
+          },
+          {
+            "_key": "92752364d76b",
+            "_type": "span",
+            "marks": [],
+            "text": ", "
+          },
+          {
+            "_key": "f4d557484b37",
+            "_type": "span",
+            "marks": ["8c61831e3124"],
+            "text": "CSS"
+          },
+          {
+            "_key": "5233e652eb14",
+            "_type": "span",
+            "marks": [],
+            "text": " and web development from the ground up."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "b30783b08f40",
+            "_type": "link",
+            "href": "/tags/html"
+          },
+          {
+            "_key": "8c61831e3124",
+            "_type": "link",
+            "href": "/tags/css3"
+          }
+        ],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "intern",
+    "endDate": "2009-01-31T06:32:00.000Z",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/622e87b7f28db9b895d348abdb915e099a4d9f8f-200x200.jpg",
+    "jobTitle": "Front-end developer",
+    "link": "https://www.labela.nl/",
+    "startDate": "2008-09-01T06:31:00.000Z",
+    "tags": [
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "5337ef4b-78a2-4410-b692-48d45eb96e06",
+        "label": "Photoshop"
+      },
+      {
+        "_id": "2907ae3c-5f23-47b5-951b-9c5825362a7e",
+        "label": "Illustrator"
+      }
+    ]
+  }
+]

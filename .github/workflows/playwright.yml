@@ -51,9 +51,9 @@ jobs:
         uses: actions/cache@v3
         with:
           path: .next/cache
-          key: nextjs-${{ runner.os }}-${{ github.sha }}
+          key: nextjs-${{ runner.os }}-${{ hashFiles('e2e/fixtures/**', 'app/mock/handlers.ts') }}-${{ github.sha }}
           restore-keys: |
-            nextjs-${{ runner.os }}-
+            nextjs-${{ runner.os }}-${{ hashFiles('e2e/fixtures/**', 'app/mock/handlers.ts') }}-
       - name: Build code
         run: npm run build
       - name: Run Playwright tests

@@ -1,0 +1,44 @@
+{
+  "_id": "3e37e065-e582-450f-bba0-70709082f578",
+  "description": "Passionate software developer transforming creative ideas into functional products.",
+  "imageAlt": "site logo SCC de Snaijer",
+  "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/d8a5ca0022318562b453ec9cc1806fd334ba489e-1200x675.png",
+  "socialMedia": [
+    {
+      "icon": "github",
+      "link": "https://github.com/sanderdesnaijer",
+      "title": "Github"
+    },
+    {
+      "icon": "linkedin",
+      "link": "https://www.linkedin.com/in/sanderdesnaijer",
+      "title": "LinkedIn"
+    },
+    {
+      "icon": "x",
+      "link": "https://x.com/sanderdesnaijer",
+      "title": "X"
+    },
+    {
+      "icon": "gitlab",
+      "link": "https://gitlab.com/sanderdesnaijer",
+      "title": "Gitlab"
+    },
+    {
+      "icon": "instagram",
+      "link": "https://www.instagram.com/metsander",
+      "title": "Instagram"
+    },
+    {
+      "icon": "medium",
+      "link": "https://medium.com/@sanderdesnaijer",
+      "title": "Medium"
+    },
+    {
+      "icon": "youtube",
+      "link": "https://www.youtube.com/@metSander",
+      "title": "Youtube "
+    }
+  ],
+  "title": "Sander de Snaijer"
+}

@@ -1,21 +1,21 @@
 /**
- * Lightweight Sanity client for e2e tests.
+ * Fixture-based data provider for e2e tests.
  *
- * Queries Sanity CDN directly instead of going through the app's API routes.
- * This allows the API routes to be removed from production, reducing
- * unnecessary edge requests from bot traffic.
+ * Reads from e2e/fixtures/*.json (snapshotted from Sanity production data)
+ * instead of querying the Sanity API at runtime. This makes e2e tests:
+ * - Fully offline (no network dependency)
+ * - Deterministic (same data every run)
+ * - Fast (no API round-trips)
+ * - Free of Sanity API usage
+ *
+ * To update fixtures: npx tsx e2e/scripts/snapshot-fixtures.ts
  */
-import { createClient } from "@sanity/client";
-import {
-  blogsQuery,
-  blogQuery,
-  projectsQuery,
-  projectQuery,
-  pageQuery,
-  settingsQuery,
-  jobsQuery,
-} from "@/sanity/lib/queries";
-import { apiVersion, dataset, projectId } from "@/sanity/env";
+import pagesFixture from "../fixtures/pages.json";
+import settingsFixture from "../fixtures/settings.json";
+import projectsFixture from "../fixtures/projects.json";
+import blogsFixture from "../fixtures/blogs.json";
+import jobsFixture from "../fixtures/jobs.json";
+
 import {
   ProjectTypeSanity,
   SettingSanity,
@@ -24,56 +24,38 @@ import {
 } from "@/sanity/types";
 import { BlogSanity } from "@/sanity/types/blogType";
 
-const client = createClient({
-  projectId,
-  dataset,
-  apiVersion,
-  useCdn: false,
-});
-
-/**
- * Wrapper that catches Sanity/network errors and returns null,
- * matching the behaviour of the removed fetchData helper.
- */
-async function safeFetch<T>(
-  query: string,
-  params: Record<string, unknown> = {}
-): Promise<T | null> {
-  try {
-    return await client.fetch<T>(query, params);
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.error(`[e2e sanity] fetch failed:`, error);
-    return null;
-  }
-}
+const pages = pagesFixture as unknown as PageSanity[];
+const settings = settingsFixture as unknown as SettingSanity;
+const projects = projectsFixture as unknown as ProjectTypeSanity[];
+const blogs = blogsFixture as unknown as BlogSanity[];
+const jobs = jobsFixture as unknown as JobSanity[];
 
 export async function fetchPage(slug = ""): Promise<PageSanity | null> {
-  return safeFetch<PageSanity>(pageQuery, { slug });
+  return pages.find((p) => (p.slug?.current ?? "") === slug) ?? null;
 }
 
 export async function fetchProjects(): Promise<ProjectTypeSanity[] | null> {
-  return safeFetch<ProjectTypeSanity[]>(projectsQuery);
+  return projects;
 }
 
 export async function fetchProject(
   slug = ""
 ): Promise<ProjectTypeSanity | null> {
-  return safeFetch<ProjectTypeSanity>(projectQuery, { slug });
+  return projects.find((p) => p.slug?.current === slug) ?? null;
 }
 
 export async function fetchArticles(): Promise<BlogSanity[] | null> {
-  return safeFetch<BlogSanity[]>(blogsQuery);
+  return blogs;
 }
 
 export async function fetchArticle(slug: string): Promise<BlogSanity | null> {
-  return safeFetch<BlogSanity>(blogQuery, { slug });
+  return blogs.find((b) => b.slug?.current === slug) ?? null;
 }
 
 export async function fetchSettings(): Promise<SettingSanity | null> {
-  return safeFetch<SettingSanity>(settingsQuery);
+  return settings;
 }
 
 export async function fetchJobs(): Promise<JobSanity[] | null> {
-  return safeFetch<JobSanity[]>(jobsQuery);
+  return jobs;
 }
