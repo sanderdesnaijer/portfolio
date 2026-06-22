@@ -96,7 +96,7 @@ The exported markdown file lands in `scripts/devto-exports/<slug>.md` with front
 
 ## RSS feed
 
-The site exposes a full-content RSS 2.0 feed at `/feed.xml` (`app/feed.xml/route.ts`). Each item includes the complete article as HTML in `<content:encoded>`, rendered from the Sanity Portable Text body, plus title, link, canonical guid, publish date, author, tags, and the cover image as an enclosure. The feed is statically generated and revalidates every 24 hours. A discovery `<link rel="alternate" type="application/rss+xml">` is advertised on all public pages.
+The site exposes a full-content RSS 2.0 feed at `/feed.xml` (`app/feed.xml/route.ts`). Each item includes the complete article as HTML in `<content:encoded>`, rendered from the Sanity Portable Text body, plus title, link, canonical guid, publish date, author, tags, and the cover image as an enclosure. The feed is statically generated and refreshed on-demand: the Sanity webhook (`/api/revalidate`) revalidates `/feed.xml` when a blog post or tag changes, with a 24h time-based backstop. A discovery `<link rel="alternate" type="application/rss+xml">` is advertised on all public pages.
 
 ## Republishing blog posts to HackerNoon
 

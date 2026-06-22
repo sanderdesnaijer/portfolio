@@ -37,6 +37,7 @@ function getPathsToRevalidate(body: SanityWebhookBody): string[] {
         "/",
         "/blog",
         "/tags",
+        "/feed.xml",
         ...(slugValue ? [`/blog/${slugValue}`] : []),
       ];
 
@@ -45,6 +46,7 @@ function getPathsToRevalidate(body: SanityWebhookBody): string[] {
         "/tags",
         "/projects",
         "/blog",
+        "/feed.xml",
         ...(slugValue ? [`/tags/${slugValue}`] : []),
       ];
 

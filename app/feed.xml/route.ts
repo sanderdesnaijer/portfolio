@@ -104,6 +104,26 @@ function cdata(html: string): string {
   return `<![CDATA[${html.replace(/]]>/g, "]]]]><![CDATA[>")}]]>`;
 }
 
+// Best-effort enclosure MIME type from the image URL extension. Sanity CDN URLs
+// end in the real extension (.webp/.png/...), optionally with a query string.
+function imageMimeType(url: string): string {
+  const ext = url.split("?")[0].split(".").pop()?.toLowerCase();
+  switch (ext) {
+    case "png":
+      return "image/png";
+    case "webp":
+      return "image/webp";
+    case "gif":
+      return "image/gif";
+    case "svg":
+      return "image/svg+xml";
+    case "avif":
+      return "image/avif";
+    default:
+      return "image/jpeg";
+  }
+}
+
 // ---------------------------------------------------------------------------
 // Portable Text -> HTML conversion (self-contained, server-side)
 // ---------------------------------------------------------------------------
@@ -321,7 +341,7 @@ export async function GET() {
         .join("\n");
 
       const enclosure = post.imageURL
-        ? `    <enclosure url="${escapeXml(post.imageURL)}" type="image/jpeg" length="0" />\n`
+        ? `    <enclosure url="${escapeXml(post.imageURL)}" type="${imageMimeType(post.imageURL)}" length="0" />\n`
         : "";
 
       return `  <item>
