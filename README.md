@@ -94,6 +94,14 @@ npm run export:devto
 
 The exported markdown file lands in `scripts/devto-exports/<slug>.md` with frontmatter, cover image, tags, and canonical URL pre-filled. Review the content and paste into [dev.to/new](https://dev.to/new). Set `published: true` when ready to go live.
 
+## RSS feed
+
+The site exposes a full-content RSS 2.0 feed at `/feed.xml` (`app/feed.xml/route.ts`). Each item includes the complete article as HTML in `<content:encoded>`, rendered from the Sanity Portable Text body, plus title, link, canonical guid, publish date, author, tags, and the cover image as an enclosure. The feed is statically generated and revalidates every 24 hours. A discovery `<link rel="alternate" type="application/rss+xml">` is advertised on all public pages.
+
+## Republishing blog posts to HackerNoon
+
+HackerNoon imports from the RSS feed above (its Editor 2.0 has no reliable markdown paste import). Go to [app.hackernoon.com/new](https://app.hackernoon.com/new), hover "Import Story", choose RSS Feed, and point it at `https://www.sanderdesnaijer.com/feed.xml` (or use Direct URL with a single post link). Set the canonical URL in Story Settings and submit for review.
+
 ## IndexNow
 
 The site supports [IndexNow](https://www.indexnow.org/) for instant URL submission to Bing, Yandex, and other participating search engines. The verification key is served from `public/`.

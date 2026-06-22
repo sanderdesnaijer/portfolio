@@ -71,6 +71,14 @@ export const generateMetaData = ({
   },
   alternates: {
     canonical: canonical || url,
+    types: {
+      "application/rss+xml": [
+        {
+          url: `${envConfig.baseUrl}/feed.xml`,
+          title: "Sander de Snaijer - Blog",
+        },
+      ],
+    },
   },
   // Google Search Console verification
   ...(envConfig.googleSiteVerification && {
