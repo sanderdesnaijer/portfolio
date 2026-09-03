@@ -10,6 +10,9 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({
   const [mounted, setMounted] = React.useState(false);
   const { theme, setTheme } = useTheme();
 
+  // Intentional hydration guard: next-themes cannot know the resolved theme
+  // until the client mounts, so the first paint must be a placeholder.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   React.useEffect(() => setMounted(true), []);
 
   if (!mounted) {

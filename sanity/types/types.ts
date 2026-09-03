@@ -51,12 +51,7 @@ export interface YouTubeBlock {
 }
 
 export type Block =
-  | TextBlock
-  | ImageBlock
-  | CodeBlock
-  | EmbedBlock
-  | TableBlock
-  | YouTubeBlock;
+  TextBlock | ImageBlock | CodeBlock | EmbedBlock | TableBlock | YouTubeBlock;
 
 export interface IconLink {
   title: string;

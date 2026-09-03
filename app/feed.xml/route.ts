@@ -61,12 +61,7 @@ interface EmbedBlock {
 }
 
 type PortableTextBlock =
-  | Block
-  | CodeBlock
-  | YouTubeBlock
-  | ImageBlock
-  | TableBlock
-  | EmbedBlock;
+  Block | CodeBlock | YouTubeBlock | ImageBlock | TableBlock | EmbedBlock;
 
 interface FeedPost {
   title: string;
