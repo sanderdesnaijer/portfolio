@@ -32,12 +32,12 @@ const customConfig: Config = {
 
   // IMPORTANT: transpile ESM packages from node_modules
   transformIgnorePatterns: [
-    "node_modules/(?!(@mswjs/interceptors|msw|until-async|next-sanity|@sanity|@portabletext)/)",
+    "node_modules/(?!(@mswjs/interceptors|msw|until-async|rettime|@open-draft/deferred-promise|headers-polyfill|strict-event-emitter|outvariant|is-node-process|next-sanity|@sanity|@portabletext)/)",
   ],
 
   // Ensure TS/JS go through babel-jest with Next's preset
   transform: {
-    "^.+\\.(js|jsx|ts|tsx)$": [
+    "^.+\\.(js|jsx|mjs|ts|tsx)$": [
       "babel-jest",
       {
         presets: [
