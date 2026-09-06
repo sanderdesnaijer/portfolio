@@ -49,7 +49,6 @@
     "@types/node": "^25.3.0",
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
-    "@types/sharp": "^0.31.1",
     "baseline-browser-mapping": "^2.10.0",
     "dotenv": "^17.3.1",
     "eslint": "^9.39.3",
@@ -64,7 +63,7 @@
     "postcss": "^8.5.6",
     "prettier": "^3.8.1",
     "prettier-plugin-tailwindcss": "^0.7.2",
-    "sharp": "^0.34.5",
+    "sharp": "^0.35.4",
     "tailwindcss": "^4.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
@@ -77,6 +76,11 @@
   "overrides": {
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
-    "minimatch": ">=10.2.1"
+    "minimatch": ">=10.2.1",
+    "@vercel/frameworks": {
+      "js-yaml": "^3.15.2"
+    },
+    "smol-toml": ">=1.6.1",
+    "uuid": ">=11.1.1"
   }
 }

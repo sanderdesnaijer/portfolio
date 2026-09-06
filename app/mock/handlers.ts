@@ -25,7 +25,10 @@ async function getQueryAndParams(request: Request) {
   return { query, params };
 }
 
-// 1x1 transparent PNG placeholder for mock image requests
+// 1x1 semi-transparent GREEN PNG placeholder for mock image requests.
+// The image optimizer upscales it to fill the layout box and flattens the
+// alpha when it re-encodes to JPEG, so mocked images render as solid green
+// rectangles. That is expected with NEXT_PUBLIC_MOCK_API=true, not a bug.
 const PLACEHOLDER_PNG_BASE64 =
   "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==";
 
