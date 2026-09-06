@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { createContext, useContext, useMemo } from "react";
 import { PortableTextReactComponents } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 import { LinkMark } from "./LinkMark";
@@ -14,25 +15,64 @@ function slugify(text: string): string {
     .replace(/(^-|-$)/g, "");
 }
 
-const usedIds = new Set<string>();
+type HeadingBlock = {
+  _key?: string;
+  style?: string;
+  children?: { text?: string }[];
+};
 
-function uniqueId(base: string): string {
-  let id = base;
-  let counter = 1;
-  while (usedIds.has(id)) {
-    id = `${base}-${counter}`;
-    counter++;
+// Maps each heading block's stable _key to its anchor id. The map is built once
+// per document so the server and the client derive identical ids. Deduplicating
+// through a module-level counter instead would keep incrementing across renders
+// and client navigations, which breaks hydration and the anchor links with it.
+const HeadingIdContext = createContext<Map<string, string> | null>(null);
+
+function buildHeadingIds(blocks: unknown): Map<string, string> {
+  const ids = new Map<string, string>();
+  if (!Array.isArray(blocks)) return ids;
+
+  const used = new Set<string>();
+  for (const block of blocks as HeadingBlock[]) {
+    if (!block?._key || !block.style || !/^h[2-4]$/.test(block.style)) continue;
+
+    const base = slugify(
+      (block.children ?? []).map((c) => c?.text ?? "").join("")
+    );
+    let id = base;
+    let counter = 1;
+    while (used.has(id)) {
+      id = `${base}-${counter}`;
+      counter++;
+    }
+    used.add(id);
+    ids.set(block._key, id);
   }
-  usedIds.add(id);
-  return id;
+  return ids;
+}
+
+export function HeadingIdProvider({
+  blocks,
+  children,
+}: {
+  blocks: unknown;
+  children: React.ReactNode;
+}) {
+  const ids = useMemo(() => buildHeadingIds(blocks), [blocks]);
+  return (
+    <HeadingIdContext.Provider value={ids}>
+      {children}
+    </HeadingIdContext.Provider>
+  );
 }
 
 function HeadingWithAnchor({
   children,
   level,
+  blockKey,
 }: {
   children?: React.ReactNode;
   level: 2 | 3 | 4;
+  blockKey?: string;
 }) {
   const text =
     typeof children === "string"
@@ -44,7 +84,8 @@ function HeadingWithAnchor({
             )
             .join("")
         : "";
-  const id = uniqueId(slugify(text));
+  const headingIds = useContext(HeadingIdContext);
+  const id = (blockKey && headingIds?.get(blockKey)) || slugify(text);
   const Tag = `h${level}` as const;
 
   return (
@@ -210,14 +251,20 @@ export const portableTextComponents: Partial<PortableTextReactComponents> = {
     },
   },
   block: {
-    h2: ({ children }: { children?: React.ReactNode }) => (
-      <HeadingWithAnchor level={2}>{children}</HeadingWithAnchor>
+    h2: ({ children, value }) => (
+      <HeadingWithAnchor level={2} blockKey={value?._key}>
+        {children}
+      </HeadingWithAnchor>
     ),
-    h3: ({ children }: { children?: React.ReactNode }) => (
-      <HeadingWithAnchor level={3}>{children}</HeadingWithAnchor>
+    h3: ({ children, value }) => (
+      <HeadingWithAnchor level={3} blockKey={value?._key}>
+        {children}
+      </HeadingWithAnchor>
     ),
-    h4: ({ children }: { children?: React.ReactNode }) => (
-      <HeadingWithAnchor level={4}>{children}</HeadingWithAnchor>
+    h4: ({ children, value }) => (
+      <HeadingWithAnchor level={4} blockKey={value?._key}>
+        {children}
+      </HeadingWithAnchor>
     ),
   },
   marks: {

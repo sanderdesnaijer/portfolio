@@ -7,7 +7,10 @@ import { convertDate, getSignificantUpdateDate } from "../utils/utils";
 import { useTranslations } from "next-intl";
 import { ProjectLayout } from "./ProjectLayout";
 import { urlFor } from "@/sanity/lib/image";
-import { portableTextComponents } from "./portableTextComponents";
+import {
+  HeadingIdProvider,
+  portableTextComponents,
+} from "./portableTextComponents";
 import { BlogContent } from "./BlogContent";
 
 const imageWidth = 860;
@@ -68,10 +71,12 @@ export const Project = ({ project }: { project: ProjectTypeSanity }) => {
       ) : null}
 
       {project?.body ? (
-        <PortableText
-          value={project.body}
-          components={portableTextComponents}
-        />
+        <HeadingIdProvider blocks={project.body}>
+          <PortableText
+            value={project.body}
+            components={portableTextComponents}
+          />
+        </HeadingIdProvider>
       ) : null}
       {project?.faq && project.faq.length > 0 && (
         <section>
