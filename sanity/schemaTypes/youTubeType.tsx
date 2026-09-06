@@ -1,5 +1,5 @@
 import { defineType, defineField, type PreviewProps } from "sanity";
-import { PlayIcon } from "@sanity/icons";
+import { PlayIcon } from "@sanity/icons/Play";
 import { Flex, Text } from "@sanity/ui";
 import ReactPlayer from "react-player";
 

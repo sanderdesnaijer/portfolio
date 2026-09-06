@@ -1,4 +1,4 @@
-import { ControlsIcon } from "@sanity/icons";
+import { ControlsIcon } from "@sanity/icons/Controls";
 import { defineField, defineType } from "sanity";
 
 export const settingType = defineType({
