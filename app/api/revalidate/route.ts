@@ -18,8 +18,16 @@ type SanityWebhookBody = {
   slug?: { current?: string };
 };
 
+/**
+ * sitemap.ts is generated from Sanity, so publishing or unpublishing any
+ * document that owns a URL changes it. Without this the sitemap keeps serving
+ * the copy cached at build time and newly published pages stay missing from it
+ * until the next deploy.
+ */
+const SITEMAP = "/sitemap.xml";
+
 // Map Sanity document types to the routes they affect.
-function getPathsToRevalidate(body: SanityWebhookBody): string[] {
+function resolvePaths(body: SanityWebhookBody): string[] {
   const { _type, slug } = body;
   const slugValue = slug?.current;
 
@@ -29,6 +37,7 @@ function getPathsToRevalidate(body: SanityWebhookBody): string[] {
         "/",
         "/projects",
         "/tags",
+        SITEMAP,
         ...(slugValue ? [`/projects/${slugValue}`] : []),
       ];
 
@@ -38,6 +47,7 @@ function getPathsToRevalidate(body: SanityWebhookBody): string[] {
         "/blog",
         "/tags",
         "/feed.xml",
+        SITEMAP,
         ...(slugValue ? [`/blog/${slugValue}`] : []),
       ];
 
@@ -47,6 +57,7 @@ function getPathsToRevalidate(body: SanityWebhookBody): string[] {
         "/projects",
         "/blog",
         "/feed.xml",
+        SITEMAP,
         ...(slugValue ? [`/tags/${slugValue}`] : []),
       ];
 
@@ -60,6 +71,7 @@ function getPathsToRevalidate(body: SanityWebhookBody): string[] {
         "/projects",
         "/blog",
         "/tags",
+        SITEMAP,
         ...(slugValue ? [`/${slugValue}`] : []),
       ];
 
@@ -70,6 +82,15 @@ function getPathsToRevalidate(body: SanityWebhookBody): string[] {
       // Unknown type: revalidate the homepage as a safe fallback.
       return ["/"];
   }
+}
+
+/**
+ * Routes affected by a change to this document, without duplicates: a page
+ * whose slug is also in the static list, such as "about", would otherwise be
+ * revalidated twice. Exported for unit tests.
+ */
+export function getPathsToRevalidate(body: SanityWebhookBody): string[] {
+  return [...new Set(resolvePaths(body))];
 }
 
 export async function POST(req: NextRequest) {

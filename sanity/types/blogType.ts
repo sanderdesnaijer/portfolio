@@ -10,6 +10,8 @@ export interface FaqItem {
 
 export interface BlogSanity extends SanityDocument {
   title: string;
+  /** Optional <title> tag override. Falls back to `title`. Mirrors PageSanity.seoTitleBase */
+  seoTitleBase?: string;
   publishedAt: string;
   slug: {
     current: string;

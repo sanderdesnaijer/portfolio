@@ -1,5 +1,894 @@
 [
   {
+    "_createdAt": "2026-11-15T11:36:31Z",
+    "_id": "z2VyvXd5YFZ9gwC9IzxFF3",
+    "_updatedAt": "2026-11-15T12:03:04Z",
+    "author": "Sander de Snaijer",
+    "body": [
+      {
+        "_key": "2e081003-d8e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "083ed87c-833",
+            "_type": "span",
+            "marks": [],
+            "text": "If your MediaPipe app fails at startup with a 404 or a network error on "
+          },
+          {
+            "_key": "a3f5ee19-057",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "modelAssetPath"
+          },
+          {
+            "_key": "13886d51-d8c",
+            "_type": "span",
+            "marks": [],
+            "text": ", you are in the right place. This page lists the direct download URLs for the MediaPipe model files, what each one contains, and what to do when Google Cloud Storage is unreachable from your network."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b8abc040-365",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c6be06b7-69b",
+            "_type": "span",
+            "marks": [],
+            "text": "Direct Download Links"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "0af184ee-289",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b9c80593-291",
+            "_type": "span",
+            "marks": [],
+            "text": "These are the official URLs on Google Cloud Storage. Sizes were checked on 15 November 2026."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4964cd0e-aad",
+        "_type": "table",
+        "caption": "MediaPipe Tasks model files and their sizes",
+        "headers": ["File", "What it detects", "Size", "Precision"],
+        "rows": [
+          {
+            "_key": "d28691b6-e56",
+            "cells": [
+              "face_landmarker.task",
+              "478 face landmarks, including iris",
+              "3.6 MB",
+              "float16"
+            ]
+          },
+          {
+            "_key": "aa43adfe-0b4",
+            "cells": [
+              "hand_landmarker.task",
+              "21 hand landmarks per hand",
+              "7.5 MB",
+              "float16"
+            ]
+          },
+          {
+            "_key": "b5985efa-c1f",
+            "cells": [
+              "gesture_recognizer.task",
+              "Hand landmarks plus gesture labels",
+              "8.0 MB",
+              "float16"
+            ]
+          },
+          {
+            "_key": "647bc75c-8b7",
+            "cells": [
+              "pose_landmarker_lite.task",
+              "33 body pose landmarks",
+              "5.5 MB",
+              "float16"
+            ]
+          },
+          {
+            "_key": "9d12ba1d-bd5",
+            "cells": [
+              "pose_landmarker_full.task",
+              "33 body pose landmarks",
+              "9.0 MB",
+              "float16"
+            ]
+          }
+        ]
+      },
+      {
+        "_key": "a2cec849-977",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9685cb22-827",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Face Landmarker: "
+          },
+          {
+            "_key": "036ab039-a20",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "86e31bd4-7e3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f48c4472-f08",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Hand Landmarker: "
+          },
+          {
+            "_key": "7566c575-865",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "cc488b09-c3a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7fba8fdb-628",
+            "_type": "span",
+            "marks": [],
+            "text": "What float16 and the Version Number Mean"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "3fb6b0db-2f5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e934517a-fb5",
+            "_type": "span",
+            "marks": [],
+            "text": "The model URLs follow a fixed pattern: "
+          },
+          {
+            "_key": "23ecd88a-469",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "storage.googleapis.com/mediapipe-models/<task>/<model>/<precision>/<version>/<file>.task"
+          },
+          {
+            "_key": "922a5375-616",
+            "_type": "span",
+            "marks": [],
+            "text": ". Two parts of that path trip people up."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "22ff25c1-40f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "02e3a283-02a",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "float16 "
+          },
+          {
+            "_key": "e5639aeb-ec6",
+            "_type": "span",
+            "marks": [],
+            "text": "is the quantized model, which is the one Google publishes for web and the one every official example loads. It is roughly half the size of full precision with no accuracy difference you will notice in a browser."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8136719f-fae",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "358fa692-fc8",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "latest or 1 "
+          },
+          {
+            "_key": "79d22806-4e6",
+            "_type": "span",
+            "marks": [],
+            "text": "is the version segment. As of 15 November 2026 both paths return byte-identical files, so the "
+          },
+          {
+            "_key": "72015ba4-7d3",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "/1/"
+          },
+          {
+            "_key": "75616b22-294",
+            "_type": "span",
+            "marks": [],
+            "text": " URLs copied from older tutorials still work. Prefer "
+          },
+          {
+            "_key": "e736abe9-72f",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "/latest/"
+          },
+          {
+            "_key": "4440f942-9cc",
+            "_type": "span",
+            "marks": [],
+            "text": " in new code so you pick up model updates."
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b574c425-938",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "37c85c91-78b",
+            "_type": "span",
+            "marks": [],
+            "text": "Loading the Model in JavaScript"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "ae568edc-26b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "21ffe8da-508",
+            "_type": "span",
+            "marks": [],
+            "text": "You do not have to download the file at all. The "
+          },
+          {
+            "_key": "a7912312-b03",
+            "_type": "span",
+            "marks": ["f90c8c29-31c"],
+            "text": "MediaPipe Tasks API"
+          },
+          {
+            "_key": "0376cfae-475",
+            "_type": "span",
+            "marks": [],
+            "text": " fetches it for you when you pass the URL as "
+          },
+          {
+            "_key": "dd4e105f-ac6",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "modelAssetPath"
+          },
+          {
+            "_key": "59a4c2ed-209",
+            "_type": "span",
+            "marks": [],
+            "text": "."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "f90c8c29-31c",
+            "_type": "link",
+            "href": "https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker/web_js"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "baeca8c7-c75",
+        "_type": "codeBlock",
+        "code": "import {\n  FaceLandmarker,\n  FilesetResolver,\n} from \"https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3\";\n\nconst vision = await FilesetResolver.forVisionTasks(\n  \"https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm\"\n);\n\nconst faceLandmarker = await FaceLandmarker.createFromOptions(vision, {\n  baseOptions: {\n    modelAssetPath: \"https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task\",\n    delegate: \"GPU\",\n  },\n  outputFaceBlendshapes: true,\n  runningMode: \"VIDEO\",\n  numFaces: 1,\n});",
+        "language": "javascript"
+      },
+      {
+        "_key": "915acbe3-930",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0ee013f1-c86",
+            "_type": "span",
+            "marks": [],
+            "text": "Downloading the file makes sense when you want to self-host it, pin a known version, or ship it inside an offline build. Drop it in your "
+          },
+          {
+            "_key": "48f0ed80-59e",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "public/"
+          },
+          {
+            "_key": "0840ae51-fd0",
+            "_type": "span",
+            "marks": [],
+            "text": " folder and point "
+          },
+          {
+            "_key": "d605d8c1-b29",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "modelAssetPath"
+          },
+          {
+            "_key": "f97c7d9d-5bb",
+            "_type": "span",
+            "marks": [],
+            "text": " at the local path instead."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "916a17c5-d27",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7f939733-747",
+            "_type": "span",
+            "marks": [],
+            "text": "If storage.googleapis.com Is Blocked"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "8720b549-4d8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "22184be3-d2a",
+            "_type": "span",
+            "marks": [],
+            "text": "In some regions and on some corporate networks the Google Cloud Storage domain is blocked or unreliable, so the model fails to load at runtime even though your code is correct. I mirror the two files I use most in a "
+          },
+          {
+            "_key": "05459d23-f13",
+            "_type": "span",
+            "marks": ["05d7bfb9-c2b"],
+            "text": "GitHub release"
+          },
+          {
+            "_key": "70d7d959-892",
+            "_type": "span",
+            "marks": [],
+            "text": " so they stay reachable."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "05d7bfb9-c2b",
+            "_type": "link",
+            "href": "https://github.com/sanderdesnaijer/mediapipe-model-mirrors/releases"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "1ebb97cf-3df",
+        "_type": "codeBlock",
+        "code": "# Face Landmarker\nwget https://github.com/sanderdesnaijer/mediapipe-model-mirrors/releases/download/v1/face_landmarker.task\n\n# Hand Landmarker\nwget https://github.com/sanderdesnaijer/mediapipe-model-mirrors/releases/download/v1/hand_landmarker.task",
+        "language": "bash"
+      },
+      {
+        "_key": "39377e94-481",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "379c2e6e-845",
+            "_type": "span",
+            "marks": [],
+            "text": "Or point "
+          },
+          {
+            "_key": "305554e6-ba4",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "modelAssetPath"
+          },
+          {
+            "_key": "f6c03cfa-d24",
+            "_type": "span",
+            "marks": [],
+            "text": " straight at the mirror:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "bc359da7-816",
+        "_type": "codeBlock",
+        "code": "modelAssetPath: \"https://github.com/sanderdesnaijer/mediapipe-model-mirrors/releases/download/v1/face_landmarker.task\"",
+        "language": "javascript"
+      },
+      {
+        "_key": "b63a2012-d8d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7ba79d21-7b1",
+            "_type": "span",
+            "marks": [],
+            "text": "The mirror was last refreshed in May 2026. It carries only the face and hand models. For anything else, use the official URLs above."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8c18c0de-1ed",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e247a1d7-1d3",
+            "_type": "span",
+            "marks": [],
+            "text": "Troubleshooting"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "6a5e5423-a9f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d4e0ff1b-1b9",
+            "_type": "span",
+            "marks": [],
+            "text": "The model loads locally but 404s in production"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "e7beb2b2-dce",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "18ea6d35-c5c",
+            "_type": "span",
+            "marks": [],
+            "text": "Check that your host serves "
+          },
+          {
+            "_key": "ab188b23-dd7",
+            "_type": "span",
+            "marks": ["code"],
+            "text": ".task"
+          },
+          {
+            "_key": "4b8e9f14-c90",
+            "_type": "span",
+            "marks": [],
+            "text": " files. Some static hosts only serve an allowlist of extensions and silently return the index page instead, which the loader then fails to parse."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "7c7ed162-a94",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7e2e1fcd-211",
+            "_type": "span",
+            "marks": [],
+            "text": "CORS errors when self-hosting"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "a67951e4-c93",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fb25d355-2c5",
+            "_type": "span",
+            "marks": [],
+            "text": "The file has to be served with "
+          },
+          {
+            "_key": "acd5417d-ae5",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "Access-Control-Allow-Origin"
+          },
+          {
+            "_key": "f881df64-3a3",
+            "_type": "span",
+            "marks": [],
+            "text": " if it sits on a different origin from your page. Serving it from the same origin as the app avoids the problem entirely."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0c0bfcd0-776",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ad64b7ac-ebe",
+            "_type": "span",
+            "marks": [],
+            "text": "The download is slow or stalls on first load"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "b0184077-cbd",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0949f323-cfe",
+            "_type": "span",
+            "marks": [],
+            "text": "These files are several megabytes and are fetched before the first frame can be processed. Show a loading state while the model initializes, and cache it with a service worker if users return often."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "61b8d420-695",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7092d8c4-10c",
+            "_type": "span",
+            "marks": [],
+            "text": "License"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "0ba3cf6b-9d5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ab45fbd8-909",
+            "_type": "span",
+            "marks": [],
+            "text": "MediaPipe is open source under the "
+          },
+          {
+            "_key": "c4d44a2b-82a",
+            "_type": "span",
+            "marks": ["9d1b95d5-28a"],
+            "text": "Apache 2.0 license"
+          },
+          {
+            "_key": "ecc2aac7-f0c",
+            "_type": "span",
+            "marks": [],
+            "text": ". The mirrored files are redistributed unmodified with the original license and attribution intact."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "9d1b95d5-28a",
+            "_type": "link",
+            "href": "https://github.com/google-ai-edge/mediapipe/blob/master/LICENSE"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "e0c95b79-769",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2e7c298a-3d3",
+            "_type": "span",
+            "marks": [],
+            "text": "Related"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "ebe521c5-6c5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "189d7ea8-96f",
+            "_type": "span",
+            "marks": [],
+            "text": "Once the model loads, you will want "
+          },
+          {
+            "_key": "4ad23720-766",
+            "_type": "span",
+            "marks": ["ea7b57fa-4b6"],
+            "text": "all 478 face landmark indices"
+          },
+          {
+            "_key": "b5c98821-99d",
+            "_type": "span",
+            "marks": [],
+            "text": " grouped by face region, or the step-by-step "
+          },
+          {
+            "_key": "f0913697-169",
+            "_type": "span",
+            "marks": ["20df4d92-4c8"],
+            "text": "hand and face tracking tutorial"
+          },
+          {
+            "_key": "6a41b9da-993",
+            "_type": "span",
+            "marks": [],
+            "text": " that builds a working app around these files."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "ea7b57fa-4b6",
+            "_type": "link",
+            "href": "/blog/mediapipe-face-mesh-landmarks"
+          },
+          {
+            "_key": "20df4d92-4c8",
+            "_type": "link",
+            "href": "/blog/mediapipe-hand-face-tracking"
+          }
+        ],
+        "style": "normal"
+      }
+    ],
+    "description": null,
+    "excerpt": "Direct download links for the MediaPipe face_landmarker.task and hand_landmarker.task model files, with a GitHub mirror for blocked regions and setup code.",
+    "faq": [
+      {
+        "_key": "873d0471-aac",
+        "_type": "object",
+        "answer": [
+          {
+            "_key": "6a3056f9-ec5",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "8b8f66c8-d11",
+                "_type": "span",
+                "marks": [],
+                "text": "The official URL is "
+              },
+              {
+                "_key": "424233cb-bc5",
+                "_type": "span",
+                "marks": ["code"],
+                "text": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task"
+              },
+              {
+                "_key": "229cbf78-8a5",
+                "_type": "span",
+                "marks": [],
+                "text": ". It is 3.6 MB. If Google Cloud Storage is blocked on your network, the same file is mirrored on GitHub, linked above."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "Where can I download face_landmarker.task?"
+      },
+      {
+        "_key": "0b87b285-d93",
+        "_type": "object",
+        "answer": [
+          {
+            "_key": "2a0f4a9d-790",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "cfb43012-c24",
+                "_type": "span",
+                "marks": [],
+                "text": "The segment is the model version. As of 15 November 2026 "
+              },
+              {
+                "_key": "17271fed-825",
+                "_type": "span",
+                "marks": ["code"],
+                "text": "/float16/1/"
+              },
+              {
+                "_key": "d2163890-d4c",
+                "_type": "span",
+                "marks": [],
+                "text": " and "
+              },
+              {
+                "_key": "b8f5faba-d5e",
+                "_type": "span",
+                "marks": ["code"],
+                "text": "/float16/latest/"
+              },
+              {
+                "_key": "8dc3c00c-1db",
+                "_type": "span",
+                "marks": [],
+                "text": " return byte-identical files, so older tutorial URLs still work. Use /latest/ in new code so you get model updates automatically."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "What is the difference between float16/1 and float16/latest?"
+      },
+      {
+        "_key": "14fd109c-78c",
+        "_type": "object",
+        "answer": [
+          {
+            "_key": "5ca17ddf-6b1",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "c5ebb846-824",
+                "_type": "span",
+                "marks": [],
+                "text": "face_landmarker.task is 3.6 MB, hand_landmarker.task is 7.5 MB, gesture_recognizer.task is 8.0 MB, and the pose models are 5.5 MB (lite) and 9.0 MB (full). All are float16 quantized builds."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "How big are the MediaPipe .task model files?"
+      },
+      {
+        "_key": "12e440c5-a50",
+        "_type": "object",
+        "answer": [
+          {
+            "_key": "52eab5dd-521",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "bd596a2c-14a",
+                "_type": "span",
+                "marks": [],
+                "text": "No. Passing the hosted URL as "
+              },
+              {
+                "_key": "8246eba8-117",
+                "_type": "span",
+                "marks": ["code"],
+                "text": "modelAssetPath"
+              },
+              {
+                "_key": "cf8ebc56-237",
+                "_type": "span",
+                "marks": [],
+                "text": " is enough and is what the official examples do. Download the file when you want to self-host it, pin a version, or support offline use."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "Do I need to download the .task file to use MediaPipe?"
+      }
+    ],
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/4523fd97d7b317a2a8aefab617debe6e6b77d513-1200x630.webp?w=1200&h=630&fit=crop&auto=format",
+    "links": [
+      {
+        "_key": "b6375464-691",
+        "icon": "github",
+        "link": "https://github.com/sanderdesnaijer/mediapipe-model-mirrors/releases",
+        "title": "MediaPipe model mirror (GitHub releases)"
+      },
+      {
+        "_key": "938e2e0d-862",
+        "icon": "article",
+        "link": "https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker",
+        "title": "Official MediaPipe Face Landmarker documentation"
+      },
+      {
+        "_key": "61591977-f5d",
+        "icon": "article",
+        "link": "/blog/mediapipe-face-mesh-landmarks",
+        "title": "Reference: all 478 face mesh landmarks"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "The MediaPipe face and hand landmarker model files, face_landmarker.task and hand_landmarker.task",
+      "asset": {
+        "_ref": "image-4523fd97d7b317a2a8aefab617debe6e6b77d513-1200x630-webp",
+        "_type": "reference"
+      }
+    },
+    "mediumUrl": null,
+    "publishedAt": "2026-11-15T11:36:31.095Z",
+    "seoTitleBase": "Download face_landmarker.task and hand_landmarker.task",
+    "slug": {
+      "_type": "slug",
+      "current": "download-mediapipe-model-files"
+    },
+    "tags": [
+      {
+        "_id": "25efe796-f5f2-462b-8754-55815a7f9440",
+        "label": "MediaPipe"
+      },
+      {
+        "_id": "dc090de6-5ab5-408e-ba86-fda6d1036cc1",
+        "label": "face mesh"
+      },
+      {
+        "_id": "be24be94-24bf-4ff6-8753-4c957195f831",
+        "label": "hand tracking"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "02a88284-ab90-44a5-a858-abfb625f1fd5",
+        "label": "Computer vision"
+      }
+    ],
+    "title": "Download MediaPipe Model Files"
+  },
+  {
     "_createdAt": "2026-05-13T14:09:48Z",
     "_id": "adae9f75-85bc-4152-9ad7-64395c92b30e",
     "_updatedAt": "2026-05-13T15:17:54Z",
@@ -1346,6 +2235,7 @@
     },
     "mediumUrl": null,
     "publishedAt": "2026-05-13T14:59:00.000Z",
+    "seoTitleBase": null,
     "slug": {
       "_type": "slug",
       "current": "from-zero-to-27k-impressions-seo"
@@ -1377,7 +2267,7 @@
   {
     "_createdAt": "2026-04-29T13:44:27Z",
     "_id": "7U2KKQVIRrBV1BYx98Wuej",
-    "_updatedAt": "2026-05-31T07:52:08Z",
+    "_updatedAt": "2026-11-15T11:36:32Z",
     "author": "Sander de Snaijer",
     "body": [
       {
@@ -1440,6 +2330,216 @@
             "_key": "8462010e-4ca",
             "_type": "link",
             "href": "/projects/eyebrow-tetris"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "78e603bf-24e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9445e048-86e",
+            "_type": "span",
+            "marks": [],
+            "text": "Face Mesh or Face Landmarker? Same 478 Points"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "8df0f604-39d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1f0a0464-513",
+            "_type": "span",
+            "marks": [],
+            "text": "If you searched for MediaPipe Face Landmarker and landed on a page about Face Mesh, you are in the right place. These are two names for the same thing. "
+          },
+          {
+            "_key": "d4d8ad3b-81f",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Face Mesh"
+          },
+          {
+            "_key": "d28988e9-749",
+            "_type": "span",
+            "marks": [],
+            "text": " was the original solution name. When Google moved MediaPipe to the Tasks API, the vision task was renamed to "
+          },
+          {
+            "_key": "96a5ffee-543",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Face Landmarker"
+          },
+          {
+            "_key": "e53208eb-fd5",
+            "_type": "span",
+            "marks": [],
+            "text": ", and the class you instantiate in JavaScript is "
+          },
+          {
+            "_key": "53b05cdc-501",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "FaceLandmarker"
+          },
+          {
+            "_key": "82d11964-1a9",
+            "_type": "span",
+            "marks": [],
+            "text": ". The landmark indices on this page are identical in both, so index 33 is still the outer corner of the left eye either way."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "9cf3dd7b-8ec",
+        "_type": "table",
+        "caption": "Face Mesh to Face Landmarker naming map",
+        "headers": ["Old name", "Current name", "What it is"],
+        "rows": [
+          {
+            "_key": "2bad6fda-b7e",
+            "cells": [
+              "MediaPipe Face Mesh",
+              "MediaPipe Face Landmarker",
+              "The vision task"
+            ]
+          },
+          {
+            "_key": "dc5903c7-975",
+            "cells": ["FaceMesh", "FaceLandmarker", "The JavaScript class"]
+          },
+          {
+            "_key": "5d8e467e-f51",
+            "cells": [
+              "face_mesh solution",
+              "face_landmarker.task",
+              "The model file you load"
+            ]
+          }
+        ]
+      },
+      {
+        "_key": "316eea7f-070",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "14efce62-0a6",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "468 or 478 landmarks? "
+          },
+          {
+            "_key": "d3c5611b-a15",
+            "_type": "span",
+            "marks": [],
+            "text": "Both numbers are correct, they just count different things. The original face mesh model returns 468 surface points. Later versions add 10 iris points, 5 per eye, for a total of 478. If you see 468 in older tutorials and 478 in your own output, nothing is broken: you have iris refinement enabled. Landmarks 468 to 472 are the left iris and 473 to 477 are the right iris."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "36e022a3-d24",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c091a0b5-fe4",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Face Mesh landmarks: "
+          },
+          {
+            "_key": "9883a66e-92a",
+            "_type": "span",
+            "marks": [],
+            "text": "0 to 467, the face surface points present in every version"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "ed048777-64f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "568977be-8ba",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Iris landmarks: "
+          },
+          {
+            "_key": "b56e69da-969",
+            "_type": "span",
+            "marks": [],
+            "text": "468 to 477, added by the Face Landmarker model"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "9dd3ec32-044",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f8cb3805-294",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Total: "
+          },
+          {
+            "_key": "981da88a-252",
+            "_type": "span",
+            "marks": [],
+            "text": "478 points, which is what the tables below list"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "86ad7cb0-75b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1e1878a5-9e0",
+            "_type": "span",
+            "marks": [],
+            "text": "Google's own naming is still mixed, so both terms show up in the "
+          },
+          {
+            "_key": "5a72503b-ec3",
+            "_type": "span",
+            "marks": ["eec2e086-89e"],
+            "text": "Face Landmarker guide"
+          },
+          {
+            "_key": "5d874f30-80d",
+            "_type": "span",
+            "marks": [],
+            "text": ". This page uses Face Mesh and Face Landmarker interchangeably for that reason."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "eec2e086-89e",
+            "_type": "link",
+            "href": "https://ai.google.dev/edge/mediapipe/solutions/vision/face_landmarker"
           }
         ],
         "style": "normal"
@@ -2819,342 +3919,66 @@
         "style": "normal"
       },
       {
-        "_key": "e1d9e849-52b",
+        "_key": "5ffd1f15-bbd",
         "_type": "block",
         "children": [
           {
-            "_key": "53aa47fc-2f5",
+            "_key": "a27abfc8-ad3",
             "_type": "span",
             "marks": [],
-            "text": "Download MediaPipe Model Files (Alternative Mirror)"
+            "text": "Download the MediaPipe Model Files"
           }
         ],
         "markDefs": [],
         "style": "h2"
       },
       {
-        "_key": "14bae207-8c0",
+        "_key": "01c27b2d-fac",
         "_type": "block",
         "children": [
           {
-            "_key": "880085ed-76f",
+            "_key": "5136d694-d40",
             "_type": "span",
             "marks": [],
-            "text": "The official MediaPipe model files are hosted on Google Cloud Storage ("
+            "text": "The face mesh model ships as "
           },
           {
-            "_key": "b9e5194a-404",
+            "_key": "c796f3fb-8cd",
             "_type": "span",
             "marks": ["code"],
-            "text": "storage.googleapis.com"
+            "text": "face_landmarker.task"
           },
           {
-            "_key": "e5b0c7eb-2df",
+            "_key": "ba66a1ab-7e1",
             "_type": "span",
             "marks": [],
-            "text": "). In some regions this domain is blocked or unreliable, which means the models fail to load at runtime. If you cannot reach the official URLs, you can download the same files from the GitHub mirror below."
-          }
-        ],
-        "markDefs": [],
-        "style": "normal"
-      },
-      {
-        "_key": "c6f19117-958",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "7d62ca40-cd6",
-            "_type": "span",
-            "marks": [],
-            "text": "Available Model Files"
-          }
-        ],
-        "markDefs": [],
-        "style": "h3"
-      },
-      {
-        "_key": "40316b0c-750",
-        "_type": "table",
-        "caption": "MediaPipe model files mirrored on GitHub",
-        "headers": ["File", "Type", "Precision", "Mirror"],
-        "rows": [
-          {
-            "_key": "b3d7e00e-3c0",
-            "cells": [
-              "face_landmarker.task",
-              "Face mesh (478 landmarks)",
-              "float16",
-              "GitHub release"
-            ]
+            "text": ", a 3.6 MB file hosted on Google Cloud Storage. If that domain is blocked on your network, or you want to self-host or pin a version, I keep a separate "
           },
           {
-            "_key": "803518f5-222",
-            "cells": [
-              "hand_landmarker.task",
-              "Hand landmarks (21 points)",
-              "float16",
-              "GitHub release"
-            ]
-          }
-        ]
-      },
-      {
-        "_key": "f6917aa2-d85",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "16b0e982-930",
+            "_key": "6b0a6b30-fb8",
             "_type": "span",
-            "marks": [],
-            "text": "Download with wget or curl"
-          }
-        ],
-        "markDefs": [],
-        "style": "h3"
-      },
-      {
-        "_key": "0a43a200-de3",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "61e4cc0d-536",
-            "_type": "span",
-            "marks": ["strong"],
-            "text": "Face Landmarker:"
-          }
-        ],
-        "markDefs": [],
-        "style": "normal"
-      },
-      {
-        "_key": "0694a597-226",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "5870e38b-b66",
-            "_type": "span",
-            "marks": ["code"],
-            "text": "wget https://github.com/sanderdesnaijer/mediapipe-model-mirrors/releases/download/v1/face_landmarker.task"
-          }
-        ],
-        "markDefs": [],
-        "style": "normal"
-      },
-      {
-        "_key": "4e54acb2-41c",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "1333e7e0-4c7",
-            "_type": "span",
-            "marks": ["strong"],
-            "text": "Hand Landmarker:"
-          }
-        ],
-        "markDefs": [],
-        "style": "normal"
-      },
-      {
-        "_key": "7b0529cf-ec6",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "fb38c4f3-fd6",
-            "_type": "span",
-            "marks": ["code"],
-            "text": "wget https://github.com/sanderdesnaijer/mediapipe-model-mirrors/releases/download/v1/hand_landmarker.task"
-          }
-        ],
-        "markDefs": [],
-        "style": "normal"
-      },
-      {
-        "_key": "a2adc31d-7c9",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "8e95b81d-bd3",
-            "_type": "span",
-            "marks": [],
-            "text": "Or use them directly in your code by replacing the "
+            "marks": ["641f3161-73a"],
+            "text": "download page for the MediaPipe model files"
           },
           {
-            "_key": "32a9686c-44b",
-            "_type": "span",
-            "marks": ["code"],
-            "text": "modelAssetPath"
-          },
-          {
-            "_key": "2e3e1ac7-eba",
+            "_key": "358d9a2a-0a6",
             "_type": "span",
             "marks": [],
-            "text": ":"
-          }
-        ],
-        "markDefs": [],
-        "style": "normal"
-      },
-      {
-        "_key": "4b98a371-c85",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "2d7c23be-839",
-            "_type": "span",
-            "marks": ["code"],
-            "text": "modelAssetPath: \"https://github.com/sanderdesnaijer/mediapipe-model-mirrors/releases/download/v1/face_landmarker.task\""
-          }
-        ],
-        "markDefs": [],
-        "style": "normal"
-      },
-      {
-        "_key": "4fbf5d64-2fb",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "182b3ffb-27b",
-            "_type": "span",
-            "marks": [],
-            "text": "Official Download URLs"
-          }
-        ],
-        "markDefs": [],
-        "style": "h3"
-      },
-      {
-        "_key": "7fb51369-b33",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "f71f9dda-0b2",
-            "_type": "span",
-            "marks": [],
-            "text": "If you can reach Google Cloud Storage, the official URLs are the recommended source. They always point to the latest version:"
-          }
-        ],
-        "markDefs": [],
-        "style": "normal"
-      },
-      {
-        "_key": "0eb6f393-555",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "86be17a7-463",
-            "_type": "span",
-            "marks": ["strong"],
-            "text": "Face Landmarker: "
-          },
-          {
-            "_key": "0b497db5-c7d",
-            "_type": "span",
-            "marks": ["code"],
-            "text": "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/latest/face_landmarker.task"
-          }
-        ],
-        "level": 1,
-        "listItem": "bullet",
-        "markDefs": [],
-        "style": "normal"
-      },
-      {
-        "_key": "f262c484-b1f",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "24d345be-473",
-            "_type": "span",
-            "marks": ["strong"],
-            "text": "Hand Landmarker: "
-          },
-          {
-            "_key": "818a5ed2-67c",
-            "_type": "span",
-            "marks": ["code"],
-            "text": "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task"
-          }
-        ],
-        "level": 1,
-        "listItem": "bullet",
-        "markDefs": [],
-        "style": "normal"
-      },
-      {
-        "_key": "6621951b-4b0",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "208833a3-a5d",
-            "_type": "span",
-            "marks": [],
-            "text": "License"
-          }
-        ],
-        "markDefs": [],
-        "style": "h3"
-      },
-      {
-        "_key": "c088ac80-efa",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "f00c1b92-a31",
-            "_type": "span",
-            "marks": [],
-            "text": "MediaPipe is open source under the "
-          },
-          {
-            "_key": "c89c388f-0a3",
-            "_type": "span",
-            "marks": ["886b7e82-bc5"],
-            "text": "Apache 2.0 license"
-          },
-          {
-            "_key": "cf44788d-dee",
-            "_type": "span",
-            "marks": [],
-            "text": ". The mirrored model files are redistributed with the original license and attribution intact. See the LICENSE file included in the GitHub release."
+            "text": " with the direct URLs, a GitHub mirror, and the setup code."
           }
         ],
         "markDefs": [
           {
-            "_key": "886b7e82-bc5",
+            "_key": "641f3161-73a",
             "_type": "link",
-            "href": "https://github.com/google-ai-edge/mediapipe/blob/master/LICENSE"
+            "href": "/blog/download-mediapipe-model-files"
           }
         ],
-        "style": "normal"
-      },
-      {
-        "_key": "90381e28-731",
-        "_type": "block",
-        "children": [
-          {
-            "_key": "386cc96f-2ba",
-            "_type": "span",
-            "marks": [],
-            "text": "Mirror last updated: "
-          },
-          {
-            "_key": "ca3476de-46f",
-            "_type": "span",
-            "marks": ["strong"],
-            "text": "May 2026"
-          },
-          {
-            "_key": "63931474-1df",
-            "_type": "span",
-            "marks": [],
-            "text": ". If the official models have been updated since then, download from the official URLs above and consider opening an issue on the mirror repo so it can be refreshed.opening an issue on the mirror repo so it can be refreshed."
-          }
-        ],
-        "markDefs": [],
         "style": "normal"
       }
     ],
     "description": null,
-    "excerpt": "Complete visual reference for all 478 MediaPipe Face Mesh landmarks. Grouped by face region with copy-paste JavaScript code for eyes, mouth, nose and jawline. ",
+    "excerpt": "Every MediaPipe Face Landmarker (Face Mesh) landmark index, all 478 points grouped by face region, with copy-paste JavaScript for eyes, mouth and jawline.",
     "faq": [
       {
         "_key": "k00005x",
@@ -3409,6 +4233,72 @@
           }
         ],
         "question": "Is there an alternative download mirror for MediaPipe hand_landmarker.task?"
+      },
+      {
+        "_key": "6a5fb12f-519",
+        "_type": "object",
+        "answer": [
+          {
+            "_key": "306dca88-fb9",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "5887fb22-599",
+                "_type": "span",
+                "marks": [],
+                "text": "Yes. Face Mesh is the original name and Face Landmarker is the current name under the MediaPipe Tasks API. The JavaScript class is "
+              },
+              {
+                "_key": "9817669b-cd4",
+                "_type": "span",
+                "marks": ["code"],
+                "text": "FaceLandmarker"
+              },
+              {
+                "_key": "f9a00507-a93",
+                "_type": "span",
+                "marks": [],
+                "text": " and the model file is "
+              },
+              {
+                "_key": "ccaa529e-d29",
+                "_type": "span",
+                "marks": ["code"],
+                "text": "face_landmarker.task"
+              },
+              {
+                "_key": "f86f1a4c-a68",
+                "_type": "span",
+                "marks": [],
+                "text": ". The landmark indices are the same in both, so code written against Face Mesh index numbers keeps working with Face Landmarker."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "Is MediaPipe Face Mesh the same as Face Landmarker?"
+      },
+      {
+        "_key": "d08e75b6-70f",
+        "_type": "object",
+        "answer": [
+          {
+            "_key": "ed0002fd-bd0",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "89bc5623-86e",
+                "_type": "span",
+                "marks": [],
+                "text": "It returns 478 landmarks. The first 468 are face surface points, which is the number quoted in older Face Mesh tutorials. Landmarks 468 to 477 are the iris points, 5 per eye, added in a later model update. If your output has 468 points instead of 478, iris refinement is disabled."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "Does MediaPipe Face Landmarker have 468 or 478 landmarks?"
       }
     ],
     "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/4523fd97d7b317a2a8aefab617debe6e6b77d513-1200x630.webp?w=1200&h=630&fit=crop&auto=format",
@@ -3480,6 +4370,7 @@
     },
     "mediumUrl": null,
     "publishedAt": "2026-04-29T13:44:26.465Z",
+    "seoTitleBase": null,
     "slug": {
       "_type": "slug",
       "current": "mediapipe-face-mesh-landmarks"
@@ -3510,7 +4401,7 @@
         "label": "Webcam"
       }
     ],
-    "title": "MediaPipe Face Mesh: All 478 Landmark Points"
+    "title": "MediaPipe Face Landmarker: All 478 Face Mesh Landmarks"
   },
   {
     "_createdAt": "2026-04-12T11:49:20Z",
@@ -5219,6 +6110,7 @@
     },
     "mediumUrl": null,
     "publishedAt": "2026-04-12T11:50:00.000Z",
+    "seoTitleBase": null,
     "slug": {
       "_type": "slug",
       "current": "gesture-controls-openlayers-mediapipe"
@@ -5286,7 +6178,7 @@
   {
     "_createdAt": "2026-03-22T13:10:15Z",
     "_id": "182967d0-c751-43cb-aff7-18d3c2efd067",
-    "_updatedAt": "2026-05-10T12:29:46Z",
+    "_updatedAt": "2026-11-15T11:36:34Z",
     "author": "Sander de Snaijer",
     "body": [
       {
@@ -5783,6 +6675,56 @@
           }
         ],
         "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "5dc7029c-c5c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "56ae708e-ffc",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Model not loading? "
+          },
+          {
+            "_key": "654ed8fe-e86",
+            "_type": "span",
+            "marks": [],
+            "text": "If "
+          },
+          {
+            "_key": "5e404151-405",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "hand_landmarker.task"
+          },
+          {
+            "_key": "dbdbee17-a57",
+            "_type": "span",
+            "marks": [],
+            "text": " fails with a 404 or a network error, the file is hosted on Google Cloud Storage, which is blocked on some networks. I keep the "
+          },
+          {
+            "_key": "a1785c70-01b",
+            "_type": "span",
+            "marks": ["da1df98b-77a"],
+            "text": "direct URLs and a mirror"
+          },
+          {
+            "_key": "56b69678-15a",
+            "_type": "span",
+            "marks": [],
+            "text": " on a separate page."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "da1df98b-77a",
+            "_type": "link",
+            "href": "/blog/download-mediapipe-model-files"
+          }
+        ],
         "style": "normal"
       },
       {
@@ -8346,6 +9288,7 @@
     },
     "mediumUrl": null,
     "publishedAt": "2026-03-22T13:50:00.000Z",
+    "seoTitleBase": null,
     "slug": {
       "_type": "slug",
       "current": "mediapipe-hand-face-tracking"
@@ -10913,6 +11856,7 @@
     },
     "mediumUrl": "https://medium.com/@sanderdesnaijer/how-to-make-stained-glass-with-a-3d-printer-and-resin-step-by-step-guide-81d4d35aa6f4?source=rss-aae3af6fc2dd------2",
     "publishedAt": "2026-03-07T07:03:34.000Z",
+    "seoTitleBase": null,
     "slug": {
       "current": "3d-printed-stained-glass-resin"
     },
@@ -10951,7 +11895,7 @@
   {
     "_createdAt": "2025-11-08T13:00:15Z",
     "_id": "28X0vry1nzL5Efc8AY6jKe",
-    "_updatedAt": "2026-05-18T14:01:31Z",
+    "_updatedAt": "2026-06-03T05:16:17Z",
     "author": "Sander de Snaijer",
     "body": [
       {
@@ -10994,7 +11938,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h3"
+        "style": "h2"
       },
       {
         "_key": "3663d9016e9b",
@@ -11008,7 +11952,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h4"
+        "style": "h3"
       },
       {
         "_key": "e9e35494e9a2",
@@ -11072,7 +12016,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h4"
+        "style": "h3"
       },
       {
         "_key": "8eab9d5b3819",
@@ -11250,7 +12194,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h4"
+        "style": "h3"
       },
       {
         "_key": "7f51cf76d4d1",
@@ -11376,7 +12320,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h3"
+        "style": "h2"
       },
       {
         "_key": "ff4f3e4a2e07",
@@ -11645,12 +12589,12 @@
           {
             "_key": "9c9c99a0da8b",
             "_type": "span",
-            "marks": ["strong"],
+            "marks": [],
             "text": "Step 2: Print the Mold"
           }
         ],
         "markDefs": [],
-        "style": "h3"
+        "style": "h2"
       },
       {
         "_key": "b9c3d4fd5264",
@@ -11753,12 +12697,12 @@
           {
             "_key": "4411cedbea21",
             "_type": "span",
-            "marks": ["strong"],
+            "marks": [],
             "text": "Step 3: Make the Silicone Mold"
           }
         ],
         "markDefs": [],
-        "style": "h3"
+        "style": "h2"
       },
       {
         "_key": "e7720555229f",
@@ -11907,12 +12851,12 @@
           {
             "_key": "b2f471dbfaf2",
             "_type": "span",
-            "marks": ["strong"],
+            "marks": [],
             "text": "Step 4: Make the Chocolate Bar"
           }
         ],
         "markDefs": [],
-        "style": "h3"
+        "style": "h2"
       },
       {
         "_key": "b3ihdtnc",
@@ -12241,6 +13185,7 @@
     },
     "mediumUrl": "https://medium.com/@sanderdesnaijer/how-to-make-custom-chocolate-bars-with-your-logo-using-a-3d-printer-2bcf0de54515?source=rss-aae3af6fc2dd------2",
     "publishedAt": "2025-11-08T05:58:24.000Z",
+    "seoTitleBase": null,
     "slug": {
       "current": "3d-printed-chocolate-bar-mold"
     },
@@ -12275,7 +13220,7 @@
   {
     "_createdAt": "2025-04-20T09:13:21Z",
     "_id": "GMJzzGYJsLe4WlO02feKm5",
-    "_updatedAt": "2026-05-05T10:33:49Z",
+    "_updatedAt": "2026-06-03T05:15:08Z",
     "author": "Sander de Snaijer",
     "body": [
       {
@@ -12425,7 +13370,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h4"
+        "style": "h2"
       },
       {
         "_key": "f8u69vuk",
@@ -12581,7 +13526,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h4"
+        "style": "h2"
       },
       {
         "_key": "60bd86191abe",
@@ -12713,7 +13658,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h4"
+        "style": "h2"
       },
       {
         "_key": "9af27406c1b9",
@@ -12822,7 +13767,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h4"
+        "style": "h2"
       },
       {
         "_key": "86c74fffa18e",
@@ -13168,7 +14113,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h4"
+        "style": "h2"
       },
       {
         "_key": "395f1091c5fa",
@@ -13234,7 +14179,7 @@
           }
         ],
         "markDefs": [],
-        "style": "h4"
+        "style": "h2"
       },
       {
         "_key": "806a5f9ddf5e",
@@ -13341,6 +14286,7 @@
     },
     "mediumUrl": "https://medium.com/@sanderdesnaijer/how-to-create-a-responsive-header-that-adapts-to-desktop-mobile-layouts-and-scroll-behavior-html-5a244b280543?source=rss-aae3af6fc2dd------2",
     "publishedAt": "2025-04-20T06:48:50.000Z",
+    "seoTitleBase": null,
     "slug": {
       "current": "responsive-header-scroll-html-css-js"
     },
@@ -14998,6 +15944,7 @@
     },
     "mediumUrl": "https://medium.com/@sanderdesnaijer/creating-a-headless-cms-portfolio-using-next-js-and-sanity-7842568aa9ce?source=rss-aae3af6fc2dd------2",
     "publishedAt": "2025-04-14T05:46:20.000Z",
+    "seoTitleBase": null,
     "slug": {
       "current": "nextjs-sanity-portfolio-headless-cms"
     },
@@ -15912,6 +16859,7 @@
     },
     "mediumUrl": "https://medium.com/@sanderdesnaijer/building-my-first-flutter-app-challenges-and-lessons-learned-49ad913b4941?source=rss-aae3af6fc2dd------2",
     "publishedAt": "2025-03-02T01:02:41.000Z",
+    "seoTitleBase": null,
     "slug": {
       "current": "building-first-flutter-app-lessons"
     },
@@ -16390,6 +17338,7 @@
     },
     "mediumUrl": "https://medium.com/@sanderdesnaijer/creating-a-3d-printed-word-clock-with-minute-accuracy-c8e0fd85bd16?source=rss-aae3af6fc2dd------2",
     "publishedAt": "2025-02-09T04:18:24.000Z",
+    "seoTitleBase": null,
     "slug": {
       "current": "3d-printed-arduino-word-clock"
     },

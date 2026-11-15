@@ -83,7 +83,9 @@ test.describe("blog detail", () => {
     const article = firstArticle!;
 
     await testPageMetadata(page, {
-      title: article.title,
+      // seoTitleBase overrides the <title> tag when the visible H1 is not the
+      // best search title; it falls back to title when unset.
+      title: article.seoTitleBase || article.title,
       description: getExcerpt(article!),
       url: buildPageUrl("blog", articleSlug),
       imageUrl: article!.imageURL!,
