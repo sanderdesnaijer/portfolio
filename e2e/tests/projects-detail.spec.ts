@@ -9,17 +9,36 @@ import { validateJsonLd } from "../utils/jsonLD";
 import { mockConsent } from "../utils/localStorage";
 import { titleRegExp } from "../utils/regex";
 
-async function checkPageElements(page: Page, projectTitle: string) {
+/**
+ * Resources is optional in the data model: ProjectLayout only renders the
+ * LinkList when the project has at least one link, so a project without links
+ * is valid and must not fail this check.
+ */
+async function checkPageElements(
+  page: Page,
+  projectTitle: string,
+  hasResources: boolean
+) {
   await expect(
     page.getByRole("heading", { name: titleRegExp(projectTitle) })
   ).toBeVisible();
 
-  await expect(page.getByRole("list", { name: /Resources/i })).toBeVisible();
+  const resources = page.getByRole("list", { name: /Resources/i });
+  if (hasResources) {
+    await expect(resources).toBeVisible();
+  } else {
+    await expect(resources).toHaveCount(0);
+  }
 }
+
+const hasLinks = (project: { links?: unknown[] } | null) =>
+  Boolean(project?.links?.length);
 
 test.describe("projects detail", () => {
   let projectSlug: string;
   let project: Awaited<ReturnType<typeof fetchProject>>;
+  let projectWithResources: Awaited<ReturnType<typeof fetchProject>>;
+  let projectWithoutResources: Awaited<ReturnType<typeof fetchProject>>;
 
   test.beforeAll(async () => {
     const projects = await fetchProjects();
@@ -27,6 +46,10 @@ test.describe("projects detail", () => {
     if (!first) return;
     projectSlug = first.slug.current;
     project = await fetchProject(projectSlug);
+
+    // Both shapes are valid content, so cover both.
+    projectWithResources = projects?.find((p) => hasLinks(p)) ?? null;
+    projectWithoutResources = projects?.find((p) => !hasLinks(p)) ?? null;
   });
 
   test.beforeEach(async ({ page }) => {
@@ -41,8 +64,41 @@ test.describe("projects detail", () => {
   }) => {
     test.skip(!project, "No projects available from API");
     await testResponsive(page, `/projects/${projectSlug}`, (p) =>
-      checkPageElements(p, project!.title)
+      checkPageElements(p, project!.title, hasLinks(project))
     );
+  });
+
+  test("should render the Resources list for a project that has links", async ({
+    page,
+  }) => {
+    test.skip(
+      !projectWithResources,
+      "No project with links available from API"
+    );
+    const target = projectWithResources!;
+    await page.goto(`/projects/${target.slug.current}`);
+    await checkPageElements(page, target.title, true);
+
+    const items = page
+      .getByRole("list", { name: /Resources/i })
+      .getByRole("listitem");
+    await expect(items).toHaveCount(target.links!.length);
+  });
+
+  test("should omit the Resources list for a project without links", async ({
+    page,
+  }) => {
+    test.skip(
+      !projectWithoutResources,
+      "No project without links available from API"
+    );
+    const target = projectWithoutResources!;
+    await page.goto(`/projects/${target.slug.current}`);
+    // The page still renders, it just has no Resources section.
+    await checkPageElements(page, target.title, false);
+    await expect(
+      page.getByRole("heading", { name: /^Resources$/i })
+    ).toHaveCount(0);
   });
 
   test("should navigate to a project overview page and back", async ({

@@ -1,8 +1,3998 @@
 [
   {
+    "_createdAt": "2026-09-14T18:03:58Z",
+    "_id": "733a3ffc-32d3-4c5a-a3a3-1ae4f9d9a342",
+    "_updatedAt": "2026-09-14T18:15:14Z",
+    "body": [
+      {
+        "_key": "3b6926871740",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8fd3b50d2cf3",
+            "_type": "span",
+            "marks": [],
+            "text": "I make a lot of notes. To-do lists, things I need to print, things I need to fix, things I will definitely remember later and then immediately forget. The problem is that my handwriting isn't exactly helping. Notes end up everywhere, checkboxes slowly turn into random shapes, and sometimes even I have trouble figuring out what I wrote."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "ea025b595ac3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4e48b1b7087f",
+            "_type": "span",
+            "marks": [],
+            "text": "At the same time, I needed a small break from another project. I had been working on an enclosure for "
+          },
+          {
+            "_key": "eb171d4328b3",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Flappy Banana"
+          },
+          {
+            "_key": "6194578ff5e0",
+            "_type": "span",
+            "marks": [],
+            "text": ", a little game I was building, and I was trying to make that design parametric as well. It wasn't going particularly well. Small changes, tolerances and dimensions kept causing problems elsewhere in the model. So instead of solving that problem, I did the sensible thing and started another project. This time, something smaller."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "208be92cc1c3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "76aee193f6db",
+            "_type": "span",
+            "marks": [],
+            "text": "Starting with the problem"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "efd5b353ee18",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e9ead01ce698",
+            "_type": "span",
+            "marks": [],
+            "text": "The original idea came from the notes I was already using. My dad's company has these rectangular note blocks, and I had a pile of them lying around. They were actually a pretty good starting point. There is a logo in the top-left corner and some unused space next to it, which gave me the idea of using that space for a title. The rest of the note could then be used for the actual list."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2807937b7ec4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "23fa8b5388d7",
+            "_type": "span",
+            "marks": [],
+            "text": "But instead of drawing my usual questionable checkboxes by hand, I wanted removable stencil sheets. The holder itself should store the notes, hold a pen without making the design unnecessarily wider, and have several thin stencil sheets stored underneath."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f492de0a2720",
+        "_type": "image",
+        "alt": "Handwritten SJP note sheets with messy to-do lists and hand-drawn checkboxes hanging on a workshop pegboard",
+        "asset": {
+          "_ref": "image-00a2addec0d65342b8f096d074ed0f93dda74194-4284x5712-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "df5015038ec1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "952637229e16",
+            "_type": "span",
+            "marks": [],
+            "text": "For the rectangular version I made three stencil layouts: a two-column version with circles, a two-column version with squares, and a three-column version with squares for those days when apparently everything needs to become a task. After a few revisions, everything fitted and the stencil sheets worked surprisingly well."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "10ffd9fe0462",
+        "_type": "image",
+        "alt": "Blue rectangular 3D printed note holder with an SJP note block and three white stencil sheets with different checkbox and circle layouts",
+        "asset": {
+          "_ref": "image-6a89cab56a7d44f0270079167dc33f388625904d-5712x4284-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "390c70153467",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d44bac5ca463",
+            "_type": "span",
+            "marks": [],
+            "text": "Then my dad left it in his car."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "ff155c866ef4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2781bda7e416",
+            "_type": "span",
+            "marks": [],
+            "text": "The car test I didn't plan"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "873cab303604",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7d2691d57c06",
+            "_type": "span",
+            "marks": [],
+            "text": "A few days after taking the holder to his office, my dad messaged me saying the note block didn't fit anymore. That made no sense. I knew it fitted because I had tested it myself. When I got the holder back, the explanation became pretty obvious: it had warped."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "59a9cdc055bb",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b96b8734fbd9",
+            "_type": "span",
+            "marks": [],
+            "text": "It was summer, the inside of the car had become very hot, and I had printed the holder in PLA. The dimensions I had spent all that time getting right weren't the dimensions anymore. So I printed the same design in PETG and gave it a rather unscientific durability test: back into the hot car. This time it survived."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3a7d742020ab",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "38ae2e7c1609",
+            "_type": "span",
+            "marks": [],
+            "text": "That was probably the first indication that this little note holder was going to teach me more about designing for 3D printing than I expected."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8ee41938ddd3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2f46917caaaf",
+            "_type": "span",
+            "marks": [],
+            "text": "Parametric, until you change something"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "12dbcf49672c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4bdea89603da",
+            "_type": "span",
+            "marks": [],
+            "text": "Then my girlfriend wanted one. The rectangular company notes were fine for my dad, but not particularly useful if you need to buy replacements somewhere else. So we went to a shop and bought regular square sticky notes instead."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "805a65844df5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2f5952fda4a5",
+            "_type": "span",
+            "marks": [],
+            "text": "No problem. The model was parametric. At least, I thought it was."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a711151cdf71",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c6d26cceea95",
+            "_type": "span",
+            "marks": [],
+            "text": "Changing the dimensions exposed parts of the design that weren't properly connected to the parameters. Some features changed correctly, others didn't. The stencil sheets in particular still depended on dimensions I had effectively designed around the original note block. So I went back into Fusion 360 and started fixing it properly."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3edf2c707f9c",
+        "_type": "image",
+        "alt": "Fusion 360 showing the parametric note holder model next to its user parameters for note dimensions, tolerances, walls, stencils and tabs.",
+        "asset": {
+          "_ref": "image-8733210752ec3e5af1a42d12f323da4f25f520aa-2192x1306-png",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "3ea8e51c48ed",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "be907a499df2",
+            "_type": "span",
+            "marks": [],
+            "text": "For anyone unfamiliar with parametric design, the idea is that instead of designing everything around fixed measurements, you define important dimensions as parameters. The note might have a width and depth of 75 mm. The wall has its own thickness. There is a clearance around the notes, another clearance for the stencils, and other dimensions can be calculated from those values."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "db0ea826509e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8d16f58dbd7d",
+            "_type": "span",
+            "marks": [],
+            "text": "If the note changes, I shouldn't have to start moving faces and editing sketches all over the model. I should be able to change "
+          },
+          {
+            "_key": "dc53dd07cf70",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "noteWidth"
+          },
+          {
+            "_key": "223514519d43",
+            "_type": "span",
+            "marks": [],
+            "text": " and let the relationships and constraints in the model do the rest."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "343e6a1c3a50",
+        "_type": "image",
+        "alt": "Fusion 360 showing the same parametric note holder configured for a wider rectangular 150 mm note block by changing the noteWidth parameter.",
+        "asset": {
+          "_ref": "image-e0a2c7b7909fa735d626bda1117b8c26fbf95e65-2182x1303-png",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "20b9dead1e45",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "64d2534f3876",
+            "_type": "span",
+            "marks": [],
+            "text": "The change from 75 mm to around 150 mm isn't just a stress test either. That's roughly the difference between the square notes and the rectangular company note block my dad uses. The holder becomes wider, the stencil lines follow it, and the rest of the design adapts with it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "79471da1188d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9408a01fa53e",
+            "_type": "span",
+            "marks": [],
+            "text": "That's exactly what I wanted from the project: "
+          },
+          {
+            "_key": "6d8dc90efc20",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "change a number, not the model."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "de6f9276e55e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f94a50ea5747",
+            "_type": "span",
+            "marks": [],
+            "text": "Dimensions aren't tolerances"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "231b7e00eeb5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b82c9b1bf858",
+            "_type": "span",
+            "marks": [],
+            "text": "This was also where I finally started treating "
+          },
+          {
+            "_key": "268df753a0de",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "dimensions and tolerances as different things"
+          },
+          {
+            "_key": "d1da06333af9",
+            "_type": "span",
+            "marks": [],
+            "text": ". That sounds obvious now, but it was something I had been doing wrong in other designs."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "cd8ec4ff82b2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "875c4691be2d",
+            "_type": "span",
+            "marks": [],
+            "text": "If a note is 75 mm wide, its width is 75 mm. I shouldn't change that value to 75.5 mm because my printer needs some extra room. The physical object hasn't suddenly become wider. Instead, the design should know that the note is 75 mm and that the printer needs a certain amount of clearance around it. That means having things such as "
+          },
+          {
+            "_key": "7b9d8f4a65c1",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "noteWidth"
+          },
+          {
+            "_key": "311914a88baa",
+            "_type": "span",
+            "marks": [],
+            "text": ", "
+          },
+          {
+            "_key": "7f54d2452fca",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "noteClearance"
+          },
+          {
+            "_key": "4d8be950dfc5",
+            "_type": "span",
+            "marks": [],
+            "text": " and "
+          },
+          {
+            "_key": "e62f0680c9c4",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "stencilClearance"
+          },
+          {
+            "_key": "7ad325ccd1ec",
+            "_type": "span",
+            "marks": [],
+            "text": " as separate parameters."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3f5246178c3d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1c91abd44f03",
+            "_type": "span",
+            "marks": [],
+            "text": "This was one of the things that had caused trouble with Flappy Banana. I was sometimes changing the actual dimensions to compensate for a print that didn't fit. It fixes that particular print, but slowly makes the CAD model lie about the object you're designing. This project was small enough that I could finally get that distinction into my head properly."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b5b832afb2dd",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3ecc71a6421b",
+            "_type": "span",
+            "marks": [],
+            "text": "Doing the modelling myself"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "c3c8368b7e48",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e52a9ee591d0",
+            "_type": "span",
+            "marks": [],
+            "text": "This was also a little different from some of my other projects. For the "
+          },
+          {
+            "_key": "7c509228af27",
+            "_type": "span",
+            "marks": ["strong", "a338fa162e35"],
+            "text": "Durian Lamp"
+          },
+          {
+            "_key": "c97491c5df50",
+            "_type": "span",
+            "marks": [],
+            "text": ", I experimented with using AI to help create parts of the 3D design. That was interesting, and it can get you surprisingly far, but making revisions isn't always pleasant. You explain what you want, wait, get a result, discover something isn't quite right, change the prompt and try again."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "a338fa162e35",
+            "_type": "link",
+            "href": "/projects/durian-lamp"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "b784be6d764b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e0ea784c20aa",
+            "_type": "span",
+            "marks": [],
+            "text": "Here I wanted to build the model myself in Fusion 360. That turned out to be much more satisfying for this kind of project. Every time I found a problem, I could go into the parameter dialog, change a value and immediately see what happened. More importantly, I understood "
+          },
+          {
+            "_key": "c6b1f0055992",
+            "_type": "span",
+            "marks": ["em"],
+            "text": "why"
+          },
+          {
+            "_key": "84b2c08c7b28",
+            "_type": "span",
+            "marks": [],
+            "text": " it happened."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3b0cc836154e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5417e6eba959",
+            "_type": "span",
+            "marks": [],
+            "text": "The computer wasn't generating a new interpretation of my design. I had defined the relationships myself, and that made experimenting with small changes much faster."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b5b562634785",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d6e628e0d9a5",
+            "_type": "span",
+            "marks": [],
+            "text": "From rectangular to square"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "ea7249f93f88",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5f9e9e079fd5",
+            "_type": "span",
+            "marks": [],
+            "text": "Once the model worked with the standard square notes, I could start having a bit more fun with the stencil sheets. For the square holder I kept the selection fairly simple: a regular square checkbox, a circle, a two-column circle layout and a heart. The heart was mostly for my girlfriend."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "51337b1f5788",
+        "_type": "image",
+        "alt": "Square 3D printed note holder with removable black stencil sheets for hearts, circles and square checkboxes, including small retention bumps and symbols on the tabs.",
+        "asset": {
+          "_ref": "image-2f4a893063f6bbe10983307d739a1b9191e6b267-4284x5712-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "cfed7cf915c7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "67146740d128",
+            "_type": "span",
+            "marks": [],
+            "text": "Naturally, the shape that looks the simplest became one of the annoying ones. Making a heart shape isn't difficult. Making a heart that works as a stencil with an actual pen is."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2932d187cd13",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "26dcd14fa838",
+            "_type": "span",
+            "marks": [],
+            "text": "I made the stencil shapes in "
+          },
+          {
+            "_key": "3afe80b9f95d",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Affinity Designer"
+          },
+          {
+            "_key": "d8247c02d5da",
+            "_type": "span",
+            "marks": [],
+            "text": ", which has become my replacement for Illustrator. I used Illustrator for years, but I wasn't particularly interested in following Adobe further down the road of subscriptions and increasingly restrictive contracts. Affinity gives me the vector tools I need without much drama, which is exactly what I want from software."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "014287fbdb48",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e58d1a963694",
+            "_type": "span",
+            "marks": [],
+            "text": "The first heart versions looked perfectly fine as vectors, but tracing them didn't produce a particularly nice heart. A pen has thickness, you hold it at an angle, and it has to physically travel around the inside edge of the stencil. Sharp transitions that look good on screen don't necessarily feel natural when you're drawing through them. So the heart went through several revisions before the shape on paper started looking like the shape on screen."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "12c07c7e3fc2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f3cbc2934ea3",
+            "_type": "span",
+            "marks": [],
+            "text": "That became another recurring theme of the project: "
+          },
+          {
+            "_key": "a1bbc267d785",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "CAD geometry and usable geometry aren't always the same thing."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "96600076c7cf",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6b1416bcb0f4",
+            "_type": "span",
+            "marks": [],
+            "text": "Which stencil did I put in there?"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "82368253f08d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "87119d87c267",
+            "_type": "span",
+            "marks": [],
+            "text": "Once my girlfriend started using the holder, she found another problem I hadn't really considered. When the stencil sheets were stored inside the holder, you couldn't tell which one was which."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "ab808c7cd733",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "636d2cdb1e9e",
+            "_type": "span",
+            "marks": [],
+            "text": "Fair point."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1c799a9141b2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7bc042610e3d",
+            "_type": "span",
+            "marks": [],
+            "text": "So I added a small symbol to every tab. A square stencil gets a square, a circle gets a circle, a two-column version gets two symbols and the heart gets a heart. It's a tiny detail, but it's one of my favorite changes because it didn't come from staring at the model. It came from someone actually using the thing."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d41e6c5877e1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "63c7808b2459",
+            "_type": "span",
+            "marks": [],
+            "text": "Because the stencil system was parametric, I could also make the number of storage slots configurable instead of maintaining separate models."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "5d6137afb4fe",
+        "_type": "image",
+        "alt": "Fusion 360 note holder configured with five stencil storage slots using the stencilCount parameter",
+        "asset": {
+          "_ref": "image-7bec6d0a36b260d73cf8650bdc63e197b38176e2-2191x1305-png",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "3879f7431a4a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "30a29ffb964d",
+            "_type": "span",
+            "marks": [],
+            "text": "Want three stencil sheets? Set "
+          },
+          {
+            "_key": "1f357b3cbb59",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "stencilCount"
+          },
+          {
+            "_key": "f84ac9a2d44d",
+            "_type": "span",
+            "marks": [],
+            "text": " to 3. Want five? Set it to 5. The height of the holder and the storage area can be derived from that value rather than maintaining a different model for every version."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "7adb247bc468",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "bad170d862f5",
+            "_type": "span",
+            "marks": [],
+            "text": "The tiny bump that took far too long"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "d927a320af9c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "17dbc2e0155e",
+            "_type": "span",
+            "marks": [],
+            "text": "There was still another problem: the stencil sheets could slide out. This was especially noticeable with the smaller square holder. Pick it up the wrong way and the sheets could simply escape from the front."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2ef82b3baffa",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0f6860125a40",
+            "_type": "span",
+            "marks": [],
+            "text": "I tried several ideas before settling on a tiny bump on the holder combined with a corresponding recess in each stencil tab. Push the sheet in and it moves over the bump before settling into place. It's a tiny feature, so naturally it took far too many test prints."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f3863b6c05bd",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fb845149c7f7",
+            "_type": "span",
+            "marks": [],
+            "text": "I would change the bump by something like 0.10 mm, print another version and sometimes barely see any difference at all. Eventually I realized I was thinking about the CAD dimensions without thinking enough about how the printer actually creates them. My prints were using a 0.16 mm layer height. Asking for certain vertical changes smaller than that doesn't magically give the printer another physical layer."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "dc0796b5ede3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b263e556f065",
+            "_type": "span",
+            "marks": [],
+            "text": "So I stopped defining features like the bump purely as arbitrary millimeter values. Instead, the layer height itself became a parameter. If I'm printing at 0.16 mm and I want a feature to be three layers high, its height can simply be derived from:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "531b17723913",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "06ebdb0e5d2b",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "layerHeight × 3"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d4fea063018b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6db7bf6d2b89",
+            "_type": "span",
+            "marks": [],
+            "text": "Now the design is describing something the printer can actually produce."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "ebaf9c75bf28",
+        "_type": "image",
+        "alt": "Large collection of 3D printed note holder and stencil prototypes in different colors showing the many iterations used to test dimensions, clearances, tabs and retention bumps.",
+        "asset": {
+          "_ref": "image-e7fe34ee8482b0fe5c577792f42ef2e89ff0c4f6-4284x5712-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "a8a94011d0e2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "487a74fdbf66",
+            "_type": "span",
+            "marks": [],
+            "text": "There's that saying about doing the same thing over and over again while expecting a different result. Looking at this pile, I may have spent parts of this project conducting my own practical research into it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1d934a0cf75a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7d6db56a780c",
+            "_type": "span",
+            "marks": [],
+            "text": "At least eventually I started changing the right parameters."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "cf7198843269",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "16b26902600c",
+            "_type": "span",
+            "marks": [],
+            "text": "Did I actually make it parametric?"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "31d2ac9d1fef",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "712722ad1bfe",
+            "_type": "span",
+            "marks": [],
+            "text": "At some point I wanted to know whether I had actually built a parametric design or just spent a lot of time making one note holder unnecessarily complicated. So I started making different versions."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a249b20ad61f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "00f152ab010e",
+            "_type": "span",
+            "marks": [],
+            "text": "There was the rectangular version for my dad's company notes, a square version for standard sticky notes, versions for myself, a personalized one for my girlfriend, and eventually versions for colleagues. Names and logos could be changed without rebuilding the holder. Different stencil combinations could be exported. Note dimensions could change. Even the number of stencil sheets could change."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f18990aaf67d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c81fb57e21c9",
+            "_type": "span",
+            "marks": [],
+            "text": "The colleague versions became another small experiment in personalization. Instead of putting a huge name across the holder, I went with a smaller recessed name on the back. That worked without causing problems, so I pushed it a little further and added the company logo across the front of the stencil drawers as well."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "afbbd098fb58",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3906891ce719",
+            "_type": "span",
+            "marks": [],
+            "text": "And... nothing broke."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c0482633dd1c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9cf55402a045",
+            "_type": "span",
+            "marks": [],
+            "text": "That was actually one of the more satisfying moments of the project. Earlier, every new idea felt like it might trigger another round of redesigning and test printing. Now I could add a name, add a logo, change a dimension or make another variation without worrying about the whole thing falling apart. I was finally becoming confident in the model itself."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "61fd8de2c2c3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6297ccfb8bb3",
+            "_type": "span",
+            "marks": [],
+            "text": "I wasn't redesigning the note holder anymore. "
+          },
+          {
+            "_key": "8bf4a4aa4c69",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "I was configuring it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2cc7e6e404da",
+        "_type": "image",
+        "alt": "Three finished versions of the parametric 3D printed note holder: a black square holder with handwritten checklist and stencils, a blue rectangular SJP version with integrated pen, and a translucent turquoise square version.",
+        "asset": {
+          "_ref": "image-2f979f8b500dffaf9f8e8a3b3e139acd8727a8a3-964x642-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "bacee904ef9a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9e4edf721a74",
+            "_type": "span",
+            "marks": [],
+            "text": "What I actually learned"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "f4fd69bcf6be",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "029fb4590557",
+            "_type": "span",
+            "marks": [],
+            "text": "I'm not a 3D modelling expert, and I'm sure there are plenty of things in this Fusion 360 file that somebody with more experience would do differently. Feedback is always more than welcome. But I have started developing my own simple way of deciding whether a parametric design is going in the right direction: "
+          },
+          {
+            "_key": "6e9dd31a71bf",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "how much work does a change cost me?"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3ef48a081861",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "953198a25aa7",
+            "_type": "span",
+            "marks": [],
+            "text": "If changing the note size means editing five sketches, moving some faces and fixing three broken features, I've probably designed something wrong. If I can open the parameter dialog, change one value and everything follows, I'm probably heading in the right direction."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "34936e96531d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0a588827424a",
+            "_type": "span",
+            "marks": [],
+            "text": "The same thinking changed how I organize the Fusion 360 file itself. The holder and stencil sheets are separate components, so their features and timelines stay where they belong. Things that are likely to change between versions, such as names, text and logos, are deliberately added near the end of the timeline. If I want to make a version for somebody else, I don't want to dig through the entire history of the model just to find their name."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "93f7a604c91f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "834581cc399c",
+            "_type": "span",
+            "marks": [],
+            "text": "That's probably the biggest thing this project taught me. Parametric modelling isn't just about replacing "
+          },
+          {
+            "_key": "c4af83cab02d",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "75 mm"
+          },
+          {
+            "_key": "55f7068f3259",
+            "_type": "span",
+            "marks": [],
+            "text": " with a variable called "
+          },
+          {
+            "_key": "49d6b281fc5d",
+            "_type": "span",
+            "marks": ["code"],
+            "text": "noteWidth"
+          },
+          {
+            "_key": "db0ff43cb8b6",
+            "_type": "span",
+            "marks": [],
+            "text": ". It's about deciding which parts of a design are facts, which are tolerances, which depend on the printer, which belong together, and which things you're likely to want to change later."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f8045eea2f23",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2f3970e210d0",
+            "_type": "span",
+            "marks": [],
+            "text": "The finished note holders aren't particularly complicated objects. The pile of failed prints suggests I did my best to change that. But now I can change the note size, clearances, layer height, number of stencils, names and logos without rebuilding everything around them."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "827cad76f567",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8351a36a62bc",
+            "_type": "span",
+            "marks": [],
+            "text": "And, perhaps more importantly, my checkboxes finally look like checkboxes."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b6024addcc0b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "60e8c4c4c441",
+            "_type": "span",
+            "marks": [],
+            "text": "I'm still learning 3D design, so if you spot something I could have done better, I'm always interested in hearing it. For now, my benchmark is pretty simple:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "50e016ab3d62",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f11a4999a00a",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "If the next change only requires changing a parameter, I know I'm moving in the right direction."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "A fully parametric 3D printed note holder with interchangeable stencils, built around real-world tolerances, layer heights and lots of test prints.",
+    "faq": [
+      {
+        "_key": "bb0d849a4e9d",
+        "answer": [
+          {
+            "_key": "643a5a7126e4",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "f2f64b254ab0",
+                "_type": "span",
+                "marks": [],
+                "text": "A parametric model uses named dimensions and relationships instead of relying on fixed measurements throughout the design. In this project, changing parameters such as the note width, clearance or number of stencil sheets automatically updates the related parts of the model."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "What is a parametric 3D model?"
+      },
+      {
+        "_key": "651af1983edc",
+        "answer": [
+          {
+            "_key": "96c4682b0162",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "834cdef97520",
+                "_type": "span",
+                "marks": [],
+                "text": "The first PLA version warped after being left in a hot car. I reprinted the holder in PETG and repeated the test, and the PETG version survived the heat without the same deformation."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "Why did you use PETG instead of PLA?"
+      },
+      {
+        "_key": "fd7a0d659ffd",
+        "answer": [
+          {
+            "_key": "5b1b875f9c49",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "0a3fd7aeb55f",
+                "_type": "span",
+                "marks": [],
+                "text": "Some small features, such as the bumps that keep the stencil sheets in place, need to match what the printer can physically produce. Defining their height as a multiple of the print layer height made those features much more predictable."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "question": "Why is layer height a parameter in the model?"
+      }
+    ],
+    "imageAlt": "Three finished parametric 3D printed note holders in different sizes, with removable stencil sheets, note blocks and an integrated pen holder.",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/fb9e84dad31d97a59c511cd931ff63da257f4f3d-964x642.jpg",
+    "jsonLdApplicationCategory": null,
+    "jsonLdCodeRepository": null,
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": null,
+    "jsonLdType": ["CreativeWork"],
+    "links": null,
+    "mainImage": {
+      "_type": "image",
+      "alt": "Three finished parametric 3D printed note holders in different sizes, with removable stencil sheets, note blocks and an integrated pen holder.",
+      "asset": {
+        "_ref": "image-fb9e84dad31d97a59c511cd931ff63da257f4f3d-964x642-jpg",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-09-14T18:04:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "parametric-note-holder"
+    },
+    "tags": [
+      {
+        "_id": "019329da-422e-47d2-b5ff-b9c86bf5b14d",
+        "label": "3D printing "
+      },
+      {
+        "_id": "1fcde828-df68-466a-8050-73ec2f3d5e48",
+        "label": "3D modelling"
+      },
+      {
+        "_id": "fa22da2f-035a-4a36-ab73-6b20f1ac66e6",
+        "label": "DIY"
+      },
+      {
+        "_id": "6688186a-b082-4670-a468-25cad9d7cced",
+        "label": "makers"
+      },
+      {
+        "_id": "c30b8ce0-c32d-43fb-b108-d786eeb62d41",
+        "label": "Bambu X1C"
+      },
+      {
+        "_id": "3d650f00-9697-4da3-84f7-e1cbb15b007c",
+        "label": "Fusion 360"
+      }
+    ],
+    "title": "Designing for Change: A Parametric Note Holder in Fusion 360"
+  },
+  {
+    "_createdAt": "2026-08-31T13:53:05Z",
+    "_id": "53a1bff5-dc26-4269-be62-84c3c4fdf987",
+    "_updatedAt": "2026-09-13T18:55:31Z",
+    "body": [
+      {
+        "_key": "4e0890f1c434",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9b911a7c2930",
+            "_type": "span",
+            "marks": [],
+            "text": "It started with a simple problem: my girlfriend was coming to visit for a four-week holiday and my bedroom can get pretty dark at night, so I wanted to get her a small night lamp. I could buy one, of course, but where's the fun in that? So I decided to make one myself."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "844b97434f2d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "91d73ba11b71",
+            "_type": "span",
+            "marks": [],
+            "text": "The next question was what it should look like. My girlfriend loves durian fruit, and me not so much, especially the smell of it. Whenever she buys one, I feel like I can smell it everywhere. So I thought a lamp in the shape of a durian could be the perfect solution for both of us. "
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "5950853d5abe",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "46ee4e350bad",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Want to build your own?"
+          },
+          {
+            "_key": "17f5b5efca22",
+            "_type": "span",
+            "marks": [],
+            "text": " The Durian Lamp is now available as a free download on MakerWorld, with a ready-to-print profile for the Bambu LED Lamp Kit.\n"
+          },
+          {
+            "_key": "fe95a7296483",
+            "_type": "span",
+            "marks": ["strong", "591137543b04"],
+            "text": "Download the Durian Lamp on MakerWorld →"
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "591137543b04",
+            "_type": "link",
+            "href": "https://makerworld.com/nl/models/3302273-durian-lamp-3d-printed-led-mood-light#profileId-3747990"
+          }
+        ],
+        "style": "blockquote"
+      },
+      {
+        "_key": "70dd71e17b09",
+        "_type": "youTube",
+        "url": "https://www.youtube.com/watch?v=GD4zxUfnRkU"
+      },
+      {
+        "_key": "76de85a978f3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b15bec194b01",
+            "_type": "span",
+            "marks": [],
+            "text": "The first durian"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "c7e822e3feb1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2f79498f2fe9",
+            "_type": "span",
+            "marks": [],
+            "text": "The idea was fairly simple: 3D-print a translucent durian, put an addressable LED strip inside and control it with an ESP32 running WLED."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6a80cef01fe2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b203b0d36903",
+            "_type": "span",
+            "marks": [],
+            "text": "I initially experimented with placing the LEDs vertically inside the lamp, similar to what I did with my "
+          },
+          {
+            "_key": "cf4074801461",
+            "_type": "span",
+            "marks": ["cab05dede419"],
+            "text": "word clock"
+          },
+          {
+            "_key": "da11d8c9b8b0",
+            "_type": "span",
+            "marks": [],
+            "text": ". But that required a lot of cutting and soldering. Instead, I found that I could just wrap one continuous LED strip horizontally around a central column. It was much easier and actually gave a better effect as well.\n"
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "cab05dede419",
+            "_type": "link",
+            "href": "/projects/arduino-3d-printed-dutch-word-clock"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "70f0de5a4cc1",
+        "_type": "youTube",
+        "url": "https://youtu.be/HPEKDFtNaec"
+      },
+      {
+        "_key": "3f30122db8ec",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d47d1b2be5cb",
+            "_type": "span",
+            "marks": [],
+            "text": "When my girlfriend arrived, she liked the lamp, but as a durian lover she had some suggestions. And she was right. The shape could use some better grooves and the stem didn't look quite right. After changing those, it started looking much more like an actual durian."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "405bc2e7ba77",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "730aa150fc4f",
+            "_type": "span",
+            "marks": [],
+            "text": "She was very happy with the result and showed it to her mom. Her mom wanted one too, but a smaller version. That led to a second design: a mini durian made to fit a simple LED tea light. So before I'd even finished improving the original lamp, it had already produced a smaller spin-off."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6769e5b3713f",
+        "_type": "image",
+        "alt": "Five colorful 3D printed mini durian lamps with LED tea lights, showing different color and design variations.",
+        "asset": {
+          "_ref": "image-f86b6eb2b266f8b5337c31b2b046ce63758d5974-4771x3106-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "2a7110ab2509",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "72f1c484a3ac",
+            "_type": "span",
+            "marks": [],
+            "text": "An experiment with AI-generated 3D modelling"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "45ffd33c3f60",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "30b73b2e6f6f",
+            "_type": "span",
+            "marks": [],
+            "text": "The durian was also my first project where I used AI for most of the 3D modelling instead of designing everything myself in Fusion 360. I took it a bit further than simply asking AI to generate a model. I built a Three.js web interface around it where I could configure the durian before exporting it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "28bdd62dc297",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "557ecade5cfa",
+            "_type": "span",
+            "marks": [],
+            "text": "I could change the overall size and height, choose between different power inputs, change the spike height and number of spikes, and configure different options for the base, such as USB-C or a regular power input. Everything scaled automatically."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b9e84cd7a3bf",
+        "_type": "image",
+        "alt": "Interactive Three.js configurator for the Durian Lamp, showing an illuminated 3D model with adjustable size, power inlet, switch, shell lock and ESP32 mounting options.",
+        "asset": {
+          "_ref": "image-1341feee0041c8a19f3bc053a7b68ff1752ffdcb-1952x1184-png",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "16d3f8c410a6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "99b5a24be31f",
+            "_type": "span",
+            "marks": [],
+            "text": "At first, this felt great. I was able to get something fairly complex working surprisingly quickly. I printed it and, even better, the dimensions were right. The stem fitted, the power connector fitted and all those configurable parts actually worked."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d669bd278269",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ef68b2bbd4c7",
+            "_type": "span",
+            "marks": [],
+            "text": "Then I needed to start making changes. That's where it became much less fun. Giving AI precise instructions for changes to an existing 3D shape turned out to be much harder than creating the initial version. Once I started printing more versions, I also discovered problems that weren't immediately obvious in the model."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f08e51afc754",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0be0f21cf53c",
+            "_type": "span",
+            "marks": [],
+            "text": "For example, some parts of the shell didn't have a consistent wall thickness, which eventually caused printing problems. It was an interesting experiment and I'm glad I tried it. It showed me how quickly AI can help create a configurable 3D model and even build an interface around it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d6104485c5b9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e670ed8550f2",
+            "_type": "span",
+            "marks": [],
+            "text": "It also convinced me not to use this approach again for a model like this. For something I expect to keep modifying and refining, I'd rather go back to Fusion 360 and have full control over the geometry."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "522a39120704",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fb6193dd54be",
+            "_type": "span",
+            "marks": [],
+            "text": "Then I broke it"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "f8af7468acd4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "aed842fa0a30",
+            "_type": "span",
+            "marks": [],
+            "text": "The physical design was getting better, but the electronics were still very much a prototype. One day I took the lamp into the kitchen to try it out. The resistor connection on the LED data line came loose and the first LED in the strip stopped working. "
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "cc42388ac2c8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "aed842fa0a30",
+            "_type": "span",
+            "marks": [],
+            "text": "Annoying, but it taught me a good lesson. If I wanted this to be an actual lamp rather than an electronics experiment sitting next to my bed, I needed to make the inside as reliable as the outside. That's when a simple night lamp started turning into a much bigger electronics project."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f35804813fab",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7d18007d5262",
+            "_type": "span",
+            "marks": [],
+            "text": "Why not just use a light bulb?"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "db41e36ea455",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "19592d36761c",
+            "_type": "span",
+            "marks": [],
+            "text": "There is, of course, a much easier way to build a lamp. I could have designed the base around a normal E27 socket, screwed in a smart bulb and probably saved myself a ridiculous amount of time."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "582142133519",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "18b09d06bdc5",
+            "_type": "span",
+            "marks": [],
+            "text": "But where's the fun in that?"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2a1639dbe5a2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ec8132004eda",
+            "_type": "span",
+            "marks": [],
+            "text": "I had just bought a new soldering iron and wanted to learn more about electronics, so this seemed like a good excuse. And it definitely turned into a learning project."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c95f461e8974",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5bb0d4d980b9",
+            "_type": "span",
+            "marks": [],
+            "text": "I learned how to solder perfboards, how to use a multimeter properly, how to check continuity and find connections that should or shouldn't be there, and how to debug a board before plugging in an ESP32 and hoping for the best. I've killed two or three ESP32s across different projects in the last few months, so that last part was probably a lesson I needed."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8ac40d92c6a3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e0ab76dc2a9d",
+            "_type": "span",
+            "marks": [],
+            "text": "Every new perfboard got a little better. Not every solder joint works perfectly the first time, at least not when I make it, but now I actually know how to find the problem instead of staring at a board wondering why nothing works."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "137904f36406",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3b34303f316c",
+            "_type": "span",
+            "marks": [],
+            "text": "And in return for all that extra headache, I also get a completely customizable lamp. WLED gives me effects, brightness control, rainbow colors and pretty much anything else I want to add later."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f052b0f566aa",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3b2c57fd8bb4",
+            "_type": "span",
+            "marks": [],
+            "text": "Could I have done something similar with a smart bulb? Sure, without all the nice effects."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "fd2a3856ee3a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ff2e99d45fea",
+            "_type": "span",
+            "marks": [],
+            "text": "Would I have learned nearly as much? Nope."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "36df507ea10c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "935a1797bc96",
+            "_type": "span",
+            "marks": [],
+            "text": "Version 1: The prototype"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "cd0bac10b5fe",
+        "_type": "image",
+        "alt": "First Durian Lamp prototype glowing with multicolor LEDs on a workbench surrounded by soldering and electronics tools",
+        "asset": {
+          "_ref": "image-baa291a427ca5dd1d320a92d75d6888b780e0637-5712x4284-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "5d11ba22d727",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2a215415b0d1",
+            "_type": "span",
+            "marks": [],
+            "text": "The first electronics were about as simple as I could make them. An ESP32 running WLED controlled the addressable 5 V LED strip, with a 330 Ω resistor between the ESP32's data output and the LED strip. Power came from a regular 5 V USB supply. The LED strip was wrapped around the central column inside the lamp, with the ESP32 and wiring hidden inside the base."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "5b1ab92a8eba",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5705e1b3873d",
+            "_type": "span",
+            "marks": [],
+            "text": "It proved that the concept worked, but the loose wiring and soldered connections weren't something I wanted to rely on permanently. Breaking the data connection made that very obvious."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "14d885da9fe5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a704f9d1e8a2",
+            "_type": "span",
+            "marks": [],
+            "text": "There was also another small problem: the lamp could only be controlled through WLED using the app or a browser. That's not very convenient when you're lying in bed in the dark and just want to turn on a lamp."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1a87c060481d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5a0c8b8a2559",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Main parts:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4a5035d8cbea",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "da2fde663b41",
+            "_type": "span",
+            "marks": [],
+            "text": "ESP32"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "23a7f132caf2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e8a75308a123",
+            "_type": "span",
+            "marks": [],
+            "text": "5 V addressable LED strip"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d4436137ac39",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "920f147a9765",
+            "_type": "span",
+            "marks": [],
+            "text": "330 Ω data resistor"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "fcdc305e1607",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "95636de8f43b",
+            "_type": "span",
+            "marks": [],
+            "text": "5 V USB power"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0f0057dfb3a7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "28831760f1b1",
+            "_type": "span",
+            "marks": [],
+            "text": "3D-printed translucent shell, base and column"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e8eede075509",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "48ae886bc5d3",
+            "_type": "span",
+            "marks": [],
+            "text": "Version 2: Moving to perfboard"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "54ea55b6c9a9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4b1676bc2b71",
+            "_type": "span",
+            "marks": [],
+            "text": "For the next version, I wanted the electronics to feel less like a prototype. I moved the connections onto perfboard and added a 1000 µF capacitor across the LED power supply. More importantly, I changed the power distribution."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4924708085e5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0881c9899ebf",
+            "_type": "span",
+            "marks": [],
+            "text": "Instead of sending the LED current through the ESP32 board, the incoming 5 V supply was split so the ESP32 and LED strip each had their own connection to the main power rails. That gave me a much cleaner power path and meant the ESP32 wasn't being used as a power distribution board for the LEDs."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4d95aac04f60",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1ae0f079dfd3",
+            "_type": "span",
+            "marks": [],
+            "text": "I also wanted a physical way to turn the lamp on and off without having to find my phone in the dark. So I cut the USB power cable and added an inline cord switch."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "fa588b264927",
+        "_type": "image",
+        "alt": "Open inline cord switch being wired for the Durian Lamp power cable on a workbench.",
+        "asset": {
+          "_ref": "image-f07c2ca4e1a4d53f2cf895c75ed25b2cf9ed6d2c-3024x4032-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "c2f5c08a3dfd",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "656ff903975f",
+            "_type": "span",
+            "marks": [],
+            "text": "It worked well, but there was another problem. Pretty much everything was soldered together. The board lives inside the central column, so getting it in and out means pushing and pulling the electronics through a fairly small space. Eventually I broke one of the wires while doing that."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e3d6e900de2e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "82c1ed125fac",
+            "_type": "span",
+            "marks": [],
+            "text": "That made the next improvement pretty obvious: instead of soldering everything permanently together, I wanted the individual parts to be removable and replaceable."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c05f11f881a8",
+        "_type": "image",
+        "alt": "Durian Lamp version 2 electronics with the LED strip, ESP32 and power components soldered together during prototyping.",
+        "asset": {
+          "_ref": "image-4316a56ada2ce5de267546935ad811afcc82ad8c-5712x4284-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "2bbc536ba886",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ec5018c20c08",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Main changes:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "88593ee14af2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "da7b0b29819d",
+            "_type": "span",
+            "marks": [],
+            "text": "Perfboard instead of loose connections"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "dc1f1489ee48",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "aaaa23c85d08",
+            "_type": "span",
+            "marks": [],
+            "text": "1000 µF capacitor"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "5af0885497ce",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c3e3699a8f06",
+            "_type": "span",
+            "marks": [],
+            "text": "Dedicated 5 V and ground rails"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a43ac5a823bb",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9d8e7084bbc5",
+            "_type": "span",
+            "marks": [],
+            "text": "Separate power branches for the ESP32 and LED strip"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "90d17f760f27",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "31412e4e5941",
+            "_type": "span",
+            "marks": [],
+            "text": "330 Ω resistor retained on the data line"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "051377045164",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6d902c2d4c27",
+            "_type": "span",
+            "marks": [],
+            "text": "Inline cord switch for physically turning the lamp on and off"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "478fdaf4035f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b4207b45a3ad",
+            "_type": "span",
+            "marks": [],
+            "text": ""
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "93a8c4fc58d4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b1b99fc17044",
+            "_type": "span",
+            "marks": [],
+            "text": "Version 3: Making it smaller and cleaner"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "5b0e67c702c2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1f6f75e05d46",
+            "_type": "span",
+            "marks": [],
+            "text": "The first perfboard worked, but it was larger and messier than it needed to be. Everything was also still soldered together and couldn't easily be disconnected. So I made another one."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a5c3341c9a13",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6ffdd87a1297",
+            "_type": "span",
+            "marks": [],
+            "text": "The goal wasn't really to change how the lamp worked. I wanted to improve the physical design of the electronics: shorter connections, better component placement and a more compact board that was easier to fit inside the base and easier to remove again."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "96a67c8fdc16",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1a3afa569306",
+            "_type": "span",
+            "marks": [],
+            "text": "This was also where I started thinking less about simply making a working circuit and more about making the electronics into an actual module that could be removed, repaired or replaced."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8626bce82847",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c5b6a3851b6c",
+            "_type": "span",
+            "marks": [],
+            "text": "I liked this version a lot more, but there was still one part I didn't trust. The USB-C connector was mounted directly onto the perfboard. I secured it with hot glue, which worked, but every time I plugged or unplugged the USB cable I could feel that this would probably become the next thing to break with heavier use."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "549fcdd9aa9a",
+        "_type": "image",
+        "alt": "Durian Lamp version 3 perfboard with USB-C power, capacitor, resistor, ESP32 headers and hot glue securing the wiring.",
+        "asset": {
+          "_ref": "image-c2f828a6add2ffa8a76f6436a48a796421e99508-4032x3024-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "ca78df234dd2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "2c323d66a593",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Main changes:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e9abcf20a286",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "33eecfbbea51",
+            "_type": "span",
+            "marks": [],
+            "text": "Smaller perfboard"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "279ec302ca2d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8d90e84ea161",
+            "_type": "span",
+            "marks": [],
+            "text": "Cleaner component layout"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d1c4376f61a2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "bbaff185dbe3",
+            "_type": "span",
+            "marks": [],
+            "text": "Shorter wiring"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e7e9dda7f09d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "06492c05855d",
+            "_type": "span",
+            "marks": [],
+            "text": "More compact power distribution"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "522fd01d9f56",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e01a120fb703",
+            "_type": "span",
+            "marks": [],
+            "text": "Easier to fit inside the lamp base"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f8dfc7971f7f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9b728ea63c8a",
+            "_type": "span",
+            "marks": [],
+            "text": "More focus on making parts removable"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1c1451080a59",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9c9e623fb702",
+            "_type": "span",
+            "marks": [],
+            "text": "Version 4: Moving USB to the enclosure"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "ca7371046020",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d41d1d8ff1b2",
+            "_type": "span",
+            "marks": [],
+            "text": "There was still one weak point: the USB connection. The USB-C power connector was attached to the perfboard itself and glued into position. Every time the USB cable was plugged in or removed, some of that force ended up being transferred to the board."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6e63764382dc",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "518659f39086",
+            "_type": "span",
+            "marks": [],
+            "text": "It worked, but I didn't trust it as a long-term solution. For the next version, I separated the USB connector from the electronics completely. The USB-C input is now mounted directly into the wall of the 3D-printed base. From there, two wires carry 5 V and ground to the internal perfboard."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a2ebcf4ba18a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a4c751aa5bbc",
+            "_type": "span",
+            "marks": [],
+            "text": "That means plugging in the lamp puts the mechanical stress on the enclosure instead of the electronics. I also changed the rest of the board with repairability in mind. The wiring now uses JST and JST-PH connectors where possible, so parts can be disconnected and replaced instead of being permanently soldered together. The ESP32 itself is removable as well."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6e52d9127a1b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "bc72b911f000",
+            "_type": "span",
+            "marks": [],
+            "text": "I deliberately put much of the wiring on top of the perfboard too. It's not quite as hidden, but it makes the connections much easier to see and understand when I need to work on it."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "10b8d928e32f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "236380d2fd0e",
+            "_type": "span",
+            "marks": [],
+            "text": "Finally, I added a resettable fuse to give the power input some extra protection. At this point, the perfboard had gone from being a place to solder some wires together to becoming its own removable controller module."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1bd16def9bac",
+        "_type": "image",
+        "alt": "Durian Lamp version 4 with the 3D printed base, ESP32 and modular perfboard electronics connected with removable plugs.",
+        "asset": {
+          "_ref": "image-6056240888c0bdc82cedae1a16d52180518e6bba-4032x3024-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "ac8e330b2d81",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b030bcf50c0a",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Main changes:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4846dc0c066d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "676b354ad8a0",
+            "_type": "span",
+            "marks": [],
+            "text": "USB-C connector mounted in the enclosure"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "16f145d305c2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3d280026b643",
+            "_type": "span",
+            "marks": [],
+            "text": "Separate wires from USB input to the perfboard"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "ad2c92be0df7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "88cc7c76b611",
+            "_type": "span",
+            "marks": [],
+            "text": "No mechanical load from the USB cable on the circuit board"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6f9c884c2429",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d022564279da",
+            "_type": "span",
+            "marks": [],
+            "text": "JST and JST-PH connectors for removable components"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b40f56b9d6ed",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3a5cfe107691",
+            "_type": "span",
+            "marks": [],
+            "text": "Removable ESP32"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "2b63d1ff891d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b8bc9bea5965",
+            "_type": "span",
+            "marks": [],
+            "text": "More visible and easier-to-follow wiring"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "26ed3b47ea0d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "c3a00690dcdb",
+            "_type": "span",
+            "marks": [],
+            "text": "Resettable fuse"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "94c37b74aa2f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ca8771ad6753",
+            "_type": "span",
+            "marks": [],
+            "text": "More modular internal electronics"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "8f6985a7ae95",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3b4f52a501ec",
+            "_type": "span",
+            "marks": [],
+            "text": "Easier to remove, repair or redesign the controller later"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "5579fbe394ef",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ba07cc1747f9",
+            "_type": "span",
+            "marks": [],
+            "text": "At this point the electronics were basically finished. So naturally I grabbed an ESP32 Mini to make an even smaller version."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "65ce413b71f4",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "157ae0846fd2",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "No. Finish the lamp."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f1f89b090719",
+        "_type": "image",
+        "alt": "Durian lamp prototype testing an ESP32 Mini and a smaller layout with the LED strip connected.",
+        "asset": {
+          "_ref": "image-a1bea412c280875c94516b9c8f74075ebfd674be-3024x4032-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "f5020d29156f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "bb595845b672",
+            "_type": "span",
+            "marks": [],
+            "text": "At least it was a quick test, and I got to enjoy the modularity paying off."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "480ed1829996",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1d38046d5e6a",
+            "_type": "span",
+            "marks": [],
+            "text": "One more problem: heat"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "a6aa6c979ebe",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "17faaf290f46",
+            "_type": "span",
+            "marks": [],
+            "text": "With most of the electronics finally in place, I noticed one more thing during testing: the ESP32 was getting a bit warm inside the column."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "bc25a1a7fb6f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "412ff3a41f42",
+            "_type": "span",
+            "marks": [],
+            "text": "My first thought was that it might somehow be related to the LED strip drawing power. Since the ESP32 and LEDs now have separate power paths, I wanted to make sure something wasn't still causing extra load on the board."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4c8e6aeac872",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "133309c071c3",
+            "_type": "span",
+            "marks": [],
+            "text": "So I tested it with the LEDs running and with them completely off. As far as I could tell, the LEDs weren't the cause. The ESP32 still warmed up without them. The more likely problem was much simpler: I had put an ESP32 inside a fairly small, almost completely enclosed 3D-printed column."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c2c79632320e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "415c35b3925b",
+            "_type": "span",
+            "marks": [],
+            "text": "So instead of changing the electronics again, I changed the print. I redesigned the column to add more ventilation around the ESP32, allowing heat to escape instead of getting trapped inside."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "df68a34acc10",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6f110eb5fab7",
+            "_type": "span",
+            "marks": [],
+            "text": "It's another small thing I probably wouldn't have thought much about when building the first prototype, but something that became obvious once I started treating the lamp as something that should be able to run reliably for longer periods. I like this solution as it’s also saving some filament."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4b1f5c68214e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "6f110eb5fab7",
+            "_type": "span",
+            "marks": [],
+            "text": "Version 5: Apparently I wasn't done with the electronics"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "12303d2d0c9b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8ee0a5918c31",
+            "_type": "span",
+            "marks": [],
+            "text": "The extra ventilation helped, but I still wasn't completely convinced that the heat was only caused by the enclosed column. There was one other thing I kept looking at: the way I had wired the perfboard."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "7576e28c2490",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7bc70ff29d27",
+            "_type": "span",
+            "marks": [],
+            "text": "So, of course, I made another one."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "5f54fe810248",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3cb73f5614d8",
+            "_type": "span",
+            "marks": [],
+            "text": "This time I gave the board proper power rails. Ground runs along one rail and 5 V along another, with the ESP32 and LED strip branching off them separately. I also moved the 1000 µF capacitor right to the LED output, across 5 V and ground, instead of making it part of the route the power had to travel through."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a7dc1f79d5fc",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "43107dfb55cb",
+            "_type": "span",
+            "marks": [],
+            "text": "Electrically, this is a much cleaner layout. The capacitor is now simply connected across the LED supply where it's needed, while the main power can continue directly along the rail."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3d30aeaba115",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a0e4610fad5b",
+            "_type": "span",
+            "marks": [],
+            "text": "I also went further with the removable connections. Both the USB-C power input and the three wires going to the LED strip now plug into connectors on the perfboard. The LED connector probably doesn't "
+          },
+          {
+            "_key": "c39d2b321502",
+            "_type": "span",
+            "marks": ["em"],
+            "text": "need"
+          },
+          {
+            "_key": "7a3b538081ba",
+            "_type": "span",
+            "marks": [],
+            "text": " to be removable, but after breaking enough soldered wires during this project, I like knowing that I can disconnect the whole board without pulling on anything."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "0ffcf9e218e9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d58d3f57b95d",
+            "_type": "span",
+            "marks": [],
+            "text": "It's a small change, but this version finally feels less like a collection of components soldered onto perfboard and more like an actual little controller board. The board didn’t get hot anymore and controlling the lights was no longer flickery, so it was a good improvement. "
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a9ae51ffdacd",
+        "_type": "image",
+        "alt": "Version 5 of the Durian Lamp ESP32 perfboard, with dedicated 5V and ground rails, removable power and LED connectors, a 330 ohm resistor, and a 1000 µF capacitor near the LED output.",
+        "asset": {
+          "_ref": "image-50d4663d8d0b0cc3055498bc954d7eb740af7f02-4032x3024-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "5985fc57bdb2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9d0114cd1633",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Main changes:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "9fe3708e9d9e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "efd52b421209",
+            "_type": "span",
+            "marks": [],
+            "text": "Dedicated 5 V and ground rails"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "ee71ca5d3b8b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0b04f878c716",
+            "_type": "span",
+            "marks": [],
+            "text": "ESP32 and LED strip branch directly from those rails"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c5cb92a98c7b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "897dd2480339",
+            "_type": "span",
+            "marks": [],
+            "text": "Capacitor moved right next to the LED output"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "38d9096c3564",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3e5d86dc5b69",
+            "_type": "span",
+            "marks": [],
+            "text": "Removable power connector"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "9144f156bcf1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e0cc14b359b8",
+            "_type": "span",
+            "marks": [],
+            "text": "Removable three-wire LED connector"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4d735d1e6d3f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0b235ec37fdd",
+            "_type": "span",
+            "marks": [],
+            "text": "Cleaner and easier-to-follow power distribution"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a226aef3c805",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "396710a5615a",
+            "_type": "span",
+            "marks": [],
+            "text": "No more permanently attached external wiring"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d7101e8684f8",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8df3aa4d73bc",
+            "_type": "span",
+            "marks": [],
+            "text": "By this point I had also accumulated a small collection of failed and outdated perfboards. In case you're wondering what happens to those:  I cast them into resin skulls and try to sell them. "
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "541767557655",
+        "_type": "youTube",
+        "url": "https://www.youtube.com/watch?v=a6W8KdpqKqk"
+      },
+      {
+        "_key": "4012ea7abf92",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "57f51fc9054d",
+            "_type": "span",
+            "marks": [],
+            "text": "Version 6: Okay, one actual last change"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "17b9d988be0c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fc3d138cb3a8",
+            "_type": "span",
+            "marks": [],
+            "text": "A while ago I ordered a bunch of USB cables with inline cord switches, which are perfect for a night lamp. The only problem was that they were all Micro-USB, while I had designed the latest base around USB-C."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "604539e9654f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4e8d25b67462",
+            "_type": "span",
+            "marks": [],
+            "text": "I could have ordered new cables. Instead, I changed the lamp again."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a4c60c3f3fb7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b7dabf82dbc4",
+            "_type": "span",
+            "marks": [],
+            "text": "I made a second version of the base with a Micro-USB input. The internal wiring stays exactly the same: the connector is mounted in the enclosure, its cable runs through the column and plugs into the perfboard. Because the power connection on the board is removable, it doesn't really care whether the outside of the lamp uses USB-C or Micro-USB."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "813524935690",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "5e1ed656200d",
+            "_type": "span",
+            "marks": [],
+            "text": "This also meant I could stop cutting USB cables apart just to add a switch. I can simply use the Micro-USB cables I already have with their built-in inline cord switch, which is much nicer for a bedside lamp."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "228c34504ca0",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7e5db55c3061",
+            "_type": "span",
+            "marks": [],
+            "text": "It's a tiny addition, but also a good test of all the modularity I kept adding. Changing the external power connector no longer means changing the electronics."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "aaf203dc8120",
+        "_type": "image",
+        "alt": "Durian Lamp opened on a workbench showing the modular perfboard electronics alongside USB-C and Micro-USB base power connector options",
+        "asset": {
+          "_ref": "image-b08715993e63b891fa80f7af5eb5e82d3bd11988-5712x4284-jpg",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "ef9063a8d070",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "194afd764075",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Main changes:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "ff1e37d53592",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "60351d93b424",
+            "_type": "span",
+            "marks": [],
+            "text": "USB-C and Micro-USB base versions"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6277b5948c99",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "30da9d5140bf",
+            "_type": "span",
+            "marks": [],
+            "text": "Both use the same internal electronics"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d57aff83c89e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "9cc94ca85785",
+            "_type": "span",
+            "marks": [],
+            "text": "Enclosure-mounted power connector"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "7580b3d979cd",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4df5f07b7d98",
+            "_type": "span",
+            "marks": [],
+            "text": "Removable connection to the perfboard"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a46740d505e1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d48bb6260bc2",
+            "_type": "span",
+            "marks": [],
+            "text": "Support for ready-made cables with an inline cord switch"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f3270bceb2bb",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e85f8d0e004d",
+            "_type": "span",
+            "marks": [],
+            "text": "No more cutting USB cables"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a82c40718c3d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "22677539c123",
+            "_type": "span",
+            "marks": [],
+            "text": "The video created another problem"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "7ce8eac96c0c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "fa22479c485c",
+            "_type": "span",
+            "marks": [],
+            "text": "Somewhere along the way I made a durian song with Suno, called Durian everywhere. It was too good not to share, so now I needed to make a video."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "74c2a8921bea",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e14c356016cd",
+            "_type": "span",
+            "marks": [],
+            "text": "For the video I gathered all the different durians I'd made and carried them around the house to set up different shots. That exposed another design flaw very quickly: the top shell kept falling off the base. "
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "611d546fe2e7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e14c356016cd",
+            "_type": "span",
+            "marks": [],
+            "text": "Until then it hadn't bothered me much. The lamp normally just sits in one place, so gravity was doing a perfectly acceptable job of holding everything together. A video shoot apparently has different requirements. After repeatedly picking the shell up from the floor, I redesigned the internal mechanism and added a proper snap-fit between the shell and the base."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "9104c565c56c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "71ccc223e10f",
+            "_type": "span",
+            "marks": [],
+            "text": "The complete lamp can now be picked up and moved around as one piece without leaving half the durian behind. Yet another problem I probably wouldn't have discovered if I'd simply left the lamp sitting on the nightstand."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "af8be7a9c032",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "1c3ddae1748f",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Current setup"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3d9a57d34055",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e3409306296e",
+            "_type": "span",
+            "marks": [],
+            "text": "The lamp currently combines:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a8a5c710b8e2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "d7c570389894",
+            "_type": "span",
+            "marks": [],
+            "text": "ESP32 running WLED"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e9b842a415c2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "7e663e13c3f6",
+            "_type": "span",
+            "marks": [],
+            "text": "5 V addressable LEDs wrapped around the internal column"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b615c41e95bc",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "486fa0b5f409",
+            "_type": "span",
+            "marks": [],
+            "text": "330 Ω resistor on the LED data line"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "bfcd53f42f63",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "08ca3323480c",
+            "_type": "span",
+            "marks": [],
+            "text": "1000 µF capacitor across the LED power supply"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f345689c7d7f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "163bbeedf937",
+            "_type": "span",
+            "marks": [],
+            "text": "Resettable fuse"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4ea1d6f06603",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a7384d10b1c5",
+            "_type": "span",
+            "marks": [],
+            "text": "Perfboard-based power distribution"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1a5f21dd2f40",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a944bd30141d",
+            "_type": "span",
+            "marks": [],
+            "text": "Separate power paths for the ESP32 and LEDs"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a3f0076b7278",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "a12aebbf41b1",
+            "_type": "span",
+            "marks": [],
+            "text": "Enclosure-mounted USB-C power input"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "9a5794507402",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0d54046874ad",
+            "_type": "span",
+            "marks": [],
+            "text": "JST and JST-PH connectors"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "091abd73733f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4e124fb2a6f0",
+            "_type": "span",
+            "marks": [],
+            "text": "Physical control button"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "c47dde21f214",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "780d42bda71c",
+            "_type": "span",
+            "marks": [],
+            "text": "3D-printed translucent durian shell"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "75498b539fab",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f5fccac08dd5",
+            "_type": "span",
+            "marks": [],
+            "text": "Redesigned durian stem, grooves and shell details"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "e60cd30d2111",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f5f1750c42c3",
+            "_type": "span",
+            "marks": [],
+            "text": "Snap-fit connection between the shell and base"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "1d6dd747890a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "41929983390f",
+            "_type": "span",
+            "marks": [],
+            "text": "Ventilated internal column for the ESP32"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "a4fe3e772b5b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e4ad7b82e544",
+            "_type": "span",
+            "marks": [],
+            "text": "So what did I actually end up with?"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "db1b78dedb17",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "dd8f5cb4a54a",
+            "_type": "span",
+            "marks": [],
+            "text": "After all these versions, I somehow ended up with a small modular lamp system rather than one finished model."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "238ccdcda5b7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "21241c62c82c",
+            "_type": "span",
+            "marks": [],
+            "text": "There is now "
+          },
+          {
+            "_key": "262ca1e17028",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "one Durian shell"
+          },
+          {
+            "_key": "56014a2c6217",
+            "_type": "span",
+            "marks": [],
+            "text": ", but the parts underneath it can be mixed depending on how you want to build the lamp:"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "69f3caf1bd5f",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4e6facc513d8",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "3 bases:"
+          },
+          {
+            "_key": "ceaab4cd1872",
+            "_type": "span",
+            "marks": [],
+            "text": " USB-C, Micro-USB, or a simple cable opening for the Bambu LED controller"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d34ffe8dc9c0",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "da60159186d9",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "2 columns:"
+          },
+          {
+            "_key": "633c43cd168b",
+            "_type": "span",
+            "marks": [],
+            "text": " one designed for the ESP32/perfboard electronics and one for the simpler LED setup"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4ae4470f7279",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "669fbd3c3a4b",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "1 finalized perfboard:"
+          },
+          {
+            "_key": "0be6b8f6bfaa",
+            "_type": "span",
+            "marks": [],
+            "text": " with removable power and LED connections"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f70f2d98c216",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "99f2fe101c36",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "1 Durian shell:"
+          },
+          {
+            "_key": "d45076d94219",
+            "_type": "span",
+            "marks": [],
+            "text": " print it in whatever color or translucent material you want"
+          }
+        ],
+        "level": 1,
+        "listItem": "bullet",
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "f34b84c42112",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e60c8de0deb8",
+            "_type": "span",
+            "marks": [],
+            "text": "The nice part is that I don't need a completely different lamp for every version. The shell stays the same, and I can swap the parts underneath depending on whether I want the simple Bambu setup or the full ESP32/WLED version."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4b986fdf9ccf",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "42ad98bb8185",
+            "_type": "span",
+            "marks": [],
+            "text": "Which, considering this started as a simple night lamp, is probably a little ridiculous."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "accbc2aaa6cd",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ffea77e98b26",
+            "_type": "span",
+            "marks": [],
+            "text": "Just when I thought I was out..."
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "9ae707290bc6",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e91482a4176a",
+            "_type": "span",
+            "marks": ["em"],
+            "text": "...they pull me back in."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "54899a9303f3",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4cdd452d6451",
+            "_type": "span",
+            "marks": [],
+            "text": "At some point I made the mistake of wondering: what if I actually wanted to turn this into a real product one day? What would need to change to make it production-ready?"
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4d52844f8497",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "95868a9c5644",
+            "_type": "span",
+            "marks": [],
+            "text": "So I started watching some YouTube videos about taking electronics from a prototype to an actual product, and ended up at "
+          },
+          {
+            "_key": "b61b74571048",
+            "_type": "span",
+            "marks": ["8d121d3c8e09"],
+            "text": "this video by John Teel"
+          },
+          {
+            "_key": "64573829e672",
+            "_type": "span",
+            "marks": [],
+            "text": ". John is an electronics design engineer and used to work as a senior design engineer at Texas Instruments, so he knows a lot more about this stuff than I do. He does a really good job of explaining all the things that can go wrong once something leaves your desk and ends up in the hands of other people."
+          }
+        ],
+        "markDefs": [
+          {
+            "_key": "8d121d3c8e09",
+            "_type": "link",
+            "href": "https://youtu.be/TZdKkc8Xju8?utm_source=chatgpt.com"
+          }
+        ],
+        "style": "normal"
+      },
+      {
+        "_key": "84f6d701fa0a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "aff0e084c723",
+            "_type": "span",
+            "marks": [],
+            "text": "And, of course, that gave me a few more things to think about."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "13cbfc214415",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "ab314897c64c",
+            "_type": "span",
+            "marks": [],
+            "text": "The current ESP32 version already has a resettable fuse, a 330 Ω resistor on the LED data line and a 1000 µF capacitor across the LED power supply. But while looking into more production-grade protection, I found two things that were easy enough to improve even on the DIY perfboard."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "37945e402d3d",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "14dd23062de2",
+            "_type": "span",
+            "marks": [],
+            "text": "The ESP32 runs from the 5 V supply, but its GPIO pins still output a 3.3 V data signal. My WS2812B LEDs have been working perfectly fine with that, but a proper level shifter removes that uncertainty. So I'm adding a 74AHCT125 to convert the 3.3 V data signal to 5 V before it reaches the LEDs."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "11c1b35625ae",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e3b51beca7d1",
+            "_type": "span",
+            "marks": [],
+            "text": "I'm also adding a tiny 100 nF ceramic capacitor next to the level shifter. The big 1000 µF capacitor helps with larger changes in the LED power supply; this tiny one deals with very fast little disturbances right next to the chip."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4e0e76cf8398",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e85b8df88c2f",
+            "_type": "span",
+            "marks": [],
+            "text": "That should be where I stop adding things to the perfboard. "
+          },
+          {
+            "_key": "869a9a268147",
+            "_type": "span",
+            "marks": ["em"],
+            "text": "Should."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "cb013e2a7f30",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "826b838182dc",
+            "_type": "span",
+            "marks": [],
+            "text": "If I ever actually turn this into something I want to sell, that's a different story. I'd make a custom PCB and properly look at things like ESD, overvoltage and transient protection, PCB trace sizing, thermal behaviour, testing and all the other boring things that suddenly become very important when you're building something for strangers instead of yourself."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "81ab63a797c1",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0d427e0607a6",
+            "_type": "span",
+            "marks": [],
+            "text": "For now, the ESP32 version remains what it was supposed to be: "
+          },
+          {
+            "_key": "4301613c6998",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "a DIY electronics project, not a commercial product."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "52cad2e835d2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "00312eaf5778",
+            "_type": "span",
+            "marks": [],
+            "text": "Finished... for now"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "319d6c5ac915",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "54fc90c4398e",
+            "_type": "span",
+            "marks": [],
+            "text": "At some point you have to stop adding things and call a project finished. I think we've finally reached that point. Or at least close enough."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3068e12f5248",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "e4abe19f9fcb",
+            "_type": "span",
+            "marks": [],
+            "text": "The lamp itself is done, the design has been tested, and the Bambu LED Kit version is now available on MakerWorld. It consists of three printable parts: the base, the removable center column and the translucent durian shell. This is deliberately the simplest version of the lamp. Print the parts, install the Bambu LED Kit and you're done. No soldering, ESP32 or questionable adventures with a multimeter required."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "3e6f9bb57b3e",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "924864a9521b",
+            "_type": "span",
+            "marks": [],
+            "text": "The more complicated ESP32/WLED version isn't going anywhere, though. That version has its own removable column for the electronics and the custom perfboard I've spent far too much time redesigning. I still want to release it, but I don't want to hold back the finished Bambu version while I prepare proper instructions for something considerably more complicated."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "b0699da952c9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "3523453cb1dc",
+            "_type": "span",
+            "marks": [],
+            "text": "And that's probably a good place to end this project log. What started as a small night light for my girlfriend somehow turned into multiple bases, multiple columns, custom electronics, WLED, a pile of failed perfboards and far more durians than I expected."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "01a17c70ad9b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b45b17c13e90",
+            "_type": "span",
+            "marks": [],
+            "text": "The simple version is out. The complicated version will follow."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "7618f895379b",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4fca28f8fe52",
+            "_type": "span",
+            "marks": [],
+            "text": "So, finished... for now."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "bf6640bb540a",
+        "_type": "image",
+        "alt": "Finished 3D printed Durian Lamp glowing green and warm yellow with the Bambu LED Kit",
+        "asset": {
+          "_ref": "image-3961fddb0cad2a3a03ff3f4a0b3e2e5159b5ac0f-4284x5712-jpg",
+          "_type": "reference"
+        }
+      }
+    ],
+    "companyLogo": null,
+    "companyName": null,
+    "description": null,
+    "excerpt": "A 3D printed durian lamp with programmable RGB LEDs, built with an ESP32 and WLED. What started as a simple night lamp turned into several redesigns. ",
+    "faq": null,
+    "imageAlt": "Three 3D printed durian lamps in different sizes, illuminated with colorful RGB LED effects.",
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/a63d26c37b3327e777a1414bc54b668d42d37244-1200x630.png",
+    "jsonLdApplicationCategory": null,
+    "jsonLdCodeRepository": null,
+    "jsonLdDownloadUrl": null,
+    "jsonLdIsAuthor": true,
+    "jsonLdOperatingSystem": null,
+    "jsonLdProgrammingLanguage": null,
+    "jsonLdType": ["CreativeWork"],
+    "links": [
+      {
+        "_key": "0380677da363",
+        "icon": "externalLink",
+        "link": "https://makerworld.com/nl/models/3302273-durian-lamp-3d-printed-led-mood-light#profileId-3747990",
+        "title": "MakerWorld - Download the Durian Lamp"
+      }
+    ],
+    "mainImage": {
+      "_type": "image",
+      "alt": "Three 3D printed durian lamps in different sizes, illuminated with colorful RGB LED effects.",
+      "asset": {
+        "_ref": "image-a63d26c37b3327e777a1414bc54b668d42d37244-1200x630-png",
+        "_type": "reference"
+      }
+    },
+    "publishedAt": "2026-08-31T13:59:00.000Z",
+    "slug": {
+      "_type": "slug",
+      "current": "durian-lamp"
+    },
+    "tags": [
+      {
+        "_id": "101f410e-9ce9-448f-8460-eb63630a11ba",
+        "label": "ESP32"
+      },
+      {
+        "_id": "06020007-80fd-4068-8542-c86e92c2aa1f",
+        "label": "electronics"
+      },
+      {
+        "_id": "019329da-422e-47d2-b5ff-b9c86bf5b14d",
+        "label": "3D printing "
+      },
+      {
+        "_id": "fa22da2f-035a-4a36-ab73-6b20f1ac66e6",
+        "label": "DIY"
+      },
+      {
+        "_id": "6688186a-b082-4670-a468-25cad9d7cced",
+        "label": "makers"
+      },
+      {
+        "_id": "1fcde828-df68-466a-8050-73ec2f3d5e48",
+        "label": "3D modelling"
+      },
+      {
+        "_id": "c367dc6b-f51e-4a17-9e08-c77b17bcd209",
+        "label": "Arduino"
+      }
+    ],
+    "title": "Durian Lamp: A 3D Printed ESP32 & WLED Lamp"
+  },
+  {
     "_createdAt": "2026-05-31T12:27:13Z",
     "_id": "project-1-bit-doom",
-    "_updatedAt": "2026-05-31T12:38:00Z",
+    "_updatedAt": "2026-06-14T08:29:28Z",
     "body": [
       {
         "_key": "6e20f502-72d",
@@ -49,6 +4039,11 @@
         ],
         "markDefs": [],
         "style": "normal"
+      },
+      {
+        "_key": "be67079d2552",
+        "_type": "youTube",
+        "url": "https://youtu.be/DsCNIac6LnE?si=TqeAg-g2ZcSq7DvP"
       },
       {
         "_key": "cd18a41d-5aa",
@@ -242,28 +4237,325 @@
         "style": "h2"
       },
       {
-        "_key": "b6688ca3-700",
+        "_key": "cd4461981dc4",
         "_type": "block",
         "children": [
           {
-            "_key": "f5a41189-e46",
+            "_key": "a5277ecfbcdd",
             "_type": "span",
             "marks": [],
-            "text": "The project supports multiple 1-bit dithering algorithms: Bayer ordered dithering at 2x2, 4x4, and 8x8, plus Floyd-Steinberg and Atkinson error diffusion. Each one gives the image a different character. Bayer is fast and produces a clean pattern, good for maintaining high frame rates. Atkinson creates that classic Macintosh look with more contrast. Floyd-Steinberg sits somewhere in between."
+            "text": "Converting a full-color Doom frame to pure black and white is where most of the visual character comes from. The project supports five 1-bit dithering algorithms, and you can switch between them in real time and watch the result change on both the browser preview and the physical OLED. There are also controls for contrast, brightness, and cropping from all four sides, so you can frame just the gameplay area and cut out the HUD."
           }
         ],
         "markDefs": [],
         "style": "normal"
       },
       {
-        "_key": "988ecd4d-a28",
+        "_key": "ccccab854735",
         "_type": "block",
         "children": [
           {
-            "_key": "c4f027c6-1f3",
+            "_key": "a5277ecfbcdd",
             "_type": "span",
             "marks": [],
-            "text": "You can switch between them in real time and see the result both in the browser preview and on the physical OLED. There are also controls for contrast, brightness, and cropping from all four sides, so you can frame just the gameplay area and cut out the HUD."
+            "text": "The five fall into two families. "
+          },
+          {
+            "_key": "9bd1473219d3",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Ordered dithering"
+          },
+          {
+            "_key": "7ca2e3c2710e",
+            "_type": "span",
+            "marks": [],
+            "text": " (the Bayer matrices) compares each pixel against a fixed threshold pattern. It is stateless and fast, which keeps the frame rate high, but it leaves a visible repeating grid. "
+          },
+          {
+            "_key": "8ecfaf376131",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Error diffusion"
+          },
+          {
+            "_key": "f85076a1ec15",
+            "_type": "span",
+            "marks": [],
+            "text": " (Floyd-Steinberg and Atkinson) pushes the rounding error of each pixel onto its neighbours, which looks more organic and detailed but costs more per frame. Here is how each one looks on the 128x64 screen."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "51f6f8bff8d7",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f85076a1ec15",
+            "_type": "span",
+            "marks": [],
+            "text": "Bayer 2x2 ordered dithering"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "9533455a3c5c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "f053573ecbfa",
+            "_type": "span",
+            "marks": [],
+            "text": "The smallest Bayer matrix. It only resolves a handful of brightness levels, so the pattern is bold and the image is the most abstract of the set. It is the fastest option and holds up in fast motion, but fine detail in Doom's darker rooms tends to disappear."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "982f8b8ffcee",
+        "_type": "image",
+        "alt": "Doom dithered with Bayer 2x2 ordered dithering on a 128x64 SSD1306 OLED, showing a coarse checkerboard pattern with only a few tonal steps",
+        "asset": {
+          "_ref": "image-e88370e1ead0c8268321deb08c18559baaabf544-1024x768-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "d4d3c557e720",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "623f3ffffd6c",
+            "_type": "span",
+            "marks": [],
+            "text": "Bayer 4x4 ordered dithering"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "0fbea5e3e2b2",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "4b4120412adb",
+            "_type": "span",
+            "marks": [],
+            "text": "A solid middle-ground option. Seventeen tonal levels give enough gradient to read shapes and enemies, while the ordered pattern stays cheap enough to keep frame rates up. It is a reasonable default, though in the end the higher contrast of Atkinson read better on this screen."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "d2dba218e710",
+        "_type": "image",
+        "alt": "Doom dithered with Bayer 4x4 ordered dithering on a 128x64 SSD1306 OLED, showing a clean regular crosshatch pattern",
+        "asset": {
+          "_ref": "image-31bba2ed934a4419d9bfb2eedaf876bfa28a0df3-1024x768-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "f4e2d653e8a9",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "8239e392d7c1",
+            "_type": "span",
+            "marks": [],
+            "text": "Bayer 8x8 ordered dithering"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "6c57f6196e54",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "067a2b23a178",
+            "_type": "span",
+            "marks": [],
+            "text": "The largest Bayer matrix resolves the most tonal steps and gives the smoothest gradients of the ordered family. On a tiny screen the fine texture can read as slight noise, but it preserves the most shading detail while still being fully stateless and fast."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4e945b2428f0",
+        "_type": "image",
+        "alt": "Doom dithered with Bayer 8x8 ordered dithering on a 128x64 SSD1306 OLED, showing a fine dense repeating dot texture",
+        "asset": {
+          "_ref": "image-1836e2e43f611a46a08a56f9f4164b86292a8b8e-1024x768-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "6670814569b5",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "12cd2295b40a",
+            "_type": "span",
+            "marks": [],
+            "text": "Floyd-Steinberg error diffusion"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "63488d9bbcea",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "97646b6fb8fe",
+            "_type": "span",
+            "marks": [],
+            "text": "The classic error-diffusion algorithm. It spreads each pixel's rounding error to its neighbours, so there is no repeating grid and gradients look the smoothest of all five. The trade-off on a moving image is that the scattered dots can shimmer slightly from frame to frame, and it costs more to compute than the Bayer modes."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "6f241d01a8eb",
+        "_type": "image",
+        "alt": "Doom dithered with Floyd-Steinberg error diffusion on a 128x64 SSD1306 OLED, showing smooth organic gradients with no repeating pattern",
+        "asset": {
+          "_ref": "image-6881d9d8332a588daf0656570ffa0c77759779db-1024x768-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "15f71db59209",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "b4f215cbbb65",
+            "_type": "span",
+            "marks": [],
+            "text": "Atkinson error diffusion"
+          }
+        ],
+        "markDefs": [],
+        "style": "h3"
+      },
+      {
+        "_key": "aa22195ed66c",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "87a8acd42ea5",
+            "_type": "span",
+            "marks": [],
+            "text": "Atkinson diffuses only part of the error, which leaves more pure black and white and gives that punchy, high-contrast look from the original Macintosh. Edges and silhouettes pop, which actually helps readability of enemies in dark scenes, at the cost of losing some midtone shading."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      },
+      {
+        "_key": "4f2db2e53c1e",
+        "_type": "image",
+        "alt": "Doom dithered with Atkinson error diffusion on a 128x64 SSD1306 OLED, showing high contrast with sparse white dots and deep blacks in the classic Macintosh style",
+        "asset": {
+          "_ref": "image-7275728d7fd6a9e65d526264e85ba7060554f2d1-1024x768-webp",
+          "_type": "reference"
+        }
+      },
+      {
+        "_key": "d8ff98495ecd",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "eccd67dcfe74",
+            "_type": "span",
+            "marks": [],
+            "text": "Which one wins"
+          }
+        ],
+        "markDefs": [],
+        "style": "h2"
+      },
+      {
+        "_key": "5a30e89cfe08",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "0dbce70887e5",
+            "_type": "span",
+            "marks": [],
+            "text": "After trying all five on real gameplay, "
+          },
+          {
+            "_key": "90b5f4bbcdc0",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Atkinson"
+          },
+          {
+            "_key": "1ff1310e5899",
+            "_type": "span",
+            "marks": [],
+            "text": " was the winner. Its high contrast and deep blacks make enemies and edges pop on the tiny screen, which matters more than smooth shading when you are actually trying to play. The classic Macintosh look is a nice bonus.\nThe two runners-up were both solid. "
+          },
+          {
+            "_key": "8723e7c3704f",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Bayer 2x2"
+          },
+          {
+            "_key": "f95cdd77cc4d",
+            "_type": "span",
+            "marks": [],
+            "text": " held up well, the bold pattern is cheap and stays readable in motion. "
+          },
+          {
+            "_key": "97ca3c118f61",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "Floyd-Steinberg"
+          },
+          {
+            "_key": "6f2ceb53944c",
+            "_type": "span",
+            "marks": [],
+            "text": " also looked good thanks to its smooth, grid-free gradients. The "
+          },
+          {
+            "_key": "748f77713eed",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "4x4"
+          },
+          {
+            "_key": "1d75fd4ea760",
+            "_type": "span",
+            "marks": [],
+            "text": " and "
+          },
+          {
+            "_key": "09c8e11daac4",
+            "_type": "span",
+            "marks": ["strong"],
+            "text": "8x8"
+          },
+          {
+            "_key": "4f7dacb5a6e1",
+            "_type": "span",
+            "marks": [],
+            "text": " Bayer modes are fine middle-ground options, but on this display the extra tonal levels did not add as much as Atkinson's contrast."
           }
         ],
         "markDefs": [],
@@ -556,14 +4848,14 @@
         "_key": "53e91b176ed0",
         "answer": [
           {
-            "_key": "1fd77873e9c7",
+            "_key": "2681b9769f01",
             "_type": "block",
             "children": [
               {
-                "_key": "19c21e6c1df6",
+                "_key": "b7c7511ac081",
                 "_type": "span",
                 "marks": [],
-                "text": "It depends on what you value. Atkinson dithering gives the most contrast and a classic Macintosh aesthetic. Bayer 4x4 is the best balance of speed and visual quality. Floyd-Steinberg produces the smoothest gradients but can look noisy on a tiny screen."
+                "text": "After testing all five on real gameplay, Atkinson won. Its high contrast and deep blacks make enemies and edges stand out clearly on the 128x64 screen, which matters more than smooth shading when you are actually playing, and it gives that classic Macintosh look. Bayer 2x2 and Floyd-Steinberg were close runners-up: the 2x2 pattern is cheap and stays readable in motion, and Floyd-Steinberg has the smoothest grid-free gradients. The 4x4 and 8x8 Bayer modes are fine middle-ground options."
               }
             ],
             "markDefs": [],
@@ -661,6 +4953,10 @@
       {
         "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
         "label": "Javascript"
+      },
+      {
+        "_id": "e314d8b0-b586-40d6-bb49-94a2165c0f6d",
+        "label": "dithering"
       }
     ],
     "title": "1-Bit Doom: Stream DOS Games to ESP32 OLED Over WiFi"
@@ -912,7 +5208,7 @@
   {
     "_createdAt": "2026-05-23T05:56:25Z",
     "_id": "xfhA6WlRU3jtmS68mzcOBV",
-    "_updatedAt": "2026-05-23T06:36:02Z",
+    "_updatedAt": "2026-11-15T11:36:35Z",
     "body": [
       {
         "_key": "f56c83e9-526",
@@ -1111,6 +5407,12 @@
         "icon": "article",
         "link": "/blog/mediapipe-face-mesh-landmarks",
         "title": "Read the article about MediaPipe face mesh landmarks"
+      },
+      {
+        "_key": "ad74de03-96b",
+        "icon": "article",
+        "link": "/blog/download-mediapipe-model-files",
+        "title": "Download the MediaPipe model files"
       }
     ],
     "mainImage": {
@@ -1157,7 +5459,7 @@
   {
     "_createdAt": "2026-05-08T13:50:42Z",
     "_id": "023dc8f1-0e94-4d28-9ca2-807d3943e77e",
-    "_updatedAt": "2026-05-23T15:00:26Z",
+    "_updatedAt": "2026-06-12T13:18:20Z",
     "body": [
       {
         "_key": "81deda2e0ace",
@@ -1419,6 +5721,10 @@
       {
         "_id": "68a3161b-e6a1-4e5c-8774-7c5d54ada0ad",
         "label": "Webcam"
+      },
+      {
+        "_id": "e314d8b0-b586-40d6-bb49-94a2165c0f6d",
+        "label": "dithering"
       }
     ],
     "title": "ESP32 Mini OLED Webcam Stream"

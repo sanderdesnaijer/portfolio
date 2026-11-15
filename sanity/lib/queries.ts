@@ -157,6 +157,7 @@ export const blogQuery = groq`
     _createdAt,
     _updatedAt,
     title,
+    seoTitleBase,
     slug,
     publishedAt,
     mainImage,
@@ -182,6 +183,7 @@ export const blogsQuery = groq`
   *[_type == "blogPost"] | order(publishedAt desc) {
     _id,
     title,
+    seoTitleBase,
     slug,
     publishedAt,
     mainImage,

@@ -1,5 +1,94 @@
 [
   {
+    "_id": "f9215453-04f4-4c79-8c12-49ac86c1162a",
+    "companyName": "Norwegian Meteorological Institute",
+    "contractName": "The NextGen",
+    "description": [
+      {
+        "_key": "e82aba57732a",
+        "_type": "block",
+        "children": [
+          {
+            "_key": "bf0354ece990",
+            "_type": "span",
+            "marks": [],
+            "text": "I've recently started working with the Norwegian Meteorological Institute (MET Norway), continuing my work on the open-source Open GeoWeb platform. Having worked on the project for several years at KNMI, I'm now contributing from the Norwegian side, helping develop and improve the tools meteorologists use to monitor and analyse weather data in real time."
+          }
+        ],
+        "markDefs": [],
+        "style": "normal"
+      }
+    ],
+    "employmentType": "contract",
+    "endDate": null,
+    "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/32fb557d0cf922ee7d01245726d4251c5e1473e2-200x200.jpg",
+    "jobTitle": "Front-end developer",
+    "link": "https://www.met.no/en",
+    "startDate": "2026-10-01T07:15:00.000Z",
+    "tags": [
+      {
+        "_id": "a360f4af-4cb7-49ff-81b0-8fc8aadd1a38",
+        "label": "HTML"
+      },
+      {
+        "_id": "287e4257-0a1c-4df6-9216-a27959a5f04f",
+        "label": "CSS3"
+      },
+      {
+        "_id": "73890da9-5eb9-43ef-b2a6-5d04579c1309",
+        "label": "Javascript"
+      },
+      {
+        "_id": "7d6516a5-39e9-4fe1-b21d-9a01863e34ea",
+        "label": "Typescript"
+      },
+      {
+        "_id": "0d98d371-259c-4037-8bf3-bd067b4b0184",
+        "label": "Open GeoWeb"
+      },
+      {
+        "_id": "263f9d7a-92fb-401c-80a5-86335078aa82",
+        "label": "OpenLayers"
+      },
+      {
+        "_id": "aafce187-d58c-4fe5-a7e3-5582ed64be8a",
+        "label": "maps"
+      },
+      {
+        "_id": "2583ede8-2270-4223-b4db-1d47647acfde",
+        "label": "NX"
+      },
+      {
+        "_id": "101cc581-a777-45f0-b1d8-325a84fbbb72",
+        "label": "Jest"
+      },
+      {
+        "_id": "757d6e34-1cbf-40b1-8e9e-9e4e7aace891",
+        "label": "Playwright"
+      },
+      {
+        "_id": "145a41ce-bbe3-4195-8011-3831affaad02",
+        "label": "React"
+      },
+      {
+        "_id": "28b1de79-f2c6-40a6-a6bf-2fd36a47b6f8",
+        "label": "Redux"
+      },
+      {
+        "_id": "bf2df11e-6861-4f4c-9d83-17aee5a42f1a",
+        "label": "Open Source"
+      },
+      {
+        "_id": "c78b4dc8-a770-4dfe-8748-e38604bece58",
+        "label": "Storybook"
+      },
+      {
+        "_id": "ac23153f-88ff-47a6-a51b-782864192583",
+        "label": "localization"
+      }
+    ]
+  },
+  {
     "_id": "69c3c72f-f928-412e-9129-7ca3fc17b20d",
     "companyName": "Royal Netherlands Meteorological Institute",
     "contractName": "The NextGen",
@@ -87,7 +176,7 @@
       }
     ],
     "employmentType": "contract",
-    "endDate": null,
+    "endDate": "2026-09-30T07:07:00.000Z",
     "imageURL": "https://cdn.sanity.io/images/c6ybobx3/production/e3ee9676e6e6942f18a72325ed6519bf5def97ce-200x200.jpg",
     "jobTitle": "Front-end developer",
     "link": "https://www.knmi.nl/",

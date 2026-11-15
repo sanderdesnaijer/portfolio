@@ -68,7 +68,9 @@ export async function generateMetadata({
     params: { slug },
   });
 
-  const { title } = article;
+  // seoTitleBase lets the <title> tag differ from the visible H1, for posts
+  // where the best search title is not the best heading. Falls back to title.
+  const title = article.seoTitleBase || article.title;
   const description = getExcerpt(article);
   const rawImageUrl = article.imageURL || page.imageURL;
   const OG_PARAMS = "w=1200&h=630&fit=crop&auto=format";

@@ -73,7 +73,7 @@ const queries: Record<
   },
   blogs: {
     query: `*[_type == "blogPost"] | order(publishedAt desc) {
-      _id, _createdAt, _updatedAt, title, slug, publishedAt, mainImage,
+      _id, _createdAt, _updatedAt, title, seoTitleBase, slug, publishedAt, mainImage,
       "imageURL": select(
         defined(mainImage) => mainImage.asset->url + "?w=1200&h=630&fit=crop&auto=format",
         imageURL

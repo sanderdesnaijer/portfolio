@@ -18,6 +18,17 @@ export const blogType = defineType({
           ),
     }),
     defineField({
+      name: "seoTitleBase",
+      title: "SEO title (base)",
+      type: "string",
+      description:
+        "Optional. Used for the <title> tag and social previews when the visible heading is not the best search title, for example when the title tag needs an exact file name. Falls back to Title when empty. Mirrors the same field on Pages.",
+      validation: (Rule) =>
+        Rule.max(MAX_SEO_TITLE_LENGTH).warning(
+          `Aim for titles under ${MAX_SEO_TITLE_LENGTH} characters so they don't get truncated in search results`
+        ),
+    }),
+    defineField({
       name: "publishedAt",
       title: "Published At",
       type: "datetime",
