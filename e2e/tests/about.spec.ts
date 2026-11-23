@@ -50,7 +50,7 @@ test.describe("about", () => {
 
   test("should render dynamic content from Sanity", async ({ page }) => {
     await expect(
-      page.getByRole("link", { name: "[Link to] Royal Netherlands" })
+      page.getByRole("link", { name: "Royal Netherlands" })
     ).toBeVisible();
     await expect(
       page.getByText(/frontend developer|software developer/i).first()

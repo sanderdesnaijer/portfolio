@@ -115,7 +115,7 @@ node scripts/indexnow.mjs
 Submit specific URLs after publishing new content:
 
 ```bash
-node scripts/indexnow.mjs https://sanderdesnaijer.com/blog/my-new-post
+node scripts/indexnow.mjs https://www.sanderdesnaijer.com/blog/my-new-post
 ```
 
 Run once per publish. Don't resubmit the same URLs repeatedly.

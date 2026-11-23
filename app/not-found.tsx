@@ -1,4 +1,3 @@
-"use server";
 import { getTranslations } from "next-intl/server";
 import { AUTHOR_NAME } from "./utils/constants";
 import { CustomLink } from "./components/CustomLink";

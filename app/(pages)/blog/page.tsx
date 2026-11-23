@@ -1,4 +1,3 @@
-"use server";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { blogsQuery, pageQuery } from "@/sanity/lib/queries";
 import { PageSanity } from "@/sanity/types";

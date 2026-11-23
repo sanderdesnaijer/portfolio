@@ -1,4 +1,3 @@
-"use server";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
