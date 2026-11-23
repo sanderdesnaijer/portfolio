@@ -6,13 +6,13 @@
  *
  * Usage:
  *   node scripts/indexnow.mjs                    # submit all known pages
- *   node scripts/indexnow.mjs https://sanderdesnaijer.com/blog/some-post  # submit specific URL(s)
+ *   node scripts/indexnow.mjs https://www.sanderdesnaijer.com/blog/some-post  # submit specific URL(s)
  *
  * The script fetches your sitemap to discover all pages, then submits them
  * in a single batch request to the IndexNow API.
  */
 
-const HOST = "sanderdesnaijer.com";
+const HOST = "www.sanderdesnaijer.com";
 const KEY = "c73e0494895244bd890be15328b9ffb4";
 const KEY_LOCATION = `https://${HOST}/${KEY}.txt`;
 const INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow";
