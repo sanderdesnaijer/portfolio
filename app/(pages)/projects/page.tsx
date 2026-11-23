@@ -1,4 +1,3 @@
-"use server";
 import { JsonLd } from "@/app/components/JsonLd";
 import { NotFound } from "@/app/components/NotFound";
 import { PageLayout } from "@/app/components/PageLayout";

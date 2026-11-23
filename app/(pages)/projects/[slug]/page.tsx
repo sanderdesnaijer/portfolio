@@ -1,4 +1,3 @@
-"use server";
 import { QueryParams } from "@sanity/client";
 import { projectQuery } from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/fetch";

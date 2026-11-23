@@ -1,4 +1,3 @@
-"use server";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import {
   pageQuery,

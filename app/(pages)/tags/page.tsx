@@ -1,5 +1,3 @@
-"use server";
-
 import { PageLayout } from "@/app/components/PageLayout";
 import { generatePageMetadata } from "@/app/utils/metadata";
 import { toTagSlug } from "@/app/utils/utils";

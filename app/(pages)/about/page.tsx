@@ -1,4 +1,3 @@
-"use server";
 import { sanityFetch } from "@/sanity/lib/fetch";
 import { jobsQuery, pageQuery } from "@/sanity/lib/queries";
 import { PortableText, PortableTextReactComponents } from "next-sanity";
@@ -171,13 +170,12 @@ export default async function Page() {
                   <div className="md:w-5/7 md:pl-4">
                     <Link
                       href={job.link}
-                      aria-label={`[Link to] ${job.companyName}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group/link mb-2 flex"
                     >
                       <Image
-                        alt={job.imageURL}
+                        alt=""
                         src={urlFor(job.imageURL)
                           .width(companyIconSize)
                           .height(companyIconSize)

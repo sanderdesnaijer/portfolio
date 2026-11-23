@@ -1,5 +1,3 @@
-"use server";
-
 import { notFound } from "next/navigation";
 import { PageLayout } from "@/app/components/PageLayout";
 import { generateMetaData } from "@/app/utils/metadata";
